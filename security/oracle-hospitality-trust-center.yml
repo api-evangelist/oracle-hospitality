@@ -1,0 +1,68 @@
+generated: '2026-07-28'
+method: searched
+probe: true
+url: https://www.oracle.com/trust/
+compliance_portal: https://www.oracle.com/corporate/cloud-compliance/
+scope: >-
+  Oracle Hospitality does not run a separate trust centre. Oracle Corporation publishes a company-wide
+  Trust and Security portal plus a cloud compliance attestations catalogue, and the OHIP-specific security
+  posture is documented in the Oracle Hospitality Integration Platform Security Guide.
+certifications:
+- SOC 1
+- SOC 2
+- SOC 3
+- ISO/IEC 27001
+- ISO/IEC 27017
+- ISO/IEC 27018
+- ISO/IEC 27701
+- PCI DSS
+- HIPAA
+- HITRUST
+- FedRAMP
+- CSA STAR
+- IRAP
+- C5
+- ENS
+- FIPS 140
+frameworks:
+- GDPR
+- NIST
+attestation_caveat: >-
+  Oracle states that attestations are "generally specific to a certain cloud service and may also be
+  specific to a certain data center or geographic region", are provided as-is without warranty, and are not
+  incorporated into contracts. Nothing here asserts that a given attestation covers OPERA Cloud or OHIP
+  specifically; customers are directed to their Oracle sales representative for service-scoped evidence.
+product_security:
+  ohip_security_guide: https://docs.oracle.com/en/industries/hospitality/integration-platform/ohips/toc.htm
+  topics:
+  - PCI DSS considerations for payment-bearing integrations
+  - TLS requirements
+  - Credential and application-key handling
+  controls_documented_in_developer_guide:
+  - IP allow listing, up to 100 IP ranges per chain
+  - Application suspension withdraws access to the application key and rotates it on resumption
+  - Environment-owner approval required before a partner may consume a customer's Business Events
+evidence:
+- source: https://www.oracle.com/trust/
+  status: 200
+  kind: trust-portal
+- source: https://www.oracle.com/corporate/cloud-compliance/
+  status: 200
+  kind: compliance-attestations
+  keywords:
+  - SOC 1
+  - SOC 2
+  - SOC 3
+  - ISO/IEC 27001
+  - ISO/IEC 27017
+  - ISO/IEC 27018
+  - ISO/IEC 27701
+  - PCI DSS
+  - HIPAA
+  - HITRUST
+  - FedRAMP
+  - CSA STAR
+  - GDPR
+- source: https://docs.oracle.com/en/industries/hospitality/integration-platform/ohips/toc.htm
+  status: 200
+  kind: product-security-guide

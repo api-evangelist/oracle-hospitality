@@ -1,0 +1,143 @@
+generated: '2026-07-28'
+method: searched
+source: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_using_the_oracle_hospitality_APIs.htm
+derived_from:
+- openapi/ (59 Swagger 2.0 documents, 3,546 operations)
+summary: >-
+  Cross-cutting request/response semantics for the Oracle Hospitality Integration Platform (OHIP). OHIP is
+  a gateway in front of OPERA Cloud: every call carries an OAuth bearer token plus an application key, and
+  most Property API calls are additionally scoped to a single property by the x-hotelid header. There is no
+  idempotency-key contract, no RFC 9457 problem envelope, and no hypermedia; long-running work is handled
+  by a dedicated asynchronous polling pattern instead.
+authentication:
+  style: oauth2-bearer-plus-application-key
+  headers:
+  - Authorization: Bearer <oAuth token>
+  - 'x-app-key: <ApplicationKey>'
+  artifact: authentication/oracle-hospitality-authentication.yml
+  scopes: scopes/oracle-hospitality-scopes.yml
+tenancy_and_scoping:
+  gateway: >-
+    Per-tenant. The gateway hostname is issued in the Developer Portal Environments tab and is not
+    published; the harvested Swagger documents carry basePath only (e.g. /rsv/v1) with a placeholder host.
+  headers:
+  - name: x-hotelid
+    description: OPERA property code. The dominant scoping key across the corpus (1,863 path or query
+      parameter occurrences of hotelId/hotelIds). A mismatch against the environment returns 403.
+  - name: x-channelCode
+    description: Oracle-issued global Channel Code, required on OPERA Cloud Distribution API calls.
+  - name: x-externalsystem
+    description: External system code used by Integration Processor / Business Events operations.
+idempotency:
+  supported: false
+  note: >-
+    No idempotency key header or parameter appears anywhere in the 59 harvested specifications and the
+    developer guide documents none. The nearest published control is a throttling rule rather than a
+    de-duplication contract - identical asynchronous requests must be spaced at least 30 minutes apart,
+    and startBlockAllocationSummaryProcess with date filters at least 3 hours apart. Safe retry therefore
+    depends on the semantics of the individual operation.
+  docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_limits.htm
+pagination:
+  style: offset-limit
+  params:
+  - name: limit
+    in: query
+    occurrences: 234
+  - name: offset
+    in: query
+    occurrences: 177
+  - name: pageNumber
+    in: query
+    occurrences: 28
+    note: Used by a small number of report/statistics operations.
+  note: >-
+    Collection operations expose limit/offset. There is no cursor, no Link header and no standard
+    total-count envelope field across the corpus; each response wraps its collection in an
+    operation-specific object.
+filtering_and_search:
+  conventions:
+  - Many configuration collections expose paired parameterName / parameterValue query parameters
+    (458 / 457 occurrences) for generic attribute filtering.
+  - wildCard (200 occurrences) enables partial matching on code and description searches.
+  - includeInactiveFlag / fetchInactive / includeInactive / inactive control whether soft-deleted
+    configuration rows are returned.
+  - excludeCodes and codes narrow list-of-values style responses.
+  - fetchInstructions (83 occurrences) selects which sub-resources are expanded into the response - OHIP's
+    equivalent of field expansion.
+  - Long GET queries are subject to a documented query-parameter limit; a 414 is returned when exceeded.
+    See https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_rest_api_get_query_parameter_limits.htm
+field_expansion:
+  supported: true
+  mechanism: fetchInstructions query parameter
+  note: An enumerated list per operation naming which related sub-resources to include in the payload.
+request_tracing:
+  header: x-request-id
+  direction: request
+  format: GUID
+  required: false
+  description: Client-supplied correlation identifier, quoted in Oracle's sample calls and used when
+    raising support requests.
+  docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_api_troubleshooting.htm
+response_conventions:
+  media_type: application/json
+  note: >-
+    Oracle Hospitality APIs produce only application/json; an Accept header of anything else returns 406,
+    and a request Content-Type other than application/json returns 415.
+  headers:
+  - name: Location
+    description: POST always returns the location of the newly created resource in a Location header.
+  header_case: Request and response headers are case insensitive.
+  docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_standard_response_headers.htm
+http_methods:
+  documented: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_summmary_of_http_methods.htm
+  observed:
+  - GET
+  - POST
+  - PUT
+  - DELETE
+  - HEAD
+  note: HEAD is used to poll asynchronous job status via the Location header.
+asynchronous_pattern:
+  docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_async_apis.htm
+  applies_to: '*/async/v1 base paths (blkasync, crmasync, cshasync, invasync, parasync, rsvasync, rtpasync)'
+  steps:
+  - POST the initial request; the response returns a Location header.
+  - Poll HEAD on the returned Location to obtain process status.
+  - When the process completes, HEAD returns in the Location header the URL that yields the results.
+  - GET that URL to obtain the results.
+  caveat: >-
+    Results are single-use. Once the final GET has been issued the data is no longer available on the same
+    summaryId and a repeat call returns 404; the sequence must be restarted.
+date_formats:
+  docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_date_formats.htm
+  graphql_date: 'YYYY-MM-DD'
+  graphql_datetime: 'YYYY-MM-DD HH24:MI:SS'
+  note: The RnA GraphQL schemas declare Date and DateTime scalars with these formats.
+special_characters:
+  docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_special_characters_in_urls.htm
+error_envelope:
+  format: oracle-proprietary
+  problem_json: false
+  note: >-
+    Errors are not RFC 9457 application/problem+json. 4xx bodies where present describe which fields are at
+    fault; OPERA business errors carry a module-prefixed code of the form MODxxxxx (e.g. RSV00001), with
+    GENxxxxx for errors that apply across all modules. Several statuses (401, 403, 404, 405, 406, 413, 414,
+    502, 503) return no response body at all.
+  artifacts:
+  - errors/oracle-hospitality-problem-types.yml
+  - errors/oracle-hospitality-error-codes.yml
+rate_limit_signalling:
+  status: 429
+  headers_published: false
+  behavior: Burst overage returns 429; sustained overage delays requests.
+  artifact: rate-limits/oracle-hospitality-rate-limits.yml
+versioning:
+  style: uri-path
+  artifact: lifecycle/oracle-hospitality-lifecycle.yml
+events:
+  artifact: asyncapi/oracle-hospitality-outbound-asyncapi.yml
+  models:
+  - Business Events streaming (push, GraphQL subscription over WebSocket)
+  - Business Events polling (pull, Integration Processor API, max 20 events per call)
+  - Outbound callback APIs implemented by the partner (ARI publication, content notification, reservation
+    notification, CRM/cashiering/front-office outbound)

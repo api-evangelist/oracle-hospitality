@@ -1,0 +1,299 @@
+generated: '2026-07-28'
+method: derived
+source: openapi/ + graphql/ + mcp/oracle-hospitality-mcp.yml
+summary: >-
+  Oracle Hospitality exposes two overlapping-but-non-identical projections of one OPERA Cloud data core:
+  a transactional REST surface (59 Swagger 2.0 documents, 3,546 operations) and a read-only GraphQL
+  reporting surface (75 Reporting & Analytics subject areas plus a Business Events streaming schema). There
+  is no MCP server, so the tool column below is the DERIVED candidate tool set in
+  mcp/oracle-hospitality-mcp.yml. This crosswalk binds each candidate tool and each GraphQL subject area to
+  the REST operationIds that back it, and records what only exists on one side.
+surfaces:
+  openapi:
+    path: openapi/
+    count: 59
+    operations: 3546
+    specification: Swagger 2.0
+    gated: false
+    note: Published verbatim under UPL-1.0 at https://github.com/oracle/hospitality-api-docs
+  graphql:
+    path: graphql/
+    count: 76
+    endpoint: '<gateway URL>/rna/v1/graphql/'
+    introspection_gated: true
+    note: >-
+      SDL is published in the repository, so no live introspection is needed. The endpoint itself is
+      per-tenant and requires an OAuth token plus x-app-key; the streaming schema
+      (graphql/oracle-hospitality-streaming-graphql-schema.json) is a captured introspection result, not a
+      live probe.
+  mcp:
+    published: false
+    url: null
+    gated: null
+    note: No Oracle-published MCP server exists. Tools listed are candidates derived from OpenAPI.
+crosswalk:
+- tool: search_hotel_availability
+  category: availability
+  rest: [getHotelAvailability, searchHotelAvailability, getHotelAvailabilityCRO]
+  binding: rest
+  confidence: high
+- tool: search_alternate_availability
+  category: availability
+  rest: [getAlternateAvailability, searchAlternateAvailability]
+  binding: rest
+  confidence: high
+- tool: get_rate_plan_info
+  category: rates
+  rest: [getAvailabilityRatePlanInfo, getAvailabilityRatePlanInfoByMultipleRatePlans]
+  binding: rest
+  confidence: high
+- tool: get_hotel_inventory
+  category: inventory
+  rest: [getHotelInventory, getInventoryStatistics]
+  binding: rest
+  confidence: high
+- tool: create_reservation
+  category: reservations
+  rest: [postReservation, postReservationByBlock]
+  binding: rest
+  confidence: high
+  note: postReservation exists in both the Property Reservation API and the Distribution Book API with
+    different contracts; this tool binds to the Property one.
+- tool: get_hotel_reservations
+  category: reservations
+  rest: [getHotelReservations, getReservationSummaries]
+  binding: rest
+  confidence: high
+- tool: cancel_reservations
+  category: reservations
+  rest: [postCancelReservations, postCancelReservationByExtId]
+  binding: rest
+  confidence: high
+- tool: get_reservation_by_external_id
+  category: reservations
+  rest: [getReservationByExtId, getExternalSystemReservations, searchExternalSystemReservations]
+  binding: rest
+  confidence: high
+- tool: validate_rate_info
+  category: rates
+  rest: [validateRateInfo, getRateInfo, validatePolicies]
+  binding: rest
+  confidence: medium
+- tool: get_reservation_summaries
+  category: front-office
+  rest: [getReservationSummaries, getReservationStatusStatistics]
+  binding: rest
+  confidence: high
+- tool: auto_assign_room
+  category: front-office
+  rest: [autoAssignRoom, assignRoomsAI]
+  binding: rest
+  confidence: high
+- tool: get_housekeeping_overview
+  category: housekeeping
+  rest: [getHousekeepingOverview, getHousekeepingDiscrepancies, getRoomConditions]
+  binding: rest
+  confidence: high
+- tool: set_room_condition
+  category: housekeeping
+  rest: [setRoomCondition, putRoomRelatedStatus]
+  binding: rest
+  confidence: high
+- tool: get_out_of_order_rooms
+  category: housekeeping
+  rest: [getOutOfOrderRooms, getOutOfServiceRooms]
+  binding: rest
+  confidence: high
+- tool: get_guest_profile
+  category: profiles
+  rest: [getGuestProfile, getProfileByExtId, getCompanyProfile]
+  binding: rest
+  confidence: high
+- tool: create_guest_profile
+  category: profiles
+  rest: [postGuestProfile, postCompanyProfile]
+  binding: rest
+  confidence: high
+- tool: get_member_history
+  category: loyalty
+  rest: [getMemberHistory, getMembershipTransaction, getMembershipReservationActivity]
+  binding: rest
+  confidence: high
+- tool: search_blocks
+  category: groups
+  rest: [searchBlocks, getBlocks]
+  binding: rest
+  confidence: high
+  note: getBlocks is deprecated in the harvested specification.
+- tool: get_block_reservations
+  category: groups
+  rest: [getBlockReservations, getBlockRoomsStatus]
+  binding: rest
+  confidence: high
+- tool: post_rooming_list
+  category: groups
+  rest: [postRoomingList, startRoomingListCreationProcess]
+  binding: rest
+  confidence: medium
+  note: The async variant in rsvasync.json is the supported path for large rooming lists.
+- tool: get_folio_charges
+  category: cashiering
+  rest: [getCheckDetails, putBillingCharges]
+  binding: rest
+  confidence: medium
+- tool: shop_property_offers
+  category: distribution
+  rest: [getPropertyOffers, getPropertyOffer, getPropertyAlternateOffers, getPropertyCalendar]
+  binding: rest
+  confidence: high
+- tool: distribution_create_reservation
+  category: distribution
+  rest: [postReservation, postOnHoldReservation]
+  binding: rest
+  confidence: high
+  note: Distribution Book API; requires x-channelCode.
+- tool: distribution_cancel_reservation
+  category: distribution
+  rest: [postCancelReservation]
+  binding: rest
+  confidence: high
+- tool: get_upsell_offers
+  category: upsell
+  rest: [getUpsellOffers, postUpsellOffers]
+  binding: rest
+  confidence: high
+- tool: get_business_events
+  category: events
+  rest: [getBusinessEvents, getBusinessEventsByExternalSystem]
+  binding: rest
+  confidence: medium
+  note: >-
+    Documented as FetchBusinessEvents at /int/v1/externalSystem/{extSystemCode}/businessEvents; the
+    Integration Processor specification (int.json) declares two operations and the rate-limit page names
+    getBusinessEvents and getBusinessEventsByExternalSystem.
+graphql_to_rest:
+- graphql: bookingsReservation
+  file: graphql/oracle-hospitality-rna-bookings-reservation.graphql
+  rest: [getHotelReservations, getReservationSummaries]
+  binding: reporting-projection
+  confidence: medium
+  note: Read-only denormalised reporting view; not operation-for-operation equivalent.
+- graphql: bookingReservationExtended
+  file: graphql/oracle-hospitality-rna-booking-reservation-extended.graphql
+  rest: [getHotelReservations]
+  binding: reporting-projection
+  confidence: medium
+- graphql: bookingsBlock
+  file: graphql/oracle-hospitality-rna-bookings-block.graphql
+  rest: [searchBlocks, getBlockStatistics]
+  binding: reporting-projection
+  confidence: medium
+- graphql: profilesIndividuals
+  file: graphql/oracle-hospitality-rna-profiles-individuals.graphql
+  rest: [getGuestProfile]
+  binding: reporting-projection
+  confidence: medium
+- graphql: profilesAccounts
+  file: graphql/oracle-hospitality-rna-profiles-accounts.graphql
+  rest: [getCompanyProfile]
+  binding: reporting-projection
+  confidence: medium
+- graphql: profilesLoyalty
+  file: graphql/oracle-hospitality-rna-profiles-loyalty.graphql
+  rest: [getMemberHistory]
+  binding: reporting-projection
+  confidence: medium
+- graphql: inventoryRooms
+  file: graphql/oracle-hospitality-rna-inventory-rooms.graphql
+  rest: [getHotelInventory]
+  binding: reporting-projection
+  confidence: medium
+- graphql: inventoryHousekeepingManagementTaskSheet
+  file: graphql/oracle-hospitality-rna-inventory-housekeeping-management-task-sheet.graphql
+  rest: [getHouseKeepingTasks, getTaskSheetStatistics]
+  binding: reporting-projection
+  confidence: medium
+- graphql: ratesCodes
+  file: graphql/oracle-hospitality-rna-rates-codes.graphql
+  rest: [getAvailabilityRatePlanInfo]
+  binding: reporting-projection
+  confidence: low
+- graphql: ratesRestrictions
+  file: graphql/oracle-hospitality-rna-rates-restrictions.graphql
+  rest: [getRestrictionsByDateRange]
+  binding: reporting-projection
+  confidence: medium
+- graphql: ratesHurdles
+  file: graphql/oracle-hospitality-rna-rates-hurdles.graphql
+  rest: [getHurdleRates, getMultiPropHurdleRates]
+  binding: reporting-projection
+  confidence: medium
+- graphql: aRAccountsReceivable
+  file: graphql/oracle-hospitality-rna-ar-accounts-receivable.graphql
+  rest: [getStatements, getARTransactions]
+  binding: reporting-projection
+  confidence: low
+  note: Both REST operations are deprecated in the harvested specification; the GraphQL subject area is
+    the supported read path.
+graphql_only:
+- subject_area: aRAgingReport
+  reason: Aging-bucket analysis is computed in Reporting & Analytics; no REST equivalent exists.
+- subject_area: statisticsForecastSummary
+  reason: Forecast aggregation subject area with no transactional REST counterpart.
+- subject_area: statisticsHistoryAndForecast
+  reason: Historical + forward statistics roll-up, reporting-only.
+- subject_area: statisticsManagersReport
+  reason: Manager's report roll-up, reporting-only.
+- subject_area: statisticsReservationPace
+  reason: Pace analysis, reporting-only.
+- subject_area: resortBudgetForecast
+  reason: Budget vs forecast subject area, reporting-only.
+- subject_area: changesLog
+  reason: Cross-entity change log projection with no REST audit endpoint.
+- subject_area: eFolio
+  reason: Electronic folio extract, reporting-only.
+- subject_area: financialTransactionsSummary
+  reason: Aggregated transaction summary, reporting-only.
+- subject_area: salesManagerGoals
+  reason: Sales goal tracking, reporting-only.
+- subject_area: simpleReports*
+  reason: Six pre-shaped "simple report" subject areas (activities, booking blocks, bookings reservation,
+    events, financial transactions, profile individuals) with no REST equivalent.
+rest_only:
+- capability: Configuration management
+  operations_approx: 1900
+  specs: [entcfg, fofcfg, rsvcfg, crmcfg, rmcfg, blkcfg, evmcfg, actcfg, intcfg, expcfg, repcfg, rmrcfg,
+    medcfg, lov]
+  reason: Chain and hotel configuration - room types, rate structures, transaction codes, list of values,
+    exports, reports. No reporting projection.
+- capability: Write operations of every kind
+  reason: The entire GraphQL surface is read-only. Every POST/PUT/DELETE in the corpus is REST-only.
+- capability: Cashiering and payment operations
+  specs: [csh, cshasync, ecommtokenization, tokenexchange]
+  reason: Folio posting, settlement, foreign currency, OPI tokenization and token exchange.
+- capability: Distribution channel operations
+  specs: [book, shop, content, controls, distribution, resnotif, onboard, hdpbaoauth2, chl]
+  reason: Channel-partner facing booking, shopping and ARI management.
+- capability: Outbound / callback contracts
+  specs: [aripublication, notification, lookup, crmoutbound, cshoutbound, fofoutbound]
+  reason: Endpoints the partner implements; see asyncapi/oracle-hospitality-outbound-asyncapi.yml.
+- capability: Asynchronous bulk jobs
+  specs: [blkasync, crmasync, cshasync, invasync, parasync, rsvasync, rtpasync]
+  reason: POST/HEAD/GET job pattern for large extracts and mass updates.
+- capability: Nor1 integrated upsell
+  specs: [upselloffers]
+- capability: Provisioning and integration processing
+  specs: [ops, int, dvm, cms, bof]
+coverage:
+  tools_named: 26
+  tools_bound_to_rest: 26
+  mcp_only: 0
+  graphql_subject_areas: 75
+  graphql_bound_to_rest: 11
+  graphql_only: 11
+  rest_operations_total: 3546
+  rest_operations_with_a_tool: 47
+  note: >-
+    Tool coverage is deliberately thin relative to 3,546 operations - the candidate set targets the
+    marquee guest-lifecycle flows rather than the configuration surface, which is 1,900+ operations of
+    chain and hotel setup that an agent should not be driving.

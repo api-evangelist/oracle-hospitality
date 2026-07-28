@@ -1,0 +1,133 @@
+generated: '2026-07-28'
+method: searched
+source: >-
+  Derived from openapi/ (59 Swagger 2.0 documents) and graphql/ (77 SDL documents), enriched from the OHIP
+  developer guide and the Oracle Cloud compliance catalogue.
+standards:
+- id: swagger-2.0
+  conforms: true
+  evidence: 'All 59 harvested specifications declare a top-level swagger field with value "2.0", and all
+    59 parse.'
+- id: openapi-3
+  conforms: false
+  evidence: >-
+    Oracle publishes Swagger 2.0 only. No OpenAPI 3.x document is published for any Oracle Hospitality API.
+- id: graphql
+  conforms: true
+  evidence: >-
+    77 GraphQL SDL documents for the OPERA Cloud Reporting & Analytics Data APIs plus a full introspection
+    schema for the Business Events Streaming API, published under graphql/ in
+    oracle/hospitality-api-docs.
+- id: graphql-over-websocket
+  conforms: true
+  evidence: >-
+    Business Events Streaming API is a GraphQL subscription over WebSocket.
+    https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_connecting_to_the_streaming_api.htm
+- id: oauth2
+  conforms: true
+  evidence: >-
+    OAuth 2.0 with two grants - password (Resource Owner Group / SSD environments) and client_credentials
+    (OPERA Cloud Identity Management / OCIM environments).
+    https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_authenticating_to_oracle_hospitality_property_apis_ocim.htm
+- id: rfc7519-jwt
+  conforms: true
+  evidence: JSON Web Token bearer tokens; a jwt apiKey scheme is declared in
+    openapi/oracle-hospitality-property-v1-tokenexchange.json.
+- id: oidc
+  conforms: false
+  evidence: >-
+    No OpenID Connect discovery document is published and no id_token flow is documented for OHIP; OPERA
+    Cloud Identity Management issues OAuth 2.0 access tokens only. /.well-known/openid-configuration is not
+    served on any public Oracle Hospitality host.
+- id: rfc8414-oauth-metadata
+  conforms: false
+  evidence: /.well-known/oauth-authorization-server probed on www.oracle.com - 403; not published.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    No application/problem+json response is declared anywhere in the corpus. Errors use a proprietary
+    module-prefixed code (MODxxxxx) and several statuses return no body at all.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt probed on www.oracle.com (403) and docs.oracle.com (404).
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: >-
+    Deprecation is announced in dated ReadMe pages under Upcoming Major Changes; no Sunset or Deprecation
+    response header is documented.
+- id: rfc9110-http-semantics
+  conforms: true
+  evidence: >-
+    Oracle documents that its APIs follow HTTP specifications, that headers are case insensitive, and that
+    POST returns the created resource location in a Location header.
+    https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_standard_response_headers.htm
+- id: opentravel-ota
+  conforms: partial
+  evidence: >-
+    OTA_HotelInvCountNotifRQ, OTA_HotelRateAmountNotifRQ and OTA_HotelRestrictionsNotifRQ payload schemas
+    are carried by the Distribution ARI Publication outbound API
+    (openapi/oracle-hospitality-distribution-outbound-aripublication.json); the OpenTravel Code List Unique
+    ID Type (UIT) is referenced in openapi/oracle-hospitality-property-v1-blk.json and OTA_ErrorRS
+    enumerations in openapi/oracle-hospitality-property-v1-csh.json. OpenTravel survives only on the
+    channel-facing edges; the Property API domain model is proprietary.
+- id: htng
+  conforms: legacy
+  evidence: >-
+    HTNG is named only as a legacy OPERA Electronic Distribution Systems SOAP interface being migrated to
+    proprietary REST. https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_htng.htm
+- id: iata-identifiers
+  conforms: true
+  evidence: >-
+    IATA travel-agency numbers with an explicit idContext field, IATA 3-letter airport and city codes, and
+    GDS record locators appear across the distribution and reservation specifications.
+- id: iata-ndc
+  conforms: false
+  evidence: >-
+    Not applicable - hospitality technology, not airline distribution. No NDC certification, NDC API or NDC
+    reference exists in the corpus or the developer guide.
+- id: fhir-r4
+  conforms: false
+- id: scim2
+  conforms: false
+- id: odata
+  conforms: false
+- id: json-api
+  conforms: false
+- id: hal
+  conforms: false
+- id: pagination-offset-limit
+  conforms: true
+  evidence: limit (234 occurrences) and offset (177 occurrences) query parameters across the corpus.
+- id: idempotency-key
+  conforms: false
+  evidence: >-
+    No idempotency key header or parameter exists in any of the 59 specifications and none is documented.
+- id: pci-dss
+  conforms: true
+  evidence: >-
+    PCI DSS is addressed in the Oracle Hospitality Integration Platform Security Guide
+    (https://docs.oracle.com/en/industries/hospitality/integration-platform/ohips/toc.htm) and Oracle
+    publishes PCI DSS attestations in its cloud compliance catalogue. Oracle Payment Interface tokenization
+    and token exchange APIs exist so that card data does not transit partner integrations.
+- id: soc2
+  conforms: true
+  evidence: SOC 1 / SOC 2 / SOC 3 attestations published at https://www.oracle.com/corporate/cloud-compliance/
+- id: iso-27001
+  conforms: true
+  evidence: ISO/IEC 27001, 27017, 27018 and 27701 attestations published at
+    https://www.oracle.com/corporate/cloud-compliance/
+- id: gdpr
+  conforms: true
+  evidence: >-
+    GDPR is covered in Oracle's cloud compliance catalogue. Note that no GDPR data-portability endpoint was
+    found in the API corpus; bulk export runs through the Export Configuration API and the Data APIs.
+- id: upl-1.0
+  conforms: true
+  evidence: >-
+    Every specification carries "This document and all content within is available under the Universal
+    Permissive License v 1.0" (https://oss.oracle.com/licenses/upl) in info.description.
+compliance_program:
+  published: true
+  url: https://www.oracle.com/corporate/cloud-compliance/
+  trust_center: https://www.oracle.com/trust/
+  artifact: security/oracle-hospitality-trust-center.yml

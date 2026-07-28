@@ -1,0 +1,99 @@
+generated: '2026-07-28'
+method: searched
+source: openapi/oracle-hospitality-property-v1-oauth.json, openapi/oracle-hospitality-property-v1-tokenexchange.json
+docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_authenticating_to_oracle_hospitality_property_apis_ocim.htm
+notes: >-
+  The 59 harvested Swagger 2.0 documents are thin on securityDefinitions - only oauth.json (HTTP Basic
+  on the token operation) and tokenexchange.json (an apiKey-in-header Authorization/JWT scheme) declare
+  one at all, and no operation-level security requirements are attached. The real OHIP authentication
+  contract lives in the public developer guide and is captured below as searched. Two schemes coexist
+  because Oracle is mid-migration: legacy environments use Resource Owner Group authentication (SSD,
+  OAuth 2.0 password grant with an OPERA integration user) and migrated environments use Client
+  Credentials authentication (OCIM, OPERA Cloud Identity Management).
+summary:
+  types:
+  - oauth2
+  - http
+  - apiKey
+  api_key_in:
+  - header
+  oauth2_flows:
+  - password
+  - clientCredentials
+schemes:
+- name: OHIP OAuth 2.0 - Resource Owner Group (SSD)
+  type: oauth2
+  flow: password
+  token_endpoint_path: /oauth/v1/tokens
+  grant_type: password
+  client_authentication: HTTP Basic (clientId:clientSecret, base64) on the Authorization header
+  additional_credentials:
+  - OPERA Cloud integration user username and password (must hold the WSACCESS role)
+  required_headers:
+  - name: x-app-key
+    description: Application key issued per registered application in the OHIP Developer Portal.
+  sources:
+  - openapi/oracle-hospitality-property-v1-oauth.json
+  docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_authenticating_to_oracle_hospitality_property_apis_ssd.htm
+- name: OHIP OAuth 2.0 - Client Credentials (OCIM)
+  type: oauth2
+  flow: clientCredentials
+  grant_type: client_credentials
+  client_authentication: HTTP Basic (clientId:clientSecret, base64) on the Authorization header
+  scope: 'urn:opc:hgbu:ws:_myscopes_'
+  client_id_format: '<chain><environment><enterprise>Client'
+  required_headers:
+  - name: x-app-key
+    description: Application key issued per registered application in the OHIP Developer Portal.
+  docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_authenticating_to_oracle_hospitality_property_apis_ocim.htm
+- name: basicAuth
+  type: http
+  scheme: basic
+  note: Declared on the OHIP token operation (getToken) to carry clientId:clientSecret.
+  sources:
+  - openapi/oracle-hospitality-property-v1-oauth.json
+- name: jwt
+  type: apiKey
+  in: header
+  parameter: Authorization
+  note: Bearer JWT presented to the OPI Token Exchange Service.
+  sources:
+  - openapi/oracle-hospitality-property-v1-tokenexchange.json
+request_headers:
+- name: Authorization
+  value: Bearer <oAuth token>
+  required: true
+- name: x-app-key
+  value: <ApplicationKey>
+  required: true
+  description: Issued per registered application; regenerated when a suspended partner service is resumed.
+- name: x-hotelid
+  required: conditional
+  description: OPERA property code. Required on Property API calls scoped to a single hotel; a 403 is
+    returned when it does not match a hotel in the environment being called.
+- name: x-channelCode
+  required: conditional
+  description: Oracle-issued global Channel Code, required on OPERA Cloud Distribution API calls.
+- name: x-externalsystem
+  required: conditional
+  description: External system code, used by the Integration Processor / Business Events operations.
+- name: x-request-id
+  required: false
+  description: Client-supplied GUID echoed for request correlation and support.
+- name: Accept
+  value: application/json (multipart/mixed; deferSpec=20220824, application/json for the RnA GraphQL APIs)
+  required: true
+credential_issuance:
+  self_serve: false
+  process: >-
+    Credentials are not self-serve. Partners purchase Oracle Hospitality Integration Cloud Service through
+    the Oracle Store or a partner registration CPQ form, register an application in the tenant-scoped OHIP
+    Developer Portal to receive an application key, then add an environment to obtain clientId, clientSecret,
+    EnterpriseID, Scope and the gateway URL. Production access additionally requires an Oracle Partner
+    Network reference number emailed to hospitality-integrations_ww@oracle.com; Distribution API access
+    additionally requires an Oracle-issued global Channel Code and an Oracle Cloud Marketplace listing.
+  docs:
+  - https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_getting_started_for_partners.htm
+  - https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_registering_an_application.htm
+  - https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_environments_gateways_and_credentials.htm
+  - https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_requesting_a_global_channel_code_for_distribution_apis.htm

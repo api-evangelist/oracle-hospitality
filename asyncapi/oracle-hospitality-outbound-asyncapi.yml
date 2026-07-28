@@ -1,0 +1,244 @@
+asyncapi: 3.0.0
+info:
+  title: Oracle Hospitality event and outbound-callback surface
+  version: 26.2.0.0
+  description: >-
+    Oracle publishes no AsyncAPI document for Oracle Hospitality. This document is DERIVED, by the API
+    Evangelist enrichment pipeline, from two real, published surfaces: (1) the six outbound Swagger 2.0
+    specifications in oracle/hospitality-api-docs, which describe endpoints the INTEGRATION PARTNER must
+    implement and OPERA Cloud calls out to - webhooks in everything but name; and (2) the OHIP Business
+    Events surface, delivered either as a GraphQL subscription over WebSocket (Streaming API, push) or by
+    polling the Integration Processor API. No message payload is invented here - every channel points at
+    the operationId and source specification it was derived from, and the payload schemas live in those
+    files.
+
+
+    This document and the underlying Oracle specifications are available under the Universal Permissive
+    License v 1.0 (https://oss.oracle.com/licenses/upl).
+  license:
+    name: Universal Permissive License v1.0
+    url: https://oss.oracle.com/licenses/upl
+  externalDocs:
+    description: OHIP Business Events
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_business_events.htm
+  x-generated: '2026-07-28'
+  x-method: derived
+  x-source:
+  - openapi/oracle-hospitality-distribution-outbound-aripublication.json
+  - openapi/oracle-hospitality-distribution-outbound-notification.json
+  - openapi/oracle-hospitality-distribution-outbound-lookup.json
+  - openapi/oracle-hospitality-property-outbound-crmoutbound.json
+  - openapi/oracle-hospitality-property-outbound-cshoutbound.json
+  - openapi/oracle-hospitality-property-outbound-fofoutbound.json
+  - https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_streaming_api.htm
+  - https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_polling_api.htm
+servers:
+  streaming:
+    host: '{gatewayHost}'
+    protocol: wss
+    pathname: /streaming
+    description: >-
+      Business Events Streaming API. GraphQL subscription over WebSocket. The gateway host is issued per
+      tenant on the Environments page of the OHIP Developer Portal and is not published.
+    variables:
+      gatewayHost:
+        description: Per-tenant OHIP gateway hostname, issued in the Developer Portal.
+        default: gateway.example
+  partnerEndpoint:
+    host: '{partnerHost}'
+    protocol: https
+    description: >-
+      The partner-hosted HTTPS endpoint that OPERA Cloud calls for outbound / notification messages. The
+      URL is registered by the customer against the external system or channel; Oracle publishes the
+      request contract, not the address.
+    variables:
+      partnerHost:
+        description: Partner-hosted callback host registered against the external system or channel.
+        default: partner.example
+channels:
+  ariInventory:
+    address: /aripublication/v1/inventory
+    servers: [$ref: '#/servers/partnerEndpoint']
+    title: ARI inventory notification
+    description: >-
+      Property availability / inventory schedule updates pushed to a distribution channel partner. Carries
+      OpenTravel OTA_HotelInvCountNotifRQ payload schemas. Requires an Oracle-issued global Channel Code.
+    messages:
+      inventoryNotification:
+        name: OTA_HotelInvCountNotifRQ
+        contentType: application/json
+        x-source-operation: openapi/oracle-hospitality-distribution-outbound-aripublication.json#postInventory
+  ariRates:
+    address: /aripublication/v1/rates
+    servers: [$ref: '#/servers/partnerEndpoint']
+    title: ARI rate notification
+    description: Rate schedule updates pushed to a distribution channel partner. Carries OpenTravel
+      OTA_HotelRateAmountNotifRQ payload schemas.
+    messages:
+      rateNotification:
+        name: OTA_HotelRateAmountNotifRQ
+        contentType: application/json
+        x-source-operation: openapi/oracle-hospitality-distribution-outbound-aripublication.json#postRates
+  ariRestrictions:
+    address: /aripublication/v1/restrictions
+    servers: [$ref: '#/servers/partnerEndpoint']
+    title: ARI restriction notification
+    description: Property restriction updates pushed to a distribution channel partner. Carries OpenTravel
+      OTA_HotelRestrictionsNotifRQ payload schemas.
+    messages:
+      restrictionNotification:
+        name: OTA_HotelRestrictionsNotifRQ
+        contentType: application/json
+        x-source-operation: openapi/oracle-hospitality-distribution-outbound-aripublication.json#postRestrictions
+  contentNotification:
+    address: /notification/v1/content
+    servers: [$ref: '#/servers/partnerEndpoint']
+    title: Content notification
+    description: Real-time property content, channel room and channel rate updates pushed to a
+      distribution channel partner.
+    messages:
+      contentNotification:
+        name: contentNotification
+        contentType: application/json
+        x-source-operation: openapi/oracle-hospitality-distribution-outbound-notification.json#postContent
+  externalRoomTypeLookup:
+    address: /lookup/v1/roomTypes
+    servers: [$ref: '#/servers/partnerEndpoint']
+    title: External room type lookup
+    description: Oracle Hospitality Distribution calls the channel partner to retrieve that partner's room
+      types.
+    messages:
+      externalRoomTypes:
+        name: externalRoomTypes
+        contentType: application/json
+        x-source-operation: openapi/oracle-hospitality-distribution-outbound-lookup.json#getExternalRoomTypes
+  externalRatePlanLookup:
+    address: /lookup/v1/ratePlans
+    servers: [$ref: '#/servers/partnerEndpoint']
+    title: External rate plan lookup
+    description: Oracle Hospitality Distribution calls the channel partner to retrieve that partner's rate
+      plans.
+    messages:
+      externalRatePlans:
+        name: externalRatePlans
+        contentType: application/json
+        x-source-operation: openapi/oracle-hospitality-distribution-outbound-lookup.json#getExternalRatePlans
+  crmOutbound:
+    address: /crm/v1/*
+    servers: [$ref: '#/servers/partnerEndpoint']
+    title: CRM outbound callbacks
+    description: >-
+      Twelve operations OPERA Cloud calls on an external CRM / loyalty / gaming system - profile lookup and
+      download, enrollment, membership number issue and validation, award redemption, player statistics,
+      gaming offers, IATA number validation and address validation.
+    messages:
+      crmOutbound:
+        name: crmOutbound
+        contentType: application/json
+        x-source-operations:
+        - openapi/oracle-hospitality-property-outbound-crmoutbound.json#getExternalProfiles
+        - openapi/oracle-hospitality-property-outbound-crmoutbound.json#downloadExternalProfile
+        - openapi/oracle-hospitality-property-outbound-crmoutbound.json#postEnrollment
+        - openapi/oracle-hospitality-property-outbound-crmoutbound.json#getPlayerStatistics
+        - openapi/oracle-hospitality-property-outbound-crmoutbound.json#getGamingOffers
+        - openapi/oracle-hospitality-property-outbound-crmoutbound.json#checkIataNumber
+        - openapi/oracle-hospitality-property-outbound-crmoutbound.json#redeemAward
+        - openapi/oracle-hospitality-property-outbound-crmoutbound.json#postMembershipNumber
+        - openapi/oracle-hospitality-property-outbound-crmoutbound.json#getMembershipDetails
+        - openapi/oracle-hospitality-property-outbound-crmoutbound.json#getValidatedAddresses
+        - openapi/oracle-hospitality-property-outbound-crmoutbound.json#getValidatedAddress
+        - openapi/oracle-hospitality-property-outbound-crmoutbound.json#validateMembershipNumber
+  cashieringOutbound:
+    address: /csh/v1/*
+    servers: [$ref: '#/servers/partnerEndpoint']
+    title: Cashiering outbound callbacks
+    description: >-
+      Seven operations OPERA Cloud calls on an external comp-accounting system to authorize, post, approve
+      and reverse comp redemptions and comp postings.
+    messages:
+      cashieringOutbound:
+        name: cashieringOutbound
+        contentType: application/json
+        x-source-operations:
+        - openapi/oracle-hospitality-property-outbound-cshoutbound.json#getCompRedemptions
+        - openapi/oracle-hospitality-property-outbound-cshoutbound.json#authorizeCompRedemptions
+        - openapi/oracle-hospitality-property-outbound-cshoutbound.json#postCompRedemptions
+        - openapi/oracle-hospitality-property-outbound-cshoutbound.json#reverseCompRedemptions
+        - openapi/oracle-hospitality-property-outbound-cshoutbound.json#asyncApproveCompPostings
+        - openapi/oracle-hospitality-property-outbound-cshoutbound.json#approveCompPostings
+        - openapi/oracle-hospitality-property-outbound-cshoutbound.json#reverseCompPostings
+  frontOfficeOutbound:
+    address: /fof/v1/roomKeys
+    servers: [$ref: '#/servers/partnerEndpoint']
+    title: Front office outbound - room keys
+    description: OPERA Cloud calls the door-lock / key system to cut room keys.
+    messages:
+      roomKeys:
+        name: roomKeys
+        contentType: application/json
+        x-source-operations:
+        - openapi/oracle-hospitality-property-outbound-fofoutbound.json#postRoomKeysOutbound
+        - openapi/oracle-hospitality-property-outbound-fofoutbound.json#postExternalRoomKeys
+        x-deprecated:
+        - postExternalRoomKeys
+  businessEventsStream:
+    address: businessEvents
+    servers: [$ref: '#/servers/streaming']
+    title: Business Events (streaming, push)
+    description: >-
+      GraphQL subscription over WebSocket. Each event carries the resource that received the event, the
+      event name (for example "Update Reservation"), the old value and the new value. Business Events are
+      configured per module in OPERA Cloud and subscribed per external system; the environment owner must
+      approve a partner subscription. Only one client may consume a given chain on a given gateway with a
+      given application key. Consumers must connect at least every 24 hours or replay from a supplied
+      offset.
+    messages:
+      businessEvent:
+        name: businessEvent
+        contentType: application/json
+        x-schema: graphql/oracle-hospitality-streaming-graphql-schema.json
+        x-docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_interpreting_the_event.htm
+operations:
+  publishAriInventory:
+    action: receive
+    channel: {$ref: '#/channels/ariInventory'}
+    summary: Partner receives an availability/inventory schedule update and responds success or
+      error/warning.
+  publishAriRates:
+    action: receive
+    channel: {$ref: '#/channels/ariRates'}
+    summary: Partner receives a rate schedule update and responds success or error/warning.
+  publishAriRestrictions:
+    action: receive
+    channel: {$ref: '#/channels/ariRestrictions'}
+    summary: Partner receives a restriction update and responds success or error/warning.
+  publishContent:
+    action: receive
+    channel: {$ref: '#/channels/contentNotification'}
+    summary: Partner receives property/channel content updates.
+  lookupExternalRoomTypes:
+    action: receive
+    channel: {$ref: '#/channels/externalRoomTypeLookup'}
+    summary: Partner returns its room types to Oracle Hospitality Distribution.
+  lookupExternalRatePlans:
+    action: receive
+    channel: {$ref: '#/channels/externalRatePlanLookup'}
+    summary: Partner returns its rate plans to Oracle Hospitality Distribution.
+  handleCrmOutbound:
+    action: receive
+    channel: {$ref: '#/channels/crmOutbound'}
+    summary: External CRM/loyalty/gaming system serves profile, membership and award requests from OPERA
+      Cloud.
+  handleCashieringOutbound:
+    action: receive
+    channel: {$ref: '#/channels/cashieringOutbound'}
+    summary: External comp-accounting system serves comp redemption and posting requests from OPERA Cloud.
+  handleRoomKeys:
+    action: receive
+    channel: {$ref: '#/channels/frontOfficeOutbound'}
+    summary: Door-lock system cuts room keys on request from OPERA Cloud.
+  subscribeBusinessEvents:
+    action: receive
+    channel: {$ref: '#/channels/businessEventsStream'}
+    summary: Consumer subscribes to Business Events for a chain or property and receives them in real
+      time.

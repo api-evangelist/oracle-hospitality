@@ -1,0 +1,41 @@
+generated: '2026-07-28'
+method: searched
+source: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_web_service_error_codes.htm
+scope: OPERA Cloud web service business error codes returned inside OHIP REST responses
+format:
+  pattern: 'MODxxxxx'
+  description: >-
+    OPERA Cloud error codes are a three-letter module prefix followed by a five-digit sequence. Module
+    codes match the OPERA functional module raising the error; GEN is reserved for generic errors that
+    apply across all modules.
+  examples:
+  - code: RSV00001
+    module: RSV
+    module_name: Reservation
+  - code: GENxxxxx
+    module: GEN
+    module_name: Generic - applies to all modules
+system_errors: >-
+  Detailed system errors are logged in the OPERA application log; a generic error is returned to the web
+  service consumer.
+registry:
+  published: partial
+  public_page: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_web_service_error_codes.htm
+  full_list_url: https://iccp.custhelp.com/app/answers/answer_view/a_id/1014458
+  full_list_access: >-
+    The complete code list is published as an Oracle Customer Support Portal article, which requires a
+    support account. The public developer guide documents the code format and the module-prefix convention
+    but not the enumerated codes, so no code list is reproduced here.
+module_prefixes_observed:
+- prefix: RSV
+  module: Reservation
+- prefix: GEN
+  module: Generic
+- prefix: OPICS
+  module: Oracle Payment Interface Cloud Service
+  note: Seen as OPICS-NOT_FOUND on the OPI Token Exchange 404 response - a hyphenated variant rather than
+    the MODxxxxx form.
+related:
+- errors/oracle-hospitality-problem-types.yml
+- https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_data_apis_errors.htm
+- https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_errors.htm

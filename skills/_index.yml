@@ -1,0 +1,47 @@
+generated: '2026-07-28'
+method: generated
+source: openapi/ + graphql/ + https://docs.oracle.com/cd/F29336_01/doc.201/f27480/
+note: >-
+  Oracle publishes no AGENTS.md or agent skill files for Oracle Hospitality. These are generated packaged
+  operating instructions for the marquee OHIP flows. Every operationId referenced was verified to exist
+  verbatim in the harvested specifications.
+skills:
+- file: oracle-hospitality-authenticate.md
+  name: Authenticate to the Oracle Hospitality Integration Platform
+  api: openapi/oracle-hospitality-property-v1-oauth.json
+  operations: [getToken]
+- file: oracle-hospitality-shop-and-book.md
+  name: Shop availability and create a reservation
+  api: openapi/oracle-hospitality-property-v1-par.json
+  operations: [getHotelAvailability, searchHotelAvailability, getAlternateAvailability,
+    getAvailabilityRatePlanInfo, validateRateInfo, getRateInfo, validatePolicies, postReservation,
+    getHotelReservations, postCancelReservations]
+- file: oracle-hospitality-arrival-to-departure.md
+  name: Run a guest from arrival to departure
+  api: openapi/oracle-hospitality-property-v1-fof.json
+  operations: [getReservationSummaries, postPreCheckInReservation, verifyCheckinReservation,
+    autoAssignRoom, assignRoomsAI, postCheckIn, postAdvanceCheckIn, deleteCheckin, postChargesAndPayments,
+    getCheckDetails, postCheckOut, reinstateCheckOut]
+- file: oracle-hospitality-housekeeping.md
+  name: Drive housekeeping room status
+  api: openapi/oracle-hospitality-property-v1-hsk.json
+  operations: [getHousekeepingOverview, getHousekeepingDiscrepancies, getRoomConditions, setRoomCondition,
+    putRoomRelatedStatus, getOutOfOrderRooms, postOutOfOrderRooms, completeOutOfOrderRooms,
+    getOutOfServiceRooms, postOutOfServiceRooms, completeOutOfServiceRooms, getHouseKeepingTasks,
+    autoGenerateTaskSheets, startServicingTaskRoom, completeServicingTaskRoom, completeTaskSheet]
+- file: oracle-hospitality-distribution-channel.md
+  name: Connect a distribution channel to OPERA Cloud
+  api: openapi/oracle-hospitality-distribution-v1-shop.json
+  operations: [getPropertyStatus, putPropertyStatus, getPropertyControls, getPropertiesSummary,
+    getPropertyInfo, getRoomTypesInfo, getRatePlansInfo, getProperties, getPropertyOffers,
+    getPropertyCalendar, postReservation, putReservation, getReservation, postCancelReservation,
+    postReservationNotif, postInventory, postRates, postRestrictions, postContent]
+- file: oracle-hospitality-business-events.md
+  name: Consume OPERA Cloud Business Events
+  api: openapi/oracle-hospitality-property-v1-int.json
+  operations: [getBusinessEvents, getBusinessEventsByExternalSystem]
+- file: oracle-hospitality-bulk-extract.md
+  name: Extract data in bulk from OPERA Cloud
+  api: openapi/oracle-hospitality-property-v1-rsvasync.json
+  operations: [startReservationsDailySummaryProcess, getReservationsProcessStatus,
+    getReservationsDailySummary, headMassUpdateProcessStatus, getMassUpdateProcessSummary]

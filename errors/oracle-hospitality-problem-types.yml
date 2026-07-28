@@ -1,0 +1,135 @@
+generated: '2026-07-28'
+method: searched
+source: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_common_error_messages.htm
+derived_from: openapi/ (59 Swagger 2.0 documents, 3,546 operations)
+format: oracle-proprietary
+problem_json: false
+note: >-
+  Oracle Hospitality does not use RFC 9457 application/problem+json. The corpus is unusually uniform: the
+  same eleven 4xx/5xx responses are declared on nearly every one of the 3,546 operations. Several of them
+  are documented as returning no response body at all, so the machine-readable signal is the status code
+  plus, for business failures, an OPERA module error code (MODxxxxx) in the body. Titles and remediation
+  below are quoted from Oracle's Common HTTP Errors page.
+envelope:
+  business_error_code_format: 'MODxxxxx'
+  examples:
+  - RSV00001
+  - GENxxxxx
+  description: >-
+    Module-specific errors are named with the module prefix (RSV for Reservation, and so on); errors that
+    apply across all modules use the GENxxxxx form. System errors are logged in the application log and a
+    generic error is returned to the web service consumer.
+  registry: errors/oracle-hospitality-error-codes.yml
+problems:
+- status: 400
+  title: Bad Request - field validation
+  declared_on_operations: 3498
+  body: Response body details which fields are at fault.
+  remediation: >-
+    Change the fields mentioned in the error response so that they align with the specifications. In some
+    cases the values are determined by a hotel-specific configured List of Values (LOV), so supply a value
+    that is in the LOV for that hotel; the List of Values API (openapi/oracle-hospitality-property-v1-lov.json)
+    resolves these.
+- status: 400
+  title: This API is not supported for the current database version.
+  body: 'This API is not supported for the current database version.'
+  remediation: Contact Oracle Customer Support stating the gateway being called and the error message
+    received.
+- status: 401
+  title: Unauthorized
+  declared_on_operations: 3498
+  body: No response body.
+  remediation: Ensure the oAuth token is valid and current, and that the application key is valid.
+- status: 402
+  title: invalid_grant
+  body: '"invalid_grant", "[Wrong Password]"'
+  remediation: Check the password of the integration user.
+- status: 403
+  title: Unauthorized to access the resource
+  declared_on_operations: 3497
+  causes:
+  - Integration user missing the WSACCESS role.
+  - Environment owner has not approved the integration user.
+  - Wrong hotelId supplied in the x-hotelid header.
+  - Using a pre-migration clientId/clientSecret in an environment migrated to Client Credentials (OCIM).
+- status: 403
+  title: No Subscribed Plan or API found
+  remediation: Occurs when accessing an API the application is not subscribed to; verify the application
+    subscription in the Developer Portal.
+- status: 403
+  title: User is not authorized to access data for resort
+  remediation: Check that the integration user has the WSACCESS role and access to the property.
+- status: 403
+  title: Forbidden
+  remediation: Can occur when IP allow listing is enabled and the caller's IP address is not configured
+    for access.
+- status: 404
+  title: Not Found
+  declared_on_operations: 3497
+  body: No response body.
+  remediation: >-
+    For asynchronous APIs, once the final GET has been issued the data is no longer available on the same
+    summaryId, so a repeat call returns 404; restart the request sequence at step one.
+- status: 404
+  title: OPICS-NOT_FOUND
+  remediation: Verify with the environment owner that Oracle Payment Interface Cloud Service is set up
+    (product ID 14308) and that Token Exchange Service is selected.
+  source_operation: openapi/oracle-hospitality-property-v1-tokenexchange.json
+- status: 405
+  title: Method Not Allowed
+  declared_on_operations: 3496
+  body: No response body.
+  remediation: Ensure the HTTP verb is supported by the operation.
+- status: 406
+  title: Not Acceptable
+  declared_on_operations: 3496
+  body: No response body.
+  remediation: Set the accept header to application/json; Oracle Hospitality APIs produce only
+    application/json.
+- status: 411
+  title: Length Required
+  declared_on_operations: 2
+- status: 413
+  title: Payload Too Large
+  declared_on_operations: 3489
+  body: No response body.
+  remediation: Ensure the request matches the documented request body schema; for bulk fetch or update use
+    the asynchronous APIs.
+- status: 414
+  title: URI Too Long
+  declared_on_operations: 3489
+  body: No response body.
+  remediation: Reduce the number of query parameters or restructure the query.
+- status: 415
+  title: Unsupported Media Type
+  declared_on_operations: 3494
+  remediation: Ensure the request payload has a content-type of application/json.
+- status: 422
+  title: Unprocessable Entity
+  declared_on_operations: 1
+- status: 500
+  title: Internal Server Error
+  declared_on_operations: 3499
+  body: Response body details the error.
+  remediation: Retry in a few moments or contact Oracle Customer Support.
+- status: 502
+  title: Bad Gateway
+  declared_on_operations: 3495
+  body: No response body.
+  remediation: Retry in a few moments or contact Oracle Customer Support.
+- status: 503
+  title: Service Unavailable
+  declared_on_operations: 3497
+  body: No response body.
+  remediation: Retry in a few moments or contact Oracle Customer Support.
+- status: 504
+  title: Gateway Timeout
+  declared_on_operations: 1
+- status: 429
+  title: Too Many Requests
+  declared_in_spec: false
+  source: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_limits.htm
+  remediation: >-
+    Returned when the short-term burst threshold is exceeded (100 requests per second per gateway, or 100
+    per minute for streaming). Not declared in any specification; documented only in the Limits chapter.
+troubleshooting: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_api_troubleshooting.htm

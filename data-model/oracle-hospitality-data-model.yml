@@ -1,0 +1,322 @@
+generated: '2026-07-28'
+method: derived
+source: openapi/ (59 Swagger 2.0 documents, 11,623 definitions, 3,546 operations) + graphql/ (76 SDL documents)
+summary: >-
+  The OPERA Cloud data model as exposed through OHIP. Everything hangs off the property: hotelId is by far
+  the dominant key in the corpus (3,698 occurrences across paths, parameters and schemas), and almost every
+  Property API operation is scoped to one hotel by the x-hotelid header. Below the property the model
+  splits into four clusters - reservations and stays, profiles and memberships, inventory and rates, and
+  financials - with blocks and events bridging group business into all four. Identifiers are Oracle-internal
+  surrogate keys with no external registry, except at the travel-industry edges (IATA agency numbers, IATA
+  airport/city codes, GDS record locators, OpenTravel UniqueID Type).
+identifier_frequency:
+  hotelId: 3698
+  roomType: 483
+  reservationId: 469
+  profileId: 425
+  ratePlanCode: 335
+  roomId: 237
+  blockId: 229
+  membershipId: 167
+  sourceCode: 167
+  accountId: 151
+  cashierId: 151
+  marketCode: 149
+  chainCode: 116
+  eventId: 113
+  packageCode: 94
+  channelCode: 71
+  extSystemCode: 48
+  itemId: 29
+  transactionId: 28
+  activityId: 28
+entities:
+- name: chain
+  key: chainCode
+  domain: enterprise
+  description: Hotel chain / enterprise. Embedded in the OHIP gateway URL and in the OCIM clientId format
+    <chain><environment><enterprise>Client.
+  specs:
+  - openapi/oracle-hospitality-property-v1-entcfg.json
+- name: hotel
+  key: hotelId
+  domain: enterprise
+  aliases: [property, resort]
+  description: The OPERA property code. The root scoping key for the whole platform, carried on the
+    x-hotelid header.
+  specs:
+  - openapi/oracle-hospitality-property-v1-entcfg.json
+  - openapi/oracle-hospitality-property-v1-rmcfg.json
+- name: reservation
+  key: reservationId
+  domain: bookings
+  description: A guest stay booking. Carries stayInfo, resGuestInfo, routing instructions, packages,
+    preferences, traces, alerts, deposit and cancellation policy.
+  specs:
+  - openapi/oracle-hospitality-property-v1-rsv.json
+  - openapi/oracle-hospitality-distribution-v1-book.json
+- name: block
+  key: blockId
+  domain: bookings
+  description: Group room block, with allocations by room type and date, wash schedules, rooming lists,
+    sub-allocations and tour series.
+  specs:
+  - openapi/oracle-hospitality-property-v1-blk.json
+  - openapi/oracle-hospitality-property-v1-blkcfg.json
+- name: profile
+  key: profileId
+  domain: profiles
+  subtypes: [guest, company, travelAgent, source, contact, group]
+  description: Guest, company, travel agent, source and contact profiles, with addresses, communications,
+    preferences, negotiated rates and relationships.
+  specs:
+  - openapi/oracle-hospitality-property-v1-crm.json
+  - openapi/oracle-hospitality-property-v1-crmcfg.json
+- name: membership
+  key: membershipId
+  domain: profiles
+  description: Loyalty membership on a profile - type, level, points, tier projections, awards,
+    certificates and claims.
+  specs:
+  - openapi/oracle-hospitality-property-v1-crm.json
+- name: room
+  key: roomId
+  domain: inventory
+  description: A physical room, with room type, features, condition, housekeeping status and maintenance
+    records.
+  specs:
+  - openapi/oracle-hospitality-property-v1-rmcfg.json
+  - openapi/oracle-hospitality-property-v1-hsk.json
+- name: roomType
+  key: roomType
+  domain: inventory
+  description: Sellable room category. The unit of inventory in availability, ARI publication and block
+    allocation.
+  specs:
+  - openapi/oracle-hospitality-property-v1-rmcfg.json
+  - openapi/oracle-hospitality-property-v1-inv.json
+- name: ratePlan
+  key: ratePlanCode
+  domain: rates
+  description: Rate code with pricing schedules, rate classes, categories, seasons, tiers, hurdles,
+    restrictions and promotion codes.
+  specs:
+  - openapi/oracle-hospitality-property-v1-rtp.json
+  - openapi/oracle-hospitality-property-v1-par.json
+- name: availability
+  key: hotelId+date+roomType
+  domain: rates
+  description: Price, availability and restriction state by date, the payload the Distribution ARI
+    Publication API pushes outward as OTA-shaped notification messages.
+  specs:
+  - openapi/oracle-hospitality-property-v1-par.json
+  - openapi/oracle-hospitality-distribution-outbound-aripublication.json
+- name: folio
+  key: folioId
+  domain: financials
+  description: Guest billing folio; windows, charges, payments, transfers, splits and folio printing.
+  specs:
+  - openapi/oracle-hospitality-property-v1-csh.json
+- name: transaction
+  key: transactionId
+  domain: financials
+  description: A posting against a folio or AR account, classified by transaction code, revenue group and
+    revenue type.
+  specs:
+  - openapi/oracle-hospitality-property-v1-csh.json
+- name: arAccount
+  key: accountId
+  domain: financials
+  description: Accounts receivable account with invoices, payments, adjustments and aging.
+  specs:
+  - openapi/oracle-hospitality-property-v1-ars.json
+- name: cashier
+  key: cashierId
+  domain: financials
+  description: Cashier session used to post, settle and close; carries locks and closure reports.
+  specs:
+  - openapi/oracle-hospitality-property-v1-csh.json
+- name: event
+  key: eventId
+  domain: catering
+  description: Sales and catering event, with function spaces, resources, menus, postings and forecasts.
+  specs:
+  - openapi/oracle-hospitality-property-v1-evm.json
+  - openapi/oracle-hospitality-property-v1-evmcfg.json
+- name: activity
+  key: activityId
+  domain: sales
+  description: Sales activity linked to accounts, contacts and blocks.
+  specs:
+  - openapi/oracle-hospitality-property-v1-act.json
+- name: taskSheet
+  key: taskSheetId
+  domain: housekeeping
+  description: Housekeeping task sheet assigning servicing tasks and rooms to attendants.
+  specs:
+  - openapi/oracle-hospitality-property-v1-hsk.json
+- name: channel
+  key: channelCode
+  domain: distribution
+  description: Oracle-issued global Channel Code identifying a distribution partner; channel room type and
+    rate mappings live under it.
+  specs:
+  - openapi/oracle-hospitality-property-v1-chl.json
+  - openapi/oracle-hospitality-distribution-v1-distribution.json
+- name: externalSystem
+  key: extSystemCode
+  domain: integration
+  description: Registered external system; the subscription boundary for Business Events and the key for
+    external reference identifiers on reservations and profiles.
+  specs:
+  - openapi/oracle-hospitality-property-v1-intcfg.json
+  - openapi/oracle-hospitality-property-v1-int.json
+relationships:
+- from: chain
+  to: hotel
+  type: has_many
+  via: hotelId
+- from: hotel
+  to: reservation
+  type: has_many
+  via: hotelId
+- from: hotel
+  to: room
+  type: has_many
+  via: hotelId
+- from: hotel
+  to: ratePlan
+  type: has_many
+  via: ratePlanCode
+- from: hotel
+  to: block
+  type: has_many
+  via: hotelId
+- from: reservation
+  to: profile
+  type: belongs_to
+  via: profileId
+  evidence: resGuestInfoType and resAccompanyGuestInfoType carry profileIdList
+- from: reservation
+  to: roomType
+  type: has_one
+  via: roomType
+- from: reservation
+  to: room
+  type: has_one
+  via: roomId
+- from: reservation
+  to: ratePlan
+  type: has_one
+  via: ratePlanCode
+- from: reservation
+  to: block
+  type: belongs_to
+  via: blockId
+  evidence: stayInfoType -> reservationBlockType -> blockIdList
+- from: reservation
+  to: folio
+  type: has_many
+  via: reservationId
+- from: reservation
+  to: taskSheet
+  type: has_many
+  via: reservationId
+  evidence: reservation housekeeping schedule operations in hsk.json
+- from: block
+  to: roomType
+  type: has_many
+  via: roomType
+  evidence: block allocation and room-type order operations in blk.json
+- from: block
+  to: event
+  type: has_many
+  via: blockId
+- from: profile
+  to: membership
+  type: has_many
+  via: membershipId
+  evidence: resGuestInfoType -> membershipInfoType
+- from: profile
+  to: address
+  type: has_many
+  via: addressId
+  evidence: addressInfoType -> addressType -> countryNameType
+- from: profile
+  to: arAccount
+  type: has_many
+  via: accountId
+- from: folio
+  to: transaction
+  type: has_many
+  via: transactionId
+- from: arAccount
+  to: invoice
+  type: has_many
+  via: invoiceId
+- from: cashier
+  to: transaction
+  type: has_many
+  via: cashierId
+- from: room
+  to: roomType
+  type: belongs_to
+  via: roomType
+- from: ratePlan
+  to: availability
+  type: has_many
+  via: ratePlanCode
+- from: channel
+  to: roomType
+  type: has_many
+  via: channelCode
+  evidence: channel room type and rate mapping operations in chl.json
+- from: externalSystem
+  to: reservation
+  type: has_many
+  via: extSystemCode
+  evidence: getExternalSystemReservations / getReservationByExtId in rsv.json
+- from: event
+  to: functionSpace
+  type: has_many
+  via: functionSpaceId
+envelope_types:
+  note: >-
+    Every response shares a small set of envelope definitions rather than a hypermedia format. These are
+    the most-reused schema names in the corpus.
+  types:
+  - name: links
+    description: Self/related link block appended to most responses.
+  - name: status
+    description: Response status wrapper carrying warningsType and links.
+  - name: warningsType
+    description: Non-fatal warning collection.
+  - name: exceptionDetailType
+    description: Error wrapper carrying an errorInstance collection.
+  - name: operaVersion
+    description: OPERA version block carrying operaVersionNumberType.
+portable_identifiers:
+- IATA travel-agency number, with an explicit idContext field ("Used to identify the source of the
+  identifier (e.g., IATA, ABTA)")
+- IATA 3-letter airport and city codes (airportCode, hotelCityCode)
+- GDS record locator (recordLocator)
+- OpenTravel UniqueID Type (UIT) code list reference
+proprietary_identifiers:
+- hotelId
+- chainCode and enterpriseID
+- reservationId
+- profileId
+- blockId
+- roomId
+- accountId
+- extSystemCode
+- channelCode (Oracle-issued, one per distribution partner, global across properties)
+reporting_projection:
+  surface: OPERA Cloud Reporting & Analytics (RnA) GraphQL Data APIs
+  files: graphql/
+  count: 75
+  note: >-
+    The same entities are re-projected as 75 read-only GraphQL subject areas (bookingsReservation,
+    profilesIndividuals, financialGuestLedger, inventoryRooms, ratesCodes, statisticsForecastSummary and
+    so on), each exposing exactly one root query field over a denormalised reporting view. Oracle
+    recommends these for bulk extraction to avoid load on the transactional platform.

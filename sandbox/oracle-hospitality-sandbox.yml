@@ -1,0 +1,64 @@
+generated: '2026-07-28'
+method: searched
+source: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_quick_start_for_partners_using_the_partner_sandbox.htm
+summary: >-
+  Oracle operates a shared Partner Sandbox for the Oracle Hospitality Integration Platform. It is not
+  self-serve - a partner must first be onboarded (Oracle Store purchase or CPQ form) and signed in to the
+  tenant-scoped Developer Portal, at which point sandbox credentials and the sandbox gateway URL appear on
+  the Environments page. There is no test/live key prefix convention and no magic test values; the sandbox
+  is a real OPERA Cloud environment containing Oracle-seeded demo properties.
+environments:
+- name: Partner Sandbox (SSD)
+  scheme: Resource Owner Group authentication
+  test_hotel_id: SAND01
+  shared: true
+  note: An integration user must be created for SSD sandboxes.
+  docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_viewing_partner_sandbox_details_ssd.htm
+- name: Partner Sandbox (OCIM)
+  scheme: Client Credentials authentication (OPERA Cloud Identity Management)
+  test_hotel_id: OHIPSB02
+  shared: true
+  note: No integration user is required for OCIM.
+  docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_viewing_partner_sandbox_details.htm
+- name: Partner dedicated non-production environment
+  shared: false
+  note: >-
+    Partners may add their own non-production environment. Business Events streaming is auto-approved for
+    a partner consuming from the partner sandbox or from their own dedicated non-production environment.
+- name: Customer UAT / non-production environment
+  shared: false
+  note: Requires the environment owner to approve the partner connection in their own Developer Portal.
+test_values:
+  published:
+  - kind: hotelId
+    value: SAND01
+    environment: Partner Sandbox (SSD)
+  - kind: hotelId
+    value: OHIPSB02
+    environment: Partner Sandbox (OCIM)
+  note: >-
+    These are the only test identifiers Oracle publishes. No test card numbers, test tokens, test IBANs or
+    time-simulation facilities are documented for OHIP; payment testing runs through Oracle Payment
+    Interface configuration in the environment rather than through published magic values.
+promotion_to_production:
+  self_serve: false
+  requirements:
+  - A non-production application may not access production environments; a separate production application
+    must be created.
+  - Email an Oracle Partner Network (OPN) reference number to hospitality-integrations_ww@oracle.com.
+  - Customer production applications additionally require a written Business Justification and confirmation
+    of the Oracle Terms and Conditions.
+  - Distribution partners additionally require an Oracle-issued global Channel Code and an Oracle Cloud
+    Marketplace listing.
+  docs:
+  - https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_moving_to_production_ocim.htm
+  - https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_moving_to_production_ssd.htm
+tooling:
+  postman_workspace: https://www.postman.com/hospitalityapis/workspace/oracle-hospitality-apis/overview
+  postman_collections: https://github.com/oracle/hospitality-api-docs/tree/main/postman-collections
+  postman_environment_file: oracle-hospitality.postman_environment.json
+  graphiql: >-
+    A GraphiQL playground is published for the Business Events Streaming API
+    (https://github.com/oracle/hospitality-api-docs/blob/main/graphql/streaming/graphiql.html); it is a
+    client that connects to the partner's own tenant gateway, not a hosted public console.
+  docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_github_postman_collections.htm

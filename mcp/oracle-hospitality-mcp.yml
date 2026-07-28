@@ -1,0 +1,157 @@
+generated: '2026-07-28'
+method: derived
+status: candidate
+server:
+  published: false
+  name: oracle-hospitality
+  transport: null
+  url: null
+search:
+  date: '2026-07-28'
+  checked:
+  - source: https://www.oracle.com/mcp/
+    result: >-
+      Oracle's MCP landing page lists Oracle AI Database MCP servers only (SQLcl MCP Server, OCI Database
+      Tools MCP Server, ORDS MCP endpoint). No hospitality, OPERA Cloud, OHIP, MICROS or Simphony server.
+  - source: https://github.com/oracle/mcp
+    result: >-
+      Oracle's official MCP monorepo contains 32 servers - dbtools, mysql, goldengate, data-studio, db-doc
+      and 27 OCI infrastructure servers. None covers Oracle Hospitality.
+  - source: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/
+    result: The OHIP developer guide makes no reference to the Model Context Protocol.
+  - source: npm registry (@modelcontextprotocol, "ohip", "opera cloud", "oracle hospitality")
+    result: No first-party MCP package. One third-party generated SDK exists (@applyinnovations/ohip-sdk),
+      which is not an MCP server.
+  conclusion: >-
+    Oracle Hospitality ships no MCP server, first-party or hosted. The tool list below is a DERIVED
+    candidate - it names what an MCP server over OHIP would expose, bound to real operationIds that exist
+    verbatim in the harvested specifications, so it can be forged into a server without inventing a
+    contract. It is not an Oracle artifact and is not advertised as one.
+derived_from: openapi/ (59 Swagger 2.0 documents, 3,546 operations)
+scope_note: >-
+  A one-tool-per-operation mapping would produce 3,546 tools, which no agent can hold. The candidate set
+  below is scoped to the marquee property, distribution and upsell flows - the operations a hotel-facing
+  agent actually needs - and every entry names the source specification and operationId it binds to. Each
+  tool inherits that operation's parameters and request body as its real input schema.
+common_inputs:
+  required_headers:
+  - Authorization (Bearer OAuth token)
+  - x-app-key
+  - x-hotelid (property-scoped operations)
+  - x-channelCode (distribution operations)
+tools:
+- name: search_hotel_availability
+  description: Search availability and rates for a property over a date range.
+  category: availability
+  source_operation: openapi/oracle-hospitality-property-v1-par.json#getHotelAvailability
+- name: search_alternate_availability
+  description: Find alternate dates or room types when the requested stay is unavailable.
+  category: availability
+  source_operation: openapi/oracle-hospitality-property-v1-par.json#getAlternateAvailability
+- name: get_rate_plan_info
+  description: Retrieve availability and pricing detail for a rate plan.
+  category: rates
+  source_operation: openapi/oracle-hospitality-property-v1-par.json#getAvailabilityRatePlanInfo
+- name: get_hotel_inventory
+  description: Retrieve room-type inventory counts for a property.
+  category: inventory
+  source_operation: openapi/oracle-hospitality-property-v1-inv.json#getHotelInventory
+- name: create_reservation
+  description: Create a reservation at a property.
+  category: reservations
+  source_operation: openapi/oracle-hospitality-property-v1-rsv.json#postReservation
+  consequence: write
+- name: get_hotel_reservations
+  description: List or search reservations for a property.
+  category: reservations
+  source_operation: openapi/oracle-hospitality-property-v1-rsv.json#getHotelReservations
+- name: cancel_reservations
+  description: Cancel one or more reservations.
+  category: reservations
+  source_operation: openapi/oracle-hospitality-property-v1-rsv.json#postCancelReservations
+  consequence: write
+- name: get_reservation_by_external_id
+  description: Fetch a reservation by an external system's reference identifier.
+  category: reservations
+  source_operation: openapi/oracle-hospitality-property-v1-rsv.json#getReservationByExtId
+- name: validate_rate_info
+  description: Validate a rate before committing a reservation.
+  category: rates
+  source_operation: openapi/oracle-hospitality-property-v1-rsv.json#validateRateInfo
+- name: get_reservation_summaries
+  description: Retrieve front-desk reservation summaries (arrivals, departures, in-house).
+  category: front-office
+  source_operation: openapi/oracle-hospitality-property-v1-fof.json#getReservationSummaries
+- name: auto_assign_room
+  description: Auto-assign a room to a reservation.
+  category: front-office
+  source_operation: openapi/oracle-hospitality-property-v1-fof.json#autoAssignRoom
+  consequence: write
+- name: get_housekeeping_overview
+  description: Retrieve the housekeeping status overview for a property.
+  category: housekeeping
+  source_operation: openapi/oracle-hospitality-property-v1-hsk.json#getHousekeepingOverview
+- name: set_room_condition
+  description: Set the condition of a room.
+  category: housekeeping
+  source_operation: openapi/oracle-hospitality-property-v1-hsk.json#setRoomCondition
+  consequence: write
+- name: get_out_of_order_rooms
+  description: List rooms flagged out of order.
+  category: housekeeping
+  source_operation: openapi/oracle-hospitality-property-v1-hsk.json#getOutOfOrderRooms
+- name: get_guest_profile
+  description: Retrieve a guest profile.
+  category: profiles
+  source_operation: openapi/oracle-hospitality-property-v1-crm.json#getGuestProfile
+- name: create_guest_profile
+  description: Create a guest profile.
+  category: profiles
+  source_operation: openapi/oracle-hospitality-property-v1-crm.json#postGuestProfile
+  consequence: write
+- name: get_member_history
+  description: Retrieve loyalty membership history for a profile.
+  category: loyalty
+  source_operation: openapi/oracle-hospitality-property-v1-crm.json#getMemberHistory
+- name: search_blocks
+  description: Search group room blocks at a property.
+  category: groups
+  source_operation: openapi/oracle-hospitality-property-v1-blk.json#searchBlocks
+- name: get_block_reservations
+  description: List reservations attached to a block.
+  category: groups
+  source_operation: openapi/oracle-hospitality-property-v1-blk.json#getBlockReservations
+- name: post_rooming_list
+  description: Upload a rooming list against a block.
+  category: groups
+  source_operation: openapi/oracle-hospitality-property-v1-blk.json#postRoomingList
+  consequence: write
+- name: get_folio_charges
+  description: Retrieve billing charges on a guest folio.
+  category: cashiering
+  source_operation: openapi/oracle-hospitality-property-v1-csh.json#getCheckDetails
+- name: shop_property_offers
+  description: Shop bookable offers for a property through OPERA Cloud Distribution.
+  category: distribution
+  source_operation: openapi/oracle-hospitality-distribution-v1-shop.json#getPropertyOffers
+- name: distribution_create_reservation
+  description: Create a reservation through OPERA Cloud Distribution as a channel partner.
+  category: distribution
+  source_operation: openapi/oracle-hospitality-distribution-v1-book.json#postReservation
+  consequence: write
+- name: distribution_cancel_reservation
+  description: Cancel a reservation through OPERA Cloud Distribution.
+  category: distribution
+  source_operation: openapi/oracle-hospitality-distribution-v1-book.json#postCancelReservation
+  consequence: write
+- name: get_upsell_offers
+  description: Retrieve Nor1 integrated upsell offers for a stay.
+  category: upsell
+  source_operation: openapi/oracle-hospitality-nor1-v1-upselloffers.json#getUpsellOffers
+- name: get_business_events
+  description: Poll Business Events for an external system.
+  category: events
+  source_operation: openapi/oracle-hospitality-property-v1-int.json
+  note: Operation is documented as FetchBusinessEvents at
+    /int/v1/externalSystem/{extSystemCode}/businessEvents.
+crosswalk: mcp/oracle-hospitality-tool-crosswalk.yml

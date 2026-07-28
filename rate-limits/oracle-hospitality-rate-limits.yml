@@ -1,0 +1,103 @@
+generated: '2026-07-28'
+method: searched
+source: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_limits.htm
+docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_limits.htm
+enforcement:
+  scope: per gateway, shared by all consumers and clients accessing that gateway
+  over_limit_status: 429
+  over_limit_behavior: >-
+    Exceeding the burst threshold returns HTTP 429 (Too Many Requests). Exceeding the standard sustained
+    rate causes requests to be automatically delayed rather than rejected.
+  headers_published: false
+  note: Oracle does not publish X-RateLimit-* response headers for OHIP; the documented signal is the
+    429 status and request delay.
+rate_limits:
+- name: OHIP gateway - sustained
+  surface: all Oracle Hospitality APIs
+  limit_count: 50
+  interval: second
+  scope: gateway
+  note: Shared by all consumers and clients accessing that gateway.
+- name: OHIP gateway - short-term burst
+  surface: all Oracle Hospitality APIs
+  limit_count: 100
+  interval: second
+  scope: gateway
+  note: Short-term burst allowance; exceeding it returns HTTP 429.
+- name: Streaming API - sustained
+  surface: Business Events Streaming API
+  limit_count: 12
+  interval: minute
+  scope: gateway
+- name: Streaming API - burst
+  surface: Business Events Streaming API
+  limit_count: 100
+  interval: minute
+  scope: gateway
+- name: Business Events polling
+  surface: Integration Processor API (getBusinessEvents, getBusinessEventsByExternalSystem)
+  limit_count: 300
+  interval: minute
+  scope: gateway
+  note: Maximum 20 events returned per call.
+- name: Asynchronous APIs - POST
+  surface: '*/async/v1 operations'
+  limit_count: 100
+  interval: minute
+  scope: gateway
+- name: Asynchronous APIs - POST per environment/application
+  surface: '*/async/v1 operations'
+  limit_count: 250
+  interval: minute
+  scope: environment-application
+- name: Asynchronous APIs - HEAD
+  surface: '*/async/v1 operations'
+  limit_count: 300
+  interval: minute
+  scope: gateway
+- name: Asynchronous APIs - GET
+  surface: '*/async/v1 operations'
+  limit_count: 300
+  interval: minute
+  scope: gateway
+size_limits:
+- name: Total HTTP header size
+  value: 8KB
+  note: Includes the OAuth token, x-app-key, x-request-id and all other headers.
+- name: Request body - default
+  value: 100KB
+- name: Request body - elevated operations
+  value: 2MB
+  operations:
+  - postRestrictionsProcess
+  - postRoomingList
+  - postSubAllocation
+  - putBlockAllocation
+  - postReservation
+  - postReservationByBlock
+  - startSetDailyRatePlanSchedulesProcess
+  - postSellLimitsProcess
+  - emailFolioReport
+  - setCustomizedLetter
+  - openPaymentTokenExchange
+- name: Request body - file upload operations
+  value: 14MB
+  operations:
+  - uploadFileAttachment
+  - uploadImage
+account_limits:
+- name: Applications registered per OHIP Developer Portal
+  value: 100
+- name: IP allow-list ranges per chain
+  value: 100
+- name: Streaming consumers per chain / gateway / application key
+  value: 1
+  note: Only one client can be connected to consume events from a single chain in a single gateway on a
+    single application key.
+throttling_conventions:
+- Identical asynchronous requests must be spaced at least 30 minutes apart.
+- startBlockAllocationSummaryProcess with date filters must be spaced at least 3 hours apart.
+- Streaming consumers must connect at least once every 24 hours, or supply the optional offset parameter
+  with the last received offset value.
+- A minimum of 10,000 ms must elapse between sending a WebSocket complete message and the next subscribe
+  message.

@@ -1,0 +1,35 @@
+generated: '2026-07-28'
+method: searched
+source: live probes, 2026-07-28
+result: none
+note: >-
+  No /.well-known/ discovery document is published on any reachable Oracle Hospitality host. The OHIP API
+  gateway itself is per-tenant - the hostname is issued on the Environments page of the tenant-scoped
+  Developer Portal and is not published - so there is no public API host to probe; the 59 harvested Swagger
+  documents declare a placeholder host (oracle.api.com) that does not resolve. Probes were therefore run
+  against the two public Oracle hosts that carry the Oracle Hospitality surface: www.oracle.com (product +
+  corporate) and docs.oracle.com (the OHIP developer guide). www.oracle.com answers 403 to automated
+  requests for unknown paths rather than 404, so a 403 here means "not served", not "gated".
+hosts:
+- host: https://www.oracle.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+  - path: /.well-known/openid-configuration
+    status: 403
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+  - path: /.well-known/api-catalog
+    status: 403
+  - path: /.well-known/ai-plugin.json
+    status: 403
+- host: https://docs.oracle.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+- host: https://oracle.api.com
+  note: Placeholder host declared in every harvested Swagger document. Does not resolve; not probed.
+  documents: []
+related:
+  security_policy: security/oracle-hospitality-vulnerability-disclosure.yml
+  authentication: authentication/oracle-hospitality-authentication.yml

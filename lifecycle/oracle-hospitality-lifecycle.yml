@@ -1,0 +1,107 @@
+generated: '2026-07-28'
+method: searched
+source: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_versioning.htm
+versioning:
+  scheme: uri-path
+  current: v1
+  early_access: v0
+  docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_versioning.htm
+  policy: >-
+    APIs are exposed at /v0, /v1, /v2 and so on. Oracle's stated strategy is to avoid versions beyond v1
+    by only introducing non-breaking changes; versions beyond v1 might be considered in future.
+  release_train: >-
+    Specifications are stamped with the OPERA Cloud SaaS release they are compatible with (26.2.0.0 for
+    58 of the 59 harvested documents; 21.5.0.0 for the OHIP oAuth API and 1.0.1 for OPI Token Exchange).
+  non_breaking_changes:
+  - Adding new API operations
+  - Adding new optional request parameters to existing API operations
+  - Adding new properties to existing API responses
+  - Adding new response headers
+  - Changing the order of properties in existing API responses
+  - Updating descriptions of API operations or properties
+  - Adding or changing examples
+  - Increasing the length of a string parameter
+  - Changing from a more restrictive to a less restrictive numeric datatype
+  - Deprecating an API operation
+  - Adding items to or removing items from an ENUM
+  - Adding new events
+  breaking_changes:
+  - Removing an entire API operation
+  - Removing or renaming a request parameter
+  - Removing or renaming a response parameter
+  - Adding a new required request parameter
+  - Making a previously optional parameter required
+  - Changing the datatype of a parameter or response field
+  - Adding a new validation rule to an existing request parameter
+  - Changing authentication or authorization requirements
+  - Enforcing new or lower limits on request parameters
+  - Changing how resources are accessed
+  - Request/response body size changes
+  - Changing response error codes
+deprecation:
+  policy_url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_versioning.htm
+  announcements_url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_upcoming_major_changes.htm
+  granularity: operation
+  sunset_header: false
+  policy: >-
+    A major change announcement is issued as soon as possible once an API operation will be deprecated,
+    including sunset date details. APIs are deprecated at the operation level, not lower. Deprecations are
+    published as dated ReadMe entries under Upcoming Major Changes rather than as RFC 8594 Sunset/Deprecation
+    response headers.
+  worked_example: >-
+    OPERA Cloud Property Early Adopter APIs (/v0) were deprecated in September 2023 with sunset in
+    January 2025.
+  adoption_sequence:
+  - Major change announcement issued
+  - Integration partners test in the sandbox environment
+  - Customer UAT environments upgraded
+  - Customer production environments upgraded
+  - Partner changes must be deployed to production before the SaaS upgrade reaches production
+  deprecated_operation_count: 242
+  deprecated_operations_note: >-
+    242 operations across the 59 harvested Swagger documents carry deprecated: true. A representative
+    sample is listed below; the full set is derivable from openapi/.
+  deprecated_operations:
+  - openapi/oracle-hospitality-property-outbound-fofoutbound.json#postExternalRoomKeys
+  - openapi/oracle-hospitality-property-v1-act.json#getEmails
+  - openapi/oracle-hospitality-property-v1-ars.json#getStatements
+  - openapi/oracle-hospitality-property-v1-ars.json#getARTransactions
+  - openapi/oracle-hospitality-property-v1-ars.json#getInvoicesOnHold
+  - openapi/oracle-hospitality-property-v1-ars.json#putInvoice
+  - openapi/oracle-hospitality-property-v1-ars.json#getInvoiceAppliedPayments
+  - openapi/oracle-hospitality-property-v1-ars.json#deletePaymentsFromInvoice
+  - openapi/oracle-hospitality-property-v1-ars.json#postARCharges
+  - openapi/oracle-hospitality-property-v1-blk.json#getBlocks
+legacy_migration:
+  docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_migrating_from_legacy_apis_to_rest.htm
+  retiring_interfaces:
+  - name: OPERA Xchange Interface (OXI)
+    docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_opera_xchange_interface_oxi.htm
+  - name: HTNG (OPERA Electronic Distribution Systems SOAP)
+    docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_htng.htm
+  - name: OPERA Web Services (OWS) and Kiosk
+    docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_opera_web_services_and_kiosk.htm
+  - name: Property Interfaces (IFC8, FIAS, XML_POS)
+    docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_interfaces.htm
+early_adopter_program:
+  docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_early_adopter_api_program.htm
+  version: v0
+  backward_compatibility: >-
+    "our aim is to avoid breaking changes in v.0 APIs, however we cannot guarantee full backward
+    compatibility"
+  sla: >-
+    "the best endeavors assistance provided by product management as part of the program is not subject to
+    service level agreements (SLAs); however, we do offer a premium (paid) service for partners and/or
+    customers who desire dedicated support."
+sla:
+  published: false
+  note: >-
+    No public uptime target or service level agreement is published for the Oracle Hospitality Integration
+    Platform. Commercial terms sit inside the Oracle Cloud Service Agreement accepted at purchase.
+status_page:
+  published: false
+  note: >-
+    No OPERA Cloud / Oracle Hospitality status page was found. Oracle operates a status page for Oracle
+    Cloud Infrastructure (https://ocistatus.oraclecloud.com/), but it does not enumerate Oracle Hospitality
+    SaaS services; OHIP directs incident reporting to the Oracle Customer Support Portal instead.
+  support: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_getting_help_and_contacting_support.htm

@@ -1,0 +1,29 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for OPERA Cloud Distribution ARI Publication
+  version: 1.0.0
+  x-generated: '2026-07-28'
+  x-method: generated
+  x-source: openapi/oracle-hospitality-distribution-outbound-aripublication.json
+extends: openapi/oracle-hospitality-distribution-outbound-aripublication.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: oracle-hospitality
+    x-apievangelist-basePath: /aripublication/v1
+    x-apievangelist-specification: Swagger 2.0
+    x-apievangelist-operations: 3
+    x-apievangelist-deprecated-operations: 0
+    x-apievangelist-authentication: authentication/oracle-hospitality-authentication.yml
+    x-apievangelist-conventions: conventions/oracle-hospitality-conventions.yml
+    x-apievangelist-errors: errors/oracle-hospitality-problem-types.yml
+    x-apievangelist-rate-limits: rate-limits/oracle-hospitality-rate-limits.yml
+    x-apievangelist-lifecycle: lifecycle/oracle-hospitality-lifecycle.yml
+    x-apievangelist-idempotency: none-published
+    x-apievangelist-license: UPL-1.0
+    x-apievangelist-source-repository: https://github.com/oracle/hospitality-api-docs
+- target: $
+  description: OHIP gateway hostnames are issued per tenant on the Developer Portal Environments page and are not
+    published; the harvested document declares the placeholder host "none". Do not treat it as resolvable.
+  update:
+    x-apievangelist-host-note: per-tenant gateway, not published

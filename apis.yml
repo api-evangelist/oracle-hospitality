@@ -2,20 +2,20 @@ aid: oracle-hospitality
 url: https://raw.githubusercontent.com/api-evangelist/oracle-hospitality/refs/heads/main/apis.yml
 name: Oracle Hospitality
 kind: company
-description: 'Oracle Hospitality is Oracle Corporation''s hotel and food-and-beverage technology line,
-  built on the 2014 acquisition of MICROS Systems and anchored by OPERA Cloud, the property management
-  system that runs the front desk, reservations, housekeeping, cashiering and event sales for a large
-  share of the world''s branded hotel rooms, alongside OPERA Cloud Distribution, Simphony point of sale
-  and Nor1 upsell. Home market is the United States. It sits in the middle of the hotel distribution chain
-  rather than at either end: it is the system of record a property runs on, and the switch through which
-  that property''s availability, rates and inventory reach GDS, OTA and web channels and through which
-  reservations come back. Its API posture is unusually open at the specification layer and firmly gated
-  at the credential layer - Oracle publishes 59 Swagger 2.0 specifications covering roughly 3,500 operations
-  to a public GitHub repository under the Universal Permissive License, and publishes the full Oracle
-  Hospitality Integration Platform (OHIP) developer guide openly, but there is no self-serve signup: partners
-  must purchase Oracle Hospitality Integration Cloud Service through the Oracle Store or a CPQ form, production
-  access requires an Oracle Partner Network reference number, and distribution channel partners additionally
-  need an Oracle-issued global Channel Code and an Oracle Cloud Marketplace listing.'
+description: 'Oracle Hospitality is Oracle Corporation''s hotel and food-and-beverage technology line, built
+  on the 2014 acquisition of MICROS Systems and anchored by OPERA Cloud, the property management system that
+  runs the front desk, reservations, housekeeping, cashiering and event sales for a large share of the world''s
+  branded hotel rooms, alongside OPERA Cloud Distribution, Simphony point of sale and Nor1 upsell. Home market
+  is the United States. It sits in the middle of the hotel distribution chain rather than at either end: it
+  is the system of record a property runs on, and the switch through which that property''s availability, rates
+  and inventory reach GDS, OTA and web channels and through which reservations come back. Its API posture is
+  unusually open at the specification layer and firmly gated at the credential layer - Oracle publishes 59
+  Swagger 2.0 specifications covering roughly 3,500 operations to a public GitHub repository under the Universal
+  Permissive License, and publishes the full Oracle Hospitality Integration Platform (OHIP) developer guide
+  openly, but there is no self-serve signup: partners must purchase Oracle Hospitality Integration Cloud Service
+  through the Oracle Store or a CPQ form, production access requires an Oracle Partner Network reference number,
+  and distribution channel partners additionally need an Oracle-issued global Channel Code and an Oracle Cloud
+  Marketplace listing.'
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/oracle.png
 tags:
 - Travel
@@ -34,13 +34,13 @@ specificationVersion: '0.19'
 apis:
 - aid: oracle-hospitality:opera-cloud-distribution-ari-publication
   name: OPERA Cloud Distribution ARI Publication
-  description: Oracle Hospitality Distribution ARI publication message specification for distribution
-    partners to receive in real time property restrictions/availability, rate, and inventory schedules
-    updates, also known as ARI. Partner receives this message will respond with success or error/warning
-    so that property/CRS user can see the status of message delivery in OPERA. A channel code identifier
-    is required in Oracle Hospitality Distribution to receive those messages. Compatible with OPERA Cloud
-    release 26.2.0.0. 3 operation(s) documented; base path /aripublication/v1. Harvested verbatim from
-    Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+  description: Oracle Hospitality Distribution ARI publication message specification for distribution partners
+    to receive in real time property restrictions/availability, rate, and inventory schedules updates, also
+    known as ARI. Partner receives this message will respond with success or error/warning so that property/CRS
+    user can see the status of message delivery in OPERA. A channel code identifier is required in Oracle Hospitality
+    Distribution to receive those messages. Compatible with OPERA Cloud release 26.2.0.0. 3 operation(s) documented;
+    base path /aripublication/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger
+    2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/distribution/outbound/aripublication.json
   tags:
   - ARI Publication
@@ -51,12 +51,13 @@ apis:
     url: openapi/oracle-hospitality-distribution-outbound-aripublication.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_distribution_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-distribution-outbound-aripublication-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-distribution-outbound-lookup
   name: OPERA Cloud Distribution Outbound Lookup
-  description: Oracle Hospitality Distribution External Lookup is to get rate plan and room types from
-    external channel partners. Compatible with OPERA Cloud release 26.2.0.0. 2 operation(s) documented;
-    base path /lookup/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger
-    2.0, release 26.2.0.0).
+  description: Oracle Hospitality Distribution External Lookup is to get rate plan and room types from external
+    channel partners. Compatible with OPERA Cloud release 26.2.0.0. 2 operation(s) documented; base path /lookup/v1.
+    Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/distribution/outbound/lookup.json
   tags:
   - Distribution
@@ -66,15 +67,16 @@ apis:
     url: openapi/oracle-hospitality-distribution-outbound-lookup.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_distribution_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-distribution-outbound-lookup-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-distribution-content-notification
   name: OPERA Cloud Distribution Content Notification
   description: Oracle Hospitality Distribution Content notification message specification for distribution
-    partners to receive in real time property content, channel room and rate updates. Partner receives
-    this message will respond with success or error/warning so that property/CRS user can see the status
-    of message delivery in OPERA. A channel code identifier is required in Oracle Hospitality Distribution
-    to receive those messages. Compatible with OPERA Cloud release 26.2.0.0. 1 operation(s) documented;
-    base path /notification/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository
-    (Swagger 2.0, release 26.2.0.0).
+    partners to receive in real time property content, channel room and rate updates. Partner receives this
+    message will respond with success or error/warning so that property/CRS user can see the status of message
+    delivery in OPERA. A channel code identifier is required in Oracle Hospitality Distribution to receive
+    those messages. Compatible with OPERA Cloud release 26.2.0.0. 1 operation(s) documented; base path /notification/v1.
+    Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/distribution/outbound/notification.json
   tags:
   - Content Notification
@@ -85,16 +87,17 @@ apis:
     url: openapi/oracle-hospitality-distribution-outbound-notification.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_distribution_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-distribution-outbound-notification-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-distribution-book
   name: OPERA Cloud Distribution Book
-  description: OPERA Cloud Distribution Reservations API allows authorized channel partners to create
-    and update reservations for any active property in Oracle Hospitality Distribution (regardless if
-    the property is using OPERA Cloud, OPERA V5 / Suite8 / on-premise PMS Versions). Regardless of how
-    the reservation is created, either directly in Oracle Hospitality Distribution API (reservation request
-    operations) or already created and committed in another external system (reservation notification
-    operations) the same API can be used. Compatible with OPERA Cloud release 26.2.0.0. 5 operation(s)
-    documented; base path /book/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository
-    (Swagger 2.0, release 26.2.0.0).
+  description: OPERA Cloud Distribution Reservations API allows authorized channel partners to create and update
+    reservations for any active property in Oracle Hospitality Distribution (regardless if the property is
+    using OPERA Cloud, OPERA V5 / Suite8 / on-premise PMS Versions). Regardless of how the reservation is created,
+    either directly in Oracle Hospitality Distribution API (reservation request operations) or already created
+    and committed in another external system (reservation notification operations) the same API can be used.
+    Compatible with OPERA Cloud release 26.2.0.0. 5 operation(s) documented; base path /book/v1. Harvested
+    verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/distribution/v1/book.json
   tags:
   - Reservation Request
@@ -105,12 +108,14 @@ apis:
     url: openapi/oracle-hospitality-distribution-v1-book.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_distribution_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-distribution-v1-book-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-distribution-content
   name: OPERA Cloud Distribution Content
-  description: Oracle Hospitality Distribution Content is for distribution partners to retrieve property
-    Channel content information. Compatible with OPERA Cloud release 26.2.0.0. 5 operation(s) documented;
-    base path /content/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger
-    2.0, release 26.2.0.0).
+  description: Oracle Hospitality Distribution Content is for distribution partners to retrieve property Channel
+    content information. Compatible with OPERA Cloud release 26.2.0.0. 5 operation(s) documented; base path
+    /content/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release
+    26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/distribution/v1/content.json
   tags:
   - Distribution
@@ -120,12 +125,14 @@ apis:
     url: openapi/oracle-hospitality-distribution-v1-content.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_distribution_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-distribution-v1-content-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-distribution-property-controls
   name: OPERA Cloud Distribution Property Controls
-  description: Oracle Hospitality Distribution Property Controls specification for distribution partners
-    to retrieve property controls and settings. Compatible with OPERA Cloud release 26.2.0.0. 1 operation(s)
-    documented; base path /controls/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository
-    (Swagger 2.0, release 26.2.0.0).
+  description: Oracle Hospitality Distribution Property Controls specification for distribution partners to
+    retrieve property controls and settings. Compatible with OPERA Cloud release 26.2.0.0. 1 operation(s) documented;
+    base path /controls/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger
+    2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/distribution/v1/controls.json
   tags:
   - Distribution Controls
@@ -136,16 +143,18 @@ apis:
     url: openapi/oracle-hospitality-distribution-v1-controls.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_distribution_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-distribution-v1-controls-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-distribution-reservation-service
   name: OPERA Cloud Distribution Reservation Service
   description: The OPERA Cloud Distribution Reservation API enables authorized channel partners to create,
-    update, fetch and cancel reservations for properties managed through OPERA Cloud Foundation or OPERA
-    Cloud Central, leveraging Oracle Hospitality Identity Management for secure access. Each request must
-    include a valid channel code in the x-channelCode header. When a hotel maps its hotel, room type,
-    and rate codes to channel-specific values, the API will return those mapped channel codes; otherwise,
-    it will return the native OPERA Cloud codes. Compatible with OPERA Cloud release 26.2.0.0. 4 operation(s)
-    documented; base path /distribution/v1. Harvested verbatim from Oracle's public hospitality-api-docs
-    repository (Swagger 2.0, release 26.2.0.0).
+    update, fetch and cancel reservations for properties managed through OPERA Cloud Foundation or OPERA Cloud
+    Central, leveraging Oracle Hospitality Identity Management for secure access. Each request must include
+    a valid channel code in the x-channelCode header. When a hotel maps its hotel, room type, and rate codes
+    to channel-specific values, the API will return those mapped channel codes; otherwise, it will return the
+    native OPERA Cloud codes. Compatible with OPERA Cloud release 26.2.0.0. 4 operation(s) documented; base
+    path /distribution/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger
+    2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/distribution/v1/distribution.json
   tags:
   - Reservation
@@ -156,20 +165,22 @@ apis:
     url: openapi/oracle-hospitality-distribution-v1-distribution.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_distribution_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-distribution-v1-distribution-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-distribution-authentication-api
   name: OPERA Cloud Distribution Authentication API
-  description: 'API to obtain the access token (in the JWT format) that matches the provided credentials
-    issued by the Oracle Hospitality Distribution administrator for a specific Distribution channel partner.
-    The token will then be used by API users to access OPERA Cloud Distribution APIS. Once a token is
-    created, it can be used in multiple subsequent calls until it expires as defined in this API response.
-    Username for a channel partner Distribution API account is provisioned by an Oracle administrator
-    at the channel level. It is not an OPERA Cloud (PMS) user and not created or approved by the hotelier.
-    Additionally, for each property, the hotelier will need to enable the channel so that it can access
-    data for their specific hotel in the reservation context. More information on how to request a username
-    and temporary password for a registered channel for Distribution APIs: Channel partners registered
-    via OHIP receive credential(s) from the Oracle Hospitality Distribution administrator during the channel
-    registration. Compatible with OPERA Cloud release 26.2.0.0. 1 operation(s) documented; base path /hdpba/oauth2/v1.
-    Harvested verbatim from Oracle''s public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).'
+  description: 'API to obtain the access token (in the JWT format) that matches the provided credentials issued
+    by the Oracle Hospitality Distribution administrator for a specific Distribution channel partner. The token
+    will then be used by API users to access OPERA Cloud Distribution APIS. Once a token is created, it can
+    be used in multiple subsequent calls until it expires as defined in this API response. Username for a channel
+    partner Distribution API account is provisioned by an Oracle administrator at the channel level. It is
+    not an OPERA Cloud (PMS) user and not created or approved by the hotelier. Additionally, for each property,
+    the hotelier will need to enable the channel so that it can access data for their specific hotel in the
+    reservation context. More information on how to request a username and temporary password for a registered
+    channel for Distribution APIs: Channel partners registered via OHIP receive credential(s) from the Oracle
+    Hospitality Distribution administrator during the channel registration. Compatible with OPERA Cloud release
+    26.2.0.0. 1 operation(s) documented; base path /hdpba/oauth2/v1. Harvested verbatim from Oracle''s public
+    hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).'
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/distribution/v1/hdpbaoauth2.json
   tags:
   - Authentication
@@ -180,12 +191,14 @@ apis:
     url: openapi/oracle-hospitality-distribution-v1-hdpbaoauth2.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_distribution_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-distribution-v1-hdpbaoauth2-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-distribution-onboarding
   name: OPERA Cloud Distribution Onboarding
   description: Oracle Hospitality Distribution Onboarding specification for distribution partners to retrieve
-    property status with its attributes and update property status. Compatible with OPERA Cloud release
-    26.2.0.0. 2 operation(s) documented; base path /onboard/v1. Harvested verbatim from Oracle's public
-    hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+    property status with its attributes and update property status. Compatible with OPERA Cloud release 26.2.0.0.
+    2 operation(s) documented; base path /onboard/v1. Harvested verbatim from Oracle's public hospitality-api-docs
+    repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/distribution/v1/onboard.json
   tags:
   - Onboarding
@@ -196,15 +209,17 @@ apis:
     url: openapi/oracle-hospitality-distribution-v1-onboard.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_distribution_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-distribution-v1-onboard-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-distribution-reservation-notification
   name: OPERA Cloud Distribution Reservation Notification
-  description: OPERA Cloud Distribution Reservation Notifications API allows authorized channel partners
-    to create and update reservations for any active property in Oracle Hospitality Distribution (regardless
-    if the property is using OPERA Cloud / OPERA V5 / on-premise PMS Versions). This API is meant to transmit
-    reservations already created and committed in the channel external system and does not perform any
-    Pricing and Availability validation. Compatible with OPERA Cloud release 26.2.0.0. 4 operation(s)
-    documented; base path /resnotif/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository
-    (Swagger 2.0, release 26.2.0.0).
+  description: OPERA Cloud Distribution Reservation Notifications API allows authorized channel partners to
+    create and update reservations for any active property in Oracle Hospitality Distribution (regardless if
+    the property is using OPERA Cloud / OPERA V5 / on-premise PMS Versions). This API is meant to transmit
+    reservations already created and committed in the channel external system and does not perform any Pricing
+    and Availability validation. Compatible with OPERA Cloud release 26.2.0.0. 4 operation(s) documented; base
+    path /resnotif/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0,
+    release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/distribution/v1/resnotif.json
   tags:
   - Reservation Notification
@@ -215,12 +230,14 @@ apis:
     url: openapi/oracle-hospitality-distribution-v1-resnotif.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_distribution_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-distribution-v1-resnotif-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-distribution-shop
   name: OPERA Cloud Distribution Shop
   description: Oracle Hospitality Distribution Shop is for distribution partners to find properties availability,
-    room-rates offers for a single property or a specific room-rate offer detail.. Compatible with OPERA
-    Cloud release 26.2.0.0. 6 operation(s) documented; base path /shop/v1. Harvested verbatim from Oracle's
-    public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+    room-rates offers for a single property or a specific room-rate offer detail.. Compatible with OPERA Cloud
+    release 26.2.0.0. 6 operation(s) documented; base path /shop/v1. Harvested verbatim from Oracle's public
+    hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/distribution/v1/shop.json
   tags:
   - Distribution
@@ -230,15 +247,16 @@ apis:
     url: openapi/oracle-hospitality-distribution-v1-shop.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_distribution_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-distribution-v1-shop-overlay.yaml
 - aid: oracle-hospitality:nor1-integrated-upsell-api
   name: Nor1 Integrated Upsell API
-  description: An upsell service that can be consumed to display upgrade offers to a hotel guest prior
-    to arrival. Pre-arrival upsells are becoming increasingly important due to the adoption of mobile
-    and kiosk check-in which reduces the opportunity for front-desk upselling. Upgrade offers are based
-    on PRiME(R) AI/ML decision intelligence and OPERA real-time inventory. The service allows instant
-    fulfillment of the upgrade offer. Compatible with OPERA Cloud release 26.2.0.0. 2 operation(s) documented;
-    base path /ohcgep/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger
-    2.0, release 26.2.0.0).
+  description: An upsell service that can be consumed to display upgrade offers to a hotel guest prior to arrival.
+    Pre-arrival upsells are becoming increasingly important due to the adoption of mobile and kiosk check-in
+    which reduces the opportunity for front-desk upselling. Upgrade offers are based on PRiME(R) AI/ML decision
+    intelligence and OPERA real-time inventory. The service allows instant fulfillment of the upgrade offer.
+    Compatible with OPERA Cloud release 26.2.0.0. 2 operation(s) documented; base path /ohcgep/v1. Harvested
+    verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/nor1/v1/upselloffers.json
   tags:
   - Nor1 Integrated Upsell API
@@ -249,13 +267,14 @@ apis:
     url: openapi/oracle-hospitality-nor1-v1-upselloffers.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_nor1_integrated_upsell_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-nor1-v1-upselloffers-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-customer-relationship-management-outbound-api
   name: OPERA Cloud Customer Relationship Management Outbound API
-  description: APIs to cater for Customer Relationship Management external (outbound) functionality with
-    OPERA. These APIs facilitate various operations related to getting data from an external system, and
-    inserting it into OPERA. Compatible with OPERA Cloud release 26.2.0.0. 12 operation(s) documented;
-    base path /crm/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger
-    2.0, release 26.2.0.0).
+  description: APIs to cater for Customer Relationship Management external (outbound) functionality with OPERA.
+    These APIs facilitate various operations related to getting data from an external system, and inserting
+    it into OPERA. Compatible with OPERA Cloud release 26.2.0.0. 12 operation(s) documented; base path /crm/v1.
+    Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/outbound/crmoutbound.json
   tags:
   - Profile
@@ -268,13 +287,14 @@ apis:
     url: openapi/oracle-hospitality-property-outbound-crmoutbound.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-outbound-crmoutbound-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-cashiering-outbound-api
   name: OPERA Cloud Cashiering Outbound API
-  description: APIs to cater for Cashiering related external (outbound) functionality with OPERA. These
-    APIs facilitate various operations related to getting data from an external system, and inserting
-    it into OPERA. Compatible with OPERA Cloud release 26.2.0.0. 7 operation(s) documented; base path
-    /csh/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release
-    26.2.0.0).
+  description: APIs to cater for Cashiering related external (outbound) functionality with OPERA. These APIs
+    facilitate various operations related to getting data from an external system, and inserting it into OPERA.
+    Compatible with OPERA Cloud release 26.2.0.0. 7 operation(s) documented; base path /csh/v1. Harvested verbatim
+    from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/outbound/cshoutbound.json
   tags:
   - Cashiering
@@ -285,13 +305,14 @@ apis:
     url: openapi/oracle-hospitality-property-outbound-cshoutbound.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-outbound-cshoutbound-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-front-desk-operations-outbound-api
   name: OPERA Cloud Front Desk Operations Outbound API
-  description: APIs to cater for Front Desk related external (outbound) functionality with OPERA Cloud.
-    These APIs facilitate various operations related to getting data from an external system, and inserting
-    it into OPERA Cloud. Compatible with OPERA Cloud release 26.2.0.0. 2 operation(s) documented; base
-    path /fof/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0,
-    release 26.2.0.0).
+  description: APIs to cater for Front Desk related external (outbound) functionality with OPERA Cloud. These
+    APIs facilitate various operations related to getting data from an external system, and inserting it into
+    OPERA Cloud. Compatible with OPERA Cloud release 26.2.0.0. 2 operation(s) documented; base path /fof/v1.
+    Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/outbound/fofoutbound.json
   tags:
   - FrontOfficeExternal
@@ -302,10 +323,12 @@ apis:
     url: openapi/oracle-hospitality-property-outbound-fofoutbound.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-outbound-fofoutbound-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-activity-api
   name: OPERA Cloud Activity API
-  description: APIs to cater for Sales Activity functionality in OPERA Cloud. Activities provide you with
-    an account management tool for managing daily tasks such as appointments, sales calls, contact follow-up,
+  description: APIs to cater for Sales Activity functionality in OPERA Cloud. Activities provide you with an
+    account management tool for managing daily tasks such as appointments, sales calls, contact follow-up,
     and so on. Compatible with OPERA Cloud release 26.2.0.0. 23 operation(s) documented; base path /act/v1.
     Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/act.json
@@ -318,12 +341,14 @@ apis:
     url: openapi/oracle-hospitality-property-v1-act.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-act-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-activity-management-api
   name: OPERA Cloud Activity Management API
-  description: APIs to cater for Activity Configuration functionality in OPERA Cloud. In this module you
-    can retrieve, create, update Activity configuration codes, for example create a new Activity Type.
-    Compatible with OPERA Cloud release 26.2.0.0. 25 operation(s) documented; base path /act/config/v1.
-    Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+  description: APIs to cater for Activity Configuration functionality in OPERA Cloud. In this module you can
+    retrieve, create, update Activity configuration codes, for example create a new Activity Type. Compatible
+    with OPERA Cloud release 26.2.0.0. 25 operation(s) documented; base path /act/config/v1. Harvested verbatim
+    from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/actcfg.json
   tags:
   - ActivityManagement
@@ -334,11 +359,13 @@ apis:
     url: openapi/oracle-hospitality-property-v1-actcfg.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-actcfg-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-accounts-receivables-api
   name: OPERA Cloud Accounts Receivables API
   description: APIs to cater for Accounts Receivables functionality in OPERA Cloud. 60 operation(s) documented;
-    base path /ars/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger
-    2.0, release 26.2.0.0).
+    base path /ars/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0,
+    release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/ars.json
   tags:
   - AccountsReceivables
@@ -349,13 +376,15 @@ apis:
     url: openapi/oracle-hospitality-property-v1-ars.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-ars-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-block-api
   name: OPERA Cloud Block API
-  description: APIs to cater for Business Block functionality in OPERA Cloud. A block is a group of rooms
-    held for guests who are attending an event, meeting, or function. You can create blocks for family
-    reunions, business conferences, weddings, and so on. You can also set aside rooms for the event (block).
-    Compatible with OPERA Cloud release 26.2.0.0. 93 operation(s) documented; base path /blk/v1. Harvested
-    verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+  description: APIs to cater for Business Block functionality in OPERA Cloud. A block is a group of rooms held
+    for guests who are attending an event, meeting, or function. You can create blocks for family reunions,
+    business conferences, weddings, and so on. You can also set aside rooms for the event (block). Compatible
+    with OPERA Cloud release 26.2.0.0. 93 operation(s) documented; base path /blk/v1. Harvested verbatim from
+    Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/blk.json
   tags:
   - BlockExternal
@@ -368,11 +397,13 @@ apis:
     url: openapi/oracle-hospitality-property-v1-blk.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-blk-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-block-reservation-asynchronous-api
   name: OPERA Cloud Block Reservation Asynchronous API
-  description: APIs to cater Block Reservation related asynchronous functionality in OPERA. Compatible
-    with OPERA Cloud release 26.2.0.0. 14 operation(s) documented; base path /blk/async/v1. Harvested
-    verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+  description: APIs to cater Block Reservation related asynchronous functionality in OPERA. Compatible with
+    OPERA Cloud release 26.2.0.0. 14 operation(s) documented; base path /blk/async/v1. Harvested verbatim from
+    Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/blkasync.json
   tags:
   - BlockAsync
@@ -383,11 +414,13 @@ apis:
     url: openapi/oracle-hospitality-property-v1-blkasync.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-blkasync-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-block-configuration-api
   name: OPERA Cloud Block Configuration API
   description: APIs for Block configuration, such as creating, updating, fetching and removing codes related
-    to blocks. 57 operation(s) documented; base path /blk/config/v1. Harvested verbatim from Oracle's
-    public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+    to blocks. 57 operation(s) documented; base path /blk/config/v1. Harvested verbatim from Oracle's public
+    hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/blkcfg.json
   tags:
   - ChainConfig
@@ -399,14 +432,15 @@ apis:
     url: openapi/oracle-hospitality-property-v1-blkcfg.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-blkcfg-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-back-office-operations-api
   name: OPERA Cloud Back Office Operations API
-  description: APIs to cater for Back Office Operations functionality in OPERA Cloud. A common BackOffice
-    industry term is End of Day. This closes and balances each day's business activities. It reconciles
-    guest folios and processes credit card transactions. The End of Day routine rolls the business date
-    forward and prints final reports. Compatible with OPERA Cloud release 26.2.0.0. 2 operation(s) documented;
-    base path /bof/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger
-    2.0, release 26.2.0.0).
+  description: APIs to cater for Back Office Operations functionality in OPERA Cloud. A common BackOffice industry
+    term is End of Day. This closes and balances each day's business activities. It reconciles guest folios
+    and processes credit card transactions. The End of Day routine rolls the business date forward and prints
+    final reports. Compatible with OPERA Cloud release 26.2.0.0. 2 operation(s) documented; base path /bof/v1.
+    Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/bof.json
   tags:
   - BackOfficeOperations
@@ -417,13 +451,15 @@ apis:
     url: openapi/oracle-hospitality-property-v1-bof.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-bof-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-channel-configuration-api
   name: OPERA Cloud Channel Configuration API
   description: APIs to cater for Channel Management functionality in OPERA Cloud. Channel Management allows
     a property to configure and administer channels such as OTAs, and web channels, covering functionality
-    such as channel configuration, availability, inventory and restrictions. Compatible with OPERA Cloud
-    release 26.2.0.0. 138 operation(s) documented; base path /chl/v1. Harvested verbatim from Oracle's
-    public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+    such as channel configuration, availability, inventory and restrictions. Compatible with OPERA Cloud release
+    26.2.0.0. 138 operation(s) documented; base path /chl/v1. Harvested verbatim from Oracle's public hospitality-api-docs
+    repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/chl.json
   tags:
   - Availability
@@ -436,11 +472,13 @@ apis:
     url: openapi/oracle-hospitality-property-v1-chl.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-chl-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-api-for-customer-management-service
   name: OPERA Cloud API for Customer Management Service
-  description: This API deals with the different aspect of the CustomerManagement. Compatible with OPERA
-    Cloud release 26.2.0.0. 6 operation(s) documented; base path /cms/v1. Harvested verbatim from Oracle's
-    public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+  description: This API deals with the different aspect of the CustomerManagement. Compatible with OPERA Cloud
+    release 26.2.0.0. 6 operation(s) documented; base path /cms/v1. Harvested verbatim from Oracle's public
+    hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/cms.json
   tags:
   - CustomerManagement
@@ -451,17 +489,18 @@ apis:
     url: openapi/oracle-hospitality-property-v1-cms.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-cms-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-customer-relationship-management-api
   name: OPERA Cloud Customer Relationship Management API
-  description: APIs to cater for Customer Relationship Management (profile) functionality in OPERA Cloud.
-    There are different types of profiles in OPERA Cloud, including Guest, Company, Travel Agent, Source,
-    Group, and Contact profile types. A profile can store and display a wide range of information about
-    the guest, company, travel agent etc., depending upon the type of profile. For example, a guest profile
-    can store the guest name, address, contact information, details on billing, membership benefits, preferences
-    and much more. All profiles in OPERA when created are assigned a ProfileID. This ID will be used throughout
-    the CRM APIs. Compatible with OPERA Cloud release 26.2.0.0. 165 operation(s) documented; base path
-    /crm/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release
-    26.2.0.0).
+  description: APIs to cater for Customer Relationship Management (profile) functionality in OPERA Cloud. There
+    are different types of profiles in OPERA Cloud, including Guest, Company, Travel Agent, Source, Group,
+    and Contact profile types. A profile can store and display a wide range of information about the guest,
+    company, travel agent etc., depending upon the type of profile. For example, a guest profile can store
+    the guest name, address, contact information, details on billing, membership benefits, preferences and
+    much more. All profiles in OPERA when created are assigned a ProfileID. This ID will be used throughout
+    the CRM APIs. Compatible with OPERA Cloud release 26.2.0.0. 165 operation(s) documented; base path /crm/v1.
+    Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/crm.json
   tags:
   - Profile
@@ -477,11 +516,13 @@ apis:
     url: openapi/oracle-hospitality-property-v1-crm.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-crm-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-crm-asynchronous-api
   name: OPERA Cloud CRM Asynchronous API
-  description: APIs to insert Stay Records related asynchronous functionality in OPERA. Compatible with
-    OPERA Cloud release 26.2.0.0. 4 operation(s) documented; base path /crm/async/v1. Harvested verbatim
-    from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+  description: APIs to insert Stay Records related asynchronous functionality in OPERA. Compatible with OPERA
+    Cloud release 26.2.0.0. 4 operation(s) documented; base path /crm/async/v1. Harvested verbatim from Oracle's
+    public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/crmasync.json
   tags:
   - CRMAsync
@@ -492,13 +533,15 @@ apis:
     url: openapi/oracle-hospitality-property-v1-crmasync.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-crmasync-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-crm-configuration-api
   name: OPERA Cloud CRM Configuration API
   description: APIs for Customer Relationship Management (profile) configuration, such as creating preferences,
-    or address types. It also includes Membership Configuration, where you can retrieve membership levels
-    that are configured for a property, or create new membership enrollment codes . Compatible with OPERA
-    Cloud release 26.2.0.0. 310 operation(s) documented; base path /crm/config/v1. Harvested verbatim
-    from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+    or address types. It also includes Membership Configuration, where you can retrieve membership levels that
+    are configured for a property, or create new membership enrollment codes . Compatible with OPERA Cloud
+    release 26.2.0.0. 310 operation(s) documented; base path /crm/config/v1. Harvested verbatim from Oracle's
+    public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/crmcfg.json
   tags:
   - ProfileConfiguration
@@ -512,13 +555,15 @@ apis:
     url: openapi/oracle-hospitality-property-v1-crmcfg.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-crmcfg-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-cashiering-api
   name: OPERA Cloud Cashiering API
-  description: APIs to cater for Cashiering related functionality in OPERA Cloud. Cashiering provides
-    access to a guest folio, posting journals, receipt histories, currency calculations, credit card settlements,
-    and check a guest out. Compatible with OPERA Cloud release 26.2.0.0. 195 operation(s) documented;
-    base path /csh/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger
-    2.0, release 26.2.0.0).
+  description: APIs to cater for Cashiering related functionality in OPERA Cloud. Cashiering provides access
+    to a guest folio, posting journals, receipt histories, currency calculations, credit card settlements,
+    and check a guest out. Compatible with OPERA Cloud release 26.2.0.0. 195 operation(s) documented; base
+    path /csh/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release
+    26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/csh.json
   tags:
   - Cashiering
@@ -529,11 +574,13 @@ apis:
     url: openapi/oracle-hospitality-property-v1-csh.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-csh-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-cashiering-asynchronous-api
   name: OPERA Cloud Cashiering Asynchronous API
-  description: APIs to cater for Cashiering related asynchronous functionality in OPERA Cloud. Compatible
-    with OPERA Cloud release 26.2.0.0. 2 operation(s) documented; base path /csh/async/v1. Harvested verbatim
-    from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+  description: APIs to cater for Cashiering related asynchronous functionality in OPERA Cloud. Compatible with
+    OPERA Cloud release 26.2.0.0. 2 operation(s) documented; base path /csh/async/v1. Harvested verbatim from
+    Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/cshasync.json
   tags:
   - Property Management
@@ -543,11 +590,13 @@ apis:
     url: openapi/oracle-hospitality-property-v1-cshasync.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-cshasync-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-datavaluemapping-service-api
   name: OPERA Cloud DataValueMapping Service API
   description: APIs which offer external systems to config and use values different than what are configured
-    in opera Compatible with OPERA Cloud release 26.2.0.0. 10 operation(s) documented; base path /dvm/v1.
-    Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+    in opera Compatible with OPERA Cloud release 26.2.0.0. 10 operation(s) documented; base path /dvm/v1. Harvested
+    verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/dvm.json
   tags:
   - DataValueMapping
@@ -558,12 +607,13 @@ apis:
     url: openapi/oracle-hospitality-property-v1-dvm.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-dvm-overlay.yaml
 - aid: oracle-hospitality:cloud-opi-tokenization-ecommerce-api
   name: Cloud OPI Tokenization ECommerce API
-  description: ECommerce Tokenization API This API allows you to process credit card tokenization via
-    e-commerce token form. Compatible with OPERA Cloud release 25.3.0.0. 2 operation(s) documented; base
-    path /eComm/eToken/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger
-    2.0, release 26.2.0.0).
+  description: ECommerce Tokenization API This API allows you to process credit card tokenization via e-commerce
+    token form. Compatible with OPERA Cloud release 25.3.0.0. 2 operation(s) documented; base path /eComm/eToken/v1.
+    Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/ecommtokenization.json
   tags:
   - Hotels
@@ -574,11 +624,13 @@ apis:
     url: openapi/oracle-hospitality-property-v1-ecommtokenization.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-ecommtokenization-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-enterprise-configuration-api
   name: OPERA Cloud Enterprise Configuration API
-  description: APIs to cater for Enterprise Configuration functionality in OPERA Cloud. 246 operation(s)
-    documented; base path /ent/config/v1. Harvested verbatim from Oracle's public hospitality-api-docs
-    repository (Swagger 2.0, release 26.2.0.0).
+  description: APIs to cater for Enterprise Configuration functionality in OPERA Cloud. 246 operation(s) documented;
+    base path /ent/config/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger
+    2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/entcfg.json
   tags:
   - ChainConfig
@@ -591,14 +643,16 @@ apis:
     url: openapi/oracle-hospitality-property-v1-entcfg.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-entcfg-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-sales-event-management-api
   name: OPERA Cloud Sales Event Management API
-  description: APIs to cater for Event Management functionality in OPERA Cloud. The Events feature in
-    OPERA Cloud is designed to manage any kind of catering activity. Events can be as simple as a one-hour
-    reception or more complex, such as a three-day business meeting with meals, breaks, and specific meeting
-    functionSpaceDetails with setupCode and resource requirements. Any group function can be an Event.
-    Compatible with OPERA Cloud release 26.2.0.0. 45 operation(s) documented; base path /evm/v1. Harvested
-    verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+  description: APIs to cater for Event Management functionality in OPERA Cloud. The Events feature in OPERA
+    Cloud is designed to manage any kind of catering activity. Events can be as simple as a one-hour reception
+    or more complex, such as a three-day business meeting with meals, breaks, and specific meeting functionSpaceDetails
+    with setupCode and resource requirements. Any group function can be an Event. Compatible with OPERA Cloud
+    release 26.2.0.0. 45 operation(s) documented; base path /evm/v1. Harvested verbatim from Oracle's public
+    hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/evm.json
   tags:
   - EventManagement
@@ -609,11 +663,13 @@ apis:
     url: openapi/oracle-hospitality-property-v1-evm.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-evm-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-event-configuration-api
   name: OPERA Cloud Event Configuration API
-  description: This API caters for Event Configuration in OPERA Cloud. 137 operation(s) documented; base
-    path /evm/config/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger
-    2.0, release 26.2.0.0).
+  description: This API caters for Event Configuration in OPERA Cloud. 137 operation(s) documented; base path
+    /evm/config/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release
+    26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/evmcfg.json
   tags:
   - ResourceConfig
@@ -626,11 +682,13 @@ apis:
     url: openapi/oracle-hospitality-property-v1-evmcfg.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-evmcfg-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-export-configuration-api
   name: OPERA Cloud Export Configuration API
   description: APIs catering to the managing export master data configuration. 22 operation(s) documented;
-    base path /exp/config/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository
-    (Swagger 2.0, release 26.2.0.0).
+    base path /exp/config/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger
+    2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/expcfg.json
   tags:
   - Export
@@ -641,15 +699,17 @@ apis:
     url: openapi/oracle-hospitality-property-v1-expcfg.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-expcfg-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-front-desk-operations-service
   name: OPERA Cloud Front Desk Operations Service
-  description: APIs to cater for Front Desk Operations and Front Desk Statistic functionality in OPERA
-    Cloud. Front Desk features some of the most commonly used operations in OPERA Cloud, such as managing
-    guest arrivals, managing in-house guests, and managing guest departures. Some additional tasks you
-    can complete from the Front Desk menu are room searches, room assignments, and quick check outs as
-    well as opening folios, creating registration cards, setting wake up calls, and sending messages to
-    guests. Compatible with OPERA Cloud release 26.2.0.0. 91 operation(s) documented; base path /fof/v1.
-    Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+  description: APIs to cater for Front Desk Operations and Front Desk Statistic functionality in OPERA Cloud.
+    Front Desk features some of the most commonly used operations in OPERA Cloud, such as managing guest arrivals,
+    managing in-house guests, and managing guest departures. Some additional tasks you can complete from the
+    Front Desk menu are room searches, room assignments, and quick check outs as well as opening folios, creating
+    registration cards, setting wake up calls, and sending messages to guests. Compatible with OPERA Cloud
+    release 26.2.0.0. 91 operation(s) documented; base path /fof/v1. Harvested verbatim from Oracle's public
+    hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/fof.json
   tags:
   - FOFStats
@@ -662,13 +722,15 @@ apis:
     url: openapi/oracle-hospitality-property-v1-fof.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-fof-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-front-desk-configuration-api
   name: OPERA Cloud Front Desk Configuration API
-  description: APIs to cater for Front Desk Configuration in OPERA Cloud. Here you can find operations
-    to get, post, put and delete front desk codes such as commission codes, transaction groups, codes
-    & subgroups, articles, payment methods and credit card types. Compatible with OPERA Cloud release
-    26.2.0.0. 363 operation(s) documented; base path /fof/config/v1. Harvested verbatim from Oracle's
-    public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+  description: APIs to cater for Front Desk Configuration in OPERA Cloud. Here you can find operations to get,
+    post, put and delete front desk codes such as commission codes, transaction groups, codes & subgroups,
+    articles, payment methods and credit card types. Compatible with OPERA Cloud release 26.2.0.0. 363 operation(s)
+    documented; base path /fof/config/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository
+    (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/fofcfg.json
   tags:
   - AccountsReceivablesConfig
@@ -684,13 +746,15 @@ apis:
     url: openapi/oracle-hospitality-property-v1-fofcfg.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-fofcfg-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-housekeeping-service-api
   name: OPERA Cloud Housekeeping Service API
-  description: APIs to cater for Housekeeping functionality in OPERA Cloud. Housekeeping enables you to
-    schedule daily room cleaning, maintenance, and housekeeping staff activities. It provides information
-    on room status, out of order/out of service rooms, and forecasting. Compatible with OPERA Cloud release
-    26.2.0.0. 60 operation(s) documented; base path /hsk/v1. Harvested verbatim from Oracle's public hospitality-api-docs
-    repository (Swagger 2.0, release 26.2.0.0).
+  description: APIs to cater for Housekeeping functionality in OPERA Cloud. Housekeeping enables you to schedule
+    daily room cleaning, maintenance, and housekeeping staff activities. It provides information on room status,
+    out of order/out of service rooms, and forecasting. Compatible with OPERA Cloud release 26.2.0.0. 60 operation(s)
+    documented; base path /hsk/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository
+    (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/hsk.json
   tags:
   - Housekeeping
@@ -701,10 +765,12 @@ apis:
     url: openapi/oracle-hospitality-property-v1-hsk.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-hsk-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-integration-processor-api
   name: OPERA Cloud Integration Processor API
-  description: APIs to get Business Events generated in OPERA Cloud. Compatible with OPERA Cloud release
-    26.2.0.0. 2 operation(s) documented; base path /int/v1. Harvested verbatim from Oracle's public hospitality-api-docs
+  description: APIs to get Business Events generated in OPERA Cloud. Compatible with OPERA Cloud release 26.2.0.0.
+    2 operation(s) documented; base path /int/v1. Harvested verbatim from Oracle's public hospitality-api-docs
     repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/int.json
   tags:
@@ -716,12 +782,14 @@ apis:
     url: openapi/oracle-hospitality-property-v1-int.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-int-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-integration-configuration-api
   name: OPERA Cloud Integration Configuration API
-  description: APIs catering to Integration Configuration in OPERA Cloud. Operations such as get Hotel
-    Interface Types, or get UDF mappings can be found in this module. Compatible with OPERA Cloud release
-    26.2.0.0. 50 operation(s) documented; base path /int/config/v1. Harvested verbatim from Oracle's public
-    hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+  description: APIs catering to Integration Configuration in OPERA Cloud. Operations such as get Hotel Interface
+    Types, or get UDF mappings can be found in this module. Compatible with OPERA Cloud release 26.2.0.0. 50
+    operation(s) documented; base path /int/config/v1. Harvested verbatim from Oracle's public hospitality-api-docs
+    repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/intcfg.json
   tags:
   - BEProcessor
@@ -735,13 +803,14 @@ apis:
     url: openapi/oracle-hospitality-property-v1-intcfg.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-intcfg-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-inventory-api
   name: OPERA Cloud Inventory API
-  description: APIs to cater for Inventory functionality in OPERA Cloud. This includes sell limits for
-    date ranges, viewing and updating the properties inventory, as well as item inventory (such as rollaways,
-    microwaves etc.). Compatible with OPERA Cloud release 26.2.0.0. 13 operation(s) documented; base path
-    /inv/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release
-    26.2.0.0).
+  description: APIs to cater for Inventory functionality in OPERA Cloud. This includes sell limits for date
+    ranges, viewing and updating the properties inventory, as well as item inventory (such as rollaways, microwaves
+    etc.). Compatible with OPERA Cloud release 26.2.0.0. 13 operation(s) documented; base path /inv/v1. Harvested
+    verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/inv.json
   tags:
   - Inventory
@@ -753,16 +822,18 @@ apis:
     url: openapi/oracle-hospitality-property-v1-inv.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-inv-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-inventory-asynchronous-api
   name: Opera Cloud Inventory Asynchronous API
   description: APIs to cater for Inventory related asynchronous functionality in OPERA Cloud. This includes
     viewing inventory data along with its revenue and updating inventory&apos;s sell limits for date ranges.
-    This API follows an async pattern where You make an initial request, which returns a Location header
-    You poll HEAD on the Location header returned to obtain the status of the process Once the process
-    completes HEAD will return in the Location header the URL that must be called to obtain the results
-    of the process You call the URL to obtain the results of the process Compatible with OPERA Cloud release
-    26.2.0.0. 6 operation(s) documented; base path /inv/async/v1. Harvested verbatim from Oracle's public
-    hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+    This API follows an async pattern where You make an initial request, which returns a Location header You
+    poll HEAD on the Location header returned to obtain the status of the process Once the process completes
+    HEAD will return in the Location header the URL that must be called to obtain the results of the process
+    You call the URL to obtain the results of the process Compatible with OPERA Cloud release 26.2.0.0. 6 operation(s)
+    documented; base path /inv/async/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository
+    (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/invasync.json
   tags:
   - InventoryAsync
@@ -773,11 +844,13 @@ apis:
     url: openapi/oracle-hospitality-property-v1-invasync.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-invasync-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-leisure-management-api
   name: OPERA Cloud Leisure Management API
-  description: APIs to cater for external Leisure Management functionality integrated with OPERA Cloud.
-    Compatible with OPERA Cloud release 26.2.0.0. 26 operation(s) documented; base path /lms/v1. Harvested
-    verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+  description: APIs to cater for external Leisure Management functionality integrated with OPERA Cloud. Compatible
+    with OPERA Cloud release 26.2.0.0. 26 operation(s) documented; base path /lms/v1. Harvested verbatim from
+    Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/lms.json
   tags:
   - LeisureManagement
@@ -789,14 +862,16 @@ apis:
     url: openapi/oracle-hospitality-property-v1-lms.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-lms-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-list-of-values-management-api
   name: OPERA Cloud List of Values Management API
   description: APIs to cater for List of Value functionality in OPERA Cloud. A List of Values in the OPERA
-    Application can be configured by a property. Then by using these APIs you can retrieve all configured
-    codes. As an example, Titles is a configurable ListOfValues. A hotel can specify what titles they
-    wish to use, and thus fetching the LOV for title, you can view the codes that are configured for a
-    property. Compatible with OPERA Cloud release 26.2.0.0. 453 operation(s) documented; base path /lov/v1.
-    Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+    Application can be configured by a property. Then by using these APIs you can retrieve all configured codes.
+    As an example, Titles is a configurable ListOfValues. A hotel can specify what titles they wish to use,
+    and thus fetching the LOV for title, you can view the codes that are configured for a property. Compatible
+    with OPERA Cloud release 26.2.0.0. 453 operation(s) documented; base path /lov/v1. Harvested verbatim from
+    Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/lov.json
   tags:
   - LOV
@@ -807,11 +882,13 @@ apis:
     url: openapi/oracle-hospitality-property-v1-lov.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-lov-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-content-service
   name: OPERA Cloud Content Service
-  description: Opera Content Service offers capability to manage large content such as images and files.
-    Compatible with OPERA Cloud release 26.2.0.0. 11 operation(s) documented; base path /med/config/v1.
-    Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+  description: Opera Content Service offers capability to manage large content such as images and files. Compatible
+    with OPERA Cloud release 26.2.0.0. 11 operation(s) documented; base path /med/config/v1. Harvested verbatim
+    from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/medcfg.json
   tags:
   - OperaContent
@@ -822,12 +899,14 @@ apis:
     url: openapi/oracle-hospitality-property-v1-medcfg.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-medcfg-overlay.yaml
 - aid: oracle-hospitality:oauth-api-for-ohip
   name: oAuth API for OHIP
-  description: REST API to obtain an OAuth token from the Oracle Hospitality Integration Platform. For
-    authenticating to Distribution APIs please use the Early Release OPERA Cloud Distribution Authentication
-    API. Compatible with OPERA Cloud release 21.5.0.0. 1 operation(s) documented; base path /oauth/v1.
-    Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 21.5.0.0).
+  description: REST API to obtain an OAuth token from the Oracle Hospitality Integration Platform. For authenticating
+    to Distribution APIs please use the Early Release OPERA Cloud Distribution Authentication API. Compatible
+    with OPERA Cloud release 21.5.0.0. 1 operation(s) documented; base path /oauth/v1. Harvested verbatim from
+    Oracle's public hospitality-api-docs repository (Swagger 2.0, release 21.5.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/oauth.json
   tags:
   - Authentication
@@ -838,11 +917,13 @@ apis:
     url: openapi/oracle-hospitality-property-v1-oauth.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-oauth-overlay.yaml
 - aid: oracle-hospitality:opera-provisioning-service-api
   name: OPERA Provisioning Service API
-  description: APIs to cater to provisioning and deprovisioning of new properties and chains in OPERA.
-    Compatible with OPERA Cloud release 26.2.0.0. 1 operation(s) documented; base path /ops/v1. Harvested
-    verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+  description: APIs to cater to provisioning and deprovisioning of new properties and chains in OPERA. Compatible
+    with OPERA Cloud release 26.2.0.0. 1 operation(s) documented; base path /ops/v1. Harvested verbatim from
+    Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/ops.json
   tags:
   - Provisioning
@@ -853,14 +934,16 @@ apis:
     url: openapi/oracle-hospitality-property-v1-ops.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-ops-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-price-availability-rate-api
   name: OPERA Cloud Price Availability Rate API
-  description: APIs to cater for Price and Rate Availability functionality in OPERA Cloud. Availability
-    enables you to manage your room inventory by providing a detailed view of all available and sold rooms
-    at a property. Some of the tasks you can perform include defining conditions for stay restrictions,
-    setting room sell limits, and searching for and viewing room availability. Compatible with OPERA Cloud
-    release 26.2.0.0. 28 operation(s) documented; base path /par/v1. Harvested verbatim from Oracle's
-    public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+  description: APIs to cater for Price and Rate Availability functionality in OPERA Cloud. Availability enables
+    you to manage your room inventory by providing a detailed view of all available and sold rooms at a property.
+    Some of the tasks you can perform include defining conditions for stay restrictions, setting room sell
+    limits, and searching for and viewing room availability. Compatible with OPERA Cloud release 26.2.0.0.
+    28 operation(s) documented; base path /par/v1. Harvested verbatim from Oracle's public hospitality-api-docs
+    repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/par.json
   tags:
   - Availability
@@ -871,11 +954,13 @@ apis:
     url: openapi/oracle-hospitality-property-v1-par.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-par-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-price-availability-rate-async-api
   name: OPERA Cloud Price Availability Rate Async API
-  description: APIs to cater for Price and Rate Availability Asynchronous functionality in OPERA Cloud.
-    Compatible with OPERA Cloud release 26.2.0.0. 2 operation(s) documented; base path /par/async/v1.
-    Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+  description: APIs to cater for Price and Rate Availability Asynchronous functionality in OPERA Cloud. Compatible
+    with OPERA Cloud release 26.2.0.0. 2 operation(s) documented; base path /par/async/v1. Harvested verbatim
+    from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/parasync.json
   tags:
   - AvailabilityAsync
@@ -886,11 +971,13 @@ apis:
     url: openapi/oracle-hospitality-property-v1-parasync.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-parasync-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-report-master-data-management-api
   name: OPERA Cloud Report Master Data Management API
-  description: APIs for adding, updating, and deleting stationery reports in OPERA Cloud. Compatible with
-    OPERA Cloud release 26.2.0.0. 12 operation(s) documented; base path /rep/config/v1. Harvested verbatim
-    from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+  description: APIs for adding, updating, and deleting stationery reports in OPERA Cloud. Compatible with OPERA
+    Cloud release 26.2.0.0. 12 operation(s) documented; base path /rep/config/v1. Harvested verbatim from Oracle's
+    public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/repcfg.json
   tags:
   - Report
@@ -901,12 +988,14 @@ apis:
     url: openapi/oracle-hospitality-property-v1-repcfg.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-repcfg-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-room-configuration-api
   name: OPERA Cloud Room Configuration API
   description: APIs to cater for room configuration, such as configuring room types, room Classes, creating
-    new room features, or updating housekeeping room maintenance reasons. Compatible with OPERA Cloud
-    release 26.2.0.0. 170 operation(s) documented; base path /rm/config/v1. Harvested verbatim from Oracle's
-    public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+    new room features, or updating housekeeping room maintenance reasons. Compatible with OPERA Cloud release
+    26.2.0.0. 170 operation(s) documented; base path /rm/config/v1. Harvested verbatim from Oracle's public
+    hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/rmcfg.json
   tags:
   - ChainConfig
@@ -918,13 +1007,15 @@ apis:
     url: openapi/oracle-hospitality-property-v1-rmcfg.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-rmcfg-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-room-rotation-service-api
   name: OPERA Cloud Room Rotation Service API
-  description: APIs to facilitate Room Rotation functionality in OPERA Cloud. Api provides capability
-    to handle Room Rotation in OPERA Cloud. Room Rotation provides room ownership options for automatic
-    inventory rotation and prioritization for owner rooms assignment and occupancy. Compatible with OPERA
-    Cloud release 26.2.0.0. 10 operation(s) documented; base path /rmr/v1. Harvested verbatim from Oracle's
-    public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+  description: APIs to facilitate Room Rotation functionality in OPERA Cloud. Api provides capability to handle
+    Room Rotation in OPERA Cloud. Room Rotation provides room ownership options for automatic inventory rotation
+    and prioritization for owner rooms assignment and occupancy. Compatible with OPERA Cloud release 26.2.0.0.
+    10 operation(s) documented; base path /rmr/v1. Harvested verbatim from Oracle's public hospitality-api-docs
+    repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/rmr.json
   tags:
   - RoomRotation
@@ -935,13 +1026,15 @@ apis:
     url: openapi/oracle-hospitality-property-v1-rmr.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-rmr-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-room-rotation-configuration-service-api
   name: OPERA Cloud Room Rotation Configuration Service API
-  description: APIs to cater for Room Rotation Configuration functionality in OPERA Cloud. Api provides
-    capability to handle Room Rotation in OPERA Cloud. Room Rotation provides room ownership options for
-    automatic inventory rotation and prioritization for owner rooms assignment and occupancy. Compatible
-    with OPERA Cloud release 26.2.0.0. 30 operation(s) documented; base path /rmr/config/v1. Harvested
-    verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+  description: APIs to cater for Room Rotation Configuration functionality in OPERA Cloud. Api provides capability
+    to handle Room Rotation in OPERA Cloud. Room Rotation provides room ownership options for automatic inventory
+    rotation and prioritization for owner rooms assignment and occupancy. Compatible with OPERA Cloud release
+    26.2.0.0. 30 operation(s) documented; base path /rmr/config/v1. Harvested verbatim from Oracle's public
+    hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/rmrcfg.json
   tags:
   - RoomRotationConfig
@@ -952,18 +1045,19 @@ apis:
     url: openapi/oracle-hospitality-property-v1-rmrcfg.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-rmrcfg-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-reservation-api
   name: OPERA Cloud Reservation API
   description: APIs to cater for Reservation functionality in OPERA Cloud. OPERA Cloud Reservations provides
-    a complete set of capabilities for creating and updating reservations. Reservations are a central
-    feature of OPERA Cloud. As a key source of information, the reservation specifies a guest's arrival
-    date, departure date, room type, rate, packages, and many other details. It is also a gateway to dozens
-    of other functions that contribute to the guest's experience. All reservations in OPERA Cloud require
-    a guest profile. You can create profiles while booking a reservation. If a profile already exists,
-    you can look it up (using getProfiles in CRM module) and attach it to the reservation during the reservation
-    booking process using the Profile ID. Compatible with OPERA Cloud release 26.2.0.0. 184 operation(s)
-    documented; base path /rsv/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository
-    (Swagger 2.0, release 26.2.0.0).
+    a complete set of capabilities for creating and updating reservations. Reservations are a central feature
+    of OPERA Cloud. As a key source of information, the reservation specifies a guest's arrival date, departure
+    date, room type, rate, packages, and many other details. It is also a gateway to dozens of other functions
+    that contribute to the guest's experience. All reservations in OPERA Cloud require a guest profile. You
+    can create profiles while booking a reservation. If a profile already exists, you can look it up (using
+    getProfiles in CRM module) and attach it to the reservation during the reservation booking process using
+    the Profile ID. Compatible with OPERA Cloud release 26.2.0.0. 184 operation(s) documented; base path /rsv/v1.
+    Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/rsv.json
   tags:
   - ReservationExternal
@@ -976,16 +1070,17 @@ apis:
     url: openapi/oracle-hospitality-property-v1-rsv.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-rsv-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-reservation-asynchronous-api
   name: OPERA Cloud Reservation Asynchronous API
-  description: APIs to cater for Reservation Asynchronous functionality in OPERA Cloud. This includes
-    viewing reservation data along with its revenue. This API follows an async pattern where You make
-    an initial request, which returns a Location header You poll HEAD on the Location header returned
-    to obtain the status of the process Once the process completes HEAD will return in the Location header
-    the URL that must be called to obtain the results of the process You call the URL to obtain the results
-    of the process Compatible with OPERA Cloud release 26.2.0.0. 15 operation(s) documented; base path
-    /rsv/async/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0,
-    release 26.2.0.0).
+  description: APIs to cater for Reservation Asynchronous functionality in OPERA Cloud. This includes viewing
+    reservation data along with its revenue. This API follows an async pattern where You make an initial request,
+    which returns a Location header You poll HEAD on the Location header returned to obtain the status of the
+    process Once the process completes HEAD will return in the Location header the URL that must be called
+    to obtain the results of the process You call the URL to obtain the results of the process Compatible with
+    OPERA Cloud release 26.2.0.0. 15 operation(s) documented; base path /rsv/async/v1. Harvested verbatim from
+    Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/rsvasync.json
   tags:
   - ReservationAsync
@@ -996,12 +1091,14 @@ apis:
     url: openapi/oracle-hospitality-property-v1-rsvasync.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-rsvasync-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-reservation-master-data-management-api
   name: OPERA Cloud Reservation Master Data Management API
   description: APIs to cater for Reservation Configuration in OPERA Cloud. In this module you can retrieve,
     create, modify or delete configuration related to Reservations, Blocks and Leisure Management. Compatible
-    with OPERA Cloud release 26.2.0.0. 215 operation(s) documented; base path /rsv/config/v1. Harvested
-    verbatim from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+    with OPERA Cloud release 26.2.0.0. 215 operation(s) documented; base path /rsv/config/v1. Harvested verbatim
+    from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/rsvcfg.json
   tags:
   - ReservationConfig
@@ -1014,14 +1111,16 @@ apis:
     url: openapi/oracle-hospitality-property-v1-rsvcfg.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-rsvcfg-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-rate-api
   name: OPERA Cloud Rate API
-  description: APIs to cater for Rate Availability functionality in OPERA Cloud. Rate Management provides
-    all the tools you need to effectively define and manage the rate structures for a property in OPERA
-    Cloud. Some of the things you can do include creating and managing rate codes, rate classes, rate
-    categories, display sets, rate strategies, as well as managing promotion groups and codes. Compatible
-    with OPERA Cloud release 26.2.0.0. 144 operation(s) documented; base path /rtp/v1. Harvested verbatim
-    from Oracle's public hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+  description: APIs to cater for Rate Availability functionality in OPERA Cloud. Rate Management provides all
+    the tools you need to effectively define and manage the rate structures for a property in OPERA Cloud.
+    Some of the things you can do include creating and managing rate codes, rate classes, rate categories,
+    display sets, rate strategies, as well as managing promotion groups and codes. Compatible with OPERA Cloud
+    release 26.2.0.0. 144 operation(s) documented; base path /rtp/v1. Harvested verbatim from Oracle's public
+    hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/rtp.json
   tags:
   - Availability
@@ -1035,16 +1134,18 @@ apis:
     url: openapi/oracle-hospitality-property-v1-rtp.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-rtp-overlay.yaml
 - aid: oracle-hospitality:opera-cloud-rate-plan-asynchronous-service-api
   name: Opera Cloud Rate Plan Asynchronous Service API
   description: APIs catering to the Rate Plan asynchronous related functionality in a hotel. This includes
     adding/updating daily rates&apos; pricing schedules and best available rates by day or length of stay.
-    This API follows an async pattern where You make an initial request, which returns a Location header
-    You poll HEAD on the Location header returned to obtain the status of the process Once the process
-    completes HEAD will return in the Location header the URL that must be called to obtain the results
-    of the process You call the URL to obtain the results of the process Compatible with OPERA Cloud release
-    26.2.0.0. 18 operation(s) documented; base path /rtp/async/v1. Harvested verbatim from Oracle's public
-    hospitality-api-docs repository (Swagger 2.0, release 26.2.0.0).
+    This API follows an async pattern where You make an initial request, which returns a Location header You
+    poll HEAD on the Location header returned to obtain the status of the process Once the process completes
+    HEAD will return in the Location header the URL that must be called to obtain the results of the process
+    You call the URL to obtain the results of the process Compatible with OPERA Cloud release 26.2.0.0. 18
+    operation(s) documented; base path /rtp/async/v1. Harvested verbatim from Oracle's public hospitality-api-docs
+    repository (Swagger 2.0, release 26.2.0.0).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/rtpasync.json
   tags:
   - RatePlanAsync
@@ -1055,11 +1156,13 @@ apis:
     url: openapi/oracle-hospitality-property-v1-rtpasync.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-rtpasync-overlay.yaml
 - aid: oracle-hospitality:opi-token-exchange-service-api
   name: OPI Token Exchange Service API
-  description: Oracle Token Exchange Service Specification Compatible with OPERA Cloud release 1.0.1.
-    1 operation(s) documented; base path /tokenExchange/v1. Harvested verbatim from Oracle's public hospitality-api-docs
-    repository (Swagger 2.0, release 1.0.1).
+  description: Oracle Token Exchange Service Specification Compatible with OPERA Cloud release 1.0.1. 1 operation(s)
+    documented; base path /tokenExchange/v1. Harvested verbatim from Oracle's public hospitality-api-docs repository
+    (Swagger 2.0, release 1.0.1).
   humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/rest-api-specs/property/v1/tokenexchange.json
   tags:
   - Hotels
@@ -1070,7 +1173,1385 @@ apis:
     url: openapi/oracle-hospitality-property-v1-tokenexchange.json
   - type: Documentation
     url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_property_apis.htm
+  - type: Overlay
+    url: overlays/oracle-hospitality-property-v1-tokenexchange-overlay.yaml
+- aid: oracle-hospitality:opera-cloud-rna-activities
+  name: OPERA Cloud RnA Activities GraphQL API
+  description: 'Provides information of Sales activities related to Accounts, Contacts, and Blocks for the
+    selected Property. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in
+    the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query
+    field: activities. Harvested verbatim from Oracle''s public hospitality-api-docs repository under the Universal
+    Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/Activities.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-activities.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-ar-accounts-receivable
+  name: OPERA Cloud RnA ARAccountsReceivable GraphQL API
+  description: 'Detailed Accounts Receivable data, including Adjustments, Payments, Invoices and Posting for
+    AR Accounts, with linked reservation data. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only
+    GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: aRAccountsReceivable. Harvested verbatim from Oracle''s public hospitality-api-docs repository
+    under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/ARAccountsReceivable.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-ar-accounts-receivable.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-ar-aging-report
+  name: OPERA Cloud RnA ARAgingReport GraphQL API
+  description: 'Detailed information on accounts receivable transactions including aging bucket of invoices,
+    open transaction amounts, folio information and the account details. Compatible with OPERA Cloud RnA release
+    26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed
+    at <gateway URL>/rna/v1/graphql/ Root query field: aRAgingReport. Harvested verbatim from Oracle''s public
+    hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/ARAgingReport.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-ar-aging-report.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-ar-ledger
+  name: OPERA Cloud RnA ARLedger GraphQL API
+  description: 'Ledger details showing activity in accounts receivables including reservation and transaction
+    details. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA
+    Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field:
+    aRLedger. Harvested verbatim from Oracle''s public hospitality-api-docs repository under the Universal
+    Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/ARLedger.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-ar-ledger.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-booking-reservation-extended
+  name: OPERA Cloud RnA BookingReservationExtended GraphQL API
+  description: 'Provide booking reservation information with extended or additional details such as blocks,
+    routing, etc. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA
+    Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field:
+    bookingReservationExtended. Harvested verbatim from Oracle''s public hospitality-api-docs repository under
+    the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/BookingReservationExtended.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-booking-reservation-extended.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-bookings-block-production-changes
+  name: OPERA Cloud RnA BookingsBlockProductionChanges GraphQL API
+  description: 'Detailed information on blocks and any changes to the number of rooms or revenue, by stay date,
+    property and Block Owner. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area
+    in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root
+    query field: bookingsBlockProductionChanges. Harvested verbatim from Oracle''s public hospitality-api-docs
+    repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/BookingsBlockProductionChanges.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-bookings-block-production-changes.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-bookings-block-status-changes
+  name: OPERA Cloud RnA BookingsBlockStatusChanges GraphQL API
+  description: 'Detailed information on the status changes throughout the production period of a block, including
+    the new and old status codes, rooms and associated revenues, by property and Block Owner. Compatible with
+    OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics
+    (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field: bookingsBlockStatusChanges.
+    Harvested verbatim from Oracle''s public hospitality-api-docs repository under the Universal Permissive
+    License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/BookingsBlockStatusChanges.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-bookings-block-status-changes.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-bookings-block
+  name: OPERA Cloud RnA BookingsBlock GraphQL API
+  description: 'Block header and grid details, including actual and potential room and revenue statistics,
+    catering events, and the associated profile and reservations data. Compatible with OPERA Cloud RnA release
+    26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed
+    at <gateway URL>/rna/v1/graphql/ Root query field: bookingsBlock. Harvested verbatim from Oracle''s public
+    hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/BookingsBlock.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-bookings-block.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-bookings-reservation
+  name: OPERA Cloud RnA BookingsReservation GraphQL API
+  description: 'Detailed information on reservations booked in the past and future, including market code,
+    rate code, reservation status, guest information and associated room and revenue details. Compatible with
+    OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics
+    (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field: bookingsReservation. Harvested
+    verbatim from Oracle''s public hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/BookingsReservation.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-bookings-reservation.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-catering-event-forecast
+  name: OPERA Cloud RnA CateringEventForecast GraphQL API
+  description: 'Event revenue forecast details for defined periods broken down by Event Type, Revenue Group
+    and Revenue Type. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the
+    OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query
+    field: cateringEventForecast. Harvested verbatim from Oracle''s public hospitality-api-docs repository
+    under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/CateringEventForecast.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-catering-event-forecast.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-catering-event-postings
+  name: OPERA Cloud RnA CateringEventPostings GraphQL API
+  description: 'Event posting details including revenues by property, Block, Event and Revenue groups. Compatible
+    with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics
+    (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field: cateringEventPostings. Harvested
+    verbatim from Oracle''s public hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/CateringEventPostings.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-catering-event-postings.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-catering-event-status-changes
+  name: OPERA Cloud RnA CateringEventStatusChanges GraphQL API
+  description: 'Detailed information on the status changes throughout the production period of an event, including
+    the new and old status codes, change date, revenue and attendees. Compatible with OPERA Cloud RnA release
+    26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed
+    at <gateway URL>/rna/v1/graphql/ Root query field: cateringEventStatusChanges. Harvested verbatim from
+    Oracle''s public hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/CateringEventStatusChanges.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-catering-event-status-changes.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-catering-event-types
+  name: OPERA Cloud RnA CateringEventTypes GraphQL API
+  description: 'Event type definitions. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL
+    subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: cateringEventTypes. Harvested verbatim from Oracle''s public hospitality-api-docs repository
+    under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/CateringEventTypes.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-catering-event-types.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-catering-events-and-resources
+  name: OPERA Cloud RnA CateringEventsAndResources GraphQL API
+  description: 'Event and Block details including group profile information, menu, packages and revenues broken
+    down by event type. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in
+    the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query
+    field: cateringEventsAndResources. Harvested verbatim from Oracle''s public hospitality-api-docs repository
+    under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/CateringEventsAndResources.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-catering-events-and-resources.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-changes-log
+  name: OPERA Cloud RnA ChangesLog GraphQL API
+  description: 'Provides detailed information on actions and the users who completed the action, including
+    date, time, activity type, and description. Also providing the capability to combine with reservation,
+    block and profile data. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area
+    in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root
+    query field: changesLog. Harvested verbatim from Oracle''s public hospitality-api-docs repository under
+    the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/ChangesLog.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-changes-log.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-configuration-chain
+  name: OPERA Cloud RnA ConfigurationChain GraphQL API
+  description: 'The Chain Configuration Subject Area contains configuration/setting attributes from components
+    such as Enterprise Administration, Financial Administration, Booking Administration and Client Relations
+    Administration in OPERA. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area
+    in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root
+    query field: configurationChain. Harvested verbatim from Oracle''s public hospitality-api-docs repository
+    under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/ConfigurationChain.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-configuration-chain.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-configuration-resort
+  name: OPERA Cloud RnA ConfigurationResort GraphQL API
+  description: 'The Resort Configuration Subject Area contains configuration/setting attributes from components
+    such as Enterprise Administration, Financial Administration, Booking Administration and Client Relations
+    Administration in OPERA. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area
+    in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root
+    query field: configurationResort. Harvested verbatim from Oracle''s public hospitality-api-docs repository
+    under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/ConfigurationResort.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-configuration-resort.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-e-folio
+  name: OPERA Cloud RnA EFolio GraphQL API
+  description: 'This subject area contains data for billing folio settlements to be used for exporting to an
+    external system for efolios. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject
+    area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: eFolio. Harvested verbatim from Oracle''s public hospitality-api-docs repository under
+    the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/EFolio.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-e-folio.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-export-mappings
+  name: OPERA Cloud RnA ExportMappings GraphQL API
+  description: 'Provides detailed information of all configured external codes/values (i.e. general ledger
+    codes) mapped to codes used in OPERA (i.e transaction codes, market codes). It contains a comprehensive
+    set of data including, but not limited to, Mapping Type Code/Descriptions, Mapped To Code/Descriptions
+    with other Mapping details such as Export Values by Property / Chain. Compatible with OPERA Cloud RnA release
+    26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed
+    at <gateway URL>/rna/v1/graphql/ Root query field: exportMappings. Harvested verbatim from Oracle''s public
+    hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/ExportMappings.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-export-mappings.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-financial-commissions
+  name: OPERA Cloud RnA FinancialCommissions GraphQL API
+  description: 'Detailed information on the commissions module, including Reservation and Travel Agent profile
+    information, with commission codes, amounts, payment activity and processing status. Commission information
+    can be reported across all properties by Travel Agent and Source profiles, bank account, guest information
+    and dates. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA
+    Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field:
+    financialCommissions. Harvested verbatim from Oracle''s public hospitality-api-docs repository under the
+    Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/FinancialCommissions.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-financial-commissions.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-financial-deposit-ledger
+  name: OPERA Cloud RnA FinancialDepositLedger GraphQL API
+  description: 'Deposit ledger details including individual transactions, folio information, calendar and financial
+    period and the reservation details. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL
+    subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: financialDepositLedger. Harvested verbatim from Oracle''s public hospitality-api-docs
+    repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/FinancialDepositLedger.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-financial-deposit-ledger.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-financial-guest-ledger
+  name: OPERA Cloud RnA FinancialGuestLedger GraphQL API
+  description: 'Guest ledger details including individual reservations, posted transaction details with debit
+    and credit amounts. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in
+    the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query
+    field: financialGuestLedger. Harvested verbatim from Oracle''s public hospitality-api-docs repository under
+    the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/FinancialGuestLedger.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-financial-guest-ledger.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-financial-transaction-codes
+  name: OPERA Cloud RnA FinancialTransactionCodes GraphQL API
+  description: 'Transaction code header details including flags, group, and sub-group details. Compatible with
+    OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics
+    (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field: financialTransactionCodes.
+    Harvested verbatim from Oracle''s public hospitality-api-docs repository under the Universal Permissive
+    License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/FinancialTransactionCodes.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-financial-transaction-codes.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-financial-transaction-details-extended
+  name: OPERA Cloud RnA FinancialTransactionDetailsExtended GraphQL API
+  description: 'Provide financial transaction information with extended or additional details such as routing,
+    cashiers, currency, etc. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area
+    in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root
+    query field: financialTransactionDetailsExtended. Harvested verbatim from Oracle''s public hospitality-api-docs
+    repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/FinancialTransactionDetailsExtended.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-financial-transaction-details-extended.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-financial-transaction-details
+  name: OPERA Cloud RnA FinancialTransactionDetails GraphQL API
+  description: 'Detailed information on all posted transactions including net and gross amounts, currency,
+    calendar and financial period, market and rate code. Compatible with OPERA Cloud RnA release 26.1.0.0.
+    Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway
+    URL>/rna/v1/graphql/ Root query field: financialTransactionDetails. Harvested verbatim from Oracle''s public
+    hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/FinancialTransactionDetails.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-financial-transaction-details.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-financial-transactions-summary
+  name: OPERA Cloud RnA FinancialTransactionsSummary GraphQL API
+  description: 'Summarized information on posted transactions including transaction group, sub group and codes,
+    broken down by property and business date. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only
+    GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: financialTransactionsSummary. Harvested verbatim from Oracle''s public hospitality-api-docs
+    repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/FinancialTransactionsSummary.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-financial-transactions-summary.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-integration-configurations
+  name: OPERA Cloud RnA IntegrationConfigurations GraphQL API
+  description: 'Exchange Configurations data including External Systems, External Databases, Business Events,
+    Interface Setup, Interface Controls and Interface Mappings. Compatible with OPERA Cloud RnA release 26.1.0.0.
+    Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway
+    URL>/rna/v1/graphql/ Root query field: integrationConfigurations. Harvested verbatim from Oracle''s public
+    hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/IntegrationConfigurations.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-integration-configurations.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-inventory-function-spaces
+  name: OPERA Cloud RnA InventoryFunctionSpaces GraphQL API
+  description: 'All Function Space Details and Configured Options Including Room Type, Occupancy, Function
+    Type, Room Setup, Notes and Physical Dimensions. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only
+    GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: inventoryFunctionSpaces. Harvested verbatim from Oracle''s public hospitality-api-docs
+    repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/InventoryFunctionSpaces.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-inventory-function-spaces.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-inventory-housekeeping-management-room
+  name: OPERA Cloud RnA InventoryHousekeepingManagementRoom GraphQL API
+  description: 'Details on Tasks, Task Sheets and Credits and providing Information on Rooms, Room Attributes
+    and Statuses for the current date. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL
+    subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: inventoryHousekeepingManagementRoom. Harvested verbatim from Oracle''s public hospitality-api-docs
+    repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/InventoryHousekeepingManagementRoom.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-inventory-housekeeping-management-room.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-inventory-housekeeping-management-task-sheet
+  name: OPERA Cloud RnA InventoryHousekeepingManagementTaskSheet GraphQL API
+  description: 'Details on Tasks, Task Sheets and Credits for the current date. Compatible with OPERA Cloud
+    RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data
+    APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field: inventoryHousekeepingManagementTaskSheet.
+    Harvested verbatim from Oracle''s public hospitality-api-docs repository under the Universal Permissive
+    License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/InventoryHousekeepingManagementTaskSheet.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-inventory-housekeeping-management-task-sheet.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-inventory-rooms-management
+  name: OPERA Cloud RnA InventoryRoomsManagement GraphQL API
+  description: 'Provides detailed information on room maintenance and out of order/service assignments broken
+    down by property, time and room dimensions. Also provides reservations and profile details for service
+    requests. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA
+    Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field:
+    inventoryRoomsManagement. Harvested verbatim from Oracle''s public hospitality-api-docs repository under
+    the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/InventoryRoomsManagement.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-inventory-rooms-management.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-inventory-rooms
+  name: OPERA Cloud RnA InventoryRooms GraphQL API
+  description: 'Comprehensive Information on Guest Room Details and Configuration. Compatible with OPERA Cloud
+    RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data
+    APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field: inventoryRooms. Harvested verbatim from
+    Oracle''s public hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/InventoryRooms.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-inventory-rooms.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-profiles-accounts
+  name: OPERA Cloud RnA ProfilesAccounts GraphQL API
+  description: 'The Profiles-Accounts subject area contains Account Room Night and Revenue statistics broken
+    down between Group and Individual stays and can be summarized by Property, Stay Date, Business Segment,
+    Owner and Profile Type. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area
+    in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root
+    query field: profilesAccounts. Harvested verbatim from Oracle''s public hospitality-api-docs repository
+    under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/ProfilesAccounts.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-profiles-accounts.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-profiles-addresses
+  name: OPERA Cloud RnA ProfilesAddresses GraphQL API
+  description: 'All associated addresses including primary and secondary addresses, and address types which
+    can be associated with the proper profile and profile type. Compatible with OPERA Cloud RnA release 26.1.0.0.
+    Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway
+    URL>/rna/v1/graphql/ Root query field: profilesAddresses. Harvested verbatim from Oracle''s public hospitality-api-docs
+    repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/ProfilesAddresses.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-profiles-addresses.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-profiles-communications
+  name: OPERA Cloud RnA ProfilesCommunications GraphQL API
+  description: 'All associated communication details including communication types and roles, which can be
+    associated with the proper profile and profile type. Compatible with OPERA Cloud RnA release 26.1.0.0.
+    Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway
+    URL>/rna/v1/graphql/ Root query field: profilesCommunications. Harvested verbatim from Oracle''s public
+    hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/ProfilesCommunications.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-profiles-communications.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-profiles-contacts
+  name: OPERA Cloud RnA ProfilesContacts GraphQL API
+  description: 'The Contacts subject area contains Room Night and Revenue statistics broken down between booked
+    and stays reservations and can be summarized by Property, Stay Date, Business Segment and Owner. Compatible
+    with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics
+    (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field: profilesContacts. Harvested
+    verbatim from Oracle''s public hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/ProfilesContacts.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-profiles-contacts.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-profiles-individuals
+  name: OPERA Cloud RnA ProfilesIndividuals GraphQL API
+  description: 'Guest profile data including contact information, VIP codes, memberships and stay statistics
+    with room and revenue details. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject
+    area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: profilesIndividuals. Harvested verbatim from Oracle''s public hospitality-api-docs repository
+    under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/ProfilesIndividuals.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-profiles-individuals.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-profiles-loyalty-claims
+  name: OPERA Cloud RnA ProfilesLoyaltyClaims GraphQL API
+  description: 'Detailed information on the Loyalty Program providing details on the Membership, Profiles,
+    Stay Information and the ability to track Claims. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only
+    GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: profilesLoyaltyClaims. Harvested verbatim from Oracle''s public hospitality-api-docs
+    repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/ProfilesLoyaltyClaims.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-profiles-loyalty-claims.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-profiles-loyalty-transactions
+  name: OPERA Cloud RnA ProfilesLoyaltyTransactions GraphQL API
+  description: 'Detailed information on the Loyalty Program providing details on the Membership, Profiles,
+    Stay Information and the ability to track Awards. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only
+    GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: profilesLoyaltyTransactions. Harvested verbatim from Oracle''s public hospitality-api-docs
+    repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/ProfilesLoyaltyTransactions.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-profiles-loyalty-transactions.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-profiles-loyalty
+  name: OPERA Cloud RnA ProfilesLoyalty GraphQL API
+  description: 'Detailed information on the Loyalty Program providing details on the Membership, Profiles,
+    Stay Information and the ability to track Awards and Claims. Compatible with OPERA Cloud RnA release 26.1.0.0.
+    Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway
+    URL>/rna/v1/graphql/ Root query field: profilesLoyalty. Harvested verbatim from Oracle''s public hospitality-api-docs
+    repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/ProfilesLoyalty.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-profiles-loyalty.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-profiles-membership-transactions
+  name: OPERA Cloud RnA ProfilesMembershipTransactions GraphQL API
+  description: 'Provides information on Stay Records statistics of guest stay and its respective Membership
+    Transactions details for a profile. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL
+    subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: profilesMembershipTransactions. Harvested verbatim from Oracle''s public hospitality-api-docs
+    repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/ProfilesMembershipTransactions.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-profiles-membership-transactions.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-profiles-notes
+  name: OPERA Cloud RnA ProfilesNotes GraphQL API
+  description: 'Profile note types and note details, including internal and confidential flags, and the profile
+    details they are associated with. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject
+    area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: profilesNotes. Harvested verbatim from Oracle''s public hospitality-api-docs repository
+    under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/ProfilesNotes.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-profiles-notes.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-profiles-relationship-types
+  name: OPERA Cloud RnA ProfilesRelationshipTypes GraphQL API
+  description: 'Relationship type definition. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL
+    subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: profilesRelationshipTypes. Harvested verbatim from Oracle''s public hospitality-api-docs
+    repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/ProfilesRelationshipTypes.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-profiles-relationship-types.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-profiles-relationships
+  name: OPERA Cloud RnA ProfilesRelationships GraphQL API
+  description: 'The Profile - Relationships subject area contains relationship details including the relationship
+    type, description and role and the profiles that are linked through the relationship. Compatible with OPERA
+    Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA)
+    Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field: profilesRelationships. Harvested
+    verbatim from Oracle''s public hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/ProfilesRelationships.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-profiles-relationships.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-profiles-stay-records
+  name: OPERA Cloud RnA ProfilesStayRecords GraphQL API
+  description: 'Provides information on Stay Records statistics of guest stay and its respective Membership
+    Transactions details for a profile. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL
+    subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: profilesStayRecords. Harvested verbatim from Oracle''s public hospitality-api-docs repository
+    under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/ProfilesStayRecords.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-profiles-stay-records.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-promotion-coupon-codes
+  name: OPERA Cloud RnA PromotionCouponCodes GraphQL API
+  description: 'Promotion Coupon Codes details. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only
+    GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: promotionCouponCodes. Harvested verbatim from Oracle''s public hospitality-api-docs repository
+    under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/PromotionCouponCodes.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-promotion-coupon-codes.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-property
+  name: OPERA Cloud RnA Property GraphQL API
+  description: 'Property definition with marketing, financial, and housekeeping details. Compatible with OPERA
+    Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA)
+    Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field: property. Harvested verbatim from
+    Oracle''s public hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/Property.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-property.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-rates-buckets
+  name: OPERA Cloud RnA RatesBuckets GraphQL API
+  description: 'Rate bucket definition. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL
+    subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: ratesBuckets. Harvested verbatim from Oracle''s public hospitality-api-docs repository
+    under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/RatesBuckets.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-rates-buckets.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-rates-categories
+  name: OPERA Cloud RnA RatesCategories GraphQL API
+  description: 'Rate category definition including begin and end date and rate class association. Compatible
+    with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics
+    (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field: ratesCategories. Harvested
+    verbatim from Oracle''s public hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/RatesCategories.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-rates-categories.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-rates-classes
+  name: OPERA Cloud RnA RatesClasses GraphQL API
+  description: 'Rate class definition with begin and end date. Compatible with OPERA Cloud RnA release 26.1.0.0.
+    Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway
+    URL>/rna/v1/graphql/ Root query field: ratesClasses. Harvested verbatim from Oracle''s public hospitality-api-docs
+    repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/RatesClasses.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-rates-classes.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-rates-code-details
+  name: OPERA Cloud RnA RatesCodeDetails GraphQL API
+  description: 'Rate Header information including room types, package elements, market and source code and
+    associated flags. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the
+    OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query
+    field: ratesCodeDetails. Harvested verbatim from Oracle''s public hospitality-api-docs repository under
+    the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/RatesCodeDetails.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-rates-code-details.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-rates-codes
+  name: OPERA Cloud RnA RatesCodes GraphQL API
+  description: 'Rate detail information including all rate header details, room type, rate tiers and rate amounts
+    per occupant. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA
+    Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field:
+    ratesCodes. Harvested verbatim from Oracle''s public hospitality-api-docs repository under the Universal
+    Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/RatesCodes.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-rates-codes.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-rates-deposit-and-cancellation-rules
+  name: OPERA Cloud RnA RatesDepositAndCancellationRules GraphQL API
+  description: 'Deposit and cancellation rules schedules and details by date, rate code and days prior to arrival
+    or after booking. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the
+    OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query
+    field: ratesDepositAndCancellationRules. Harvested verbatim from Oracle''s public hospitality-api-docs
+    repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/RatesDepositAndCancellationRules.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-rates-deposit-and-cancellation-rules.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-rates-hurdles
+  name: OPERA Cloud RnA RatesHurdles GraphQL API
+  description: 'Rate yielding and hurdle information including date, amount , length of stay and room type.
+    Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting
+    & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field: ratesHurdles. Harvested
+    verbatim from Oracle''s public hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/RatesHurdles.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-rates-hurdles.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-rates-rate-seasons
+  name: OPERA Cloud RnA RatesRateSeasons GraphQL API
+  description: 'Rate yielding and hurdle information including date, amount , length of stay and room type.
+    Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting
+    & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field: ratesRateSeasons.
+    Harvested verbatim from Oracle''s public hospitality-api-docs repository under the Universal Permissive
+    License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/RatesRateSeasons.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-rates-rate-seasons.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-rates-restrictions
+  name: OPERA Cloud RnA RatesRestrictions GraphQL API
+  description: 'Rate restriction definition including restriction type, date applied, room and rate code with
+    day of the week and length of the stay details. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only
+    GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: ratesRestrictions. Harvested verbatim from Oracle''s public hospitality-api-docs repository
+    under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/RatesRestrictions.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-rates-restrictions.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-rates-tiers
+  name: OPERA Cloud RnA RatesTiers GraphQL API
+  description: 'Rate tier definition by length of stays. Compatible with OPERA Cloud RnA release 26.1.0.0.
+    Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway
+    URL>/rna/v1/graphql/ Root query field: ratesTiers. Harvested verbatim from Oracle''s public hospitality-api-docs
+    repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/RatesTiers.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-rates-tiers.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-resort-budget-forecast
+  name: OPERA Cloud RnA ResortBudgetForecast GraphQL API
+  description: 'This Subject Area Contains the Budget Forecast Details of the Property(s). Compatible with
+    OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics
+    (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field: resortBudgetForecast. Harvested
+    verbatim from Oracle''s public hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/ResortBudgetForecast.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-resort-budget-forecast.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-revenue-fixed-charges
+  name: OPERA Cloud RnA RevenueFixedCharges GraphQL API
+  description: 'Details on fixed charges including amount, frequency, and transaction code and the linked reservations.
+    Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting
+    & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field: revenueFixedCharges.
+    Harvested verbatim from Oracle''s public hospitality-api-docs repository under the Universal Permissive
+    License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/RevenueFixedCharges.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-revenue-fixed-charges.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-revenue-groups-and-types
+  name: OPERA Cloud RnA RevenueGroupsAndTypes GraphQL API
+  description: 'Revenue group and type details. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only
+    GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: revenueGroupsAndTypes. Harvested verbatim from Oracle''s public hospitality-api-docs
+    repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/RevenueGroupsAndTypes.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-revenue-groups-and-types.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-revenue-packages
+  name: OPERA Cloud RnA RevenuePackages GraphQL API
+  description: 'Package header details including package group setup and associated flags for selling and consumption
+    options. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA
+    Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field:
+    revenuePackages. Harvested verbatim from Oracle''s public hospitality-api-docs repository under the Universal
+    Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/RevenuePackages.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-revenue-packages.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-sales-manager-goals
+  name: OPERA Cloud RnA SalesManagerGoals GraphQL API
+  description: 'The Sales Manager Goals subject Area enable the end users to retrieve information / create
+    reports to compare the goals set for the Sales Managers against completed activities, and against statistical
+    revenue data associated to profiles. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL
+    subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: salesManagerGoals. Harvested verbatim from Oracle''s public hospitality-api-docs repository
+    under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/SalesManagerGoals.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-sales-manager-goals.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-simple-reports-activities
+  name: OPERA Cloud RnA SimpleReportsActivities GraphQL API
+  description: 'The Simple Report Activities Subject Area simplifies creating and building adhoc reports, including
+    the ability to create new reports. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL
+    subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: simpleReportsActivities. Harvested verbatim from Oracle''s public hospitality-api-docs
+    repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/SimpleReportsActivities.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-simple-reports-activities.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-simple-reports-booking-blocks
+  name: OPERA Cloud RnA SimpleReportsBookingBlocks GraphQL API
+  description: 'The Simple Reports Booking Blocks Subject Area simplifies creating and building adhoc reports,
+    including the ability to create new reports. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only
+    GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: simpleReportsBookingBlocks. Harvested verbatim from Oracle''s public hospitality-api-docs
+    repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/SimpleReportsBookingBlocks.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-simple-reports-booking-blocks.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-simple-reports-bookings-reservation
+  name: OPERA Cloud RnA SimpleReportsBookingsReservation GraphQL API
+  description: 'The Simple Reports Bookings Reservation Subject Area simplifies creating and building adhoc
+    reports, including the ability to create new reports. Compatible with OPERA Cloud RnA release 26.1.0.0.
+    Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway
+    URL>/rna/v1/graphql/ Root query field: simpleReportsBookingsReservation. Harvested verbatim from Oracle''s
+    public hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/SimpleReportsBookingsReservation.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-simple-reports-bookings-reservation.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-simple-reports-events
+  name: OPERA Cloud RnA SimpleReportsEvents GraphQL API
+  description: 'The Simple Reports Events Subject Area simplifies creating and building adhoc reports, including
+    the ability to create new reports. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL
+    subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: simpleReportsEvents. Harvested verbatim from Oracle''s public hospitality-api-docs repository
+    under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/SimpleReportsEvents.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-simple-reports-events.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-simple-reports-financial-transactions
+  name: OPERA Cloud RnA SimpleReportsFinancialTransactions GraphQL API
+  description: 'The Simple Reports Financial Transactions Subject Area simplifies creating and building adhoc
+    reports, including the ability to create new reports. Compatible with OPERA Cloud RnA release 26.1.0.0.
+    Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway
+    URL>/rna/v1/graphql/ Root query field: simpleReportsFinancialTransactions. Harvested verbatim from Oracle''s
+    public hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/SimpleReportsFinancialTransactions.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-simple-reports-financial-transactions.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-simple-reports-profile-individuals
+  name: OPERA Cloud RnA SimpleReportsProfileIndividuals GraphQL API
+  description: 'The Simple Reports Profile-Individuals Subject Area simplifies creating and building adhoc
+    reports, including the ability to create new reports. Compatible with OPERA Cloud RnA release 26.1.0.0.
+    Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway
+    URL>/rna/v1/graphql/ Root query field: simpleReportsProfileIndividuals. Harvested verbatim from Oracle''s
+    public hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/SimpleReportsProfileIndividuals.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-simple-reports-profile-individuals.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-statistics-forecast-summary
+  name: OPERA Cloud RnA StatisticsForecastSummary GraphQL API
+  description: 'Future on the books information including rooms, revenue and persons with breakdowns by room
+    types, market code, source code and periods of time. Compatible with OPERA Cloud RnA release 26.1.0.0.
+    Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway
+    URL>/rna/v1/graphql/ Root query field: statisticsForecastSummary. Harvested verbatim from Oracle''s public
+    hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/StatisticsForecastSummary.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-statistics-forecast-summary.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-statistics-history-and-forecast
+  name: OPERA Cloud RnA StatisticsHistoryAndForecast GraphQL API
+  description: 'Detailed information on past and future reservations including occupancy and revenue figures
+    with all profile data, broken down by Market, Rate code, Room type and Periods of time. Compatible with
+    OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics
+    (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field: statisticsHistoryAndForecast.
+    Harvested verbatim from Oracle''s public hospitality-api-docs repository under the Universal Permissive
+    License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/StatisticsHistoryAndForecast.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-statistics-history-and-forecast.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-statistics-managers-report
+  name: OPERA Cloud RnA StatisticsManagersReport GraphQL API
+  description: 'Past statistics including rooms and revenue figures, arrivals, departures and occupancy broken
+    out by multiple time periods. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject
+    area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: statisticsManagersReport. Harvested verbatim from Oracle''s public hospitality-api-docs
+    repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/StatisticsManagersReport.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-statistics-managers-report.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-statistics-reservation-pace
+  name: OPERA Cloud RnA StatisticsReservationPace GraphQL API
+  description: 'The Reservation Pace subject area contains daily rooms and revenue information on reservations
+    on the books as of specific dates in the past (snapshot dates) summarized by Property, PACERATECODE, Room
+    Type, Channel and Rate Code. Compatible with OPERA Cloud RnA release 26.1.0.0. Read-only GraphQL subject
+    area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed at <gateway URL>/rna/v1/graphql/
+    Root query field: statisticsReservationPace. Harvested verbatim from Oracle''s public hospitality-api-docs
+    repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/StatisticsReservationPace.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-statistics-reservation-pace.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-statistics-reservations-daily-summary
+  name: OPERA Cloud RnA StatisticsReservationsDailySummary GraphQL API
+  description: 'Summarized information on past reservations including number of persons, rooms and revenue
+    figures, broken down by room type, market code, rate code and periods of time. Compatible with OPERA Cloud
+    RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data
+    APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field: statisticsReservationsDailySummary. Harvested
+    verbatim from Oracle''s public hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/StatisticsReservationsDailySummary.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-statistics-reservations-daily-summary.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-statistics-reservations-daily
+  name: OPERA Cloud RnA StatisticsReservationsDaily GraphQL API
+  description: 'Detailed information on past reservations including occupancy and revenue figures with all
+    profile data, broken down by Market, Rate code, room type and periods of time. Compatible with OPERA Cloud
+    RnA release 26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data
+    APIs, exposed at <gateway URL>/rna/v1/graphql/ Root query field: statisticsReservationsDaily. Harvested
+    verbatim from Oracle''s public hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/StatisticsReservationsDaily.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-statistics-reservations-daily.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-rna-statistics-reservations-summary
+  name: OPERA Cloud RnA StatisticsReservationsSummary GraphQL API
+  description: 'Summarized booking data for both on the books and past stays including rooms, revenue and occupancy
+    details broken out by Market Code, Rate code and periods of time. Compatible with OPERA Cloud RnA release
+    26.1.0.0. Read-only GraphQL subject area in the OPERA Cloud Reporting & Analytics (RnA) Data APIs, exposed
+    at <gateway URL>/rna/v1/graphql/ Root query field: statisticsReservationsSummary. Harvested verbatim from
+    Oracle''s public hospitality-api-docs repository under the Universal Permissive License v1.0.'
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/data-apis/StatisticsReservationsSummary.graphql
+  tags:
+  - Reporting and Analytics
+  - GraphQL
+  - OPERA Cloud
+  - Hotels
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-rna-statistics-reservations-summary.graphql
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+- aid: oracle-hospitality:opera-cloud-business-events-streaming
+  name: OPERA Cloud Business Events Streaming API
+  description: Push delivery of OPERA Cloud Business Events as a GraphQL subscription over WebSocket. Each
+    event carries the resource that changed, the event name, the old value and the new value. Subscription
+    is per external system and requires the environment owner to approve the partner connection; only one client
+    may consume a given chain on a given gateway with a given application key. The captured introspection schema
+    declares Query, Mutation and Subscription root types. Harvested verbatim from Oracle's public hospitality-api-docs
+    repository under the Universal Permissive License v1.0.
+  humanURL: https://github.com/oracle/hospitality-api-docs/blob/main/graphql/streaming/StreamingGraphQLSchema.json
+  tags:
+  - Business Events
+  - Streaming
+  - GraphQL
+  - WebSocket
+  - OPERA Cloud
+  properties:
+  - type: GraphQL
+    url: graphql/oracle-hospitality-streaming-graphql-schema.json
+  - type: AsyncAPI
+    url: asyncapi/oracle-hospitality-outbound-asyncapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_streaming_api.htm
 common:
+- type: Authentication
+  url: authentication/oracle-hospitality-authentication.yml
+- type: DomainSecurity
+  url: security/oracle-hospitality-domain-security.yml
 - type: Website
   url: https://www.oracle.com/hospitality/
 - type: Portal
@@ -1099,6 +2580,74 @@ common:
   url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_versioning.htm
 - type: Support
   url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_getting_help_and_contacting_support.htm
+- type: Packages
+  url: packages/oracle-hospitality-packages.yml
+- type: LLMsTxt
+  url: llms/oracle-hospitality-llms.txt
+- type: Conformance
+  url: conformance/oracle-hospitality-conformance.yml
+- type: Compliance
+  url: https://www.oracle.com/corporate/cloud-compliance/
+  name: Oracle Cloud compliance attestations
+- type: ErrorCatalog
+  url: errors/oracle-hospitality-problem-types.yml
+- type: ErrorCodes
+  url: errors/oracle-hospitality-error-codes.yml
+- type: Lifecycle
+  url: lifecycle/oracle-hospitality-lifecycle.yml
+- type: Deprecation
+  url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_versioning.htm
+  name: Operation-level deprecation and sunset policy
+- type: OAuthScopes
+  url: scopes/oracle-hospitality-scopes.yml
+- type: VulnerabilityDisclosure
+  url: security/oracle-hospitality-vulnerability-disclosure.yml
+- type: Security
+  url: https://www.oracle.com/corporate/security-practices/assurance/vulnerability/reporting.html
+  name: How to report security vulnerabilities to Oracle
+- type: TrustCenter
+  url: security/oracle-hospitality-trust-center.yml
+- type: Sandbox
+  url: sandbox/oracle-hospitality-sandbox.yml
+- type: Conventions
+  url: conventions/oracle-hospitality-conventions.yml
+- type: ChangeLog
+  url: changelog/oracle-hospitality-changelog.yml
+- type: RateLimits
+  url: rate-limits/oracle-hospitality-rate-limits.yml
+- type: DataModel
+  url: data-model/oracle-hospitality-data-model.yml
+- type: AsyncAPI
+  url: asyncapi/oracle-hospitality-outbound-asyncapi.yml
+- type: Webhooks
+  url: asyncapi/oracle-hospitality-outbound-asyncapi.yml
+  name: Outbound callback contracts the integration partner implements
+- type: AgentSkill
+  url: skills/_index.yml
+- type: ToolCrosswalk
+  url: mcp/oracle-hospitality-tool-crosswalk.yml
+- type: APIReference
+  url: https://github.com/oracle/hospitality-api-docs/tree/main/rest-api-specs
+- type: GettingStarted
+  url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_gs.htm
+- type: Roadmap
+  url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_upcoming_major_changes.htm
+  name: Upcoming major changes to Oracle Hospitality APIs
+- type: Blog
+  url: https://blogs.oracle.com/hospitality/
+- type: PrivacyPolicy
+  url: https://www.oracle.com/legal/privacy/
+- type: Pricing
+  url: https://shop.oracle.com/apex/f?p=DSTORE:PRODUCT:0:::6:P6_LPI,P6_PROD_HIER_ID:38393155522162790035848247,38391514880125550241393242
+  name: Oracle Store listing for Oracle Hospitality Integration Cloud Service
+- type: SignUp
+  url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_getting_started_for_partners.htm
+  name: Partner onboarding via the Oracle Store or the partner registration CPQ form
+- type: SourceCode
+  url: https://github.com/oracle/hospitality-api-docs
+- type: GraphQL
+  url: graphql/oracle-hospitality-rna-base.graphql
+  name: OPERA Cloud RnA shared base types (SDL)
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

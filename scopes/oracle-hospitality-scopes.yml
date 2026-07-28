@@ -1,0 +1,50 @@
+generated: '2026-07-28'
+method: searched
+source: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_environments_gateways_and_credentials.htm
+docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_authenticating_to_oracle_hospitality_property_apis_ocim.htm
+note: >-
+  None of the 59 harvested Swagger 2.0 documents declares an oauth2 securityDefinition, so nothing is
+  derivable from the specs. The OAuth surface is documented instead: environments secured by OPERA Cloud
+  Identity Management (OCIM) issue a client_credentials token whose scope value is supplied on the
+  Environments page of the OHIP Developer Portal. Oracle publishes a single umbrella scope rather than a
+  per-resource scope vocabulary - entitlement is enforced by API subscription (per-application plan), by
+  the integration user's OPERA roles (WSACCESS plus module-level roles) and by property scoping through
+  the x-hotelid header, not by discrete OAuth scopes.
+schemes:
+- name: OHIP OAuth 2.0 - Client Credentials (OCIM)
+  flows:
+  - flow: clientCredentials
+    scope_parameter: scope
+    docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_authenticating_to_oracle_hospitality_property_apis_ocim.htm
+- name: OHIP OAuth 2.0 - Resource Owner Group (SSD)
+  flows:
+  - flow: password
+    scope_parameter: none
+    docs: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_authenticating_to_oracle_hospitality_property_apis_ssd.htm
+scopes:
+- scope: 'urn:opc:hgbu:ws:_myscopes_'
+  description: >-
+    Umbrella scope requested on the client_credentials token call for environments using OPERA Cloud
+    Identity Management. Resolves to the scopes granted to that client, which are determined by the
+    application's API subscriptions and the environment it is bound to.
+  flows:
+  - clientCredentials
+  sources:
+  - https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oauth_token_api.htm
+  - https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_environments_gateways_and_credentials.htm
+authorization_model:
+  enforcement:
+  - layer: API subscription
+    description: An application must be subscribed to an API before it may call it; calling an
+      unsubscribed API returns 403 "No Subscribed Plan or API found".
+  - layer: OPERA integration user roles
+    description: The integration user must hold the WSACCESS role, plus the module-level roles for the
+      resources being called; missing roles return 403 "User is not authorized to access data for resort".
+  - layer: Property scoping
+    description: The x-hotelid header must match a hotel in the environment being called.
+  - layer: Channel entitlement
+    description: Distribution APIs additionally require an Oracle-issued global Channel Code on
+      x-channelCode.
+  - layer: IP allow listing
+    description: When enabled by the customer, unlisted source addresses receive 403 Forbidden. Maximum
+      100 IP ranges per chain.
