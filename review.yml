@@ -1,0 +1,940 @@
+aid: oracle-hospitality
+name: Oracle Hospitality
+review:
+  question: What would it cost a hotel or an integration partner to leave Oracle Hospitality, and what does Oracle
+    actually publish about it?
+  date: '2026-07-28'
+  reviewer: API Evangelist
+  tier: hospitality-tech
+  homeMarket: United States
+  specsHarvested: 59
+  operationsDocumented: 3519
+findings:
+  summary: 'Oracle Hospitality is the hotel-technology arm of Oracle Corporation, built on the 2014 MICROS Systems
+    acquisition. OPERA Cloud is the property management system of record; OPERA Cloud Distribution is the channel/ARI
+    switch that carries a property''s availability, rates and inventory out to GDS, OTA and web channels and carries
+    reservations back; Nor1 handles upsell. The Oracle Hospitality Integration Platform (OHIP) is the single API
+    front door for all of it.
+
+    The specification layer is genuinely open: Oracle publishes 59 Swagger 2.0 documents covering 3,519 documented
+    operations to a public GitHub repository (oracle/hospitality-api-docs) under the Universal Permissive License
+    v1.0, alongside a fully public OHIP developer guide on docs.oracle.com. Every one of the 59 specs was fetched
+    (HTTP 200) and parses.
+
+    The credential layer is not open. There is no self-serve signup and no public developer portal URL: the portal
+    is tenant-scoped (https://<ohip-domain>/<enterpriseID>prd/ui) and is issued by email on provisioning. Partners
+    onboard by purchasing Oracle Hospitality Integration Cloud Service through the Oracle Store or a Cost Price
+    Quote form; production applications require an Oracle Partner Network reference number; distribution channel
+    partners additionally need an Oracle-issued global Channel Code and an Oracle Cloud Marketplace listing.
+
+    The interesting switching-cost finding is that Oracle is actively migrating the industry OFF standards. The
+    legacy interfaces it is retiring - HTNG (SOAP over OPERA Electronic Distribution Systems), OPERA Web Services
+    (OWS), OPERA Xchange Interface (OXI) and Kiosk - are replaced by proprietary OPERA-modeled REST resources. OpenTravel
+    survives only in narrow pockets: the Distribution ARI Publication outbound API still carries OTA_HotelInvCountNotifRQ,
+    OTA_HotelRateAmountNotifRQ and OTA_HotelRestrictionsNotifRQ payload schemas, the Block API cites the OpenTravel
+    Code List Unique ID Type (UIT), and the Cashiering API references OTA_ErrorRS enumerations.'
+  transports:
+  - protocol: REST
+    scheme: https
+    documented: true
+    note: OHIP gateway; host is per-tenant and issued in the Developer Portal Environments tab, so no public baseURL
+      is publishable. Specs carry basePath only (e.g. /rsv/v1).
+  - protocol: WebSocket
+    scheme: wss
+    documented: true
+    note: Business Events Streaming API (push), GraphQL subscription over WebSocket. Documented at https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_streaming_api.htm.
+      Endpoint is per-tenant; not published.
+  - protocol: SOAP
+    scheme: https
+    documented: true
+    note: Legacy OWS / HTNG / OXI / Kiosk interfaces, explicitly in migration to REST per chapter 16 of the OHIP
+      guide.
+  productLines:
+  - OPERA Cloud property management (Property APIs)
+  - OPERA Cloud Distribution (Distribution APIs, ARI publication, channel connectivity)
+  - Nor1 Integrated Upsell
+  - Oracle Payment Interface (OPI tokenization, token exchange)
+  - Oracle Hospitality Data APIs (bulk extraction from Reporting & Analytics subject areas)
+  - Simphony point of sale (no public REST specification found in the harvested repository)
+switchingCost:
+  interfaceShape:
+    value: standard-plus-proprietary
+    standardsNamed:
+    - OpenTravel Alliance (OTA) message schemas - OTA_HotelInvCountNotifRQ, OTA_HotelRateAmountNotifRQ, OTA_HotelRestrictionsNotifRQ
+      in openapi/oracle-hospitality-distribution-outbound-aripublication.json
+    - OpenTravel Code List Unique ID Type (UIT) referenced in openapi/oracle-hospitality-property-v1-blk.json
+    - OTA_ErrorRS enumerations referenced in openapi/oracle-hospitality-property-v1-csh.json
+    - HTNG - named only as a LEGACY OPERA Electronic Distribution Systems SOAP interface being migrated to proprietary
+      REST (https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_htng.htm); also appears as an OEDS service name
+      value in openapi/oracle-hospitality-property-v1-intcfg.json
+    - OAuth 2.0 (password and client_credentials grants) and JSON Web Token RFC 7519, per openapi/oracle-hospitality-property-v1-oauth.json
+    - Swagger 2.0 as the description format for all 59 specifications
+    - PCI DSS referenced in the OHIP security guide (https://docs.oracle.com/en/industries/hospitality/integration-platform/ohips/toc.htm)
+    proprietaryElements:
+    - x-app-key application key header, issued per registered application and regenerated on suspension
+    - x-hotelid / hotelId as the dominant resource key (1,863 path or query parameter occurrences across the corpus)
+    - Oracle-issued global Channel Code, required to call Distribution APIs
+    - enterpriseID and chain code baked into the tenant gateway URL and clientId format
+    - OPERA-modeled REST resource vocabulary across ~3,500 operations that no other vendor implements
+    assessment: A partner integrating against OHIP writes to an Oracle-specific REST vocabulary. The standards that
+      do appear are either (a) confined to the outbound ARI publication path, where OTA payload schemas are preserved
+      because channel partners already speak them, or (b) generic web standards (OAuth 2.0, JWT, Swagger 2.0) that
+      describe the envelope, not the domain model. The domain model itself is proprietary, and Oracle is deliberately
+      moving customers from standards-based SOAP (HTNG, OWS) onto it.
+  secondSource:
+    value: alternatives-with-migration
+    alternativesConsidered:
+    - 'Property management systems: Agilysys, Infor Hospitality Management Solution, Amadeus Hospitality, Sabre
+      SynXis Property Hub, Shiji Enterprise Platform, Mews, Cloudbeds, Apaleo, StayNTouch, protel (Planet), RMS
+      Cloud'
+    - 'Channel management / distribution: SiteMinder, Derbysoft, RateGain, Amadeus (formerly TravelClick) iHotelier,
+      Sabre SynXis Central Reservations'
+    - 'Point of sale (against Simphony): Agilysys InfoGenesis, Toast, Lightspeed, Shiji Infrasys'
+    assessment: 'Real competitors exist at every layer, so this is not a no-alternative position. But there is no
+      shared PMS data model in hospitality the way NDC or OTA exist in distribution, so a replacement is a rebuild:
+      every one of a property or chain''s integrations - door locks, POS, spa, revenue management, CRM, payment,
+      loyalty - is written against OPERA resource shapes and would be rewritten. Oracle publishes its own evidence
+      for how large that job is: chapter 16 of the OHIP guide is a legacy-to-REST migration mapping table, operation
+      by operation, for customers moving WITHIN Oracle. Moving out has no such map.'
+  exitPath:
+    value: bulk-export-documented
+    operationsCited:
+    - 'GET /availableExports, GET /{exportFileId}/generatedExports, POST /exportSchedules, GET /hotels/{hotelId}/exportSchedules
+      - OPERA Cloud Export Configuration API, openapi/oracle-hospitality-property-v1-expcfg.json (22 operations).
+      Spec description: "The exports feature in OPERA Cloud provides the ability to create and export data files,
+      such as back office data, to third-party interfaces and receiving systems."'
+    - Oracle Hospitality Data APIs - "Use these APIs for bulk data access where the extraction of large amounts
+      of data is required... allow bulk data to be queried from Reporting & Analytics to avoid any performance impact
+      on the transactional OPERA Cloud platform." (https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm).
+      No Swagger specification for these is published in the GitHub repository.
+    - 'Asynchronous APIs - blkasync, crmasync, cshasync, invasync, parasync, rsvasync, rtpasync specs. Per https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_opera_xchange_interface_oxi.htm:
+      "The REST Property APIs have Asynchronous APIs, which enable the user to send a REST request to OPERA Cloud
+      for a significant amount of data (for example, 30 days of reservations)."'
+    caveats:
+    - 'The one thing explicitly NOT self-service is portability of the integration configuration itself: "If you
+      need a Portable Export of your Application Details, create a ticket in the Customer Support Portal." (https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_portable_export.htm)
+      - that part is export-on-request.'
+    - Export is of operational data into files and reporting subject areas. No documented operation exports the
+      OPERA configuration model (rate plans, room types, chain and hotel configuration) as a portable package for
+      migration to another vendor.
+    - No GDPR / consumer data-portability endpoint was found in the corpus.
+  identifierPortability:
+    shared:
+    - 'IATA travel-agency numbers, with an explicit idContext field: "Used to identify the source of the identifier
+      (e.g., IATA, ABTA)" (openapi/oracle-hospitality-distribution-v1-distribution.json)'
+    - IATA 3-letter airport and city codes (airportCode in distribution book/shop specs, hotelCityCode in act.json)
+    - GDS record locators - recordLocator "GDS Record Locator" in openapi/oracle-hospitality-property-v1-rsv.json
+      and a "GDS Record Locator for reservation" query parameter in fof.json
+    - Group IATA number (gIId) validated by an external system, openapi/oracle-hospitality-property-v1-blk.json
+    - OpenTravel UniqueID Type (UIT) code list reference, blk.json
+    - IATA number validation operation on travel-agency profiles, openapi/oracle-hospitality-property-outbound-crmoutbound.json
+    proprietary:
+    - hotelId - the OPERA property code, the single most common parameter in the corpus (1,863 occurrences)
+    - chain code and enterpriseID, embedded in the gateway URL and the OCIM clientId format "<chain><environment><enterprise>Client"
+    - reservationId (261), profileId (107), blockId (119), roomId, accountId - OPERA-internal surrogate keys
+    - extSystemCode and channelCode - Oracle-issued external system and channel identifiers
+    - Oracle-issued global Channel Code, one per distribution partner, reused across every property
+    notFound:
+    - GIATA IDs
+    - HTNG hotel identifiers
+    - GDS-native chain codes as a first-class key
+    summary: Mixed. Guest, agency and reservation records carry portable industry identifiers - IATA agency numbers,
+      IATA airport/city codes, GDS record locators, OpenTravel UIT - so the travel-industry edges of the data travel.
+      Everything that binds those records together inside OPERA (hotelId, chain, enterpriseID, reservationId, profileId,
+      blockId, channelCode) is an Oracle-internal key with no external registry.
+  contractualLockIn:
+    published:
+    - source: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_getting_started_for_partners.htm
+      quote: 'There are two ways to onboard partners to the Oracle Hospitality Integration Cloud Service: Oracle
+        Store - You can onboard by purchasing the Oracle Hospitality Integration Cloud Service through the Oracle
+        Store... Partner Registration Cost Price Quote (CPQ) form - If you are unable to onboard through the Oracle
+        Store, you can onboard by submitting the partner registration (CPQ) form.'
+      note: Checkout requires the buyer to "agree to the terms and conditions of the Cloud Service Agreement".
+    - source: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_registering_an_application.htm
+      quote: A non production application may not access production environments, so to move from calling non production
+        to calling production environments, you must create a new production application. To access production environments,
+        please email your Oracle Partner Network (OPN) reference number to hospitality-integrations_ww@oracle.com.
+    - source: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_requesting_a_global_channel_code_for_distribution_apis.htm
+      quote: As a global Distribution channel partner, you must obtain a single, global Channel Code to access Oracle
+        Hospitality Distribution APIs. This code is issued once per partner and is used globally by any property
+        connecting to your channel. ... Oracle Partner Network (OPN) membership and an Oracle Cloud Marketplace
+        listing for your integration are required to access customer production environments.
+    - source: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_signing_in_to_the_developer_portal.htm
+      quote: 'When you sign in to the developer portal while in a ''SUSPENDED'' status, you can... View applications,
+        but you cannot: Create new applications. Change the application key on an application... View the application
+        key. ... When a Suspended Partner Service is Resumed: ... The only exception is the application key is regenerated.
+        Partners must update their applications to use the regenerated application key.'
+      note: 'Suspension is the closest thing to a published revocation clause: access to the application key is
+        withdrawn, and on resumption the key is rotated, forcing a partner code change.'
+    - source: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_limits.htm
+      quote: Up to 50 requests per second are allowed per gateway, shared by all consumers and clients accessing
+        that gateway. ... Only one client can be connected to consume events from a single chain in a single gateway
+        on a single application key. ... The maximum number of applications that can be registered in the OHIP Developer
+        portal is 100.
+      note: A shared per-gateway rate budget means a property's integrations compete with each other for throughput
+        - a structural cost of running many vendors against one OPERA tenant.
+    - source: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_early_adopter_api_program.htm
+      quote: our aim is to avoid breaking changes in v.0 APIs, however we cannot guarantee full backward compatibility...
+        the best endeavors assistance provided by product management as part of the program is not subject to service
+        level agreements (SLAs); however, we do offer a premium (paid) service for partners and/or customers who
+        desire dedicated support.
+    - source: https://www.oracle.com/legal/terms.html
+      quote: termsOfService declared in every harvested specification (info.termsOfService).
+    - source: https://oss.oracle.com/licenses/upl
+      quote: This document and all content within is available under the Universal Permissive License v 1.0 - appended
+        by Oracle to the info.description of every harvested specification. The specifications themselves are unencumbered;
+        the service they describe is not.
+    notPublished:
+    - Minimum contract term for Oracle Hospitality Integration Cloud Service
+    - Exclusivity or full-content style obligations
+    - Per-transaction, per-reservation or per-segment fees (call usage alerts exist, but no published price)
+    - Termination notice period and post-termination data-retrieval window
+    - Any commitment on how long a departing customer retains OPERA data access
+    summary: 'What is verifiable: you buy a subscription and accept the Oracle Cloud Service Agreement; production
+      access is conditioned on Oracle Partner Network membership; distribution access is conditioned on an Oracle-issued
+      Channel Code plus an Oracle Cloud Marketplace listing; suspension revokes key access and rotates the key on
+      resumption. Commercial terms - price, term, notice, exclusivity - are not published and are not inferred here.'
+  accessGate:
+    value: commercial-agreement
+    whatADeveloperMustDo:
+    - 'Partner path: purchase Oracle Hospitality Integration Cloud Service via the Oracle Store (or submit a partner
+      registration CPQ form obtained from hospitality-integrations_ww@oracle.com), accept the Oracle Cloud Service
+      Agreement, and complete OCI Cloud Account Activation.'
+    - 'Hotelier path: OPERA Cloud Foundation includes OHIP access; an administrator creates the Developer Portal
+      Access role / assigns OHIPADMIN, and the portal URL arrives by email on provisioning.'
+    - Register an application in the Developer Portal, receive an application key (x-app-key), add an environment
+      to obtain clientId, clientSecret, EnterpriseID, Scope and gateway URL.
+    - 'For production: email an Oracle Partner Network reference number to hospitality-integrations_ww@oracle.com;
+      customer production applications also require a written Business Justification and confirmation of the Oracle
+      Terms & Conditions.'
+    - 'For Distribution APIs: email hgbu_distribution_partner_rqs_grp@oracle.com for a global Channel Code (5 business
+      day acknowledgement), then hold OPN membership and publish an Oracle Cloud Marketplace listing before touching
+      customer production environments.'
+    - 'For Business Events streaming from a customer environment: the environment owner must approve the subscription
+      in their own Developer Portal.'
+    whatIsFreeAndPublic:
+    - 59 Swagger 2.0 specifications, UPL-1.0, https://github.com/oracle/hospitality-api-docs
+    - Postman collections and workspace, https://www.postman.com/hospitalityapis/oracle-hospitality-apis/overview
+    - The complete OHIP developer guide, https://docs.oracle.com/cd/F29336_01/doc.201/f27480/
+    - A shared partner sandbox (cross-tenant, only after onboarding)
+  distributionModel:
+    value: channel-manager
+    assessment: OPERA Cloud Distribution is the ARI switch between a property and its channels. Availability, rates
+      and inventory are pushed outward as OTA-shaped notification messages (ARI Publication API) and reservations
+      come back inbound (Distribution Reservation Service, Book, Shop, Reservation Notification). The OPERA Cloud
+      Channel Configuration API (openapi/oracle-hospitality-property-v1-chl.json, 138 operations) manages channel,
+      availability and inventory mapping with external system subtypes documented as "GDS, WEB, etc." Oracle does
+      not publish a count of connected channels or a public channel directory; the only public statement about channel
+      scope is that a Channel Code "is issued once per partner and is used globally by any property connecting to
+      your channel."
+    ndcPosture: Not applicable - hospitality technology, not airline distribution. No IATA NDC certification, NDC
+      API or NDC reference was found anywhere in the 59 harvested specifications or the OHIP guide; apparent NDC
+      string matches in the corpus were substring false positives.
+probes:
+- url: https://github.com/oracle/hospitality-api-docs
+  httpStatus: 200
+  note: Public spec repository, UPL-1.0. 59 Swagger 2.0 specs harvested from rest-api-specs/.
+- url: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/
+  httpStatus: 200
+  note: Raw fetch root for every harvested artifact; per-file status recorded in artifacts below.
+- url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/
+  httpStatus: 200
+  note: Oracle Hospitality Integration Platform developer guide - the real public developer documentation.
+- url: https://docs.oracle.com/en/industries/hospitality/index.html
+  httpStatus: 200
+  note: Oracle Hospitality documentation index.
+- url: https://docs.oracle.com/en/industries/hospitality/integration-platform/ohips/c_preface.htm
+  httpStatus: 200
+  note: OHIP security guide (PCI, TLS, credentials, application key).
+- url: https://www.oracle.com/hospitality/
+  httpStatus: 200
+  note: Product marketing site.
+- url: https://www.oracle.com/hospitality/integration-platform/
+  httpStatus: 200
+  note: OHIP product page. Marketing + Oracle Store buy flow, not a developer portal.
+- url: https://www.oracle.com/hospitality/hotel-property-management/
+  httpStatus: 200
+  note: OPERA Cloud PMS product page.
+- url: https://www.postman.com/hospitalityapis/oracle-hospitality-apis/overview
+  httpStatus: 200
+  note: Oracle-operated public Postman workspace.
+- url: https://www.oracle.com/legal/terms.html
+  httpStatus: 200
+  note: termsOfService declared in every spec.
+- url: https://oss.oracle.com/licenses/upl
+  httpStatus: 200
+  note: Universal Permissive License v1.0 - the licence on the specifications.
+- url: https://developer.oracle.com/hospitality/
+  httpStatus: 200
+  note: Redirects to https://www.oracle.com/developer/ - there is no oracle.com/hospitality developer portal at
+    this address.
+- url: https://api.oracle.com/
+  httpStatus: 0
+  note: No such host / no response. There is no public Oracle Hospitality API gateway hostname; gateways are per-tenant.
+- url: https://blogs.oracle.com/hospitality/
+  httpStatus: 403
+  note: Blocked to automated fetch.
+- url: https://www.oracle.com/hospitality/restaurant-pos-systems/
+  httpStatus: 404
+  note: Simphony POS not at this path; no public Simphony REST specification found in the harvested repository.
+sources:
+- url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_getting_started_for_partners.htm
+  type: Documentation
+  note: Partner onboarding via Oracle Store or CPQ form; Cloud Service Agreement acceptance.
+- url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_getting_started_for_hoteliers_ocim.htm
+  type: Documentation
+  note: Hotelier onboarding; tenant portal URL format https://<ohip-domain>/<enterpriseID>prd/ui; module-level access
+    control.
+- url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_registering_an_application.htm
+  type: Documentation
+  note: Application registration, application key, OPN reference number for production.
+- url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_environments_gateways_and_credentials.htm
+  type: Documentation
+  note: clientId, clientSecret, EnterpriseID, Scope and gateway URL per environment; OCIM client credentials scheme.
+- url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/t_signing_in_to_the_developer_portal.htm
+  type: Documentation
+  note: Portal sign-in and SUSPENDED-status behaviour including application key regeneration.
+- url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_portable_export.htm
+  type: Documentation
+  note: Portable Export of Application Details is by support ticket only.
+- url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_oracle_hospitality_data_apis.htm
+  type: Documentation
+  note: Bulk data extraction from Reporting & Analytics subject areas.
+- url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_migrating_from_legacy_apis_to_rest.htm
+  type: Documentation
+  note: Migration off OXI, OWS, ADS, HTNG and Kiosk onto OHIP REST.
+- url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_htng.htm
+  type: Documentation
+  note: HTNG named as a legacy SOAP interface with a REST migration mapping table.
+- url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_opera_web_services_and_kiosk.htm
+  type: Documentation
+  note: OWS/Kiosk SOAP to REST mapping; notes membership management not yet available in REST.
+- url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_opera_xchange_interface_oxi.htm
+  type: Documentation
+  note: OXI to REST; asynchronous bulk retrieval pattern described.
+- url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_requesting_a_global_channel_code_for_distribution_apis.htm
+  type: Documentation
+  note: Global Channel Code request process, OPN membership and Marketplace listing requirement.
+- url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_limits.htm
+  type: Documentation
+  note: Rate limits, header size, application count, single streaming consumer per chain/gateway/key.
+- url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_versioning.htm
+  type: Documentation
+  note: URI-level versioning; definition of non-breaking change.
+- url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_streaming_api.htm
+  type: Documentation
+  note: Business Events streaming over WebSocket with customer approval for partner consumption.
+- url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_early_adopter_api_program.htm
+  type: Documentation
+  note: Version 0 APIs, no SLA, paid premium support option.
+- url: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_github_postman_collections.htm
+  type: Documentation
+  note: Oracle points developers at the public GitHub spec repository and Postman workspace.
+- url: https://github.com/oracle/hospitality-api-docs
+  type: SourceCode
+  note: The harvested artifacts.
+artifacts:
+- file: openapi/oracle-hospitality-distribution-outbound-aripublication.json
+  title: OPERA Cloud Distribution ARI Publication
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /aripublication/v1
+  operations: 3
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/distribution/outbound/aripublication.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-distribution-outbound-lookup.json
+  title: OPERA Cloud Distribution Outbound Lookup
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /lookup/v1
+  operations: 2
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/distribution/outbound/lookup.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-distribution-outbound-notification.json
+  title: OPERA Cloud Distribution Content Notification
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /notification/v1
+  operations: 1
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/distribution/outbound/notification.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-distribution-v1-book.json
+  title: OPERA Cloud Distribution Book
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /book/v1
+  operations: 5
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/distribution/v1/book.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-distribution-v1-content.json
+  title: OPERA Cloud Distribution Content
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /content/v1
+  operations: 5
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/distribution/v1/content.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-distribution-v1-controls.json
+  title: OPERA Cloud Distribution Property Controls
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /controls/v1
+  operations: 1
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/distribution/v1/controls.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-distribution-v1-distribution.json
+  title: OPERA Cloud Distribution Reservation Service
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /distribution/v1
+  operations: 4
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/distribution/v1/distribution.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-distribution-v1-hdpbaoauth2.json
+  title: OPERA Cloud Distribution Authentication API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /hdpba/oauth2/v1
+  operations: 1
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/distribution/v1/hdpbaoauth2.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-distribution-v1-onboard.json
+  title: OPERA Cloud Distribution Onboarding
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /onboard/v1
+  operations: 2
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/distribution/v1/onboard.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-distribution-v1-resnotif.json
+  title: OPERA Cloud Distribution Reservation Notification
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /resnotif/v1
+  operations: 4
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/distribution/v1/resnotif.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-distribution-v1-shop.json
+  title: OPERA Cloud Distribution Shop
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /shop/v1
+  operations: 6
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/distribution/v1/shop.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-nor1-v1-upselloffers.json
+  title: Nor1 Integrated Upsell API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /ohcgep/v1
+  operations: 2
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/nor1/v1/upselloffers.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-outbound-crmoutbound.json
+  title: OPERA Cloud Customer Relationship Management Outbound API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /crm/v1
+  operations: 12
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/outbound/crmoutbound.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-outbound-cshoutbound.json
+  title: OPERA Cloud Cashiering Outbound API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /csh/v1
+  operations: 7
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/outbound/cshoutbound.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-outbound-fofoutbound.json
+  title: OPERA Cloud Front Desk Operations Outbound API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /fof/v1
+  operations: 2
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/outbound/fofoutbound.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-act.json
+  title: OPERA Cloud Activity API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /act/v1
+  operations: 23
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/act.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-actcfg.json
+  title: OPERA Cloud Activity Management API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /act/config/v1
+  operations: 25
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/actcfg.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-ars.json
+  title: OPERA Cloud Accounts Receivables API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /ars/v1
+  operations: 60
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/ars.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-blk.json
+  title: OPERA Cloud Block API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /blk/v1
+  operations: 93
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/blk.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-blkasync.json
+  title: OPERA Cloud Block Reservation Asynchronous API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /blk/async/v1
+  operations: 14
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/blkasync.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-blkcfg.json
+  title: OPERA Cloud Block Configuration API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /blk/config/v1
+  operations: 57
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/blkcfg.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-bof.json
+  title: OPERA Cloud Back Office Operations API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /bof/v1
+  operations: 2
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/bof.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-chl.json
+  title: OPERA Cloud Channel Configuration API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /chl/v1
+  operations: 138
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/chl.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-cms.json
+  title: OPERA Cloud API for Customer Management Service
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /cms/v1
+  operations: 6
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/cms.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-crm.json
+  title: OPERA Cloud Customer Relationship Management API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /crm/v1
+  operations: 165
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/crm.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-crmasync.json
+  title: OPERA Cloud CRM Asynchronous API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /crm/async/v1
+  operations: 4
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/crmasync.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-crmcfg.json
+  title: OPERA Cloud CRM Configuration API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /crm/config/v1
+  operations: 310
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/crmcfg.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-csh.json
+  title: OPERA Cloud Cashiering API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /csh/v1
+  operations: 195
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/csh.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-cshasync.json
+  title: OPERA Cloud Cashiering Asynchronous API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /csh/async/v1
+  operations: 2
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/cshasync.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-dvm.json
+  title: OPERA Cloud DataValueMapping Service API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /dvm/v1
+  operations: 10
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/dvm.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-ecommtokenization.json
+  title: Cloud OPI Tokenization ECommerce API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /eComm/eToken/v1
+  operations: 2
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/ecommtokenization.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-entcfg.json
+  title: OPERA Cloud Enterprise Configuration API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /ent/config/v1
+  operations: 246
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/entcfg.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-evm.json
+  title: OPERA Cloud Sales Event Management API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /evm/v1
+  operations: 45
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/evm.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-evmcfg.json
+  title: OPERA Cloud Event Configuration API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /evm/config/v1
+  operations: 137
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/evmcfg.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-expcfg.json
+  title: OPERA Cloud Export Configuration API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /exp/config/v1
+  operations: 22
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/expcfg.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-fof.json
+  title: OPERA Cloud Front Desk Operations Service
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /fof/v1
+  operations: 91
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/fof.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-fofcfg.json
+  title: OPERA Cloud Front Desk Configuration API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /fof/config/v1
+  operations: 363
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/fofcfg.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-hsk.json
+  title: OPERA Cloud Housekeeping Service API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /hsk/v1
+  operations: 60
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/hsk.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-int.json
+  title: OPERA Cloud Integration Processor API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /int/v1
+  operations: 2
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/int.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-intcfg.json
+  title: OPERA Cloud Integration Configuration API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /int/config/v1
+  operations: 50
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/intcfg.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-inv.json
+  title: OPERA Cloud Inventory API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /inv/v1
+  operations: 13
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/inv.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-invasync.json
+  title: Opera Cloud Inventory Asynchronous API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /inv/async/v1
+  operations: 6
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/invasync.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-lms.json
+  title: OPERA Cloud Leisure Management API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /lms/v1
+  operations: 26
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/lms.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-lov.json
+  title: OPERA Cloud List of Values Management API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /lov/v1
+  operations: 453
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/lov.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-medcfg.json
+  title: OPERA Cloud Content Service
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /med/config/v1
+  operations: 11
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/medcfg.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-oauth.json
+  title: oAuth API for OHIP
+  specification: Swagger 2.0
+  version: 21.5.0.0
+  basePath: /oauth/v1
+  operations: 1
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/oauth.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-ops.json
+  title: OPERA Provisioning Service API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /ops/v1
+  operations: 1
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/ops.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-par.json
+  title: OPERA Cloud Price Availability Rate API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /par/v1
+  operations: 28
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/par.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-parasync.json
+  title: OPERA Cloud Price Availability Rate Async API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /par/async/v1
+  operations: 2
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/parasync.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-repcfg.json
+  title: OPERA Cloud Report Master Data Management API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /rep/config/v1
+  operations: 12
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/repcfg.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-rmcfg.json
+  title: OPERA Cloud Room Configuration API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /rm/config/v1
+  operations: 170
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/rmcfg.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-rmr.json
+  title: OPERA Cloud Room Rotation Service API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /rmr/v1
+  operations: 10
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/rmr.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-rmrcfg.json
+  title: OPERA Cloud Room Rotation Configuration Service API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /rmr/config/v1
+  operations: 30
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/rmrcfg.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-rsv.json
+  title: OPERA Cloud Reservation API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /rsv/v1
+  operations: 184
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/rsv.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-rsvasync.json
+  title: OPERA Cloud Reservation Asynchronous API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /rsv/async/v1
+  operations: 15
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/rsvasync.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-rsvcfg.json
+  title: OPERA Cloud Reservation Master Data Management API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /rsv/config/v1
+  operations: 215
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/rsvcfg.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-rtp.json
+  title: OPERA Cloud Rate API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /rtp/v1
+  operations: 144
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/rtp.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-rtpasync.json
+  title: Opera Cloud Rate Plan Asynchronous Service API
+  specification: Swagger 2.0
+  version: 26.2.0.0
+  basePath: /rtp/async/v1
+  operations: 18
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/rtpasync.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+- file: openapi/oracle-hospitality-property-v1-tokenexchange.json
+  title: OPI Token Exchange Service API
+  specification: Swagger 2.0
+  version: 1.0.1
+  basePath: /tokenExchange/v1
+  operations: 1
+  sourceURL: https://raw.githubusercontent.com/oracle/hospitality-api-docs/main/rest-api-specs/property/v1/tokenexchange.json
+  httpStatus: 200
+  fetched: '2026-07-28'
+  parses: true
+actions:
+  specsHarvested: 59
+  specsDirectory: openapi/
+  allSpecsParse: true
+  apisYmlWritten: true
+  readmeWritten: true
+  baseURLOmitted: Deliberate. Every harvested specification declares basePath only and no host. The OHIP gateway
+    hostname is issued per tenant in the Developer Portal Environments tab and is not published, so no baseURL is
+    asserted for any API rather than inventing one.
+  notHarvested:
+  - Postman collections in postman-collections/ (real, public, left to the enrichment pipeline)
+  - Oracle Hospitality Data APIs (no machine-readable specification published)
+  - Simphony point of sale (no public REST specification found)
+  - Business Events streaming GraphQL schema (documented, not published as a downloadable artifact)
