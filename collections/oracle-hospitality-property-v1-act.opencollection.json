@@ -1,0 +1,1686 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Activity API",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Activity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/activities",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "completed",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the Activity is completed or not."
+              },
+              {
+                "name": "highPriority",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the Activity has high priority."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              },
+              {
+                "name": "text",
+                "value": "",
+                "type": "query",
+                "description": "Search string to be used for super search."
+              },
+              {
+                "name": "hotelIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ownerCode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "activityClass",
+                "value": "",
+                "type": "query",
+                "description": "A collection of supported list of activity classes."
+              },
+              {
+                "name": "activityType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "activityPurpose",
+                "value": "",
+                "type": "query",
+                "description": "Purpose of the Activity."
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "contactId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              }
+            ]
+          },
+          "docs": "Use this API to retrieve activities for multiple hotels.  Results can be narrowed down by your search criteria in the request message. <p><strong>OperationId:</strong>getActivitiesByMultipleHotelIds</p> <p>The maximum allowable limit for this API is <strong>200</strong>.</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to update multiple activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/activities",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "You can use this API to bulk update activities <p><strong>OperationId:</strong>putBulkActivities</p>"
+        },
+        {
+          "info": {
+            "name": "Delete activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/activities",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "activityIds",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              }
+            ]
+          },
+          "docs": "If you want to delete an activity, use this API.  You must know the activity ID for the request. <p><strong>OperationId:</strong>deleteMultipleActivities</p>"
+        },
+        {
+          "info": {
+            "name": "Complete activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/activities/activitiesCompletion",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Use this API to mark multiple Activities as completed in 1 request.  You must know the OPERA Activity ID's for this API. <p><strong>OperationId:</strong>postMultipleActivitiesCompletion</p>"
+        },
+        {
+          "info": {
+            "name": "Get Emails",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/activities/emails",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "idExtension",
+                "value": "",
+                "type": "query",
+                "description": "Additional identifying value assigned by the creating system."
+              },
+              {
+                "name": "idContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "accountIdId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "accountIdIdExtension",
+                "value": "",
+                "type": "query",
+                "description": "Additional identifying value assigned by the creating system."
+              },
+              {
+                "name": "accountIdIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "accountIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "contactIdId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "contactIdIdExtension",
+                "value": "",
+                "type": "query",
+                "description": "Additional identifying value assigned by the creating system."
+              },
+              {
+                "name": "contactIdIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "contactIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "blockIdId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "blockIdIdExtension",
+                "value": "",
+                "type": "query",
+                "description": "Additional identifying value assigned by the creating system."
+              },
+              {
+                "name": "blockIdIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "blockIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "emailSubject",
+                "value": "",
+                "type": "query",
+                "description": "Subject of the email."
+              },
+              {
+                "name": "senderLastName",
+                "value": "",
+                "type": "query",
+                "description": "Family name or last name of the Sender."
+              },
+              {
+                "name": "senderFirstName",
+                "value": "",
+                "type": "query",
+                "description": "Given name or first name of the Sender."
+              },
+              {
+                "name": "senderEmailAddress",
+                "value": "",
+                "type": "query",
+                "description": "Email address of the Sender."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "duration",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Use this API to retrieve emails which have been received from an external system and stored in OPERA. They are stored against accounts, contacts and blocks in OPERA. <p><strong>OperationId:</strong>getEmails</p> <p>The maximum allowable limit for this API is <strong>200</strong>.</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get Emails",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/activities/emails/searches",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Use this API to retrieve emails which have been received from an external system and stored in OPERA. They are stored against accounts, contacts and blocks in OPERA. <p><strong>OperationId:</strong>searchEmails</p> <p>The maximum allowable limit for this API is <strong>200</strong>.</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get activity by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/activities/:activityId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "activityId",
+                "value": "",
+                "type": "path",
+                "description": "Unique OPERA Activity ID which is used to find an Activity from OPERA. This ID is a primary identification of an Activity in OPERA."
+              },
+              {
+                "name": "fetchInstructions",
+                "value": "",
+                "type": "query",
+                "description": "Instruction to fetch Activity's information, linked Block and Profile, Attachments and linked Activities."
+              }
+            ]
+          },
+          "docs": "You can use this API to retrieve an Activity, using the OPERA Activity ID in the request. <p><strong>OperationId:</strong>getActivityWithOutHotelId</p>"
+        },
+        {
+          "info": {
+            "name": "Delete activity  by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/activities/:activityId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "activityId",
+                "value": "",
+                "type": "path",
+                "description": "Unique OPERA Activity ID which is used to find an Activity from OPERA. This ID is a primary identification of an Activity in OPERA."
+              },
+              {
+                "name": "activityIds",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              }
+            ]
+          },
+          "docs": "Use this API to mark an Activity as deleted.  You must know the OPERA Activity ID for this API. <p><strong>OperationId:</strong>deleteActivitiesWithOutHotelId</p>"
+        },
+        {
+          "info": {
+            "name": "Delete an attachment from an Activity",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/activities/:activityId/attachments/:attachmentId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "attachmentId",
+                "value": "",
+                "type": "path",
+                "description": "Attachment ID"
+              },
+              {
+                "name": "activityId",
+                "value": "",
+                "type": "path",
+                "description": "Activity ID"
+              }
+            ]
+          },
+          "docs": "You can use this API to delete an attachment which exists on an activity in OPERA Cloud. <p><strong>OperationId:</strong>deleteActivityAttachmentWithoutHotelId</p>"
+        },
+        {
+          "info": {
+            "name": "Get activities by hotel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/activities",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "This is the Hotel Code of the Activity"
+              },
+              {
+                "name": "completed",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the Activity is completed or not."
+              },
+              {
+                "name": "highPriority",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the Activity has high priority."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              },
+              {
+                "name": "text",
+                "value": "",
+                "type": "query",
+                "description": "Search string to be used for super search."
+              },
+              {
+                "name": "hotelIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ownerCode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "activityClass",
+                "value": "",
+                "type": "query",
+                "description": "A collection of supported list of activity classes."
+              },
+              {
+                "name": "activityType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "activityPurpose",
+                "value": "",
+                "type": "query",
+                "description": "Purpose of the Activity."
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "contactId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              }
+            ]
+          },
+          "docs": "You can use this API to retrieve multiple Activities for a hotel, you can narrow the results using different search criteria  <p><strong>OperationId:</strong>getActivities</p> <p>The maximum allowable limit for this API is <strong>200</strong>.</p>"
+        },
+        {
+          "info": {
+            "name": "Create activities in a hotel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/activities",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel where activity is searched based on Activity ID."
+              }
+            ]
+          },
+          "docs": "Use postActivities to create a new activity for a hotel.  You would need to know the types of Activities a hotel accepts, such as Appointments, TODO.  Use ListOfValues API's to find the available types at a hotel. <p><strong>OperationId:</strong>postActivities</p>"
+        },
+        {
+          "info": {
+            "name": "Get Activity statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/activities/statistics",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique OPERA Hotel code"
+              },
+              {
+                "name": "hotelIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "reportStartDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date of the report."
+              },
+              {
+                "name": "activityTypeCodes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ownerCodeList",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "You can use this API to retrieve all statistics of activities. <p><strong>OperationId:</strong>getActivityStatistics</p>"
+        },
+        {
+          "info": {
+            "name": "Get activity in a hotel by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/activities/:activityId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "activityId",
+                "value": "",
+                "type": "path",
+                "description": "Unique OPERA Activity ID which is used to find an Activity from OPERA. This ID is a primary identification of an Activity in OPERA."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel where activity is searched based on Activity ID."
+              },
+              {
+                "name": "fetchInstructions",
+                "value": "",
+                "type": "query",
+                "description": "Instruction to fetch Activity's information, linked Block and Profile, Attachments and linked Activities."
+              }
+            ]
+          },
+          "docs": "You can use this API to retrieve an Activity for a hotel, using the OPERA Activity ID in the request. <p><strong>OperationId:</strong>getActivity</p>"
+        },
+        {
+          "info": {
+            "name": "Update activity in a hotel by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/activities/:activityId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "activityId",
+                "value": "",
+                "type": "path",
+                "description": "Unique OPERA Activity ID which is used to find an Activity from OPERA. This ID is a primary identification of an Activity in OPERA."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel where activity is searched based on Activity ID."
+              }
+            ]
+          },
+          "docs": "Use this to update an existing Activity for a hotel.  You must know the OPERA Activity ID for this API. <p><strong>OperationId:</strong>putActivities</p>"
+        },
+        {
+          "info": {
+            "name": "Delete activity in a hotel by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/activities/:activityId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "activityId",
+                "value": "",
+                "type": "path",
+                "description": "Unique OPERA Activity ID which is used to find an Activity from OPERA. This ID is a primary identification of an Activity in OPERA."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel where activity is searched based on Activity ID."
+              },
+              {
+                "name": "activityIds",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              }
+            ]
+          },
+          "docs": "Use this API to mark an Activity as deleted.  You must know the OPERA Activity ID for this API. <p><strong>OperationId:</strong>deleteActivities</p>"
+        },
+        {
+          "info": {
+            "name": "Complete activity in a hotel by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/activities/:activityId/activityCompletion",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "activityId",
+                "value": "",
+                "type": "path",
+                "description": "Unique OPERA Activity ID which is used to find an Activity from OPERA. This ID is a primary identification of an Activity in OPERA."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel where activity is searched based on Activity ID."
+              }
+            ]
+          },
+          "docs": "Use this API to mark one Activity as completed in 1 request.  You must know the OPERA Activity ID for this API. <p><strong>OperationId:</strong>postSingleActivityCompletion</p>"
+        },
+        {
+          "info": {
+            "name": "Get Activity Attachments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/activities/:activityId/attachments",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "activityId",
+                "value": "",
+                "type": "path",
+                "description": "Activity ID"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique OPERA Hotel code"
+              },
+              {
+                "name": "attachedFileName",
+                "value": "",
+                "type": "query",
+                "description": "File name used to filter final list of attachments. For example, Document.txt."
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "Description used to filter final list of attachments. For example, Offical guest ID. (This parameter does not require wildcard characters like * or % )."
+              }
+            ]
+          },
+          "docs": "You can use this API when you want to view the attachments on an existing activity. <p><strong>OperationId:</strong>getActivityAttachments</p>"
+        },
+        {
+          "info": {
+            "name": "Delete an attachment from an Activity",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/activities/:activityId/attachments/:attachmentId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "attachmentId",
+                "value": "",
+                "type": "path",
+                "description": "Attachment ID"
+              },
+              {
+                "name": "activityId",
+                "value": "",
+                "type": "path",
+                "description": "Activity ID"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique OPERA Hotel code"
+              }
+            ]
+          },
+          "docs": "You can use this API to delete an attachment which exists on an activity in OPERA Cloud. <p><strong>OperationId:</strong>deleteActivityAttachment</p>"
+        },
+        {
+          "info": {
+            "name": "Create linked activities in a hotel by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/activities/:activityId/linkedActivities",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "activityId",
+                "value": "",
+                "type": "path",
+                "description": "Activity ID"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique OPERA Hotel code"
+              }
+            ]
+          },
+          "docs": "You can use this API to invite one or multiple owners to an activity. <p><strong>OperationId:</strong>postLinkedActivities</p>"
+        },
+        {
+          "info": {
+            "name": "Get Activity Log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/activityLog",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique OPERA Hotel code"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              },
+              {
+                "name": "module",
+                "value": "",
+                "type": "query",
+                "description": "Activity module."
+              },
+              {
+                "name": "moduleParamsParameterName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the parameter."
+              },
+              {
+                "name": "moduleParamsParameterValue",
+                "value": "",
+                "type": "query",
+                "description": "Value of the parameter."
+              },
+              {
+                "name": "activityGroup",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "activityType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Search from date for the user activity log."
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "Search to date for the user activity log."
+              },
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "Search text for the user activity log."
+              },
+              {
+                "name": "userByIdUserIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "userForIdUserIds",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "You can use this API to view the changes log for a specified Activity. <p><strong>OperationId:</strong>getActivityLog</p> <p>The maximum allowable limit for this API is <strong>200</strong>.</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get recently accessed activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/recentlyAccessedActivities",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique OPERA Hotel code"
+              }
+            ]
+          },
+          "docs": "This API allows you to retrieve a list of activities that have recently been accessed.   <p><strong>OperationId:</strong>getRecentlyAccessedActivities</p>"
+        },
+        {
+          "info": {
+            "name": "Get recently accessed activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/recentlyAccessedActivities",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This API allows you to retrieve a list of activities that have recently been accessed.   <p><strong>OperationId:</strong>getRecentlyAccessedActivitiesWithOutHotelId</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to get health status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/services/activity/status",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>pingActivityService</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

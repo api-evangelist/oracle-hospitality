@@ -1,0 +1,920 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Distribution Shop",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Shop",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Property Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCodes",
+                "value": "",
+                "type": "query",
+                "description": "List of Hotel Codes"
+              },
+              {
+                "name": "arrivalDate",
+                "value": "",
+                "type": "query",
+                "description": "Arrival/Check-in Date"
+              },
+              {
+                "name": "departureDate",
+                "value": "",
+                "type": "query",
+                "description": "Departure/Check-out Date"
+              },
+              {
+                "name": "adults",
+                "value": "",
+                "type": "query",
+                "description": "Number of adults"
+              },
+              {
+                "name": "children",
+                "value": "",
+                "type": "query",
+                "description": "Number of children"
+              },
+              {
+                "name": "childrenAges",
+                "value": "",
+                "type": "query",
+                "description": "List of Age of the children. Element count must match the number of children"
+              },
+              {
+                "name": "ratePlanCodes",
+                "value": "",
+                "type": "query",
+                "description": "List of Rate Plan codes"
+              },
+              {
+                "name": "accessCode",
+                "value": "",
+                "type": "query",
+                "description": "Access code. An alphanumeric code used to unlock and price negotiated rate plans during shopping, subject to channel eligibility. If both accessCode and companyId/travelAgentId/sourceId are provided, accessCode takes precedence and the companyId/travelAgentId/sourceId values are ignored."
+              },
+              {
+                "name": "numberOfUnits",
+                "value": "",
+                "type": "query",
+                "description": "Number of rooms to be searched for this availability"
+              },
+              {
+                "name": "rateMode",
+                "value": "",
+                "type": "query",
+                "description": "The rate mode to be applied. It represents a shown rate is highest, average, first night, or most frequent one when there are rate changes during the staty duration."
+              },
+              {
+                "name": "ratePlanCodeMatchOnly",
+                "value": "",
+                "type": "query",
+                "description": "If true, only rate plan code specified, otherwise public rate plan codes too"
+              },
+              {
+                "name": "ratePlanType",
+                "value": "",
+                "type": "query",
+                "description": "Rate Plan type"
+              },
+              {
+                "name": "availableOnly",
+                "value": "",
+                "type": "query",
+                "description": "If true, only hotels with availability will be returned (except if all of them are unavailable)"
+              },
+              {
+                "name": "minRate",
+                "value": "",
+                "type": "query",
+                "description": "Minimum base rate in an offer"
+              },
+              {
+                "name": "maxRate",
+                "value": "",
+                "type": "query",
+                "description": "Maximum base rate in an offer"
+              },
+              {
+                "name": "alternateOffers",
+                "value": "",
+                "type": "query",
+                "description": "This is supported with ratePlanCodeMatchOnly flag as false: <p> <strong>Always</strong> - return alternate offers </p> <p> <strong>WhenRequestedNotAvailable</strong> - return alternate rates if requested rates are not available </p>"
+              },
+              {
+                "name": "commissionableStatus",
+                "value": "",
+                "type": "query",
+                "description": "What offers to show based on their Commissionable Status <p> <strong>Commissionable</strong> - Return only commisionable offers. </p> <p> <strong>NonCommissionable</strong> - Return only non-commisionable offers.  </p> <p> <strong>Both</strong> - Return commisionable and non-commisionable both offers. </p>"
+              },
+              {
+                "name": "promotionCodes",
+                "value": "",
+                "type": "query",
+                "description": "List of Promotion codes"
+              },
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID associated with a Company profile. It is used to retrieve negotiated rate offers specific to that Company."
+              },
+              {
+                "name": "travelAgentId",
+                "value": "",
+                "type": "query",
+                "description": "The IATA number/account ID associated with a Travel Agent profile. It is used to retrieve negotiated rate offers specific to that Travel Agent."
+              },
+              {
+                "name": "sourceId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID associated with a Source profile. It is used to retrieve negotiated rate offers specific to that Source."
+              }
+            ]
+          },
+          "docs": "List the availability status and rate range at multiple properties for given list of properties. <p><strong>OperationId:</strong>getProperties</p>"
+        },
+        {
+          "info": {
+            "name": "Property Offers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelCode/offers",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "Hotel Code for a channel"
+              },
+              {
+                "name": "arrivalDate",
+                "value": "",
+                "type": "query",
+                "description": "Arrival/Check-in Date"
+              },
+              {
+                "name": "departureDate",
+                "value": "",
+                "type": "query",
+                "description": "Departure/Check-out Date"
+              },
+              {
+                "name": "adults",
+                "value": "",
+                "type": "query",
+                "description": "Number of adults"
+              },
+              {
+                "name": "children",
+                "value": "",
+                "type": "query",
+                "description": "Number of children"
+              },
+              {
+                "name": "childrenAges",
+                "value": "",
+                "type": "query",
+                "description": "List of Age of the children. Element count must match the number of children"
+              },
+              {
+                "name": "roomTypes",
+                "value": "",
+                "type": "query",
+                "description": "List of Room Type codes"
+              },
+              {
+                "name": "ratePlanCodes",
+                "value": "",
+                "type": "query",
+                "description": "List of Rate Plan codes"
+              },
+              {
+                "name": "accessCode",
+                "value": "",
+                "type": "query",
+                "description": "Access code. An alphanumeric code used to unlock and price negotiated rate plans during shopping, subject to channel eligibility. If both accessCode and companyId/travelAgentId/sourceId are provided, accessCode takes precedence and the companyId/travelAgentId/sourceId values are ignored."
+              },
+              {
+                "name": "ratePlanType",
+                "value": "",
+                "type": "query",
+                "description": "Rate Plan type"
+              },
+              {
+                "name": "numberOfUnits",
+                "value": "",
+                "type": "query",
+                "description": "Number of rooms to be searched for this availability"
+              },
+              {
+                "name": "roomTypeMatchOnly",
+                "value": "",
+                "type": "query",
+                "description": "If true, only room types specified, otherwise public room types too"
+              },
+              {
+                "name": "ratePlanCodeMatchOnly",
+                "value": "",
+                "type": "query",
+                "description": "If true, only rate plan code specified, otherwise public rate plan codes too"
+              },
+              {
+                "name": "rateMode",
+                "value": "",
+                "type": "query",
+                "description": "The rate mode to be applied. It represents a shown rate is highest, average, first night, or most frequent one when there are rate changes during the staty duration."
+              },
+              {
+                "name": "roomAmenity",
+                "value": "",
+                "type": "query",
+                "description": "Id of requested amenity, single element"
+              },
+              {
+                "name": "roomAmenityQuantity",
+                "value": "",
+                "type": "query",
+                "description": "Quantity of the requested roomAmenity, single element"
+              },
+              {
+                "name": "includeAmenities",
+                "value": "",
+                "type": "query",
+                "description": "Indicates to include property amenities in the response"
+              },
+              {
+                "name": "minRate",
+                "value": "",
+                "type": "query",
+                "description": "Minimum base rate in an offer"
+              },
+              {
+                "name": "maxRate",
+                "value": "",
+                "type": "query",
+                "description": "Maximum base rate in an offer"
+              },
+              {
+                "name": "alternateOffers",
+                "value": "",
+                "type": "query",
+                "description": "This is supported with ratePlanCodeMatchOnly flag as false: <p> <strong>Always</strong> - return alternate offers </p> <p> <strong>WhenRequestedNotAvailable</strong> - return alternate rates if requested rates are not available </p>"
+              },
+              {
+                "name": "commissionableStatus",
+                "value": "",
+                "type": "query",
+                "description": "What offers to show based on their Commissionable Status <p> <strong>Commissionable</strong> - Return only commisionable offers. </p> <p> <strong>NonCommissionable</strong> - Return only non-commisionable offers.  </p> <p> <strong>Both</strong> - Return commisionable and non-commisionable both offers. </p>"
+              },
+              {
+                "name": "promotionCodes",
+                "value": "",
+                "type": "query",
+                "description": "List of Promotion codes"
+              },
+              {
+                "name": "blockCode",
+                "value": "",
+                "type": "query",
+                "description": "A code to retrieve price and availability from OPERA Cloud business block. Search parameters ratePlanCodes, accessCode, ratePlanType, ratePlanCodeMatchOnly will be ignored when blockCode is present. <p>Note: blockCode search parameter is not supported if PMS is connected via OXI interface. </p>"
+              },
+              {
+                "name": "roomViewCodes",
+                "value": "",
+                "type": "query",
+                "description": "Indicates the codes of the room view. Typical values would be \"11 for Ocean view\", \"12 for Pool view\" or \"16 for Garden View\". Refer to OTA List Room View Type (RVT).  </p>"
+              },
+              {
+                "name": "fetchInstructions",
+                "value": "",
+                "type": "query",
+                "description": "The optional additional information to be included in the response."
+              },
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID associated with a Company profile. It is used to retrieve negotiated rate offers specific to that Company."
+              },
+              {
+                "name": "travelAgentId",
+                "value": "",
+                "type": "query",
+                "description": "The IATA number/account ID associated with a Travel Agent profile. It is used to retrieve negotiated rate offers specific to that Travel Agent."
+              },
+              {
+                "name": "sourceId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID associated with a Source profile. It is used to retrieve negotiated rate offers specific to that Source."
+              },
+              {
+                "name": "validateItemInventory",
+                "value": "",
+                "type": "query",
+                "description": "If true, offer with a linked package item will be validated against available inventory"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return per page. By default, the limit is -1, which returns all the items."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned. By default, the offset is 0."
+              }
+            ]
+          },
+          "docs": "List available offers for a single property. <p><strong>OperationId:</strong>getPropertyOffers</p>"
+        },
+        {
+          "info": {
+            "name": "Property Get Offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelCode/offer",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "Hotel Code for a channel"
+              },
+              {
+                "name": "arrivalDate",
+                "value": "",
+                "type": "query",
+                "description": "Arrival/Check-in Date"
+              },
+              {
+                "name": "departureDate",
+                "value": "",
+                "type": "query",
+                "description": "Departure/Check-out Date"
+              },
+              {
+                "name": "adults",
+                "value": "",
+                "type": "query",
+                "description": "Number of adults"
+              },
+              {
+                "name": "children",
+                "value": "",
+                "type": "query",
+                "description": "Number of children"
+              },
+              {
+                "name": "childrenAges",
+                "value": "",
+                "type": "query",
+                "description": "List of Age of the children. Element count must match the number of children"
+              },
+              {
+                "name": "roomType",
+                "value": "",
+                "type": "query",
+                "description": "Room Type "
+              },
+              {
+                "name": "ratePlanCode",
+                "value": "",
+                "type": "query",
+                "description": "Rate Plan code"
+              },
+              {
+                "name": "accessCode",
+                "value": "",
+                "type": "query",
+                "description": "Access code. An alphanumeric code used to unlock and price negotiated rate plans during shopping, subject to channel eligibility. If both accessCode and companyId/travelAgentId/sourceId are provided, accessCode takes precedence and the companyId/travelAgentId/sourceId values are ignored."
+              },
+              {
+                "name": "rateMode",
+                "value": "",
+                "type": "query",
+                "description": "The rate mode to be applied. It represents a shown rate is highest, average, first night, or most frequent one when there are rate changes during the staty duration."
+              },
+              {
+                "name": "numberOfUnits",
+                "value": "",
+                "type": "query",
+                "description": "Number of rooms to be searched for this availability"
+              },
+              {
+                "name": "bookingCode",
+                "value": "",
+                "type": "query",
+                "description": "BookingCode is the concatenation of channel roomTypeCode and channel rate plan code at the offer level"
+              },
+              {
+                "name": "includeAmenities",
+                "value": "",
+                "type": "query",
+                "description": "Indicates to include property amenities in the response"
+              },
+              {
+                "name": "promotionCodes",
+                "value": "",
+                "type": "query",
+                "description": "List of Promotion codes"
+              },
+              {
+                "name": "blockCode",
+                "value": "",
+                "type": "query",
+                "description": "A code to retrieve price and availability from OPERA Cloud business block. Search parameters ratePlanCodes, accessCode, ratePlanType, ratePlanCodeMatchOnly will be ignored when blockCode is present. <p>Note: blockCode search parameter is not supported if PMS is connected via OXI interface. </p>"
+              },
+              {
+                "name": "fetchInstructions",
+                "value": "",
+                "type": "query",
+                "description": "The optional additional information to be included in the response."
+              },
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID associated with a Company profile. It is used to retrieve negotiated rate offers specific to that Company."
+              },
+              {
+                "name": "travelAgentId",
+                "value": "",
+                "type": "query",
+                "description": "The IATA number/account ID associated with a Travel Agent profile. It is used to retrieve negotiated rate offers specific to that Travel Agent."
+              },
+              {
+                "name": "sourceId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID associated with a Source profile. It is used to retrieve negotiated rate offers specific to that Source."
+              },
+              {
+                "name": "validateItemInventory",
+                "value": "",
+                "type": "query",
+                "description": "If true, offer with a linked package item will be validated against available inventory"
+              }
+            ]
+          },
+          "docs": "Retrieve a single offer by room type and rate plan. Or booking code. <p><strong>OperationId:</strong>getPropertyOffer</p>"
+        },
+        {
+          "info": {
+            "name": "Get Property addons",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelCode/addons",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "Hotel Code for a channel"
+              },
+              {
+                "name": "arrivalDate",
+                "value": "",
+                "type": "query",
+                "description": "Arrival/Check-in Date"
+              },
+              {
+                "name": "departureDate",
+                "value": "",
+                "type": "query",
+                "description": "Departure/Check-out Date"
+              },
+              {
+                "name": "adults",
+                "value": "",
+                "type": "query",
+                "description": "Number of adults"
+              },
+              {
+                "name": "children",
+                "value": "",
+                "type": "query",
+                "description": "Number of children"
+              },
+              {
+                "name": "childrenAges",
+                "value": "",
+                "type": "query",
+                "description": "List of Age of the children. Element count must match the number of children"
+              },
+              {
+                "name": "numberOfUnits",
+                "value": "",
+                "type": "query",
+                "description": "Number of rooms to be searched for this availability"
+              },
+              {
+                "name": "packageCodes",
+                "value": "",
+                "type": "query",
+                "description": "List of package codes"
+              },
+              {
+                "name": "packageGroupCodes",
+                "value": "",
+                "type": "query",
+                "description": "List of package group codes"
+              }
+            ]
+          },
+          "docs": "Retrieve available property add-on offerings, including individual packages and grouped packages.<p><strong>OperationId:</strong>getPropertyAddons</p>"
+        },
+        {
+          "info": {
+            "name": "Property Calendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelCode/calendar",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "Hotel Code for a channel"
+              },
+              {
+                "name": "arrivalDateFrom",
+                "value": "",
+                "type": "query",
+                "description": "Arrival/Check-in Date From"
+              },
+              {
+                "name": "arrivalDateTo",
+                "value": "",
+                "type": "query",
+                "description": "Arrival/Check-in Date To"
+              },
+              {
+                "name": "lengthOfStay",
+                "value": "",
+                "type": "query",
+                "description": "Length of stay, in days. The maximum permitted value is 14."
+              },
+              {
+                "name": "adults",
+                "value": "",
+                "type": "query",
+                "description": "Number of adults"
+              },
+              {
+                "name": "children",
+                "value": "",
+                "type": "query",
+                "description": "Number of children"
+              },
+              {
+                "name": "childrenAges",
+                "value": "",
+                "type": "query",
+                "description": "List of Age of the children. Element count must match the number of children"
+              },
+              {
+                "name": "ratePlanCodes",
+                "value": "",
+                "type": "query",
+                "description": "List of Rate Plan codes"
+              },
+              {
+                "name": "roomTypes",
+                "value": "",
+                "type": "query",
+                "description": "List of Room Type codes"
+              },
+              {
+                "name": "promotionCodes",
+                "value": "",
+                "type": "query",
+                "description": "List of Promotion codes"
+              },
+              {
+                "name": "numberOfUnits",
+                "value": "",
+                "type": "query",
+                "description": "Number of rooms to be searched for this availability"
+              },
+              {
+                "name": "rateMode",
+                "value": "",
+                "type": "query",
+                "description": "The rate mode to be applied. It represents a shown rate is highest, average, first night, or most frequent one when there are rate changes during the staty duration."
+              }
+            ]
+          },
+          "docs": "Lists the lowest available offers as a calendar for a single property for up to 62 days. If no rate filters are provided (no specific rate plan codes, room type codes, or promotion codes), evaluation is limited to the top 20 channel rates based on the configured Channel Rate Order (no iteration over remaining public rates). If rate filters are provided, the getPropertyCalendar retains the existing behavior and evaluates all applicable rates per current logic. <p><strong>OperationId:</strong>getP"
+        },
+        {
+          "info": {
+            "name": "Property Alternate Offers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelCode/alternateOffers",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "Hotel Code for a channel"
+              },
+              {
+                "name": "arrivalDate",
+                "value": "",
+                "type": "query",
+                "description": "Arrival/Check-in Date"
+              },
+              {
+                "name": "alternateDays",
+                "value": "",
+                "type": "query",
+                "description": "Number of alternate days before and after the arrival date"
+              },
+              {
+                "name": "lengthOfStay",
+                "value": "",
+                "type": "query",
+                "description": "Length of stay, in days. The maximum permitted value is 14."
+              },
+              {
+                "name": "adults",
+                "value": "",
+                "type": "query",
+                "description": "Number of adults"
+              },
+              {
+                "name": "children",
+                "value": "",
+                "type": "query",
+                "description": "Number of children"
+              },
+              {
+                "name": "childrenAges",
+                "value": "",
+                "type": "query",
+                "description": "List of Age of the children. Element count must match the number of children"
+              },
+              {
+                "name": "ratePlanCodes",
+                "value": "",
+                "type": "query",
+                "description": "List of Rate Plan codes"
+              },
+              {
+                "name": "roomTypes",
+                "value": "",
+                "type": "query",
+                "description": "List of Room Type codes"
+              },
+              {
+                "name": "numberOfUnits",
+                "value": "",
+                "type": "query",
+                "description": "Number of rooms to be searched for this availability"
+              },
+              {
+                "name": "promotionCodes",
+                "value": "",
+                "type": "query",
+                "description": "List of Promotion codes"
+              },
+              {
+                "name": "rateMode",
+                "value": "",
+                "type": "query",
+                "description": "The rate mode to be applied. It represents a shown rate is highest, average, first night, or most frequent one when there are rate changes during the staty duration."
+              },
+              {
+                "name": "accessCode",
+                "value": "",
+                "type": "query",
+                "description": "Access code. An alphanumeric code used to unlock and price negotiated rate plans during shopping, subject to channel eligibility. If both accessCode and companyId/travelAgentId/sourceId are provided, accessCode takes precedence and the companyId/travelAgentId/sourceId values are ignored."
+              },
+              {
+                "name": "roomViewCodes",
+                "value": "",
+                "type": "query",
+                "description": "Indicates the codes of the room view. Typical values would be \"11 for Ocean view\", \"12 for Pool view\" or \"16 for Garden View\". Refer to OTA List Room View Type (RVT).  </p>"
+              },
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID associated with a Company profile. It is used to retrieve negotiated rate offers specific to that Company."
+              },
+              {
+                "name": "travelAgentId",
+                "value": "",
+                "type": "query",
+                "description": "The IATA number/account ID associated with a Travel Agent profile. It is used to retrieve negotiated rate offers specific to that Travel Agent."
+              },
+              {
+                "name": "sourceId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID associated with a Source profile. It is used to retrieve negotiated rate offers specific to that Source."
+              }
+            ]
+          },
+          "docs": "Lsts available alternate offers as a calendar for a single property. If no rate filters are provided (no specific rate plan codes, room type codes, access codes, room view codes, or promotion codes), evaluation is limited to the top 20 channel rates based on the configured Channel Rate Order (no iteration over remaining public rates). If any rate filters are provided, the system retains the existing behavior and evaluates all applicable rates per current logic. <p><strong>OperationId:</strong>ge"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

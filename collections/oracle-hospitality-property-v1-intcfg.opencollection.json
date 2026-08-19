@@ -1,0 +1,3379 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Integration Configuration API",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "BEProcessor",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Operation to ping.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/config/oxi/services/beProcessor/status",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>pingBeProcessor</p>"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ExternalSystemsConfig",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Operation to fetch configured external devices.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/configuredExternalDevices",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Flag that indicates whether the device is active."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idEditable",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "deviceType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "deviceCode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "deviceArea",
+                "value": "",
+                "type": "query",
+                "description": "The area where the device is installed"
+              },
+              {
+                "name": "displayName",
+                "value": "",
+                "type": "query",
+                "description": "External device display name."
+              },
+              {
+                "name": "mobileYN",
+                "value": "",
+                "type": "query",
+                "description": "Indicator if device type is mobile or desktop."
+              },
+              {
+                "name": "desktopYN",
+                "value": "",
+                "type": "query",
+                "description": "Indicator if device type is mobile or desktop."
+              },
+              {
+                "name": "registerAddress",
+                "value": "",
+                "type": "query",
+                "description": "The address which the Cash Register ID ( Device ID ) is associated with."
+              },
+              {
+                "name": "deviceValue",
+                "value": "",
+                "type": "query",
+                "description": "External device Value."
+              },
+              {
+                "name": "parameterName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the parameter."
+              },
+              {
+                "name": "parameterValue",
+                "value": "",
+                "type": "query",
+                "description": "Value of the parameter."
+              },
+              {
+                "name": "includeInactive",
+                "value": "",
+                "type": "query",
+                "description": "Flag to choose to include inactive external devices or not."
+              },
+              {
+                "name": "fiscalPartnerCode",
+                "value": "",
+                "type": "query",
+                "description": "Used for fiscal partner codes. Possible values of this pattern are 1, 101, 101.EQP, or 101.EQP.X."
+              },
+              {
+                "name": "partnerCode",
+                "value": "",
+                "type": "query",
+                "description": "Used for fiscal partner codes. Possible values of this pattern are 1, 101, 101.EQP, or 101.EQP.X."
+              },
+              {
+                "name": "fetchInstruction",
+                "value": "",
+                "type": "query",
+                "description": "Fetch instructions that can be used for all or partner specific."
+              },
+              {
+                "name": "partnerPayloadType",
+                "value": "",
+                "type": "query",
+                "description": "Used for searching a partner code configured with the specified fiscal payload type."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getConfiguredExternalDevices</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch delivery methods.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/deliveryMethods",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query",
+                "description": "Property code."
+              },
+              {
+                "name": "croCode",
+                "value": "",
+                "type": "query",
+                "description": "CRO code."
+              },
+              {
+                "name": "usages",
+                "value": "",
+                "type": "query",
+                "description": "Settings for Text Message Delivery of Queue Reservation status"
+              },
+              {
+                "name": "includeInactive",
+                "value": "",
+                "type": "query",
+                "description": "If true this will include inactive records(This is only applicable for general SMTP delivery method )."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getDeliveryMethods</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to create delivery methods.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/deliveryMethods",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>postDeliveryMethods</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to change delivery methods.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/deliveryMethods",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>putDeliveryMethods</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to remove delivery methods.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/deliveryMethods",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query",
+                "description": "Used for codes in the OPERA Code tables. Possible values of this pattern are 1, 101, 101.EQP, or 101.EQP.X."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Settings for Text Message Delivery of Queue Reservation status"
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "SFTP delivery configurations"
+              },
+              {
+                "name": "configurationId",
+                "value": "",
+                "type": "query",
+                "description": "Unique id associated with this configuration"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>deleteDeliveryMethods</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch external device configurations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/externalDevices/configurations",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Flag that indicates whether the device is active."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idEditable",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "deviceType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "deviceCode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "deviceArea",
+                "value": "",
+                "type": "query",
+                "description": "The area where the device is installed"
+              },
+              {
+                "name": "displayName",
+                "value": "",
+                "type": "query",
+                "description": "External device display name."
+              },
+              {
+                "name": "mobileYN",
+                "value": "",
+                "type": "query",
+                "description": "Indicator if device type is mobile or desktop."
+              },
+              {
+                "name": "desktopYN",
+                "value": "",
+                "type": "query",
+                "description": "Indicator if device type is mobile or desktop."
+              },
+              {
+                "name": "registerAddress",
+                "value": "",
+                "type": "query",
+                "description": "The address which the Cash Register ID ( Device ID ) is associated with."
+              },
+              {
+                "name": "deviceValue",
+                "value": "",
+                "type": "query",
+                "description": "External device Value."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getExternalDeviceConfigurations</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to change external device configurations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/externalDevices/configurations",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>putExternalDeviceConfigurations</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to ping.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/externalSystems/config/ping",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>ping</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to create publishers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/externalSystems/:externalSystemCode/hotels/:hotelId/publishers",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique OPERA Id used to find a property in OPERA."
+              },
+              {
+                "name": "externalSystemCode",
+                "value": "",
+                "type": "path",
+                "description": "Unique OPERA Code used to find External System in OPERA."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>postPublishers</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to remove publisher.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/externalSystems/:externalSystemCode/hotels/:hotelId/publishers",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique OPERA Id used to find a property in OPERA."
+              },
+              {
+                "name": "externalSystemCode",
+                "value": "",
+                "type": "path",
+                "description": "Unique OPERA Code used to find External System in OPERA."
+              },
+              {
+                "name": "subscriberHotelId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>deletePublisher</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch publishers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/externalSystems/:externalSystemCode/publishers",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalSystemCode",
+                "value": "",
+                "type": "path",
+                "description": "Unique OPERA Code used to find External System in OPERA."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getPublishers</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to create hotel interface.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotelInerface",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>postHotelInterface</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to change hotel interface.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotelInerface",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>putHotelInterface</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch hotel interfaces.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotelInterfaceTypes",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "interfaceTypes",
+                "value": "",
+                "type": "query",
+                "description": "XML Posting Interface"
+              },
+              {
+                "name": "logosCodes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeInactive",
+                "value": "",
+                "type": "query",
+                "description": "If true this will set the criteria to include inactive records."
+              },
+              {
+                "name": "includeOutboundCode",
+                "value": "",
+                "type": "query",
+                "description": "If true this will set the criteria to include interfaces that are configured to use outbound code."
+              },
+              {
+                "name": "includeExternalSystem",
+                "value": "",
+                "type": "query",
+                "description": "If true this will set the criteria to include interfaces that are configured to use external system."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getHotelInterfaces</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to remove hotel interface.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/hotelInerface",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "logo",
+                "value": "",
+                "type": "query",
+                "description": "Hotel Interface Logo. On the database, this is also referred as DBF Logo. This is a three letter code followed by an underscore(_). This tells us which DBF files and log files with the prefix that IFC7 is going to create."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>deleteHotelInterface</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to create interface account.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/interfaces/:interfaceId/accounts",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "interfaceId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Logo"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Property"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>postInterfaceAccount</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to change interface account.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/interfaces/:interfaceId/accounts/:accountId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Account"
+              },
+              {
+                "name": "interfaceId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Logo"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Property"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>putInterfaceAccount</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to remove interface account.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/interfaces/:interfaceId/accounts/:accountId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Account"
+              },
+              {
+                "name": "interfaceId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Logo"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Property"
+              },
+              {
+                "name": "autoBalance",
+                "value": "",
+                "type": "query",
+                "description": "Auto balance flag of postings setup."
+              },
+              {
+                "name": "paymentMethod",
+                "value": "",
+                "type": "query",
+                "description": "Payment method of posting accounts in transaction codes setup."
+              },
+              {
+                "name": "account",
+                "value": "",
+                "type": "query",
+                "description": "Account of posting accounts in transaction codes setup."
+              },
+              {
+                "name": "accountDescription",
+                "value": "",
+                "type": "query",
+                "description": "Account description of posting accounts in transaction codes setup."
+              },
+              {
+                "name": "salesOutlet",
+                "value": "",
+                "type": "query",
+                "description": "Sales outlet of posting accounts in transaction codes setup."
+              },
+              {
+                "name": "trxCode",
+                "value": "",
+                "type": "query",
+                "description": "Transaction code of posting accounts in transaction codes setup."
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "Description of posting accounts in transaction codes setup."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>deleteInterfaceAccount</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch interface room statuses.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/interfaces/:interfaceId/roomStatus",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "interfaceId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA id for Property"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA id for Property"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getInterfaceRoomStatuses</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to change interface room status.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/interfaces/:interfaceId/roomStatus",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "interfaceId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA id for Property"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA id for Property"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>putInterfaceRoomStatus</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to remove interface room status.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/interfaces/:interfaceId/roomStatus",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "interfaceId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA id for Property"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA id for Property"
+              },
+              {
+                "name": "entryCode",
+                "value": "",
+                "type": "query",
+                "description": "Entry code of a Hotel Interface Room Status."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Room Status which is either Vacant (V) or Occupied (O)."
+              },
+              {
+                "name": "housekeepingStatus",
+                "value": "",
+                "type": "query",
+                "description": "Housekeeping status of a room."
+              },
+              {
+                "name": "customRoomTranslation",
+                "value": "",
+                "type": "query",
+                "description": "Custom Room Translation of a Hotel Interface. It is a concatenation of a Status (V-Vacant or O-Occupied) and Housekeeping Status (IS-Inspected, CL-Clean, etc.) The delimiter is a period. Sample values are V.IS, V.CL, O.IS, O.CL."
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "Description of the Hotel Interface Room Status."
+              },
+              {
+                "name": "interfaceRoomStatusId",
+                "value": "",
+                "type": "query",
+                "description": "Row number to identify all the records belonging to a single group of Hotel Interface Room Status."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>deleteInterfaceRoomStatus</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch interface rooms.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/interfaces/:interfaceId/rooms",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "interfaceId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Logo"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Property"
+              },
+              {
+                "name": "fromRoom",
+                "value": "",
+                "type": "query",
+                "description": "From Room Number"
+              },
+              {
+                "name": "toRoom",
+                "value": "",
+                "type": "query",
+                "description": "To Room Number"
+              },
+              {
+                "name": "fromLineType",
+                "value": "",
+                "type": "query",
+                "description": "From Line Type"
+              },
+              {
+                "name": "toLineType",
+                "value": "",
+                "type": "query",
+                "description": "To Line Type"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getInterfaceRooms</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to create interface room.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/interfaces/:interfaceId/rooms",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "interfaceId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Logo"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Property"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>postInterfaceRoom</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to remove interface room.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/interfaces/:interfaceId/rooms",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "interfaceId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Logo"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Property"
+              },
+              {
+                "name": "roomType",
+                "value": "",
+                "type": "query",
+                "description": "Front Office Room Type."
+              },
+              {
+                "name": "roomNumber",
+                "value": "",
+                "type": "query",
+                "description": "Front Office Room Number."
+              },
+              {
+                "name": "lineNumber",
+                "value": "",
+                "type": "query",
+                "description": "External System's extension number."
+              },
+              {
+                "name": "oldLineNumber",
+                "value": "",
+                "type": "query",
+                "description": "External System's extension number. It is used for editing a record. It is logically part of the record ID, and can actually be updated."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Line Type of an Interface Room."
+              },
+              {
+                "name": "dataLine",
+                "value": "",
+                "type": "query",
+                "description": "Line Out"
+              },
+              {
+                "name": "dataLineId",
+                "value": "",
+                "type": "query",
+                "description": "Translation Table Id as defined in the IFC_CTRL table. It is also referred as Xlat Id."
+              },
+              {
+                "name": "wakeUpCall",
+                "value": "",
+                "type": "query",
+                "description": "Value to set/check if the wake up call functionality is enabled/disabled for the particular line number."
+              },
+              {
+                "name": "doNotDisturb",
+                "value": "",
+                "type": "query",
+                "description": "Do Not Disturb is set to available and freely switchable."
+              },
+              {
+                "name": "classOfService",
+                "value": "",
+                "type": "query",
+                "description": "Class Of Service is set to available and freely switchable."
+              },
+              {
+                "name": "directInwardDial",
+                "value": "",
+                "type": "query",
+                "description": "Direct Inward Dial is set to available and freely switchable."
+              },
+              {
+                "name": "messageWaiting",
+                "value": "",
+                "type": "query",
+                "description": "Message Waiting is set to available and freely switchable."
+              },
+              {
+                "name": "maskDialNumber",
+                "value": "",
+                "type": "query",
+                "description": "Mask the dialled digits as per the room configuration."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>deleteInterfaceRoom</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to import interface rooms.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/interfaces/:interfaceId/rooms/import",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "interfaceId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Logo"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Property"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>importInterfaceRooms</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to change interface room.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/interfaces/:interfaceId/rooms/:roomId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "roomId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "interfaceId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Logo"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Property"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>putInterfaceRoom</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch interface unit charges.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/interfaces/:interfaceId/unitCharges",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "interfaceId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA id for Property"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA id for Property"
+              },
+              {
+                "name": "logo",
+                "value": "",
+                "type": "query",
+                "description": "Hotel Interface Logo. On the database, this is also referred as DBF Logo. This is a three letter code followed by an underscore(_). This tells us which DBF files and log files with the prefix that IFC7 is going to create."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getInterfaceUnitCharges</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to change interface unit charges.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/interfaces/:interfaceId/unitCharges",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "interfaceId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA id for Property"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA id for Property"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>putInterfaceUnitCharges</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch hotel interface details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/logos/:logo",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "logo",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Logo"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Property"
+              },
+              {
+                "name": "fetchInstructions",
+                "value": "",
+                "type": "query",
+                "description": "Transaction codes of a Hotel Interface."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getHotelInterfaceDetails</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch hotel interface controller registry.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/interfaceControllerRegistry",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "machine",
+                "value": "",
+                "type": "query",
+                "description": "Used for Character Strings, length 0 to 40."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getHotelInterfaceControllerRegistry</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch hotel interface errors.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/interfaceErrors",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              },
+              {
+                "name": "hotelIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "interfaceTypes",
+                "value": "",
+                "type": "query",
+                "description": "XML Posting Interface"
+              },
+              {
+                "name": "logoCodes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeInactive",
+                "value": "",
+                "type": "query",
+                "description": "If true this will set the criteria to include inactive records."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getHotelInterfaceErrors</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch hotel interface failed messages.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/interfaceFailedMessages",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              },
+              {
+                "name": "hotelIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "interfaceTypes",
+                "value": "",
+                "type": "query",
+                "description": "XML Posting Interface"
+              },
+              {
+                "name": "logoCodes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeInactive",
+                "value": "",
+                "type": "query",
+                "description": "If true this will set the criteria to include inactive records."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getHotelInterfaceFailedMessages</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch interface rights.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/interfaceRights",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query",
+                "description": "Used for codes in the OPERA Code tables. Possible values of this pattern are 1, 101, 101.EQP, or 101.EQP.X."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "idExtension",
+                "value": "",
+                "type": "query",
+                "description": "Additional identifying value assigned by the creating system."
+              },
+              {
+                "name": "idContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getInterfaceRights</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to change interface right.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/interfaceRights",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>putInterfaceRight</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to remove interface right.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/interfaceRights",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query",
+                "description": "Hotel Code to which the Interface Right belongs to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "idExtension",
+                "value": "",
+                "type": "query",
+                "description": "Additional identifying value assigned by the creating system."
+              },
+              {
+                "name": "idContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "right",
+                "value": "",
+                "type": "query",
+                "description": "Internal code for each allowed right of a Hotel Interface record."
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "User defined code for an Interface Right."
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "User defined description for an Interface Right."
+              },
+              {
+                "name": "interfaceRightDescription",
+                "value": "",
+                "type": "query",
+                "description": "System Description of an allowed Interface Right."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>deleteInterfaceRight</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch hotel interface schemas.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/interfaceSchemas",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              },
+              {
+                "name": "hotelIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "interfaceTypes",
+                "value": "",
+                "type": "query",
+                "description": "XML Posting Interface"
+              },
+              {
+                "name": "logoCodes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeInactive",
+                "value": "",
+                "type": "query",
+                "description": "If true this will set the criteria to include inactive records."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getHotelInterfaceSchemas</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch external database available properties.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/interfaces/:interfaceId/databases/:databaseId/availableResorts",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "databaseId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Databsase"
+              },
+              {
+                "name": "interfaceId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for interface"
+              },
+              {
+                "name": "includeInactive",
+                "value": "",
+                "type": "query",
+                "description": "Flag that indicates to include inactive records."
+              },
+              {
+                "name": "interfaceCodes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "hotelIds",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getExternalDatabaseAvailableProperties</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch interface machines.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/machines",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getInterfaceMachines</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to change interface machine.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/machines/:machineId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "machineId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for machine"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>putInterfaceMachine</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to remove interface machine.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/machines/:machineId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "machineId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for machine"
+              },
+              {
+                "name": "machine",
+                "value": "",
+                "type": "query",
+                "description": "Unique Machine name of the running Interface."
+              },
+              {
+                "name": "program",
+                "value": "",
+                "type": "query",
+                "description": "Path and name of the Interface program running on every Machine."
+              },
+              {
+                "name": "controllerPort",
+                "value": "",
+                "type": "query",
+                "description": "Opera Interface controller (server) port for the connecting clients."
+              },
+              {
+                "name": "vncPort",
+                "value": "",
+                "type": "query",
+                "description": "VNC server port for connecting to the VNC server."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>deleteInterfaceMachine</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to send a response to the Look up of UDFs.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/udfMappings",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the Type for Reservation and Profile Type."
+              },
+              {
+                "name": "uDFName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the user-defined function (UDF) field."
+              }
+            ]
+          },
+          "docs": "Operation to send a response to the Look-up of UDFs. <p><strong>OperationId:</strong>getUDFMappings</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to send a response to the Change in UDF.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/udfMappings",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Operation to send a response to the Change in UDF. <p><strong>OperationId:</strong>putUDFMapping</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to create/change printer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/upsert/hotels/:hotelId/printers",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Id for Property"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>putUpsertPrinter</p>"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ChainConfig",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the template device locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/deviceLocations",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fetchInactive",
+                "value": "",
+                "type": "query",
+                "description": "Determines wether to fetch inactive records or not."
+              },
+              {
+                "name": "codes",
+                "value": "",
+                "type": "query",
+                "description": "Codes to be searched."
+              },
+              {
+                "name": "wildCard",
+                "value": "",
+                "type": "query",
+                "description": "Wildcard search on the code."
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "Description of the code."
+              }
+            ]
+          },
+          "docs": "Use this API to get the template device locations. <p><strong>OperationId:</strong>getTemplateDeviceLocations</p>"
+        },
+        {
+          "info": {
+            "name": "Create the template device locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/deviceLocations",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Use this API to create the template device locations. <p><strong>OperationId:</strong>postTemplateDeviceLocations</p>"
+        },
+        {
+          "info": {
+            "name": "Change the template device locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/deviceLocations/:deviceLocationId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "deviceLocationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of device location."
+              }
+            ]
+          },
+          "docs": "Use this API to update the template device locations. <p><strong>OperationId:</strong>changeTemplateDeviceLocations</p>"
+        },
+        {
+          "info": {
+            "name": "Delete the template device locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/deviceLocations/:deviceLocationId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "deviceLocationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of device location."
+              }
+            ]
+          },
+          "docs": "Use this API to delete the template device locations. <p><strong>OperationId:</strong>removeTemplateDeviceLocations</p>"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "OEDSConfig",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get OEDS API",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/oedsApi",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "serviceName",
+                "value": "",
+                "type": "query",
+                "description": "OEDS Module Name."
+              },
+              {
+                "name": "moduleName",
+                "value": "",
+                "type": "query",
+                "description": "OEDS Module Name."
+              },
+              {
+                "name": "operationId",
+                "value": "",
+                "type": "query",
+                "description": "OEDS Operation Id."
+              },
+              {
+                "name": "legacy",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the results will include only legacy OEDS operations, If set to false, then will include only non-legacy OEDS operations, else consider both."
+              }
+            ]
+          },
+          "docs": "This API fetches OEDS APIs, based on search criteria such as Module Name, Operation Name and Legacy.<p><strong>OperationId:</strong>getOEDSConfigData</p>"
+        },
+        {
+          "info": {
+            "name": "Update OEDS API",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/oedsApi",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This API update the OEDS API by specifying the Module Name, Operation Name in the request. <p><strong>OperationId:</strong>changeOEDSConfigData</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

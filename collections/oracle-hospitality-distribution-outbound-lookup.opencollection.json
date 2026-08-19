@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Distribution Outbound Lookup",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lookup",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get External Room Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelCode/externalRoomTypes",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier value for the property/hotel associated with a channel."
+              },
+              {
+                "name": "channelCode",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifier value for the channel associated with a property/hotel."
+              },
+              {
+                "name": "lang",
+                "value": "",
+                "type": "query",
+                "description": "ISO639 / BCP 47 language code format."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return in the response. Maximum record limit is 1000."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              }
+            ]
+          },
+          "docs": "Provide an ability to get room types information from a channel partner to OPERA Cloud Distribution."
+        },
+        {
+          "info": {
+            "name": "Get External Rate Plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelCode/externalRatePlans",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier value for the property/hotel associated with a channel."
+              },
+              {
+                "name": "channelCode",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifier value for the channel associated with a property/hotel."
+              },
+              {
+                "name": "roomType",
+                "value": "",
+                "type": "query",
+                "description": "The OPERA Cloud Hotel/proeprty Room type code."
+              },
+              {
+                "name": "lang",
+                "value": "",
+                "type": "query",
+                "description": "ISO639 / BCP 47 language code format."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return in the response. Maximum record limit is 1000."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              }
+            ]
+          },
+          "docs": "Provide an ability to get rate plan codes information from a channel partner to OPERA Cloud Distribution."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,2294 @@
+{
+  "item": [
+    {
+      "id": "5a50a40a-c0f0-4d8b-b8cc-e37924316c45",
+      "name": "FrontOfficeExternal",
+      "description": {
+        "content": "The FrontOffice External module provides operations for OPERA Cloud to access FrontOffice operations from external interfaces.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9d2c73d7-daa3-444f-abde-aca2f43a5043",
+          "name": "Requests room key(s)",
+          "request": {
+            "name": "Requests room key(s)",
+            "description": {
+              "content": "API that manages requests for Door Lock Room Keys. This operation is used by OPERA Cloud connected to external Door Lock Systems systems via Outbound Systems configuration: \n\n<strong>OPERA Cloud utilizes this operation </strong>\n\n- to request new or additional room keys - e.g. when guest checks in, or additional keys post check in.\n\n- to request to activate new keys after check on e.g. when a room key has been lost for a room.\n\n- to request a room key which is not related to a guest reservation but valid for a defined time - (for show rooms, repair) - One Shot Key.\n\n- to request to re-encode a key whereby other keys for this room remain active.\n\n- to request to read a key data from a room key and display it to the user in the PMS.\n\n- to request to modify existing key data - upon room move or change of departure date. (online key systems only!!)\n\n- to request to remove / delete a room key from a room on. Usually sent with check out of a reservation.\n\nUse this API to post a room key action to the active Door Lock System.\n\n<strong>Notes on keyType values:</strong>\n\n<strong>keyType = New\n\nkeyType = Lost </strong>\n\nIt is expected that all previous active keys for the room will become invalid.\n\nIt is expected that partner system handles multiple keys being active in case numberOfKeys is >1.\n\n<strong>keyType = Duplicate\n\nkeyType = ReEncode</strong>\n\nIt is expected that existing active keys for this room remain active.\n\n<strong>keyType = OneShot</strong>\n\nIt is expected that the room key is only valid for a room for specific time (for maintenance or Show room).\n\nIt is never related to a reservation.\n\n<strong>keyType = Read</strong> A request to the Key Card system to read Key Card information from requested Key Encoder/reader.\n\nThe Key Read functionality is of pure informational purpose. None of the received information is stored or processed in the PMS, and it is only for display to the user.\n\n<strong>keyType = Remove</strong>\n\nIt is expected that with this request all active keys for a room or reservation will become inactive or invalid so they will not be able to open the room after defined validityEnd time.\n\n<strong>Additional KeyType actions used by Online Door Lock Systems:</strong>\n\n<strong>Online Key card Systems</strong> are systems which do not write guest data to the room key directly but do store guest data internally and send the information to the related door lock.\n\n<strong>keyType = ModifyStay</strong>\n\nFor Online Door Lock Systems - Request to adjust Room key data when guest changes length of stay (validityEnd)\n\n<strong>keyType = RoomMove</strong>\n\nFor Online Door Lock Systems - adjust Room key data when guest performs room move. \n\n<p><strong>OperationId:</strong> postExternalRoomKeys</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hotels",
+                ":hotelId",
+                "externalRoomKeys"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hotelId",
+                  "description": "(Required) Unique ID of the hotel"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Pass this header as true, if payload needs DVM",
+                "key": "externalData",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Client or Partner's Application Key",
+                "key": "x-app-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Request Id of an incoming request",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Customer's Integration Application Id",
+                "key": "x-originating-application",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json;charset=UTF-8"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": 1,\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyOptions\": \"<string>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"requestType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8b0ed78c-72a0-43eb-ba97-28ba14d4d3b0",
+              "name": "Response from the active Door Locking System Property Interface to the post request.<p><strong>Note on Response messages:</strong>\n\nIt is necessary to specify both the PMS 'encoderTerminal' and the Key Service system's coder (encoderId) in cases where more than one PMS workstation may be addressing one key coder. ORACLE PMS will NOT send another Request command automatically should a negative response be received. The user sees the response and decides if another try should be made.<p>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "externalRoomKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": 1,\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyOptions\": \"<string>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"requestType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audience language",
+                  "key": "Content-Language",
+                  "value": "W-73"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"roomId\": \"string\",\n  \"responseCode\": \"RY\",\n  \"encoderTerminal\": \"string\",\n  \"encoderId\": \"string\",\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"keyTrack\": [\n    {\n      \"keyTrack1\": \"<string>\",\n      \"keyTrack2\": \"<string>\",\n      \"keyTrack3\": \"<string>\"\n    },\n    {\n      \"keyTrack1\": \"<string>\",\n      \"keyTrack2\": \"<string>\",\n      \"keyTrack3\": \"<string>\"\n    }\n  ],\n  \"keyOptions\": \"string\",\n  \"keyValidityStart\": \"1948-08-02T21:46:13.264Z\",\n  \"keyValidityEnd\": \"2018-11-05T21:42:00.497Z\",\n  \"responseText\": \"string\",\n  \"additionalRooms\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "244074f7-9f6a-4bdb-b19b-049a34fa9478",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "externalRoomKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": 1,\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyOptions\": \"<string>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"requestType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6654,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"o:errorCode\": \"string\",\n  \"o:errorPath\": \"string\",\n  \"o:errorDetails\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 461,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 6169,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    }\n  ],\n  \"links\": [\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"GET\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"POST\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10798b3b-4e50-4f77-a120-737c374e3e92",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "externalRoomKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": 1,\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyOptions\": \"<string>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"requestType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "752b6447-6f0a-4756-b2da-04f8cd86961c",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "externalRoomKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": 1,\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyOptions\": \"<string>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"requestType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "238edf3d-0a51-4204-b817-fd69c93a1704",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "externalRoomKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": 1,\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyOptions\": \"<string>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"requestType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 431,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"o:errorCode\": \"string\",\n  \"o:errorPath\": \"string\",\n  \"o:errorDetails\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 3372,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 3020,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    }\n  ],\n  \"links\": [\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"GET\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"DELETE\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90d70574-cb69-42ee-ab7f-723923e5db86",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "externalRoomKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": 1,\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyOptions\": \"<string>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"requestType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "144f0da6-362c-41e0-945a-3b69d60b7d25",
+              "name": "Not acceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "externalRoomKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": 1,\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyOptions\": \"<string>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"requestType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c650e03a-58e8-43a0-8900-5088eb7c9714",
+              "name": "Request Entity Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "externalRoomKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": 1,\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyOptions\": \"<string>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"requestType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c84f8599-60a9-4e87-8f19-74c2ccd16d9f",
+              "name": "Request URI Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "externalRoomKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": 1,\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyOptions\": \"<string>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"requestType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request-URI Too Long",
+              "code": 414,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b2b0e6c3-bd7a-4733-a658-a0e211575822",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "externalRoomKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": 1,\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyOptions\": \"<string>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"requestType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f03a3865-e1e2-44db-bc30-52179c23d5ac",
+              "name": "System Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "externalRoomKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": 1,\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyOptions\": \"<string>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"requestType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 431,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"o:errorCode\": \"string\",\n  \"o:errorPath\": \"string\",\n  \"o:errorDetails\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 3372,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 3020,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    }\n  ],\n  \"links\": [\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"GET\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"DELETE\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6fb5317-d915-4bcf-9b89-50870fe2b403",
+              "name": "Bad Gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "externalRoomKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": 1,\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyOptions\": \"<string>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"requestType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9c16e8f0-c855-4657-9b1b-0421b9ec89fe",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "externalRoomKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": 1,\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyOptions\": \"<string>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"requestType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7161e972-04cc-4e14-853e-5d26d4aaed54",
+          "name": "Requests room key(s)",
+          "request": {
+            "name": "Requests room key(s)",
+            "description": {
+              "content": "API that manages requests for Door Lock Room Keys. This operation is used by OPERA Cloud connected to external Door Lock Systems systems via Outbound Systems configuration: \n\n<strong>OPERA Cloud utilizes this operation </strong>\n\n- to request new or additional room keys - e.g. when guest checks in, or additional keys post check in.\n\n- to request to activate new keys after check on e.g. when a room key has been lost for a room.\n\n- to request a room key which is not related to a guest reservation but valid for a defined time - (for show rooms, repair) - One Shot Key.\n\n- to request to re-encode a key whereby other keys for this room remain active.\n\n- to request to read a key data from a room key and display it to the user in the PMS.\n\n- to request to modify existing key data - upon room move or change of departure date. (online key systems only!!)\n\n- to request to remove / delete a room key from a room on. Usually sent with check out of a reservation.\n\nUse this API to post a room key action to the active Door Lock System.\n\n<strong>Notes on keyType values:</strong>\n\n<strong>keyType = New\n\nkeyType = Lost </strong>\n\nIt is expected that all previous active keys for the room will become invalid.\n\nIt is expected that partner system handles multiple keys being active in case numberOfKeys is >1.\n\n<strong>keyType = Duplicate\n\nkeyType = ReEncode</strong>\n\nIt is expected that existing active keys for this room remain active.\n\n<strong>keyType = OneShot</strong>\n\nIt is expected that the room key is only valid for a room for specific time (for maintenance or Show room).\n\nIt is never related to a reservation.\n\n<strong>keyType = Read</strong> A request to the Key Card system to read Key Card information from requested Key Encoder/reader.\n\nThe Key Read functionality is of pure informational purpose. None of the received information is stored or processed in the PMS, and it is only for display to the user.\n\n<strong>keyType = Remove</strong>\n\nIt is expected that with this request all active keys for a room or reservation will become inactive or invalid so they will not be able to open the room after defined validityEnd time.\n\n<strong>Additional KeyType actions used by Online Door Lock Systems:</strong>\n\n<strong>Online Key card Systems</strong> are systems which do not write guest data to the room key directly but do store guest data internally and send the information to the related door lock.\n\n<strong>keyType = ModifyStay</strong>\n\nFor Online Door Lock Systems - Request to adjust Room key data when guest changes length of stay (validityEnd)\n\n<strong>keyType = RoomMove</strong>\n\nFor Online Door Lock Systems - adjust Room key data when guest performs room move. \n\n<p><strong>OperationId:</strong> postRoomKeysOutbound</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hotels",
+                ":hotelId",
+                "roomKeysOutbound"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hotelId",
+                  "description": "(Required) Unique ID of the hotel"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Pass this header as true, if payload needs DVM",
+                "key": "externalData",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Client or Partner's Application Key",
+                "key": "x-app-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Request Id of an incoming request",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Customer's Integration Application Id",
+                "key": "x-originating-application",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json;charset=UTF-8"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomKeyType\": \"<string>\",\n  \"keyUserType\": \"<string>\",\n  \"keyRequestTime\": \"<dateTime>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": \"<integer>\",\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"keyOptions\": [\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    },\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    }\n  ],\n  \"cardSerialNumber\": \"<string>\",\n  \"printData\": {\n    \"printText\": \"<string>\",\n    \"printFile\": \"<byte>\",\n    \"printPicture\": \"<byte>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bff01426-14ad-4c48-b982-832be741901e",
+              "name": "Response from the active Door Locking System Property Interface to the post request.<p><strong>Note on Response messages:</strong>\n\nIt is necessary to specify both the PMS 'encoderTerminal' and the Key Service system's coder (encoderId) in cases where more than one PMS workstation may be addressing one key coder. ORACLE PMS will NOT send another Request command automatically should a negative response be received. The user sees the response and decides if another try should be made.<p>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "roomKeysOutbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomKeyType\": \"<string>\",\n  \"keyUserType\": \"<string>\",\n  \"keyRequestTime\": \"<dateTime>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": \"<integer>\",\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"keyOptions\": [\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    },\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    }\n  ],\n  \"cardSerialNumber\": \"<string>\",\n  \"printData\": {\n    \"printText\": \"<string>\",\n    \"printFile\": \"<byte>\",\n    \"printPicture\": \"<byte>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audience language",
+                  "key": "Content-Language",
+                  "value": "W-73"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"roomId\": \"string\",\n  \"responseCode\": \"RY\",\n  \"encoderTerminal\": \"string\",\n  \"roomKeyType\": \"<string>\",\n  \"keyUserType\": \"<string>\",\n  \"keyValidityStart\": \"1991-12-05T21:37:29.486Z\",\n  \"keyValidityEnd\": \"1997-10-10T17:20:07.695Z\",\n  \"keyCreationTime\": \"1971-12-23T22:08:38.289Z\",\n  \"encoderId\": \"string\",\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"keyTrack\": [\n    {\n      \"keyTrack1\": \"<string>\",\n      \"keyTrack2\": \"<string>\",\n      \"keyTrack3\": \"<string>\"\n    },\n    {\n      \"keyTrack1\": \"<string>\",\n      \"keyTrack2\": \"<string>\",\n      \"keyTrack3\": \"<string>\"\n    }\n  ],\n  \"noOfKeys\": 6130,\n  \"responseText\": \"string\",\n  \"additionalRooms\": [\n    \"string\",\n    \"string\"\n  ],\n  \"keyOptions\": [\n    {\n      \"keyOptionsCode\": \"string\",\n      \"keyOptionDescription\": \"string\",\n      \"isEnabled\": false,\n      \"default\": true\n    },\n    {\n      \"keyOptionsCode\": \"s\",\n      \"keyOptionDescription\": \"string\",\n      \"isEnabled\": true,\n      \"default\": true\n    }\n  ],\n  \"userId\": \"string\",\n  \"digitalKeyData\": \"string\",\n  \"keyImage\": \"string\",\n  \"cardSerialNumber\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "264b663f-ae3f-49f4-8dea-4aa2dfac6dd7",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "roomKeysOutbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomKeyType\": \"<string>\",\n  \"keyUserType\": \"<string>\",\n  \"keyRequestTime\": \"<dateTime>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": \"<integer>\",\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"keyOptions\": [\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    },\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    }\n  ],\n  \"cardSerialNumber\": \"<string>\",\n  \"printData\": {\n    \"printText\": \"<string>\",\n    \"printFile\": \"<byte>\",\n    \"printPicture\": \"<byte>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 431,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"o:errorCode\": \"string\",\n  \"o:errorPath\": \"string\",\n  \"o:errorDetails\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 3372,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 3020,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    }\n  ],\n  \"links\": [\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"GET\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"DELETE\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d51db9d1-9071-4246-ba3f-9bacb63a2c26",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "roomKeysOutbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomKeyType\": \"<string>\",\n  \"keyUserType\": \"<string>\",\n  \"keyRequestTime\": \"<dateTime>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": \"<integer>\",\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"keyOptions\": [\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    },\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    }\n  ],\n  \"cardSerialNumber\": \"<string>\",\n  \"printData\": {\n    \"printText\": \"<string>\",\n    \"printFile\": \"<byte>\",\n    \"printPicture\": \"<byte>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "19404a19-c8cf-4e1a-a50a-e6a9e6ea53f9",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "roomKeysOutbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomKeyType\": \"<string>\",\n  \"keyUserType\": \"<string>\",\n  \"keyRequestTime\": \"<dateTime>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": \"<integer>\",\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"keyOptions\": [\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    },\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    }\n  ],\n  \"cardSerialNumber\": \"<string>\",\n  \"printData\": {\n    \"printText\": \"<string>\",\n    \"printFile\": \"<byte>\",\n    \"printPicture\": \"<byte>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b326aeca-ae63-4521-ab86-faf4cc558de2",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "roomKeysOutbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomKeyType\": \"<string>\",\n  \"keyUserType\": \"<string>\",\n  \"keyRequestTime\": \"<dateTime>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": \"<integer>\",\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"keyOptions\": [\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    },\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    }\n  ],\n  \"cardSerialNumber\": \"<string>\",\n  \"printData\": {\n    \"printText\": \"<string>\",\n    \"printFile\": \"<byte>\",\n    \"printPicture\": \"<byte>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 431,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"o:errorCode\": \"string\",\n  \"o:errorPath\": \"string\",\n  \"o:errorDetails\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 3372,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 3020,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    }\n  ],\n  \"links\": [\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"GET\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"DELETE\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9264c0ce-6422-4fb5-9850-22dd8bae9e51",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "roomKeysOutbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomKeyType\": \"<string>\",\n  \"keyUserType\": \"<string>\",\n  \"keyRequestTime\": \"<dateTime>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": \"<integer>\",\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"keyOptions\": [\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    },\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    }\n  ],\n  \"cardSerialNumber\": \"<string>\",\n  \"printData\": {\n    \"printText\": \"<string>\",\n    \"printFile\": \"<byte>\",\n    \"printPicture\": \"<byte>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8c9dacab-df11-4c48-97b2-8a59610298c4",
+              "name": "Not acceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "roomKeysOutbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomKeyType\": \"<string>\",\n  \"keyUserType\": \"<string>\",\n  \"keyRequestTime\": \"<dateTime>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": \"<integer>\",\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"keyOptions\": [\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    },\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    }\n  ],\n  \"cardSerialNumber\": \"<string>\",\n  \"printData\": {\n    \"printText\": \"<string>\",\n    \"printFile\": \"<byte>\",\n    \"printPicture\": \"<byte>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "288c6374-7fe3-4c8c-b9e6-e3ff043810a4",
+              "name": "Request Entity Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "roomKeysOutbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomKeyType\": \"<string>\",\n  \"keyUserType\": \"<string>\",\n  \"keyRequestTime\": \"<dateTime>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": \"<integer>\",\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"keyOptions\": [\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    },\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    }\n  ],\n  \"cardSerialNumber\": \"<string>\",\n  \"printData\": {\n    \"printText\": \"<string>\",\n    \"printFile\": \"<byte>\",\n    \"printPicture\": \"<byte>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0b16002d-18fa-4f77-9feb-a389a3c3bb67",
+              "name": "Request URI Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "roomKeysOutbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomKeyType\": \"<string>\",\n  \"keyUserType\": \"<string>\",\n  \"keyRequestTime\": \"<dateTime>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": \"<integer>\",\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"keyOptions\": [\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    },\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    }\n  ],\n  \"cardSerialNumber\": \"<string>\",\n  \"printData\": {\n    \"printText\": \"<string>\",\n    \"printFile\": \"<byte>\",\n    \"printPicture\": \"<byte>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request-URI Too Long",
+              "code": 414,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "00c5e08b-5e31-448a-8725-c0ceae89fcb6",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "roomKeysOutbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomKeyType\": \"<string>\",\n  \"keyUserType\": \"<string>\",\n  \"keyRequestTime\": \"<dateTime>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": \"<integer>\",\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"keyOptions\": [\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    },\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    }\n  ],\n  \"cardSerialNumber\": \"<string>\",\n  \"printData\": {\n    \"printText\": \"<string>\",\n    \"printFile\": \"<byte>\",\n    \"printPicture\": \"<byte>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1f701f7c-7947-4de4-9f5f-f32bcf981c8e",
+              "name": "System Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "roomKeysOutbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomKeyType\": \"<string>\",\n  \"keyUserType\": \"<string>\",\n  \"keyRequestTime\": \"<dateTime>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": \"<integer>\",\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"keyOptions\": [\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    },\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    }\n  ],\n  \"cardSerialNumber\": \"<string>\",\n  \"printData\": {\n    \"printText\": \"<string>\",\n    \"printFile\": \"<byte>\",\n    \"printPicture\": \"<byte>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 431,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"o:errorCode\": \"string\",\n  \"o:errorPath\": \"string\",\n  \"o:errorDetails\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 3372,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 3020,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    }\n  ],\n  \"links\": [\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"GET\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"DELETE\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df4b1918-4b02-4a9d-8aab-8d4675a4e7bc",
+              "name": "Bad Gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "roomKeysOutbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomKeyType\": \"<string>\",\n  \"keyUserType\": \"<string>\",\n  \"keyRequestTime\": \"<dateTime>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": \"<integer>\",\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"keyOptions\": [\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    },\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    }\n  ],\n  \"cardSerialNumber\": \"<string>\",\n  \"printData\": {\n    \"printText\": \"<string>\",\n    \"printFile\": \"<byte>\",\n    \"printPicture\": \"<byte>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b58d8cb3-16b3-41a7-8be6-9103196beff7",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "roomKeysOutbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyType\": \"<string>\",\n  \"encoderTerminal\": \"<string>\",\n  \"encoderId\": \"<string>\",\n  \"roomKeyType\": \"<string>\",\n  \"keyUserType\": \"<string>\",\n  \"keyRequestTime\": \"<dateTime>\",\n  \"roomId\": \"<string>\",\n  \"oldRoomId\": \"<string>\",\n  \"noOfKeys\": \"<integer>\",\n  \"reservationIdList\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"guestShareFlag\": \"<boolean>\",\n  \"OldGuestShareFlag\": \"<boolean>\",\n  \"keyValidityStart\": \"<dateTime>\",\n  \"keyValidityEnd\": \"<dateTime>\",\n  \"keyTrack\": {\n    \"keyTrack1\": \"<string>\",\n    \"keyTrack2\": \"<string>\",\n    \"keyTrack3\": \"<string>\"\n  },\n  \"additionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"oldAdditionalRooms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"keyOptions\": [\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    },\n    {\n      \"keyOptionsCode\": \"<string>\",\n      \"keyOptionDescription\": \"<string>\"\n    }\n  ],\n  \"cardSerialNumber\": \"<string>\",\n  \"printData\": {\n    \"printText\": \"<string>\",\n    \"printFile\": \"<byte>\",\n    \"printPicture\": \"<byte>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/fof/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "36d4e2fa-7ec0-4c07-85cb-bf7cae78383c",
+    "name": "OPERA Cloud Front Desk Operations Outbound API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to cater for Front Desk related external (outbound) functionality with OPERA Cloud. These APIs facilitate various operations related to getting data from an external system, and inserting it into OPERA Cloud.<br /><br /> Compatible with OPERA Cloud release 26.2.0.0.<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>\n\nContact Support:\n Email: hospitality_apis_ww_grp@oracle.com",
+      "type": "text/plain"
+    }
+  }
+}

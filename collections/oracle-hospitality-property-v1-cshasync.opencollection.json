@@ -1,0 +1,187 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Cashiering Asynchronous API",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CashieringAsync",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Financial Postings with Net and Vat breakdown.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/financialPostingsNetVat",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel"
+              }
+            ]
+          },
+          "docs": "You can use this API to get Financial postings with Net and Vat breakdown. <p><strong>OperationId:</strong>startFinancialPostingsAsync</p> <p>This API allows a time span of <strong>15</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Check status of financial postings process",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "{{baseUrl}}/hotels/:hotelId/financialPostingsNetVat/:statusId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "statusId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel"
+              }
+            ]
+          },
+          "docs": "Use this to check whether the response is ready yet. You can get  the value of statusId with startFinancialPostingsAsync API response (under header location). <p><strong>OperationId:</strong>getFinancialPostingsProcessStatusAsync</p>"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Cashiering",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get results of Financial Postings with Net and Vat breakdown.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/financialPostingsNetVat/:statusId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel"
+              },
+              {
+                "name": "statusId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API returns response for the process initiated with startFinancialPostingsAsync. You can get the value of statusId with getFinancialPostingsProcessStatusAsync API response (under header location). <p><strong>OperationId:</strong>getFinancialPostingsAsync</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

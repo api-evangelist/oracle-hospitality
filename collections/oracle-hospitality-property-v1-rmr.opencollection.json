@@ -1,0 +1,798 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Room Rotation Service API",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RoomRotation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get list of reservations and the associated rotations points",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/departureStartDate/:departureStartDate/departureEndDate/:departureEndDate/reservationRotationPoints",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique Id for the Hotel"
+              },
+              {
+                "name": "departureStartDate",
+                "value": "",
+                "type": "path",
+                "description": "Departure Start Date of the reservation to be searched."
+              },
+              {
+                "name": "departureEndDate",
+                "value": "",
+                "type": "path",
+                "description": "Departure End Date of the reservation to be searched."
+              },
+              {
+                "name": "roomIds",
+                "value": "",
+                "type": "query",
+                "description": "List of Room Ids for which to return Reservation Rotation Points."
+              },
+              {
+                "name": "confirmationNumber",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "surname",
+                "value": "",
+                "type": "query",
+                "description": "Family name, last name."
+              },
+              {
+                "name": "givenName",
+                "value": "",
+                "type": "query",
+                "description": "Given name, first name or names"
+              },
+              {
+                "name": "roomClasses",
+                "value": "",
+                "type": "query",
+                "description": "List of Room Classes for which to return Room Rotation Points. Multiple values can be entered by adding multiple query parameters."
+              },
+              {
+                "name": "roomTypes",
+                "value": "",
+                "type": "query",
+                "description": "List of Room Types for which to return Room Rotation Points. Multiple values can be entered by adding multiple query parameters."
+              },
+              {
+                "name": "marketCodes",
+                "value": "",
+                "type": "query",
+                "description": "List of Market Codes to filter reservations. Multiple values may be provided via repeated query parameters."
+              },
+              {
+                "name": "floors",
+                "value": "",
+                "type": "query",
+                "description": "List of Floors to filter reservations. Multiple values may be provided via repeated query parameters."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              }
+            ]
+          },
+          "docs": "This API will allow a user to retrieve list of reservations and the number of rotation points associated with a given reservation for requested hotel, departure start date, departure end date, and room numbers. <p><strong>OperationId:</strong>getReservationRotationPoints</p> <p>This API allows a time span of <strong>30</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get list of reservations and the associated rotations points",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/departureStartDate/:departureStartDate/departureEndDate/:departureEndDate/reservationRotationPoints/searches",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique Id for the Hotel"
+              },
+              {
+                "name": "departureStartDate",
+                "value": "",
+                "type": "path",
+                "description": "Departure Start Date of the reservation to be searched."
+              },
+              {
+                "name": "departureEndDate",
+                "value": "",
+                "type": "path",
+                "description": "Departure End Date of the reservation to be searched."
+              }
+            ]
+          },
+          "docs": "This API will allow a user to retrieve list of reservations and the number of rotation points associated with a given reservation for requested hotel, departure start date, departure end date, and room numbers. <p><strong>OperationId:</strong>getReservationRotationPoints</p> <p>This API allows a time span of <strong>30</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get list of rotation points details associated with a reservation with adjustment log.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/reservations/:reservationId/rooms/:roomId/reservationRotationPointsDetails",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique Id of the Hotel for the reservation."
+              },
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique OPERA reservation ID which is used to find reservation from OPERA. This ID is a primary identification of a reservation in OPERA."
+              },
+              {
+                "name": "roomId",
+                "value": "",
+                "type": "path",
+                "description": "Room number of the reservation."
+              },
+              {
+                "name": "includeAdjustmentLog",
+                "value": "",
+                "type": "query",
+                "description": "Include adjustment log details in the response."
+              }
+            ]
+          },
+          "docs": "This API will allow a user to retrieve list of rotation points details along with adjustment log for requested hotel, reservation Id and room number. <p><strong>OperationId:</strong>getReservationRotationPointsDetails</p>"
+        },
+        {
+          "info": {
+            "name": "Update Rotation Points Details associated with a reservation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/reservations/:reservationId/rooms/:roomId/reservationRotationPointsDetails",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique Id of the Hotel for the reservation."
+              },
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique OPERA reservation ID which is used to find reservation from OPERA. This ID is a primary identification of a reservation in OPERA."
+              },
+              {
+                "name": "roomId",
+                "value": "",
+                "type": "path",
+                "description": "Room number of the reservation."
+              }
+            ]
+          },
+          "docs": "This API will allow a user to modify rotation points for the requested hotel, reservation Id and room number. <p><strong>OperationId:</strong>putReservationRotationPointsDetails</p>"
+        },
+        {
+          "info": {
+            "name": "Get Room Rotation Points",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/roomRotationPoints",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique Id for the Hotel"
+              },
+              {
+                "name": "roomRotationPointsDate",
+                "value": "",
+                "type": "query",
+                "description": "The date for which the Room Rotation Points are being requested"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records the API should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              },
+              {
+                "name": "roomClasses",
+                "value": "",
+                "type": "query",
+                "description": "List of Room Classes for which to return Room Rotation Points. Multiple values can be entered by adding multiple query parameters."
+              },
+              {
+                "name": "roomTypes",
+                "value": "",
+                "type": "query",
+                "description": "List of Room Types for which to return Room Rotation Points. Multiple values can be entered by adding multiple query parameters."
+              },
+              {
+                "name": "roomIds",
+                "value": "",
+                "type": "query",
+                "description": "List of Room Ids for which to return Room Rotation Points. Multiple values can be entered by adding multiple query parameters."
+              }
+            ]
+          },
+          "docs": "Use this API to fetch the individual units' rotation points.<p><strong>OperationId:</strong>getRoomRotationPoints</p> <p>The maximum allowable limit for this API is <strong>100</strong>.</p>"
+        },
+        {
+          "info": {
+            "name": "Update Rotation Points by Room Numbers",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/roomRotationPoints",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique Id for the Hotel"
+              }
+            ]
+          },
+          "docs": "Use this operation to update balance forward and adjusted points of individual rooms. <p><strong>OperationId:</strong>putRoomRotationPoints</p>"
+        },
+        {
+          "info": {
+            "name": "Get Profile Room Owners Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/profiles/:profileId/roomOwnerships",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of profile."
+              },
+              {
+                "name": "hotelIds",
+                "value": "",
+                "type": "query",
+                "description": "Unique Id(s) for the Hotel(s). Multiple Hotels can be entered by adding multiple query parameters."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The starting value of the date range."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The ending value of the date range."
+              },
+              {
+                "name": "includeReferral",
+                "value": "",
+                "type": "query",
+                "description": "Include Owner Referral in response flag."
+              },
+              {
+                "name": "includeAvailableRoomsOnly",
+                "value": "",
+                "type": "query",
+                "description": "Flag indicating if only rooms available for booking during the date range specified should be included in response."
+              }
+            ]
+          },
+          "docs": "Use this API to fetch profile Rooms with Room Ownership or Owner Referral records associated. <p><strong>OperationId:</strong>getRoomOwnerships</p>"
+        },
+        {
+          "info": {
+            "name": "Get Room Owners Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/roomOwners",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelIds",
+                "value": "",
+                "type": "query",
+                "description": "Unique Id(s) for the Hotel(s) queried."
+              },
+              {
+                "name": "surname",
+                "value": "",
+                "type": "query",
+                "description": "Family name, last name."
+              },
+              {
+                "name": "givenName",
+                "value": "",
+                "type": "query",
+                "description": "Given name, first name or names"
+              },
+              {
+                "name": "startDateFrom",
+                "value": "",
+                "type": "query",
+                "description": "The starting value of the start date range."
+              },
+              {
+                "name": "startDateTo",
+                "value": "",
+                "type": "query",
+                "description": "The ending value of the start date range."
+              },
+              {
+                "name": "endDateFrom",
+                "value": "",
+                "type": "query",
+                "description": "The starting value of the end date range."
+              },
+              {
+                "name": "endDateTo",
+                "value": "",
+                "type": "query",
+                "description": "The ending value of the end date range."
+              },
+              {
+                "name": "roomClasses",
+                "value": "",
+                "type": "query",
+                "description": "List of Room Classes for which to return Room Owners. Multiple values can be entered by adding multiple query parameters."
+              },
+              {
+                "name": "roomTypes",
+                "value": "",
+                "type": "query",
+                "description": "List of Room Types for which to return Room Owners. Multiple values can be entered by adding multiple query parameters."
+              },
+              {
+                "name": "roomIds",
+                "value": "",
+                "type": "query",
+                "description": "List of Room Ids for which to return Room Owners. Multiple values can be entered by adding multiple query parameters."
+              },
+              {
+                "name": "contractNumber",
+                "value": "",
+                "type": "query",
+                "description": "Contract Number of the Ownership Record."
+              },
+              {
+                "name": "includeInactive",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to return inactive records. Records are considered inactive when the end date of the ownership record is prior to the current property business date."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records the API should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              }
+            ]
+          },
+          "docs": "Get Room Ownership details for specific room(s) or owners. Hotel Id(s) and at least one other search criteria is required. <p><strong>OperationId:</strong>getRoomOwners</p>"
+        },
+        {
+          "info": {
+            "name": "Get Room Owners Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/roomOwners/searches",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get Room Ownership details for specific room(s) or owners. Hotel Id(s) and at least one other search criteria is required. <p><strong>OperationId:</strong>searchRoomOwners</p>"
+        },
+        {
+          "info": {
+            "name": "Ping",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/services/roomrotation/status",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "operaPingInput",
+                "value": "",
+                "type": "query",
+                "description": "Opera Ping request input type"
+              }
+            ]
+          },
+          "docs": "This API facilitates status check of room rotation service <p><strong>OperationId:</strong>pingRoomRotationService</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

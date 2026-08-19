@@ -1,0 +1,2150 @@
+{
+  "item": [
+    {
+      "id": "5eefa5ca-17ef-485d-9340-90f1fc8cada0",
+      "name": "Lookup",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e643cfce-70ae-4d3f-a664-9d09ba67d54b",
+          "name": "Get External Room Types",
+          "request": {
+            "name": "Get External Room Types",
+            "description": {
+              "content": "Provide an ability to get room types information from a channel partner to OPERA Cloud Distribution.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hotels",
+                ":hotelCode",
+                "externalRoomTypes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "channelCode",
+                  "value": "<string>",
+                  "description": "A unique identifier value for the channel associated with a property/hotel."
+                },
+                {
+                  "disabled": false,
+                  "key": "lang",
+                  "value": "<string>",
+                  "description": "ISO639 / BCP 47 language code format."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "1000",
+                  "description": "(Required) Indicates maximum number of records a Web Service should return in the response. Maximum record limit is 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "(Required) Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hotelCode",
+                  "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dd08a6f9-c9a4-4d76-a105-b663e4593c21",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRoomTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audience language",
+                  "key": "Content-Language",
+                  "value": "vMFIOcMV-B88l-dUlMlR-d-u9fXFE1-Sudq-r71DfJ"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"property\": {\n    \"hotelCode\": \"XUSXXYY99\",\n    \"channelCode\": \"CH1\"\n  },\n  \"items\": [\n    {\n      \"room\": {\n        \"roomType\": \"XA1K\",\n        \"roomName\": \"102\",\n        \"description\": \"Deluxe King Room on my Channel.\"\n      },\n      \"occupancy\": {\n        \"maxOccupancy\": 3,\n        \"maxAdultOccupancy\": 3,\n        \"maxChildOccupancy\": 2\n      }\n    },\n    {\n      \"room\": {\n        \"roomType\": \"XA1K\",\n        \"roomName\": \"102\",\n        \"description\": \"Deluxe King Room on my Channel.\"\n      },\n      \"occupancy\": {\n        \"maxOccupancy\": 3,\n        \"maxAdultOccupancy\": 3,\n        \"maxChildOccupancy\": 2\n      }\n    }\n  ],\n  \"hasMore\": true,\n  \"totalResults\": 300,\n  \"limit\": 200,\n  \"count\": 100,\n  \"offset\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c76a09b-f588-4f45-9e1c-721a89ed494d",
+              "name": "Request data provided is invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRoomTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1974-07-18T17:57:29.580Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2002-03-21T14:34:45.984Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1011\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1988-06-09T22:49:24.727Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 2254\n    }\n  ],\n  \"logId\": 8643\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7a08912-dc1f-4ac5-9f3f-560ecc61dcc3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRoomTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cbd6930d-8084-41ae-9c3e-3b8b700b8788",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRoomTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d50fc87b-4868-4775-94f7-1c95fcf2b75c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRoomTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4245f81e-f3c0-45fb-a96c-a6aaf390c437",
+              "name": "Not Allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRoomTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c5ae8a1-a377-4bd9-854f-1a56ae0835a0",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRoomTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d25eb71c-c22e-47ea-a527-837cba8f07b1",
+              "name": "Length Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRoomTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Length Required",
+              "code": 411,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e5e088f-5f44-4c06-a81e-78bf7e1b23e6",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRoomTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "912e8894-784d-4a8d-ad31-b23a43e69728",
+              "name": "URI Too Long",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRoomTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request-URI Too Long",
+              "code": 414,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21dc6830-e343-46cf-ac6d-3b0a7c663d2c",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRoomTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40622130-7033-4d08-8a6a-2b1d7ff4c72e",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRoomTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a66d4d67-7249-44c0-8029-9d9d1456d4e2",
+              "name": "Bad Gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRoomTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "622c2f3d-3d0b-4581-ab4b-16bb8ba892cc",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRoomTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b42934d6-85f8-42d0-9188-32ed517ab73f",
+          "name": "Get External Rate Plans",
+          "request": {
+            "name": "Get External Rate Plans",
+            "description": {
+              "content": "Provide an ability to get rate plan codes information from a channel partner to OPERA Cloud Distribution.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hotels",
+                ":hotelCode",
+                "externalRatePlans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "channelCode",
+                  "value": "<string>",
+                  "description": "A unique identifier value for the channel associated with a property/hotel."
+                },
+                {
+                  "disabled": false,
+                  "key": "roomType",
+                  "value": "<string>",
+                  "description": "The OPERA Cloud Hotel/proeprty Room type code."
+                },
+                {
+                  "disabled": false,
+                  "key": "lang",
+                  "value": "<string>",
+                  "description": "ISO639 / BCP 47 language code format."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "1000",
+                  "description": "(Required) Indicates maximum number of records a Web Service should return in the response. Maximum record limit is 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "(Required) Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hotelCode",
+                  "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b5806e7c-0191-4e33-93dc-d55c6eb3ff65",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRatePlans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "roomType",
+                      "value": "XA1K"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audience language",
+                  "key": "Content-Language",
+                  "value": "vMFIOcMV-B88l-dUlMlR-d-u9fXFE1-Sudq-r71DfJ"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"property\": {\n    \"hotelCode\": \"XUSXXYY99\",\n    \"channelCode\": \"CH1\"\n  },\n  \"items\": [\n    {\n      \"ratePlan\": {\n        \"ratePlanCode\": \"XDAILY\",\n        \"ratePlanName\": \"Corporate\",\n        \"ratePlanDescription\": \"Daily discount for a corporation.\"\n      }\n    },\n    {\n      \"ratePlan\": {\n        \"ratePlanCode\": \"XDAILY\",\n        \"ratePlanName\": \"Corporate\",\n        \"ratePlanDescription\": \"Daily discount for a corporation.\"\n      }\n    }\n  ],\n  \"hasMore\": true,\n  \"totalResults\": 300,\n  \"limit\": 200,\n  \"count\": 100,\n  \"offset\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e32dd71b-4adb-4ebc-8d05-8aa789664070",
+              "name": "Request data provided is invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRatePlans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "roomType",
+                      "value": "XA1K"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a6690d2-2d20-4174-ac09-e386d76b0120",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRatePlans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "roomType",
+                      "value": "XA1K"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0be824b8-5ff1-4804-8f69-a8b656493757",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRatePlans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "roomType",
+                      "value": "XA1K"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff0b2e8c-f1f5-494a-a0c9-7a61df6bc4d3",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRatePlans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "roomType",
+                      "value": "XA1K"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4305732-126c-4a39-864d-a362eb770d02",
+              "name": "Not Allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRatePlans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "roomType",
+                      "value": "XA1K"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73c3b1fb-c66e-4135-83dc-4d6293b44674",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRatePlans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "roomType",
+                      "value": "XA1K"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "404c27ed-ab5d-44d8-a0fb-d760bcc5e0d5",
+              "name": "Length Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRatePlans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "roomType",
+                      "value": "XA1K"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Length Required",
+              "code": 411,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c628540c-f957-4073-9c51-2ebed7dc60d5",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRatePlans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "roomType",
+                      "value": "XA1K"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97526386-4416-4246-ad98-b941b0a65894",
+              "name": "URI Too Long",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRatePlans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "roomType",
+                      "value": "XA1K"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request-URI Too Long",
+              "code": 414,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0291446-db95-4f4a-8c8c-d87397f32e97",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRatePlans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "roomType",
+                      "value": "XA1K"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ad1a21a-52fd-4bf8-a8d6-edc21654150e",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRatePlans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "roomType",
+                      "value": "XA1K"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6557efee-5e8b-42c6-a316-0e10c5b7a532",
+              "name": "Bad Gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRatePlans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "roomType",
+                      "value": "XA1K"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8864f7e-8c60-4829-884b-b7e2bced878b",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "externalRatePlans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channelCode",
+                      "value": "CH1"
+                    },
+                    {
+                      "key": "roomType",
+                      "value": "XA1K"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) A unique identifier value for the property/hotel associated with a channel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"Error in Application\",\n  \"status\": 400,\n  \"o:errorCode\": \"RSV-34534534\",\n  \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n  \"timestamp\": \"1948-05-06T00:15:00.715Z\",\n  \"o:errorDetails\": [\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"1997-10-12T07:24:38.869Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 1304\n    },\n    {\n      \"title\": \"Error in Application\",\n      \"status\": 400,\n      \"o:errorCode\": \"RSV-34534534\",\n      \"type\": \"http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4\",\n      \"timestamp\": \"2009-10-10T13:57:14.163Z\",\n      \"o:errorDetails\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/ExceptionDetail detected>\"\n        }\n      ],\n      \"logId\": 4398\n    }\n  ],\n  \"logId\": 3343\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/lookup/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bd66db15-10e7-426f-b23a-a3a7d667a86d",
+    "name": "OPERA Cloud Distribution Outbound Lookup",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Oracle Hospitality Distribution External Lookup is to get rate plan and room types from external channel partners.<br /><br /> Compatible with OPERA Cloud release 26.2.0.0<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>\n\nContact Support:\n Email: hospitality_apis_ww_grp@oracle.com",
+      "type": "text/plain"
+    }
+  }
+}

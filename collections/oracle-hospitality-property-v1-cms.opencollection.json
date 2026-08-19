@@ -1,0 +1,473 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud API for Customer Management Service",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CustomerManagement",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetches track it items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/trackItems",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ticketId",
+                "value": "",
+                "type": "query",
+                "description": "Complete ticket number of the Track It item."
+              },
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "reservationIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "reservationIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "givenName",
+                "value": "",
+                "type": "query",
+                "description": "Given name, first name or names."
+              },
+              {
+                "name": "surname",
+                "value": "",
+                "type": "query",
+                "description": "Family name, last name. May also be used for full name if the sending system does not have the ability to separate a full name into its parts, e.g. the surname element may be used to pass the full name."
+              },
+              {
+                "name": "trackItGroups",
+                "value": "",
+                "type": "query",
+                "description": "Group to which the Track It items belong."
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "Track It types based on the Track It group."
+              },
+              {
+                "name": "locations",
+                "value": "",
+                "type": "query",
+                "description": "Locations for Track It location."
+              },
+              {
+                "name": "actions",
+                "value": "",
+                "type": "query",
+                "description": "Track It actions based on Track It groups."
+              },
+              {
+                "name": "actionStatuses",
+                "value": "",
+                "type": "query",
+                "description": "Action status of the Track It item(Open, Closed)."
+              },
+              {
+                "name": "appUserId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "appUserIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "appUserIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "assignedStatuses",
+                "value": "",
+                "type": "query",
+                "description": "Assignment status of the Track It item(Assigned, Unassigned)."
+              },
+              {
+                "name": "room",
+                "value": "",
+                "type": "query",
+                "description": "Guest's room number if ticket associated with a reservation."
+              },
+              {
+                "name": "followUpDate",
+                "value": "",
+                "type": "query",
+                "description": "Follow up date for the ticket."
+              },
+              {
+                "name": "createdOn",
+                "value": "",
+                "type": "query",
+                "description": "Date when the ticket was created."
+              },
+              {
+                "name": "createdByUserId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "createdByUserIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "createdByUserIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "Description associated with the Track It item."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all Track It Items for a property. <p><strong>OperationId:</strong>getTrackItItems</p>"
+        },
+        {
+          "info": {
+            "name": "Creates track it items",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/trackItems",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create a new Track It Item. Track It manages storage and delivery of guest luggage, parcels, vehicles (valet), and lost items.  They can optionally be linked to a reservation if related or an arrival, in-house or departure reservation. <p><strong>OperationId:</strong>postTrackItItems</p>"
+        },
+        {
+          "info": {
+            "name": "Updates track it items",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/trackItems",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update the details of a Track It Item for a property. <p><strong>OperationId:</strong>putTrackItItems</p>"
+        },
+        {
+          "info": {
+            "name": "Deletes track it items",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/trackItems",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trackItId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "trackItIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "trackItIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              }
+            ]
+          },
+          "docs": "Delete a Track It Item for a property. <p><strong>OperationId:</strong>deleteTrackItItems</p>"
+        },
+        {
+          "info": {
+            "name": "Fetches track it items",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/trackItems/searches",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all Track It Items for a property. <p><strong>OperationId:</strong>searchTrackItItems</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to ping the customer management service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/services/customerManagement/status",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>pingCustomerManagementService</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

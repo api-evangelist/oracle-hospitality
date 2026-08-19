@@ -1,0 +1,796 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Report Master Data Management API",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Report",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Operation to fetch all report groups.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/allReportGroups",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "HotelId",
+                "value": "",
+                "type": "query",
+                "description": "Used for codes in the OPERA Code tables. Possible values of this pattern are 1, 101, 101.EQP, or 101.EQP.X."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "idContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element. Refer to OpenTravel Code List Unique ID Type (UIT)."
+              },
+              {
+                "name": "moduleName",
+                "value": "",
+                "type": "query",
+                "description": "Used for Character Strings, length 0 to 20."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getAllReportGroups</p>"
+        },
+        {
+          "info": {
+            "name": "Return reports for integration purpose.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/allReports",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "excludeGroup",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether a report group should be excluded"
+              },
+              {
+                "name": "includeInternalReports",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether sample internal reports are to be included"
+              },
+              {
+                "name": "includeRnAReports",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether RnA reports are to be included"
+              },
+              {
+                "name": "includeUnpublished",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether protected reports should be included"
+              },
+              {
+                "name": "includeWatermarkDetails",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the watermark details is to be populated. This is needed only for the configuration and not for the actual execution."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "multiPropertyOnly",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the result set should only include multi-property reports."
+              },
+              {
+                "name": "protectedReportParam",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether protected reports should be included"
+              },
+              {
+                "name": "scheduled",
+                "value": "",
+                "type": "query",
+                "description": "Indicates that only reports that can be scheduled are included"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Partial report name or description to search."
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query",
+                "description": "Report group to limit search."
+              },
+              {
+                "name": "hotel",
+                "value": "",
+                "type": "query",
+                "description": "Hotel code to search reports for."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "idContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element. Refer to OpenTravel Code List Unique ID Type (UIT)."
+              }
+            ]
+          },
+          "docs": "Use this API to return all reports based on search criteria such as excludeGroup, includeInternalReports, includeRnAReports, includeUnpublished, includeWatermarkDetails, limit, multiPropertyOnly, protectedReportParam, scheduled, name, group, hotel, id, idContext, type. <p><strong>OperationId:</strong>getAllReports</p>"
+        },
+        {
+          "info": {
+            "name": "Create generic reports.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/genericReports",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Use this API to create generic reports. <p><strong>OperationId:</strong>postGenericReports</p>"
+        },
+        {
+          "info": {
+            "name": "Update generic reports.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/genericReports",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Use this API to update generic reports. <p><strong>OperationId:</strong>changeGenericReports</p>"
+        },
+        {
+          "info": {
+            "name": "Delete generic reports.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/genericReports",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query",
+                "description": "Used for codes in the OPERA Code tables. Possible values of this pattern are 1, 101, 101.EQP, or 101.EQP.X."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "idContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element. Refer to OpenTravel Code List Unique ID Type (UIT)."
+              }
+            ]
+          },
+          "docs": "Use this API to delete generic reports based on hotelId, Id, contextId. <p><strong>OperationId:</strong>deleteGenericReports</p>"
+        },
+        {
+          "info": {
+            "name": "Return report parameters.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/reportParameters",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "idContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element. Refer to OpenTravel Code List Unique ID Type (UIT)."
+              }
+            ]
+          },
+          "docs": "Use this API to return report parameters based on search criteria such as id, idContext, type. <p><strong>OperationId:</strong>getReportParameters</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to copy report text configuration.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/reportTextConfiguration/copy",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>copyReportTextConfiguration</p>"
+        },
+        {
+          "info": {
+            "name": "Return reports.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/reports",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "excludeGroup",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether a report group should be excluded"
+              },
+              {
+                "name": "includeInternalReports",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether sample internal reports are to be included"
+              },
+              {
+                "name": "includeRnAReports",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether RnA reports are to be included"
+              },
+              {
+                "name": "includeUnpublished",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether protected reports should be included"
+              },
+              {
+                "name": "includeWatermarkDetails",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the watermark details is to be populated. This is needed only for the configuration and not for the actual execution."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "multiPropertyOnly",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the result set should only include multi-property reports."
+              },
+              {
+                "name": "protectedReportParam",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether protected reports should be included"
+              },
+              {
+                "name": "scheduled",
+                "value": "",
+                "type": "query",
+                "description": "Indicates that only reports that can be scheduled are included"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Partial report name or description to search."
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query",
+                "description": "Report group to limit search."
+              },
+              {
+                "name": "hotel",
+                "value": "",
+                "type": "query",
+                "description": "Hotel code to search reports for."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "idContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element. Refer to OpenTravel Code List Unique ID Type (UIT)."
+              }
+            ]
+          },
+          "docs": "Use this API to return reports based on search criteria such as excludeGroup, includeInternalReports, includeRnAReports, includeUnpublished, includeWatermarkDetails, limit, multiPropertyOnly, protectedReportParam, scheduled, name, group, hotel, id, idContext, type. <p><strong>OperationId:</strong>getReports</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to ping.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/services/reports/status",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>pingReportsConfigServiceStatus</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to change/create manager report statistics.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/upsert/managerReports/statistics",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>changeUpsertManagerReportStatistics</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to change/create report text configuration messages.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/upsert/reports/textConfigurationMessages",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>changeUpsertReportTextConfigurationMessages</p>"
+        },
+        {
+          "info": {
+            "name": "Update generic reports.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/upsertGenericReports",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Use this API to update generic reports. <p><strong>OperationId:</strong>putUpsertGenericReports</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

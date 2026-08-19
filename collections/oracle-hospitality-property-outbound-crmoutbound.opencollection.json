@@ -1,0 +1,898 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Customer Relationship Management Outbound API",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ProfileExternal",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve profiles from external system",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/chains/:chainCode/externalProfiles",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path",
+                "description": "Profiles will be fetched from this External System."
+              },
+              {
+                "name": "chainCode",
+                "value": "",
+                "type": "path",
+                "description": "Chain code from which the External Profiles will be fetched."
+              },
+              {
+                "name": "externalDatabaseId",
+                "value": "",
+                "type": "query",
+                "description": "Profile will be fetched from this External database."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query",
+                "description": "Hotel Code, It is used to filter hotel specific children to this specific hotel code."
+              },
+              {
+                "name": "profileType",
+                "value": "",
+                "type": "query",
+                "description": "The types of Profile handled by the web service."
+              },
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "profileIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Family name, last name or Company Name."
+              },
+              {
+                "name": "givenName",
+                "value": "",
+                "type": "query",
+                "description": "Given name, first name or names."
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "City (e.g., Dublin), town, or postal station (i.e., a postal service territory, often used in a military address)."
+              },
+              {
+                "name": "postalCode",
+                "value": "",
+                "type": "query",
+                "description": "Post Office Code number."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "State or Province name (e.g., Texas)."
+              },
+              {
+                "name": "countryCode",
+                "value": "",
+                "type": "query",
+                "description": "Code for a country or a nationality."
+              },
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query",
+                "description": "Keyword associated to the profile."
+              },
+              {
+                "name": "communication",
+                "value": "",
+                "type": "query",
+                "description": "Any communication method associated to the profile such as phone, fax, eMail id."
+              },
+              {
+                "name": "membershipNumber",
+                "value": "",
+                "type": "query",
+                "description": "Membership number associated to the profile."
+              },
+              {
+                "name": "membershipType",
+                "value": "",
+                "type": "query",
+                "description": "Member Type of searching profile."
+              },
+              {
+                "name": "arNumber",
+                "value": "",
+                "type": "query",
+                "description": "Account Receivable associated to the profile."
+              },
+              {
+                "name": "birthDate",
+                "value": "",
+                "type": "query",
+                "description": "Date of birth"
+              }
+            ]
+          },
+          "docs": "Use this API when you want to search for profiles in an external system. The response will include a list of profiles that exist in the external system, based on your search criteria.  For example, you want to see if the external system has a profile for Mr David Smith.  The GET API will send a request to external system, and the response will include a list of any profiles that exist for Mr Davis Smith in that system.  If a profile does exist, and the user would like to 'download' that profile "
+        },
+        {
+          "info": {
+            "name": "Download a Profile from external system",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/chains/:chainCode/externalProfiles/:profileExternalId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-transactionId",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path",
+                "description": "If supplied, profile will be downloaded from this External System, otherwise it will be decided automatically based on the configuration."
+              },
+              {
+                "name": "chainCode",
+                "value": "",
+                "type": "path",
+                "description": "Chain code from which the External Profiles will be downloaded."
+              },
+              {
+                "name": "profileExternalId",
+                "value": "",
+                "type": "path",
+                "description": "Unique Identifier of the Profile on the External System."
+              },
+              {
+                "name": "externalDatabaseId",
+                "value": "",
+                "type": "query",
+                "description": "Profile will be downloaded from this External database."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query",
+                "description": "Hotel Code, It is used to filter hotel specific children to this specific hotel code."
+              }
+            ]
+          },
+          "docs": "After searching for profiles in an external system using getExternalProfiles, proceed to use this API knowing the external profile ID in the path.  The result will be a new profile created in OPERA. <p><strong>OperationId:</strong>downloadExternalProfile</p>"
+        },
+        {
+          "info": {
+            "name": "Retrieve player statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/playerStatistics/:profileId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path",
+                "description": "Unique Identifier for profile ID"
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path",
+                "description": "External System Code"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "query",
+                "description": "Unique Identifier for PlayerID."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query",
+                "description": "Code of the Hotel."
+              },
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "reservationIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "reservationIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              }
+            ]
+          },
+          "docs": "Request for the fetch player statistics WS operation <p><strong>OperationId:</strong>getPlayerStatistics</p>"
+        },
+        {
+          "info": {
+            "name": "Get offers that can be attached for a profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/gamingOffers/:membershipNo",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "membershipNo",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query",
+                "description": "Hotel Code for which the offers will be fetched."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Use this API when you have a guest profile and you want to get the offers available from an external system. <p><strong>OperationId:</strong>getGamingOffers</p>"
+        },
+        {
+          "info": {
+            "name": "Validate IATA number.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/travelAgents/:iataNumber",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-transactionId",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "iataNumber",
+                "value": "",
+                "type": "path",
+                "description": "IATA Number"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Hotel Id"
+              }
+            ]
+          },
+          "docs": "This API will validate and check an IATA number. <p><strong>OperationId:</strong>checkIataNumber</p>"
+        },
+        {
+          "info": {
+            "name": "Retrive valid addresses from a third party vendor.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/validatedAddresses",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "addressText",
+                "value": "",
+                "type": "query",
+                "description": "The suggestion that should be presented to the user as a possible match to their input."
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the address recieved as part of an address search validation."
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query",
+                "description": "The preferred language for results. This should be a 2 or 4 character language code."
+              },
+              {
+                "name": "timeoutSeconds",
+                "value": "",
+                "type": "query",
+                "description": "Maximum time you are prepared to wait for a response."
+              }
+            ]
+          },
+          "docs": "Use this API when you want to validate address from a third party vendor. The response will be a list of addresses with its address ID based on the search criteria. <p><strong>OperationId:</strong>getValidatedAddresses</p>"
+        },
+        {
+          "info": {
+            "name": "Get full Address information from third party system for a given external Address ID. The external Address ID is fetched from valdatedAddresses service.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/validatedAddresses/:externalAddressId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalAddressId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "timeoutSeconds",
+                "value": "",
+                "type": "query",
+                "description": "Maximum time you are prepared to wait for a response."
+              }
+            ]
+          },
+          "docs": "Use this API when you want to fetch full address information for a given address Id. <p><strong>OperationId:</strong>getValidatedAddress</p>"
+        },
+        {
+          "info": {
+            "name": "Validate Membership Number attached to a membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/chains/:chainCode/validateMembershipNumber",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chainCode",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "membershipNo",
+                "value": "",
+                "type": "query",
+                "description": "Indicates membership number of the guest"
+              },
+              {
+                "name": "membershipType",
+                "value": "",
+                "type": "query",
+                "description": "Membership type for which point calculation process is to be run."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query",
+                "description": "Hotel code from which the membership code belongs to"
+              }
+            ]
+          },
+          "docs": "Use this API when you want to validate membership numbers from external system. <p><strong>OperationId:</strong>validateMembershipNumber</p>"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ProfileMembership",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an Enrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/chains/:chainCode/enrollments",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-transactionId",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path",
+                "description": "Profile will be downloaded from this External System."
+              },
+              {
+                "name": "chainCode",
+                "value": "",
+                "type": "path",
+                "description": "Chain code from which the External Profiles will be downloaded."
+              }
+            ]
+          },
+          "docs": "Use this API when you have a guest profile and you want to enroll that guest profile into a membership program in an external system. <p><strong>OperationId:</strong>postEnrollment</p>"
+        },
+        {
+          "info": {
+            "name": "Redeem an award",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/profiles/:externalProfileId/profileAwards",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-transactionId",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path",
+                "description": "Profile will be downloaded from this External System."
+              },
+              {
+                "name": "externalProfileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Redeem an award that exists on a profile. <p><strong>OperationId:</strong>redeemAward</p>"
+        },
+        {
+          "info": {
+            "name": "Get membership information on a profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/profiles/:externalProfileId/memberships",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-transactionId",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path",
+                "description": "Profile will be downloaded from this External System."
+              },
+              {
+                "name": "externalProfileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "operaProfileId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "membershipType",
+                "value": "",
+                "type": "query",
+                "description": "The type of the membership."
+              },
+              {
+                "name": "membershipId",
+                "value": "",
+                "type": "query",
+                "description": "The card number associated with this membership."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query",
+                "description": "Property from which the membership stay information was received."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Whether member info search will pertain to transaction dates/ stay dates/ points credit dates."
+              }
+            ]
+          },
+          "docs": "Use this API to retrieve membership details on a profile. <p><strong>OperationId:</strong>getMembershipDetails</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Profile",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate membership number",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/memberships/:membershipType/membershipIDs",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-transactionId",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path",
+                "description": "Profile will be downloaded from this External System."
+              },
+              {
+                "name": "membershipType",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API will generate a new membership number. <p><strong>OperationId:</strong>postMembershipNumber</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,293 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Distribution Book",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reservation Request",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelCode/reservations",
+            "headers": [
+              {
+                "name": "x-hdp-tracing-key",
+                "value": ""
+              },
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Property in Channel system."
+              }
+            ]
+          },
+          "docs": "<p>Create new reservation.</p> <p><strong>OperationId:</strong>postReservation</p>"
+        },
+        {
+          "info": {
+            "name": "Retrieve reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelCode/reservations/:confirmationNum",
+            "headers": [
+              {
+                "name": "x-hdp-tracing-key",
+                "value": ""
+              },
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Property in Channel system."
+              },
+              {
+                "name": "confirmationNum",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Confirmation Number"
+              },
+              {
+                "name": "idExtension",
+                "value": "",
+                "type": "query",
+                "description": "This is the index number for multi leg reservations. Numeric values only."
+              }
+            ]
+          },
+          "docs": "<p>Get reservation.</p> <p><strong>OperationId:</strong>getReservation</p>"
+        },
+        {
+          "info": {
+            "name": "Modify reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelCode/reservations/:confirmationNum",
+            "headers": [
+              {
+                "name": "x-hdp-tracing-key",
+                "value": ""
+              },
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Property in Channel system."
+              },
+              {
+                "name": "confirmationNum",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Confirmation Number"
+              }
+            ]
+          },
+          "docs": "<p>Modify a reservation.</p> <p><strong>OperationId:</strong>putReservation</p>"
+        },
+        {
+          "info": {
+            "name": "Cancel reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelCode/reservations/:confirmationNum/cancellations",
+            "headers": [
+              {
+                "name": "x-hdp-tracing-key",
+                "value": ""
+              },
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Property in Channel system."
+              },
+              {
+                "name": "confirmationNum",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Confirmation Number"
+              }
+            ]
+          },
+          "docs": "<p>Cancel a reservation.</p> <p><strong>OperationId:</strong>postCancelReservation</p>"
+        },
+        {
+          "info": {
+            "name": "Commit/Ignore an onHold reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelCode/reservations/:confirmationNum/status",
+            "headers": [
+              {
+                "name": "x-hdp-tracing-key",
+                "value": ""
+              },
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Property in Channel system."
+              },
+              {
+                "name": "confirmationNum",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Confirmation Number"
+              }
+            ]
+          },
+          "docs": "<p>Commit/Ignore an onHold reservation.</p> <p><strong>OperationId:</strong>postOnHoldReservation</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

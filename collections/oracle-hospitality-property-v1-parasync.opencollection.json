@@ -1,0 +1,195 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Price Availability Rate Async API",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AvailabilityAsync",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create restrictions in OPERA Cloud.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/hotels/:hotelId/restrictions",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel in OPERA"
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path",
+                "description": "Unique code of the external system"
+              }
+            ]
+          },
+          "docs": "A user can send various restrictions to OPERA by specifying restriction details in the request. <p><strong>OperationId:</strong>postRestrictionsProcess</p>"
+        },
+        {
+          "info": {
+            "name": "Get status for created restrictions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/hotels/:hotelId/restrictions/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of Hotel in OPERA."
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path",
+                "description": "Unique code of the external system."
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID to fetch status of created restrictions."
+              }
+            ]
+          },
+          "docs": "Use this to check whether the restrictions sent have been processed. <p><strong>OperationId:</strong>getRestrictions</p>"
+        },
+        {
+          "info": {
+            "name": "Check status of Restrictions",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/hotels/:hotelId/restrictions/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID to fetch status of created restrictions."
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path",
+                "description": "Unique code of the external system."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of Hotel in OPERA."
+              }
+            ]
+          },
+          "docs": "Use this to check whether the restrictions sent have been processed. <p><strong>OperationId:</strong>getRestrictionsProcessStatus</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

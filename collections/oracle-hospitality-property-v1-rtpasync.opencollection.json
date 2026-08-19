@@ -1,0 +1,1330 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Opera Cloud Rate Plan Asynchronous Service API",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RatePlanAsync",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "API to initiate rate plans&apos; price update process",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/hotels/:hotelId/ratePlans/dailySchedules",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Use this API to start the process to add and update daily rate plans&apos; pricing schedule. Returns a header parameter Location that can be used in the getDailyRatePlanSchedulesProcessStatus operation. <p><strong>OperationId:</strong>startSetDailyRatePlanSchedulesProcess</p>"
+        },
+        {
+          "info": {
+            "name": "Get results of a daily rate plan schedule process",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/hotels/:hotelId/ratePlans/dailySchedules/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Use this API to get the result of the daily rate plans schedule process, which will include details of any data that has failed to process. You can get the value of the summaryId from the Location header returned by the getDailyRatePlanSchedulesProcessStatus operation after the process is completed. <p><strong>OperationId:</strong>getDailyRatePlanSchedules</p>"
+        },
+        {
+          "info": {
+            "name": "Check status of setting daily rate plan schedule process",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/hotels/:hotelId/ratePlans/dailySchedules/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Use this API to check whether the rate plan pricing schedule process is completed. You can get value of summaryId from the Location header returned by the startSetDailyRatePlanSchedulesProcess operation.<p><strong>OperationId:</strong>getDailyRatePlanSchedulesProcessStatus</p>"
+        },
+        {
+          "info": {
+            "name": "API to initiate setting best available rate plans process.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/hotels/:hotelId/ratePlans/bestAvailableLOS",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel in OPERA"
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Use this API to start the process of adding and updating best available rate plans by day or by length of stay. Returns a header parameter Location that can be used in the getBestAvailableRatePlansProcessStatus operation. <p><strong>OperationId:</strong>startSetBestAvailableRatePlansProcess</p>"
+        },
+        {
+          "info": {
+            "name": "Get results of a daily rate plan schedule process",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/hotels/:hotelId/ratePlans/bestAvailableLOS/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Use this API to get the result of the process to set best available rate plans, which will include details of any data that has been failed to process. You can get the value of the summaryId from the Location header returned by the getBestAvailableRatePlansProcessStatus operation after the process is completed. <p><strong>OperationId:</strong>getBestAvailableRatePlans</p>"
+        },
+        {
+          "info": {
+            "name": "Check status of setting best available rate plans process",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/hotels/:hotelId/ratePlans/bestAvailableLOS/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Use this API to check whether the setting of best available rate plans process is completed. You can get value of summaryId from the Location header returned by the startSetBestAvailableRatePlansProcess operation.<p><strong>OperationId:</strong>getBestAvailableRatePlansProcessStatus</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to configure hurdle rates.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/hotels/:hotelId/rates/hurdles",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel in OPERA"
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path",
+                "description": "Unique code of the external system"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>startHurdleRatesProcess</p>"
+        },
+        {
+          "info": {
+            "name": "This API facilitates fetching of status for configured hurdle rates.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/hotels/:hotelId/rates/hurdles/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of Hotel in OPERA."
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path",
+                "description": "Unique code of the external system."
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID to fetch status of configured hurdle rates."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getHurdleRates</p>"
+        },
+        {
+          "info": {
+            "name": "This API returns the status of asynchronous process scheduled for given id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/hotels/:hotelId/rates/hurdles/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID to fetch status of configured hurdle rates."
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path",
+                "description": "Unique code of the external system."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of Hotel in OPERA."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getHurdleRatesProcessStatus</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to start the update of rate header flags. Recommendation is not to exceed 250 rate codes in one request.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/hotels/:hotelId/ratePlans/headers",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel in OPERA"
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path",
+                "description": "Unique code of the external system"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>startSetRatePlansHeadersProcess</p>"
+        },
+        {
+          "info": {
+            "name": "This API facilitates fetching of status for configured rate plans.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/hotels/:hotelId/ratePlans/headers/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of Hotel in OPERA."
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path",
+                "description": "Unique code of the external system."
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID to fetch status of configured rate plans."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getRatePlansHeaders</p>"
+        },
+        {
+          "info": {
+            "name": "This API returns the status of asynchronous process scheduled for given id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/hotels/:hotelId/ratePlans/headers/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID to fetch status of configured rate plans."
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path",
+                "description": "Unique code of the external system."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of Hotel in OPERA."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getRatePlansHeadersProcessStatus</p>"
+        },
+        {
+          "info": {
+            "name": "Add or remove the Room Types to or from rate codes.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/ratePlans/roomTypes",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              }
+            ]
+          },
+          "docs": "This API is to add or remove the Room Types to or from rate codes.<p><strong>OperationId:</strong>startRatePlanRoomTypesModifyProcess</p>"
+        },
+        {
+          "info": {
+            "name": "Get results of add/remove Room Types process.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/ratePlans/roomTypes/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of add/remove Room Types process"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              }
+            ]
+          },
+          "docs": "This API returns a summary of the add/remove Room Types process. You can get the value of requestId from the process API response (under header location). <p><strong>OperationId:</strong>getRatePlanRoomTypesModifyProcessSummary</p>"
+        },
+        {
+          "info": {
+            "name": "Check status of add/remove Room Types process.",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "{{baseUrl}}/hotels/:hotelId/ratePlans/roomTypes/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of add/remove Room Types process"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              }
+            ]
+          },
+          "docs": "Use this to check whether add/remove Room Types process has been completed. You can get the value of requestId from the process API response (under header location). <p><strong>OperationId:</strong>headRatePlanRoomTypesModifyProcessStatus</p>"
+        },
+        {
+          "info": {
+            "name": "Delete ratePlans",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/ratePlans/deletions",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              }
+            ]
+          },
+          "docs": "This API allows you to do bulk ratePlans deletion.<p><strong>OperationId:</strong>startRatePlanDeletionProcess</p>"
+        },
+        {
+          "info": {
+            "name": "Get results of delete Rate Plans process.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/ratePlans/deletions/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of delete Rate Plans process"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              }
+            ]
+          },
+          "docs": "This API returns a summary of the delete Rate Plans process. You can get the value of requestId from the process API response (under header location). <p><strong>OperationId:</strong>getRatePlanDeletionProcessSummary</p>"
+        },
+        {
+          "info": {
+            "name": "Check status of delete ratePlans process.",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "{{baseUrl}}/hotels/:hotelId/ratePlans/deletions/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of delete Rate Plans process"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              }
+            ]
+          },
+          "docs": "Use this to check whether delete ratePlans process has been completed. You can get the value of requestId from the process API response (under header location). <p><strong>OperationId:</strong>headRatePlanDeletionProcessStatus</p>"
+        },
+        {
+          "info": {
+            "name": "Delete ratePlan Schedules ",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/ratePlans/schedules/deletions",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              }
+            ]
+          },
+          "docs": "This API allows you to do bulk ratePlan schedules deletion.<p><strong>OperationId:</strong>startRatePlanScheduleDeletionProcess</p>"
+        },
+        {
+          "info": {
+            "name": "Get results of delete Rate Plan Schedules process.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/ratePlans/schedules/deletions/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of delete Rate Plan Schedules process"
+              }
+            ]
+          },
+          "docs": "This API returns a summary of the delete Rate Plan Schedules process. You can get the value of requestId from the process API response (under header location). <p><strong>OperationId:</strong>getRatePlanScheduleDeletionProcessSummary</p>"
+        },
+        {
+          "info": {
+            "name": "Check status of delete ratePlan schedules process.",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "{{baseUrl}}/hotels/:hotelId/ratePlans/schedules/deletions/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of delete Rate Plan schedules process"
+              }
+            ]
+          },
+          "docs": "Use this to check whether delete ratePlan schedules process has been completed. You can get the value of requestId from the process API response (under header location). <p><strong>OperationId:</strong>headRatePlanScheduleDeletionProcessStatus</p>"
+        },
+        {
+          "info": {
+            "name": "Sync pricing schedules from a standard rate plan to linked base rates.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/ratePlans/schedules/sync",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Hotel ID"
+              }
+            ]
+          },
+          "docs": "Starts an async job to synchronize pricing schedules from a standard rate plan to linked base rates. Use syncMode to choose one of two behaviors: SINGLE_SCHEDULE_TO_ALL_BASE_RATES (one schedule to all linked base rates) or ALL_SCHEDULES_TO_ONE_BASE_RATE (all schedules to one linked base rate).<p><strong>OperationId:</strong>startRatePlanSchedulesSyncProcess</p>"
+        },
+        {
+          "info": {
+            "name": "Get result of rate plan schedules sync async process.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/ratePlans/schedules/sync/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Hotel ID"
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Async job request id"
+              }
+            ]
+          },
+          "docs": "API to fetch result of pricing schedules sync process.<p><strong>OperationId:</strong>getRatePlanSchedulesSyncProcessSummary</p>"
+        },
+        {
+          "info": {
+            "name": "Check status of rate plan schedules sync process.",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "{{baseUrl}}/hotels/:hotelId/ratePlans/schedules/sync/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Hotel ID"
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Async job request id"
+              }
+            ]
+          },
+          "docs": "Check status of rate plan schedules sync process.<p><strong>OperationId:</strong>headRatePlanSchedulesSyncProcessStatus</p>"
+        },
+        {
+          "info": {
+            "name": "Copy rate plans.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/ratePlans/copy",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Hotel ID"
+              }
+            ]
+          },
+          "docs": "This asynchronous API allows you to copy one or more rate codes from a single source property to multiple target properties. After submitting the copy request, the operation is processed in the background and a job identifier is returned for tracking progress and completion status. <p><strong>OperationId:</strong>startCopyRatePlansProcess</p>"
+        },
+        {
+          "info": {
+            "name": "Get result of rate plans copy async process.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/ratePlans/copy/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Hotel ID"
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Async job request id"
+              }
+            ]
+          },
+          "docs": "API to fetch result of rate plans copy process.<p><strong>OperationId:</strong>getCopyRatePlansProcessSummary</p>"
+        },
+        {
+          "info": {
+            "name": "Check status of rate plans copy process.",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "{{baseUrl}}/hotels/:hotelId/ratePlans/copy/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Hotel ID"
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Async job request id"
+              }
+            ]
+          },
+          "docs": "Check status of rate plans copy process.<p><strong>OperationId:</strong>headCopyRatePlansProcessStatus</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

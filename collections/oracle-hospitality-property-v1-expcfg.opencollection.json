@@ -1,0 +1,1502 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Export Configuration API",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Operation to fetch exports available.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/availableExports",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fetchColumns",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fetchDataSetup",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fetchDestinationSetup",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fetchGenerateConfiguration",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "exportFileId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "idExtension",
+                "value": "",
+                "type": "query",
+                "description": "Additional identifying value assigned by the creating system."
+              },
+              {
+                "name": "idContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "hotelIds",
+                "value": "",
+                "type": "query",
+                "description": "Hotel code."
+              },
+              {
+                "name": "fileGroup",
+                "value": "",
+                "type": "query",
+                "description": "Enumeration of export file groups."
+              },
+              {
+                "name": "includeInactive",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether inactive records should be returned."
+              },
+              {
+                "name": "match",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeComponents",
+                "value": "",
+                "type": "query",
+                "description": "Indicate whether component exports should be included in the request."
+              }
+            ]
+          },
+          "docs": "Use this API to return available exports based on search criteria such as fetchColumns, fetchDataSetup, fetchDestinationSetup, fetchGenerateConfiguration, limit, exportFileId, idExtension, idContext, type, hotelIds, fileGroup, includeInactive, includeComponents. <p><strong>OperationId:</strong>getExportsAvailable</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch export columns and functions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/columnsAndFunctions",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fetchDbColumns",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fetchOperaApis",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fetchPrePostProcedures",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "dataSource",
+                "value": "",
+                "type": "query",
+                "description": "Data source for which we are supposed to get columns and pre post procedures"
+              },
+              {
+                "name": "exportFileId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Enumeration of API Categories."
+              }
+            ]
+          },
+          "docs": "Use this API to return export columns and functions based on search criteria such as fetchDbColumns, fetchOperaApis, fetchPrePostProcedures, dataSource, exportFileId, category. <p><strong>OperationId:</strong>getExportColumnsAndFunctions</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to create export mapping codes.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/exportMappingCodes",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>postExportMappingCodes</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to update export mapping codes.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/exportMappingCodes",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>putExportMappingCodes</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to update export mapping linked types.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/exportMappingLinkedTypes",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>putExportMappingLinkedTypes</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch export mappings by chain.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/exportMappings",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query",
+                "description": "Used for codes in the OPERA Code tables. Possible values of this pattern are 1, 101, 101.EQP, or 101.EQP.X."
+              },
+              {
+                "name": "exportMappingConfigs",
+                "value": "",
+                "type": "query",
+                "description": "Enumeration  of Types allowed for Export Mapping"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getExportMappingsByChain</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to create export schedules.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/exportSchedules",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Use this API to create export schedules. <p><strong>OperationId:</strong>postExportSchedules</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to remove export schedules.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/exportSchedules",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobNames",
+                "value": "",
+                "type": "query",
+                "description": "Unique name that identifies export schedule"
+              }
+            ]
+          },
+          "docs": "Use this API to delete export schedules based on the jobNames. <p><strong>OperationId:</strong>removeExportSchedules</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to change export schedules.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/exportSchedules/:exportFileId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "exportFileId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of export file."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>changeExportSchedulesByChain</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch export mapping codes to link.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/configTypes/:configType/exportMappingCodesToLink",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configType",
+                "value": "",
+                "type": "path",
+                "description": "Configuration Type."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "The hotel code for the codes to fetch for linking."
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "The hotel code for the codes to fetch for linking."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getExportMappingCodesToLink</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch activity logs for Export Data.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/exportActivityLog",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              },
+              {
+                "name": "activityType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Search from date for the user activity log."
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "Search to date for the user activity log."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              },
+              {
+                "name": "module",
+                "value": "",
+                "type": "query",
+                "description": "Activity module."
+              },
+              {
+                "name": "parameterName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the parameter."
+              },
+              {
+                "name": "parameterValue",
+                "value": "",
+                "type": "query",
+                "description": "Value of the parameter."
+              },
+              {
+                "name": "activityGroup",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "Search text for the user activity log."
+              },
+              {
+                "name": "userByIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "userForIds",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Use this API to return activity logs for export data for a specific property based on search criteria such as hotelId, activityType, fromDate, toDate, limit, offset, module, parameterName, parameterValue, activityGroup, searchText, userByIds, userForIds.  <p><strong>OperationId:</strong>getExportActivityLog</p> <p>The maximum allowable limit for this API is <strong>25</strong>.</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to remove export mappings.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/exportMappingId/:exportMappingId/exportMappings",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "exportMappingId",
+                "value": "",
+                "type": "path",
+                "description": "Export Mapping Id."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              }
+            ]
+          },
+          "docs": "Use this API to delete export mappings for a specific property based on the exportMappingId and the hotelId. <p><strong>OperationId:</strong>deleteExistingExportMappings</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch export mapping codes.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/exportMappingTypes/:exportMappingTypeId/exportMappingCodes",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "exportMappingTypeId",
+                "value": "",
+                "type": "path",
+                "description": "Export Mapping Type Id."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getExportMappingCodes</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch export mappings.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/exportMappings",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              },
+              {
+                "name": "exportMappingConfigs",
+                "value": "",
+                "type": "query",
+                "description": "Enumeration  of Types allowed for Export Mapping"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getExportMappings</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to create export mappings.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/exportMappings",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>postExportMappings</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to update export mappings.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/exportMappings",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>putExportMappings</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch export mapping linked codes.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/exportMappings/linkedCodes",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "idExtension",
+                "value": "",
+                "type": "query",
+                "description": "Additional identifying value assigned by the creating system."
+              },
+              {
+                "name": "idContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "codeToLink",
+                "value": "",
+                "type": "query",
+                "description": "Linked code."
+              },
+              {
+                "name": "configType",
+                "value": "",
+                "type": "query",
+                "description": "Enumeration  of Types allowed for Export Mapping"
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getExportMappingLinkedCodes</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to remove export mapping codes.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/exportMappings/:exportMappingId/mappingTypes/:mappingTypeCode/exportMappingCodes",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "mappingTypeCode",
+                "value": "",
+                "type": "path",
+                "description": "Mapping Type Code."
+              },
+              {
+                "name": "exportMappingId",
+                "value": "",
+                "type": "path",
+                "description": "Export Mapping Id."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>deleteExportMappingCodes</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch export schedules.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/exportSchedules",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              },
+              {
+                "name": "timeZone",
+                "value": "",
+                "type": "query",
+                "description": "Time zone hour and minute specified in the format TZH:TZM example:-05:00"
+              },
+              {
+                "name": "exportFileId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "idExtension",
+                "value": "",
+                "type": "query",
+                "description": "Additional identifying value assigned by the creating system."
+              },
+              {
+                "name": "idContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "exportGroup",
+                "value": "",
+                "type": "query",
+                "description": "Enumeration of export file groups."
+              },
+              {
+                "name": "exportName",
+                "value": "",
+                "type": "query",
+                "description": "Export name to restrict export schedules"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start Date to restrict export schedules"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End Date to restrict export schedules"
+              },
+              {
+                "name": "frequency",
+                "value": "",
+                "type": "query",
+                "description": "Frequency for which export schedules needs to be returned"
+              },
+              {
+                "name": "includeInactive",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether inactive schedules needs to be returned or not"
+              }
+            ]
+          },
+          "docs": "Use this API to return export schedules for a specific property based on search criteria such as hotelId, timeZone, exportFileId, idExtension, idContext, type, exportGroup, exportName, startDate, endDate, frequency, includeInactive.  <p><strong>OperationId:</strong>getExportSchedules</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to change export schedules.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/exportSchedules/:exportFileId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              },
+              {
+                "name": "exportFileId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of export file."
+              }
+            ]
+          },
+          "docs": "Use this API to update export schedules based on the exportFileId and exportSchedulesToBeChanged. <p><strong>OperationId:</strong>changeExportSchedules</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to ping.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/services/export/status",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>pingExportServices</p>"
+        },
+        {
+          "info": {
+            "name": "Operation to fetch exports generated.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/:exportFileId/generatedExports",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "exportFileId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of export file."
+              },
+              {
+                "name": "exportDataId",
+                "value": "",
+                "type": "query",
+                "description": "Unique ID of export data."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>getExportsGenerated</p> <p>The maximum allowable limit for this API is <strong>25</strong>.</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

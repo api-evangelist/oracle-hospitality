@@ -1,0 +1,2008 @@
+{
+  "item": [
+    {
+      "id": "d0447348-dab2-41e6-9fcb-07e3c39ba609",
+      "name": "Onboarding",
+      "description": {
+        "content": "Distribution Onboarding",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e425352e-887f-4116-9112-e44911209cf3",
+          "name": "Update property status for a given channel.",
+          "request": {
+            "name": "Update property status for a given channel.",
+            "description": {
+              "content": "Modify property status for given property for given channel. <p><strong>OperationId:</strong>putPropertyStatus</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hotels",
+                ":hotelCode",
+                "propertyStatus"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hotelCode",
+                  "description": "(Required) The unique identifier of the Property in Channel system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Code for the channel.",
+                "key": "x-channelCode",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Client or Partner's Application Key",
+                "key": "x-app-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Language code",
+                "key": "Accept-Language",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Unique tracing key e.g. 4664ab3423434a45",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Customer's Integration Application Id",
+                "key": "x-originating-application",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json; charset=utf-8"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"connectionStatus\": \"<string>\",\n  \"connectionNotes\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7006af25-7509-437f-9bb7-273e0291735d",
+              "name": "Updated property status for a given channel.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "propertyStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) The unique identifier of the Property in Channel system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Code for the channel.",
+                    "key": "x-channelCode",
+                    "value": "CH1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique tracing key e.g. 4664ab3423434a45",
+                    "key": "x-request-id",
+                    "value": "4664ab3423434a45"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connectionStatus\": \"TEST\",\n  \"connectionNotes\": \"Property onboarded successfully\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Location of the updated resource",
+                  "key": "Location",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Response language",
+                  "key": "Content-Language",
+                  "value": "tkIs-YIHJ-26-a-NtM-PbjSUO-aB5-J"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"hotelCode\": \"XUSXXYY99\",\n  \"channelCode\": \"CH1\",\n  \"connectionInformation\": {\n    \"connectionStatus\": \"TEST\",\n    \"connectionNotes\": \"Property onboarded successfully\",\n    \"connectionStatusLastChangedOn\": \"1950-05-31T18:55:54.917Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a512d6a4-5a2d-4027-8eaa-b743b9ef8255",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "propertyStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) The unique identifier of the Property in Channel system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Code for the channel.",
+                    "key": "x-channelCode",
+                    "value": "CH1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique tracing key e.g. 4664ab3423434a45",
+                    "key": "x-request-id",
+                    "value": "4664ab3423434a45"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connectionStatus\": \"TEST\",\n  \"connectionNotes\": \"Property onboarded successfully\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DCR00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7d3c1c3-0e97-493d-83f1-8ed9f6593a53",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "propertyStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) The unique identifier of the Property in Channel system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Code for the channel.",
+                    "key": "x-channelCode",
+                    "value": "CH1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique tracing key e.g. 4664ab3423434a45",
+                    "key": "x-request-id",
+                    "value": "4664ab3423434a45"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connectionStatus\": \"TEST\",\n  \"connectionNotes\": \"Property onboarded successfully\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DCR00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b496e28-d309-4836-a0e4-5d5d0d509802",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "propertyStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) The unique identifier of the Property in Channel system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Code for the channel.",
+                    "key": "x-channelCode",
+                    "value": "CH1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique tracing key e.g. 4664ab3423434a45",
+                    "key": "x-request-id",
+                    "value": "4664ab3423434a45"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connectionStatus\": \"TEST\",\n  \"connectionNotes\": \"Property onboarded successfully\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DCR00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e32032c6-de5d-4450-ac2a-c02fd68a9330",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "propertyStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) The unique identifier of the Property in Channel system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Code for the channel.",
+                    "key": "x-channelCode",
+                    "value": "CH1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique tracing key e.g. 4664ab3423434a45",
+                    "key": "x-request-id",
+                    "value": "4664ab3423434a45"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connectionStatus\": \"TEST\",\n  \"connectionNotes\": \"Property onboarded successfully\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DCR00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d981aab-6a26-4f9f-9d01-1f635037185f",
+              "name": "Not Allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "propertyStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) The unique identifier of the Property in Channel system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Code for the channel.",
+                    "key": "x-channelCode",
+                    "value": "CH1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique tracing key e.g. 4664ab3423434a45",
+                    "key": "x-request-id",
+                    "value": "4664ab3423434a45"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connectionStatus\": \"TEST\",\n  \"connectionNotes\": \"Property onboarded successfully\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DCR00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1feeb74-ef28-4f10-abb6-0b697c6dbd53",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "propertyStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) The unique identifier of the Property in Channel system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Code for the channel.",
+                    "key": "x-channelCode",
+                    "value": "CH1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique tracing key e.g. 4664ab3423434a45",
+                    "key": "x-request-id",
+                    "value": "4664ab3423434a45"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connectionStatus\": \"TEST\",\n  \"connectionNotes\": \"Property onboarded successfully\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DCR00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b58505a-154a-45a5-8d1c-5186cc9f6026",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "propertyStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) The unique identifier of the Property in Channel system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Code for the channel.",
+                    "key": "x-channelCode",
+                    "value": "CH1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique tracing key e.g. 4664ab3423434a45",
+                    "key": "x-request-id",
+                    "value": "4664ab3423434a45"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connectionStatus\": \"TEST\",\n  \"connectionNotes\": \"Property onboarded successfully\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DCR00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c30ee9e-6486-47f1-80f1-e498ec3a80c5",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "propertyStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) The unique identifier of the Property in Channel system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Code for the channel.",
+                    "key": "x-channelCode",
+                    "value": "CH1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique tracing key e.g. 4664ab3423434a45",
+                    "key": "x-request-id",
+                    "value": "4664ab3423434a45"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connectionStatus\": \"TEST\",\n  \"connectionNotes\": \"Property onboarded successfully\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DCR00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aec5aa58-9d2a-4aca-92aa-75cbda90f119",
+              "name": "Bad Gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "propertyStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) The unique identifier of the Property in Channel system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Code for the channel.",
+                    "key": "x-channelCode",
+                    "value": "CH1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique tracing key e.g. 4664ab3423434a45",
+                    "key": "x-request-id",
+                    "value": "4664ab3423434a45"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connectionStatus\": \"TEST\",\n  \"connectionNotes\": \"Property onboarded successfully\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DCR00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b1b9eac-519f-45a5-9a08-a7005097f38c",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "propertyStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) The unique identifier of the Property in Channel system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Code for the channel.",
+                    "key": "x-channelCode",
+                    "value": "CH1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique tracing key e.g. 4664ab3423434a45",
+                    "key": "x-request-id",
+                    "value": "4664ab3423434a45"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connectionStatus\": \"TEST\",\n  \"connectionNotes\": \"Property onboarded successfully\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DCR00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "466ef252-7d6a-4ae5-9cff-be58e624b096",
+          "name": "Get Property Status.",
+          "request": {
+            "name": "Get Property Status.",
+            "description": {
+              "content": "Retrieve property status for a given channel. <p><strong>OperationId:</strong>getPropertyStatus</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hotels",
+                ":hotelCode",
+                "propertyStatus"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hotelCode",
+                  "description": "(Required) The unique identifier of the Property in Channel system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Code for the channel.",
+                "key": "x-channelCode",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Client or Partner's Application Key",
+                "key": "x-app-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Language code",
+                "key": "Accept-Language",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Unique tracing key e.g. 4664ab3423434a45",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Customer's Integration Application Id",
+                "key": "x-originating-application",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ed482c63-a78f-4ce4-b5a5-6bd890852fad",
+              "name": "Get Property Status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "propertyStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) The unique identifier of the Property in Channel system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Code for the channel.",
+                    "key": "x-channelCode",
+                    "value": "CH1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique tracing key e.g. 4664ab3423434a45",
+                    "key": "x-request-id",
+                    "value": "4664ab3423434a45"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Location of the resource",
+                  "key": "Location",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Response language",
+                  "key": "Content-Language",
+                  "value": "tkIs-YIHJ-26-a-NtM-PbjSUO-aB5-J"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"hotelCode\": \"XUSXXYY99\",\n  \"channelCode\": \"CH1\",\n  \"connectionInformation\": {\n    \"connectionStatus\": \"ACTIVE\",\n    \"connectionNotes\": \"Property onboarded successfully\",\n    \"connectionStatusLastChangedOn\": \"2021-09-17T08:17:18.321Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a1519cb-5bda-4955-a90e-6653750870d4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "propertyStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) The unique identifier of the Property in Channel system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Code for the channel.",
+                    "key": "x-channelCode",
+                    "value": "CH1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique tracing key e.g. 4664ab3423434a45",
+                    "key": "x-request-id",
+                    "value": "4664ab3423434a45"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DCR00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "666fa0d8-6b7d-48a1-9879-fae19b912b29",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "propertyStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) The unique identifier of the Property in Channel system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Code for the channel.",
+                    "key": "x-channelCode",
+                    "value": "CH1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique tracing key e.g. 4664ab3423434a45",
+                    "key": "x-request-id",
+                    "value": "4664ab3423434a45"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DCR00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a528925-9091-4af6-a2ed-d6c4eeca64cc",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "propertyStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) The unique identifier of the Property in Channel system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Code for the channel.",
+                    "key": "x-channelCode",
+                    "value": "CH1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique tracing key e.g. 4664ab3423434a45",
+                    "key": "x-request-id",
+                    "value": "4664ab3423434a45"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DCR00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba37df27-6355-4cf7-965a-0b88560b5972",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "propertyStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) The unique identifier of the Property in Channel system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Code for the channel.",
+                    "key": "x-channelCode",
+                    "value": "CH1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique tracing key e.g. 4664ab3423434a45",
+                    "key": "x-request-id",
+                    "value": "4664ab3423434a45"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DCR00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc61d311-3232-4650-8e14-ec5b582ec3c2",
+              "name": "Not Allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "propertyStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) The unique identifier of the Property in Channel system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Code for the channel.",
+                    "key": "x-channelCode",
+                    "value": "CH1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique tracing key e.g. 4664ab3423434a45",
+                    "key": "x-request-id",
+                    "value": "4664ab3423434a45"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DCR00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d78e5d7-0140-4f29-8693-d2e53c0a9bbd",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "propertyStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) The unique identifier of the Property in Channel system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Code for the channel.",
+                    "key": "x-channelCode",
+                    "value": "CH1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique tracing key e.g. 4664ab3423434a45",
+                    "key": "x-request-id",
+                    "value": "4664ab3423434a45"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DCR00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30271c5b-8c1a-444e-8820-e5d0b85ba272",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "propertyStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) The unique identifier of the Property in Channel system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Code for the channel.",
+                    "key": "x-channelCode",
+                    "value": "CH1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique tracing key e.g. 4664ab3423434a45",
+                    "key": "x-request-id",
+                    "value": "4664ab3423434a45"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DCR00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88e59ef0-a98f-4c73-b253-5125cc5f7be3",
+              "name": "Bad Gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "propertyStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) The unique identifier of the Property in Channel system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Code for the channel.",
+                    "key": "x-channelCode",
+                    "value": "CH1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique tracing key e.g. 4664ab3423434a45",
+                    "key": "x-request-id",
+                    "value": "4664ab3423434a45"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DCR00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc386eb0-52db-4fe7-9e37-e53c4460537a",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelCode",
+                    "propertyStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelCode",
+                      "description": "(Required) The unique identifier of the Property in Channel system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Code for the channel.",
+                    "key": "x-channelCode",
+                    "value": "CH1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique tracing key e.g. 4664ab3423434a45",
+                    "key": "x-request-id",
+                    "value": "4664ab3423434a45"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DCR00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DCR00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/onboard/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c1c9d625-c9ff-43e0-a48e-43385079ff35",
+    "name": "OPERA Cloud Distribution Onboarding",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Oracle Hospitality Distribution Onboarding specification for distribution partners to retrieve property status with its attributes and update property status.<br /><br /> Compatible with OPERA Cloud release 26.2.0.0<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>\n\nContact Support:\n Email: hospitality_apis_ww_grp@oracle.com",
+      "type": "text/plain"
+    }
+  }
+}

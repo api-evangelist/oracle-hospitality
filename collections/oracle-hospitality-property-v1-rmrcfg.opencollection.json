@@ -1,0 +1,1744 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Room Rotation Configuration Service API",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RoomRotationConfig",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Room Rotation Adjustment Reasons",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/adjustmentReasons",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fetchInactive",
+                "value": "",
+                "type": "query",
+                "description": "Determines wether to fetch inactive records or not."
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "Rotation Adjustment Reason Codes to be searched.  Multiple values can be entered by adding multiple query parameters."
+              },
+              {
+                "name": "wildCard",
+                "value": "",
+                "type": "query",
+                "description": "Wildcard search on the code."
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "Description of the code."
+              }
+            ]
+          },
+          "docs": "Use this API to get configured Room Rotation Adjustment Reasons. <p><strong>OperationId:</strong>getAdjustmentReasons</p>"
+        },
+        {
+          "info": {
+            "name": "Post Room Rotation Adjustment Reasons",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/adjustmentReasons",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Use this API to post Room Rotation Adjustment Reasons. <p><strong>OperationId:</strong>postAdjustmentReasons</p>"
+        },
+        {
+          "info": {
+            "name": "Update Room Rotation Adjustment Reasons",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/adjustmentReasons/:adjustmentReasonsId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "adjustmentReasonsId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of Room Rotation Adjustment Reason"
+              }
+            ]
+          },
+          "docs": "Use this API to update Room Rotation Adjustment Reasons. <p><strong>OperationId:</strong>putAdjustmentReasons</p>"
+        },
+        {
+          "info": {
+            "name": "Delete Room Rotation Adjustment Reasons",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/adjustmentReasons/:adjustmentReasonsId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "adjustmentReasonsId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of Room Rotation Adjustment Reason."
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "Code of the Room Rotation Adjustment Reason.  Multiple values can be entered by adding multiple query parameters."
+              }
+            ]
+          },
+          "docs": "Use this API to delete Room Rotation Adjustment Reasons. <p><strong>OperationId:</strong>deleteAdjustmentReasons</p>"
+        },
+        {
+          "info": {
+            "name": "Retrieve all Room Rotation Revenue Transaction Codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/revenueTransactionCodes",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of hotel."
+              },
+              {
+                "name": "rotationRevenue",
+                "value": "",
+                "type": "query",
+                "description": "Indicate to retrieve transaction codes that are marked as Rotation Revenue transaction codes. If this value is omitted, all transaction codes will be returned for the given property."
+              }
+            ]
+          },
+          "docs": "Use this API to retrieve all existing Room Rotation Revenue Transaction Codes for a given hotel. <p><strong>OperationId:</strong>getRevenueTransactionCodes</p>"
+        },
+        {
+          "info": {
+            "name": "Update the room rotation revenue status of a set of transaction codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/revenueTransactionCodes",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of hotel."
+              }
+            ]
+          },
+          "docs": "Use this API to update the room rotation revenue status of a set of transaction codes. <p><strong>OperationId:</strong>putRevenueTransactionCodes</p>"
+        },
+        {
+          "info": {
+            "name": "Fetch Room Rotation Period",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/rotationPeriod",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of hotel."
+              }
+            ]
+          },
+          "docs": "Use this API to fetch Room Rotation Period based on criteria. <p><strong>OperationId:</strong>getRotationPeriod</p>"
+        },
+        {
+          "info": {
+            "name": "Change Room Rotation Period",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/rotationPeriod",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of hotel."
+              }
+            ]
+          },
+          "docs": "Use this API to change Room Rotation Period. <p><strong>OperationId:</strong>putRotationPeriod</p>"
+        },
+        {
+          "info": {
+            "name": "Save changes to Rotation Setup Rules and recalculate Rotation Points",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/rotationRules",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of hotel."
+              }
+            ]
+          },
+          "docs": "This operation will create/update/delete Rotation Setup Rules sent in the request and then recalculate rotation points.  <p><strong>OperationId:</strong>postRoomRotationRules</p>"
+        },
+        {
+          "info": {
+            "name": "Retrieve all Room Rotation Setup Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/rules",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of hotel."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              },
+              {
+                "name": "setupType",
+                "value": "",
+                "type": "query",
+                "description": "Simple type for Rotation Setup Rule(s)."
+              },
+              {
+                "name": "inactiveRules",
+                "value": "",
+                "type": "query",
+                "description": "If set to True, only Inactive Rotation Setup Rules will be retrieved. Otherwise, only Active Rotation Setup Rules will be retrieved."
+              }
+            ]
+          },
+          "docs": "Use this API to retrieve all existing Room Rotation Setup Rules based on criteria. <p><strong>OperationId:</strong>getRotationRules</p>"
+        },
+        {
+          "info": {
+            "name": "Create Room Rotation Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/rules",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of hotel."
+              }
+            ]
+          },
+          "docs": "This API has been deprecated and will be replaced by <p><strong>OperationId:</strong>postRoomRotationRules</p>"
+        },
+        {
+          "info": {
+            "name": "Change Room Rotation Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/rules/:ruleId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "Unique Rotation Group Code."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of hotel."
+              }
+            ]
+          },
+          "docs": "This API has been deprecated and will be replaced by <p><strong>OperationId:</strong>postRoomRotationRules</p>"
+        },
+        {
+          "info": {
+            "name": "Delete an existing Room Rotation Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/rules/:ruleId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of Rotation Rule."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of hotel."
+              }
+            ]
+          },
+          "docs": "This API has been deprecated and will be replaced by <p><strong>OperationId:</strong>postRoomRotationRules</p>"
+        },
+        {
+          "info": {
+            "name": "Get Room Rotation Owner Room Grades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/unitGrades",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of hotel."
+              },
+              {
+                "name": "hotelIds",
+                "value": "",
+                "type": "query",
+                "description": "Unique ID(s) of hotel(s)."
+              },
+              {
+                "name": "fetchInactive",
+                "value": "",
+                "type": "query",
+                "description": "Determines wether to fetch inactive records or not."
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "Configured Owner Room Grade Codes to be searched.  Multiple values can be entered by adding multiple query parameters."
+              },
+              {
+                "name": "wildCard",
+                "value": "",
+                "type": "query",
+                "description": "Wildcard search on Owner Room Grade Codes."
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "Description of Owner Room Grade Codes."
+              }
+            ]
+          },
+          "docs": "Use this API to Get Room Rotation Owner Room Grades. <p><strong>OperationId:</strong>getUnitGrades</p>"
+        },
+        {
+          "info": {
+            "name": "Create a new Room Rotation Owner Room Grade Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/unitGrades",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of hotel."
+              }
+            ]
+          },
+          "docs": "Use this API to create a new Room Rotation Owner Room Grade Code. <p><strong>OperationId:</strong>postUnitGrades</p>"
+        },
+        {
+          "info": {
+            "name": "Change an existing Room Rotation Owner Room Unit Grade",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/unitGrades/:unitGradeCode",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "unitGradeCode",
+                "value": "",
+                "type": "path",
+                "description": "Unique Code of Owner Room Unit Grade."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of hotel."
+              }
+            ]
+          },
+          "docs": "Use this API to update Room Rotation Owner Room Unit Grades. <p><strong>OperationId:</strong>putUnitGrades</p>"
+        },
+        {
+          "info": {
+            "name": "Delete an existing Room Rotation Owner Room Unit Grade",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/unitGrades/:unitGradeCode",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "unitGradeCode",
+                "value": "",
+                "type": "path",
+                "description": "Unique Code of Owner Room Unit Grade."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of hotel."
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "Owner Room Unit Grade Code.  Multiple values can be entered by adding multiple query parameters."
+              }
+            ]
+          },
+          "docs": "Use this API to delete an existing Room Rotation Owner Room Unit Grade. <p><strong>OperationId:</strong>deleteUnitGrades</p>"
+        },
+        {
+          "info": {
+            "name": "Get Room Rotation Override Reasons",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/overrideReasons",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fetchInactive",
+                "value": "",
+                "type": "query",
+                "description": "Determines wether to fetch inactive records or not."
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "Room Rotation Override Reason Codes to be searched.  Multiple values can be entered by adding multiple query parameters."
+              },
+              {
+                "name": "wildCard",
+                "value": "",
+                "type": "query",
+                "description": "Wildcard search on the Room Rotation Override Reason code."
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "Description of the configured Room Rotation Override Reason."
+              }
+            ]
+          },
+          "docs": "Use this API to get configured Room Rotation Override Reasons <p><strong>OperationId:</strong>getOverrideReasons</p>"
+        },
+        {
+          "info": {
+            "name": "Create a new Room Rotation Override Reason",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/overrideReasons",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Use this API to create a new Room Rotation Override Reason. <p><strong>OperationId:</strong>postOverrideReasons</p>"
+        },
+        {
+          "info": {
+            "name": "Change an existing Room Rotation Override Reason",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/overrideReasons/:overrideReasonsId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "overrideReasonsId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of Room Rotation Override Reason"
+              }
+            ]
+          },
+          "docs": "Use this API to update an existing Room Rotation Override Reason. <p><strong>OperationId:</strong>putOverrideReasons</p>"
+        },
+        {
+          "info": {
+            "name": "Delete an existing Room Rotation Override Reason",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/overrideReasons/:overrideReasonsId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "overrideReasonsId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of Room Rotation Override Reason"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "Code of the Room Rotation Override Reason.  Multiple values can be entered by adding multiple query parameters."
+              }
+            ]
+          },
+          "docs": "Use this API to delete an existing Room Rotation Override Reason. <p><strong>OperationId:</strong>deleteOverrideReasons</p>"
+        },
+        {
+          "info": {
+            "name": "Get Profile Owner Referral Records.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/profiles/:profileId/roomOwnerReferrals",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of profile."
+              },
+              {
+                "name": "includeInactive",
+                "value": "",
+                "type": "query",
+                "description": "If set to True, Inactive Room Owner Referrals will also be retrieved. Otherwise, only Active Room Owner Referrals details will be retrieved."
+              }
+            ]
+          },
+          "docs": "Use this API to fetch profile Owner Referral Records. <p><strong>OperationId:</strong>getRoomOwnerReferrals</p>"
+        },
+        {
+          "info": {
+            "name": "Create Room Owner Referrals",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/profiles/:profileId/roomOwnerReferrals",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of profile."
+              }
+            ]
+          },
+          "docs": "Use this API to create multiple Room Owner Referral Records. <p><strong>OperationId:</strong>postRoomOwnerReferrals</p>"
+        },
+        {
+          "info": {
+            "name": "Change Room Owner Referral Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/profiles/:profileId/roomOwnerReferrals/:roomOwnerReferralId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of profile."
+              },
+              {
+                "name": "roomOwnerReferralId",
+                "value": "",
+                "type": "path",
+                "description": "Unique Room Owner Referral Record."
+              }
+            ]
+          },
+          "docs": "Use this API to update Room Owner Referral Record. <p><strong>OperationId:</strong>putRoomOwnerReferral</p>"
+        },
+        {
+          "info": {
+            "name": "Delete Room Owner Referral Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/profiles/:profileId/roomOwnerReferrals/:roomOwnerReferralId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of profile."
+              },
+              {
+                "name": "roomOwnerReferralId",
+                "value": "",
+                "type": "path",
+                "description": "Unique Room Owner Referral Record."
+              }
+            ]
+          },
+          "docs": "Use this API to delete Room Owner Referral Record. <p><strong>OperationId:</strong>deleteRoomOwnerReferral</p>"
+        },
+        {
+          "info": {
+            "name": "Get Profile Room Ownership Records",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/profiles/:profileId/roomOwners",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of profile."
+              },
+              {
+                "name": "showInactiveRoomOwners",
+                "value": "",
+                "type": "query",
+                "description": "If set to True, Inactive Room Ownership Records will also be retrieved. Otherwise, only Active Room Ownership Records will be retrieved."
+              }
+            ]
+          },
+          "docs": "Use this API to fetch profile Room Ownership Records. <p><strong>OperationId:</strong>getProfileRoomOwners</p>"
+        },
+        {
+          "info": {
+            "name": "Create Room Ownership Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/roomOwners",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Use this API to create Create Room Ownership Record. <p><strong>OperationId:</strong>postRoomOwner</p>"
+        },
+        {
+          "info": {
+            "name": "Change Room Ownership Records",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/roomOwners",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Use this API to update Multiple Room Ownership Records across properties. <p><strong>OperationId:</strong>putRoomOwner</p>"
+        },
+        {
+          "info": {
+            "name": "Delete Room Ownership Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/roomOwners/:roomOwnershipId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "roomOwnershipId",
+                "value": "",
+                "type": "path",
+                "description": "Unique Id for Room Ownership Record."
+              },
+              {
+                "name": "overrideReferralCheck",
+                "value": "",
+                "type": "query",
+                "description": "Indicate to Override the Referral record Check if applicable."
+              }
+            ]
+          },
+          "docs": "Use this API to delete Room Ownership Record. <p><strong>OperationId:</strong>deleteRoomOwner</p>"
+        },
+        {
+          "info": {
+            "name": "Ping",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/services/roomrotation/status",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "operaPingInput",
+                "value": "",
+                "type": "query",
+                "description": "Opera Ping request input type"
+              }
+            ]
+          },
+          "docs": "This API facilitates status check of room rotation service <p><strong>OperationId:</strong>pingRoomRotationConfigService</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

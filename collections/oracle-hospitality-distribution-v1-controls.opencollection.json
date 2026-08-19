@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Distribution Property Controls",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Distribution Controls",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch Channel Property Controls for a given channel and a Hotel.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelCode/propertyControls",
+            "headers": [
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Property in Channel system."
+              }
+            ]
+          },
+          "docs": "Fetch Channel Property Controls for a given property for given channel. <p><strong>OperationId:</strong>getPropertyControls</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

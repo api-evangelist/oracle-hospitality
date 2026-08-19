@@ -1,0 +1,838 @@
+{
+  "item": [
+    {
+      "id": "0fb8dff5-7db2-492b-9cd1-f7b7d9bbb05e",
+      "name": "CashieringAsync",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0bf996c6-e65f-4e27-bdc9-57df4adcc73c",
+          "name": "Get Financial Postings with Net and Vat breakdown.",
+          "request": {
+            "name": "Get Financial Postings with Net and Vat breakdown.",
+            "description": {
+              "content": "You can use this API to get Financial postings with Net and Vat breakdown. <p><strong>OperationId:</strong>startFinancialPostingsAsync</p> <p>This API allows a time span of <strong>15</strong> days.</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hotels",
+                ":hotelId",
+                "financialPostingsNetVat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hotelId",
+                  "description": "(Required) Unique ID of the hotel"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Pass this header as true, if payload needs DVM",
+                "key": "externalData",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Client or Partner's Application Key",
+                "key": "x-app-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Request Id of an incoming request",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Customer's Integration Application Id",
+                "key": "x-originating-application",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                "key": "x-hotelid",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Language code",
+                "key": "Accept-Language",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"netvatcriteriatype\": {\n    \"hotelId\": \"<string>\",\n    \"folioWindowNo\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"includePseudoRooms\": \"<string>\",\n    \"reservationId\": \"<string>\",\n    \"timeSpan\": {\n      \"startDate\": \"<date>\",\n      \"endDate\": \"<date>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "479fd065-96b9-46e2-911b-026cd62d6b3e",
+              "name": "Location of process status resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "financialPostingsNetVat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"netvatcriteriatype\": {\n    \"hotelId\": \"<string>\",\n    \"folioWindowNo\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"includePseudoRooms\": \"<string>\",\n    \"reservationId\": \"<string>\",\n    \"timeSpan\": {\n      \"startDate\": \"<date>\",\n      \"endDate\": \"<date>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audience language",
+                  "key": "Content-Language",
+                  "value": "qAKKrjW-NTPXu-miHsI-QgKqgJr-MhYlvfUd"
+                },
+                {
+                  "disabled": false,
+                  "description": "Location of process status resource",
+                  "key": "Location",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4aec1a3-d950-4865-ac12-30c1075710e6",
+          "name": "Check status of financial postings process",
+          "request": {
+            "name": "Check status of financial postings process",
+            "description": {
+              "content": "Use this to check whether the response is ready yet. You can get  the value of statusId with startFinancialPostingsAsync API response (under header location). <p><strong>OperationId:</strong>getFinancialPostingsProcessStatusAsync</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hotels",
+                ":hotelId",
+                "financialPostingsNetVat",
+                ":statusId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "statusId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hotelId",
+                  "description": "(Required) Unique ID of the hotel"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Pass this header as true, if payload needs DVM",
+                "key": "externalData",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Client or Partner's Application Key",
+                "key": "x-app-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Request Id of an incoming request",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Customer's Integration Application Id",
+                "key": "x-originating-application",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                "key": "x-hotelid",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Language code",
+                "key": "Accept-Language",
+                "value": "<string>"
+              }
+            ],
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d86aeaa0-52e5-44dd-b489-c26234cab254",
+              "name": "Response for status of scheduled asynchronous process.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "financialPostingsNetVat",
+                    ":statusId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "statusId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audience language",
+                  "key": "Content-Language",
+                  "value": "qAKKrjW-NTPXu-miHsI-QgKqgJr-MhYlvfUd"
+                },
+                {
+                  "disabled": false,
+                  "description": "Status of the requested process.",
+                  "key": "Status",
+                  "value": "Processing"
+                },
+                {
+                  "disabled": false,
+                  "description": "number of seconds to wait before polling again.",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "41a5c8f8-9fc7-4f25-b946-8b55fdd7728c",
+              "name": "Response for status of scheduled asynchronous process.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "financialPostingsNetVat",
+                    ":statusId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "statusId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audience language",
+                  "key": "Content-Language",
+                  "value": "qAKKrjW-NTPXu-miHsI-QgKqgJr-MhYlvfUd"
+                },
+                {
+                  "disabled": false,
+                  "description": "Status of the requested process.",
+                  "key": "Status",
+                  "value": "Completed"
+                },
+                {
+                  "disabled": false,
+                  "description": "Location of newly created resource once the status of process run is Complete.",
+                  "key": "Location",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "4d7db405-54c5-4192-ac3c-a8e54319c826",
+      "name": "Cashiering",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4b5326fd-8229-4f40-8131-9480fc81671c",
+          "name": "Get results of Financial Postings with Net and Vat breakdown.",
+          "request": {
+            "name": "Get results of Financial Postings with Net and Vat breakdown.",
+            "description": {
+              "content": "This API returns response for the process initiated with startFinancialPostingsAsync. You can get the value of statusId with getFinancialPostingsProcessStatusAsync API response (under header location). <p><strong>OperationId:</strong>getFinancialPostingsAsync</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hotels",
+                ":hotelId",
+                "financialPostingsNetVat",
+                ":statusId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hotelId",
+                  "description": "(Required) Unique ID of the hotel"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "statusId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Pass this header as true, if payload needs DVM",
+                "key": "externalData",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Client or Partner's Application Key",
+                "key": "x-app-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Request Id of an incoming request",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Customer's Integration Application Id",
+                "key": "x-originating-application",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                "key": "x-hotelid",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "External system code.",
+                "key": "x-externalsystem",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Language code",
+                "key": "Accept-Language",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "93ef42f3-af30-458b-9dee-8621b3baf42c",
+              "name": "Response for fetching the Posting Journal.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "financialPostingsNetVat",
+                    ":statusId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "statusId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audience language",
+                  "key": "Content-Language",
+                  "value": "qAKKrjW-NTPXu-miHsI-QgKqgJr-MhYlvfUd"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"financialPostings\": [\n    {\n      \"posting\": {\n        \"referenceTransactionNo\": 5015.580052056733,\n        \"referencePackageTransactionNo\": 4966.788308292648,\n        \"remark\": \"string\",\n        \"reference\": \"string\",\n        \"checkNo\": \"string\",\n        \"checkCount\": \"string\",\n        \"postedAmount\": {\n          \"amount\": 5245.152565143205,\n          \"currencyCode\": \"string\"\n        },\n        \"price\": {\n          \"amount\": 3158.433264512357,\n          \"currencyCode\": \"string\"\n        },\n        \"quantity\": 7487.245482435617,\n        \"transactionType\": \"Wrapper\",\n        \"creditAmount\": {\n          \"amount\": 1341.3539729272616,\n          \"currencyCode\": \"string\"\n        },\n        \"debitAmount\": {\n          \"amount\": 7861.20615475216,\n          \"currencyCode\": \"string\"\n        },\n        \"articleCode\": \"st\",\n        \"cashierInfo\": {\n          \"cashierId\": 7430.809892994232,\n          \"cashierName\": \"string\"\n        },\n        \"paidOut\": false,\n        \"arrangementCode\": \"string\",\n        \"groupTypeInfo\": {\n          \"groupId\": \"string\",\n          \"groupCount\": 1825,\n          \"groupDescription\": \"string\",\n          \"subGroupId\": \"string\"\n        },\n        \"rateCode\": \"str\",\n        \"compRedemptionCode\": \"s\",\n        \"updateInfo\": {\n          \"updateDate\": \"1947-12-\",\n          \"updateBy\": \"string\"\n        },\n        \"fbaCertificate\": true,\n        \"taxInvoiceNo\": \"string\",\n        \"serviceRecovery\": false,\n        \"compPostingsInfo\": {\n          \"authorizer\": \"string\",\n          \"approvalStatus\": \"string\"\n        },\n        \"financialTransactionIdList\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"exchange\": {\n          \"debitAmount\": {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currencyCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"creditAmount\": {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currencyCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"approvalCode\": \"string\",\n        \"approvalStatus\": \"string\",\n        \"stampDuty\": false,\n        \"customCharge\": true,\n        \"transactionNo\": 9031.500503852349,\n        \"transactionDate\": \"1987-04-\",\n        \"transactionCode\": \"string\",\n        \"transactionDescription\": \"string\",\n        \"transactionAmount\": 1816.7692178291218,\n        \"postingDate\": \"1950-02-\",\n        \"revenueDate\": \"1971-01-\",\n        \"receiptNo\": 1489.8516796097294,\n        \"roundingDifferenceTrx\": true,\n        \"commissionable\": true,\n        \"reversePaymentTransactionNo\": 5513.956823839443,\n        \"canAdjustInvoice\": true,\n        \"depositTransactionId\": \"string\",\n        \"hotelId\": \"string\",\n        \"targetHotel\": \"string\",\n        \"subPostings\": [\n          {\n            \"referenceTransactionNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"remark\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reference\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"checkNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"checkCount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postedAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"creditAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"debitAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"articleCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cashierInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"paidOut\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"arrangementCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupTypeInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rateCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"compRedemptionCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updateInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fbaCertificate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"taxInvoiceNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"serviceRecovery\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"compPostingsInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"financialTransactionIdList\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"exchange\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"approvalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"approvalStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"stampDuty\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"customCharge\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionDescription\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postingDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postingTime\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"revenueDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"receiptNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"officialBIRReceiptExists\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"roundingDifferenceTrx\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"commissionable\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reversePaymentTransactionNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"canAdjustInvoice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"depositTransactionId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupByCount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"folioWindowNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deferredTax\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"awardTransaction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"covers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"proformaFlag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"referenceTransactionNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"remark\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reference\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"checkNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"checkCount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postedAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"creditAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"debitAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"articleCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cashierInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"paidOut\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"arrangementCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupTypeInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rateCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"compRedemptionCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updateInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fbaCertificate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"taxInvoiceNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"serviceRecovery\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"compPostingsInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"financialTransactionIdList\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"exchange\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"approvalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"approvalStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"stampDuty\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"customCharge\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionDescription\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postingDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postingTime\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"revenueDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"receiptNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"officialBIRReceiptExists\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"roundingDifferenceTrx\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"commissionable\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reversePaymentTransactionNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"canAdjustInvoice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"depositTransactionId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupByCount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"folioWindowNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deferredTax\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"awardTransaction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"covers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"proformaFlag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"guestInfo\": {\n          \"profileId\": {\n            \"url\": \"string\",\n            \"type\": \"string\",\n            \"instance\": \"str\",\n            \"idContext\": \"string\",\n            \"id\": \"string\",\n            \"idExtension\": 9583\n          },\n          \"reservationId\": {\n            \"url\": \"string\",\n            \"type\": \"string\",\n            \"instance\": \"string\",\n            \"idContext\": \"string\",\n            \"id\": \"string\",\n            \"idExtension\": 3224\n          },\n          \"guestName\": \"string\",\n          \"roomId\": \"string\",\n          \"confirmationNo\": \"string\"\n        },\n        \"aRInfo\": {\n          \"accountNumber\": \"string\",\n          \"accountName\": \"string\",\n          \"invoiceNo\": 3894.9601099887564\n        },\n        \"currencyExchangeInfo\": {\n          \"description\": \"string\",\n          \"exchangeRate\": {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currencyCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"currencyAmount\": {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currencyCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"amount\": {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currencyCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"commissionPercent\": 5098.761788058681,\n          \"code\": \"string\",\n          \"exchangeDate\": \"1961-03-\"\n        },\n        \"adjustmentInfo\": {\n          \"reason\": \"string\",\n          \"departmentCode\": \"string\",\n          \"code\": \"string\"\n        },\n        \"paymentMethod\": {\n          \"paymentCard\": {\n            \"cardId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currentAuthorizedAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"approvalAmountNeeded\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"approvalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cardType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"userDefinedCardType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cardNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cardNumberMasked\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cardNumberLast4Digits\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expirationDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expirationDateMasked\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expirationDateExpired\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cardHolderName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"attachCreditCardToProfile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"processing\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"swiped\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cardPresent\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cardOrToken\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"citId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"storeToCreditCardWallet\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"balance\": {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currencyCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"authorizationRule\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"percent\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"emailFolioInfo\": {\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"emailFolio\": true,\n            \"id\": \"string\",\n            \"type\": \"string\"\n          },\n          \"paymentMethod\": \"s\",\n          \"description\": \"string\",\n          \"folioView\": 9778\n        },\n        \"payeeInfo\": {\n          \"payeeId\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"payeeName\": \"string\",\n          \"payeeAddress\": {\n            \"address\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"payeeAddressCount\": 1506,\n          \"payeeReferenceCurrency\": \"string\",\n          \"payeeAccountInfo\": {\n            \"accountName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accountId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accountNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"payeeTaxNumber\": \"string\",\n          \"payeeInternalFolio\": false\n        },\n        \"miscellaneousInfo\": {\n          \"createDateTime\": \"1985-04-28T19:36:03.818Z\",\n          \"covers\": \"string\"\n        },\n        \"exchangeInformation\": \"string\",\n        \"folioWindowNo\": 5464,\n        \"folioNo\": 1586.0981886587056,\n        \"folioNoWithPrefix\": \"string\",\n        \"internalFolioWindowID\": \"string\",\n        \"revisionNo\": 9428.548466260081,\n        \"folioTypeName\": \"string\",\n        \"fiscalBillNo\": \"string\",\n        \"deferredTax\": false\n      },\n      \"postingBreakdown\": {\n        \"grossAmount\": {\n          \"amount\": 4834.207051666698,\n          \"currencyCode\": \"string\"\n        },\n        \"netAmount\": {\n          \"amount\": 8217.602117926044,\n          \"currencyCode\": \"string\"\n        },\n        \"taxes\": [\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionNo\": 4860.067524779953,\n            \"referenceTransactionNo\": 8645.881465399867,\n            \"transactionCode\": \"string\",\n            \"transactionDate\": \"1987-04-\"\n          },\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionNo\": 5881.414167602774,\n            \"referenceTransactionNo\": 1472.1308054764158,\n            \"transactionCode\": \"string\",\n            \"transactionDate\": \"1955-05-\"\n          }\n        ]\n      }\n    },\n    {\n      \"posting\": {\n        \"referenceTransactionNo\": 8775.49669781538,\n        \"referencePackageTransactionNo\": 729.9729644020647,\n        \"remark\": \"string\",\n        \"reference\": \"string\",\n        \"checkNo\": \"string\",\n        \"checkCount\": \"string\",\n        \"postedAmount\": {\n          \"amount\": 1544.3135330974478,\n          \"currencyCode\": \"string\"\n        },\n        \"price\": {\n          \"amount\": 3063.1077473787827,\n          \"currencyCode\": \"string\"\n        },\n        \"quantity\": 6347.375106978256,\n        \"transactionType\": \"Wrapper\",\n        \"creditAmount\": {\n          \"amount\": 2690.994330844417,\n          \"currencyCode\": \"stri\"\n        },\n        \"debitAmount\": {\n          \"amount\": 7297.402484789874,\n          \"currencyCode\": \"string\"\n        },\n        \"articleCode\": \"string\",\n        \"cashierInfo\": {\n          \"cashierId\": 3987.5203882443598,\n          \"cashierName\": \"string\"\n        },\n        \"paidOut\": true,\n        \"arrangementCode\": \"strin\",\n        \"groupTypeInfo\": {\n          \"groupId\": \"string\",\n          \"groupCount\": 5286,\n          \"groupDescription\": \"string\",\n          \"subGroupId\": \"string\"\n        },\n        \"rateCode\": \"string\",\n        \"compRedemptionCode\": \"stri\",\n        \"updateInfo\": {\n          \"updateDate\": \"1998-04-\",\n          \"updateBy\": \"string\"\n        },\n        \"fbaCertificate\": true,\n        \"taxInvoiceNo\": \"s\",\n        \"serviceRecovery\": false,\n        \"compPostingsInfo\": {\n          \"authorizer\": \"string\",\n          \"approvalStatus\": \"string\"\n        },\n        \"financialTransactionIdList\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"exchange\": {\n          \"debitAmount\": {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currencyCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"creditAmount\": {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currencyCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"approvalCode\": \"string\",\n        \"approvalStatus\": \"string\",\n        \"stampDuty\": true,\n        \"customCharge\": true,\n        \"transactionNo\": 6151.1606560858345,\n        \"transactionDate\": \"2001-07-\",\n        \"transactionCode\": \"string\",\n        \"transactionDescription\": \"string\",\n        \"transactionAmount\": 232.3555805510913,\n        \"postingDate\": \"1993-04-\",\n        \"revenueDate\": \"1951-02-\",\n        \"receiptNo\": 7882.0617851968445,\n        \"roundingDifferenceTrx\": false,\n        \"commissionable\": true,\n        \"reversePaymentTransactionNo\": 5115.317774794646,\n        \"canAdjustInvoice\": false,\n        \"depositTransactionId\": \"string\",\n        \"hotelId\": \"string\",\n        \"targetHotel\": \"string\",\n        \"subPostings\": [\n          {\n            \"referenceTransactionNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"remark\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reference\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"checkNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"checkCount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postedAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"creditAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"debitAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"articleCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cashierInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"paidOut\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"arrangementCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupTypeInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rateCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"compRedemptionCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updateInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fbaCertificate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"taxInvoiceNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"serviceRecovery\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"compPostingsInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"financialTransactionIdList\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"exchange\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"approvalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"approvalStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"stampDuty\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"customCharge\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionDescription\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postingDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postingTime\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"revenueDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"receiptNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"officialBIRReceiptExists\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"roundingDifferenceTrx\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"commissionable\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reversePaymentTransactionNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"canAdjustInvoice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"depositTransactionId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupByCount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"folioWindowNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deferredTax\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"awardTransaction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"covers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"proformaFlag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"referenceTransactionNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"remark\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reference\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"checkNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"checkCount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postedAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"creditAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"debitAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"articleCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cashierInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"paidOut\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"arrangementCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupTypeInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rateCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"compRedemptionCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updateInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fbaCertificate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"taxInvoiceNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"serviceRecovery\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"compPostingsInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"financialTransactionIdList\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"exchange\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"approvalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"approvalStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"stampDuty\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"customCharge\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionDescription\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postingDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postingTime\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"revenueDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"receiptNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"officialBIRReceiptExists\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"roundingDifferenceTrx\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"commissionable\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reversePaymentTransactionNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"canAdjustInvoice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"depositTransactionId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupByCount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"folioWindowNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deferredTax\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"awardTransaction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"covers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"proformaFlag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"guestInfo\": {\n          \"profileId\": {\n            \"url\": \"string\",\n            \"type\": \"string\",\n            \"instance\": \"string\",\n            \"idContext\": \"string\",\n            \"id\": \"st\",\n            \"idExtension\": 1511\n          },\n          \"reservationId\": {\n            \"url\": \"string\",\n            \"type\": \"st\",\n            \"instance\": \"string\",\n            \"idContext\": \"string\",\n            \"id\": \"string\",\n            \"idExtension\": 8471\n          },\n          \"guestName\": \"string\",\n          \"roomId\": \"st\",\n          \"confirmationNo\": \"string\"\n        },\n        \"aRInfo\": {\n          \"accountNumber\": \"string\",\n          \"accountName\": \"string\",\n          \"invoiceNo\": 2518.778898228199\n        },\n        \"currencyExchangeInfo\": {\n          \"description\": \"string\",\n          \"exchangeRate\": {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currencyCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"currencyAmount\": {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currencyCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"amount\": {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currencyCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"commissionPercent\": 7433.945390839113,\n          \"code\": \"string\",\n          \"exchangeDate\": \"1958-12-\"\n        },\n        \"adjustmentInfo\": {\n          \"reason\": \"string\",\n          \"departmentCode\": \"stri\",\n          \"code\": \"stri\"\n        },\n        \"paymentMethod\": {\n          \"paymentCard\": {\n            \"cardId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currentAuthorizedAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"approvalAmountNeeded\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"approvalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cardType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"userDefinedCardType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cardNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cardNumberMasked\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cardNumberLast4Digits\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expirationDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expirationDateMasked\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expirationDateExpired\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cardHolderName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"attachCreditCardToProfile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"processing\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"swiped\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cardPresent\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cardOrToken\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"citId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"storeToCreditCardWallet\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"balance\": {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currencyCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"authorizationRule\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"percent\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"emailFolioInfo\": {\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"emailFolio\": true,\n            \"id\": \"string\",\n            \"type\": \"string\"\n          },\n          \"paymentMethod\": \"string\",\n          \"description\": \"string\",\n          \"folioView\": 8202\n        },\n        \"payeeInfo\": {\n          \"payeeId\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"payeeName\": \"string\",\n          \"payeeAddress\": {\n            \"address\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"payeeAddressCount\": 6000,\n          \"payeeReferenceCurrency\": \"strin\",\n          \"payeeAccountInfo\": {\n            \"accountName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accountId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accountNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"payeeTaxNumber\": \"string\",\n          \"payeeInternalFolio\": true\n        },\n        \"miscellaneousInfo\": {\n          \"createDateTime\": \"1957-12-07T10:37:58.917Z\",\n          \"covers\": \"st\"\n        },\n        \"exchangeInformation\": \"string\",\n        \"folioWindowNo\": 63,\n        \"folioNo\": 9965.67497558062,\n        \"folioNoWithPrefix\": \"string\",\n        \"internalFolioWindowID\": \"string\",\n        \"revisionNo\": 8230.206927449817,\n        \"folioTypeName\": \"string\",\n        \"fiscalBillNo\": \"string\",\n        \"deferredTax\": true\n      },\n      \"postingBreakdown\": {\n        \"grossAmount\": {\n          \"amount\": 58.01849468644593,\n          \"currencyCode\": \"string\"\n        },\n        \"netAmount\": {\n          \"amount\": 5226.833944377059,\n          \"currencyCode\": \"string\"\n        },\n        \"taxes\": [\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionNo\": 6025.618778988888,\n            \"referenceTransactionNo\": 8182.3877065993975,\n            \"transactionCode\": \"string\",\n            \"transactionDate\": \"2014-07-\"\n          },\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionNo\": 4054.9030853045497,\n            \"referenceTransactionNo\": 8661.335238537491,\n            \"transactionCode\": \"string\",\n            \"transactionDate\": \"2019-12-\"\n          }\n        ]\n      }\n    }\n  ],\n  \"totalPages\": 6385,\n  \"hasMore\": false,\n  \"links\": [\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"DELETE\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"POST\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    }\n  ],\n  \"warnings\": [\n    {\n      \"value\": \"string\",\n      \"shortText\": \"string\",\n      \"code\": \"string\",\n      \"docURL\": \"string\",\n      \"status\": \"string\",\n      \"tag\": \"string\",\n      \"recordId\": \"string\",\n      \"type\": \"string\",\n      \"language\": \"Yq-m-PhhuTFG8-E-W3b-5rGn-FhxepZ-Mk-Pjmcx-o09IR2Ol-ZbaIGV9\",\n      \"rph\": \"string\"\n    },\n    {\n      \"value\": \"string\",\n      \"shortText\": \"string\",\n      \"code\": \"string\",\n      \"docURL\": \"string\",\n      \"status\": \"string\",\n      \"tag\": \"string\",\n      \"recordId\": \"string\",\n      \"type\": \"stri\",\n      \"language\": \"CW-mF4-Xka-NHx\",\n      \"rph\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e5d7bca-3ef7-41ba-b7a2-401e621fca9a",
+              "name": "FinancialPostings not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "financialPostingsNetVat",
+                    ":statusId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "statusId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/csh/async/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8da76902-f8bf-4024-ac28-f91c121f27a0",
+    "name": "OPERA Cloud Cashiering Asynchronous API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to cater for Cashiering related asynchronous functionality in OPERA Cloud.<br /><br /> Compatible with OPERA Cloud release 26.2.0.0.<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>\n\nContact Support:\n Email: hospitality_apis_ww_grp@oracle.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Distribution Authentication API",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authenticate with the identity server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/token",
+            "headers": [
+              {
+                "name": "x-app-key",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "<p>This is required to access the OPERA Cloud Distribution REST APIs.</p> <h3>Obtaining a token</h3> <p>To obtain a token include the following body parameters:</p> <ul> <li><strong>username</strong>.  set this to your OPERA Cloud Distribution username.</strong></li> <li><strong>password</strong>.  Set this to your OPERA Cloud Distribution user's password.</li> </ul></p><p><strong>OperationId:</strong>getToken</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

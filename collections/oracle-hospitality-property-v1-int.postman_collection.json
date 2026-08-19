@@ -1,0 +1,3031 @@
+{
+  "item": [
+    {
+      "id": "979afddd-6f43-472b-a62c-894b146e3d02",
+      "name": "IntegrationProcessor",
+      "description": {
+        "content": "The Integration Processor Service provides a set of operations which help the external customers and vendors to process Business Events generated in OPERA.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "80eef7e2-95aa-46cc-87ef-5fa520d64dc9",
+          "name": "Get Business Events by External System",
+          "request": {
+            "name": "Get Business Events by External System",
+            "description": {
+              "content": "Business Event messages are placed in a queue. Use this API to dequeue/fetch the Business Event messages based on the external system for all hotels within the same chain. In order to get events, you must have a unique consumer code for the External System and hotels. <p><strong>OperationId:</strong>getBusinessEventsByExternalSystem</p> <p>The maximum allowable limit for this API is <strong>20</strong>.</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "externalSystem",
+                ":extSystemCode",
+                "businessEvents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of messages web service should dequeue from the BE queue."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "extSystemCode",
+                  "description": "(Required) External system code which will be used to dequeue the events"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Pass this header as true, if payload needs DVM",
+                "key": "externalData",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Client or Partner's Application Key",
+                "key": "x-app-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Request Id of an incoming request",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Customer's Integration Application Id",
+                "key": "x-originating-application",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                "key": "x-hotelid",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "External system code.",
+                "key": "x-externalsystem",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Language code",
+                "key": "Accept-Language",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "804be922-40b4-4711-8f36-212b6b9411f4",
+              "name": "Provides business event message dequeued from BE queue as response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audience language",
+                  "key": "Content-Language",
+                  "value": "migASG-TPIWfCpx-MsY-H8-MQyfGk-yyfywff-sSt-VDSsCzT-Na5zXB-BcKbiV-A04XT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"businessEventData\": [\n    {\n      \"businessEvent\": {\n        \"header\": {\n          \"moduleName\": \"StayRecords\",\n          \"actionType\": \"string\",\n          \"actionId\": 4028.4907269163828,\n          \"primaryKey\": \"string\",\n          \"parentActionId\": 4609.689254951705,\n          \"publisherId\": 3216.2071488759125,\n          \"createdDateTime\": \"2007-01-23T15:51:17.298Z\",\n          \"hotelId\": \"strin\"\n        },\n        \"details\": [\n          {\n            \"dataElement\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"newValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scopeFrom\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scopeTo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementSequence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementRole\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hotelId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"dataElement\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"newValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scopeFrom\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scopeTo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementSequence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementRole\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hotelId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"businessEventId\": {\n        \"type\": \"st\",\n        \"idContext\": \"string\",\n        \"id\": \"string\"\n      }\n    },\n    {\n      \"businessEvent\": {\n        \"header\": {\n          \"moduleName\": \"Catering\",\n          \"actionType\": \"string\",\n          \"actionId\": 9380.028473405291,\n          \"primaryKey\": \"string\",\n          \"parentActionId\": 6582.266539235744,\n          \"publisherId\": 1280.8355675885496,\n          \"createdDateTime\": \"2010-02-23T01:51:27.384Z\",\n          \"hotelId\": \"string\"\n        },\n        \"details\": [\n          {\n            \"dataElement\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"newValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scopeFrom\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scopeTo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementSequence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementRole\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hotelId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"dataElement\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"newValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scopeFrom\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scopeTo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementSequence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementRole\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hotelId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"businessEventId\": {\n        \"type\": \"string\",\n        \"idContext\": \"string\",\n        \"id\": \"string\"\n      }\n    }\n  ],\n  \"dataValueMapping\": [\n    {\n      \"dataElement\": \"string\",\n      \"operaValue\": \"string\",\n      \"externalValue\": \"string\"\n    },\n    {\n      \"dataElement\": \"string\",\n      \"operaValue\": \"string\",\n      \"externalValue\": \"string\"\n    }\n  ],\n  \"links\": [\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"PATCH\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"PUT\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    }\n  ],\n  \"warnings\": [\n    {\n      \"value\": \"string\",\n      \"shortText\": \"string\",\n      \"code\": \"str\",\n      \"docURL\": \"string\",\n      \"status\": \"string\",\n      \"tag\": \"string\",\n      \"recordId\": \"string\",\n      \"type\": \"string\",\n      \"language\": \"HKvHq-J5xmd\",\n      \"rph\": \"string\"\n    },\n    {\n      \"value\": \"string\",\n      \"shortText\": \"string\",\n      \"code\": \"string\",\n      \"docURL\": \"string\",\n      \"status\": \"string\",\n      \"tag\": \"string\",\n      \"recordId\": \"string\",\n      \"type\": \"string\",\n      \"language\": \"MrCIKW-1kzCcd-q6eJ9qou-NNw2Yoru-DKRIU2Gj-U3izMbM-7ym-Rkx0Iw-cj3dnHV-4B-B0\",\n      \"rph\": \"s\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73a04a57-e768-41c2-94ee-8ed096710766",
+              "name": "BusinessEventsByExternalSystem not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f8e27c3e-8377-48b9-9831-da600b54854a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 9311,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"o:errorCode\": \"string\",\n  \"o:errorPath\": \"string\",\n  \"o:errorDetails\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 9163,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 1315,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    }\n  ],\n  \"links\": [\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"GET\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"GET\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6074a6d-29a7-444a-9aab-08b181706180",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "339741b5-fbc3-4cc9-be3b-c1d2596edde9",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "79a5b4d2-956f-4d18-b140-f67a154b718a",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 325,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"o:errorCode\": \"string\",\n  \"o:errorPath\": \"string\",\n  \"o:errorDetails\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 3809,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 5425,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    }\n  ],\n  \"links\": [\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"PATCH\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"PATCH\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a5f8878-a82e-44cf-bd14-628541140728",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c42a3c25-189d-47d0-9787-1a8872d46960",
+              "name": "Not acceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5578cf01-df78-4b7e-b0c9-3d60f58ce31c",
+              "name": "Request Entity Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1fdda98e-0906-44cf-94be-abcb4ff213cb",
+              "name": "Request URI Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request-URI Too Long",
+              "code": 414,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bb108228-8207-4059-b60b-8cc6feabc760",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "71179a18-f27a-4d17-9bd8-35e7dbc873f4",
+              "name": "System Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 325,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"o:errorCode\": \"string\",\n  \"o:errorPath\": \"string\",\n  \"o:errorDetails\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 3809,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 5425,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    }\n  ],\n  \"links\": [\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"PATCH\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"PATCH\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ba36cbc-5d3b-4ef1-86aa-b69238b76c68",
+              "name": "Bad Gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "38653ba1-2312-4db0-ac96-931727e94546",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a28155c-8ea9-447d-90df-f90fd98e2e6e",
+          "name": "Get Business Events by External System and Hotel ID",
+          "request": {
+            "name": "Get Business Events by External System and Hotel ID",
+            "description": {
+              "content": "Business Event messages are placed in a queue. Use this API to fetch(dequeue) the Business Event messages based on the External System and Hotel ID. In order to get property specific business event messages, you must have a unique consumer code (OPERA Cloud UI > Toolbox > External Database) for the External System and the Hotel ID. <p><strong>OperationId:</strong>getBusinessEvents</p> <p>The maximum allowable limit for this API is <strong>20</strong>.</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "externalSystem",
+                ":extSystemCode",
+                "hotels",
+                ":hotelId",
+                "businessEvents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of messages web service should dequeue from the BE queue."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hotelId",
+                  "description": "(Required) Unique OPERA Hotel code"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "extSystemCode",
+                  "description": "(Required) External system code which will be used to dequeue the events."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Pass this header as true, if payload needs DVM",
+                "key": "externalData",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Client or Partner's Application Key",
+                "key": "x-app-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Request Id of an incoming request",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Customer's Integration Application Id",
+                "key": "x-originating-application",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                "key": "x-hotelid",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "External system code.",
+                "key": "x-externalsystem",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Language code",
+                "key": "Accept-Language",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b73d4149-4c2b-4493-8297-34d1cd15316c",
+              "name": "Provides business event message dequeued from BE queue as response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "hotels",
+                    ":hotelId",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique OPERA Hotel code"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audience language",
+                  "key": "Content-Language",
+                  "value": "migASG-TPIWfCpx-MsY-H8-MQyfGk-yyfywff-sSt-VDSsCzT-Na5zXB-BcKbiV-A04XT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"businessEventData\": [\n    {\n      \"businessEvent\": {\n        \"header\": {\n          \"moduleName\": \"Housekeeping\",\n          \"actionType\": \"string\",\n          \"actionId\": 300.17506251561076,\n          \"primaryKey\": \"string\",\n          \"parentActionId\": 6259.558204449299,\n          \"publisherId\": 2708.944391108712,\n          \"createdDateTime\": \"1958-06-16T14:34:58.311Z\",\n          \"hotelId\": \"string\"\n        },\n        \"details\": [\n          {\n            \"dataElement\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"newValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scopeFrom\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scopeTo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementSequence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementRole\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hotelId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"dataElement\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"newValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scopeFrom\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scopeTo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementSequence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementRole\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hotelId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"businessEventId\": {\n        \"type\": \"string\",\n        \"idContext\": \"string\",\n        \"id\": \"string\"\n      }\n    },\n    {\n      \"businessEvent\": {\n        \"header\": {\n          \"moduleName\": \"Availability\",\n          \"actionType\": \"string\",\n          \"actionId\": 2269.7211102115257,\n          \"primaryKey\": \"string\",\n          \"parentActionId\": 2409.751297290359,\n          \"publisherId\": 4181.040164871516,\n          \"createdDateTime\": \"2012-04-24T19:19:16.560Z\",\n          \"hotelId\": \"string\"\n        },\n        \"details\": [\n          {\n            \"dataElement\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"newValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scopeFrom\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scopeTo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementSequence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementRole\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hotelId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"dataElement\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"newValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scopeFrom\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scopeTo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementSequence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"elementRole\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hotelId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"businessEventId\": {\n        \"type\": \"string\",\n        \"idContext\": \"string\",\n        \"id\": \"string\"\n      }\n    }\n  ],\n  \"dataValueMapping\": [\n    {\n      \"dataElement\": \"string\",\n      \"operaValue\": \"string\",\n      \"externalValue\": \"string\"\n    },\n    {\n      \"dataElement\": \"string\",\n      \"operaValue\": \"string\",\n      \"externalValue\": \"string\"\n    }\n  ],\n  \"links\": [\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"PUT\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"HEAD\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    }\n  ],\n  \"warnings\": [\n    {\n      \"value\": \"string\",\n      \"shortText\": \"string\",\n      \"code\": \"string\",\n      \"docURL\": \"string\",\n      \"status\": \"string\",\n      \"tag\": \"string\",\n      \"recordId\": \"string\",\n      \"type\": \"string\",\n      \"language\": \"fHCjsEhN-c-JcP4pllp-Nhf4lpMT-hydOBQvc-ZcH\",\n      \"rph\": \"string\"\n    },\n    {\n      \"value\": \"string\",\n      \"shortText\": \"string\",\n      \"code\": \"string\",\n      \"docURL\": \"string\",\n      \"status\": \"string\",\n      \"tag\": \"string\",\n      \"recordId\": \"string\",\n      \"type\": \"string\",\n      \"language\": \"dXtuFkRh-HVYtjBVj-r7SvtN-X59P-heY-tcpO-21G-H\",\n      \"rph\": \"st\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6c987d1-b3e9-49c1-8808-1b3d8d4a2afc",
+              "name": "BusinessEvents not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "hotels",
+                    ":hotelId",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique OPERA Hotel code"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d50049a6-8fd0-48da-83d5-2e185a926c5a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "hotels",
+                    ":hotelId",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique OPERA Hotel code"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 325,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"o:errorCode\": \"string\",\n  \"o:errorPath\": \"string\",\n  \"o:errorDetails\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 3809,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 5425,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    }\n  ],\n  \"links\": [\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"PATCH\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"PATCH\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e01fec3e-1d08-4100-9415-be009407b9c7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "hotels",
+                    ":hotelId",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique OPERA Hotel code"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1b7d0cc4-36b7-4e5c-a276-f3bd6a4b9ef5",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "hotels",
+                    ":hotelId",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique OPERA Hotel code"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0ad7f7d2-6a5e-4e2f-ab0d-756ab85839e8",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "hotels",
+                    ":hotelId",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique OPERA Hotel code"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 325,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"o:errorCode\": \"string\",\n  \"o:errorPath\": \"string\",\n  \"o:errorDetails\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 3809,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 5425,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    }\n  ],\n  \"links\": [\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"PATCH\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"PATCH\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a74380a-70a8-406e-9361-8f46e56b8a59",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "hotels",
+                    ":hotelId",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique OPERA Hotel code"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "baaa6df9-59c9-4c3e-939e-3f79834acfb4",
+              "name": "Not acceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "hotels",
+                    ":hotelId",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique OPERA Hotel code"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1610a113-d7af-4ecb-b1ee-6cbafb8e50f9",
+              "name": "Request Entity Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "hotels",
+                    ":hotelId",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique OPERA Hotel code"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "178dffbd-715e-4371-b90b-728d94e30f56",
+              "name": "Request URI Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "hotels",
+                    ":hotelId",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique OPERA Hotel code"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request-URI Too Long",
+              "code": 414,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6189fd6a-d7e5-465a-9938-8eaf98f0f5a9",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "hotels",
+                    ":hotelId",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique OPERA Hotel code"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0c7bcb34-47fa-4eb1-b9f0-681a61ca5609",
+              "name": "System Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "hotels",
+                    ":hotelId",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique OPERA Hotel code"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 325,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"o:errorCode\": \"string\",\n  \"o:errorPath\": \"string\",\n  \"o:errorDetails\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 3809,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"status\": 5425,\n      \"detail\": \"string\",\n      \"instance\": \"string\",\n      \"o:errorCode\": \"string\",\n      \"o:errorPath\": \"string\"\n    }\n  ],\n  \"links\": [\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"PATCH\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"href\": \"string\",\n      \"rel\": \"string\",\n      \"templated\": false,\n      \"method\": \"PATCH\",\n      \"targetSchema\": \"string\",\n      \"operationId\": \"string\",\n      \"title\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "414a8a35-74e5-48a7-b241-e74f48c9950c",
+              "name": "Bad Gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "hotels",
+                    ":hotelId",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique OPERA Hotel code"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3a32153a-b6e8-49b3-9afb-54349adcb5e2",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalSystem",
+                    ":extSystemCode",
+                    "hotels",
+                    ":hotelId",
+                    "businessEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique OPERA Hotel code"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extSystemCode",
+                      "description": "(Required) External system code which will be used to dequeue the events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Pass this header as true, if payload needs DVM",
+                    "key": "externalData",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client or Partner's Application Key",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Request Id of an incoming request",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Customer's Integration Application Id",
+                    "key": "x-originating-application",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Mandatory parameter to identify the hotel code where the end user is logged in",
+                    "key": "x-hotelid",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "External system code.",
+                    "key": "x-externalsystem",
+                    "value": "EXTERNALSYSTEMCODE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/int/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "87b12cf1-2ba1-4757-8065-e49210f36601",
+    "name": "OPERA Cloud Integration Processor API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to get Business Events generated in OPERA Cloud.<br /><br /> Compatible with OPERA Cloud release 26.2.0.0.<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>\n\nContact Support:\n Email: hospitality_apis_ww_grp@oracle.com",
+      "type": "text/plain"
+    }
+  }
+}

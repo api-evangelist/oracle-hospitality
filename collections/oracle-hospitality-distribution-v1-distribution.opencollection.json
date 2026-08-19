@@ -1,0 +1,239 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Distribution Reservation Service",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reservation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/reservations",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the property within the channel system."
+              }
+            ]
+          },
+          "docs": "<p>This API allows the user to Create Reservations.</p> <p><strong>OperationId:</strong>postReservation</p>"
+        },
+        {
+          "info": {
+            "name": "Get reservation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/reservations/:reservationId",
+            "headers": [
+              {
+                "name": "Accept-Language",
+                "value": ""
+              },
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the property within the channel system."
+              },
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Cloud reservation Id or Confirmation Number or Channel External Reference Id which is used to find reservation from OPERA Cloud."
+              },
+              {
+                "name": "includeInSession",
+                "value": "",
+                "type": "query",
+                "description": "<p>Flag indicating whether to fetch the in-session reservation.</p> <p>If true, the most recent state of the session reservation is returned.</p> <p>If false or not passed, the last committed state of the reservation is returned.</p>"
+              },
+              {
+                "name": "fetchInstructions",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "<p>This API allows the user to fetch a particular reservation by confirmation Id, reservation Id or external reference Id</p> <p><strong>OperationId:</strong>getReservation</p>"
+        },
+        {
+          "info": {
+            "name": "Update Reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/reservations/:reservationId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "path",
+                "description": "A unique OPERA Cloud confirmation number or reservation ID is used to locate a reservation in OPERA Cloud. This ID serves as the primary identifier for a reservation in OPERA Cloud."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the property within the channel system."
+              }
+            ]
+          },
+          "docs": "Use this to update an existing reservation for a hotel, such as adding comments, changing the number of guests.   There are many fields in putReservation defined by ListOfValues; ensure you have reviewed ListOfValues APIs in order successfully to use putReservation. <p><strong>OperationId:</strong>putReservation</p>"
+        },
+        {
+          "info": {
+            "name": "Cancel Reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/reservations/:reservationId/cancellations",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "path",
+                "description": "A unique OPERA Cloud confirmation number or reservation ID is used to locate a reservation in OPERA Cloud. This ID serves as the primary identifier for a reservation in OPERA Cloud."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the property within the channel system."
+              }
+            ]
+          },
+          "docs": "Use this if a guest would like to cancel their reservation.  You will receive a cancellation number in the response. <p><strong>OperationId:</strong>postCancelReservation</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

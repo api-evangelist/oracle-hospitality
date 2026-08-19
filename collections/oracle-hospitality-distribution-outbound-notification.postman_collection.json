@@ -1,0 +1,725 @@
+{
+  "item": [
+    {
+      "id": "9be532d3-223e-479d-99fb-a3a4979a3f2b",
+      "name": "Content Notification",
+      "description": {
+        "content": " The Content Notification service provides ability to send distribution partners with hotel property inventory level, room rates, and restrictions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d817637c-6cb8-4696-9698-9f190df89e34",
+          "name": "Content Notification",
+          "request": {
+            "name": "Content Notification",
+            "description": {
+              "content": "This message will provide channel property content  <p><strong>OperationId:</strong>postContent</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "content"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"moduleName\": \"<string>\",\n  \"actionType\": \"<string>\",\n  \"uniqueId\": \"<string>\",\n  \"timeStamp\": \"<DATE_TIME>\",\n  \"enterpriseId\": \"<string>\",\n  \"hotelCode\": \"<string>\",\n  \"channelCode\": \"<string>\",\n  \"transactionKey\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d080e2ae-adf5-40f8-8048-5868f831c7ad",
+              "name": "Response for publishing content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"moduleName\": \"ChannelContent\",\n  \"actionType\": \"UPDATE CHANNEL ROOM TYPE\",\n  \"uniqueId\": \"234512-3432-234234234\",\n  \"timeStamp\": \"2021-11-20T13:59:38.000Z\",\n  \"enterpriseId\": \"ENTERPRISEID\",\n  \"hotelCode\": \"HOTELCODE\",\n  \"channelCode\": \"CHANNELCODE\",\n  \"transactionKey\": [\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    },\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audience language",
+                  "key": "Content-Language",
+                  "value": "OADIp-MNK4dCO5-VHf2edCm-99ObDQ8U-BegoE-RSIgzT-mGdj-LUPVJxB-8qSW50Eo-CbEZPc"
+                },
+                {
+                  "disabled": false,
+                  "description": "Location of process status resource",
+                  "key": "Location",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "61172745-23c9-469c-8081-2b9316c07b13",
+              "name": "Request data provided is invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"moduleName\": \"ChannelContent\",\n  \"actionType\": \"UPDATE CHANNEL ROOM TYPE\",\n  \"uniqueId\": \"234512-3432-234234234\",\n  \"timeStamp\": \"2021-11-20T13:59:38.000Z\",\n  \"enterpriseId\": \"ENTERPRISEID\",\n  \"hotelCode\": \"HOTELCODE\",\n  \"channelCode\": \"CHANNELCODE\",\n  \"transactionKey\": [\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    },\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DARI00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9f6bcec-9936-4b6f-a720-f45038e6cdd5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"moduleName\": \"ChannelContent\",\n  \"actionType\": \"UPDATE CHANNEL ROOM TYPE\",\n  \"uniqueId\": \"234512-3432-234234234\",\n  \"timeStamp\": \"2021-11-20T13:59:38.000Z\",\n  \"enterpriseId\": \"ENTERPRISEID\",\n  \"hotelCode\": \"HOTELCODE\",\n  \"channelCode\": \"CHANNELCODE\",\n  \"transactionKey\": [\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    },\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DARI00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3da22cc0-8b92-417f-9e94-3d8867ee7107",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"moduleName\": \"ChannelContent\",\n  \"actionType\": \"UPDATE CHANNEL ROOM TYPE\",\n  \"uniqueId\": \"234512-3432-234234234\",\n  \"timeStamp\": \"2021-11-20T13:59:38.000Z\",\n  \"enterpriseId\": \"ENTERPRISEID\",\n  \"hotelCode\": \"HOTELCODE\",\n  \"channelCode\": \"CHANNELCODE\",\n  \"transactionKey\": [\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    },\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DARI00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2c8a73e-f3f4-44f9-9b02-bc51dfb468a4",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"moduleName\": \"ChannelContent\",\n  \"actionType\": \"UPDATE CHANNEL ROOM TYPE\",\n  \"uniqueId\": \"234512-3432-234234234\",\n  \"timeStamp\": \"2021-11-20T13:59:38.000Z\",\n  \"enterpriseId\": \"ENTERPRISEID\",\n  \"hotelCode\": \"HOTELCODE\",\n  \"channelCode\": \"CHANNELCODE\",\n  \"transactionKey\": [\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    },\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DARI00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c639e97-d6b4-4b29-8f1b-f80808f4df58",
+              "name": "Not Allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"moduleName\": \"ChannelContent\",\n  \"actionType\": \"UPDATE CHANNEL ROOM TYPE\",\n  \"uniqueId\": \"234512-3432-234234234\",\n  \"timeStamp\": \"2021-11-20T13:59:38.000Z\",\n  \"enterpriseId\": \"ENTERPRISEID\",\n  \"hotelCode\": \"HOTELCODE\",\n  \"channelCode\": \"CHANNELCODE\",\n  \"transactionKey\": [\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    },\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DARI00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3591968-6790-4c42-935f-242aaf8e208d",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"moduleName\": \"ChannelContent\",\n  \"actionType\": \"UPDATE CHANNEL ROOM TYPE\",\n  \"uniqueId\": \"234512-3432-234234234\",\n  \"timeStamp\": \"2021-11-20T13:59:38.000Z\",\n  \"enterpriseId\": \"ENTERPRISEID\",\n  \"hotelCode\": \"HOTELCODE\",\n  \"channelCode\": \"CHANNELCODE\",\n  \"transactionKey\": [\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    },\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DARI00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8efe8ada-7be3-44e9-b501-2f8bf1cd181c",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"moduleName\": \"ChannelContent\",\n  \"actionType\": \"UPDATE CHANNEL ROOM TYPE\",\n  \"uniqueId\": \"234512-3432-234234234\",\n  \"timeStamp\": \"2021-11-20T13:59:38.000Z\",\n  \"enterpriseId\": \"ENTERPRISEID\",\n  \"hotelCode\": \"HOTELCODE\",\n  \"channelCode\": \"CHANNELCODE\",\n  \"transactionKey\": [\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    },\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DARI00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c906424-7645-4a98-9a68-9f554a94292d",
+              "name": "URI Too Long",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"moduleName\": \"ChannelContent\",\n  \"actionType\": \"UPDATE CHANNEL ROOM TYPE\",\n  \"uniqueId\": \"234512-3432-234234234\",\n  \"timeStamp\": \"2021-11-20T13:59:38.000Z\",\n  \"enterpriseId\": \"ENTERPRISEID\",\n  \"hotelCode\": \"HOTELCODE\",\n  \"channelCode\": \"CHANNELCODE\",\n  \"transactionKey\": [\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    },\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request-URI Too Long",
+              "code": 414,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DARI00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7ef8bff-9cbf-44e8-bd57-d45c430714dc",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"moduleName\": \"ChannelContent\",\n  \"actionType\": \"UPDATE CHANNEL ROOM TYPE\",\n  \"uniqueId\": \"234512-3432-234234234\",\n  \"timeStamp\": \"2021-11-20T13:59:38.000Z\",\n  \"enterpriseId\": \"ENTERPRISEID\",\n  \"hotelCode\": \"HOTELCODE\",\n  \"channelCode\": \"CHANNELCODE\",\n  \"transactionKey\": [\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    },\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DARI00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d8ab5b7-42fe-4a1c-8db6-4426771a1630",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"moduleName\": \"ChannelContent\",\n  \"actionType\": \"UPDATE CHANNEL ROOM TYPE\",\n  \"uniqueId\": \"234512-3432-234234234\",\n  \"timeStamp\": \"2021-11-20T13:59:38.000Z\",\n  \"enterpriseId\": \"ENTERPRISEID\",\n  \"hotelCode\": \"HOTELCODE\",\n  \"channelCode\": \"CHANNELCODE\",\n  \"transactionKey\": [\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    },\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DARI00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3a7efa0-b7b6-421f-a842-18b19714eb03",
+              "name": "Bad Gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"moduleName\": \"ChannelContent\",\n  \"actionType\": \"UPDATE CHANNEL ROOM TYPE\",\n  \"uniqueId\": \"234512-3432-234234234\",\n  \"timeStamp\": \"2021-11-20T13:59:38.000Z\",\n  \"enterpriseId\": \"ENTERPRISEID\",\n  \"hotelCode\": \"HOTELCODE\",\n  \"channelCode\": \"CHANNELCODE\",\n  \"transactionKey\": [\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    },\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DARI00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55575ba0-abbc-4148-ac8a-a06d5e9c35c0",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token that needs to be passed which is generated post user authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"moduleName\": \"ChannelContent\",\n  \"actionType\": \"UPDATE CHANNEL ROOM TYPE\",\n  \"uniqueId\": \"234512-3432-234234234\",\n  \"timeStamp\": \"2021-11-20T13:59:38.000Z\",\n  \"enterpriseId\": \"ENTERPRISEID\",\n  \"hotelCode\": \"HOTELCODE\",\n  \"channelCode\": \"CHANNELCODE\",\n  \"transactionKey\": [\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    },\n    {\n      \"name\": \"roomType\",\n      \"value\": \"ROOMTYPECODE\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"logId\": 884366976,\n  \"title\": \"string\",\n  \"status\": 400,\n  \"o.errorCode\": \"DARI00001\",\n  \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n  \"timestamp\": \"2021-09-17T08:17:18.321Z\",\n  \"o.errorDetails\": [\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    },\n    {\n      \"logId\": 884366976,\n      \"title\": \"string\",\n      \"status\": 400,\n      \"o.errorCode\": \"DARI00001\",\n      \"type\": \"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x\",\n      \"timestamp\": \"2021-09-17T08:17:18.321Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/notification/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c312134b-6f70-4200-91fa-264a24d375d1",
+    "name": "OPERA Cloud Distribution Content Notification",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Oracle Hospitality Distribution Content notification message specification for distribution partners to receive in real time property content, channel room and rate updates. Partner receives this message will respond with success or error/warning so that property/CRS user can see the status of message delivery in OPERA. A channel code identifier is required in Oracle Hospitality Distribution to receive those messages.<br /><br /> Compatible with OPERA Cloud release 26.2.0.0<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>\n\nContact Support:\n Email: hospitality_apis_ww_grp@oracle.com",
+      "type": "text/plain"
+    }
+  }
+}

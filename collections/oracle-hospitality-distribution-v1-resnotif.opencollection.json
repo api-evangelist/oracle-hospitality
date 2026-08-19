@@ -1,0 +1,216 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Distribution Reservation Notification",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reservation Notification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Notify of new reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelCode/reservations",
+            "headers": [
+              {
+                "name": "x-hdp-tracing-key",
+                "value": ""
+              },
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Property in Channel system."
+              }
+            ]
+          },
+          "docs": "<p>Deliver a new reservation from an external system.</p> <p><strong>OperationId:</strong>postReservationNotif</p>"
+        },
+        {
+          "info": {
+            "name": "Get a reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelCode/reservations/:confirmationNum",
+            "headers": [
+              {
+                "name": "x-hdp-tracing-key",
+                "value": ""
+              },
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Property in Channel system."
+              },
+              {
+                "name": "confirmationNum",
+                "value": "",
+                "type": "path",
+                "description": "Opera Confirmation number"
+              }
+            ]
+          },
+          "docs": "<p>Get a reservation</p> <p><strong>OperationId:</strong>getReservationNotif</p>"
+        },
+        {
+          "info": {
+            "name": "Notify of modified reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelCode/reservations/:confirmationNum",
+            "headers": [
+              {
+                "name": "x-hdp-tracing-key",
+                "value": ""
+              },
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Property in Channel system."
+              },
+              {
+                "name": "confirmationNum",
+                "value": "",
+                "type": "path",
+                "description": "Opera Confirmation number"
+              }
+            ]
+          },
+          "docs": "<p>Deliver a modification of reservation from an external system.</p> <p><strong>OperationId:</strong>putReservationNotif</p>"
+        },
+        {
+          "info": {
+            "name": "Notify of cancelled reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelCode/reservations/:confirmationNum/cancellations",
+            "headers": [
+              {
+                "name": "x-hdp-tracing-key",
+                "value": ""
+              },
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Property in Channel system."
+              },
+              {
+                "name": "confirmationNum",
+                "value": "",
+                "type": "path",
+                "description": "Opera Confirmation number"
+              }
+            ]
+          },
+          "docs": "<p>Deliver a cancellation of reservation from an external system.</p> <p><strong>OperationId:</strong>postCancelReservationNotif</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

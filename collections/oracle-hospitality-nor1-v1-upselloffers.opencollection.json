@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nor1 Integrated Upsell API",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Upsell Offers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Upsell Offers for a reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/reservations/:reservationId/arrivalDate/:arrivalDate/upsellOffers",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "providerId",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel where reservation is searched based on reservation Id."
+              },
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifying value for reservation assigned by the creating system."
+              },
+              {
+                "name": "arrivalDate",
+                "value": "",
+                "type": "path",
+                "description": "Arrival Date of the reservation."
+              }
+            ]
+          },
+          "docs": "This API will allow a user to retrieve a retrieve a list of available upsell offers based on the search criteria specified in the request body, inventory availability and current reservation details.\n<p><strong>OperationId:</strong> getUpsellOffers</p>"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "API to Fulfill Upsell Offers to customers and third parties",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Post Upsell Offers for a reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/reservations/:reservationId/arrivalDate/:arrivalDate/upsellOffers",
+            "headers": [
+              {
+                "name": "consumes",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "providerId",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel where reservation is searched based on reservation Id."
+              },
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifying value for reservation assigned by the creating system."
+              },
+              {
+                "name": "arrivalDate",
+                "value": "",
+                "type": "path",
+                "description": "Arrival Date of the reservation."
+              }
+            ]
+          },
+          "docs": "This API allows user to update a reservation by fulfilling an upsell offer selected from the list of available upsell offers, based on the unique offer ID provided in the request body.\n\nIf an upsell offer group has `selectionType` set to `zero_to_one`, the user can choose only one offer under a specific `offerType` group. To process multiple offers, submit a API request for a `offer` selected\n\nIf an upsell offer group has `selectionType` set to `zero_to_many`, the user can choose multiple offers"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

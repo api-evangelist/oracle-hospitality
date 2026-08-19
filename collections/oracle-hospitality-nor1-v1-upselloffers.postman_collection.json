@@ -1,0 +1,1384 @@
+{
+  "item": [
+    {
+      "id": "431725cf-905a-454c-9073-1eca270d9c7d",
+      "name": "Nor1 Integrated Upsell API",
+      "description": {
+        "content": "API to serve Upsell offers to customers and third parties",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    },
+    {
+      "id": "832c70c7-1da5-414a-aa3f-75b05bd91223",
+      "name": "Upsell Offers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d6b4e649-15b1-4a38-8ce8-4641b5aab2e3",
+          "name": "Get Upsell Offers for a reservation",
+          "request": {
+            "name": "Get Upsell Offers for a reservation",
+            "description": {
+              "content": "This API will allow a user to retrieve a retrieve a list of available upsell offers based on the search criteria specified in the request body, inventory availability and current reservation details.\n<p><strong>OperationId:</strong> getUpsellOffers</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hotels",
+                ":hotelId",
+                "reservations",
+                ":reservationId",
+                "arrivalDate",
+                ":arrivalDate",
+                "upsellOffers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hotelId",
+                  "description": "(Required) Unique ID of the hotel where reservation is searched based on reservation Id."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reservationId",
+                  "description": "(Required) A unique identifying value for reservation assigned by the creating system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "arrivalDate",
+                  "description": "(Required) Arrival Date of the reservation."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "x-app-key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "description": "Partner's Unique Nor1 Provider ID",
+                "key": "providerId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Language code",
+                "key": "Accept-Language",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9764985-f617-487d-b10d-6df1d46b9bd2",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "reservations",
+                    ":reservationId",
+                    "arrivalDate",
+                    ":arrivalDate",
+                    "upsellOffers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel where reservation is searched based on reservation Id."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservationId",
+                      "description": "(Required) A unique identifying value for reservation assigned by the creating system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "arrivalDate",
+                      "description": "(Required) Arrival Date of the reservation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "x-app-key",
+                    "value": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Partner's Unique Nor1 Provider ID",
+                    "key": "providerId",
+                    "value": "SAN"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audience language",
+                  "key": "Content-Language",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"Items\": [\n    {\n      \"upsellOffers\": [\n        {\n          \"offerType\": \"room_upgrade\",\n          \"selectionType\": \"zeroToMany\",\n          \"offers\": [\n            {\n              \"offerId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"images\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"savings\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"chargeFrequency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fixedCharge\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roomTypeCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"offerId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"images\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"savings\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"chargeFrequency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fixedCharge\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roomTypeCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"offerType\": \"room_upgrade\",\n          \"selectionType\": \"zeroToMany\",\n          \"offers\": [\n            {\n              \"offerId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"images\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"savings\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"chargeFrequency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fixedCharge\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roomTypeCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"offerId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"images\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"savings\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"chargeFrequency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fixedCharge\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roomTypeCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"upsellOffers\": [\n        {\n          \"offerType\": \"room_upgrade\",\n          \"selectionType\": \"zeroToMany\",\n          \"offers\": [\n            {\n              \"offerId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"images\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"savings\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"chargeFrequency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fixedCharge\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roomTypeCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"offerId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"images\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"savings\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"chargeFrequency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fixedCharge\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roomTypeCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"offerType\": \"room_upgrade\",\n          \"selectionType\": \"zeroToOne\",\n          \"offers\": [\n            {\n              \"offerId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"images\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"savings\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"chargeFrequency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fixedCharge\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roomTypeCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"offerId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"images\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"savings\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"chargeFrequency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fixedCharge\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roomTypeCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"totalResults\": 1,\n  \"offset\": 0,\n  \"count\": 1,\n  \"hasMore\": false,\n  \"limit\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6cbfb487-b0eb-48a1-b8a2-c534cc7dc1b3",
+              "name": "No Offers Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "reservations",
+                    ":reservationId",
+                    "arrivalDate",
+                    ":arrivalDate",
+                    "upsellOffers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel where reservation is searched based on reservation Id."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservationId",
+                      "description": "(Required) A unique identifying value for reservation assigned by the creating system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "arrivalDate",
+                      "description": "(Required) Arrival Date of the reservation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "x-app-key",
+                    "value": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Partner's Unique Nor1 Provider ID",
+                    "key": "providerId",
+                    "value": "SAN"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9a7955f5-9391-47cb-b2c2-02a315cd49ac",
+              "name": "Unable to find HotelId or ReservationId",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "reservations",
+                    ":reservationId",
+                    "arrivalDate",
+                    ":arrivalDate",
+                    "upsellOffers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel where reservation is searched based on reservation Id."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservationId",
+                      "description": "(Required) A unique identifying value for reservation assigned by the creating system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "arrivalDate",
+                      "description": "(Required) Arrival Date of the reservation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "x-app-key",
+                    "value": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Partner's Unique Nor1 Provider ID",
+                    "key": "providerId",
+                    "value": "SAN"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.org/protocols/..\",\n  \"title\": \"Not Found\",\n  \"status\": 404,\n  \"detail\": \"Unable to find HotelId or ReservationId\",\n  \"errorCode\": \"string\",\n  \"errorDetails\": [\n    {\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"errorCode\": \"string\"\n    },\n    {\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"errorCode\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e270b91-9ca5-49c2-8f1c-14962e4405c5",
+              "name": "System Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "reservations",
+                    ":reservationId",
+                    "arrivalDate",
+                    ":arrivalDate",
+                    "upsellOffers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel where reservation is searched based on reservation Id."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservationId",
+                      "description": "(Required) A unique identifying value for reservation assigned by the creating system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "arrivalDate",
+                      "description": "(Required) Arrival Date of the reservation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "x-app-key",
+                    "value": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Partner's Unique Nor1 Provider ID",
+                    "key": "providerId",
+                    "value": "SAN"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.org/protocols/..\",\n  \"title\": \"Internal Server Error\",\n  \"status\": 500,\n  \"detail\": \"Internal Server Error\",\n  \"errorCode\": \"string\",\n  \"errorDetails\": [\n    {\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"errorCode\": \"string\"\n    },\n    {\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"errorCode\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8532a5d-14d9-4e51-9b06-e71124279e44",
+              "name": "Bad Gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "reservations",
+                    ":reservationId",
+                    "arrivalDate",
+                    ":arrivalDate",
+                    "upsellOffers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel where reservation is searched based on reservation Id."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservationId",
+                      "description": "(Required) A unique identifying value for reservation assigned by the creating system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "arrivalDate",
+                      "description": "(Required) Arrival Date of the reservation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "x-app-key",
+                    "value": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Partner's Unique Nor1 Provider ID",
+                    "key": "providerId",
+                    "value": "SAN"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dd2ce226-8709-4177-9ef9-47bccfdc67c0",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "reservations",
+                    ":reservationId",
+                    "arrivalDate",
+                    ":arrivalDate",
+                    "upsellOffers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel where reservation is searched based on reservation Id."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservationId",
+                      "description": "(Required) A unique identifying value for reservation assigned by the creating system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "arrivalDate",
+                      "description": "(Required) Arrival Date of the reservation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "x-app-key",
+                    "value": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Partner's Unique Nor1 Provider ID",
+                    "key": "providerId",
+                    "value": "SAN"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "b36fc461-1b16-48ef-916a-a76fb6c2fef4",
+      "name": "API to Fulfill Upsell Offers to customers and third parties",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2252d64e-e6f1-4dce-ae97-ffca118e3d7d",
+          "name": "Post Upsell Offers for a reservation",
+          "request": {
+            "name": "Post Upsell Offers for a reservation",
+            "description": {
+              "content": "This API allows user to update a reservation by fulfilling an upsell offer selected from the list of available upsell offers, based on the unique offer ID provided in the request body.\n\nIf an upsell offer group has `selectionType` set to `zero_to_one`, the user can choose only one offer under a specific `offerType` group. To process multiple offers, submit a API request for a `offer` selected\n\nIf an upsell offer group has `selectionType` set to `zero_to_many`, the user can choose multiple offers under a specific `offerType` group. To process multiple offers, submit a separate API request for each `offer` selected\n<p><strong>OperationId:</strong> postUpsellOffers</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hotels",
+                ":hotelId",
+                "reservations",
+                ":reservationId",
+                "arrivalDate",
+                ":arrivalDate",
+                "upsellOffers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hotelId",
+                  "description": "(Required) Unique ID of the hotel where reservation is searched based on reservation Id."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reservationId",
+                  "description": "(Required) A unique identifying value for reservation assigned by the creating system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "arrivalDate",
+                  "description": "(Required) Arrival Date of the reservation."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "consumes",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "key": "x-app-key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "description": "Partner's Unique Nor1 Provider ID",
+                "key": "providerId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Language code",
+                "key": "Accept-Language",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"offerId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "54f07789-83c0-482f-8a2a-155f503ea5bf",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "reservations",
+                    ":reservationId",
+                    "arrivalDate",
+                    ":arrivalDate",
+                    "upsellOffers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel where reservation is searched based on reservation Id."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservationId",
+                      "description": "(Required) A unique identifying value for reservation assigned by the creating system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "arrivalDate",
+                      "description": "(Required) Arrival Date of the reservation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "consumes",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "x-app-key",
+                    "value": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Partner's Unique Nor1 Provider ID",
+                    "key": "providerId",
+                    "value": "SAN"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"offerId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"Items\": [\n    {\n      \"upsellOffers\": [\n        {\n          \"offerType\": \"room_upgrade\",\n          \"selectionType\": \"zeroToMany\",\n          \"offers\": [\n            {\n              \"offerId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"images\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"savings\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"chargeFrequency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fixedCharge\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roomTypeCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"offerId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"images\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"savings\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"chargeFrequency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fixedCharge\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roomTypeCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"offerType\": \"room_upgrade\",\n          \"selectionType\": \"zeroToOne\",\n          \"offers\": [\n            {\n              \"offerId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"images\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"savings\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"chargeFrequency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fixedCharge\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roomTypeCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"offerId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"images\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"savings\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"chargeFrequency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fixedCharge\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roomTypeCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"upsellOffers\": [\n        {\n          \"offerType\": \"room_upgrade\",\n          \"selectionType\": \"zeroToMany\",\n          \"offers\": [\n            {\n              \"offerId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"images\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"savings\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"chargeFrequency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fixedCharge\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roomTypeCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"offerId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"images\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"savings\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"chargeFrequency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fixedCharge\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roomTypeCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"offerType\": \"room_upgrade\",\n          \"selectionType\": \"zeroToOne\",\n          \"offers\": [\n            {\n              \"offerId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"images\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"savings\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"chargeFrequency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fixedCharge\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roomTypeCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"offerId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"images\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"savings\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"chargeFrequency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fixedCharge\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roomTypeCode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"totalResults\": 1,\n  \"offset\": 0,\n  \"count\": 1,\n  \"hasMore\": false,\n  \"limit\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c17a0454-f86b-4b78-b7b9-52016247b4f0",
+              "name": "Unable to find HotelId or ReservationId",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "reservations",
+                    ":reservationId",
+                    "arrivalDate",
+                    ":arrivalDate",
+                    "upsellOffers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel where reservation is searched based on reservation Id."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservationId",
+                      "description": "(Required) A unique identifying value for reservation assigned by the creating system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "arrivalDate",
+                      "description": "(Required) Arrival Date of the reservation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "consumes",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "x-app-key",
+                    "value": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Partner's Unique Nor1 Provider ID",
+                    "key": "providerId",
+                    "value": "SAN"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"offerId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.org/protocols/..\",\n  \"title\": \"Not Found\",\n  \"status\": 404,\n  \"detail\": \"Unable to find HotelId or ReservationId\",\n  \"errorCode\": \"string\",\n  \"errorDetails\": [\n    {\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"errorCode\": \"string\"\n    },\n    {\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"errorCode\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "695612df-7a23-474f-9215-ea96672428cd",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "reservations",
+                    ":reservationId",
+                    "arrivalDate",
+                    ":arrivalDate",
+                    "upsellOffers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel where reservation is searched based on reservation Id."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservationId",
+                      "description": "(Required) A unique identifying value for reservation assigned by the creating system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "arrivalDate",
+                      "description": "(Required) Arrival Date of the reservation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "consumes",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "x-app-key",
+                    "value": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Partner's Unique Nor1 Provider ID",
+                    "key": "providerId",
+                    "value": "SAN"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"offerId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.org/protocols/..\",\n  \"title\": \"Unsupported Media Type\",\n  \"status\": 415,\n  \"detail\": \"Unsupported Media Type\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8f7b2a8-0932-4e30-a6c9-c076717503cc",
+              "name": "System Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "reservations",
+                    ":reservationId",
+                    "arrivalDate",
+                    ":arrivalDate",
+                    "upsellOffers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel where reservation is searched based on reservation Id."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservationId",
+                      "description": "(Required) A unique identifying value for reservation assigned by the creating system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "arrivalDate",
+                      "description": "(Required) Arrival Date of the reservation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "consumes",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "x-app-key",
+                    "value": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Partner's Unique Nor1 Provider ID",
+                    "key": "providerId",
+                    "value": "SAN"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"offerId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.org/protocols/..\",\n  \"title\": \"Internal Server Error\",\n  \"status\": 500,\n  \"detail\": \"Internal Server Error\",\n  \"errorCode\": \"string\",\n  \"errorDetails\": [\n    {\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"errorCode\": \"string\"\n    },\n    {\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"errorCode\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58bca03e-ee98-4b7e-adee-9adeb4048f77",
+              "name": "Bad Gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "reservations",
+                    ":reservationId",
+                    "arrivalDate",
+                    ":arrivalDate",
+                    "upsellOffers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel where reservation is searched based on reservation Id."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservationId",
+                      "description": "(Required) A unique identifying value for reservation assigned by the creating system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "arrivalDate",
+                      "description": "(Required) Arrival Date of the reservation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "consumes",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "x-app-key",
+                    "value": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Partner's Unique Nor1 Provider ID",
+                    "key": "providerId",
+                    "value": "SAN"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"offerId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c5c7a571-1769-4e6d-9c7c-d3a4643c5322",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels",
+                    ":hotelId",
+                    "reservations",
+                    ":reservationId",
+                    "arrivalDate",
+                    ":arrivalDate",
+                    "upsellOffers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hotelId",
+                      "description": "(Required) Unique ID of the hotel where reservation is searched based on reservation Id."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservationId",
+                      "description": "(Required) A unique identifying value for reservation assigned by the creating system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "arrivalDate",
+                      "description": "(Required) Arrival Date of the reservation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "consumes",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "x-app-key",
+                    "value": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Partner's Unique Nor1 Provider ID",
+                    "key": "providerId",
+                    "value": "SAN"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language code",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"offerId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://oracle.api.com/ohcgep/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5e2370a8-552c-4871-8040-0d9650823585",
+    "name": "Nor1 Integrated Upsell API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "An upsell service that can be consumed to display upgrade offers to a hotel guest prior to arrival. Pre-arrival upsells are becoming increasingly important due to the adoption of mobile and kiosk check-in which reduces the opportunity for front-desk upselling. Upgrade offers are based on PRiME(R) AI/ML decision intelligence and OPERA real-time inventory. The service allows instant fulfillment of the upgrade offer.<br /><br /> Compatible with OPERA Cloud release 26.2.0.0.<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>\n\nContact Support:\n Email: hospitality_apis_ww_grp@oracle.com",
+      "type": "text/plain"
+    }
+  }
+}

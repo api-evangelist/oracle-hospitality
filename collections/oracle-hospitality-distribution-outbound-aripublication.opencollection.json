@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Distribution ARI Publication",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ARI Publication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Publish Inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/inventory",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This message will provide property room type inventory (rooms to sell) by date to the distribution (full synchronization or delta updates).  <p><strong>OperationId:</strong>postInventory</p>"
+        },
+        {
+          "info": {
+            "name": "Publish Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rates",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This message will provide property rate plans rate schedules by date and room type to the distribution (full synchronization or delta updates).<p><strong>OperationId:</strong>postRates</p>"
+        },
+        {
+          "info": {
+            "name": "Publish Restrictions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/restrictions",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This message will provide property rate plan-room type restrictions by date to the distribution (full synchronization or delta updates).<p><strong>OperationId:</strong>postRestrictions</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,780 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Content Service",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OperaContent",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return customized letter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/customizedLetter/:letterId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "letterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "letterIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "letterIdtype",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              }
+            ]
+          },
+          "docs": "Use this API to return a customized letter based on search criteria such as letterId, letterIdContext, letterIdtype. <p><strong>OperationId:</strong>getCustomizedLetter</p>"
+        },
+        {
+          "info": {
+            "name": "Return email blob file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/emailFile/:emailId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "emailId",
+                "value": "",
+                "type": "path",
+                "description": "Unique OPERA Email ID which is used to find an Email BLOB File from OPERA. This ID is a primary identification of an email file in OPERA."
+              }
+            ]
+          },
+          "docs": "Use this API to return email blob file stored in file storage schema based on the search criteria emailId. It's used in profiles to return email and open in an end user's mail client. <p><strong>OperationId:</strong>getEmailFile</p>"
+        },
+        {
+          "info": {
+            "name": "Return file attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fileAttachments",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "idContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "idType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              }
+            ]
+          },
+          "docs": "Use this API to return file attachments based on search criteria such as id, idContext, idType. <p><strong>OperationId:</strong>getFileAttachment</p>"
+        },
+        {
+          "info": {
+            "name": "Upload a file attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/fileAttachments",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Use this API to upload a file attachment. <p><strong>OperationId:</strong>uploadFileAttachment</p>"
+        },
+        {
+          "info": {
+            "name": "Create email folio report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/folioReports/email",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Use this API to create an email folio report. <p><strong>OperationId:</strong>emailFolioReport</p>"
+        },
+        {
+          "info": {
+            "name": "Update customized letter",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/reservations/:reservationId/customizedLetter",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Use this API to update a customized letter for a reservation for a specific property based on the hotelId, reservationId, customizedLetter. <p><strong>OperationId:</strong>setCustomizedLetter</p>"
+        },
+        {
+          "info": {
+            "name": "Return folio report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/reservations/:reservationId/folioReports",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "reservationIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "reservationIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "folioWindowNo",
+                "value": "",
+                "type": "query",
+                "description": "Folio window number to generate (defaults to view 1)."
+              },
+              {
+                "name": "billNumber",
+                "value": "",
+                "type": "query",
+                "description": "Optional bill number to generate."
+              },
+              {
+                "name": "folioType",
+                "value": "",
+                "type": "query",
+                "description": "Optional folio type."
+              },
+              {
+                "name": "folioDate",
+                "value": "",
+                "type": "query",
+                "description": "Optional folio generation date - defaults to hotel business date."
+              },
+              {
+                "name": "referenceCurrency",
+                "value": "",
+                "type": "query",
+                "description": "Folio currency code."
+              }
+            ]
+          },
+          "docs": "Use this API to return a folio report for a reservation for a specific property based on search criteria such as reservationId, hotelId, reservationIdContext, reservationIdType, folioWindowNo, billNumber, folioType, folioDate, referenceCurrency. <p><strong>OperationId:</strong>getFolioReport</p>"
+        },
+        {
+          "info": {
+            "name": "Return registration card",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/reservations/:reservationId/registrationCard",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "reservationIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "reservationIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "regenerate",
+                "value": "",
+                "type": "query",
+                "description": "Flag indicating whether a new registration card should be generated even if a signed card already exists."
+              },
+              {
+                "name": "signedOnly",
+                "value": "",
+                "type": "query",
+                "description": "Flag indicating whether return only the signed registrationCard if present."
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query",
+                "description": "Optional language code to use for registration card generation. Default guest language will be applied if not specified."
+              },
+              {
+                "name": "template",
+                "value": "",
+                "type": "query",
+                "description": "Optional registration card template code to use for registration card generation. Default template will be applied if not specified."
+              }
+            ]
+          },
+          "docs": "Use this API to return a registration card for a reservation based on search criteria such as reservationId, hotelId, reservationIdContext, reservationIdType, regenerate, signedOnly, language, template.  <p><strong>OperationId:</strong>getRegistrationCard</p>"
+        },
+        {
+          "info": {
+            "name": "Return image",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/images",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "linkId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "linkIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "linkIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "imageCode",
+                "value": "",
+                "type": "query",
+                "description": "An enumeration of image codes such as Logo, RoomType, InvItem"
+              },
+              {
+                "name": "imageParameterCode",
+                "value": "",
+                "type": "query",
+                "description": "An enumeration of image parameter codes such as Logo, RoomType, InvItem"
+              },
+              {
+                "name": "imageParameterValue",
+                "value": "",
+                "type": "query",
+                "description": "Image parameter value."
+              },
+              {
+                "name": "languageCode",
+                "value": "",
+                "type": "query",
+                "description": "Unique Code of language."
+              },
+              {
+                "name": "imageStyle",
+                "value": "",
+                "type": "query",
+                "description": "An enumeration of image styles."
+              },
+              {
+                "name": "imageId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "imageIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "imageIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "base64",
+                "value": "",
+                "type": "query",
+                "description": "True if the image to be returned as a base64String else if the image to be returned as the binary in MTOM attachment then false ."
+              }
+            ]
+          },
+          "docs": "Use this API to return an image based on search criteria such as linkId, linkIdContext, linkIdType, imageCode, imageParameterCode, imageParameterValue, languageCode, imageStyle, imageId, imageIdContext, imageIdType, base64.  <p><strong>OperationId:</strong>getImage</p>"
+        },
+        {
+          "info": {
+            "name": "Upload image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/images",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "You can use this API to upload an image for the suppored image code types <p><strong>OperationId:</strong>uploadImage</p>"
+        },
+        {
+          "info": {
+            "name": "Delete image",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/images",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "imageCode",
+                "value": "",
+                "type": "query",
+                "description": "An enumeration of image codes such as Logo, RoomType, InvItem"
+              },
+              {
+                "name": "imageSet",
+                "value": "",
+                "type": "query",
+                "description": "Used for Character Strings, length 0 to 800."
+              },
+              {
+                "name": "imageId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "imageIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "imageIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              }
+            ]
+          },
+          "docs": "Use this API to delete an image based on parameters such as imageCode, imageSet, imageId, imageIdContext, imageIdType. <p><strong>OperationId:</strong>removeImage</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

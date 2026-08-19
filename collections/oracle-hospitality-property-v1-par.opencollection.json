@@ -1,0 +1,3155 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Price Availability Rate API",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Availability",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Hotel Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/availability",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cro",
+                "value": "",
+                "type": "query",
+                "description": "Central reservation office Code who is requesting Rate Availability."
+              },
+              {
+                "name": "hotelIds",
+                "value": "",
+                "type": "query",
+                "description": "Hotel code of the Hotel whose Rate Availability is requested."
+              },
+              {
+                "name": "includeClosedRates",
+                "value": "",
+                "type": "query",
+                "description": "Used to indicate if closed rates are to be included in the Rate Plan set."
+              },
+              {
+                "name": "includeDefaultRatePlanSet",
+                "value": "",
+                "type": "query",
+                "description": "Used to indicate if the configured default rate plan set will be included."
+              },
+              {
+                "name": "includeNoRatePlanSet",
+                "value": "",
+                "type": "query",
+                "description": "Includes the rate codes which do not have a rate plan set associated. This parameter is applicable when the property has not configured a default rate plan set."
+              },
+              {
+                "name": "initialRatePlanSet",
+                "value": "",
+                "type": "query",
+                "description": "If InitialRatePlanSet is set to true response will return most relevant Rate Plan Set(e.g. NEGOTIATED if profiles has Negotiated Rates) depending on the request. if request does not requires special Rate Plan Set, it will return default Rate Plan Set if RatePlanSet value is not set."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "pagePointerKey",
+                "value": "",
+                "type": "query",
+                "description": "Specifies fetched record's key as pointer to fetch additional records from. If key is composite use comma separated string."
+              },
+              {
+                "name": "ratePlanSet",
+                "value": "",
+                "type": "query",
+                "description": "Rate Plan Set code to filter Rate Plans based on the predefined set. if not specified it will not filter any Rate Plans by Rate Plan Set. When InitialRatePlanSet is true response may not always return Rate Plans for the supplied Rate Plan Set(See InitialRatePlanSet documentation)."
+              },
+              {
+                "name": "redeemAwards",
+                "value": "",
+                "type": "query",
+                "description": "Used to indicate if the awards are to be redeemed."
+              },
+              {
+                "name": "roomStayStartDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "roomStayEndDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "roomStayQuantity",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "adults",
+                "value": "",
+                "type": "query",
+                "description": "Defines the number of Adults."
+              },
+              {
+                "name": "children",
+                "value": "",
+                "type": "query",
+                "description": "Defines the number of Children."
+              },
+              {
+                "name": "childAge",
+                "value": "",
+                "type": "query",
+                "description": "Age of a child in years."
+              },
+              {
+                "name": "bucket1Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the first Age Qualifying Group(Child Bucket#1)."
+              },
+              {
+                "name": "bucket2Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the second Age Qualifying Group(Child Bucket#2)."
+              },
+              {
+                "name": "bucket3Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the third Age Qualifying Group(Child Bucket#3)."
+              },
+              {
+                "name": "bucket4Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the fourth Age Qualifying Group(Child Bucket#4)."
+              },
+              {
+                "name": "bucket5Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the fifth Age Qualifying Group(Child Bucket#5)."
+              },
+              {
+                "name": "fullStayTimeSpanStartDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fullStayTimeSpanEndDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "prevailingRate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "rateCategory",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "rateClass",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "rateGroup",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ratePlanCode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "promotionCode",
+                "value": "",
+                "type": "query",
+                "description": "Promotion code associated with the rate plan."
+              },
+              {
+                "name": "roomType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "roomClass",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "bedType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "feature",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "reservationGuestId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "reservationGuestIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "reservationProfileType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "attachedProfileId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "hotelReservationId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "hotelReservationIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "ratePlanInfo",
+                "value": "",
+                "type": "query",
+                "description": "If true Rate Plan Code Master information will be included in the response."
+              },
+              {
+                "name": "returnOnlyAvailableRateCodes",
+                "value": "",
+                "type": "query",
+                "description": "If true Only availability check will be done and it will return available rate codes."
+              },
+              {
+                "name": "resGuaranteeInfo",
+                "value": "",
+                "type": "query",
+                "description": "If true Guarantee Code information will be fetched with Rate Code Information. This attribute is only effective when RatePlanInfo is true."
+              },
+              {
+                "name": "roomTypeInfo",
+                "value": "",
+                "type": "query",
+                "description": "If true Room Type Master information will be included in the response."
+              },
+              {
+                "name": "membershipIdNumber",
+                "value": "",
+                "type": "query",
+                "description": "Membership id Number of the guest."
+              },
+              {
+                "name": "membershipLevel",
+                "value": "",
+                "type": "query",
+                "description": "Membership id Number of the guest."
+              },
+              {
+                "name": "membershipType",
+                "value": "",
+                "type": "query",
+                "description": "Membership id Number of the guest."
+              },
+              {
+                "name": "pointsAvailable",
+                "value": "",
+                "type": "query",
+                "description": "Used to indicate Points Available for Profile Primary Membership Type."
+              },
+              {
+                "name": "membershipCardNumber",
+                "value": "",
+                "type": "query",
+                "description": "Member Card number associated with the guest membership."
+              },
+              {
+                "name": "smokingPreference",
+                "value": "",
+                "type": "query",
+                "description": "Smoking preference to search a reservation. This is compared to the preference on the guest profile of the reservation."
+              },
+              {
+                "name": "hotelPackage",
+                "value": "",
+                "type": "query",
+                "description": "Hotel Package Code to filter the search result."
+              },
+              {
+                "name": "yieldMarketCode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "accessibleRoomTypesOnly",
+                "value": "",
+                "type": "query",
+                "description": "Used to fetch accessible room types only in the Rate Plan set."
+              },
+              {
+                "name": "includeLocalRates",
+                "value": "",
+                "type": "query",
+                "description": "Used to indicate if local rates are to be included in the Rate Plan set."
+              },
+              {
+                "name": "includeOffshoreRates",
+                "value": "",
+                "type": "query",
+                "description": "Used to indicate if offshore rates are to be included in the Rate Plan set."
+              },
+              {
+                "name": "postingInterval",
+                "value": "",
+                "type": "query",
+                "description": "Optional posting interval filter. When nothing is provided in this filter then only Nightly rates will be returned"
+              },
+              {
+                "name": "ownerType",
+                "value": "",
+                "type": "query",
+                "description": "Owner Room Type - can be either Owner or Referral"
+              },
+              {
+                "name": "controlSegment",
+                "value": "",
+                "type": "query",
+                "description": "Control Segment to check for casino restrction for a patron profile."
+              }
+            ]
+          },
+          "docs": " This API fetches hotel availablity for multiple hotels, given dates, RatePlans, Rate Category, Rate Group, Membership Rates, Number of People. <p><strong>OperationId:</strong>getHotelAvailabilityCRO</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get Hotel Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/availability/searches",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " This API fetches hotel availablity for multiple hotels, given dates, RatePlans, Rate Category, Rate Group, Membership Rates, Number of People. <p><strong>OperationId:</strong>searchHotelAvailabilityCRO</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Search hotels for the sales process",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cro",
+                "value": "",
+                "type": "query",
+                "description": "Central Reservation Office Code who is conducting the search. This will search only hotels handled by the CRO."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "quantity",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "adults",
+                "value": "",
+                "type": "query",
+                "description": "Defines the number of Adults."
+              },
+              {
+                "name": "children",
+                "value": "",
+                "type": "query",
+                "description": "Defines the number of Children."
+              },
+              {
+                "name": "alternateHotels",
+                "value": "",
+                "type": "query",
+                "description": "If true or not specified Alternate Hotels will be returned in the result. To search specific hotels send it false."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query",
+                "description": "Hotel Code to be searched."
+              },
+              {
+                "name": "regionCode",
+                "value": "",
+                "type": "query",
+                "description": "Region Code where the given cities are located."
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "City Code to filter the search result."
+              },
+              {
+                "name": "hotelType",
+                "value": "",
+                "type": "query",
+                "description": "Hotel Type to filter the search result."
+              },
+              {
+                "name": "hotelAmenity",
+                "value": "",
+                "type": "query",
+                "description": "Hotel Amenity Code to filter the search result."
+              },
+              {
+                "name": "attraction",
+                "value": "",
+                "type": "query",
+                "description": "Attaction Code to filter the search result."
+              },
+              {
+                "name": "hotelPackage",
+                "value": "",
+                "type": "query",
+                "description": "Hotel Package Code to filter the search result."
+              },
+              {
+                "name": "prevailingRate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "rateCategory",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "rateClass",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "rateGroup",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ratePlanCode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ratePlanId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "promotionCode",
+                "value": "",
+                "type": "query",
+                "description": "Promotion code associated with the rate plan."
+              },
+              {
+                "name": "roomType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "roomClass",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "bedType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "feature",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "reservationGuestId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "reservationGuestIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "reservationProfileType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "currencyExchangeRates",
+                "value": "",
+                "type": "query",
+                "description": "If true Currency Exchange Rates information will be included in the response."
+              },
+              {
+                "name": "ratePlanInfo",
+                "value": "",
+                "type": "query",
+                "description": "If true Rate Plan Code Master information will be included in the response."
+              },
+              {
+                "name": "resGuaranteeInfo",
+                "value": "",
+                "type": "query",
+                "description": "If true Guarantee Code information will be fetched with Rate Code Information. This attribute is only effective when RatePlanInfo is true."
+              },
+              {
+                "name": "returnAllRates",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to return only 'Requested' rate codes or 'All' rate codes. The default value is true which means all available ratecodes will be returned."
+              },
+              {
+                "name": "roomTypeInfo",
+                "value": "",
+                "type": "query",
+                "description": "If true Room Type Master information will be included in the response."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "A collection of supported sorting options for search hotels results."
+              },
+              {
+                "name": "sellMessages",
+                "value": "",
+                "type": "query",
+                "description": "If true Sell Messages information will be included in the response."
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "query",
+                "description": "Block Id to query for sell messages."
+              }
+            ]
+          },
+          "docs": "This API is to search hotels for the sales process. <p><strong>OperationId:</strong>getHotels</p>"
+        },
+        {
+          "info": {
+            "name": "Analyze Rate Availability ",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/analyzeRateAvailability",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              },
+              {
+                "name": "ratePlanCode",
+                "value": "",
+                "type": "query",
+                "description": "The Rate Code for which the Analysis is requested."
+              },
+              {
+                "name": "roomType",
+                "value": "",
+                "type": "query",
+                "description": "The Room Type for which the Analysis is requested. Analysis is done to determine whether the Rate Code is available for this Room Type."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "duration",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "numberOfRooms",
+                "value": "",
+                "type": "query",
+                "description": "The number of rooms requested. The Analysis to check if this Rate Code is available for this number of rooms."
+              },
+              {
+                "name": "adults",
+                "value": "",
+                "type": "query",
+                "description": "Defines the number of Adults."
+              },
+              {
+                "name": "children",
+                "value": "",
+                "type": "query",
+                "description": "Defines the number of Children."
+              },
+              {
+                "name": "childAge",
+                "value": "",
+                "type": "query",
+                "description": "Age of a child in years."
+              },
+              {
+                "name": "bucket1Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the first Age Qualifying Group(Child Bucket#1)."
+              },
+              {
+                "name": "bucket2Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the second Age Qualifying Group(Child Bucket#2)."
+              },
+              {
+                "name": "bucket3Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the third Age Qualifying Group(Child Bucket#3)."
+              },
+              {
+                "name": "bucket4Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the fourth Age Qualifying Group(Child Bucket#4)."
+              },
+              {
+                "name": "bucket5Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the fifth Age Qualifying Group(Child Bucket#5)."
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "blockIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "reservationIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "controlSegment",
+                "value": "",
+                "type": "query",
+                "description": "Control Segment to check for casino restrction for a patron profile."
+              },
+              {
+                "name": "reservationGuestId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              }
+            ]
+          },
+          "docs": "This API allows to Analyze Rate Availability. Rate analysis request to include the rate code, room type and room span to analyze whether a rate is closed and the reasons. <p><strong>OperationId:</strong>analyzeRateAvailability</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Analyze Rate Availability ",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/analyzeRateAvailability/searches",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              }
+            ]
+          },
+          "docs": "This API allows to Analyze Rate Availability. Rate analysis request to include the rate code, room type and room span to analyze whether a rate is closed and the reasons. <p><strong>OperationId:</strong>searchAnalyzeRateAvailability</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get Hotel Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/availability",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              },
+              {
+                "name": "includeLocalRates",
+                "value": "",
+                "type": "query",
+                "description": "Used to indicate if local rates are to be included in the Rate Plan set."
+              },
+              {
+                "name": "includeOffshoreRates",
+                "value": "",
+                "type": "query",
+                "description": "Used to indicate if offshore rates are to be included in the Rate Plan set."
+              },
+              {
+                "name": "cro",
+                "value": "",
+                "type": "query",
+                "description": "Central reservation office Code who is requesting Rate Availability."
+              },
+              {
+                "name": "includeClosedRates",
+                "value": "",
+                "type": "query",
+                "description": "Used to indicate if closed rates are to be included in the Rate Plan set."
+              },
+              {
+                "name": "includeDefaultRatePlanSet",
+                "value": "",
+                "type": "query",
+                "description": "Used to indicate if the configured default rate plan set will be included."
+              },
+              {
+                "name": "includeNoRatePlanSet",
+                "value": "",
+                "type": "query",
+                "description": "Includes the rate codes which do not have a rate plan set associated. This parameter is applicable when the property has not configured a default rate plan set."
+              },
+              {
+                "name": "initialRatePlanSet",
+                "value": "",
+                "type": "query",
+                "description": "If InitialRatePlanSet is set to true response will return most relevant Rate Plan Set(e.g. NEGOTIATED if profiles has Negotiated Rates) depending on the request. if request does not requires special Rate Plan Set, it will return default Rate Plan Set if RatePlanSet value is not set."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "pagePointerKey",
+                "value": "",
+                "type": "query",
+                "description": "Specifies fetched record's key as pointer to fetch additional records from. If key is composite use comma separated string."
+              },
+              {
+                "name": "ratePlanSet",
+                "value": "",
+                "type": "query",
+                "description": "Rate Plan Set code to filter Rate Plans based on the predefined set. if not specified it will not filter any Rate Plans by Rate Plan Set. When InitialRatePlanSet is true response may not always return Rate Plans for the supplied Rate Plan Set(See InitialRatePlanSet documentation)."
+              },
+              {
+                "name": "redeemAwards",
+                "value": "",
+                "type": "query",
+                "description": "Used to indicate if the awards are to be redeemed."
+              },
+              {
+                "name": "roomStayStartDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "roomStayEndDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "roomStayQuantity",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "adults",
+                "value": "",
+                "type": "query",
+                "description": "Defines the number of Adults."
+              },
+              {
+                "name": "children",
+                "value": "",
+                "type": "query",
+                "description": "Defines the number of Children."
+              },
+              {
+                "name": "childAge",
+                "value": "",
+                "type": "query",
+                "description": "Age of a child in years."
+              },
+              {
+                "name": "bucket1Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the first Age Qualifying Group(Child Bucket#1)."
+              },
+              {
+                "name": "bucket2Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the second Age Qualifying Group(Child Bucket#2)."
+              },
+              {
+                "name": "bucket3Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the third Age Qualifying Group(Child Bucket#3)."
+              },
+              {
+                "name": "bucket4Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the fourth Age Qualifying Group(Child Bucket#4)."
+              },
+              {
+                "name": "bucket5Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the fifth Age Qualifying Group(Child Bucket#5)."
+              },
+              {
+                "name": "fullStayTimeSpanStartDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fullStayTimeSpanEndDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "prevailingRate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "rateCategory",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "rateClass",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "rateGroup",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ratePlanCode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "promotionCode",
+                "value": "",
+                "type": "query",
+                "description": "Promotion code associated with the rate plan."
+              },
+              {
+                "name": "roomType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "feature",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "reservationGuestId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "reservationGuestIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "reservationProfileType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "attachedProfileId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "hotelReservationId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "hotelReservationIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "ratePlanInfo",
+                "value": "",
+                "type": "query",
+                "description": "If true Rate Plan Code Master information will be included in the response."
+              },
+              {
+                "name": "returnOnlyAvailableRateCodes",
+                "value": "",
+                "type": "query",
+                "description": "If true Only availability check will be done and it will return available rate codes."
+              },
+              {
+                "name": "resGuaranteeInfo",
+                "value": "",
+                "type": "query",
+                "description": "If true Guarantee Code information will be fetched with Rate Code Information. This attribute is only effective when RatePlanInfo is true."
+              },
+              {
+                "name": "roomTypeInfo",
+                "value": "",
+                "type": "query",
+                "description": "If true Room Type Master information will be included in the response."
+              },
+              {
+                "name": "membershipIdNumber",
+                "value": "",
+                "type": "query",
+                "description": "Membership id Number of the guest."
+              },
+              {
+                "name": "membershipLevel",
+                "value": "",
+                "type": "query",
+                "description": "Membership id Number of the guest."
+              },
+              {
+                "name": "membershipType",
+                "value": "",
+                "type": "query",
+                "description": "Membership id Number of the guest."
+              },
+              {
+                "name": "pointsAvailable",
+                "value": "",
+                "type": "query",
+                "description": "Used to indicate Points Available for Profile Primary Membership Type."
+              },
+              {
+                "name": "membershipCardNumber",
+                "value": "",
+                "type": "query",
+                "description": "Member Card number associated with the guest membership."
+              },
+              {
+                "name": "smokingPreference",
+                "value": "",
+                "type": "query",
+                "description": "Smoking preference to search a reservation. This is compared to the preference on the guest profile of the reservation."
+              },
+              {
+                "name": "hotelPackage",
+                "value": "",
+                "type": "query",
+                "description": "Hotel Package Code to filter the search result."
+              },
+              {
+                "name": "ownerType",
+                "value": "",
+                "type": "query",
+                "description": "Owner Room Type - can be either Owner or Referral"
+              },
+              {
+                "name": "controlSegment",
+                "value": "",
+                "type": "query",
+                "description": "Control Segment to check for casino restrction for a patron profile."
+              },
+              {
+                "name": "postingInterval",
+                "value": "",
+                "type": "query",
+                "description": "Optional posting interval filter. When nothing is provided in this filter then only Nightly rates will be returned"
+              }
+            ]
+          },
+          "docs": " This API fetches hotel availability for any specific hotel, given dates, rate plans, rate category, rate group, membership rates, and number of people. It returns a list of available rate plan codes, room types, and room rates for any given search criteria. <p><strong>OperationId:</strong>getHotelAvailability</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get Alternate Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/availability/alternate",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              },
+              {
+                "name": "ratePlanCode",
+                "value": "",
+                "type": "query",
+                "description": "Requested Rate code"
+              },
+              {
+                "name": "redemption",
+                "value": "",
+                "type": "query",
+                "description": "Used to indicate if award redemption flag is to be set."
+              },
+              {
+                "name": "roomType",
+                "value": "",
+                "type": "query",
+                "description": "Requested Room type."
+              },
+              {
+                "name": "roomNumber",
+                "value": "",
+                "type": "query",
+                "description": "Requested Room Number."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "duration",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "quantity",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "adults",
+                "value": "",
+                "type": "query",
+                "description": "Defines the number of Adults."
+              },
+              {
+                "name": "children",
+                "value": "",
+                "type": "query",
+                "description": "Defines the number of Children."
+              },
+              {
+                "name": "childAge",
+                "value": "",
+                "type": "query",
+                "description": "Age of a child in years."
+              },
+              {
+                "name": "bucket1Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the first Age Qualifying Group(Child Bucket#1)."
+              },
+              {
+                "name": "bucket2Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the second Age Qualifying Group(Child Bucket#2)."
+              },
+              {
+                "name": "bucket3Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the third Age Qualifying Group(Child Bucket#3)."
+              },
+              {
+                "name": "bucket4Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the fourth Age Qualifying Group(Child Bucket#4)."
+              },
+              {
+                "name": "bucket5Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the fifth Age Qualifying Group(Child Bucket#5)."
+              },
+              {
+                "name": "reservationGuestId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "reservationGuestIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "reservationProfileType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "blockCode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "blockName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "blockIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "membershipLevel",
+                "value": "",
+                "type": "query",
+                "description": "Membership id Number of the guest."
+              },
+              {
+                "name": "membershipType",
+                "value": "",
+                "type": "query",
+                "description": "Membership id Number of the guest."
+              },
+              {
+                "name": "controlSegment",
+                "value": "",
+                "type": "query",
+                "description": "Control Segment to check for casino restrction for a patron profile."
+              }
+            ]
+          },
+          "docs": "This API allows to  fetch alternate dates for closed rates. Criteria for to search for alternate dates, room stay information, profile block or guest information can be specified. <p><strong>OperationId:</strong>getAlternateAvailability</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get Alternate Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/availability/alternate/searches",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              }
+            ]
+          },
+          "docs": "This API allows to  fetch alternate dates for closed rates. Criteria for to search for alternate dates, room stay information, profile block or guest information can be specified. <p><strong>OperationId:</strong>searchAlternateAvailability</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get Hotel Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/availability/searches",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              }
+            ]
+          },
+          "docs": " This API fetches hotel availability for any specific hotel, given dates, rate plans, rate category, rate group, membership rates, and number of people. It returns a list of available rate plan codes, room types, and room rates for any given search criteria. <p><strong>OperationId:</strong>searchHotelAvailability</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get for Available Up-sells",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/availableUpsells",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              },
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "reservationStatus",
+                "value": "",
+                "type": "query",
+                "description": "This reservation is in checked in status and the business date is past departure date. This could occur when ORS and PMS are in same environment."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ratePlanCode",
+                "value": "",
+                "type": "query",
+                "description": "Rate plan code"
+              },
+              {
+                "name": "roomType",
+                "value": "",
+                "type": "query",
+                "description": "Room type"
+              },
+              {
+                "name": "adults",
+                "value": "",
+                "type": "query",
+                "description": "Defines the number of Adults."
+              },
+              {
+                "name": "children",
+                "value": "",
+                "type": "query",
+                "description": "Defines the number of Children."
+              },
+              {
+                "name": "rateAmount",
+                "value": "",
+                "type": "query",
+                "description": "A monetary amount."
+              },
+              {
+                "name": "guaranteeCode",
+                "value": "",
+                "type": "query",
+                "description": "Guarantee code"
+              },
+              {
+                "name": "marketCode",
+                "value": "",
+                "type": "query",
+                "description": "Market code"
+              },
+              {
+                "name": "fixedRate",
+                "value": "",
+                "type": "query",
+                "description": "Fixed Rate flag"
+              },
+              {
+                "name": "rateDate",
+                "value": "",
+                "type": "query",
+                "description": "Reservation date"
+              },
+              {
+                "name": "requiredAmount",
+                "value": "",
+                "type": "query",
+                "description": "A monetary amount."
+              },
+              {
+                "name": "numberOfRooms",
+                "value": "",
+                "type": "query",
+                "description": "Number of Rooms"
+              },
+              {
+                "name": "bucket1Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the first Age Qualifying Group(Child Bucket#1)."
+              },
+              {
+                "name": "bucket2Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the second Age Qualifying Group(Child Bucket#2)."
+              },
+              {
+                "name": "bucket3Count",
+                "value": "",
+                "type": "query",
+                "description": "Number of children classified under the third Age Qualifying Group(Child Bucket#3)."
+              }
+            ]
+          },
+          "docs": "This API allows to fetch for Available Up-sells for specific hotel and date range. <p><strong>OperationId:</strong>getAvailableUpsells</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get Reservation Guarantee ",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/guarantees",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              },
+              {
+                "name": "arrivalDate",
+                "value": "",
+                "type": "query",
+                "description": "Arrival Date of the guest."
+              },
+              {
+                "name": "ratePlanCode",
+                "value": "",
+                "type": "query",
+                "description": "Rate Plan Code to find associated Guarantee Codes."
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "reservationGuestId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "travelAgentId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "sourceId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "guaranteeCode",
+                "value": "",
+                "type": "query",
+                "description": "Guarantee Code should be supplied only for the code verification purpose, if the supplied code is valid for the rest of the criteria it will return the response with the Guarantee Code information."
+              },
+              {
+                "name": "calculateEstimateAmount",
+                "value": "",
+                "type": "query",
+                "description": "Determines whether estimated amount to be calculated or not"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "numberOfRooms",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "numberOfAdults",
+                "value": "",
+                "type": "query",
+                "description": "Defines the number of Adults."
+              },
+              {
+                "name": "numberOfChildren",
+                "value": "",
+                "type": "query",
+                "description": "Defines the number of Children."
+              },
+              {
+                "name": "roomType",
+                "value": "",
+                "type": "query",
+                "description": "Room Type for the reservation"
+              }
+            ]
+          },
+          "docs": "This API allows to Fetch Reservation Guarantee. The criteria can include the rate plan code, arrival date, guarantee code and the profile information.  <p><strong>OperationId:</strong>getReservationGuarantees</p>"
+        },
+        {
+          "info": {
+            "name": "Get Hurdle Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/hurdles",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              },
+              {
+                "name": "hurdleDate",
+                "value": "",
+                "type": "query",
+                "description": "Date criteria for which the hurdle rate is scheduled."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              },
+              {
+                "name": "roomTypesCode",
+                "value": "",
+                "type": "query",
+                "description": "Codes to be searched."
+              },
+              {
+                "name": "wildCard",
+                "value": "",
+                "type": "query",
+                "description": "Wildcard search on the code."
+              },
+              {
+                "name": "hurdleRangeStart",
+                "value": "",
+                "type": "query",
+                "description": "Hurdle date start range from which the hurdle rate is scheduled."
+              },
+              {
+                "name": "hurdleRangeEnd",
+                "value": "",
+                "type": "query",
+                "description": "Hurdle date end range to which the hurdle rate is scheduled."
+              }
+            ]
+          },
+          "docs": "This API allows to fetch existing Hurdle Rates. <p><strong>OperationId:</strong>getHurdleRates</p>"
+        },
+        {
+          "info": {
+            "name": "Create Hurdle Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/hurdles",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              }
+            ]
+          },
+          "docs": "This API allows to create hurdle rates. <p><strong>OperationId:</strong>postHurdleRates</p>"
+        },
+        {
+          "info": {
+            "name": "Change Hurdle Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/hurdles",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              }
+            ]
+          },
+          "docs": "This API allows to update an existing Hurdle Rate. <p><strong>OperationId:</strong>putHurdleRates</p>"
+        },
+        {
+          "info": {
+            "name": "Delete Hurdle Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/hurdles",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              },
+              {
+                "name": "hurdleDate",
+                "value": "",
+                "type": "query",
+                "description": "Hurdle date for which the hurdle rate is scheduled."
+              },
+              {
+                "name": "roomType",
+                "value": "",
+                "type": "query",
+                "description": "Room type for which the hurdle rate applies to."
+              },
+              {
+                "name": "roomCategory",
+                "value": "",
+                "type": "query",
+                "description": "Internal room category of the room type for which the hurdle rate applies to."
+              },
+              {
+                "name": "yieldCategory",
+                "value": "",
+                "type": "query",
+                "description": "Yield category for which the hurdle rate applies to."
+              },
+              {
+                "name": "lengthOfStay",
+                "value": "",
+                "type": "query",
+                "description": "Length of stay for which the hurdle rate applies to."
+              },
+              {
+                "name": "yieldMarketCode",
+                "value": "",
+                "type": "query",
+                "description": "Yield market code for which the hurdle rate applies to."
+              },
+              {
+                "name": "hurdleRangeStart",
+                "value": "",
+                "type": "query",
+                "description": "Hurdle date start range from which the hurdle rate is scheduled."
+              },
+              {
+                "name": "hurdleRangeEnd",
+                "value": "",
+                "type": "query",
+                "description": "Hurdle date end range to which the hurdle rate is scheduled."
+              }
+            ]
+          },
+          "docs": "This API allows to delete hurdles rates. <p><strong>OperationId:</strong>deleteHurdleRates</p>"
+        },
+        {
+          "info": {
+            "name": "Get the Rate Plan Information ",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/rates",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              },
+              {
+                "name": "ratePlanCodeList",
+                "value": "",
+                "type": "query",
+                "description": "Rate Plan code."
+              }
+            ]
+          },
+          "docs": "This API allows to fetch Rate Plan information. <p><strong>OperationId:</strong>getAvailabilityRatePlanInfoByMultipleRatePlans</p>"
+        },
+        {
+          "info": {
+            "name": "Get Rate Plan Information ",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/rates/:ratePlanCode",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ratePlanCode",
+                "value": "",
+                "type": "path",
+                "description": "Rate Plan Code."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              },
+              {
+                "name": "ratePlanCodeList",
+                "value": "",
+                "type": "query",
+                "description": "Rate Plan code."
+              }
+            ]
+          },
+          "docs": "This API fetches the ratePlan information like description, short information, long information, Web URL for the ratePlan and Commission Code. The rate plan code list can be passed as part of the criteria in the request. <p><strong>OperationId:</strong>getAvailabilityRatePlanInfo</p>"
+        },
+        {
+          "info": {
+            "name": "Get the Restrictions ",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/restrictions",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              },
+              {
+                "name": "chainName",
+                "value": "",
+                "type": "query",
+                "description": "The name of the hotel chain (e.g., Hilton, Marriott, Hyatt)."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The ending value of the date range."
+              },
+              {
+                "name": "fetchSizeByDay",
+                "value": "",
+                "type": "query",
+                "description": "Defines the maximum amount of restrictions by day."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "restrictionInfo",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "restrictionSearchCriteriaStartDate",
+                "value": "",
+                "type": "query",
+                "description": "The starting value of the date range."
+              },
+              {
+                "name": "bookingChannelCode",
+                "value": "",
+                "type": "query",
+                "description": "Indicates restriction is applicable to specified Booking Channel Code in conjunction with other codes, if specified."
+              },
+              {
+                "name": "ratePlanCategory",
+                "value": "",
+                "type": "query",
+                "description": "Indicates restriction is applicable to specified Rate Plan Category in conjunction with other codes, if specified."
+              },
+              {
+                "name": "ratePlanCode",
+                "value": "",
+                "type": "query",
+                "description": "Indicates restriction is applicable to specified Rate Plan Code in conjunction with other codes, if specified."
+              },
+              {
+                "name": "roomClass",
+                "value": "",
+                "type": "query",
+                "description": "Indicates restriction is applicable to specified Room Category in conjunction with other codes, if specified."
+              },
+              {
+                "name": "roomType",
+                "value": "",
+                "type": "query",
+                "description": "Indicates restriction is applicable to specified Room Type in conjunction with other codes, if specified."
+              },
+              {
+                "name": "filterCodeCategory",
+                "value": "",
+                "type": "query",
+                "description": "An enumerated type defining the Filter Code Categort or Type. Values: BookingChannelCode, RoomClass, RoomType, RatePlanCategory, RatePlanCode."
+              },
+              {
+                "name": "filterCode",
+                "value": "",
+                "type": "query",
+                "description": "Defines BookingChannelCode, RoomClass, RoomType, RatePlanCategory or RatePlanCode to filter the Restriction."
+              },
+              {
+                "name": "houseLevelRestriction",
+                "value": "",
+                "type": "query",
+                "description": "Applicable when Always Display House Level Restrictions Parameter is On. If true, API returns restrictions at the House level when searching by channel, room class, room type, rate category and rate code."
+              }
+            ]
+          },
+          "docs": "This API allows to fetch the Restrictions for a hotel in given date range. The search criteria can include filter codes or restriction control types, date range and the hotel information. <p><strong>OperationId:</strong>getRestrictionsByDateRange</p>"
+        },
+        {
+          "info": {
+            "name": "Create a Restriction ",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/restrictions",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              }
+            ]
+          },
+          "docs": "This API allows you to create restrictions on various levels such as house level, rate class, rate category, rate plan, room class, room type, and booking channel code. <p><strong>OperationId:</strong>postRestriction</p>"
+        },
+        {
+          "info": {
+            "name": "Clear all Restrictions",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/restrictions",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              }
+            ]
+          },
+          "docs": "This API allows Clear all Restrictions for a hotel on given date. The hotel code and the date will need to be passed as part of the request. <p><strong>OperationId:</strong>clearAllRestrictions</p>"
+        },
+        {
+          "info": {
+            "name": "Delete a Restriction ",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/restrictions/:restrictionId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "restrictionId",
+                "value": "",
+                "type": "path",
+                "description": "Indicates the Restriction Type of the restriction and mandatory to delete the restriction."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Indicates restriction is applicable to specified property and mandatory to delete the restriction."
+              },
+              {
+                "name": "restrictionEndDate",
+                "value": "",
+                "type": "query",
+                "description": "Indicates the End date of the restriction and mandatory to delete the restriction."
+              },
+              {
+                "name": "restrictionStartDate",
+                "value": "",
+                "type": "query",
+                "description": "Indicates the start date of the restriction and mandatory to delete the restriction."
+              },
+              {
+                "name": "bookingChannelCode",
+                "value": "",
+                "type": "query",
+                "description": "Indicates restriction is applicable to specified Booking Channel Code in conjunction with other codes, if specified."
+              },
+              {
+                "name": "ratePlanCategory",
+                "value": "",
+                "type": "query",
+                "description": "Indicates restriction is applicable to specified Rate Plan Category in conjunction with other codes, if specified."
+              },
+              {
+                "name": "ratePlanCode",
+                "value": "",
+                "type": "query",
+                "description": "Indicates restriction is applicable to specified Rate Plan Code in conjunction with other codes, if specified."
+              },
+              {
+                "name": "roomClass",
+                "value": "",
+                "type": "query",
+                "description": "Indicates restriction is applicable to specified Room Category in conjunction with other codes, if specified."
+              },
+              {
+                "name": "roomType",
+                "value": "",
+                "type": "query",
+                "description": "Indicates restriction is applicable to specified Room Type in conjunction with other codes, if specified."
+              }
+            ]
+          },
+          "docs": "This API allows to Delete a given restriction. The date range is passed along with the restriction control type details which can include house, room type, room class or rate plan information. The unique criteria has been defined with one of these combinations: restrictionType, restrictionStartDate, restrictionEndDate, bookingChannelCode, ratePlanCategory, ratePlanCode, roomClass, roomType.<p><strong>OperationId:</strong>deleteRestriction</p>"
+        },
+        {
+          "info": {
+            "name": "Get the Restriction history ",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/restrictionsHistory",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              },
+              {
+                "name": "chainName",
+                "value": "",
+                "type": "query",
+                "description": "The name of the hotel chain (e.g., Hilton, Marriott, Hyatt)."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "The date for which a restriction log exists."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The date for which a restriction log exists. When start date is passed, end date must be provided which will fetch all restrictions logs that has an overlap in the provided range."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The date for which a restriction log exists. When start date is passed, end date must be provided which will fetch all restrictions logs that has an overlap in the provided range."
+              },
+              {
+                "name": "bookingChannelCode",
+                "value": "",
+                "type": "query",
+                "description": "Indicates restriction is applicable to specified Booking Channel Code in conjunction with other codes, if specified."
+              },
+              {
+                "name": "ratePlanCategory",
+                "value": "",
+                "type": "query",
+                "description": "Indicates restriction is applicable to specified Rate Plan Category in conjunction with other codes, if specified."
+              },
+              {
+                "name": "ratePlanCode",
+                "value": "",
+                "type": "query",
+                "description": "Indicates restriction is applicable to specified Rate Plan Code in conjunction with other codes, if specified."
+              },
+              {
+                "name": "roomClass",
+                "value": "",
+                "type": "query",
+                "description": "Indicates restriction is applicable to specified Room Category in conjunction with other codes, if specified."
+              },
+              {
+                "name": "roomType",
+                "value": "",
+                "type": "query",
+                "description": "Indicates restriction is applicable to specified Room Type in conjunction with other codes, if specified."
+              },
+              {
+                "name": "restrictionType",
+                "value": "",
+                "type": "query",
+                "description": "Indicates the restriction types."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Indicates restriction is created by User ID in conjunction with other Users, if specified."
+              }
+            ]
+          },
+          "docs": "This API allows to fetch the Restriction history. Specify filter codes or restriction control types. The date range can be passed as part of the request. <p><strong>OperationId:</strong>getRestrictionsHistory</p>"
+        },
+        {
+          "info": {
+            "name": "Get Reservation Guarantee ",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/validateGuarantees",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              }
+            ]
+          },
+          "docs": "This API allows to Fetch Reservation Guarantee. The criteria can include the rate plan code, arrival date, guarantee code and the profile information.  <p><strong>OperationId:</strong>validateReservationGuarantees</p>"
+        },
+        {
+          "info": {
+            "name": "Get multiple property Hurdle Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hurdles",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              },
+              {
+                "name": "x-hubid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelIds",
+                "value": "",
+                "type": "query",
+                "description": "Hotel code."
+              },
+              {
+                "name": "hurdleDate",
+                "value": "",
+                "type": "query",
+                "description": "Date criteria for which the hurdle rate is scheduled."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              },
+              {
+                "name": "roomTypesCode",
+                "value": "",
+                "type": "query",
+                "description": "Codes to be searched."
+              },
+              {
+                "name": "wildCard",
+                "value": "",
+                "type": "query",
+                "description": "Wildcard search on the code."
+              },
+              {
+                "name": "hurdleRangeStart",
+                "value": "",
+                "type": "query",
+                "description": "Hurdle date start range from which the hurdle rate is scheduled."
+              },
+              {
+                "name": "hurdleRangeEnd",
+                "value": "",
+                "type": "query",
+                "description": "Hurdle date end range to which the hurdle rate is scheduled."
+              }
+            ]
+          },
+          "docs": "This API allows to fetch multiple properties existing Hurdle Rates. <p><strong>OperationId:</strong>getHurdleRates</p>"
+        },
+        {
+          "info": {
+            "name": "Get the Availability Service version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/services/availability/status",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This API allows to retrieve the Availability Service version. <p><strong>OperationId:</strong>pingAvailabilityService</p>"
+        },
+        {
+          "info": {
+            "name": "Create/Change Hurdle Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/upsert/hotels/:hotelId/hurdles",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID that identifies a single hotel property."
+              }
+            ]
+          },
+          "docs": "This API allows to create/change an existing Hurdle Rate. <p><strong>OperationId:</strong>putUpsertHurdleRates</p>"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "AvailabilityExternal",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "External Control Segment Lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/externalControlSegment",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Use this API To LookUp Control Segment In An External System:<p><strong>OperationId:</strong>retriveExternalControlSegment</p>"
+        },
+        {
+          "info": {
+            "name": "Yield Market Type LookUp.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/yieldMarketType",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "membershipId",
+                "value": "",
+                "type": "query",
+                "description": "Membership Card Number."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "The Code That Uniquely Identifies A Single Hotel Property."
+              }
+            ]
+          },
+          "docs": "Use this API To LookUp Yield Market Type In An External System:<p><strong>OperationId:</strong>getExternalYieldMarketType</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

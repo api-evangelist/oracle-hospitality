@@ -1,0 +1,337 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Distribution Content",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Content",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Properties Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "connectionStatusLastChangedFrom",
+                "value": "",
+                "type": "query",
+                "description": "Channel connection status last changed after this time"
+              },
+              {
+                "name": "connectionStatusLastChangedTo",
+                "value": "",
+                "type": "query",
+                "description": "Channel connection status last changed before this time"
+              },
+              {
+                "name": "connectionStatus",
+                "value": "",
+                "type": "query",
+                "description": "Channel connection status"
+              },
+              {
+                "name": "fetchInstructions",
+                "value": "",
+                "type": "query",
+                "description": "The optional summary sections to be included in the response"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Integer, the maximal number of item entities to be returned"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Non-negative integer values that specifies the index of the first item to be returned. The offset index begins at 0. By default, the offset is 0, which returns all items starting from the first item in the collection"
+              }
+            ]
+          },
+          "docs": "Retrieve list of property information for all properties actively mapped to a single channel code.  <p><strong>OperationId:</strong>getPropertiesSummary</p>"
+        },
+        {
+          "info": {
+            "name": "Property Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelCode",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "Hotel Code"
+              }
+            ]
+          },
+          "docs": "Retrieve property information for a single property. <p><strong>OperationId:</strong>getPropertyInfo</p>"
+        },
+        {
+          "info": {
+            "name": "Room Types Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelCode/roomTypes",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "Hotel Code"
+              },
+              {
+                "name": "includeRoomAmenities",
+                "value": "",
+                "type": "query",
+                "description": "If true include room amenities along with each room type. Default is False"
+              },
+              {
+                "name": "roomType",
+                "value": "",
+                "type": "query",
+                "description": "Room Type"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Integer, the maximal number of item entities to be returned"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Non-negative integer values that specifies the index of the first item to be returned. The offset index begins at 0. By default, the offset is 0, which returns all items starting from the first item in the collection"
+              }
+            ]
+          },
+          "docs": "Retrieve room types information for a single property. <p><strong>OperationId:</strong>getRoomTypesInfo</p>"
+        },
+        {
+          "info": {
+            "name": "Rate Plans Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelCode/ratePlans",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "Hotel Code"
+              },
+              {
+                "name": "includeNegotiatedRates",
+                "value": "",
+                "type": "query",
+                "description": "Set this true to include Negotiated rate plans along with public rate plans. Default is False"
+              },
+              {
+                "name": "ratePlanCode",
+                "value": "",
+                "type": "query",
+                "description": "Rate Plan code"
+              },
+              {
+                "name": "fetchInstructions",
+                "value": "",
+                "type": "query",
+                "description": "The optional additional information to be included in the response"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Integer, the maximal number of item entities to be returned"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Non-negative integer values that specifies the index of the first item to be returned. The offset index begins at 0. By default, the offset is 0, which returns all items starting from the first item in the collection"
+              }
+            ]
+          },
+          "docs": "Retrieve rate plans information for a single property. <p><strong>OperationId:</strong>getRatePlans</p>"
+        },
+        {
+          "info": {
+            "name": "Rate Rooms Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelCode/rateRooms",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-channelCode",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "Hotel Code"
+              },
+              {
+                "name": "includeInactive",
+                "value": "",
+                "type": "query",
+                "description": "If true include inactive rateRooms. Default is False"
+              },
+              {
+                "name": "roomType",
+                "value": "",
+                "type": "query",
+                "description": "Room Type"
+              },
+              {
+                "name": "ratePlanCode",
+                "value": "",
+                "type": "query",
+                "description": "Rate Plan code"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Integer, the maximal number of item entities to be returned"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Non-negative integer values that specifies the index of the first item to be returned. The offset index begins at 0. By default, the offset is 0, which returns all items starting from the first item in the collection"
+              }
+            ]
+          },
+          "docs": "Retrieve rate plan and room type mapping information for a single property. <p><strong>OperationId:</strong>getRateRooms</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

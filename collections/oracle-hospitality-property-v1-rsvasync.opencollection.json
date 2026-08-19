@@ -1,0 +1,1083 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Reservation Asynchronous API",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ReservationAsync",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch past, present and future Reservations Daily Summary.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/hotels/:hotelId/reservations/dailySummary",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Use this API to get a reservation daily summary for a property within a given date range. Maximum limit of date range is 94 days, but the recommendation is to use a date range proportionate to the size of the hotel. Returns a header parameter Location that can be used in the getReservationsProcessStatus operation.  Use event driven APIs (see https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_business_events.htm#OHIPU-BusinessEvents-F0AC1F1C) to get real time reservation updates.  <p><strong>O"
+        },
+        {
+          "info": {
+            "name": "Get results of Reservations Daily Summary.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/hotels/:hotelId/reservations/dailySummary/:summaryId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summaryId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Use this API to retrieve a property&apos;s reservation daily summary within the dates given in the startReservationsDailySummaryProcess API request. You can get the value of the summaryId from the Location header returned by the getReservationsProcessStatus operation after the process is completed.  <p><strong>OperationId:</strong>getReservationsDailySummary</p>"
+        },
+        {
+          "info": {
+            "name": "Check status of Reservation Daily Summary process",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/hotels/:hotelId/reservations/dailySummary/:summaryId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "summaryId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Use this to check whether the process to generate reservations daily summaries is complete. You can get value of summaryId from the Location header returned by the startReservationsDailySummaryProcess operation. <p><strong>OperationId:</strong>getReservationsProcessStatus</p>"
+        },
+        {
+          "info": {
+            "name": "Updates reservation details of a given list of reservations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/reservationDetailsMassUpdate",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              }
+            ]
+          },
+          "docs": "This API allows you to update reservation details of a given list of reservations. A user is allowed to submit only one mass update request per hotel at a time. <p><strong>OperationId:</strong>startReservationDetailsMassUpdateProcess</p>"
+        },
+        {
+          "info": {
+            "name": "Updates reservation traces of a given list of reservations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/tracesMassUpdate",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              }
+            ]
+          },
+          "docs": "This API allows you to update reservation traces of a given list of reservations. A user is allowed to submit only one mass update request per hotel at a time. <p><strong>OperationId:</strong>startTracesMassUpdateProcess</p>"
+        },
+        {
+          "info": {
+            "name": "Updates reservation preferences of a given list of reservations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/preferencesMassUpdate",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              }
+            ]
+          },
+          "docs": "This API allows you to create reservation preferences of a given list of reservations. A user is allowed to submit only one mass update request per hotel at a time. <p><strong>OperationId:</strong>startPreferencesMassUpdateProcess</p>"
+        },
+        {
+          "info": {
+            "name": "Updates reservation routing instructions of a given list of reservations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/routingInstructionsMassUpdate",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              }
+            ]
+          },
+          "docs": "This API allows you to update reservation routing instructions of a given list of reservations. A user is allowed to submit only one mass update request per hotel at a time. <p><strong>OperationId:</strong>startRoutingInstructionsMassUpdateProcess</p>"
+        },
+        {
+          "info": {
+            "name": "Updates reservation housekeeping options and/or schedules of a given list of reservations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/housekeepingMassUpdate",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              }
+            ]
+          },
+          "docs": "This API allows you to update reservation housekeeping options and/or schedules of a given list of reservations. A user is allowed to submit only one mass update reservations request per hotel at a time. <p><strong>OperationId:</strong>startHousekeepingMassUpdateProcess</p>"
+        },
+        {
+          "info": {
+            "name": "Get results of a Mass Update process",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/massUpdate/:massUpdateId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "massUpdateId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of mass update process"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              }
+            ]
+          },
+          "docs": "This API returns a summary of the reservations included in the mass update process. You can get the value of massUpdateId from the process API response (under header location). <p><strong>OperationId:</strong>getMassUpdateProcessSummary</p>"
+        },
+        {
+          "info": {
+            "name": "Check status of Mass Update process.",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "{{baseUrl}}/hotels/:hotelId/massUpdate/:massUpdateId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "massUpdateId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of mass update process"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              }
+            ]
+          },
+          "docs": "Use this to check whether the mass update process has been completed. You can get the value of massUpdateId from the process API response (under header location). <p><strong>OperationId:</strong>headMassUpdateProcessStatus</p>"
+        },
+        {
+          "info": {
+            "name": "Updates reservation notes of a given list of reservations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/notesMassUpdate",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              }
+            ]
+          },
+          "docs": "This API allows you to update reservation notes of a given list of reservations. A user is allowed to submit only one mass update request per hotel at a time. <p><strong>OperationId:</strong>startNotesMassUpdateProcess</p>"
+        },
+        {
+          "info": {
+            "name": "Updates reservation transportations of a given list of reservations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/transportationsMassUpdate",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              }
+            ]
+          },
+          "docs": "This API allows you to create reservation transportations of a given list of reservations. A user is allowed to submit only one mass update request per hotel at a time. <p><strong>OperationId:</strong>startTransportationsMassUpdateProcess</p>"
+        },
+        {
+          "info": {
+            "name": "Validate Rooming List Reservations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/blocks/:blockId/roominglistvalidation",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "path",
+                "description": "Block Id"
+              }
+            ]
+          },
+          "docs": "Use this API to validate Reservations Rooming List. <p><strong>OperationId:</strong>startRoomingListValidationProcess</p>"
+        },
+        {
+          "info": {
+            "name": "Get results of Rooming List validation process",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/roominglistvalidation/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID for rooming list validation process"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              }
+            ]
+          },
+          "docs": "This API returns a summary of the status from rooming list validation process. You can get the value of requestId from the process API response (under header location). <p><strong>OperationId:</strong>getRoomingListValidationProcessResults</p>"
+        },
+        {
+          "info": {
+            "name": "Check status of Rooming List validation process.",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "{{baseUrl}}/hotels/:hotelId/roominglistvalidation/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID for rooming list validation process"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              }
+            ]
+          },
+          "docs": "Use this to check whether the validate rooming list process status is Processing, Invalid, Failed or Success. You can get the value of requestId from the process API response under header location. <p><strong>OperationId: </strong>getRoomingListValidationProcessStatus</p>"
+        },
+        {
+          "info": {
+            "name": "Updates reservation payment instructions of a given list of reservations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/paymentInstructionsMassUpdate",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              }
+            ]
+          },
+          "docs": "This API allows you to update reservation payment instructions of a given list of reservations. A user is allowed to submit only one mass update request per hotel at a time. <p><strong>OperationId:</strong>startPaymentInsructionsMassUpdateProcess</p>"
+        },
+        {
+          "info": {
+            "name": "Create Rooming List Reservations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/blocks/:blockId/roominglistcreation",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "path",
+                "description": "Block Id"
+              }
+            ]
+          },
+          "docs": "Use this API to create Reservations Rooming List. <p><strong>OperationId:</strong>startRoomingListCreationProcess</p>"
+        },
+        {
+          "info": {
+            "name": "Get results of Rooming List Creation process",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/roominglistcreation/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID for rooming list creation process"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              }
+            ]
+          },
+          "docs": "This API returns a summary of the status from rooming list creation process. You can get the value of requestId from the process API response (under header location). <p><strong>OperationId:</strong>getRoomingListCreationProcessResults</p>"
+        },
+        {
+          "info": {
+            "name": "Check status of Rooming List creation process.",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "{{baseUrl}}/hotels/:hotelId/roominglistcreation/:requestId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID for rooming list creation process"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a Hotel"
+              }
+            ]
+          },
+          "docs": "Use this to check whether the create rooming list process status is Processing, Invalid, Failed or Success. You can get the value of requestId from the process API response under header location. <p><strong>OperationId: </strong>getRoomingListCreationProcessStatus</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

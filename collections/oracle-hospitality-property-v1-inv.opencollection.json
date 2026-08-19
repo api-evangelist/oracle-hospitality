@@ -1,0 +1,1147 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Inventory API",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "INVStats",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get block inventory statistics for multiple hotel Ids",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/blockInventoryStatistics",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelIds",
+                "value": "",
+                "type": "query",
+                "description": "Hotel code."
+              },
+              {
+                "name": "includeBlocksWithNoRoom",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, includes business blocks without rooms."
+              },
+              {
+                "name": "includeOverbooking",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the house overbooking limit for each day is added to the total number of physical rooms."
+              },
+              {
+                "name": "includeOpportunities",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the results will include opportunities. If this flag is not provided it will be considered false and exclude opportunities."
+              },
+              {
+                "name": "includeTentativeInventory",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, includes non-deduct business blocks and group reservations in the Sales Allowance Available Rooms and House Availability statistics."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              },
+              {
+                "name": "endDateRange",
+                "value": "",
+                "type": "query",
+                "description": "The ending value of the date range."
+              },
+              {
+                "name": "startDateRange",
+                "value": "",
+                "type": "query",
+                "description": "The starting value of the date range."
+              },
+              {
+                "name": "blockStatusCodes",
+                "value": "",
+                "type": "query",
+                "description": "Collection of configured Block Status Codes."
+              },
+              {
+                "name": "originCodes",
+                "value": "",
+                "type": "query",
+                "description": "Collection of Origin Codes."
+              },
+              {
+                "name": "roomOwnerCodes",
+                "value": "",
+                "type": "query",
+                "description": "Collection of Room Owners."
+              },
+              {
+                "name": "blockOwners",
+                "value": "",
+                "type": "query",
+                "description": "Collection of block owners."
+              },
+              {
+                "name": "availabilitySummaryBy",
+                "value": "",
+                "type": "query",
+                "description": "Summarize the availability based on selected criteria. If not selected, by default AvailableRooms are displayed. "
+              },
+              {
+                "name": "summarySortByCode",
+                "value": "",
+                "type": "query",
+                "description": "Supported block inventory statistical sorting for summary information"
+              },
+              {
+                "name": "detailSortByCode",
+                "value": "",
+                "type": "query",
+                "description": "Supported block inventory statistical sorting for detailed block information"
+              },
+              {
+                "name": "sunday",
+                "value": "",
+                "type": "query",
+                "description": "If selected, Sundays are included in search result."
+              },
+              {
+                "name": "monday",
+                "value": "",
+                "type": "query",
+                "description": "If selected, Mondays are included in search result."
+              },
+              {
+                "name": "tuesday",
+                "value": "",
+                "type": "query",
+                "description": "If selected, Tuesdays are included in search result."
+              },
+              {
+                "name": "wednesday",
+                "value": "",
+                "type": "query",
+                "description": "If selected, Wednesdays are included in search result."
+              },
+              {
+                "name": "thursday",
+                "value": "",
+                "type": "query",
+                "description": "If selected, Thursdays are included in search result."
+              },
+              {
+                "name": "friday",
+                "value": "",
+                "type": "query",
+                "description": "If selected, Fridays are included in search result."
+              },
+              {
+                "name": "saturday",
+                "value": "",
+                "type": "query",
+                "description": "If selected, Saturdays are included in search result."
+              },
+              {
+                "name": "fetchInstructions",
+                "value": "",
+                "type": "query",
+                "description": "Type for block inventory statistics instructions that can be used in requests for partial operations."
+              },
+              {
+                "name": "roomSummaryBy",
+                "value": "",
+                "type": "query",
+                "description": "Summarize the rooms based on selected criteria. If not selected, by default AvailableRooms are displayed. Applicable only when RoomSummary is a fetchInstruction. "
+              }
+            ]
+          },
+          "docs": "You can use this API to retrieve Block inventory for multiple hotel codes. Narrow down your results using the query parameters available. <p><strong>OperationId:</strong>getBlockInventoryStatisticsMultipleHotelIds</p> <p>The maximum allowable limit for this API is <strong>100</strong>.</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get block inventory statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/blockInventoryStatistics",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel where block inventory statistics are searched."
+              },
+              {
+                "name": "includeBlocksWithNoRoom",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, includes business blocks without rooms."
+              },
+              {
+                "name": "includeOverbooking",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the house overbooking limit for each day is added to the total number of physical rooms."
+              },
+              {
+                "name": "includeOpportunities",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the results will include opportunities. If this flag is not provided it will be considered false and exclude opportunities."
+              },
+              {
+                "name": "includeTentativeInventory",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, includes non-deduct business blocks and group reservations in the Sales Allowance Available Rooms and House Availability statistics."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              },
+              {
+                "name": "endDateRange",
+                "value": "",
+                "type": "query",
+                "description": "The ending value of the date range."
+              },
+              {
+                "name": "startDateRange",
+                "value": "",
+                "type": "query",
+                "description": "The starting value of the date range."
+              },
+              {
+                "name": "blockStatusCodes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "originCodes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "roomOwnerCodes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "blockOwners",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "availabilitySummaryBy",
+                "value": "",
+                "type": "query",
+                "description": "Summarize the availability based on selected criteria. If not selected, by default AvailableRooms are displayed. "
+              },
+              {
+                "name": "summarySortByCode",
+                "value": "",
+                "type": "query",
+                "description": "Supported block inventory statistical sorting."
+              },
+              {
+                "name": "detailSortByCode",
+                "value": "",
+                "type": "query",
+                "description": "Supported block inventory statistical sorting."
+              },
+              {
+                "name": "friday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "monday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "saturday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sunday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "thursday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "tuesday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "wednesday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fetchInstructions",
+                "value": "",
+                "type": "query",
+                "description": "Type for block inventory statistics instructions that can be used in requests for partial operations."
+              },
+              {
+                "name": "roomSummaryBy",
+                "value": "",
+                "type": "query",
+                "description": "Summarize the rooms based on selected criteria. If not selected, by default AvailableRooms are displayed. Applicable only when RoomSummary is a fetchInstruction. "
+              }
+            ]
+          },
+          "docs": "You can use this API to retrieve Block inventory for a specified hotel. Narrow down your results using the query parameters available. <p><strong>OperationId:</strong>getBlockInventoryStatistics</p> <p>The maximum allowable limit for this API is <strong>100</strong>.</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get a hotels Inventory Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/inventoryStatistics",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel where inventory statistics are searched."
+              },
+              {
+                "name": "dateRangeEnd",
+                "value": "",
+                "type": "query",
+                "description": "The ending value of the date range."
+              },
+              {
+                "name": "reportCode",
+                "value": "",
+                "type": "query",
+                "description": "Identifies the type of statistics collected. Each ReportCode corresponds to a set of category summaries based upon a predetermined agreement."
+              },
+              {
+                "name": "dateRangeStart",
+                "value": "",
+                "type": "query",
+                "description": "The starting value of the date range."
+              },
+              {
+                "name": "parameterName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the parameter."
+              },
+              {
+                "name": "parameterValue",
+                "value": "",
+                "type": "query",
+                "description": "Value of the parameter."
+              }
+            ]
+          },
+          "docs": "This will fetch a hotel's inventory statistics for a specified date range that you provided in the request.<p> <Strong>Note:</strong> This operation does not contain or return revenue data.</p> <p><strong>OperationId:</strong> getInventoryStatistics</p> <p>This API allows a time span of <strong>62</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Ping",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/services/invStatsService/status",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Check inventory statistics service <p><strong>OperationId:</strong>pinginvStatsService</p>"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Inventory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get hotel inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/hotelInventory",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel where hotel inventory is searched."
+              },
+              {
+                "name": "dateRangeStart",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "dateRangeEnd",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "roomCountRequested",
+                "value": "",
+                "type": "query",
+                "description": "Number of rooms requested."
+              },
+              {
+                "name": "includeTentativeInventory",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, includes non-deduct/Tentative rooms for a date range."
+              },
+              {
+                "name": "dailyInventory",
+                "value": "",
+                "type": "query",
+                "description": "If false minimum inventory for the date range is requested, otherwise inventory is requested for every day."
+              },
+              {
+                "name": "houseLevel",
+                "value": "",
+                "type": "query",
+                "description": "Indicates that House level inventory is requested."
+              },
+              {
+                "name": "roomTypes",
+                "value": "",
+                "type": "query",
+                "description": "Room Type Code."
+              },
+              {
+                "name": "roomClasses",
+                "value": "",
+                "type": "query",
+                "description": "Room Class Code."
+              },
+              {
+                "name": "includeOverbooking",
+                "value": "",
+                "type": "query",
+                "description": "This flag indicates that include or exclude overbooking count. The default value is true."
+              }
+            ]
+          },
+          "docs": "You can use this API to retrieve the inventory for a specified hotel. Narrow down your results using the query parameters such as a date range, room type, room class, and/or tentative inventory included. <p><strong>OperationId:</strong>getHotelInventory</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get item inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/itemInventory",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel where item inventory is searched."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "duration",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End Time of the Time window."
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start Time of the Time window."
+              },
+              {
+                "name": "itemClass",
+                "value": "",
+                "type": "query",
+                "description": "Item Class to filter the Items/Item Pools in the response."
+              },
+              {
+                "name": "itemPool",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "itemCode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "defaultDuration",
+                "value": "",
+                "type": "query",
+                "description": "Define the default duration in days when booking the item."
+              },
+              {
+                "name": "fixedCharge",
+                "value": "",
+                "type": "query",
+                "description": "If true indicates that item has fixed charge when it is attached to a reservation."
+              },
+              {
+                "name": "outsideStay",
+                "value": "",
+                "type": "query",
+                "description": "If true indicates that item could be held outside of the reservation stay days."
+              },
+              {
+                "name": "requiredForBooking",
+                "value": "",
+                "type": "query",
+                "description": "If true indicates that item is required for the reservation."
+              },
+              {
+                "name": "sellInEvent",
+                "value": "",
+                "type": "query",
+                "description": "If true indicates that item can be sold in event."
+              },
+              {
+                "name": "sellInReservation",
+                "value": "",
+                "type": "query",
+                "description": "If true indicates that item can be sold in reservation."
+              },
+              {
+                "name": "sellSeparate",
+                "value": "",
+                "type": "query",
+                "description": "If true indicates that item is allowed to sell separately."
+              },
+              {
+                "name": "welcomeOffer",
+                "value": "",
+                "type": "query",
+                "description": "When set to true will only return items that are Welcome Offer Eligible."
+              }
+            ]
+          },
+          "docs": "This will fetch a hotels Item inventory for a specified date range that you can provided in the request. <p><strong>OperationId:</strong>getItemInventory</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get items inventory that are held",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/itemInventoryHold",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel where items inventory is held."
+              },
+              {
+                "name": "itemHoldId",
+                "value": "",
+                "type": "query",
+                "description": "ID of an Hold Item"
+              }
+            ]
+          },
+          "docs": "Fetch item inventory that is currently being held. <p><strong>OperationId:</strong>getHoldItemsInventory</p>"
+        },
+        {
+          "info": {
+            "name": "Hold item inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/itemInventoryHold",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel where item inventory is held."
+              }
+            ]
+          },
+          "docs": "Use this API to hold Item Inventory. The 'itemHoldId' is automatically generated by the system and is not accepted as input in the request payload. After a successful call, the response includes HATEOAS links. To retrieve or modify the created resource, extract the 'itemHoldId' from the 'rel' field of the link where 'operationId' is 'getHoldItemsInventory'. <p><strong>OperationId:</strong>postHoldItemInventory</p>"
+        },
+        {
+          "info": {
+            "name": "update items inventory that are held",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/itemInventoryHold",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel where items inventory that are held is updated."
+              }
+            ]
+          },
+          "docs": "You can update item inventory that is being held using this API. <p><strong>OperationId:</strong>putHoldItemsInventory</p>"
+        },
+        {
+          "info": {
+            "name": "Set sell limits by date",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/sellLimits",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel where sell limit are created by date."
+              }
+            ]
+          },
+          "docs": "You can use this API to create sell limits in OPERA by date. <p><strong>OperationId:</strong>changeSellLimitByDate</p>"
+        },
+        {
+          "info": {
+            "name": "Set sell limits by date range",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/sellLimitsByDateRange",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel where sell limits are created by date range."
+              }
+            ]
+          },
+          "docs": "You can use this API to create sell limits in OPERA by date range. <p><strong>OperationId:</strong>changeSellLimitByDateRange</p>"
+        },
+        {
+          "info": {
+            "name": "Release item inventory held",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/releasedItemInventory",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This API will release item inventory that has been held. <p><strong>OperationId:</strong>putItemInventoryHold</p>"
+        },
+        {
+          "info": {
+            "name": "Ping",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/services/inventory/status",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This API facilitates status check of inventory service <p><strong>OperationId:</strong>pingInventoryService</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,334 @@
+{
+  "item": [
+    {
+      "id": "c6a8919f-83c4-4cd4-9c7c-e373634a159d",
+      "name": "Authentication",
+      "description": {
+        "content": "Authentication service",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "740e6220-6492-47e9-a3b0-2d65ec8be183",
+          "name": "Authenticate with the identity server",
+          "request": {
+            "name": "Authenticate with the identity server",
+            "description": {
+              "content": "<p>This is required to access the OPERA Cloud Distribution REST APIs.</p> <h3>Obtaining a token</h3> <p>To obtain a token include the following body parameters:</p> <ul> <li><strong>username</strong>.  set this to your OPERA Cloud Distribution username.</strong></li> <li><strong>password</strong>.  Set this to your OPERA Cloud Distribution user's password.</li> </ul></p><p><strong>OperationId:</strong>getToken</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "not in use",
+                "key": "x-app-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "username",
+                  "value": "<string>",
+                  "description": "(Required) Your OPERA Cloud Distribution User Name."
+                },
+                {
+                  "disabled": false,
+                  "key": "password",
+                  "value": "<string>",
+                  "description": "(Required) Your OPERA Cloud Distribution user's password."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "db8886e3-fd92-4616-a06b-9e2c98e0d1ca",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "not in use",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Your OPERA Cloud Distribution User Name.",
+                        "type": "text/plain"
+                      },
+                      "key": "username",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Your OPERA Cloud Distribution user's password.",
+                        "type": "text/plain"
+                      },
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_token\": \"string\",\n  \"expires_in\": 9633\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "529bebe1-4b8e-42b7-acc9-d01576eff15f",
+              "name": "Bad Request. This error is returned if the authentication information provided is not valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "not in use",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Your OPERA Cloud Distribution User Name.",
+                        "type": "text/plain"
+                      },
+                      "key": "username",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Your OPERA Cloud Distribution user's password.",
+                        "type": "text/plain"
+                      },
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0c3687d8-6125-4975-a955-fb62b982619a",
+              "name": "Unauthorized. Username, and/or password doesn't match the IDP records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "not in use",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Your OPERA Cloud Distribution User Name.",
+                        "type": "text/plain"
+                      },
+                      "key": "username",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Your OPERA Cloud Distribution user's password.",
+                        "type": "text/plain"
+                      },
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b7accc61-9a55-4f5c-bb49-31ef17cdddbc",
+              "name": "Returned for any unexpected processing issue that isn't an explicit 400 or 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "not in use",
+                    "key": "x-app-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Your OPERA Cloud Distribution User Name.",
+                        "type": "text/plain"
+                      },
+                      "key": "username",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Your OPERA Cloud Distribution user's password.",
+                        "type": "text/plain"
+                      },
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/hdpba/oauth2/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "155da7a6-4f2c-4b06-9da9-d908364d6824",
+    "name": "OPERA Cloud Distribution Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "<p> API to obtain the access token (in the JWT format) that matches the provided credentials issued by the Oracle Hospitality Distribution administrator for a specific Distribution channel partner. The token will then be used by API users to access OPERA Cloud Distribution APIS. Once a token is created, it can be used in multiple subsequent calls until it expires as defined in this API response. </p>\n<p> Username for a channel partner Distribution API account is provisioned by an Oracle administrator at the channel level. It is not an OPERA Cloud (PMS) user and not created or approved by the hotelier. Additionally, for each property, the hotelier will need to enable the channel so that it can access data for their specific hotel in the reservation context. </p>\n<p> More information on how to request a username and temporary password for a registered channel for Distribution APIs:\n  <ul>\n    <li>Channel partners registered via OHIP receive credential(s) from the Oracle Hospitality Distribution administrator during the channel registration.</li>\n  </ul>\n</p><br /><br /> Compatible with OPERA Cloud release 26.2.0.0<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>\n\nContact Support:\n Email: hospitality_apis_ww_grp@oracle.com",
+      "type": "text/plain"
+    }
+  }
+}

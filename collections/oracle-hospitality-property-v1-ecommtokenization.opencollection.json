@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cloud OPI Tokenization ECommerce API",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Hotels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Initiate e-commerce tokenization transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelCode/tokenizations",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Hotel Code"
+              }
+            ]
+          },
+          "docs": "Use this operation to initiate the processing of a tokenization transaction via e-commerce token form.\n<p><strong>OperationId:</strong>postEcommTokenization</p>"
+        },
+        {
+          "info": {
+            "name": "Fetch e-commerce tokenization transaction status and details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelCode/tokenizations/:transactionId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelCode",
+                "value": "",
+                "type": "path",
+                "description": "OPERA Hotel Code"
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "ECommerce Transaction Identifier"
+              }
+            ]
+          },
+          "docs": "Use this operation to fetch the final status and details of a \ntokenization transaction once it has been processed by e-commerce token form.\n<p><strong>OperationId:</strong>getEcommTokenizationDetails</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

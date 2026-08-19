@@ -1,0 +1,628 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud DataValueMapping Service API",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DataValueMapping",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch Converted Hotel Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/hotels/:externalHotelId/conversions",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalHotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "operaHotelCode",
+                "value": "",
+                "type": "query",
+                "description": "Opera Resort for which conversion is needed."
+              }
+            ]
+          },
+          "docs": "This API allows you to get the converted hotel code <p><strong>OperationId:</strong>getOperaHotelCode</p>"
+        },
+        {
+          "info": {
+            "name": "Fetch Converted Values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/hotels/:operaHotelId/convertedValues",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "operaHotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "externalHotelId",
+                "value": "",
+                "type": "query",
+                "description": "External value of resort for which conversion is needed."
+              },
+              {
+                "name": "conversionCode",
+                "value": "",
+                "type": "query",
+                "description": "Enumeration of the different conversion codes needed for data value mapping."
+              },
+              {
+                "name": "valueToBeConverted",
+                "value": "",
+                "type": "query",
+                "description": "Value to be converted. It can be opera or external value."
+              },
+              {
+                "name": "masterValue",
+                "value": "",
+                "type": "query",
+                "description": "Master value is supposed to be Opera value."
+              }
+            ]
+          },
+          "docs": "This API allows you to get the converted values <p><strong>OperationId:</strong>getConvertedValues</p>"
+        },
+        {
+          "info": {
+            "name": "Fetch Default values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/externalSystems/:extSystemCode/hotels/:operaHotelId/defaultValues",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "operaHotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "extSystemCode",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API allows you to get default values <p><strong>OperationId:</strong>getDefaultValues</p>"
+        },
+        {
+          "info": {
+            "name": "Fetch Data Value Mapping Conversion Codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/externalSystems/:externalSystem/conversionCodes",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalSystem",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the external system."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query",
+                "description": "Unique OPERA internal ID used to identify a Hotel in OPERA."
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query",
+                "description": "List of XML Types (groups) to filter conversion codes."
+              },
+              {
+                "name": "conversionCode",
+                "value": "",
+                "type": "query",
+                "description": "List of specific conversion codes to filter."
+              },
+              {
+                "name": "configuredOnly",
+                "value": "",
+                "type": "query",
+                "description": "If 'Y', returns only configured conversion codes for the interface. Otherwise, returns all conversion codes."
+              }
+            ]
+          },
+          "docs": "API to fetch Data Value Mapping Conversion Codes for a given external system. Filters include optional hotelId and group (XML Type).<p><strong>OperationId:</strong>getDvmConversionCodes</p>"
+        },
+        {
+          "info": {
+            "name": "Fetch Data Value Mappings for specific conversion code.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/externalSystems/:externalSystem/conversionCodes/:conversionCode/dataValueMappings",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalSystem",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the external system."
+              },
+              {
+                "name": "conversionCode",
+                "value": "",
+                "type": "path",
+                "description": "Type of Conversion Code configured in OPERA."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query",
+                "description": "Unique OPERA hotel Id used to identify a Hotel in OPERA."
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Fetch data based on scope: Filtered by All(default), Global, hotelId."
+              },
+              {
+                "name": "mappingIds",
+                "value": "",
+                "type": "query",
+                "description": "List of mapping Id's to filter."
+              },
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "Search string to filter by OPERA value, external value, or description."
+              }
+            ]
+          },
+          "docs": "Retrieve mappings for a specific conversion code configured for external system, hotelId and Global mappings.<p><strong>OperationId:</strong>getDataValueMappings</p>"
+        },
+        {
+          "info": {
+            "name": "Create Conversion Code Mappings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/externalSystems/:externalSystem/conversionCodes/:conversionCode/dataValueMappings",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalSystem",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID used to identify an external system."
+              },
+              {
+                "name": "conversionCode",
+                "value": "",
+                "type": "path",
+                "description": "Type of conversion code configured in the system."
+              }
+            ]
+          },
+          "docs": "API to create Data Value Mapping (DVM) Conversion Codes by External System and Conversion Code. <p><strong>OperationId:</strong>postDataValueMappings</p>"
+        },
+        {
+          "info": {
+            "name": "Update Conversion Code Mappings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/externalSystems/:externalSystem/conversionCodes/:conversionCode/dataValueMappings",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalSystem",
+                "value": "",
+                "type": "path",
+                "description": "Unique Id used to identify an external system."
+              },
+              {
+                "name": "conversionCode",
+                "value": "",
+                "type": "path",
+                "description": "Conversion Code configured in OPERA."
+              }
+            ]
+          },
+          "docs": "API to update existing Data Value Mapping (DVM) Conversion Code records for a given External System and Conversion Code. <p><strong>OperationId:</strong>putDataValueMappings</p>"
+        },
+        {
+          "info": {
+            "name": "Remove Conversion Codes Mappings",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/externalSystems/:externalSystem/conversionCodes/:conversionCode/dataValueMappings",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalSystem",
+                "value": "",
+                "type": "path",
+                "description": "External System code"
+              },
+              {
+                "name": "conversionCode",
+                "value": "",
+                "type": "path",
+                "description": "Conversion Code"
+              },
+              {
+                "name": "mappingIds",
+                "value": "",
+                "type": "query",
+                "description": "List of Mapping IDs to delete"
+              }
+            ]
+          },
+          "docs": "API to Delete Interface Mapping Conversion Codes by providing one or more Mapping IDs as query parameter. <p><strong>OperationId:</strong>deleteDataValueMappings</p>"
+        },
+        {
+          "info": {
+            "name": "Clear Default Value Cache",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/services/datavaluemapping/defaultValueCache",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This API allows you to delete the default values cache <p><strong>OperationId:</strong>clearDefaultValueCache</p>"
+        },
+        {
+          "info": {
+            "name": "ping Data Value Mapping Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/services/datavaluemapping/status",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "ping Data Value Mapping Service <p><strong>OperationId:</strong>pingDataValueMappingService</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

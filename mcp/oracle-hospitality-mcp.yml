@@ -10,27 +10,24 @@ search:
   date: '2026-07-28'
   checked:
   - source: https://www.oracle.com/mcp/
-    result: >-
-      Oracle's MCP landing page lists Oracle AI Database MCP servers only (SQLcl MCP Server, OCI Database
-      Tools MCP Server, ORDS MCP endpoint). No hospitality, OPERA Cloud, OHIP, MICROS or Simphony server.
+    result: Oracle's MCP landing page lists Oracle AI Database MCP servers only (SQLcl MCP Server, OCI
+      Database Tools MCP Server, ORDS MCP endpoint). No hospitality, OPERA Cloud, OHIP, MICROS or Simphony
+      server.
   - source: https://github.com/oracle/mcp
-    result: >-
-      Oracle's official MCP monorepo contains 32 servers - dbtools, mysql, goldengate, data-studio, db-doc
-      and 27 OCI infrastructure servers. None covers Oracle Hospitality.
+    result: Oracle's official MCP monorepo contains 32 servers - dbtools, mysql, goldengate, data-studio,
+      db-doc and 27 OCI infrastructure servers. None covers Oracle Hospitality.
   - source: https://docs.oracle.com/cd/F29336_01/doc.201/f27480/
     result: The OHIP developer guide makes no reference to the Model Context Protocol.
   - source: npm registry (@modelcontextprotocol, "ohip", "opera cloud", "oracle hospitality")
     result: No first-party MCP package. One third-party generated SDK exists (@applyinnovations/ohip-sdk),
       which is not an MCP server.
-  conclusion: >-
-    Oracle Hospitality ships no MCP server, first-party or hosted. The tool list below is a DERIVED
-    candidate - it names what an MCP server over OHIP would expose, bound to real operationIds that exist
-    verbatim in the harvested specifications, so it can be forged into a server without inventing a
-    contract. It is not an Oracle artifact and is not advertised as one.
+  conclusion: Oracle Hospitality ships no MCP server, first-party or hosted. The tool list below is a
+    DERIVED candidate - it names what an MCP server over OHIP would expose, bound to real operationIds
+    that exist verbatim in the harvested specifications, so it can be forged into a server without inventing
+    a contract. It is not an Oracle artifact and is not advertised as one.
 derived_from: openapi/ (59 Swagger 2.0 documents, 3,546 operations)
-scope_note: >-
-  A one-tool-per-operation mapping would produce 3,546 tools, which no agent can hold. The candidate set
-  below is scoped to the marquee property, distribution and upsell flows - the operations a hotel-facing
+scope_note: A one-tool-per-operation mapping would produce 3,546 tools, which no agent can hold. The candidate
+  set below is scoped to the marquee property, distribution and upsell flows - the operations a hotel-facing
   agent actually needs - and every entry names the source specification and operationId it binds to. Each
   tool inherits that operation's parameters and request body as its real input schema.
 common_inputs:
@@ -152,6 +149,11 @@ tools:
   description: Poll Business Events for an external system.
   category: events
   source_operation: openapi/oracle-hospitality-property-v1-int.json
-  note: Operation is documented as FetchBusinessEvents at
-    /int/v1/externalSystem/{extSystemCode}/businessEvents.
+  note: Operation is documented as FetchBusinessEvents at /int/v1/externalSystem/{extSystemCode}/businessEvents.
 crosswalk: mcp/oracle-hospitality-tool-crosswalk.yml
+deployment:
+  mode: none
+  verified: derived
+  tools: 26
+  checked: '2026-08-12'
+  source: catalog MCP census

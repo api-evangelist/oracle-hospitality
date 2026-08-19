@@ -1,0 +1,4270 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Housekeeping Service API",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Housekeeping",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the housekeeping attendants schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/attendants/houseKeepingTasks",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "scheduleStartDate",
+                "value": "",
+                "type": "query",
+                "description": "The starting value of the date range."
+              },
+              {
+                "name": "scheduleEndDate",
+                "value": "",
+                "type": "query",
+                "description": "The ending value of the date range."
+              }
+            ]
+          },
+          "docs": "This API will allow you to get the housekeeping attendants schedule. <p><strong>OperationId:</strong>getHousekeepingAttendantsSchedule</p> <p>This API allows a time span of <strong>30</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Delete housekeeping attendant schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/attendants/houseKeepingTasks",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "scheduleDate",
+                "value": "",
+                "type": "query",
+                "description": "Schedule date of attendants' assignment. Used when attendants to scheduled are of the same date."
+              },
+              {
+                "name": "attendantId",
+                "value": "",
+                "type": "query",
+                "description": "ID of the attendant."
+              }
+            ]
+          },
+          "docs": "This API will allow you to delete housekeeping attendant schedule. <p><strong>OperationId:</strong>deleteHousekeepingAttendantSchedule</p>"
+        },
+        {
+          "info": {
+            "name": "Auto generate the task sheets",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/autoTaskSheets",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API will allow you to Auto generate the task sheets. <p><strong>OperationId:</strong>autoGenerateTaskSheets</p>"
+        },
+        {
+          "info": {
+            "name": "Get rooms condition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/conditions",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "roomConditionsOnly",
+                "value": "",
+                "type": "query",
+                "description": "Include rooms with conditions only."
+              },
+              {
+                "name": "roomWithoutConditionsOnly",
+                "value": "",
+                "type": "query",
+                "description": "Include rooms without conditions only."
+              },
+              {
+                "name": "room",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the room."
+              },
+              {
+                "name": "fromRoomNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toRoomNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "roomConditions",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "roomTypes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "roomClasses",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "frontOfficeRoomStatus",
+                "value": "",
+                "type": "query",
+                "description": "Simple type for front office room status instructions to be used in requests for fetching housekeeping rooms. Valid values are Vacant and Occupied."
+              },
+              {
+                "name": "reservationStatuses",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "roomAssignmentStatus",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "floors",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "roomFeatures",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "amSections",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pmSections",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "buildings",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "housekeepingRoomStatus",
+                "value": "",
+                "type": "query",
+                "description": "Simple type for room status instructions to be used in requests for fetching housekeeping rooms. Valid status values are Clean, Dirty, Pickup, Inspected, OutOfOrder, OutOfService."
+              },
+              {
+                "name": "roomParityStatus",
+                "value": "",
+                "type": "query",
+                "description": "Simple type for room parity instructions to be used in requests for fetching housekeeping rooms. Valid status values are Odd and Even."
+              }
+            ]
+          },
+          "docs": "This API will allow you to get a list of rooms that have a condition set. <p><strong>OperationId:</strong>getRoomConditions</p>"
+        },
+        {
+          "info": {
+            "name": "Set rooms condition",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/conditions",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API will allow you to set, change, or delete a condition on rooms. A condition is used to designate rooms that are available for show, set aside for special housekeeping attention, or are to be treated differently for any other reason. <p><strong>OperationId:</strong>setRoomCondition</p>"
+        },
+        {
+          "info": {
+            "name": "Get facility forecast",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/forecastTaskSchedules",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "duration",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Codes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "usePriority",
+                "value": "",
+                "type": "query",
+                "description": "."
+              },
+              {
+                "name": "includeCreditRules",
+                "value": "",
+                "type": "query",
+                "description": "Selecting to Include Credit Rules will include Item inventory and Specials credits on reservations to the Estimated Total Credits calculation."
+              }
+            ]
+          },
+          "docs": "This API will allow you to get facility forecast for Housekeeping attendants and tasks for a current or future start date . <p><strong>OperationId:</strong>getFacilityForecast</p> <p>This API allows a time span of <strong>30</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Delete all the hotel task sheets for an existing Task Sheet Set.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/houseKeepingTasks/:taskCodesBreakOutId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Indicates Unique Hotel Code for which the task sheets will be deleted."
+              },
+              {
+                "name": "taskCodesBreakOutId",
+                "value": "",
+                "type": "path",
+                "description": "Indicates Unique breakout ID for which the task sheets will be deleted."
+              }
+            ]
+          },
+          "docs": "Use this API to delete all task sheets for an existing task sheet set for a specific property. Task Sheet Sets can be used to break out the rooms to be cleaned by the housekeeping attendants.<p><strong>OperationId:</strong>deleteHouseKeepingTaskSheets</p>"
+        },
+        {
+          "info": {
+            "name": "Get the existing task sheets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/houseKeepingtasks",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "taskDate",
+                "value": "",
+                "type": "query",
+                "description": "Date for which the Task Assignment information is required."
+              },
+              {
+                "name": "attendantInRoomOnly",
+                "value": "",
+                "type": "query",
+                "description": "Query only rooms with attendant working in them."
+              },
+              {
+                "name": "generateCleaningSequence",
+                "value": "",
+                "type": "query",
+                "description": "Setting this to true will generate a sequence based on the current condition of the room for cleaning. This sequence would be the same sequence with which the Task Companion works."
+              },
+              {
+                "name": "includeReservationInfo",
+                "value": "",
+                "type": "query",
+                "description": "Setting this to true will include reservation information associated to the room."
+              },
+              {
+                "name": "includeComponentRoomsInfo",
+                "value": "",
+                "type": "query",
+                "description": "Setting this to true will include component rooms information associated to the room."
+              },
+              {
+                "name": "includeTaskSheetDetails",
+                "value": "",
+                "type": "query",
+                "description": "This will include room details for the Task Sheets. If summary information is only required, then this could be set to false. If a Task Sheet Number is included in the Search and this flag is set to true, then the details for that particular Task Sheet will be returned. For all other task sheets, the IncludeTaskSheetsSummary will determine if Summary details are required or not."
+              },
+              {
+                "name": "includeScheduledRoomDetails",
+                "value": "",
+                "type": "query",
+                "description": "Set this to true to include reservation information associated with any scheduled room moves. Available when the Advanced Daily Details OPERA Control is active. Note: IncludeReservationInfo must also be set to true to fetch reservation details."
+              },
+              {
+                "name": "includeTaskSheetsSummary",
+                "value": "",
+                "type": "query",
+                "description": "Setting this to true, will return Summary information for the task sheets required. If a Task Sheet Number is included in the Search and IncludeTaskSheetDetails is set to false and IncludeTaskSheetsSummary is false, then only the Summary information for that particular task sheet will be returned. IncludeTaskSheetDetails = True, IncludeTaskSheetsSummary = True : includes all task sheets details and summary IncludeTaskSheetDetails = false, IncludeTaskSheetsSummary = True : includes only summary IncludeTaskSheetDetails = false, IncludeTaskSheetsSummary = false, Task Sheet No =null : no task sheet detail or summary for any of the tasksheets. Returns the Task Assignnment header. IncludeTaskSheetDetails = True, IncludeTaskSheetsSummary = True, Task Sheet No = XX : includes task sheets detail for XX and summary for others. IncludeTaskSheetDetails = false, IncludeTaskSheetsSummary = True, Task Sheet No = XX : includes summary for all including XX. IncludeTaskSheetDetails = false, IncludeTaskSheetsSummary = false, Task Sheet No = XX : includes summary for XX. No information for others."
+              },
+              {
+                "name": "sortByCleaningSequence",
+                "value": "",
+                "type": "query",
+                "description": "The rooms in the task sheet would be sorted with the cleaning sequence. The normal sort would be done based on the Default Sequence."
+              },
+              {
+                "name": "taskCodes",
+                "value": "",
+                "type": "query",
+                "description": "The Code for the task."
+              },
+              {
+                "name": "taskHotelCodes",
+                "value": "",
+                "type": "query",
+                "description": "Property for which the Task Assignment information is required."
+              },
+              {
+                "name": "taskSequences",
+                "value": "",
+                "type": "query",
+                "description": "Ordering sequence for display."
+              },
+              {
+                "name": "taskDescriptions",
+                "value": "",
+                "type": "query",
+                "description": "Description of the Task Code."
+              },
+              {
+                "name": "taskInstructions",
+                "value": "",
+                "type": "query",
+                "description": "Instructions for this Task Code."
+              },
+              {
+                "name": "facilityDepartureTask",
+                "value": "",
+                "type": "query",
+                "description": "Indicates if this task code is the Departure Room Default Task to be scheduled on the departure date of the reservations. Defining a Departure Room Default Task is available when the 'Housekeeping Task Scheduling' OPERA Control is active."
+              },
+              {
+                "name": "linenChange",
+                "value": "",
+                "type": "query",
+                "description": "Indicates if a linen change is necessary."
+              },
+              {
+                "name": "taskCodesBreakOutId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "taskCodesBreakOutIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "taskCodesBreakOutIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "attendantId",
+                "value": "",
+                "type": "query",
+                "description": "Attendant ID for which the Task Sheets are assigned."
+              },
+              {
+                "name": "taskSheetNumber",
+                "value": "",
+                "type": "query",
+                "description": "Specific Task Sheet number for which the information is required."
+              },
+              {
+                "name": "housekeepingRoomStatus",
+                "value": "",
+                "type": "query",
+                "description": "Simple type for room status instructions to be used in requests for fetching housekeeping rooms. Valid status values are Clean, Dirty, Pickup, Inspected, OutOfOrder, OutOfService."
+              },
+              {
+                "name": "guestService",
+                "value": "",
+                "type": "query",
+                "description": "Possible values for the Guest Service Status."
+              },
+              {
+                "name": "roomStatusToChange",
+                "value": "",
+                "type": "query",
+                "description": "Simple type for room status instructions to be used in requests for fetching housekeeping rooms. Valid status values are Clean, Dirty, Pickup, Inspected, OutOfOrder, OutOfService."
+              },
+              {
+                "name": "includeTaskSupplies",
+                "value": "",
+                "type": "query",
+                "description": "Setting this to true, will return task supplies information for the task sheets if Facility Management control is active. If IncludeReservationInfo is set to true supplies information will always be returned."
+              }
+            ]
+          },
+          "docs": "This API will allow you to get the existing task sheets. <p><strong>OperationId:</strong>getHouseKeepingTasks</p>"
+        },
+        {
+          "info": {
+            "name": "Get hotel housekeeping discrepant rooms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/housekeepingDiscrepancies",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "roomDiscrepancyStatus",
+                "value": "",
+                "type": "query",
+                "description": "Simple type for discrepant room status instructions to be used in requests for fetching housekeeping and front office room discrepancy. Valid values are Sleep, Skip, Person Discrepancy, Due Out Only."
+              },
+              {
+                "name": "fromRoomNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toRoomNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "roomClass",
+                "value": "",
+                "type": "query",
+                "description": "Room Class of the Room."
+              },
+              {
+                "name": "housekeepingEndDate",
+                "value": "",
+                "type": "query",
+                "description": "The ending value of the date range."
+              },
+              {
+                "name": "housekeepingStartDate",
+                "value": "",
+                "type": "query",
+                "description": "The starting value of the date range."
+              },
+              {
+                "name": "floor",
+                "value": "",
+                "type": "query",
+                "description": "The floor of room to be fetched."
+              },
+              {
+                "name": "dueOut",
+                "value": "",
+                "type": "query",
+                "description": "List the rooms based on the flag DUE OUT for departure only."
+              }
+            ]
+          },
+          "docs": "Use this API to return the current housekeeping discrepant rooms for a specific property based on search parameters such as roomDiscrepancyStatus, roomClass, floor, dueOut, etc. These are rooms where the housekeeping status does not match the front office status.<p><strong>OperationId:</strong>getHousekeepingDiscrepancies</p>"
+        },
+        {
+          "info": {
+            "name": "Get housekeeping rooms overview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/housekeepingOverview",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Hotel Code for which Housekeeping overview needs to be fetched"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              },
+              {
+                "name": "housekeepingRoomStatus",
+                "value": "",
+                "type": "query",
+                "description": "Simple type for room status instructions to be used in requests for fetching housekeeping rooms. Valid status values are Clean, Dirty, Pickup, Inspected, OutOfOrder, OutOfService."
+              },
+              {
+                "name": "frontOfficeRoomStatus",
+                "value": "",
+                "type": "query",
+                "description": "Simple type for front office room status instructions to be used in requests for fetching housekeeping rooms. Valid values are Vacant and Occupied."
+              },
+              {
+                "name": "turndownStatus",
+                "value": "",
+                "type": "query",
+                "description": "Simple type for turndown status instructions to be used in requests for fetching housekeeping rooms. Valid status values are Required, Not Required and Completed."
+              },
+              {
+                "name": "roomParityStatus",
+                "value": "",
+                "type": "query",
+                "description": "Simple type for room parity instructions to be used in requests for fetching housekeeping rooms. Valid status values are Odd and Even."
+              },
+              {
+                "name": "serviceRequestStatus",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "roomAssignmentStatus",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fetchInstructions",
+                "value": "",
+                "type": "query",
+                "description": "Simple type for housekeeping instructions that can be used in requests for partial operations. When ScheduedRoomMoveInfo instruction is set to true, get only the rooms with a scheduled room move, along with the associated reservation information. When false, scheduled room move information is not included in the response. The scheduled room move information will assist housekeeping associates to prioritize rooms for cleaning."
+              },
+              {
+                "name": "fromRoomNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toRoomNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "floor",
+                "value": "",
+                "type": "query",
+                "description": "The floor of room to be fetched."
+              },
+              {
+                "name": "roomType",
+                "value": "",
+                "type": "query",
+                "description": "Room Type of the Room."
+              },
+              {
+                "name": "roomClass",
+                "value": "",
+                "type": "query",
+                "description": "Room Class of the Room."
+              },
+              {
+                "name": "building",
+                "value": "",
+                "type": "query",
+                "description": "Building of the Room."
+              },
+              {
+                "name": "roomFeatures",
+                "value": "",
+                "type": "query",
+                "description": "Features of the Room."
+              },
+              {
+                "name": "daySection",
+                "value": "",
+                "type": "query",
+                "description": "AM Sections of the Room."
+              },
+              {
+                "name": "eveningSection",
+                "value": "",
+                "type": "query",
+                "description": "PM Sections of the Room."
+              },
+              {
+                "name": "reservationStatus",
+                "value": "",
+                "type": "query",
+                "description": "The status of the reservation to which this Room is assigned."
+              },
+              {
+                "name": "guestServiceRequest",
+                "value": "",
+                "type": "query",
+                "description": "Possible values for the Guest Service Status."
+              },
+              {
+                "name": "roomIdText",
+                "value": "",
+                "type": "query",
+                "description": "Wild Card entry for Room numbers to be Fetched."
+              },
+              {
+                "name": "excludeCombo",
+                "value": "",
+                "type": "query",
+                "description": "Indicates we need to exclude the combo rooms while fetching the housekeeping details."
+              },
+              {
+                "name": "cleaningPriorityOnly",
+                "value": "",
+                "type": "query",
+                "description": "Determines whether fetching cleaning priority rooms only."
+              },
+              {
+                "name": "scheduledRoomMovesOnly",
+                "value": "",
+                "type": "query",
+                "description": "This flag indicates true or false. When it is set to true, get only the rooms with a scheduled room move, along with the associated reservation information. When false, scheduled room move information is not included in the response. The scheduled room move information will assist housekeeping associates to prioritize rooms for cleaning."
+              },
+              {
+                "name": "attendantInRoomOnly",
+                "value": "",
+                "type": "query",
+                "description": "Query only rooms with attendant working in them."
+              }
+            ]
+          },
+          "docs": "Use this API to return the status of rooms for a specific property based on search criteria such as hotelId, limit, housekeepingRoomStatus, frontOfficeRoomStatus, roomAssignmentStatus, roomType, roomFeatures. The results will give you a list of rooms, and their current housekeeping details.  You could then go ahead and update any of these rooms by using postOutOfOrderRoom for example. <p><strong>OperationId:</strong>getHousekeepingOverview</p>"
+        },
+        {
+          "info": {
+            "name": "Delete the maintenances for rooms",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/maintenances/:mainteananceId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "mainteananceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Use this API to delete maintenances from rooms. <p><strong>OperationId:</strong>deleteRoomMaintenance</p>"
+        },
+        {
+          "info": {
+            "name": "Resolve maintenances for rooms",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/maintenances/:mainteananceId/resolve",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "mainteananceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Use this API to Resolve maintenances for rooms. <p><strong>OperationId:</strong>resolveRoomMaintenance</p>"
+        },
+        {
+          "info": {
+            "name": "unResolve the maintenances for rooms",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/maintenances/:mainteananceId/unResolve",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "mainteananceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Use this API to unResolve maintenances for rooms. <p><strong>OperationId:</strong>unResolveRoomMaintenance</p>"
+        },
+        {
+          "info": {
+            "name": "Move the task rooms",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/moveTaskRooms",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API will allow you to Move the tasksheet rooms. <p><strong>OperationId:</strong>moveTaskRooms</p>"
+        },
+        {
+          "info": {
+            "name": "Get the guest housekeeping instructions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/reservations/:reservationId/houseKeepingNotes",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "reservationIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "reservationIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "room",
+                "value": "",
+                "type": "query",
+                "description": "Room to which housekeeping record belongs."
+              },
+              {
+                "name": "housekeepingInstruction",
+                "value": "",
+                "type": "query",
+                "description": "Simple type for housekeeping instructions that can be used in requests for partial operations."
+              }
+            ]
+          },
+          "docs": "This API will allow you to get the guest housekeeping instructions. <p><strong>OperationId:</strong>getGuestHousekeepingNotes</p>"
+        },
+        {
+          "info": {
+            "name": "Set guest housekeeping instructions",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/reservations/:reservationId/houseKeepingNotes",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API will allow you to Set guest housekeeping instructions. <p><strong>OperationId:</strong>setGuestHousekeepingNotes</p>"
+        },
+        {
+          "info": {
+            "name": "Get reservation housekeeping schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/reservations/:reservationId/houseKeepingTaskSchedules",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "reservationIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "reservationIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "beginDate",
+                "value": "",
+                "type": "query",
+                "description": "Begin date from which to start fetching facility tasks."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date for facility task schedule request."
+              },
+              {
+                "name": "fetchInstructions",
+                "value": "",
+                "type": "query",
+                "description": "Simple type for controlling the fetch operations of the housekeeping schedule request."
+              }
+            ]
+          },
+          "docs": "This API will allow you to get reservation housekeeping schedule. <p><strong>OperationId:</strong>getReservationHousekeepingSchedule</p>"
+        },
+        {
+          "info": {
+            "name": "Create reservation housekeeping tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/reservations/:reservationId/houseKeepingTaskSchedules",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API will allow you to create reservation housekeeping tasks. <p><strong>OperationId:</strong>postReservationHousekeepingTasks</p>"
+        },
+        {
+          "info": {
+            "name": "Update reservation housekeeping tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/reservations/:reservationId/houseKeepingTaskSchedules",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API will allow you to update reservation housekeeping tasks. <p><strong>OperationId:</strong>editReservationHousekeepingTasks</p>"
+        },
+        {
+          "info": {
+            "name": "Delete reservation housekeeping task",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/reservations/:reservationId/houseKeepingTaskSchedules",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "customized",
+                "value": "",
+                "type": "query",
+                "description": "Signifies whether task has been customized or not."
+              },
+              {
+                "name": "cycleStartDay",
+                "value": "",
+                "type": "query",
+                "description": "Signifies the shift of the housekeeping schedule."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "Date at which facility tasks stopped being retrieved."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Date at which facility tasks started being retrieved."
+              },
+              {
+                "name": "facilityTaskCode",
+                "value": "",
+                "type": "query",
+                "description": "Code of the housekeeping task."
+              },
+              {
+                "name": "facilityTaskDescription",
+                "value": "",
+                "type": "query",
+                "description": "Description of the housekeeping task code."
+              },
+              {
+                "name": "facilityTaskPriority",
+                "value": "",
+                "type": "query",
+                "description": "Signifies the priority of the task."
+              },
+              {
+                "name": "taskDate",
+                "value": "",
+                "type": "query",
+                "description": "A reservation date on which task must occur."
+              },
+              {
+                "name": "taskStartDate",
+                "value": "",
+                "type": "query",
+                "description": "Date on which the task needs to start being performed."
+              },
+              {
+                "name": "taskEndDate",
+                "value": "",
+                "type": "query",
+                "description": "Date on which task will stop being performed."
+              },
+              {
+                "name": "stayPeriod",
+                "value": "",
+                "type": "query",
+                "description": "Simple type for controlling the fetch operations of the housekeeping schedule request."
+              },
+              {
+                "name": "frequency",
+                "value": "",
+                "type": "query",
+                "description": "Signifies frequency(i.e. every 2 days) with which task is to be performed."
+              },
+              {
+                "name": "taskCycleStartDay",
+                "value": "",
+                "type": "query",
+                "description": "Signifies offset(in days) i.e. start on 3rd day from arrival."
+              },
+              {
+                "name": "roomType",
+                "value": "",
+                "type": "query",
+                "description": "Signifies the room type for which task is being performed ."
+              },
+              {
+                "name": "roomId",
+                "value": "",
+                "type": "query",
+                "description": "Room number at which task is to be performed."
+              },
+              {
+                "name": "facilityCodes",
+                "value": "",
+                "type": "query",
+                "description": "Facility code value."
+              },
+              {
+                "name": "facilityCodesDescription",
+                "value": "",
+                "type": "query",
+                "description": "Facility Code."
+              },
+              {
+                "name": "facilityCodesQuantity",
+                "value": "",
+                "type": "query",
+                "description": "Signifies the quantity."
+              }
+            ]
+          },
+          "docs": "This API will allow you to delete reservation housekeeping task. <p><strong>OperationId:</strong>deleteReservationHousekeepingTasks</p>"
+        },
+        {
+          "info": {
+            "name": "Reset reservation housekeeping schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/reservations/:reservationId/houseKeepingTaskSchedules/reset",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API will allow you to reset reservation housekeeping schedule. <p><strong>OperationId:</strong>resetReservationHousekeepingSchedule</p>"
+        },
+        {
+          "info": {
+            "name": "Shift reservation housekeeping schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/reservations/:reservationId/houseKeepingTaskSchedules/shift",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API will allow you to shift reservation housekeeping schedule. <p><strong>OperationId:</strong>shiftReservationHousekeepingSchedule</p>"
+        },
+        {
+          "info": {
+            "name": "Delete room cleaning priority",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/rooms/cleaningPriority",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "roomId",
+                "value": "",
+                "type": "query",
+                "description": "Collection of room numbers."
+              }
+            ]
+          },
+          "docs": "This API will allow you to delete room cleaning priority. <p><strong>OperationId:</strong>putRoomCleaningPriority</p>"
+        },
+        {
+          "info": {
+            "name": "Create maintenances for rooms",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/rooms/maintenanceCodes/:maintenanceCode",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "maintenanceCode",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Use this API to create maintenances for rooms. <p><strong>OperationId:</strong>postRoomMaintenance</p>"
+        },
+        {
+          "info": {
+            "name": "Get the maintenance rooms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/rooms/maintenances",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "roomIdText",
+                "value": "",
+                "type": "query",
+                "description": "Wildcard Room filter."
+              },
+              {
+                "name": "roomId",
+                "value": "",
+                "type": "query",
+                "description": "Room Number filter."
+              },
+              {
+                "name": "roomClasses",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "roomTypes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "maintenanceCodes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "roomMaintenanceStatus",
+                "value": "",
+                "type": "query",
+                "description": "Room Maintenance Status."
+              },
+              {
+                "name": "assignedUserId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "assignedUserIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "assignedUserIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "maintenanceId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "maintenanceIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "maintenanceIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID element."
+              },
+              {
+                "name": "resolvedEndDate",
+                "value": "",
+                "type": "query",
+                "description": "The ending value of the date range."
+              },
+              {
+                "name": "resolvedStartDate",
+                "value": "",
+                "type": "query",
+                "description": "The starting value of the date range."
+              },
+              {
+                "name": "includeImages",
+                "value": "",
+                "type": "query",
+                "description": "Indicator that tells whether to include Images in search results."
+              },
+              {
+                "name": "frontOfficeRoomStatus",
+                "value": "",
+                "type": "query",
+                "description": "Simple type for front office room status instructions to be used in requests for fetching room maintenance records. Valid values are Vacant and Occupied."
+              },
+              {
+                "name": "expectedByDate",
+                "value": "",
+                "type": "query",
+                "description": "The date the room maintenance record is expected to be resolved."
+              }
+            ]
+          },
+          "docs": "Use this API to get a list of rooms with maintenances. <p><strong>OperationId:</strong>getRoomMaintenance</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get Out of Order Rooms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/rooms/outOfOrderRooms",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Hotel Code for which Out Of Order rooms needs to be fetched."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date for which the out of order / out of service rooms are to be fetched."
+              },
+              {
+                "name": "roomId",
+                "value": "",
+                "type": "query",
+                "description": "Room number to be Fetched."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for which the out of order / out of service rooms are to be fetched."
+              },
+              {
+                "name": "roomTypes",
+                "value": "",
+                "type": "query",
+                "description": "The room type of out of order / out of service rooms to be fetched."
+              },
+              {
+                "name": "roomClasses",
+                "value": "",
+                "type": "query",
+                "description": "The room class of out of order / out of service rooms to be fetched."
+              }
+            ]
+          },
+          "docs": "Use this API to get a list of rooms for a hotel that are Out of Order.  You can narrow down your results with search criteria such as Room class, Room Type, date range. <p><strong>OperationId:</strong>getOutOfOrderRooms</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Set multiple rooms to Out Of Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/rooms/outOfOrderRooms",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Hotel Code of Room(s) which is to be set as Out Of Order."
+              }
+            ]
+          },
+          "docs": "This API allows you to initially set rooms to 'Out Of Order' housekeeping status and update existing outOfOrderRooms. <p><strong>OperationId:</strong>postOutOfOrderRooms</p>"
+        },
+        {
+          "info": {
+            "name": "Complete rooms Out Of Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/rooms/outOfOrderRooms",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Hotel Code for which Out Of Order rooms needs to be returned to Clean, Inspected, Dirty or Pickup status."
+              }
+            ]
+          },
+          "docs": "Use this API when one or more rooms are no longer Out Of Order, and can now be available for a guest to stay in.  Specify in the request what status the room(s) should be returned to, such as clean, Inspected, dirty or Pickup. <p><strong>OperationId:</strong>completeOutOfOrderRooms</p>"
+        },
+        {
+          "info": {
+            "name": "Get Out of Service Rooms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/rooms/outOfServiceRooms",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Hotel Code for which Out Of Service rooms needs to be fetched."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date for which the out of order / out of service rooms are to be fetched."
+              },
+              {
+                "name": "roomId",
+                "value": "",
+                "type": "query",
+                "description": "Room number to be Fetched."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for which the out of order / out of service rooms are to be fetched."
+              },
+              {
+                "name": "roomTypes",
+                "value": "",
+                "type": "query",
+                "description": "The room type of out of order / out of service rooms to be fetched."
+              },
+              {
+                "name": "roomClasses",
+                "value": "",
+                "type": "query",
+                "description": "The room class of out of order / out of service rooms to be fetched."
+              }
+            ]
+          },
+          "docs": "Use this API to get a list of rooms for a hotel that are Out of Service.  You can narrow down your results with search criteria such as Room class, Room Type, date range. <p><strong>OperationId:</strong>getOutOfServiceRooms</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Set multiple rooms to Out Of Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/rooms/outOfServiceRooms",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Hotel Code of Room(s) which is to be set as Out Of Service."
+              }
+            ]
+          },
+          "docs": "This API allows you to initially set rooms to 'Out Of Service' housekeeping status and update existing outOfServiceRooms. <p><strong>OperationId:</strong>postOutOfServiceRooms</p>"
+        },
+        {
+          "info": {
+            "name": "Complete Rooms Out of Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/rooms/outOfServiceRooms",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Hotel Code for which Out Of Service rooms needs to be returned to Clean, Inspected, Dirty or Pickup status."
+              }
+            ]
+          },
+          "docs": "Use this API when one or more rooms are no longer Out Of Service, and can now be available for a guest to stay in.  Specify in the request what status the room(s) should be returned to, such as clean, Inspected, dirty or Pickup. <p><strong>OperationId:</strong>completeOutOfServiceRooms</p>"
+        },
+        {
+          "info": {
+            "name": "Update Housekeeping Room Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/rooms/status",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Hotel Code for which housekeeping room status, housekeeping status or turndown status have to be modified"
+              }
+            ]
+          },
+          "docs": "Use this API to update the housekeeping room status for multiple rooms.  Statuses typically include Inspected, Clean, Pickup or Dirty. <p><strong>OperationId:</strong>putRoomRelatedStatus</p>"
+        },
+        {
+          "info": {
+            "name": "Set the room cleaning priority",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/rooms/:roomId/cleaningPriority",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "roomId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API will allow you to set the room cleaning priority. <p><strong>OperationId:</strong>setRoomCleaningPriority</p>"
+        },
+        {
+          "info": {
+            "name": "Change maintenances for rooms",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/rooms/:roomId/maintenances/:maintenanceId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "maintenanceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "roomId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Use this API to change the maintenances for rooms. <p><strong>OperationId:</strong>putRoomMaintenance</p>"
+        },
+        {
+          "info": {
+            "name": "Cancel servicing task room",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/rooms/:roomId/sheets/:sheetNumber",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sheetNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "roomId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API will allow you to cancel servicing task room. <p><strong>OperationId:</strong>cancelServicingTaskRoom</p>"
+        },
+        {
+          "info": {
+            "name": "Complete servicing task room",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/rooms/:roomId/sheets/:sheetNumber/complete",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sheetNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "roomId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API will allow you to complete servicing task room. <p><strong>OperationId:</strong>completeServicingTaskRoom</p>"
+        },
+        {
+          "info": {
+            "name": "Skip servicing task room",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/rooms/:roomId/sheets/:sheetNumber/skip",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sheetNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "roomId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API will allow you to Skip servicing task room. <p><strong>OperationId:</strong>skipServicingTaskRoom</p>"
+        },
+        {
+          "info": {
+            "name": "Start servicing task room",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/rooms/:roomId/sheets/:sheetNumber/start",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sheetNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "roomId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API will allow you to start servicing task room. <p><strong>OperationId:</strong>startServicingTaskRoom</p>"
+        },
+        {
+          "info": {
+            "name": "Create housekeeping attendant schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/schedules/houseKeepingTasks",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API will allow you to create housekeeping attendant schedule. <p><strong>OperationId:</strong>postHousekeepingAttendantSchedule</p>"
+        },
+        {
+          "info": {
+            "name": "Set the Guest housekeeping service requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/serviceRequests",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API allows you to Set the guest housekeeping service requests <p><strong>OperationId:</strong>setGuestHousekeepingServiceRequest</p>"
+        },
+        {
+          "info": {
+            "name": "Get task companion",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/sheets/:sheetNumber",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sheetNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "taskCodes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "taskDate",
+                "value": "",
+                "type": "query",
+                "description": "Date for which the task sheet was created. By default this would be the current business date."
+              },
+              {
+                "name": "roomId",
+                "value": "",
+                "type": "query",
+                "description": "Choice to search by a room number if a particular room is required."
+              },
+              {
+                "name": "skipRoomNumbers",
+                "value": "",
+                "type": "query",
+                "description": "Room number that should be skipped."
+              },
+              {
+                "name": "roomStatusToChange",
+                "value": "",
+                "type": "query",
+                "description": "Simple type for room status instructions to be used in requests for fetching housekeeping rooms. Valid status values are Clean, Dirty, Pickup, Inspected, OutOfOrder, OutOfService."
+              },
+              {
+                "name": "includeScheduledRoomDetails",
+                "value": "",
+                "type": "query",
+                "description": "Set this to true to include reservation information associated with any scheduled room moves. Available when the Advanced Daily Details OPERA Control is active."
+              },
+              {
+                "name": "includeRoomMaintenanceDetails",
+                "value": "",
+                "type": "query",
+                "description": "Set this to true to include maintenance details associated with a room. Available when the Maintenance OPERA Control is active."
+              },
+              {
+                "name": "includeQueueDetails",
+                "value": "",
+                "type": "query",
+                "description": "Set this to true to include Queue details associated with any reservations assigned to the room. Available when the Queue OPERA Control is active."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              },
+              {
+                "name": "taskSheetRoomsOnly",
+                "value": "",
+                "type": "query",
+                "description": "Flag to indicate whether to include only tasksheet rooms only in the response."
+              },
+              {
+                "name": "includeCompletedRooms",
+                "value": "",
+                "type": "query",
+                "description": "If true, the list of rooms returned will include rooms that have been completed and have the highest cleaning status. If false, only rooms that have not yet reached the highest cleaning status will be returned."
+              }
+            ]
+          },
+          "docs": "This API allows you to get task companion. <p><strong>OperationId:</strong>getTaskCompanion</p>"
+        },
+        {
+          "info": {
+            "name": "Complete a task sheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/taskSheet/:taskSequenceNumber/complete",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "taskSequenceNumber",
+                "value": "",
+                "type": "path",
+                "description": "Indicates unique Task sequence number for which the task sheet will be completed."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Indicates Unique Hotel Code for which the task sheet will be completed."
+              }
+            ]
+          },
+          "docs": "This API allows you to complete a task sheet. Task Sheet Completion functionality is available when the Task Sheet Completion OPERA Control is ON.<p><strong>OperationId:</strong>completeTaskSheet</p>"
+        },
+        {
+          "info": {
+            "name": "Reopen a task sheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/taskSheet/:taskSequenceNumber/reopen",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "taskSequenceNumber",
+                "value": "",
+                "type": "path",
+                "description": "Indicates unique Task sequence number for which the task sheet will be reopened."
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Indicates Unique Hotel Code for which the task sheet will be reopened."
+              }
+            ]
+          },
+          "docs": "This API allows you to reopen a task sheet. Task Sheet Completion functionality is available when the Task Sheet Completion OPERA Control is ON.<p><strong>OperationId:</strong>reopenTaskSheet</p>"
+        },
+        {
+          "info": {
+            "name": "Complete all the hotel's task sheets for an existing Task Sheet Set.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/taskSheetSet/:taskCodesBreakOutId/complete",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Indicates Unique Hotel Code for which the task sheets will be completed."
+              },
+              {
+                "name": "taskCodesBreakOutId",
+                "value": "",
+                "type": "path",
+                "description": "Indicates Unique breakout ID for which the task sheets will be completed."
+              }
+            ]
+          },
+          "docs": "Use this API to complete all task sheets for an existing task sheet set for a specific property. Task Sheet Completion functionality is available when the Task Sheet Completion OPERA Control is ON.<p><strong>OperationId:</strong>completeTaskSheetSet</p>"
+        },
+        {
+          "info": {
+            "name": "Reopen all the hotel's task sheets for an existing Task Sheet Set.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/taskSheetSet/:taskCodesBreakOutId/reopen",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Indicates Unique Hotel Code for which the task sheets will be reopened."
+              },
+              {
+                "name": "taskCodesBreakOutId",
+                "value": "",
+                "type": "path",
+                "description": "Indicates Unique Breakout ID for which the task sheets will be reopened."
+              }
+            ]
+          },
+          "docs": "Use this API to Reopen all task sheets for an existing task sheet set for a specific property. Task Sheet Completion functionality is available when the Task Sheet Completion OPERA Control is ON.<p><strong>OperationId:</strong>reopenTaskSheetSet</p>"
+        },
+        {
+          "info": {
+            "name": "Get the task sheet templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/taskSheetTemplates",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Hotel Code for which task sheet templates needs to be fetched"
+              },
+              {
+                "name": "templateCode",
+                "value": "",
+                "type": "query",
+                "description": "Template name for the task sheet."
+              }
+            ]
+          },
+          "docs": "This API allows you to get the task sheet templates. <p><strong>OperationId:</strong>getTaskSheetTemplate</p>"
+        },
+        {
+          "info": {
+            "name": "Change the task sheet templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/taskSheetTemplates/:taskSheetTemplateCode",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "taskSheetTemplateCode",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API allows you to change the task sheet templates. <p><strong>OperationId:</strong>putTaskSheetTemplate</p>"
+        },
+        {
+          "info": {
+            "name": "Delete task sheet templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/taskSheetTemplates/:taskSheetTemplateCode",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "taskSheetTemplateCode",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API allows you to delete task sheet templates. <p><strong>OperationId:</strong>deleteTaskSheetTemplate</p>"
+        },
+        {
+          "info": {
+            "name": "Create the task sheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/taskSheets",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API allows you to create the task sheet. <p><strong>OperationId:</strong>postTaskSheet</p>"
+        },
+        {
+          "info": {
+            "name": "Change the task sheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/taskSheets",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API allows you to change the task sheet. <p><strong>OperationId:</strong>putTaskSheet</p>"
+        },
+        {
+          "info": {
+            "name": "Delete the task sheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/taskSheets",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "sheetNumber",
+                "value": "",
+                "type": "query",
+                "description": "The Task Sheet number. This will be a sequential number for the task sheets generated for a particular Task Code."
+              },
+              {
+                "name": "taskCodes",
+                "value": "",
+                "type": "query",
+                "description": "The Code for the task."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "The date for which the task sheet applies."
+              }
+            ]
+          },
+          "docs": "This API allows you to delete the task sheet. <p><strong>OperationId:</strong>deleteTaskSheet</p>"
+        },
+        {
+          "info": {
+            "name": "Create the task sheet rooms",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/taskSheets/rooms",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API allows you to create the task sheet rooms. <p><strong>OperationId:</strong>postTaskSheetRooms</p>"
+        },
+        {
+          "info": {
+            "name": "Change the task sheet rooms",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/taskSheets/rooms",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API allows you to change the task sheet rooms. <p><strong>OperationId:</strong>putTaskSheetRooms</p>"
+        },
+        {
+          "info": {
+            "name": "Delete task sheet rooms",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/taskSheets/rooms",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "sheetNumber",
+                "value": "",
+                "type": "query",
+                "description": "The Task Sheet number. This will be a sequential number for the task sheets generated for a particular Task Code."
+              },
+              {
+                "name": "taskCodes",
+                "value": "",
+                "type": "query",
+                "description": "The Code for the task."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "The date for which the task sheet applies."
+              },
+              {
+                "name": "roomId",
+                "value": "",
+                "type": "query",
+                "description": "Code of the room."
+              }
+            ]
+          },
+          "docs": "This API allows you to delete task sheet rooms. <p><strong>OperationId:</strong>deleteTaskSheetRooms</p>"
+        },
+        {
+          "info": {
+            "name": "Lock the task sheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/taskSheets/:sheetNumber/lock",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sheetNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API allows you to Lock the task sheet. <p><strong>OperationId:</strong>lockTaskSheet</p>"
+        },
+        {
+          "info": {
+            "name": "Unlock the task sheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/taskSheets/:sheetNumber/unlock",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sheetNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API allows you to Unlock the task sheet. <p><strong>OperationId:</strong>unlockTaskSheet</p>"
+        },
+        {
+          "info": {
+            "name": "End the service break",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/taskSheets/:taskSheetNumber/end",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "taskSheetNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API allows you to end the Attendant's service break. <p><strong>OperationId:</strong>endServiceBreak</p>"
+        },
+        {
+          "info": {
+            "name": "Start the service break",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/taskSheets/:taskSheetNumber/start",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "taskSheetNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API allows you to Start the Attendant's service break. <p><strong>OperationId:</strong>startServiceBreak</p>"
+        },
+        {
+          "info": {
+            "name": "Merge task sheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/taskSheets/:toTaskSequenceNo/merge",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "toTaskSequenceNo",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API allows you to merge task sheet. <p><strong>OperationId:</strong>mergeTaskSheet</p>"
+        },
+        {
+          "info": {
+            "name": " ping the house keeping service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/services/houseKeeping/status",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This API allows you to ping the house keeping service. <p><strong>OperationId:</strong>pingHouseKeepingService</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

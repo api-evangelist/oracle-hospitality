@@ -1,0 +1,3660 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OPERA Cloud Sales Event Management API",
+    "version": "26.2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EventManagement",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Manage alternate events.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/alternateEvents",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>manageAlternateEvents</p>"
+        },
+        {
+          "info": {
+            "name": "Get Catering packages ",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/blocks/:blockId/cateringPackages",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the block"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query",
+                "description": "Block hotel code."
+              },
+              {
+                "name": "blockIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "blockIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID elementSpace. Refer to OpenTravel Code List Unique ID Type (UIT)."
+              }
+            ]
+          },
+          "docs": "Retrieve the cateringPackages on the block <p><strong>OperationId:</strong>getCateringPackages</p> <p>The maximum allowable limit for this API is <strong>25</strong>.</p>"
+        },
+        {
+          "info": {
+            "name": "Add catering packages to a block",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/blocks/:blockId/cateringPackages",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the block"
+              }
+            ]
+          },
+          "docs": "Add an available catering package onto your block. <p><strong>OperationId:</strong>postCateringPackage</p>"
+        },
+        {
+          "info": {
+            "name": "Update a Catering packages",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/blocks/:blockId/cateringPackages",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the block"
+              }
+            ]
+          },
+          "docs": "Update a Catering Package which already exists on the block. <p><strong>OperationId:</strong>changeCateringPackages</p>"
+        },
+        {
+          "info": {
+            "name": "Copy a Catering package",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/blocks/:blockId/cateringPackages/:cateringpackageId/copy",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cateringpackageId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the catering package"
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the block"
+              }
+            ]
+          },
+          "docs": "Use this API to copy an existing Catering Package one the block to another date on the same block. <p><strong>OperationId:</strong>copyCateringPackage</p>"
+        },
+        {
+          "info": {
+            "name": "Get Catering package revenue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/blocks/:blockId/cateringPackages/:cateringpackageId/revenue",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cateringpackageId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the catering package"
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the block"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query",
+                "description": "Block hotel code."
+              },
+              {
+                "name": "idExtension",
+                "value": "",
+                "type": "query",
+                "description": "Additional identifying value assigned by the creating system."
+              },
+              {
+                "name": "blockIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "blockIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID elementSpace. Refer to OpenTravel Code List Unique ID Type (UIT)."
+              },
+              {
+                "name": "packageIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "packageIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID elementSpace. Refer to OpenTravel Code List Unique ID Type (UIT)."
+              },
+              {
+                "name": "fetchInstructions",
+                "value": "",
+                "type": "query",
+                "description": "Fetch instructions that can be used in caterig Package Revenue maintenance."
+              }
+            ]
+          },
+          "docs": "Retrieve catering package revenue on a block <p><strong>OperationId:</strong>getCateringPackageRevenue</p>"
+        },
+        {
+          "info": {
+            "name": "Add catering package revenue to a block",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/blocks/:blockId/cateringPackages/:cateringpackageId/revenue",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cateringpackageId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the catering package"
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the block"
+              }
+            ]
+          },
+          "docs": "Add catering package revenue to a block <p><strong>OperationId:</strong>postCateringPackageRevenue</p>"
+        },
+        {
+          "info": {
+            "name": "Copy event resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/blocks/:blockId/events/:eventId/resources/copy",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the event"
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the block"
+              }
+            ]
+          },
+          "docs": "You can use this API to copy one/more existing event resources to one/more events for the same/different block. <p><strong>OperationId:</strong>copyEventResources</p>"
+        },
+        {
+          "info": {
+            "name": "Move event resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/blocks/:blockId/events/:eventId/resources/move",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the event"
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the block"
+              }
+            ]
+          },
+          "docs": "You can use this API to move one/more existing event resources to an event for the same/different block. <p><strong>OperationId:</strong>moveEventResources</p>"
+        },
+        {
+          "info": {
+            "name": "Get Resources for an Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/blocks/:blockId/events/:eventId/resources/:resourceId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the resource"
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the event"
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the block"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query",
+                "description": "Hotel code of the Resource."
+              },
+              {
+                "name": "blockIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "blockIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID elementSpace. Refer to OpenTravel Code List Unique ID Type (UIT)."
+              },
+              {
+                "name": "eventIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "eventIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID elementSpace. Refer to OpenTravel Code List Unique ID Type (UIT)."
+              },
+              {
+                "name": "resourceIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "resourceIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID elementSpace. Refer to OpenTravel Code List Unique ID Type (UIT)."
+              },
+              {
+                "name": "fetchInstructions",
+                "value": "",
+                "type": "query",
+                "description": "Fetch instructions that can be used in Event Resource maintenance."
+              }
+            ]
+          },
+          "docs": "Retrieve a resource that exist for an Event, using block ID, event ID and resource ID as parameters in the path  This will give you information on the quantity, expected revenue, discounts, notes, and so on for that resource. <p><strong>OperationId:</strong>getEventResourceByMenu</p>"
+        },
+        {
+          "info": {
+            "name": "Update multiple catering events",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/cateringEvents",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "You can use this API to update one/more catering events for the same block <p><strong>OperationId:</strong>cateringEventsBulkUpdate</p>"
+        },
+        {
+          "info": {
+            "name": "Update Catering package revenue",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/cateringPackagesRevenue",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update the catering package revenue on a block. <p><strong>OperationId:</strong>changeCateringPackageRevenue</p>"
+        },
+        {
+          "info": {
+            "name": "Delete Catering package revenue",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/cateringPackagesRevenue",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cateringPackageEventId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "cateringPackageRevenueType",
+                "value": "",
+                "type": "query",
+                "description": "Revenue Type associated with the Catering Package Price Code."
+              }
+            ]
+          },
+          "docs": "Delete the catering package revenue on a block. <p><strong>OperationId:</strong>deleteCateringPackageRevenue</p>"
+        },
+        {
+          "info": {
+            "name": "Update Event Resource ",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/eventResource",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Use this API to update the Event Resources by specifying the block ID, and event ID in the request. <p><strong>OperationId:</strong>changeEventResourceByMenu</p>"
+        },
+        {
+          "info": {
+            "name": "Get the event calendar for Multiple Properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/eventcalendar",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "eventEndDate",
+                "value": "",
+                "type": "query",
+                "description": "The ending value of the date range."
+              },
+              {
+                "name": "includeHidden",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeOpportunities",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the results will include opportunities. If this flag is not provided it will be considered false and exclude opportunities."
+              },
+              {
+                "name": "showAvailableRooms",
+                "value": "",
+                "type": "query",
+                "description": "Determines whether to fetch only available rooms(Spaces with NON-DEDUCT events) or not."
+              },
+              {
+                "name": "showReservations",
+                "value": "",
+                "type": "query",
+                "description": "Determines whether to fetch guest reservations or not."
+              },
+              {
+                "name": "isHotelSort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "isSortDescending",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageIndex",
+                "value": "",
+                "type": "query",
+                "description": "Page index to be retrieved."
+              },
+              {
+                "name": "recordsPerPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortingBy",
+                "value": "",
+                "type": "query",
+                "description": "A collection of supported sorting for Event Calendar Function Space."
+              },
+              {
+                "name": "eventStartDate",
+                "value": "",
+                "type": "query",
+                "description": "The starting value of the date range."
+              },
+              {
+                "name": "functionSpaceDetails",
+                "value": "",
+                "type": "query",
+                "description": "Room filter for the events returned."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for the events returned."
+              },
+              {
+                "name": "setupStyle",
+                "value": "",
+                "type": "query",
+                "description": "Setup Style filter for the events returned."
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Function space location filter for the events returned."
+              },
+              {
+                "name": "eventLabel",
+                "value": "",
+                "type": "query",
+                "description": "Event Bar Label filter for the events returned."
+              },
+              {
+                "name": "spaceType",
+                "value": "",
+                "type": "query",
+                "description": "Room type filter for the events returned."
+              },
+              {
+                "name": "areaMeasurement",
+                "value": "",
+                "type": "query",
+                "description": "Determines the measuring unit."
+              },
+              {
+                "name": "minimumArea",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "display",
+                "value": "",
+                "type": "query",
+                "description": "Type of function space filter for the events returned. Possible values include Individual, Combo and All."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "friday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "monday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "saturday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sunday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "thursday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "tuesday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "wednesday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "hotelIds",
+                "value": "",
+                "type": "query",
+                "description": "Hotel code."
+              },
+              {
+                "name": "eventHints",
+                "value": "",
+                "type": "query",
+                "description": "A collection of supported event hint values in UI for Events."
+              },
+              {
+                "name": "includeAdvancedHints",
+                "value": "",
+                "type": "query",
+                "description": "Determines whether to fetch profile and room related details."
+              }
+            ]
+          },
+          "docs": "You will be able to retrieve all events on the calendar for a specified property.  Narrow the results down by using the available parameters, such as Event Status, Event eventStartDate date, Location, Number of Attendees and so on. <p><strong>OperationId:</strong>getEventCalendarMultipleHotelIds</p> <p>This API allows a time span of <strong>21</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get Events ",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/events",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelIds",
+                "value": "",
+                "type": "query",
+                "description": "This is the Hotel Code of the Event"
+              },
+              {
+                "name": "eventStartDate",
+                "value": "",
+                "type": "query",
+                "description": "The starting value of the date range."
+              },
+              {
+                "name": "eventEndDate",
+                "value": "",
+                "type": "query",
+                "description": "The ending value of the date range."
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "query",
+                "description": "Block ID linked to the Catering Event"
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "query",
+                "description": "Unique ID for the catering event"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Simple type for block instructions to be used in requests for fetching blocks. Valid status values are Group, Source, TravelAgent, Contact, Company."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Attached profile name"
+              },
+              {
+                "name": "attachedProfileId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying numeric value assigned to a profile utilized to fetch events associated to blocks linked to the profile."
+              },
+              {
+                "name": "blockName",
+                "value": "",
+                "type": "query",
+                "description": "Block Name."
+              },
+              {
+                "name": "eventStatusCodes",
+                "value": "",
+                "type": "query",
+                "description": "Status Codes associated with the events to be fetched."
+              },
+              {
+                "name": "eventTypeCodes",
+                "value": "",
+                "type": "query",
+                "description": "Event Type Codes associated with the events to be fetched."
+              },
+              {
+                "name": "functionSpaceCodes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeInactive",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to include inactive events in search result."
+              },
+              {
+                "name": "includeAlternateEvents",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to include the alternate events in the search result."
+              },
+              {
+                "name": "includeOpportunities",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the results will include opportunities. If this flag is not provided it will be considered false and exclude opportunities."
+              },
+              {
+                "name": "includeSubEvents",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to include the sub events in the search result."
+              },
+              {
+                "name": "cateringEventOrderBy",
+                "value": "",
+                "type": "query",
+                "description": "A collection of supported list of order by for search catering events."
+              },
+              {
+                "name": "fetchInstructions",
+                "value": "",
+                "type": "query",
+                "description": "Instructions to fetch details information about the selected event. The BlocksInfo fetch instructions will retain a limited amount of data for the associated block.  The Indicators instruction will provide a count. The EventResources fetch instruction if passed with eventId will return the required page number and records on it, i.e. it will return same page records which has the passed eventId."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              },
+              {
+                "name": "cateringOwners",
+                "value": "",
+                "type": "query",
+                "description": "Catering Owner Codes associated with the events to be fetched."
+              }
+            ]
+          },
+          "docs": "This API fetches catering events for multiple hotels, based on search criteria such as dates, linked block, status, function space, and more. The data returned in the result contains, event type, description, dates and times, attendees, function space, setup style and more. <p><strong>OperationId:</strong>getEventsMultipleHotels</p> <p>The maximum allowable limit for this API is <strong>200</strong>.</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Create an Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/events",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "You can use this API to create an Event. <p><strong>OperationId:</strong>postEvents</p>"
+        },
+        {
+          "info": {
+            "name": "Delete Multiple Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/events",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "eventIds",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "hotelIds",
+                "value": "",
+                "type": "query",
+                "description": "Hotel code where event will be organized."
+              },
+              {
+                "name": "includeSubEvents",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to delete/inactive the sub event(s) of the master event."
+              }
+            ]
+          },
+          "docs": "This API will delete multiple existing events <p><strong>OperationId:</strong>deleteMultipleEvents</p>"
+        },
+        {
+          "info": {
+            "name": "Get Event item split quantity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/events/:eventId/splitQuantity",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the event"
+              },
+              {
+                "name": "eventPrimaryHotelId",
+                "value": "",
+                "type": "query",
+                "description": "Hotel code where event will be organized."
+              },
+              {
+                "name": "eventItemId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "eventEndDate",
+                "value": "",
+                "type": "query",
+                "description": "The ending value of the time span."
+              },
+              {
+                "name": "eventStartDate",
+                "value": "",
+                "type": "query",
+                "description": "The starting value of the time span."
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "quantity",
+                "value": "",
+                "type": "query",
+                "description": "The quantity of this item required by the event."
+              },
+              {
+                "name": "isExcludeNonDeduct",
+                "value": "",
+                "type": "query",
+                "description": "Flag to check if the Event Item is ExcludeNonDeduct"
+              }
+            ]
+          },
+          "docs": "Retrieve the event item split quantity for an event. <p><strong>OperationId:</strong>getEventItemSplitQuantity</p> <p>This API allows a time span of <strong>1</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Update Events Resources by chain",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/eventsResources",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update the details of an existing event resource on an event in OPERA Cloud. <p><strong>OperationId:</strong>changeEventsResourcesByChain</p>"
+        },
+        {
+          "info": {
+            "name": "Get events for the block ID and resource ID(optional)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/block/:blockId/resourceEvents",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel"
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the block of which the events are to be fetched."
+              },
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "query",
+                "description": "Unique ID of the event resource added to an event. When this resource id is passed, only those events of block having the same event resource added will be fetched."
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "query",
+                "description": "Unique ID of the event to which the common resource is attached. When the event id is passed, only those events belonging to same resort as the event will be returned."
+              }
+            ]
+          },
+          "docs": "Use this API to retrieve the Events as per your requested parameters. Events of a single block can be filtered based on whether a particular event resource is added.<p><strong>OperationId:</strong>getResourceEvents</p>"
+        },
+        {
+          "info": {
+            "name": "Copy Catering Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/blocks/:blockId/cateringEvents/copy",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the block"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel"
+              }
+            ]
+          },
+          "docs": "Copy an existing catering event on a block to new dates on that block.  For example there is a catering Event called Lunch for 1st May, select this event, and copy it to a new date within the block date range.  This will result in a second catering event existing on this block.  You can choose to copy certain elements such as event notes, event resources and so on. <p><strong>OperationId:</strong>copyCateringEvents</p>"
+        },
+        {
+          "info": {
+            "name": "Delete one or more catering package(s)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/blocks/:blockId/cateringPackages",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the block"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel"
+              },
+              {
+                "name": "cateringPackageId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              }
+            ]
+          },
+          "docs": "This allows you to remove an existing catering package from the Block <p><strong>OperationId:</strong>deleteCateringPackages</p>"
+        },
+        {
+          "info": {
+            "name": "Delete Catering package",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/blocks/:blockId/cateringPackages/:cateringPackageId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cateringPackageId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the Catering Package"
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the block"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel"
+              }
+            ]
+          },
+          "docs": "This allows you to remove an existing catering package from the Block <p><strong>OperationId:</strong>deleteCateringPackage</p>"
+        },
+        {
+          "info": {
+            "name": "Get modified events from a specific time period in OPERA.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/blocks/:blockId/events/changesByDateTime",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Hotel Id"
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the block of which the events are to be fetched."
+              },
+              {
+                "name": "startLastModifiedDate",
+                "value": "",
+                "type": "query",
+                "description": "From Change Date / Time when event was modified."
+              },
+              {
+                "name": "endLastModifiedDate",
+                "value": "",
+                "type": "query",
+                "description": "To Change Date / Time when event was modified."
+              },
+              {
+                "name": "includeInactive",
+                "value": "",
+                "type": "query",
+                "description": "Indicates if deleted events will be included in the response (inactive events)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              }
+            ]
+          },
+          "docs": "A user can search for events that have been created, updated and/or deleted within maximum 3 day date range. If in the time period searched a event was created and deleted, the query won't return this information. If an event is created and updated, the create information is returned. If an event is updated only, it returns the update. If an event is updated and deleted, it returns the delete. <p>The maximum allowable limit for this API is <strong>1000</strong>.</p> <p>This API allows a time spa"
+        },
+        {
+          "info": {
+            "name": "Get Catering Event changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/cateringEventChanges",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              },
+              {
+                "name": "fetchInstructions",
+                "value": "",
+                "type": "query",
+                "description": "A collection of supported list of actions."
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "eventIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "eventIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID elementSpace. Refer to OpenTravel Code List Unique ID Type (UIT)."
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "blockIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "blockIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID elementSpace. Refer to OpenTravel Code List Unique ID Type (UIT)."
+              },
+              {
+                "name": "changeSource",
+                "value": "",
+                "type": "query",
+                "description": "List of sources that can cause the event change"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "A collection of supported list of actions."
+              },
+              {
+                "name": "resourceDescription",
+                "value": "",
+                "type": "query",
+                "description": "Description of the Resource"
+              },
+              {
+                "name": "fieldNameListCode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "userListCode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "eventDate",
+                "value": "",
+                "type": "query",
+                "description": "Date of the Events whose details are fetched"
+              },
+              {
+                "name": "eventEndDate",
+                "value": "",
+                "type": "query",
+                "description": "The ending value of the date range."
+              },
+              {
+                "name": "eventStartDate",
+                "value": "",
+                "type": "query",
+                "description": "The starting value of the date range."
+              },
+              {
+                "name": "priorStatus",
+                "value": "",
+                "type": "query",
+                "description": "Prior Status of the events whose details are fetched"
+              },
+              {
+                "name": "currentStatus",
+                "value": "",
+                "type": "query",
+                "description": "Current Status of the events whose details are fetched"
+              },
+              {
+                "name": "revenueTypeListCode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve the catering event changes on an event. <p><strong>OperationId:</strong>getCateringEventChanges</p> <p>The maximum allowable limit for this API is <strong>20</strong>.</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get the event calendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/eventcalendar",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel"
+              },
+              {
+                "name": "eventEndDate",
+                "value": "",
+                "type": "query",
+                "description": "The ending value of the date range."
+              },
+              {
+                "name": "includeHidden",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeOpportunities",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the results will include opportunities. If this flag is not provided it will be considered false and exclude opportunities."
+              },
+              {
+                "name": "showAvailableRooms",
+                "value": "",
+                "type": "query",
+                "description": "Determines whether to fetch only available rooms(Spaces with NON-DEDUCT events) or not."
+              },
+              {
+                "name": "showReservations",
+                "value": "",
+                "type": "query",
+                "description": "Determines whether to fetch guest reservations or not."
+              },
+              {
+                "name": "isHotelSort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "isSortDescending",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageIndex",
+                "value": "",
+                "type": "query",
+                "description": "Page index to be retrieved."
+              },
+              {
+                "name": "recordsPerPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortingBy",
+                "value": "",
+                "type": "query",
+                "description": "A collection of supported sorting for Event Calendar Function Space."
+              },
+              {
+                "name": "eventStartDate",
+                "value": "",
+                "type": "query",
+                "description": "The starting value of the date/time range."
+              },
+              {
+                "name": "functionSpaceDetails",
+                "value": "",
+                "type": "query",
+                "description": "Room filter for the events returned."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for the events returned."
+              },
+              {
+                "name": "setupStyle",
+                "value": "",
+                "type": "query",
+                "description": "Setup Style filter for the events returned."
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Function space location filter for the events returned."
+              },
+              {
+                "name": "eventLabel",
+                "value": "",
+                "type": "query",
+                "description": "Event Bar Label filter for the events returned."
+              },
+              {
+                "name": "spaceType",
+                "value": "",
+                "type": "query",
+                "description": "Room type filter for the events returned."
+              },
+              {
+                "name": "areaMeasurement",
+                "value": "",
+                "type": "query",
+                "description": "Determines the measuring unit."
+              },
+              {
+                "name": "minimumArea",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "display",
+                "value": "",
+                "type": "query",
+                "description": "Type of function space filter for the events returned. Possible values include Individual, Combo and All."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "friday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "monday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "saturday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sunday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "thursday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "tuesday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "wednesday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "eventHints",
+                "value": "",
+                "type": "query",
+                "description": "A collection of supported event hint values in UI for Events."
+              },
+              {
+                "name": "includeAdvancedHints",
+                "value": "",
+                "type": "query",
+                "description": "Determines whether to fetch profile and room related details."
+              }
+            ]
+          },
+          "docs": "You will be able to retrieve all events on the calendar for a specified property.  Narrow the results down by using the available parameters, such as Event Status, Event eventStartDate date, Location, Number of Attendees and so on. <p><strong>OperationId:</strong>getEventCalendar</p> <p>This API allows a time span of <strong>21</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get Events ",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/events",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a hotel"
+              },
+              {
+                "name": "eventStartDate",
+                "value": "",
+                "type": "query",
+                "description": "The starting value of the date range."
+              },
+              {
+                "name": "eventEndDate",
+                "value": "",
+                "type": "query",
+                "description": "The ending value of the date range."
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "query",
+                "description": "Block ID linked to the Catering Event"
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "query",
+                "description": "Unique ID for the catering event"
+              },
+              {
+                "name": "attachedProfileId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying numeric value assigned to a profile utilized to fetch events associated to blocks linked to the profile."
+              },
+              {
+                "name": "blockName",
+                "value": "",
+                "type": "query",
+                "description": "Block Name."
+              },
+              {
+                "name": "eventStatusCodes",
+                "value": "",
+                "type": "query",
+                "description": "Status Codes associated with the events to be fetched."
+              },
+              {
+                "name": "eventTypeCodes",
+                "value": "",
+                "type": "query",
+                "description": "Event Type Codes associated with the events to be fetched."
+              },
+              {
+                "name": "functionSpaceCodes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeInactive",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to include inactive events in search result."
+              },
+              {
+                "name": "includeAlternateEvents",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to include the alternate events in the search result."
+              },
+              {
+                "name": "includeOpportunities",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the results will include opportunities. If this flag is not provided it will be considered false and exclude opportunities."
+              },
+              {
+                "name": "includeSubEvents",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to include the sub events in the search result."
+              },
+              {
+                "name": "cateringEventOrderBy",
+                "value": "",
+                "type": "query",
+                "description": "A collection of supported list of order by for search catering events."
+              },
+              {
+                "name": "fetchInstructions",
+                "value": "",
+                "type": "query",
+                "description": "Instruction to fetch all eligible master events for the selected event"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              }
+            ]
+          },
+          "docs": "This API fetches catering events for a specific hotel, based on search criteria such as dates, linked block, status, function space, and more. The data returned in the result contains, event type, description, dates and times, attendees, function space, setup style and more. <p><strong>OperationId:</strong>getEventsOneHotel</p> <p>The maximum allowable limit for this API is <strong>200</strong>.</p> <p>This API allows a time span of <strong>90</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get an Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/events/:eventId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the event"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a hotel"
+              },
+              {
+                "name": "fetchInstructions",
+                "value": "",
+                "type": "query",
+                "description": "Instruction to fetch all eligible master events for the selected event"
+              }
+            ]
+          },
+          "docs": "This API will allow you to retrieve the details of one event by specifying the event ID in the path. Event details such as event type, event description, start date / time and end date time, attendees, function space, setup style, function space rate, and more  will be returned. You can also add fetch instructions to specify what additional event data, such as block information, revenue information, event notes, and master / sub event information you would like returned in the response. If you d"
+        },
+        {
+          "info": {
+            "name": "Update an Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/events/:eventId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the event"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a hotel"
+              }
+            ]
+          },
+          "docs": "You can use this API to update an existing Event by using the Event ID.A,  If you don't know the vent ID, use getEvents API to search for an event first. <p><strong>OperationId:</strong>changeEvents</p>"
+        },
+        {
+          "info": {
+            "name": "Delete an Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/hotels/:hotelId/events/:eventId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the event"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of a hotel"
+              },
+              {
+                "name": "includeSubEvents",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to delete/inactive the sub event(s) of the master event."
+              }
+            ]
+          },
+          "docs": "This API will delete an existing event <p><strong>OperationId:</strong>deleteEvents</p>"
+        },
+        {
+          "info": {
+            "name": "Get Catering Event postings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/events/:eventId/cateringEventPostings",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel"
+              },
+              {
+                "name": "includeSubEvents",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to delete/inactive the sub event(s) of the master event."
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "blockIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "blockIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID elementSpace. Refer to OpenTravel Code List Unique ID Type (UIT)."
+              },
+              {
+                "name": "fetchInstructions",
+                "value": "",
+                "type": "query",
+                "description": "Instruction to fetch all eligible master events for the selected event"
+              }
+            ]
+          },
+          "docs": "Retrieve the catering event posting on an event. <p><strong>OperationId:</strong>getCateringEventPostings</p>"
+        },
+        {
+          "info": {
+            "name": "Manage Catering Event postings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/events/:eventId/cateringEventPostings",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel"
+              }
+            ]
+          },
+          "docs": "Update and manage the catering event changes on an event. <p><strong>OperationId:</strong>manageCateringEventPostings</p>"
+        },
+        {
+          "info": {
+            "name": "Add Resource to an Event in a hotel by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/events/:eventId/eventResources/:quickInsertId",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "quickInsertId",
+                "value": "",
+                "type": "path",
+                "description": "Menu/Item quick insert ID or Item Template name"
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the event"
+              },
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel"
+              }
+            ]
+          },
+          "docs": "Use this to add a configured resource to a Catering Event. The Catering Event ID and Quick Insert number of a Catering Menu or Miscellaneous Item or a Template name must be provided. <p><strong>OperationId:</strong>postQuickInsertResources</p>"
+        },
+        {
+          "info": {
+            "name": "Add Menu Items to a Booked Menu",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/hotels/:hotelId/events/:eventId/menus/:menuId/menuItems",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel"
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the event"
+              },
+              {
+                "name": "menuId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the booked menu for the specified event"
+              }
+            ]
+          },
+          "docs": "This API allows you to add one or more menu items to a booked menu for a specified event, using the configured internal menu item IDs."
+        },
+        {
+          "info": {
+            "name": "Copy event notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/events/:eventId/notes/copy",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Hotel where the event belongs to"
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the event"
+              }
+            ]
+          },
+          "docs": "You can use this API to copy one/more existing event notes to one/more events within the same block. <p><strong>OperationId:</strong>copyEventNotes</p>"
+        },
+        {
+          "info": {
+            "name": "Get Event Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/eventsResources",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel"
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "eventIds",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              }
+            ]
+          },
+          "docs": "Event Resources are the items and menus the property provides as part of its events offerings. Use this API to retrieve the Event resources as per your requested parameters. <p><strong>OperationId:</strong>getEventsResources</p>"
+        },
+        {
+          "info": {
+            "name": "Update Events Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/eventsResources",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel"
+              }
+            ]
+          },
+          "docs": "Update the details of an existing event resource on an event in OPERA Cloud. <p><strong>OperationId:</strong>changeEventsResources</p>"
+        },
+        {
+          "info": {
+            "name": "Get Catering Event postings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/fetchBlockPostingAccountReservations",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel"
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              }
+            ]
+          },
+          "docs": "Retrieve the catering event posting on an event. <p><strong>OperationId:</strong>getBlockPostingAccountReservations</p>"
+        },
+        {
+          "info": {
+            "name": "Get hotel's function space availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/functionalSpace",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel"
+              },
+              {
+                "name": "checkInventory",
+                "value": "",
+                "type": "query",
+                "description": "Flag that indicates if when quering for availability inventory should be checked or not."
+              },
+              {
+                "name": "eventEndDate",
+                "value": "",
+                "type": "query",
+                "description": "The ending value of the time span."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Indicates maximum number of records a Web Service should return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned."
+              },
+              {
+                "name": "physicalRoom",
+                "value": "",
+                "type": "query",
+                "description": "Determines whether to fetch only physical meeting rooms or not."
+              },
+              {
+                "name": "showForceAlternate",
+                "value": "",
+                "type": "query",
+                "description": "Flag that indicates if the result includes force alternate function spaces."
+              },
+              {
+                "name": "eventStartDate",
+                "value": "",
+                "type": "query",
+                "description": "The starting value of the time span."
+              },
+              {
+                "name": "roomCodes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "roomType",
+                "value": "",
+                "type": "query",
+                "description": "Room Type where function space belongs to"
+              },
+              {
+                "name": "spaceType",
+                "value": "",
+                "type": "query",
+                "description": "Space Type where function space belongs to"
+              },
+              {
+                "name": "functionSpaceWildcard",
+                "value": "",
+                "type": "query",
+                "description": "Wild search on Room Code and Function Name."
+              },
+              {
+                "name": "floorCodes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "locationCodes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "spaceTypes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fetchInstructions",
+                "value": "",
+                "type": "query",
+                "description": "Instruction to fetch only function space count."
+              },
+              {
+                "name": "functionSpaceSearchMode",
+                "value": "",
+                "type": "query",
+                "description": "A collection of prime search modes for fetching Function Space availability"
+              },
+              {
+                "name": "functionSpaceAdditionalSearchMode",
+                "value": "",
+                "type": "query",
+                "description": "A collection of additional search modes for fetching Function Space availability."
+              },
+              {
+                "name": "attendeesFrom",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "attendeesTo",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "areaFrom",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "areaTo",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "setupCodes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "masterRateCode",
+                "value": "",
+                "type": "query",
+                "description": "Rate Code used by master function space."
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "A monetary amount."
+              },
+              {
+                "name": "currencyCode",
+                "value": "",
+                "type": "query",
+                "description": "Provides a currency code to reflect the currency in which an amount may be expressed."
+              },
+              {
+                "name": "masterSetupCode",
+                "value": "",
+                "type": "query",
+                "description": "Setup Code used by master function space."
+              },
+              {
+                "name": "setupTime",
+                "value": "",
+                "type": "query",
+                "description": "Setup time in minutes."
+              },
+              {
+                "name": "setdownTime",
+                "value": "",
+                "type": "query",
+                "description": "Setdown time in minutes."
+              },
+              {
+                "name": "resvNameId",
+                "value": "",
+                "type": "query",
+                "description": "Internal ID of reservation, which currently holds the Function Space and which needs to be excluded while checking the Function Space availability"
+              },
+              {
+                "name": "eventTypeCodes",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Find the availability of a properties function space. <p><strong>OperationId:</strong>getFunctionSpaceAvailability</p> <p>This API allows a time span of <strong>21</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Get shared function space events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/functionalSpaceEvents",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel"
+              },
+              {
+                "name": "functionSpaceCode",
+                "value": "",
+                "type": "query",
+                "description": "Function space from which shared events will be fetched."
+              },
+              {
+                "name": "startDateTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDateTime",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "This API will allow you to see if events are booked into the same space at the same or overlapping time. <p><strong>OperationId:</strong>getSharedFunctionSpaceEvents</p> <p>This API allows a time span of <strong>21</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Retreve Waitlisted Events ",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/hotels/:hotelId/waitListedEvents",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel"
+              },
+              {
+                "name": "functionSpaceCode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "accountName",
+                "value": "",
+                "type": "query",
+                "description": "Search a specific account's waitlisted events."
+              },
+              {
+                "name": "blockName",
+                "value": "",
+                "type": "query",
+                "description": "Search a specific block's waitlisted events."
+              },
+              {
+                "name": "blockId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation."
+              },
+              {
+                "name": "blockIdContext",
+                "value": "",
+                "type": "query",
+                "description": "Used to identify the source of the identifier (e.g., IATA, ABTA)."
+              },
+              {
+                "name": "blockIdType",
+                "value": "",
+                "type": "query",
+                "description": "A reference to the type of object defined by the UniqueID elementSpace. Refer to OpenTravel Code List Unique ID Type (UIT)."
+              },
+              {
+                "name": "startDateTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDateTime",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search for waitlisted events for a specified property.  You can narrow down the results by using filters in the request. <p><strong>OperationId:</strong>getWaitlistedEvents</p> <p>This API allows a time span of <strong>21</strong> days.</p>"
+        },
+        {
+          "info": {
+            "name": "Manage Waitlisted Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/hotels/:hotelId/waitListedEvents",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hotelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique ID of the hotel"
+              }
+            ]
+          },
+          "docs": "You can update the waitlisted events such as changing priority of the events on the waitlist. <p><strong>OperationId:</strong>manageWaitlistedEvents</p>"
+        },
+        {
+          "info": {
+            "name": "Create Events for Opportunity Block",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/opportunityEvents",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "You can use this API to add Events for an Opportunity Block. <p><strong>OperationId:</strong>postOpportunityEvents</p>"
+        },
+        {
+          "info": {
+            "name": "This API facilitates status check of event management service.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/services/eventManagement/status",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "externalData",
+                "value": ""
+              },
+              {
+                "name": "x-app-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-originating-application",
+                "value": ""
+              },
+              {
+                "name": "x-hotelid",
+                "value": ""
+              },
+              {
+                "name": "x-externalsystem",
+                "value": ""
+              },
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ]
+          },
+          "docs": " <p><strong>OperationId:</strong>pingEventManagementService</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
