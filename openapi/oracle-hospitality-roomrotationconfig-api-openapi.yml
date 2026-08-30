@@ -1,0 +1,3683 @@
+openapi: 3.2.0
+info:
+  title: OPERA Cloud Room Rotation Configuration Service Room Rotation Config API
+  description: APIs to cater for Room Rotation Configuration functionality in OPERA Cloud. Api provides capability to handle Room Rotation in OPERA Cloud. Room Rotation provides room ownership options for automatic inventory rotation and prioritization for owner rooms assignment and occupancy.<br /><br /> Compatible with OPERA Cloud release 26.2.0.0.<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>
+  version: 26.2.0.0
+  termsOfService: https://www.oracle.com/legal/terms.html
+  contact:
+    email: hospitality_apis_ww_grp@oracle.com
+  license:
+    name: UPL
+    url: https://opensource.org/licenses/upl
+servers:
+- url: /rmr/config/v1
+tags:
+- name: RoomRotationConfig
+  description: The REST APIs allow you to perform all actions related to Room Rotation from configuring point calculations for owner rooms, adjustment options for room prioritization and automatic assignment based on owner room utilization.
+paths:
+  /adjustmentReasons:
+    get:
+      summary: Get Room Rotation Adjustment Reasons
+      description: Use this API to get configured Room Rotation Adjustment Reasons. <p><strong>OperationId:</strong>getAdjustmentReasons</p>
+      operationId: getAdjustmentReasons
+      parameters:
+      - name: fetchInactive
+        in: query
+        required: false
+        description: Determines wether to fetch inactive records or not.
+        schema:
+          type: boolean
+          default: false
+      - name: code
+        in: query
+        description: Rotation Adjustment Reason Codes to be searched.  Multiple values can be entered by adding multiple query parameters.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            minLength: 0
+            maxLength: 8
+          maxItems: 4000
+      - name: wildCard
+        in: query
+        required: false
+        description: Wildcard search on the code.
+        schema:
+          type: string
+          maxLength: 8
+          minLength: 0
+      - name: description
+        in: query
+        required: false
+        description: Description of the code.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 0
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response object for fetching Room Rotation Adjustment Reasons.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/FetchAdjustmentReasonsDetails'
+        '204':
+          description: AdjustmentReasons not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+    post:
+      summary: Post Room Rotation Adjustment Reasons
+      description: Use this API to post Room Rotation Adjustment Reasons. <p><strong>OperationId:</strong>postAdjustmentReasons</p>
+      operationId: postAdjustmentReasons
+      parameters:
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '201':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateAdjustmentReasonsDetails'
+        description: Request object for creating a new Room Rotation Adjustment Reason.
+        required: true
+  /adjustmentReasons/{adjustmentReasonsId}:
+    put:
+      summary: Update Room Rotation Adjustment Reasons
+      description: Use this API to update Room Rotation Adjustment Reasons. <p><strong>OperationId:</strong>putAdjustmentReasons</p>
+      operationId: putAdjustmentReasons
+      parameters:
+      - name: adjustmentReasonsId
+        in: path
+        required: true
+        description: Unique ID of Room Rotation Adjustment Reason
+        schema:
+          type: string
+          maxLength: 8
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: Response Body.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/AdjustmentReasonsDetailsUpdated'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChangeAdjustmentReasonsDetails'
+        description: Request object for changing an existing Room Rotation Adjustment Reasons.
+        required: true
+    delete:
+      summary: Delete Room Rotation Adjustment Reasons
+      description: Use this API to delete Room Rotation Adjustment Reasons. <p><strong>OperationId:</strong>deleteAdjustmentReasons</p>
+      operationId: deleteAdjustmentReasons
+      parameters:
+      - name: adjustmentReasonsId
+        in: path
+        required: true
+        description: Unique ID of Room Rotation Adjustment Reason.
+        schema:
+          type: string
+          maxLength: 8
+          minLength: 1
+      - name: code
+        in: query
+        description: Code of the Room Rotation Adjustment Reason.  Multiple values can be entered by adding multiple query parameters.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            minLength: 0
+            maxLength: 8
+          maxItems: 4000
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+  /hotels/{hotelId}/revenueTransactionCodes:
+    get:
+      summary: Retrieve all Room Rotation Revenue Transaction Codes
+      description: Use this API to retrieve all existing Room Rotation Revenue Transaction Codes for a given hotel. <p><strong>OperationId:</strong>getRevenueTransactionCodes</p>
+      operationId: getRevenueTransactionCodes
+      parameters:
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique ID of hotel.
+        schema:
+          type: string
+          maxLength: 20
+          minLength: 1
+      - name: rotationRevenue
+        in: query
+        required: false
+        description: Indicate to retrieve transaction codes that are marked as Rotation Revenue transaction codes. If this value is omitted, all transaction codes will be returned for the given property.
+        schema:
+          type: boolean
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response object for retrieving revenue transaction codes for a given property
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/FetchRevenueTransactionCodesDetails'
+        '204':
+          description: RevenueTransactionCodes not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+    put:
+      summary: Update the room rotation revenue status of a set of transaction codes
+      description: Use this API to update the room rotation revenue status of a set of transaction codes. <p><strong>OperationId:</strong>putRevenueTransactionCodes</p>
+      operationId: putRevenueTransactionCodes
+      parameters:
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique ID of hotel.
+        schema:
+          type: string
+          maxLength: 20
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: Response Body.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ChangeRevenueTransactionCodesDetails'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChangeRevenueTransactionCodesCriteria'
+        description: Request object for updating the rotation revenue status of a transaction code for a given property.
+        required: true
+  /hotels/{hotelId}/rotationPeriod:
+    get:
+      summary: Fetch Room Rotation Period
+      description: Use this API to fetch Room Rotation Period based on criteria. <p><strong>OperationId:</strong>getRotationPeriod</p>
+      operationId: getRotationPeriod
+      parameters:
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique ID of hotel.
+        schema:
+          type: string
+          maxLength: 20
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response Object for Fetch Rotation Period
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/fetchRotationPeriod'
+        '204':
+          description: RotationPeriod not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+    put:
+      summary: Change Room Rotation Period
+      description: Use this API to change Room Rotation Period. <p><strong>OperationId:</strong>putRotationPeriod</p>
+      operationId: putRotationPeriod
+      parameters:
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique ID of hotel.
+        schema:
+          type: string
+          maxLength: 20
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: Response Body.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ChangeRotationPeriodDetails'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/rotationPeriod'
+        description: Request Object for changing Rotation Period
+        required: true
+  /hotels/{hotelId}/rotationRules:
+    post:
+      summary: Save changes to Rotation Setup Rules and recalculate Rotation Points
+      description: This operation will create/update/delete Rotation Setup Rules sent in the request and then recalculate rotation points.  <p><strong>OperationId:</strong>postRoomRotationRules</p>
+      operationId: postRoomRotationRules
+      parameters:
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique ID of hotel.
+        schema:
+          type: string
+          maxLength: 20
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '201':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/roomRotationRules'
+        description: Request object for saving changes to room rotation setup rules.
+        required: true
+  /hotels/{hotelId}/rules:
+    get:
+      summary: Retrieve all Room Rotation Setup Rules
+      description: Use this API to retrieve all existing Room Rotation Setup Rules based on criteria. <p><strong>OperationId:</strong>getRotationRules</p>
+      operationId: getRotationRules
+      parameters:
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique ID of hotel.
+        schema:
+          type: string
+          maxLength: 20
+          minLength: 1
+      - name: limit
+        in: query
+        required: false
+        description: Indicates maximum number of records a Web Service should return.
+        schema:
+          type: integer
+          default: 25
+          maximum: 200
+      - name: offset
+        in: query
+        required: false
+        description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+        schema:
+          type: integer
+          default: 0
+      - name: setupType
+        in: query
+        required: false
+        description: Simple type for Rotation Setup Rule(s).
+        schema:
+          type: string
+          enum:
+          - Points
+          - OwnerMultiplier
+          - RoomStatusMultiplier
+          uniqueItems: true
+      - name: inactiveRules
+        in: query
+        required: false
+        description: If set to True, only Inactive Rotation Setup Rules will be retrieved. Otherwise, only Active Rotation Setup Rules will be retrieved.
+        schema:
+          type: boolean
+          default: false
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response object for retrieving rotation rules for a given property
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/FetchRotationRules'
+        '204':
+          description: RotationRules not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+    post:
+      summary: Create Room Rotation Rules
+      description: This API has been deprecated and will be replaced by <p><strong>OperationId:</strong>postRoomRotationRules</p>
+      deprecated: true
+      operationId: postRotationRules
+      parameters:
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique ID of hotel.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '201':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/rotationRules'
+        description: Request object for creating Rotation Rules for a given property
+        required: true
+  /hotels/{hotelId}/rules/{ruleId}:
+    delete:
+      summary: Delete an existing Room Rotation Rule
+      description: This API has been deprecated and will be replaced by <p><strong>OperationId:</strong>postRoomRotationRules</p>
+      deprecated: true
+      operationId: deleteRotationRules
+      parameters:
+      - name: ruleId
+        in: path
+        required: true
+        description: Unique ID of Rotation Rule.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique ID of hotel.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+    put:
+      summary: Change Room Rotation Rules
+      description: This API has been deprecated and will be replaced by <p><strong>OperationId:</strong>postRoomRotationRules</p>
+      deprecated: true
+      operationId: putRotationRules
+      parameters:
+      - name: ruleId
+        in: path
+        required: true
+        description: Unique Rotation Group Code.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique ID of hotel.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: Response Body.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/rotationRules'
+        description: Request object for changing room rotation rules.
+        required: true
+  /hotels/{hotelId}/unitGrades:
+    get:
+      summary: Get Room Rotation Owner Room Grades
+      description: Use this API to Get Room Rotation Owner Room Grades. <p><strong>OperationId:</strong>getUnitGrades</p>
+      operationId: getUnitGrades
+      parameters:
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique ID of hotel.
+        schema:
+          type: string
+          maxLength: 20
+          minLength: 1
+      - name: hotelIds
+        in: query
+        description: Unique ID(s) of hotel(s).
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 20
+          maxItems: 4000
+      - name: fetchInactive
+        in: query
+        required: false
+        description: Determines wether to fetch inactive records or not.
+        schema:
+          type: boolean
+          default: false
+      - name: code
+        in: query
+        description: Configured Owner Room Grade Codes to be searched.  Multiple values can be entered by adding multiple query parameters.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 8
+          maxItems: 4000
+      - name: wildCard
+        in: query
+        required: false
+        description: Wildcard search on Owner Room Grade Codes.
+        schema:
+          type: string
+          maxLength: 8
+          minLength: 1
+      - name: description
+        in: query
+        required: false
+        description: Description of Owner Room Grade Codes.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response object for fetching Room Rotation Unit Grades.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/FetchUnitGradesDetails'
+        '204':
+          description: UnitGrades not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+    post:
+      summary: Create a new Room Rotation Owner Room Grade Code
+      description: Use this API to create a new Room Rotation Owner Room Grade Code. <p><strong>OperationId:</strong>postUnitGrades</p>
+      operationId: postUnitGrades
+      parameters:
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique ID of hotel.
+        schema:
+          type: string
+          maxLength: 20
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '201':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateUnitGradesDetails'
+        description: Request object for creating a new Room Rotation Owner Room Unit Grade.
+        required: true
+  /hotels/{hotelId}/unitGrades/{unitGradeCode}:
+    put:
+      summary: Change an existing Room Rotation Owner Room Unit Grade
+      description: Use this API to update Room Rotation Owner Room Unit Grades. <p><strong>OperationId:</strong>putUnitGrades</p>
+      operationId: putUnitGrades
+      parameters:
+      - name: unitGradeCode
+        in: path
+        required: true
+        description: Unique Code of Owner Room Unit Grade.
+        schema:
+          type: string
+          maxLength: 8
+          minLength: 1
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique ID of hotel.
+        schema:
+          type: string
+          maxLength: 20
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: Response Body.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/UnitGradesDetailsUpdated'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChangeUnitGradesDetails'
+        description: Request object for changing an existing Room Rotation Owner Room Unit Grades.
+        required: true
+    delete:
+      summary: Delete an existing Room Rotation Owner Room Unit Grade
+      description: Use this API to delete an existing Room Rotation Owner Room Unit Grade. <p><strong>OperationId:</strong>deleteUnitGrades</p>
+      operationId: deleteUnitGrades
+      parameters:
+      - name: unitGradeCode
+        in: path
+        required: true
+        description: Unique Code of Owner Room Unit Grade.
+        schema:
+          type: string
+          maxLength: 8
+          minLength: 1
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique ID of hotel.
+        schema:
+          type: string
+          maxLength: 20
+          minLength: 1
+      - name: code
+        in: query
+        description: Owner Room Unit Grade Code.  Multiple values can be entered by adding multiple query parameters.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 8
+          maxItems: 4000
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+  /overrideReasons:
+    get:
+      summary: Get Room Rotation Override Reasons
+      description: Use this API to get configured Room Rotation Override Reasons <p><strong>OperationId:</strong>getOverrideReasons</p>
+      operationId: getOverrideReasons
+      parameters:
+      - name: fetchInactive
+        in: query
+        required: false
+        description: Determines wether to fetch inactive records or not.
+        schema:
+          type: boolean
+          default: false
+      - name: code
+        in: query
+        description: Room Rotation Override Reason Codes to be searched.  Multiple values can be entered by adding multiple query parameters.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            minLength: 0
+            maxLength: 8
+          maxItems: 4000
+      - name: wildCard
+        in: query
+        required: false
+        description: Wildcard search on the Room Rotation Override Reason code.
+        schema:
+          type: string
+          maxLength: 8
+          minLength: 0
+      - name: description
+        in: query
+        required: false
+        description: Description of the configured Room Rotation Override Reason.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 0
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response object for fetching Room Rotation Override Reasons.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/overrideReasonsDetails'
+        '204':
+          description: OverrideReasons not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+    post:
+      summary: Create a new Room Rotation Override Reason
+      description: Use this API to create a new Room Rotation Override Reason. <p><strong>OperationId:</strong>postOverrideReasons</p>
+      operationId: postOverrideReasons
+      parameters:
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '201':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/overrideReasonsCriteria'
+        description: Request object for creating a new Room Rotation Override Reason.
+        required: true
+  /overrideReasons/{overrideReasonsId}:
+    put:
+      summary: Change an existing Room Rotation Override Reason
+      description: Use this API to update an existing Room Rotation Override Reason. <p><strong>OperationId:</strong>putOverrideReasons</p>
+      operationId: putOverrideReasons
+      parameters:
+      - name: overrideReasonsId
+        in: path
+        required: true
+        description: Unique ID of Room Rotation Override Reason
+        schema:
+          type: string
+          maxLength: 8
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: Response Body.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/overrideReasonsToBeChanged'
+        description: Request object for changing an existing Room Rotation Override Reason.
+        required: true
+    delete:
+      summary: Delete an existing Room Rotation Override Reason
+      description: Use this API to delete an existing Room Rotation Override Reason. <p><strong>OperationId:</strong>deleteOverrideReasons</p>
+      operationId: deleteOverrideReasons
+      parameters:
+      - name: overrideReasonsId
+        in: path
+        required: true
+        description: Unique ID of Room Rotation Override Reason
+        schema:
+          type: string
+          maxLength: 8
+          minLength: 1
+      - name: code
+        in: query
+        description: Code of the Room Rotation Override Reason.  Multiple values can be entered by adding multiple query parameters.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            minLength: 0
+            maxLength: 8
+          maxItems: 4000
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+  /profiles/{profileId}/roomOwnerReferrals:
+    get:
+      summary: Get Profile Owner Referral Records.
+      description: Use this API to fetch profile Owner Referral Records. <p><strong>OperationId:</strong>getRoomOwnerReferrals</p>
+      operationId: getRoomOwnerReferrals
+      parameters:
+      - name: profileId
+        in: path
+        required: true
+        description: Unique ID of profile.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: includeInactive
+        in: query
+        required: false
+        description: If set to True, Inactive Room Owner Referrals will also be retrieved. Otherwise, only Active Room Owner Referrals details will be retrieved.
+        schema:
+          type: boolean
+          default: false
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response for getRoomOwnerReferrals operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/roomOwnerReferralDetails'
+        '204':
+          description: getRoomOwnerReferrals not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+    post:
+      summary: Create Room Owner Referrals
+      description: Use this API to create multiple Room Owner Referral Records. <p><strong>OperationId:</strong>postRoomOwnerReferrals</p>
+      operationId: postRoomOwnerReferrals
+      parameters:
+      - name: profileId
+        in: path
+        required: true
+        description: Unique ID of profile.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '201':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/createRoomOwnerReferralDetails'
+        description: Request object for creating room owner referrals.
+        required: true
+  /profiles/{profileId}/roomOwnerReferrals/{roomOwnerReferralId}:
+    put:
+      summary: Change Room Owner Referral Record
+      description: Use this API to update Room Owner Referral Record. <p><strong>OperationId:</strong>putRoomOwnerReferral</p>
+      operationId: putRoomOwnerReferral
+      parameters:
+      - name: profileId
+        in: path
+        required: true
+        description: Unique ID of profile.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: roomOwnerReferralId
+        in: path
+        required: true
+        description: Unique Room Owner Referral Record.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: Response Body.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/changeRoomOwnerReferralDetails'
+        description: Request object for changing room owner referral record.
+        required: true
+    delete:
+      summary: Delete Room Owner Referral Record
+      description: Use this API to delete Room Owner Referral Record. <p><strong>OperationId:</strong>deleteRoomOwnerReferral</p>
+      operationId: deleteRoomOwnerReferral
+      parameters:
+      - name: profileId
+        in: path
+        required: true
+        description: Unique ID of profile.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: roomOwnerReferralId
+        in: path
+        required: true
+        description: Unique Room Owner Referral Record.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+  /profiles/{profileId}/roomOwners:
+    get:
+      summary: Get Profile Room Ownership Records
+      description: Use this API to fetch profile Room Ownership Records. <p><strong>OperationId:</strong>getProfileRoomOwners</p>
+      operationId: getProfileRoomOwners
+      parameters:
+      - name: profileId
+        in: path
+        required: true
+        description: Unique ID of profile.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: showInactiveRoomOwners
+        in: query
+        required: false
+        description: If set to True, Inactive Room Ownership Records will also be retrieved. Otherwise, only Active Room Ownership Records will be retrieved.
+        schema:
+          type: boolean
+          default: false
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response for getProfileRoomOwner operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/roomOwnershipDetails'
+        '204':
+          description: getProfileRoomOwners not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+  /roomOwners:
+    post:
+      summary: Create Room Ownership Record
+      description: Use this API to create Create Room Ownership Record. <p><strong>OperationId:</strong>postRoomOwner</p>
+      operationId: postRoomOwner
+      parameters:
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '201':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: Response object to hold room ownership conflict records.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/roomOwnershipDetails'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/createRoomOwnerDetails'
+        description: Request object for creating room ownership record..
+        required: true
+    put:
+      summary: Change Room Ownership Records
+      description: Use this API to update Multiple Room Ownership Records across properties. <p><strong>OperationId:</strong>putRoomOwner</p>
+      operationId: putRoomOwner
+      parameters:
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: Response object to hold room ownership conflict records.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/roomOwnershipDetails'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/changeRoomOwnerDetails'
+        description: Request object for changing room ownership record.
+        required: true
+  /roomOwners/{roomOwnershipId}:
+    delete:
+      summary: Delete Room Ownership Record
+      description: Use this API to delete Room Ownership Record. <p><strong>OperationId:</strong>deleteRoomOwner</p>
+      operationId: deleteRoomOwner
+      parameters:
+      - name: roomOwnershipId
+        in: path
+        required: true
+        description: Unique Id for Room Ownership Record.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: overrideReferralCheck
+        in: query
+        required: false
+        description: Indicate to Override the Referral record Check if applicable.
+        schema:
+          type: boolean
+          default: false
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+  /services/roomrotation/status:
+    get:
+      summary: Ping
+      description: This API facilitates status check of room rotation service <p><strong>OperationId:</strong>pingRoomRotationConfigService</p>
+      operationId: pingRoomRotationConfigService
+      parameters:
+      - name: operaPingInput
+        in: query
+        required: false
+        description: Opera Ping request input type
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response for Ping operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/pingDetail'
+        '204':
+          description: pingRoomRotationConfigService not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - RoomRotationConfig
+components:
+  responses:
+    '406':
+      description: Not acceptable.
+    '414':
+      description: Request URI Too Large
+    '503':
+      description: Service Unavailable
+    '413':
+      description: Request Entity Too Large
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '502':
+      description: Bad Gateway
+    '403':
+      description: Forbidden
+    '415':
+      description: Unsupported Media Type
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '401':
+      description: Unauthorized
+    '405':
+      description: Method not allowed
+  parameters:
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
+      schema:
+        type: string
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
+      schema:
+        type: string
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
+      schema:
+        type: string
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    x-externalsystem:
+      name: x-externalsystem
+      description: External system code.
+      in: header
+      x-example: EXTERNALSYSTEMCODE
+      schema:
+        type: string
+        maxLength: 40
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+  schemas:
+    rotationRuleCalculationRuleType:
+      type: string
+      description: Simple type for Rotation Setup Rule Calculation Rule.
+      enum:
+      - PerRevenue
+      - PerNight
+      - PerStay
+    successType:
+      type: object
+      description: Returning an empty element of this type indicates the successful processing of an message. This is used in conjunction with the Warning Type to report any warnings or business errors.
+      properties: {}
+    createRoomOwnerDetails:
+      type: object
+      description: Request object for creating room ownership records.
+      properties:
+        roomOwner:
+          description: Details to create room ownership records
+          $ref: '#/components/schemas/roomOwnershipType'
+        overrideOwnerExclusive:
+          description: Indicate to override the Owner Exclusive flag in room ownership records with overlapping dates
+          type: boolean
+          default: false
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    referralType:
+      description: Indicates the type of referral for a Profile to the Room Owner.
+      type: string
+      enum:
+      - Owner
+      - OwnerReferral
+    rotationRevenueTransactionCodesType:
+      type: array
+      description: A revenue transaction code.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/rotationRevenueTransactionCodeType'
+    ChangeRotationPeriodDetails:
+      type: object
+      description: Response Body.
+      properties:
+        success:
+          description: Refer to Generic common types document.
+          $ref: '#/components/schemas/successType'
+        warnings:
+          description: Refer to Generic common types document.
+          $ref: '#/components/schemas/warningsType'
+        errors:
+          description: Refer to Generic common types document.
+          $ref: '#/components/schemas/errorsType'
+        echoToken:
+          description: A reference for additional message identification, assigned by the requesting host system. When a request message includes an echo token the corresponding response message MUST include an echo token with an identical value.
+          type: string
+          minLength: 0
+          maxLength: 128
+        timeStamp:
+          description: Indicates the creation date and time of the message in UTC using the following format specified by ISO 8601; YYYY-MM-DDThh:mm:ssZ with time values using the 24 hour clock (e.g. 20 November 2003, 1:59:38 pm UTC becomes 2003-11-20T13:59:38Z).
+          type: string
+          format: date-time
+        version:
+          description: For all Opera versioned messages, the version of the message is indicated by a Opera Version value.
+          type: string
+          minLength: 0
+          maxLength: 40
+        correlationId:
+          description: Allow end-to-end correlation of log messages with the corresponding Web service message throughout the processing of the Web service message.
+          type: string
+          minLength: 0
+          maxLength: 80
+        retryAllowed:
+          description: Indicates if the operation supports the ability to retry the request.
+          type: boolean
+          default: false
+        enforceAllowed:
+          description: Indicates if the operation supports the ability to force the retry request through OPERA services in the case where the external system continues to fail.
+          type: boolean
+          default: false
+        useLocalAllowed:
+          description: This attribute carries the user selected confirmation value on confirmation popup.
+          type: boolean
+          default: false
+        links:
+          $ref: '#/components/schemas/links'
+    roomOwnershipDetails:
+      type: object
+      description: Response object containing room ownership details.
+      properties:
+        roomOwnerships:
+          description: Room ownership details for the profile.
+          $ref: '#/components/schemas/roomOwnershipsList'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    AdjustmentReasonsDetailsUpdated:
+      type: object
+      description: Response Body.
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    changeRoomOwnerDetails:
+      type: object
+      description: Request object for changing room ownership records.
+      properties:
+        roomOwners:
+          description: Criteria to change the room ownership records
+          $ref: '#/components/schemas/roomOwnershipsList'
+        overrideOwnerExclusive:
+          description: Indicate to override the Owner Exclusive flag in room ownership records with overlapping dates
+          type: boolean
+          default: false
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    roomOwnershipType:
+      type: object
+      description: Define the search criteria for retrieving room ownership records
+      properties:
+        hotelId:
+          description: Hotel Code of Room Ownership record.
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomOwnershipId:
+          description: Unique Id for Room Ownership record.
+          type: integer
+        contractNumber:
+          description: Contract number for Room Ownership record.
+          type: string
+          maxLength: 50
+        startDate:
+          description: Start Date of the Room Ownership record.
+          type: string
+          format: date
+        endDate:
+          description: End Date of the Room Ownership record.
+          type: string
+          format: date
+        roomId:
+          description: Room Id of Room Ownership record.
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomCategory:
+          description: Room Category of the Room Ownership record.
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomType:
+          description: Room Type of the Room Ownership record.
+          type: string
+          minLength: 0
+          maxLength: 20
+        profileId:
+          description: Profile ID of the Room Ownership record.
+          $ref: '#/components/schemas/uniqueID_Type'
+        profileName:
+          description: Name of owner profile.
+          $ref: '#/components/schemas/profileNameType'
+        status:
+          description: Status of the Room Ownership record. (Active or Inactive)
+          type: string
+        ownerExclusive:
+          type: boolean
+          description: Whether Room is available for the exclusive use of its designated owner and owner referrals, or if it is available in general availability.
+    transactionCodesType:
+      type: array
+      description: Revenue transaction code.
+      maxItems: 4000
+      items:
+        type: string
+        minLength: 0
+        maxLength: 20
+    uniqueID_Type:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
+    ChangeAdjustmentReasonsDetails:
+      type: object
+      description: Request object for changing Room Rotation Adjustment Reasons.
+      properties:
+        adjustmentReasons:
+          description: Room Rotation Adjustment Reasons to be updated.
+          $ref: '#/components/schemas/roomRotationAdjustmentReasonsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    overrideReasonsDetails:
+      type: object
+      description: Response object for fetching Room Rotation Override Reasons.
+      properties:
+        overrideReasons:
+          description: Collection of Room Rotation Override Reasons.
+          $ref: '#/components/schemas/roomRotationOverrideReasonsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    roomOwnerReferralType:
+      type: object
+      description: Define the search criteria for retrieving Room Owner Referral records
+      properties:
+        hotelId:
+          description: Hotel Code of Room Owner Referral record.
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomOwnerId:
+          description: Unique Id for Room Ownership record.
+          type: number
+        roomOwnerReferralId:
+          description: Unique Id for Room Owner Referral record.
+          type: number
+        referral:
+          description: Type of referral to the room owner/target profile.
+          $ref: '#/components/schemas/referralType'
+        startDate:
+          description: Start Date of the Room Owner Referral record.
+          type: string
+          format: date
+        endDate:
+          description: End Date of the Room Owner Referral record.
+          type: string
+          format: date
+        roomId:
+          description: Room Id of Room Owner Referral record.
+          type: string
+        profileName:
+          description: Profile Name of the Room Owner Referral record.
+          $ref: '#/components/schemas/profileNameType'
+        profileAddress:
+          description: Address details for the profile on the Room Owner Referral record
+          $ref: '#/components/schemas/addressType'
+        profileId:
+          description: Profile ID of the Room Owner Referral record.
+          $ref: '#/components/schemas/uniqueID_Type'
+        inactive:
+          description: Status of the Room Owner Referral record.
+          type: boolean
+        inactiveDate:
+          description: Date in which the room owner referral record was marked as inactive.
+          type: string
+          format: date
+    ChangeRevenueTransactionCodesCriteria:
+      type: object
+      description: Request object for updating the rotation revenue status of a transaction code for a given property.
+      properties:
+        revenueTransactionCodes:
+          description: Revenue transaction codes for a given property value.
+          $ref: '#/components/schemas/rotationRevenueTransactionCodesChangeType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    daysOfWeekAttrType:
+      type: object
+      description: Days of the Week
+      properties:
+        sunday:
+          type: boolean
+          default: false
+        monday:
+          type: boolean
+          default: false
+        tuesday:
+          type: boolean
+          default: false
+        wednesday:
+          type: boolean
+          default: false
+        thursday:
+          type: boolean
+          default: false
+        friday:
+          type: boolean
+          default: false
+        saturday:
+          type: boolean
+          default: false
+    codeListType:
+      type: array
+      maxItems: 4000
+      items:
+        type: string
+        minLength: 0
+        maxLength: 20
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    overrideReasonsToBeChanged:
+      type: object
+      description: Request object for changing an existing Room Rotation Override Reason.
+      properties:
+        overrideReasons:
+          description: Room Rotation Override Reason to be changed.
+          $ref: '#/components/schemas/roomRotationOverrideReasonsType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    FetchAdjustmentReasonsDetails:
+      type: object
+      description: Response object for creating Room Rotation Adjustment Reasons.
+      properties:
+        adjustmentReasons:
+          description: Collection of Room Rotation Adjustment Reasons.
+          $ref: '#/components/schemas/roomRotationAdjustmentReasonsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    fetchRotationPeriod:
+      type: object
+      description: Response Object for Fetch Rotation Period
+      properties:
+        hotelId:
+          description: Property code for Room Rotation Period.
+          type: string
+          minLength: 0
+          maxLength: 20
+        startDate:
+          description: Represents Effective start date for the Room Rotation Period Setup.
+          type: string
+          format: date
+        periodFrequency:
+          description: Represents Effective Period reset frequency for the Room Rotation Period Setup.
+          $ref: '#/components/schemas/rotationPeriodFrequencyType'
+        currentPeriodStartDate:
+          description: The start date for the property's current Rotation Period.
+          type: string
+          format: date
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    status:
+      type: object
+      description: Response Body.
+      properties:
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    masterInfoType:
+      type: object
+      properties:
+        codeInfo:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/codeInfoType'
+        codeType:
+          $ref: '#/components/schemas/masterType'
+    roomRotationUnitGradesType:
+      type: array
+      description: Room Rotation Owner Room Grade Enumeration element.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/roomRotationUnitGradeType'
+    CreateAdjustmentReasonsDetails:
+      type: object
+      description: Request object for fetching Room Rotation Adjustment Reasons.
+      properties:
+        adjustmentReasons:
+          description: Room Rotation Adjustment Reasons to be created.
+          $ref: '#/components/schemas/roomRotationAdjustmentReasonsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    errorType:
+      type: object
+      description: Standard way to indicate that an error occurred during the processing of an message. If the message successfully processes, but there are business errors, those errors should be passed in the warning element.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
+          type: string
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+          type: string
+          minLength: 0
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        nodeList:
+          description: An XPath expression that selects all the nodes whose data caused this error. Further, this expression should have an additional constraint which contains the data of the node. This will provide the offending data back to systems that cannot maintain the original message.
+          type: string
+    roomOwnerReferralList:
+      description: Room Owner Referral records.
+      type: object
+      properties:
+        roomOwnerReferrals:
+          description: Collection of Detailed information on Room Owner's Referral records.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/roomOwnerReferralType'
+    rotationRuleStatusType:
+      type: string
+      description: Simple type for Rotation Setup Rule System Status.
+      enum:
+      - Changed
+      - Deleted
+      - New
+      - Queried
+    roomRotationOverrideReasonType:
+      type: object
+      description: Defines Rotation Override Reason Details.
+      properties:
+        code:
+          description: Defines the Rotation Override Reason Code.
+          type: string
+          minLength: 1
+          maxLength: 40
+        description:
+          description: Description of the Rotation Override Reason.
+          $ref: '#/components/schemas/translationTextType2000'
+        displayOrder:
+          description: Rotation Override Reason sequence number.
+          type: number
+          minimum: 0
+          maximum: 99999
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    pingDetail:
+      type: object
+      description: Response for Ping operation.
+      properties:
+        operaVersion:
+          description: Opera version number.
+          $ref: '#/components/schemas/operaVersionNumberType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    rotationPeriodType:
+      type: object
+      description: Rotation Period Frequency and Start Date Details for a Property
+      properties:
+        hotelId:
+          description: Hotel code for Room Rotation Period.
+          type: string
+          minLength: 0
+          maxLength: 20
+        startDate:
+          description: Represents Effective start date for the Room Rotation Period Setup.
+          type: string
+          format: date
+        periodFrequency:
+          description: Represents the frequency in which a Rotation Period resets for the Room Rotation Period Setup.
+          $ref: '#/components/schemas/rotationPeriodFrequencyType'
+        forceRecalculate:
+          description: Represents if Rotation points/rules recalculation job should be re-triggered.
+          type: boolean
+          default: false
+    rotationRules:
+      type: object
+      description: Request object for creating room rotation setup rules.
+      properties:
+        rotationRules:
+          description: Collection of Room Rotation Setup Rules to be created.
+          $ref: '#/components/schemas/rotationRulesType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    FetchUnitGradesDetails:
+      type: object
+      description: Response object for fetching Room Rotation Owner Room Grade Codes.
+      properties:
+        unitGrades:
+          description: Collection of Room Rotation Owner Room Grade Codes.
+          $ref: '#/components/schemas/roomRotationUnitGradesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    ChangeUnitGradesDetails:
+      type: object
+      description: Request object for changing an existing Room Rotation Owner Room Grade Codes.
+      properties:
+        unitGrades:
+          description: Room Rotation Owner Room Grade Codes to be changed.
+          $ref: '#/components/schemas/roomRotationUnitGradesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    managedByOptions:
+      description: Describes of the Configuration is Managed by Enterprise or Property.
+      type: string
+      enum:
+      - EnterpriseManaged
+      - PropertyManaged
+      - EnterpriseEnforced
+      - PropertyOverridden
+    overrideReasonsCriteria:
+      type: object
+      description: Request object for creating a new Room Rotation Override Reason.
+      properties:
+        overrideReasons:
+          description: Room Rotation Override Reasons to be created.
+          $ref: '#/components/schemas/roomRotationOverrideReasonsType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    warningType:
+      type: object
+      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
+          type: string
+          maxLength: 2000
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+          type: string
+          minLength: 0
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+          maxLength: 2000
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+          maxLength: 2000
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+          maxLength: 2000
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+          maxLength: 2000
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        rph:
+          description: Reference Place Holder used as an index for this warning.
+          type: string
+          minLength: 1
+          maxLength: 8
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
+    personNameTypeType:
+      type: string
+      description: Person's name in an external system.
+      enum:
+      - Primary
+      - Alternate
+      - Incognito
+      - External
+      - Phonetic
+    masterType:
+      type: string
+      enum:
+      - Country
+      - State
+      - AddressType
+      - PhoneType
+      - RateCategory
+      - CalculationRule
+      - PostingRythym
+      - BillingInstruction
+      - TransactionCode
+      - DisplaySet
+      - MailingActions
+      - DistanceType
+      - District
+      - Territory
+      - FiscalRegion
+      - InventoryItem
+      - Package
+      - RoomFeaturePreference
+      - SpecialPreference
+      - Promotion
+      - Department
+      - ReservationPreference
+      - FacilityTask
+      - RoomType
+      - RateCode
+      - OutOfOrderReason
+      - Block
+    rotationRevenueTransactionCodesChangeType:
+      type: object
+      description: Two collections of transaction codes for a resort. One collection lists codes to be changed to Rotation Revenue transaction codes and the other to be changed to non Rotation Revenue Transaction codes.
+      properties:
+        hotelId:
+          description: Hotel code of revenue transaction code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        rotationRevenueTransactionCodes:
+          description: List of transaction codes to be updated to rotation revenue transaction codes.
+          $ref: '#/components/schemas/transactionCodesType'
+        nonRotationRevenueTransactionCodes:
+          description: List of transaction codes to be updated to non rotation revenue transaction codes.
+          $ref: '#/components/schemas/transactionCodesType'
+    translationTextType2000:
+      type: object
+      description: Contains Multiple translated texts and language codes.
+      properties:
+        defaultText:
+          description: Default text with Character length from 1 to 2000.
+          type: string
+          minLength: 1
+          maxLength: 2000
+        translatedTexts:
+          description: List of translated text and language codes.
+          $ref: '#/components/schemas/translationsTextType'
+    roomRotationAdjustmentReasonsType:
+      type: array
+      description: Room Rotation Adjustment Reason Enumeration element.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/roomRotationAdjustmentReasonType'
+    roomRotationRules:
+      type: object
+      description: Request object for saving changes to room type rotation rules.
+      properties:
+        forceRecalculate:
+          description: Indicates if Rotation points recalculation job should be re-triggered.
+          type: boolean
+          default: false
+        rotationRules:
+          type: array
+          description: Defines collection of Room Rotation Setup Rules.
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/rotationRuleType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    rotationRuleSetupType:
+      type: string
+      description: Simple type for Rotation Rule Setup.
+      enum:
+      - Points
+      - OwnerMultiplier
+      - RoomStatusMultiplier
+    FetchRotationRules:
+      type: object
+      description: Response object for retrieving rotation setup rules for a given property
+      properties:
+        rotationRulesResult:
+          description: Retrieve Rotation Setup Rules for a given property.
+          $ref: '#/components/schemas/rotationRulesResultType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    operaVersionNumberType:
+      type: string
+      description: Current Opera Version Number
+      minLength: 0
+      maxLength: 40
+    changeRoomOwnerReferralDetails:
+      type: object
+      description: Request object for changing Room Owner Referral records.
+      properties:
+        roomOwnerReferral:
+          description: Criteria to change the Room Owner Referral record.
+          $ref: '#/components/schemas/roomOwnerReferralType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    rotationPeriod:
+      type: object
+      description: Request Object for changing Rotation Period.
+      properties:
+        rotationPeriod:
+          description: Rotation Period data (Start date/Period Frequency) to be changed
+          $ref: '#/components/schemas/rotationPeriodType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    rotationRuleType:
+      type: object
+      properties:
+        status:
+          description: Represents Record Status of Room Rotation Setup Rule.
+          $ref: '#/components/schemas/rotationRuleStatusType'
+        setupType:
+          description: Represents Setup type for Room Rotation Setup Rule.
+          $ref: '#/components/schemas/rotationRuleSetupType'
+        ruleId:
+          description: Unique ID for Room Rotation Setup Rule.
+          type: number
+        startDate:
+          description: Represents start date for Room Rotation Setup Rule.
+          type: string
+          format: date
+        endDate:
+          description: Represents end date for Room Rotation Setup Rule.
+          type: string
+          format: date
+        daysOfWeek:
+          description: Represents the days for which the Room Rotation Setup Rule are applicable.
+          $ref: '#/components/schemas/daysOfWeekAttrType'
+        calculationRule:
+          description: Represents the calculation type applicable for Rotation Point Rules.
+          $ref: '#/components/schemas/rotationRuleCalculationRuleType'
+        referral:
+          description: Indicates that this Rotation Setup Rule is to be used for Owner Referral Reservations.
+          type: boolean
+        points:
+          description: Represents total points for a Rotation Setup Rule. (To be used with Rotation Point Rules)
+          type: number
+        multiplier:
+          description: Represents multiplier value to be used for an Owner Multiplier Rule or an Out of Order / Service Multiplier rule.
+          type: number
+        reasons:
+          description: Represents Out Of Order/Service reasons in which an Owner Multiplier Rule is applicable for.
+          $ref: '#/components/schemas/codeListType'
+        rateCodes:
+          description: Represents Rate Codes in which the Rotation Setup Rule is applicable for (Either for Rotation Point Rules, or Owner Multiplier Rules).
+          $ref: '#/components/schemas/codeListType'
+        roomTypes:
+          description: Represents Room Types in which the Room Rotation Setup Rule is applicable for (At least 1 Room Type is required).
+          $ref: '#/components/schemas/codeListType'
+    createRoomOwnerReferralDetails:
+      type: object
+      description: Request object for creating Room Owner Referral records.
+      properties:
+        roomOwnerReferrals:
+          description: Details to create Room Owner Referral records.
+          $ref: '#/components/schemas/roomOwnerReferralList'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    errorsType:
+      type: array
+      description: An error that occurred during the processing of a message.
+      maxItems: 99
+      items:
+        $ref: '#/components/schemas/errorType'
+    addressType:
+      type: object
+      description: Provides address information.
+      properties:
+        isValidated:
+          description: Indicator to define if the Address is validated by the Address Validation System.
+          type: boolean
+          default: false
+        addressLine:
+          description: When the address is unformatted (FormattedInd="false") these lines will contain free form address details. When the address is formatted and street number and street name must be sent independently, the street number will be sent using StreetNmbr, and the street name will be sent in the first AddressLine occurrence.
+          type: array
+          maxItems: 4
+          items:
+            type: string
+            minLength: 0
+            maxLength: 80
+        cityName:
+          description: City (e.g., Dublin), town, or postal station (i.e., a postal service territory, often used in a military address).
+          type: string
+          minLength: 0
+          maxLength: 40
+        postalCode:
+          description: Post Office Code number.
+          type: string
+          minLength: 0
+          maxLength: 15
+        cityExtension:
+          description: Post Office City Extension Code number. City Extension mainly used for UK addresses.
+          type: string
+          minLength: 0
+          maxLength: 20
+        county:
+          description: County or District Name (e.g., Fairfax). This is read only.
+          type: string
+          minLength: 0
+          maxLength: 20
+        state:
+          description: State or Province name (e.g., Texas).
+          type: string
+          minLength: 0
+          maxLength: 20
+        country:
+          description: Country name (e.g., Ireland).
+          $ref: '#/components/schemas/countryNameType'
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        type:
+          description: Defines the type of address (e.g. home, business, other).
+          type: string
+          minLength: 0
+          maxLength: 20
+        typeDescription:
+          description: Describes the type code
+          type: string
+          minLength: 0
+          maxLength: 2000
+        primaryInd:
+          description: When true, indicates a primary information.
+          type: boolean
+        barCode:
+          description: The postal barcode for the address.
+          type: string
+          minLength: 0
+          maxLength: 100
+        createDateTime:
+          description: Time stamp of the creation.
+          type: string
+          format: date-time
+        creatorId:
+          description: ID of creator. The creator could be a software system identifier or an identifier of an employee responsible for the creation.
+          type: string
+          minLength: 0
+          maxLength: 200
+        lastModifyDateTime:
+          description: Time stamp of last modification.
+          type: string
+          format: date-time
+        lastModifierId:
+          description: Identifies the last software system or person to modify a record.
+          type: string
+          minLength: 0
+          maxLength: 200
+    roomRotationOverrideReasonsType:
+      type: array
+      description: Room Rotation Override Reason Enumeration element.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/roomRotationOverrideReasonType'
+    codeInfoType:
+      type: object
+      description: ''
+      properties:
+        description:
+          type: string
+          minLength: 0
+          maxLength: 80
+        hotelId:
+          type: string
+          minLength: 0
+          maxLength: 20
+        code:
+          type: string
+          minLength: 0
+          maxLength: 20
+    roomRotationUnitGradeType:
+      type: object
+      description: Defines Owner Room Grade Code Details.
+      properties:
+        code:
+          description: Defines the Owner Room Grade Code.
+          type: string
+          minLength: 1
+          maxLength: 40
+        description:
+          description: Description of the Owner Room Grade Code.
+          $ref: '#/components/schemas/translationTextType2000'
+        displayOrder:
+          description: Owner Room Grade Code sequence number.
+          type: number
+          minimum: 0
+          maximum: 99999
+        hotelId:
+          description: Hotel of the Owner Room Grade Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    translationsTextType:
+      type: array
+      description: Language code for the translation.
+      maxItems: 4000
+      items:
+        type: object
+        properties:
+          value:
+            type: string
+            description: Used for Character Strings, length 0 to 2000.
+            minLength: 0
+            maxLength: 2000
+          language:
+            description: Language identification.
+            type: string
+            minLength: 0
+            maxLength: 20
+        description: Language code for the translation.
+    roomOwnerReferralDetails:
+      type: object
+      description: Response object containing Room Owner Referral details.
+      properties:
+        roomOwnerReferrals:
+          description: Room Owner Referral details.
+          $ref: '#/components/schemas/roomOwnerReferralList'
+        hasOwnershipRecords:
+          type: boolean
+          description: Flag to indicate if the associated profile has any active Room Ownership records attached to it.
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    countryNameType:
+      type: object
+      description: Code for a country or a nationality.
+      properties:
+        value:
+          type: string
+          description: Used for Character Strings, length 0 to 200.
+          minLength: 0
+          maxLength: 200
+        code:
+          description: Code for a country or a nationality.
+          type: string
+          minLength: 0
+          maxLength: 20
+    rotationPeriodFrequencyType:
+      type: string
+      description: Simple type for Rotation Period Type.
+      enum:
+      - Monthly
+      - Quarterly
+      - SemiAnnually
+      - Annually
+      - Never
+    rotationRulesType:
+      type: object
+      description: Collection of Room Rotation Setup Rules elements.
+      properties:
+        hotelId:
+          description: Hotel code for Room Rotation Setup Rules.
+          type: string
+          minLength: 0
+          maxLength: 20
+        setupType:
+          description: Represents Setup type for Room Rotation Setup Rule.
+          $ref: '#/components/schemas/rotationRuleSetupType'
+        rule:
+          description: Description of the Room Rotation Setup Rule.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/rotationRuleType'
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
+    ChangeRevenueTransactionCodesDetails:
+      type: object
+      description: Response Body.
+      properties:
+        success:
+          description: Refer to Generic common types document.
+          $ref: '#/components/schemas/successType'
+        warnings:
+          description: Refer to Generic common types document.
+          $ref: '#/components/schemas/warningsType'
+        errors:
+          description: Refer to Generic common types document.
+          $ref: '#/components/schemas/errorsType'
+        echoToken:
+          description: A reference for additional message identification, assigned by the requesting host system. When a request message includes an echo token the corresponding response message MUST include an echo token with an identical value.
+          type: string
+          minLength: 0
+          maxLength: 128
+        timeStamp:
+          description: Indicates the creation date and time of the message in UTC using the following format specified by ISO 8601; YYYY-MM-DDThh:mm:ssZ with time values using the 24 hour clock (e.g. 20 November 2003, 1:59:38 pm UTC becomes 2003-11-20T13:59:38Z).
+          type: string
+          format: date-time
+        version:
+          description: For all Opera versioned messages, the version of the message is indicated by a Opera Version value.
+          type: string
+          minLength: 0
+          maxLength: 40
+        correlationId:
+          description: Allow end-to-end correlation of log messages with the corresponding Web service message throughout the processing of the Web service message.
+          type: string
+          minLength: 0
+          maxLength: 80
+        retryAllowed:
+          description: Indicates if the operation supports the ability to retry the request.
+          type: boolean
+          default: false
+        enforceAllowed:
+          description: Indicates if the operation supports the ability to force the retry request through OPERA services in the case where the external system continues to fail.
+          type: boolean
+          default: false
+        useLocalAllowed:
+          description: This attribute carries the user selected confirmation value on confirmation popup.
+          type: boolean
+          default: false
+    UnitGradesDetailsUpdated:
+      type: object
+      description: Response Body.
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    profileNameType:
+      type: object
+      description: This provides name information for a person.
+      properties:
+        name:
+          description: Family name, last name or Company Name.
+          type: string
+          minLength: 0
+          maxLength: 40
+        fullName:
+          description: Full display Name.
+          type: string
+          minLength: 0
+          maxLength: 200
+        namePrefix:
+          description: Salutation of honorific (e.g. Mr., Mrs., Ms., Miss, Dr.)
+          type: string
+          minLength: 0
+          maxLength: 40
+        givenName:
+          description: Given name, first name or names.
+          type: string
+          minLength: 0
+          maxLength: 40
+        middleName:
+          description: The middle name of the person name.
+          type: string
+          minLength: 0
+          maxLength: 40
+        nameTitle:
+          description: Degree or honors (e.g., Ph.D., M.D.)
+          type: string
+          minLength: 0
+          maxLength: 80
+        nameType:
+          description: Type of name of the individual, such as former, nickname, alternate or alias name.
+          $ref: '#/components/schemas/personNameTypeType'
+    FetchRevenueTransactionCodesDetails:
+      type: object
+      description: Response object for retrieving revenue transaction codes for a given property
+      properties:
+        revenueTransactionCodes:
+          description: Revenue transaction codes for a given property value.
+          $ref: '#/components/schemas/rotationRevenueTransactionCodesType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    roomRotationAdjustmentReasonType:
+      type: object
+      description: Defines Rotation Adjustment Reason Details.
+      properties:
+        code:
+          description: Defines the Rotation Adjustment Reason Code.
+          type: string
+          minLength: 1
+          maxLength: 40
+        description:
+          description: Description of the Rotation Adjustment Reason.
+          $ref: '#/components/schemas/translationTextType2000'
+        displayOrder:
+          description: Rotation Adjustment Reason sequence number.
+          type: number
+          minimum: 0
+          maximum: 99999
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    rotationRulesResultType:
+      type: object
+      description: Collection of Room Rotation Setup Rules Results.
+      properties:
+        rotationRules:
+          description: Information representing Room Rotation Setup Rules.
+          $ref: '#/components/schemas/rotationRulesType'
+        masterInfo:
+          description: Collection of RateCodes, RoomTypes, Out of Order Reasons
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/masterInfoType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+          default: 0
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+          default: 25
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        count:
+          description: Total number of rows returned
+          type: integer
+    rotationRevenueTransactionCodeType:
+      type: object
+      description: A revenue transaction code
+      properties:
+        hotelId:
+          description: Hotel code of revenue transaction code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        transactionCode:
+          description: Unique ID for the Transaction Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        rotationRevenue:
+          description: Indicates that the transaction code is marked as a rotation revenue transaction code.
+          type: boolean
+          default: false
+        description:
+          description: Description of the Transaction Code.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    roomOwnershipsList:
+      description: Room Ownership records.
+      type: object
+      properties:
+        roomOwnershipInfo:
+          description: Collection of Detailed information on Room Ownership records.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/roomOwnershipType'
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        count:
+          description: Total number of rows returned
+          type: integer
+    CreateUnitGradesDetails:
+      type: object
+      description: Request object for creating a new Room Rotation Owner Room Grade Code.
+      properties:
+        unitGrades:
+          description: Room Rotation Owner Room Grade Codes to be created.
+          $ref: '#/components/schemas/roomRotationUnitGradesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+externalDocs:
+  description: Find out more about Oracle Hospitality
+  url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

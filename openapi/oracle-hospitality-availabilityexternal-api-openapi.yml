@@ -1,0 +1,502 @@
+openapi: 3.2.0
+info:
+  title: OPERA Cloud Price Availability Rate Availability External API
+  description: APIs to cater for Price and Rate Availability functionality in OPERA Cloud. <br /><br />Availability enables you to manage your room inventory by providing a detailed view of all available and sold rooms at a property. Some of the tasks you can perform include defining conditions for stay restrictions, setting room sell limits, and searching for and viewing room availability.<br /><br /> Compatible with OPERA Cloud release 26.2.0.0.<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>
+  version: 26.2.0.0
+  termsOfService: https://www.oracle.com/legal/terms.html
+  contact:
+    email: hospitality_apis_ww_grp@oracle.com
+  license:
+    name: UPL
+    url: https://opensource.org/licenses/upl
+servers:
+- url: /par/v1
+tags:
+- name: AvailabilityExternal
+paths:
+  /externalControlSegment:
+    post:
+      summary: External Control Segment Lookup
+      description: Use this API To LookUp Control Segment In An External System:<p><strong>OperationId:</strong>retriveExternalControlSegment</p>
+      operationId: retriveExternalControlSegment
+      parameters:
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '201':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: Response Body.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/externalControlSegmentDetails'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - AvailabilityExternal
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/externalControlSegmentCriteria'
+        description: The request element which contains criteria to fetch control segment
+        required: true
+  /hotels/{hotelId}/yieldMarketType:
+    get:
+      summary: Yield Market Type LookUp.
+      description: Use this API To LookUp Yield Market Type In An External System:<p><strong>OperationId:</strong>getExternalYieldMarketType</p>
+      operationId: getExternalYieldMarketType
+      parameters:
+      - name: membershipId
+        in: query
+        required: false
+        description: Membership Card Number.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: hotelId
+        in: path
+        required: true
+        description: The Code That Uniquely Identifies A Single Hotel Property.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response object Of Yield Market Type LookUp.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/yieldMarketTypeDetails'
+        '204':
+          description: Yield Market Type value of Membership Id Not Found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - AvailabilityExternal
+components:
+  schemas:
+    externalControlSegmentCriteriaType:
+      type: object
+      description: The request element containing criteria to retrieve control segment code.
+      properties:
+        membershipId:
+          description: Membership card number.
+          type: string
+          minLength: 1
+          maxLength: 2000
+        hotelId:
+          description: Unique Id(s) for the Hotel(s) queried.
+          type: string
+          minLength: 1
+          maxLength: 40
+    externalControlSegmentType:
+      type: object
+      description: Type provides the Control Segment information.
+      properties:
+        membershipId:
+          description: Membership Card Number.
+          type: string
+          minLength: 1
+          maxLength: 2000
+        controlSegment:
+          description: Control Segment.
+          type: string
+          minLength: 1
+          maxLength: 2000
+        hotelId:
+          description: Hotel Code.
+          type: string
+          minLength: 1
+          maxLength: 2000
+    yieldMarketTypeDetails:
+      type: object
+      description: Response object Of Yield Market Type LookUp.
+      properties:
+        yieldMarketTypeInfo:
+          description: Type contains Yield Market Type information.
+          $ref: '#/components/schemas/yieldMarketInfoType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
+    warningType:
+      type: object
+      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
+          type: string
+          maxLength: 2000
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+          type: string
+          minLength: 0
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+          maxLength: 2000
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+          maxLength: 2000
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+          maxLength: 2000
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+          maxLength: 2000
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        rph:
+          description: Reference Place Holder used as an index for this warning.
+          type: string
+          minLength: 1
+          maxLength: 8
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
+    yieldMarketInfoType:
+      type: object
+      description: Type provides the Yield Market Type information.
+      properties:
+        membershipId:
+          description: Membership Card Number.
+          type: string
+          minLength: 1
+          maxLength: 2000
+        yieldMarketType:
+          description: Yield Market Type.
+          type: string
+          minLength: 1
+          maxLength: 2000
+        hotelId:
+          description: Hotel Code.
+          type: string
+          minLength: 1
+          maxLength: 2000
+        flexValues:
+          description: Yield Market Type FlexValues.
+          type: array
+          maxItems: 4000
+          items:
+            type: string
+            minLength: 0
+            maxLength: 2000
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    externalControlSegmentCriteria:
+      type: object
+      description: The request element containing criteria to retrieve control segment code.
+      properties:
+        externalControlSegmentCriteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/externalControlSegmentCriteriaType'
+          minItems: 1
+          maxItems: 80
+          description: External control segment criteria
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    externalControlSegmentDetails:
+      type: object
+      description: Response object Of Control Segment Look Up.
+      properties:
+        externalControlSegments:
+          description: Type contains Control Segment information.
+          type: array
+          items:
+            $ref: '#/components/schemas/externalControlSegmentType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+  responses:
+    '406':
+      description: Not acceptable.
+    '414':
+      description: Request URI Too Large
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '403':
+      description: Forbidden
+    '413':
+      description: Request Entity Too Large
+    '415':
+      description: Unsupported Media Type
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '502':
+      description: Bad Gateway
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '503':
+      description: Service Unavailable
+    '401':
+      description: Unauthorized
+    '405':
+      description: Method not allowed
+  parameters:
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
+      schema:
+        type: string
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
+      schema:
+        type: string
+    x-externalsystem:
+      name: x-externalsystem
+      description: External system code.
+      in: header
+      x-example: EXTERNALSYSTEMCODE
+      schema:
+        type: string
+        maxLength: 40
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
+      schema:
+        type: string
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+externalDocs:
+  description: Find out more about Oracle Hospitality
+  url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

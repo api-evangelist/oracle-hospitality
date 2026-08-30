@@ -1,0 +1,1056 @@
+openapi: 3.2.0
+info:
+  title: OPERA Cloud Block Block Stats API
+  description: APIs to cater for Business Block functionality in OPERA Cloud. <br /><br /> A block is a group of rooms held for guests who are attending an event, meeting, or function. You can create blocks for family reunions, business conferences, weddings, and so on. You can also set aside rooms for the event (block).<br /><br /> Compatible with OPERA Cloud release 26.2.0.0.<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>
+  version: 26.2.0.0
+  termsOfService: https://www.oracle.com/legal/terms.html
+  contact:
+    email: hospitality_apis_ww_grp@oracle.com
+  license:
+    name: UPL
+    url: https://opensource.org/licenses/upl
+servers:
+- url: /blk/v1
+tags:
+- name: BlockStats
+  description: Block Statistics provide statistical data of blocks that exist in OPERA Cloud.
+paths:
+  /blocks/statistics:
+    get:
+      summary: Get Block statistics
+      description: This API retrieves block statistics. <p><strong>OperationId:</strong>getBlockStats</p> <p>This API allows a time span of <strong>90</strong> days.</p>
+      operationId: getBlockStats
+      parameters:
+      - name: hotelId
+        in: query
+        required: false
+        description: Property context of the request.
+        schema:
+          type: string
+      - name: reportCode
+        in: query
+        description: Supported Housekeeping report codes.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - HouseSummary
+            - HouseSummaryMonthToDate
+            - HouseSummaryYearToDate
+            - ReservationActivity
+            - ReservationActivityDaily
+            - ReservationActivityMonthToDate
+            - ReservationActivityYearToDate
+            - ComplimentaryOrHouseUse
+            - DailyProjection
+            - RoomStatus
+            - LastHourStatus
+            - Turndown
+            - InHouse
+            - CheckIns
+            - CheckOuts
+            - AvailableRooms
+            - RoomMaintenance
+            - ReservationStatistics
+            - VIPGuests
+            - AdvanceCheckIn
+            - BlockArrivals
+            - ReservationsCancellationsToday
+            - AIRoomAssignment
+            - CompRouting
+          uniqueItems: true
+      - name: reportEndDate
+        in: query
+        description: End date of the report.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            format: date
+      - name: reportStartDate
+        in: query
+        description: Start date of the report.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            format: date
+      - name: statisticalCode
+        in: query
+        description: Supported housekeeping statistical codes.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - ApprovedCompPostings
+            - StagedCompPostings
+            - DeclinedCompPostings
+            - CompRoutingInstructionsRequests
+            - TotalPhysicalRooms
+            - TotalRoomsToSell
+            - TotalOutOfOrder
+            - TotalOutOfService
+            - TotalRevenue
+            - PercentRoomsOccupied
+            - StayoverRooms
+            - StayoverPersons
+            - StayoverVIP
+            - DeparturesExpectedRooms
+            - DeparturesExpectedPersons
+            - DeparturesExpectedVIP
+            - DeparturesActualRooms
+            - DeparturesActualPersons
+            - DeparturesActualVIP
+            - DeparturesInLastHour
+            - ArrivalsInLastHour
+            - ArrivalsTotal
+            - ArrivalsExpectedRooms
+            - ArrivalsExpectedPersons
+            - ArrivalsExpectedVIP
+            - ArrivalsExpectedRoomsMadeToday
+            - ArrivalsExpectedPersonsMadeToday
+            - ArrivalsExpectedVIPMadeToday
+            - ArrivalsActualRooms
+            - ArrivalsActualPersons
+            - ArrivalsActualVIP
+            - ExtendedStaysRooms
+            - ExtendedStaysPersons
+            - ExtendedStaysVIP
+            - DeparturesTotal
+            - EarlyDeparturesRooms
+            - EarlyDeparturesPersons
+            - EarlyDeparturesVIP
+            - DayUseRooms
+            - DayUsePersons
+            - DayUseVIP
+            - WalkInRooms
+            - WalkInPersons
+            - WalkInVIP
+            - CanceledOnArrivalRooms
+            - CanceledOnArrivalPersons
+            - CanceledOnArrivalVIP
+            - ComplimentaryArrivalRooms
+            - ComplimentaryArrivalPersons
+            - ComplimentaryArrivalVIP
+            - ComplimentaryStayoverRooms
+            - ComplimentaryStayoverPersons
+            - ComplimentaryStayoverVIP
+            - ComplimentaryDepartureRooms
+            - ComplimentaryDeparturePersons
+            - ComplimentaryDepartureVIP
+            - HouseUseArrivalVIP
+            - HouseUseStayoverRooms
+            - HouseUseStayoverPersons
+            - HouseUseStayoverVIP
+            - HouseUseDepartureRooms
+            - HouseUseDeparturePersons
+            - HouseUseDepartureVIP
+            - MinAvailableTonightRooms
+            - MaxOccupiedTonightRooms
+            - MaxOccupiedTonightPersons
+            - MaxOccupiedTonightVIP
+            - MaxPercentageOccupiedTonightRooms
+            - BlocksNotPickedUp
+            - IndividualRooms
+            - IndividualPersons
+            - IndividualVIP
+            - GroupAndBlockRooms
+            - GroupAndBlockPersons
+            - GroupAndBlockVIP
+            - RoomRevenue
+            - AverageRoomRevenue
+            - InspectedRooms
+            - InspectedVacant
+            - InspectedAssigned
+            - InspectedOccupied
+            - CleanedRooms
+            - CleanVacant
+            - CleanAssigned
+            - CleanOccupied
+            - DirtyVacant
+            - DirtyAssigned
+            - DirtyOccupied
+            - PickupVacant
+            - PickupAssigned
+            - PickupOccupied
+            - OutOfOrderVacant
+            - OutOfOrderAssigned
+            - OutOfOrderOccupied
+            - OutOfServiceVacant
+            - OutOfServiceAssigned
+            - OutOfServiceOccupied
+            - QueueRooms
+            - TurndownRequired
+            - TurndownNotRequired
+            - TurndownCompletedRequired
+            - AdultsInHouse
+            - ChildrenInHouse
+            - AdultsExpectedCheckedOut
+            - ChildrenExpectedCheckedOut
+            - AdultsDeparted
+            - ChildrenDeparted
+            - InHouseRooms
+            - InHouse
+            - MaxOccupancyPercentage
+            - Stayover
+            - TotalRoomsReserved
+            - RevPar
+            - SkipRooms
+            - SleepRooms
+            - HouseUseArrivalRooms
+            - HouseUseArrivalPersons
+            - AverageCheckInTime
+            - CurrentAveWaitTime
+            - CheckedInsTotal
+            - ExpectedCheckInsTotal
+            - CheckedOutsTotal
+            - ExpectedCheckOutsTotal
+            - ScheduledCheckOutsTotal
+            - RoomMaintenanceResolvedTotal
+            - RoomMaintenanceUnResolvedTotal
+            - PreRegisteredTotal
+            - VIPPreRegisteredTotal
+            - OpenFolioTotal
+            - TurndownTotal
+            - VIPTurndownTotal
+            - VIPGuestsArriving
+            - VIPGuestsDeparting
+            - VIPGuestsTotal
+            - IndividualAdvanceCheckedInCurrent
+            - BlockAdvanceCheckedInCurrent
+            - IndividualAdvanceCheckedInInhouse
+            - BlockAdvanceCheckedInInhouse
+            - IndividualAdvanceCheckedInTotal
+            - BlockAdvanceCheckedInTotal
+            - InHouseBlocksTotal
+            - CancellationsTotal
+            - NewReservationsTotal
+            - ArrivalResvs
+            - ArrivalVIPResvs
+            - ArrivalMemberResvs
+            - ArrivalUnallocResvs
+            - ArrivalManualAssgnResvs
+            - ArrivalAIAssgnResvs
+            - ArrivalAIUpgResvs
+            - ArrivalAIAssgnVIPResvs
+            - ArrivalAIAssgnMemberResvs
+            - ArrivalAIAssgnOverridden
+          uniqueItems: true
+      - name: reportParametersParameterName
+        in: query
+        description: Name of the parameter.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: reportParametersParameterValue
+        in: query
+        description: Value of the parameter.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: blockOwnersCode
+        in: query
+        description: Supported Housekeeping report codes.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - HouseSummary
+            - HouseSummaryMonthToDate
+            - HouseSummaryYearToDate
+            - ReservationActivity
+            - ReservationActivityDaily
+            - ReservationActivityMonthToDate
+            - ReservationActivityYearToDate
+            - ComplimentaryOrHouseUse
+            - DailyProjection
+            - RoomStatus
+            - LastHourStatus
+            - Turndown
+            - InHouse
+            - CheckIns
+            - CheckOuts
+            - AvailableRooms
+            - RoomMaintenance
+            - ReservationStatistics
+            - VIPGuests
+            - AdvanceCheckIn
+            - BlockArrivals
+            - ReservationsCancellationsToday
+            - AIRoomAssignment
+            - CompRouting
+          uniqueItems: true
+      - name: onlyOpportunities
+        in: query
+        required: false
+        description: Indicates that only Opportunity blocks will be fetched.
+        schema:
+          type: boolean
+      - name: multipleHotelsSearchHotelIds
+        in: query
+        description: Hotel code.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          maxItems: 4000
+      - name: blockStatusCode
+        in: query
+        description: Supported Housekeeping report codes.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - HouseSummary
+            - HouseSummaryMonthToDate
+            - HouseSummaryYearToDate
+            - ReservationActivity
+            - ReservationActivityDaily
+            - ReservationActivityMonthToDate
+            - ReservationActivityYearToDate
+            - ComplimentaryOrHouseUse
+            - DailyProjection
+            - RoomStatus
+            - LastHourStatus
+            - Turndown
+            - InHouse
+            - CheckIns
+            - CheckOuts
+            - AvailableRooms
+            - RoomMaintenance
+            - ReservationStatistics
+            - VIPGuests
+            - AdvanceCheckIn
+            - BlockArrivals
+            - ReservationsCancellationsToday
+            - AIRoomAssignment
+            - CompRouting
+          uniqueItems: true
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response element for block statistics.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/blockStats'
+        '204':
+          description: BlockStats not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - BlockStats
+  /services/blockStats/status:
+    get:
+      summary: Retrieve/Ping  Block stats service
+      description: Use this API to retrieve block stats service status. <p><strong>OperationId:</strong>pingBlockStatsService</p>
+      operationId: pingBlockStatsService
+      parameters:
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response for Ping operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/operaVersion'
+        '204':
+          description: pingBlockStatsService not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - BlockStats
+components:
+  responses:
+    '406':
+      description: Not acceptable.
+    '414':
+      description: Request URI Too Large
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '403':
+      description: Forbidden
+    '413':
+      description: Request Entity Too Large
+    '415':
+      description: Unsupported Media Type
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '502':
+      description: Bad Gateway
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '503':
+      description: Service Unavailable
+    '401':
+      description: Unauthorized
+    '405':
+      description: Method not allowed
+  parameters:
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
+      schema:
+        type: string
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
+      schema:
+        type: string
+    x-externalsystem:
+      name: x-externalsystem
+      description: External system code.
+      in: header
+      x-example: EXTERNALSYSTEMCODE
+      schema:
+        type: string
+        maxLength: 40
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
+      schema:
+        type: string
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+  schemas:
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
+    warningType:
+      type: object
+      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
+          type: string
+          maxLength: 2000
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+          type: string
+          minLength: 0
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+          maxLength: 2000
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+          maxLength: 2000
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+          maxLength: 2000
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+          maxLength: 2000
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        rph:
+          description: Reference Place Holder used as an index for this warning.
+          type: string
+          minLength: 1
+          maxLength: 8
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
+    blockStatReportType:
+      type: object
+      description: Base abstraction defining all details needed to create a statistical report.
+      properties:
+        chainCode:
+          description: The code that identifies a hotel chain or management group. The hotel chain code is decided between vendors. This attribute is optional if the hotel is an independent property that can be identified by the HotelCode attribute.
+          type: string
+          minLength: 0
+          maxLength: 20
+        hotelId:
+          description: The code that uniquely identifies a single hotel property. The hotel code is decided between vendors.
+          type: string
+          minLength: 0
+          maxLength: 20
+        hotelCityCode:
+          description: The IATA city code; for example DCA, ORD.
+          type: string
+          minLength: 0
+          maxLength: 40
+        hotelName:
+          description: A text field used to communicate the proper name of the hotel.
+          type: string
+          minLength: 0
+          maxLength: 80
+        hotelCodeContext:
+          description: A text field used to communicate the context (or source of - ex Sabre, Galileo, Worldspan, Amadeus) the HotelReferenceGroup codes.
+          type: string
+          minLength: 0
+          maxLength: 40
+        chainName:
+          description: The name of the hotel chain (e.g., Hilton, Marriott, Hyatt).
+          type: string
+          minLength: 0
+          maxLength: 80
+        calendarDate:
+          description: Statistical date of the requested report.
+          type: string
+          format: date
+          maxLength: 8
+        description:
+          type: string
+          minLength: 0
+          maxLength: 2000
+        statCategory:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/hSKStatCategoryType'
+        reportCode:
+          $ref: '#/components/schemas/hSKStatReportCodeType'
+    hSKStatCodeType:
+      type: string
+      description: Supported housekeeping statistical codes.
+      enum:
+      - ApprovedCompPostings
+      - StagedCompPostings
+      - DeclinedCompPostings
+      - CompRoutingInstructionsRequests
+      - TotalPhysicalRooms
+      - TotalRoomsToSell
+      - TotalOutOfOrder
+      - TotalOutOfService
+      - TotalRevenue
+      - PercentRoomsOccupied
+      - StayoverRooms
+      - StayoverPersons
+      - StayoverVIP
+      - DeparturesExpectedRooms
+      - DeparturesExpectedPersons
+      - DeparturesExpectedVIP
+      - DeparturesActualRooms
+      - DeparturesActualPersons
+      - DeparturesActualVIP
+      - DeparturesInLastHour
+      - ArrivalsInLastHour
+      - ArrivalsTotal
+      - ArrivalsExpectedRooms
+      - ArrivalsExpectedPersons
+      - ArrivalsExpectedVIP
+      - ArrivalsExpectedRoomsMadeToday
+      - ArrivalsExpectedPersonsMadeToday
+      - ArrivalsExpectedVIPMadeToday
+      - ArrivalsActualRooms
+      - ArrivalsActualPersons
+      - ArrivalsActualVIP
+      - ExtendedStaysRooms
+      - ExtendedStaysPersons
+      - ExtendedStaysVIP
+      - DeparturesTotal
+      - EarlyDeparturesRooms
+      - EarlyDeparturesPersons
+      - EarlyDeparturesVIP
+      - DayUseRooms
+      - DayUsePersons
+      - DayUseVIP
+      - WalkInRooms
+      - WalkInPersons
+      - WalkInVIP
+      - CanceledOnArrivalRooms
+      - CanceledOnArrivalPersons
+      - CanceledOnArrivalVIP
+      - ComplimentaryArrivalRooms
+      - ComplimentaryArrivalPersons
+      - ComplimentaryArrivalVIP
+      - ComplimentaryStayoverRooms
+      - ComplimentaryStayoverPersons
+      - ComplimentaryStayoverVIP
+      - ComplimentaryDepartureRooms
+      - ComplimentaryDeparturePersons
+      - ComplimentaryDepartureVIP
+      - HouseUseArrivalVIP
+      - HouseUseStayoverRooms
+      - HouseUseStayoverPersons
+      - HouseUseStayoverVIP
+      - HouseUseDepartureRooms
+      - HouseUseDeparturePersons
+      - HouseUseDepartureVIP
+      - MinAvailableTonightRooms
+      - MaxOccupiedTonightRooms
+      - MaxOccupiedTonightPersons
+      - MaxOccupiedTonightVIP
+      - MaxPercentageOccupiedTonightRooms
+      - BlocksNotPickedUp
+      - IndividualRooms
+      - IndividualPersons
+      - IndividualVIP
+      - GroupAndBlockRooms
+      - GroupAndBlockPersons
+      - GroupAndBlockVIP
+      - RoomRevenue
+      - AverageRoomRevenue
+      - InspectedRooms
+      - InspectedVacant
+      - InspectedAssigned
+      - InspectedOccupied
+      - CleanedRooms
+      - CleanVacant
+      - CleanAssigned
+      - CleanOccupied
+      - DirtyVacant
+      - DirtyAssigned
+      - DirtyOccupied
+      - PickupVacant
+      - PickupAssigned
+      - PickupOccupied
+      - OutOfOrderVacant
+      - OutOfOrderAssigned
+      - OutOfOrderOccupied
+      - OutOfServiceVacant
+      - OutOfServiceAssigned
+      - OutOfServiceOccupied
+      - QueueRooms
+      - TurndownRequired
+      - TurndownNotRequired
+      - TurndownCompletedRequired
+      - AdultsInHouse
+      - ChildrenInHouse
+      - AdultsExpectedCheckedOut
+      - ChildrenExpectedCheckedOut
+      - AdultsDeparted
+      - ChildrenDeparted
+      - InHouseRooms
+      - InHouse
+      - MaxOccupancyPercentage
+      - Stayover
+      - TotalRoomsReserved
+      - RevPar
+      - SkipRooms
+      - SleepRooms
+      - HouseUseArrivalRooms
+      - HouseUseArrivalPersons
+      - AverageCheckInTime
+      - CurrentAveWaitTime
+      - CheckedInsTotal
+      - ExpectedCheckInsTotal
+      - CheckedOutsTotal
+      - ExpectedCheckOutsTotal
+      - ScheduledCheckOutsTotal
+      - RoomMaintenanceResolvedTotal
+      - RoomMaintenanceUnResolvedTotal
+      - PreRegisteredTotal
+      - VIPPreRegisteredTotal
+      - OpenFolioTotal
+      - TurndownTotal
+      - VIPTurndownTotal
+      - VIPGuestsArriving
+      - VIPGuestsDeparting
+      - VIPGuestsTotal
+      - IndividualAdvanceCheckedInCurrent
+      - BlockAdvanceCheckedInCurrent
+      - IndividualAdvanceCheckedInInhouse
+      - BlockAdvanceCheckedInInhouse
+      - IndividualAdvanceCheckedInTotal
+      - BlockAdvanceCheckedInTotal
+      - InHouseBlocksTotal
+      - CancellationsTotal
+      - NewReservationsTotal
+      - ArrivalResvs
+      - ArrivalVIPResvs
+      - ArrivalMemberResvs
+      - ArrivalUnallocResvs
+      - ArrivalManualAssgnResvs
+      - ArrivalAIAssgnResvs
+      - ArrivalAIUpgResvs
+      - ArrivalAIAssgnVIPResvs
+      - ArrivalAIAssgnMemberResvs
+      - ArrivalAIAssgnOverridden
+    hSKStatCategoryCodeType:
+      type: string
+      description: Supported housekeeping statistical category codes.
+      enum:
+      - HotelCode
+    hSKStatSetType:
+      type: object
+      description: Base statistic set holder which defines the span of the statistical data.
+      properties:
+        start:
+          type: string
+          format: date
+          maxLength: 8
+        end:
+          type: string
+          format: date
+          maxLength: 8
+        stat:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/hSKStatType'
+        code:
+          type: string
+    blockStats:
+      type: object
+      description: Response element for block statistics.
+      properties:
+        reports:
+          description: Statistical report - each report is determined by the requested report in the service request criteria.
+          type: array
+          items:
+            $ref: '#/components/schemas/blockStatReportType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    hSKStatCategoryType:
+      type: object
+      description: Defines the codes and corresponding categories for which the data in the other elements has been gathered.
+      properties:
+        statCode:
+          description: Defines where this statistical data is applied.
+          type: string
+          minLength: 0
+          maxLength: 20
+        statCodeClass:
+          description: Classification of the statistical data.
+          type: string
+          minLength: 0
+          maxLength: 40
+        description:
+          type: string
+          minLength: 0
+          maxLength: 2000
+        statSet:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/hSKStatSetType'
+        statCategoryCode:
+          $ref: '#/components/schemas/hSKStatCategoryCodeType'
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    statUnitCategoryType:
+      type: string
+      description: Supported statistical units.
+      enum:
+      - Numeric
+      - Amount
+    hSKStatReportCodeType:
+      type: string
+      description: Supported Housekeeping report codes.
+      enum:
+      - HouseSummary
+      - HouseSummaryMonthToDate
+      - HouseSummaryYearToDate
+      - ReservationActivity
+      - ReservationActivityDaily
+      - ReservationActivityMonthToDate
+      - ReservationActivityYearToDate
+      - ComplimentaryOrHouseUse
+      - DailyProjection
+      - RoomStatus
+      - LastHourStatus
+      - Turndown
+      - InHouse
+      - CheckIns
+      - CheckOuts
+      - AvailableRooms
+      - RoomMaintenance
+      - ReservationStatistics
+      - VIPGuests
+      - AdvanceCheckIn
+      - BlockArrivals
+      - ReservationsCancellationsToday
+      - AIRoomAssignment
+      - CompRouting
+    operaVersion:
+      type: object
+      description: Response for Ping operation.
+      properties:
+        operaVersion:
+          description: Opera version number.
+          $ref: '#/components/schemas/operaVersionNumberType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    operaVersionNumberType:
+      type: string
+      description: Current Opera Version Number
+      minLength: 0
+      maxLength: 40
+    hSKStatType:
+      type: object
+      description: Since the statistical value can be represented in different measure of units, this element will provide a flexible definition for the supported Opera9 statistical units.
+      properties:
+        unitType:
+          description: Unit of measurement or the actual code that defines the value. Eg. CurrencyCode for the Amount Category.
+          type: string
+          minLength: 3
+          maxLength: 3
+        unitValue:
+          description: Statistical value.
+          type: number
+        unitCategory:
+          description: Statistical unit category.
+          $ref: '#/components/schemas/statUnitCategoryType'
+        code:
+          $ref: '#/components/schemas/hSKStatCodeType'
+externalDocs:
+  description: Find out more about Oracle Hospitality
+  url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

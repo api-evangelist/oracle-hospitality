@@ -1,0 +1,3314 @@
+openapi: 3.2.0
+info:
+  title: OPERA Cloud Distribution Shop API
+  description: Oracle Hospitality Distribution Shop is for distribution partners to find properties availability, room-rates offers for a single property or a specific room-rate offer detail..<br /><br /> Compatible with OPERA Cloud release 26.2.0.0<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>
+  version: 26.2.0.0
+  contact:
+    email: hospitality_apis_ww_grp@oracle.com
+  license:
+    name: UPL
+    url: https://opensource.org/licenses/upl
+  termsOfService: https://www.oracle.com/legal/terms.html
+servers:
+- url: /shop/v1
+tags:
+- name: Shop
+paths:
+  /hotels:
+    get:
+      summary: Property Search
+      description: List the availability status and rate range at multiple properties for given list of properties. <p><strong>OperationId:</strong>getProperties</p>
+      operationId: getProperties
+      tags:
+      - Shop
+      parameters:
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-channelCode'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/Accept-Language'
+      - $ref: '#/components/parameters/HotelCodes'
+      - $ref: '#/components/parameters/ArrivalDate'
+      - $ref: '#/components/parameters/DepartureDate'
+      - $ref: '#/components/parameters/Adults'
+      - $ref: '#/components/parameters/Children'
+      - $ref: '#/components/parameters/ChildrenAges'
+      - $ref: '#/components/parameters/RatePlanCodes'
+      - $ref: '#/components/parameters/AccessCode'
+      - $ref: '#/components/parameters/NumberOfUnits'
+      - $ref: '#/components/parameters/RateMode'
+      - $ref: '#/components/parameters/RatePlanCodeMatchOnly'
+      - $ref: '#/components/parameters/RatePlanType'
+      - $ref: '#/components/parameters/AvailableOnly'
+      - $ref: '#/components/parameters/minRate'
+      - $ref: '#/components/parameters/maxRate'
+      - $ref: '#/components/parameters/AlternateOffers'
+      - $ref: '#/components/parameters/CommissionableStatus'
+      - $ref: '#/components/parameters/PromotionCodes'
+      - $ref: '#/components/parameters/CompanyId'
+      - $ref: '#/components/parameters/TravelAgentId'
+      - $ref: '#/components/parameters/SourceId'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: OK
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PropertySearchResponse'
+        '400':
+          description: Request data provided is invalid
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '405':
+          description: Not Allowed
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '406':
+          description: Not Acceptable
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '413':
+          description: Payload Too Large
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '414':
+          description: URI Too Long
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+  /hotels/{hotelCode}/offers:
+    get:
+      summary: Property Offers
+      description: List available offers for a single property. <p><strong>OperationId:</strong>getPropertyOffers</p>
+      operationId: getPropertyOffers
+      tags:
+      - Shop
+      parameters:
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-channelCode'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/Accept-Language'
+      - $ref: '#/components/parameters/HotelCode'
+      - $ref: '#/components/parameters/ArrivalDate'
+      - $ref: '#/components/parameters/DepartureDate'
+      - $ref: '#/components/parameters/Adults'
+      - $ref: '#/components/parameters/Children'
+      - $ref: '#/components/parameters/ChildrenAges'
+      - $ref: '#/components/parameters/RoomTypes'
+      - $ref: '#/components/parameters/RatePlanCodes'
+      - $ref: '#/components/parameters/AccessCode'
+      - $ref: '#/components/parameters/RatePlanType'
+      - $ref: '#/components/parameters/NumberOfUnits'
+      - $ref: '#/components/parameters/RoomTypeMatchOnly'
+      - $ref: '#/components/parameters/RatePlanCodeMatchOnly'
+      - $ref: '#/components/parameters/RateMode'
+      - $ref: '#/components/parameters/RoomAmenity'
+      - $ref: '#/components/parameters/RoomAmenityQuantity'
+      - $ref: '#/components/parameters/IncludeAmenities'
+      - $ref: '#/components/parameters/minRate'
+      - $ref: '#/components/parameters/maxRate'
+      - $ref: '#/components/parameters/AlternateOffers'
+      - $ref: '#/components/parameters/CommissionableStatus'
+      - $ref: '#/components/parameters/PromotionCodes'
+      - $ref: '#/components/parameters/BlockCode'
+      - $ref: '#/components/parameters/RoomViewCodes'
+      - $ref: '#/components/parameters/FetchInstructionsOffers'
+      - $ref: '#/components/parameters/CompanyId'
+      - $ref: '#/components/parameters/TravelAgentId'
+      - $ref: '#/components/parameters/SourceId'
+      - $ref: '#/components/parameters/ValidateItemInventory'
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response object for hotel offers search
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PropertyOffersResponse'
+        '400':
+          description: Request data provided is invalid
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '405':
+          description: Not Allowed
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '406':
+          description: Not Acceptable
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '413':
+          description: Payload Too Large
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '414':
+          description: URI Too Long
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+  /hotels/{hotelCode}/offer:
+    get:
+      summary: Property Get Offer
+      description: Retrieve a single offer by room type and rate plan. Or booking code. <p><strong>OperationId:</strong>getPropertyOffer</p>
+      operationId: getPropertyOffer
+      tags:
+      - Shop
+      parameters:
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-channelCode'
+      - $ref: '#/components/parameters/Accept-Language'
+      - $ref: '#/components/parameters/HotelCode'
+      - $ref: '#/components/parameters/ArrivalDate'
+      - $ref: '#/components/parameters/DepartureDate'
+      - $ref: '#/components/parameters/Adults'
+      - $ref: '#/components/parameters/Children'
+      - $ref: '#/components/parameters/ChildrenAges'
+      - $ref: '#/components/parameters/RoomType'
+      - $ref: '#/components/parameters/RatePlanCode'
+      - $ref: '#/components/parameters/AccessCode'
+      - $ref: '#/components/parameters/RateMode'
+      - $ref: '#/components/parameters/NumberOfUnits'
+      - $ref: '#/components/parameters/BookingCode'
+      - $ref: '#/components/parameters/IncludeAmenities'
+      - $ref: '#/components/parameters/PromotionCodes'
+      - $ref: '#/components/parameters/BlockCode'
+      - $ref: '#/components/parameters/FetchInstructionsOffers'
+      - $ref: '#/components/parameters/CompanyId'
+      - $ref: '#/components/parameters/TravelAgentId'
+      - $ref: '#/components/parameters/SourceId'
+      - $ref: '#/components/parameters/ValidateItemInventory'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response object for property check offer
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/OfferDetailsResponse'
+        '400':
+          description: Request data provided is invalid
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '405':
+          description: Not Allowed
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '406':
+          description: Not Acceptable
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '413':
+          description: Payload Too Large
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '414':
+          description: URI Too Long
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+  /hotels/{hotelCode}/addons:
+    get:
+      summary: Get Property addons
+      description: Retrieve available property add-on offerings, including individual packages and grouped packages.<p><strong>OperationId:</strong>getPropertyAddons</p>
+      operationId: getPropertyAddons
+      tags:
+      - Shop
+      parameters:
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-channelCode'
+      - $ref: '#/components/parameters/Accept-Language'
+      - $ref: '#/components/parameters/HotelCode'
+      - $ref: '#/components/parameters/ArrivalDate'
+      - $ref: '#/components/parameters/DepartureDate'
+      - $ref: '#/components/parameters/Adults'
+      - $ref: '#/components/parameters/Children'
+      - $ref: '#/components/parameters/ChildrenAges'
+      - $ref: '#/components/parameters/NumberOfUnits'
+      - $ref: '#/components/parameters/PackageCodes'
+      - $ref: '#/components/parameters/PackageGroupCodes'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response object for packageAddons
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PropertyPackageAddonsResponse'
+        '400':
+          description: Request data provided is invalid
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '405':
+          description: Not Allowed
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '406':
+          description: Not Acceptable
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '413':
+          description: Payload Too Large
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '414':
+          description: URI Too Long
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+  /hotels/{hotelCode}/calendar:
+    get:
+      summary: Property Calendar
+      description: Lists the lowest available offers as a calendar for a single property for up to 62 days. If no rate filters are provided (no specific rate plan codes, room type codes, or promotion codes), evaluation is limited to the top 20 channel rates based on the configured Channel Rate Order (no iteration over remaining public rates). If rate filters are provided, the getPropertyCalendar retains the existing behavior and evaluates all applicable rates per current logic. <p><strong>OperationId:</strong>getPropertyCalendar</p>
+      operationId: getPropertyCalendar
+      tags:
+      - Shop
+      parameters:
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-channelCode'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/Accept-Language'
+      - $ref: '#/components/parameters/HotelCode'
+      - $ref: '#/components/parameters/ArrivalDateFrom'
+      - $ref: '#/components/parameters/ArrivalDateTo'
+      - $ref: '#/components/parameters/LengthOfStay'
+      - $ref: '#/components/parameters/Adults'
+      - $ref: '#/components/parameters/Children'
+      - $ref: '#/components/parameters/ChildrenAges'
+      - $ref: '#/components/parameters/RatePlanCodes'
+      - $ref: '#/components/parameters/RoomTypes'
+      - $ref: '#/components/parameters/PromotionCodes'
+      - $ref: '#/components/parameters/NumberOfUnits'
+      - $ref: '#/components/parameters/RateMode'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response object for hotel offers search
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PropertyCalendarResponse'
+        '400':
+          description: Request data provided is invalid
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '405':
+          description: Not Allowed
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '406':
+          description: Not Acceptable
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '413':
+          description: Payload Too Large
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '414':
+          description: URI Too Long
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+  /hotels/{hotelCode}/alternateOffers:
+    get:
+      summary: Property Alternate Offers
+      description: Lsts available alternate offers as a calendar for a single property. If no rate filters are provided (no specific rate plan codes, room type codes, access codes, room view codes, or promotion codes), evaluation is limited to the top 20 channel rates based on the configured Channel Rate Order (no iteration over remaining public rates). If any rate filters are provided, the system retains the existing behavior and evaluates all applicable rates per current logic. <p><strong>OperationId:</strong>getPropertyAlternateOffers</p>
+      operationId: getPropertyAlternateOffers
+      tags:
+      - Shop
+      parameters:
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-channelCode'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/Accept-Language'
+      - $ref: '#/components/parameters/HotelCode'
+      - $ref: '#/components/parameters/ArrivalDate'
+      - $ref: '#/components/parameters/AlternateDays'
+      - $ref: '#/components/parameters/LengthOfStay'
+      - $ref: '#/components/parameters/Adults'
+      - $ref: '#/components/parameters/Children'
+      - $ref: '#/components/parameters/ChildrenAges'
+      - $ref: '#/components/parameters/RatePlanCodes'
+      - $ref: '#/components/parameters/RoomTypes'
+      - $ref: '#/components/parameters/NumberOfUnits'
+      - $ref: '#/components/parameters/PromotionCodes'
+      - $ref: '#/components/parameters/RateMode'
+      - $ref: '#/components/parameters/AccessCode'
+      - $ref: '#/components/parameters/RoomViewCodes'
+      - $ref: '#/components/parameters/CompanyId'
+      - $ref: '#/components/parameters/TravelAgentId'
+      - $ref: '#/components/parameters/SourceId'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response object for hotel offers search
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PropertyAlternateOffersResponse'
+        '400':
+          description: Request data provided is invalid
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '405':
+          description: Not Allowed
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '406':
+          description: Not Acceptable
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '413':
+          description: Payload Too Large
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '414':
+          description: URI Too Long
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ExceptionDetail'
+components:
+  parameters:
+    ArrivalDate:
+      name: arrivalDate
+      in: query
+      description: Arrival/Check-in Date
+      required: true
+      x-example: '2021-06-01'
+      schema:
+        type: string
+        format: date
+    Children:
+      name: children
+      in: query
+      description: Number of children
+      required: false
+      x-example: 2
+      schema:
+        type: integer
+        default: 0
+        maximum: 10
+        minimum: 0
+    AlternateOffers:
+      name: alternateOffers
+      in: query
+      description: 'This is supported with ratePlanCodeMatchOnly flag as false: <p> <strong>Always</strong> - return alternate offers </p> <p> <strong>WhenRequestedNotAvailable</strong> - return alternate rates if requested rates are not available </p>'
+      required: false
+      x-example: Always
+      schema:
+        type: string
+        enum:
+        - Always
+        - WhenRequestedNotAvailable
+        default: Always
+    RoomTypeMatchOnly:
+      name: roomTypeMatchOnly
+      in: query
+      description: If true, only room types specified, otherwise public room types too
+      required: false
+      x-example: true
+      schema:
+        type: boolean
+        default: false
+    RoomAmenity:
+      name: roomAmenity
+      in: query
+      description: Id of requested amenity, single element
+      required: false
+      x-example: Baby bed
+      schema:
+        type: string
+    AvailableOnly:
+      name: availableOnly
+      in: query
+      description: If true, only hotels with availability will be returned (except if all of them are unavailable)
+      x-example: true
+      schema:
+        type: boolean
+        default: false
+    ArrivalDateTo:
+      name: arrivalDateTo
+      in: query
+      description: Arrival/Check-in Date To
+      required: true
+      x-example: '2021-06-01'
+      schema:
+        type: string
+        format: date
+    RoomViewCodes:
+      name: roomViewCodes
+      in: query
+      description: Indicates the codes of the room view. Typical values would be "11 for Ocean view", "12 for Pool view" or "16 for Garden View". Refer to OTA List Room View Type (RVT).  </p>
+      required: false
+      x-example:
+      - 11
+      style: form
+      explode: false
+      schema:
+        type: array
+        items:
+          type: string
+          minLength: 1
+          maxLength: 20
+        maxItems: 15
+        minItems: 0
+    RoomTypes:
+      name: roomTypes
+      in: query
+      description: List of Room Type codes
+      required: false
+      x-example:
+      - XA1K
+      - XB1K
+      style: form
+      explode: false
+      schema:
+        type: array
+        items:
+          type: string
+          minLength: 1
+          maxLength: 50
+        maxItems: 15
+        minItems: 0
+    Offset:
+      name: offset
+      in: query
+      description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned. By default, the offset is 0.
+      x-example: 2
+      required: false
+      schema:
+        type: integer
+        default: 0
+    DepartureDate:
+      name: departureDate
+      in: query
+      description: Departure/Check-out Date
+      required: true
+      x-example: '2021-06-07'
+      schema:
+        type: string
+        format: date
+    Accept-Language:
+      name: Accept-Language
+      in: header
+      required: false
+      description: Indicates the natural language and locale that the client prefers
+      x-example: en-GB
+      schema:
+        type: string
+        pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+    RatePlanCodes:
+      name: ratePlanCodes
+      in: query
+      description: List of Rate Plan codes
+      required: false
+      x-example:
+      - XDAILY
+      - XRACK
+      style: form
+      explode: false
+      schema:
+        type: array
+        items:
+          type: string
+          minLength: 1
+          maxLength: 50
+        maxItems: 15
+        minItems: 0
+    ValidateItemInventory:
+      name: validateItemInventory
+      in: query
+      description: If true, offer with a linked package item will be validated against available inventory
+      required: false
+      x-example: true
+      schema:
+        type: boolean
+        default: false
+    authorization:
+      name: authorization
+      description: "Bearer token that needs to be passed which is generated post user\n  authentication"
+      in: header
+      required: false
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of records to return per page. By default, the limit is -1, which returns all the items.
+      x-example: 25
+      required: false
+      schema:
+        type: integer
+        default: -1
+    FetchInstructionsOffers:
+      name: fetchInstructions
+      in: query
+      description: The optional additional information to be included in the response.
+      required: false
+      schema:
+        type: string
+        enum:
+        - PackageDetails
+    RoomType:
+      name: roomType
+      in: query
+      description: 'Room Type '
+      required: false
+      x-example: XA1K
+      schema:
+        type: string
+        maxLength: 50
+        minLength: 1
+    RateMode:
+      name: rateMode
+      in: query
+      required: false
+      x-example: Average
+      description: The rate mode to be applied. It represents a shown rate is highest, average, first night, or most frequent one when there are rate changes during the staty duration.
+      schema:
+        type: string
+        enum:
+        - Highest
+        - Average
+        - Arrival
+        - MostFrequent
+        default: Highest
+    CompanyId:
+      name: companyId
+      description: The account ID associated with a Company profile. It is used to retrieve negotiated rate offers specific to that Company.
+      in: query
+      required: false
+      x-example: 111111
+      schema:
+        type: string
+        maxLength: 50
+        minLength: 1
+    maxRate:
+      name: maxRate
+      in: query
+      description: Maximum base rate in an offer
+      required: false
+      x-example: 24.12
+      schema:
+        type: number
+    x-channelCode:
+      name: x-channelCode
+      in: header
+      description: A code for the channel code that is set up in the Oracle Hospitality Distribution.
+      required: true
+      x-example: CH1
+      schema:
+        type: string
+        maxLength: 50
+        minLength: 1
+    RatePlanCode:
+      name: ratePlanCode
+      in: query
+      description: Rate Plan code
+      required: false
+      x-example: XDAILY
+      schema:
+        type: string
+        maxLength: 50
+        minLength: 1
+    CommissionableStatus:
+      name: commissionableStatus
+      in: query
+      description: What offers to show based on their Commissionable Status <p> <strong>Commissionable</strong> - Return only commisionable offers. </p> <p> <strong>NonCommissionable</strong> - Return only non-commisionable offers.  </p> <p> <strong>Both</strong> - Return commisionable and non-commisionable both offers. </p>
+      required: false
+      x-example: Both
+      schema:
+        type: string
+        enum:
+        - Commissionable
+        - NonCommissionable
+        - Both
+        default: Both
+    RoomAmenityQuantity:
+      name: roomAmenityQuantity
+      in: query
+      description: Quantity of the requested roomAmenity, single element
+      required: false
+      x-example: 1
+      schema:
+        type: integer
+        maximum: 10
+        minimum: 1
+    PromotionCodes:
+      name: promotionCodes
+      in: query
+      description: List of Promotion codes
+      required: false
+      x-example:
+      - PROMO1
+      - PROMO2
+      style: form
+      explode: false
+      schema:
+        type: array
+        items:
+          type: string
+          minLength: 1
+          maxLength: 50
+        maxItems: 15
+        minItems: 0
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: false
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    minRate:
+      name: minRate
+      in: query
+      description: Minimum base rate in an offer
+      required: false
+      x-example: 24.12
+      schema:
+        type: number
+    BlockCode:
+      name: blockCode
+      description: 'A code to retrieve price and availability from OPERA Cloud business block. Search parameters ratePlanCodes, accessCode, ratePlanType, ratePlanCodeMatchOnly will be ignored when blockCode is present. <p>Note: blockCode search parameter is not supported if PMS is connected via OXI interface. </p>'
+      in: query
+      required: false
+      x-example: ABCEVENT0516
+      schema:
+        type: string
+        maxLength: 20
+        minLength: 1
+    RatePlanType:
+      name: ratePlanType
+      in: query
+      description: Rate Plan type
+      required: false
+      x-example: 10
+      schema:
+        type: string
+    x-externalsystem:
+      name: x-externalsystem
+      in: header
+      description: External system code.
+      required: false
+      schema:
+        type: string
+    BookingCode:
+      name: bookingCode
+      description: BookingCode is the concatenation of channel roomTypeCode and channel rate plan code at the offer level
+      in: query
+      required: false
+      x-example: XA1KXDAILY
+      schema:
+        type: string
+        maxLength: 100
+        minLength: 1
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
+    RatePlanCodeMatchOnly:
+      name: ratePlanCodeMatchOnly
+      in: query
+      description: If true, only rate plan code specified, otherwise public rate plan codes too
+      required: false
+      x-example: true
+      schema:
+        type: boolean
+        default: false
+    HotelCode:
+      name: hotelCode
+      in: path
+      description: Hotel Code for a channel
+      required: true
+      x-example: XUSXXYY99
+      schema:
+        type: string
+        maxLength: 50
+        minLength: 1
+    NumberOfUnits:
+      name: numberOfUnits
+      description: Number of rooms to be searched for this availability
+      in: query
+      required: false
+      x-example: 1
+      schema:
+        type: integer
+        default: 1
+        maximum: 10
+        minimum: 1
+    AlternateDays:
+      name: alternateDays
+      in: query
+      description: Number of alternate days before and after the arrival date
+      required: false
+      x-example: 1
+      schema:
+        type: integer
+        format: int32
+        default: 1
+        maximum: 7
+        minimum: 1
+    AccessCode:
+      name: accessCode
+      description: Access code. An alphanumeric code used to unlock and price negotiated rate plans during shopping, subject to channel eligibility. If both accessCode and companyId/travelAgentId/sourceId are provided, accessCode takes precedence and the companyId/travelAgentId/sourceId values are ignored.
+      in: query
+      required: false
+      x-example: ABCD-123
+      schema:
+        type: string
+        maxLength: 50
+        minLength: 1
+    ArrivalDateFrom:
+      name: arrivalDateFrom
+      in: query
+      description: Arrival/Check-in Date From
+      required: true
+      x-example: '2021-06-01'
+      schema:
+        type: string
+        format: date
+    IncludeAmenities:
+      name: includeAmenities
+      in: query
+      description: Indicates to include property amenities in the response
+      x-example: true
+      schema:
+        type: boolean
+        default: false
+    HotelCodes:
+      name: hotelCodes
+      in: query
+      description: List of Hotel Codes
+      required: true
+      x-example:
+      - XUSXXYY99
+      - XBEXXRUCI
+      - HOTEL3
+      style: form
+      explode: false
+      schema:
+        type: array
+        items:
+          type: string
+          minLength: 1
+          maxLength: 50
+        maxItems: 10
+        minItems: 1
+    PackageCodes:
+      name: packageCodes
+      description: List of package codes
+      in: query
+      required: false
+      x-example:
+      - SPA
+      - CRIB
+      style: form
+      explode: false
+      schema:
+        type: array
+        items:
+          type: string
+          minLength: 1
+          maxLength: 20
+        maxItems: 15
+        minItems: 0
+    ChildrenAges:
+      name: childrenAges
+      in: query
+      description: List of Age of the children. Element count must match the number of children
+      required: false
+      x-example:
+      - 12
+      - 14
+      style: form
+      explode: false
+      schema:
+        type: array
+        items:
+          type: integer
+          minimum: 0
+          maximum: 18
+    x-request-id:
+      name: x-request-id
+      description: Unique tracing key e.g. 4664ab3423434a45
+      in: header
+      x-example: 4664ab3423434a45
+      schema:
+        type: string
+    SourceId:
+      name: sourceId
+      description: The account ID associated with a Source profile. It is used to retrieve negotiated rate offers specific to that Source.
+      in: query
+      required: false
+      x-example: 222222
+      schema:
+        type: string
+        maxLength: 50
+        minLength: 1
+    PackageGroupCodes:
+      name: packageGroupCodes
+      description: List of package group codes
+      in: query
+      required: false
+      x-example:
+      - BRPACK
+      style: form
+      explode: false
+      schema:
+        type: array
+        items:
+          type: string
+          minLength: 1
+          maxLength: 20
+        maxItems: 15
+        minItems: 0
+    LengthOfStay:
+      name: lengthOfStay
+      in: query
+      description: Length of stay, in days. The maximum permitted value is 14.
+      required: false
+      x-example: 1
+      schema:
+        type: integer
+        format: int32
+        default: 1
+        minimum: 1
+    TravelAgentId:
+      name: travelAgentId
+      description: The IATA number/account ID associated with a Travel Agent profile. It is used to retrieve negotiated rate offers specific to that Travel Agent.
+      in: query
+      required: false
+      x-example: 222222
+      schema:
+        type: string
+        maxLength: 50
+        minLength: 1
+    Adults:
+      name: adults
+      in: query
+      description: Number of adults
+      required: false
+      x-example: 1
+      schema:
+        type: integer
+        default: 1
+        minimum: 1
+  schemas:
+    OfferTotalTypeWithTaxes:
+      description: Information on the total cost for the entire stay, including taxes.
+      type: object
+      properties:
+        amountBeforeTax:
+          description: The total amount not including any associated tax (e.g., sales tax, VAT, GST or any associated tax).
+          type: number
+          example: 100.5
+        amountAfterTax:
+          description: The total amount including all associated taxes (e.g., sales tax, VAT, GST or any associated tax).
+          type: number
+          example: 123.2
+        currencyCode:
+          $ref: '#/components/schemas/CurrencyCodeType'
+          example: USD
+        taxes:
+          description: A collection of taxes.
+          $ref: '#/components/schemas/OfferTaxesType'
+    HotelAvailabilityStatus:
+      type: string
+      enum:
+      - AvailableForSale
+      - NoAvailability
+      - NotFound
+      - OtherAvailable
+      description: 'Availability status of the property.
+
+        AvailableForSale - Property has availability based on criteria requested
+
+        NoAvailability - Property has no availability based on criteria requested
+
+        NotFound - Property is invalid or can''t be located
+
+        OtherAvailable - Other available property
+
+        '
+    PackageAmountType:
+      type: object
+      description: Base charge related to a package
+      properties:
+        base:
+          description: List of date ranges within the stay and corresponding charges.
+          $ref: '#/components/schemas/PackageBaseType'
+    OfferAvailabilityStatus:
+      type: string
+      enum:
+      - AvailableForSale
+      - NoAvailability
+      description: 'Indicates the availability status of the offer.
+
+        AvailableForSale - Offer is available for sale
+
+        NoAvailability - Offer is not available for sale
+
+        '
+    PackageBaseType:
+      description: The daily rate of the package.
+      type: object
+      properties:
+        amountBeforeTax:
+          description: The package rate not including any associated taxes (e.g., sales tax, VAT, GST or any associated taxes).
+          type: number
+          example: 100.5
+        amountAfterTax:
+          description: The package rate including all associated taxes (e.g., sales tax, VAT, GST or any associated tax).
+          type: number
+          example: 123.2
+        currencyCode:
+          $ref: '#/components/schemas/CurrencyCodeType'
+          example: USD
+    PropertyAlternateOffersRoomStay:
+      type: object
+      properties:
+        propertyInfo:
+          $ref: '#/components/schemas/PropertyAlternateOffersPropertyInfo'
+        availability:
+          $ref: '#/components/schemas/HotelAvailabilityStatus'
+        offers:
+          description: List of alternate offers starting from arrival date provided on the request, availability status of the rate, and rate detail.
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferAlternateOffersItem'
+    DistanceUnit:
+      description: Distance measurement unit for the distance from the property to the alternate property.
+      type: string
+      enum:
+      - Kilometers
+      - Miles
+    OfferDepositPolicyPaymentCodeDescriptionType:
+      type: object
+      properties:
+        paymentCode:
+          description: The code of the the payment type.
+          type: string
+          pattern: '''[A-Z0-9.]{0,20}'''
+          minLength: 0
+          maxLength: 20
+          example: AX
+        paymentDescription:
+          description: Description of the payment type.
+          type: string
+          minLength: 0
+          maxLength: 256
+          example: Bank Card Name
+    Location:
+      description: Details on the location of the property.
+      type: object
+      properties:
+        propertyLocation:
+          description: Describes the location of the property.
+          type: string
+          maxLength: 4000
+          example: ABC hills
+    PropertyCalendarPropertyInfo:
+      description: Property information
+      type: object
+      properties:
+        hotelCode:
+          description: A unique identifier for the property.
+          type: string
+          example: XUSXXYY99
+        hotelName:
+          description: Name of the property.
+          type: string
+          example: Resort1
+        chainCode:
+          description: If the property is part of the chain, the associated chain code.
+          type: string
+          example: CHAIN1
+        isAlternate:
+          description: When true indicates the property returned is an alternate property.
+          type: boolean
+          example: true
+    PromotionCodeItem:
+      type: object
+      properties:
+        code:
+          description: Promotion code associated with the rate plan.
+          type: string
+          example: EARLYBIRD
+    PackageInventoryItemType:
+      type: object
+      properties:
+        code:
+          description: Item code
+          type: string
+          minLength: 0
+          maxLength: 20
+          example: ABC123
+        quantity:
+          description: Quantity of the inventory item.
+          type: integer
+          example: 1
+    OfferTaxType:
+      type: object
+      description: Applicable tax element. This element allows for both percentages and flat amounts. If one field is used, the other should be zero since logically, taxes should be calculated in only one of the two ways.
+      properties:
+        description:
+          description: Description of the tax or fee.
+          type: string
+          minLength: 0
+          maxLength: 2000
+          example: Country generic tax
+        code:
+          description: The code for the tax.
+          type: string
+          minLength: 0
+          maxLength: 20
+          example: VAT
+        amount:
+          description: The total tax amount of the entire stay for the specific tax code.
+          type: number
+          example: 30
+        currencyCode:
+          $ref: '#/components/schemas/CurrencyCodeType'
+          example: USD
+        codeType:
+          description: 'Classification of the code: Tax or Fee.'
+          type: string
+          enum:
+          - Tax
+          - Fee
+          example: Tax
+    OfferPaymentCodeDescriptionType:
+      type: object
+      description: Payment type entity which contains a code and description
+      properties:
+        paymentCode:
+          description: The code of the the payment type.
+          type: string
+          pattern: '''[A-Z0-9.]{0,20}'''
+          minLength: 0
+          maxLength: 20
+          example: AX
+        cardType:
+          description: The code of the the payment type.
+          type: string
+          pattern: '''[A-Z0-9.]{0,20}'''
+          minLength: 0
+          maxLength: 20
+          example: AX
+        paymentDescription:
+          description: Description of the payment type.
+          type: string
+          minLength: 0
+          maxLength: 256
+          example: Bank Card Name
+    OfferDepositPolicyType:
+      description: The deposit rule associated to the deposit policy.
+      type: object
+      properties:
+        policyCode:
+          description: The code for the deposit rule.
+          type: string
+          maxLength: 20
+          example: DEP_POLICY001
+        deadline:
+          description: The deadline associated to the deposit rule.
+          $ref: '#/components/schemas/OfferDepositPolicyDeadlineType'
+          example:
+            offsetTimeUnit: Day
+            offsetDropTime: BeforeArrival
+            offsetUnitMultiplier: 5
+        basisType:
+          description: Policy basis type which can be Full or Flat Amount, or percentage of/or room nights.
+          $ref: '#/components/schemas/PolicyBasisType'
+          example: NightPercentage
+        amount:
+          description: The total amount of deposit due.
+          type: number
+          example: 55.21
+        taxInclusive:
+          description: When true the deposit amount due includes taxes.
+          type: boolean
+          example: true
+        nonRefundable:
+          description: When true the deposit amount is non-refundable.
+          type: boolean
+          example: true
+    AdditionalDetails:
+      type: object
+      description: Additional information related to the rate plan.
+      properties:
+        ratePlanMatches:
+          type: boolean
+          description: When true indicates there is a match between the rate plan and the requested parameters (ratePlanCode, accessCode, ratePlanType, accountId).
+        value:
+          description: Parameter used to indicate the rate plan match.
+          type: string
+          enum:
+          - RatePlanCode
+          - AccessCode
+          - RatePlanType
+          - AccountId
+    CompassDirection:
+      type: string
+      enum:
+      - N
+      - NE
+      - E
+      - SE
+      - S
+      - SW
+      - W
+      - NW
+      description: "Relative direction from the property to the alternate property.\nNorth, West, South, East \nN: North, W: West, S: South, E: East, NW: North West, NE: North East, SW: South West, SE: South East\n"
+    Occupancy:
+      type: object
+      description: Details on the occupancy of the room type.
+      properties:
+        minOccupancy:
+          description: The minimum number of individuals allowed in the room type.
+          type: integer
+          format: int32
+          minimum: 0
+          example: 2
+        maxOccupancy:
+          description: The maximum number of individuals allowed in the room type.
+          type: integer
+          format: int32
+          minimum: 0
+          example: 8
+        maxAdultOccupancy:
+          description: The maximum number of adults allowed in the room type.
+          type: integer
+          format: int32
+          minimum: 0
+          example: 4
+        maxChildOccupancy:
+          description: The maximum number of children allowed in the room type.
+          type: integer
+          format: int32
+          minimum: 0
+          example: 3
+    Restriction:
+      type: object
+      description: Holds restriction information that is restricting offer from being available
+      properties:
+        restrictionType:
+          type: string
+          description: 'Type of restriction. <p> Closed: The offer is not restricted to be available.  </p> <p> ClosedForArrival: Offer is not available with arrival date with this restriction. </p> <p> ClosedForDeparture: Offer is not  available with departure date with this restriction. </p> <p> MinimumStayThrough: Offer duration falls in to this restriction date is not available if minimum number of nights less than set restriction nights. Example if minimum stay through is 2, the offer is not available for less than 2 nights stay. </p> <p> MaximumStayThrough: MaximumStayThrough: Offer duration falls in to this restriction date is not available if maximum number of nights are greater than set restriction nights. Example if maximum stay through is 10, the offer is not available for greater than 10 nights stay. </p> <p> MinimumAdvancedBooking: Offer is not available if arrival date and booking date window is less than this restriction setting. </p> <p> MaximumAdvancedBooking: Offer is not available if arrival date and booking date window is greater than this restriction setting. </p> <p> LOSNotAvailable: If the offer arrival date has this restriction, the offer is available for the duration where length of stay is not restricted. Example if length of stay not available set to Open, close, close, open, open, close, open. Offer arrival date with this restriction is available for number of nights, 1, 4,5, 7, and onwards.</p>'
+          enum:
+          - Closed
+          - ClosedForArrival
+          - ClosedForDeparture
+          - MinimumStayThrough
+          - MaximumStayThrough
+          - MinimumLengthOfStay
+          - MaximumLengthOfStay
+          - MinimumAdvancedBooking
+          - MaximumAdvancedBooking
+          - LOSNotAvailable
+          example: MinimumLengthOfStay
+        restrictionValue:
+          type: integer
+          description: The specific number of days for the selected restriction. This field applies to restriction type MinimumStayThrough, MaximumStayThrough, MinimumLengthOfStay, MaximumLengthOfStay, MinimumAdvancedBooking, and MaximumAdvancedBooking only.
+          example: 2
+    OfferRoomAmenityAvailabilityStatus:
+      type: string
+      enum:
+      - AvailableForSale
+      - NoAvailability
+      description: 'Indicates the availability status of the room amenity.
+
+        AvailableForSale - Room amenity is available for sale
+
+        NoAvailability - Room amenity is not available for sale
+
+        '
+    Url:
+      type: object
+      properties:
+        url:
+          description: The url or internet web address.
+          type: string
+    OfferMinMaxTotalType:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/OfferTotalType'
+      - type: object
+        properties:
+          rateMode:
+            $ref: '#/components/schemas/OfferRateMode'
+          isCommissionable:
+            description: When true indicates the rate plan is commissionable.
+            type: boolean
+            example: true
+          hasRateChange:
+            description: When true indicates there is a rate change over the course of a multiple night stay.
+            type: boolean
+            default: false
+            example: false
+    OfferTaxesType:
+      type: object
+      description: A collection of taxes.
+      properties:
+        tax:
+          description: An individual tax.
+          type: array
+          maxItems: 99
+          items:
+            $ref: '#/components/schemas/OfferTaxType'
+        amount:
+          description: The total tax amount.
+          type: number
+          example: 25
+        currencyCode:
+          $ref: '#/components/schemas/CurrencyCodeType'
+          example: USD
+        totalTax:
+          description: Total of all taxes.
+          type: number
+          example: 23.79
+        totalFees:
+          description: Total of all fees.
+          type: number
+          example: 25
+        hotelTaxFeeDescriptions:
+          type: array
+          description: Hotel Tax / Fee Descriptions
+          items:
+            type: object
+            properties:
+              description:
+                type: string
+                example: 9% City Occupancy Tax
+    OfferDetailsPropertyInfo:
+      description: Property information
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/PropertyOffersPropertyInfo'
+      - type: object
+        properties:
+          generalInformation:
+            description: General information about the property.
+            type: object
+            $ref: '#/components/schemas/GeneralInformation'
+          communications:
+            description: The contact information for the property.
+            type: object
+            $ref: '#/components/schemas/Communications'
+          transportations:
+            description: List of transportation services that are available to and from the property.
+            type: array
+            items:
+              $ref: '#/components/schemas/Transportation'
+          direction:
+            description: Details on directions from and to the property.
+            type: object
+            $ref: '#/components/schemas/Direction'
+          location:
+            description: Details on the location of the property.
+            type: object
+            $ref: '#/components/schemas/Location'
+    CancelPolicyDeadlineType:
+      description: The deadline associated to the cancellation rule.
+      type: object
+      properties:
+        absoluteDeadline:
+          description: The date and time the cancellation rule will take effect.
+          type: string
+          format: date-time
+          example: '2021-04-01T15:46:40.134Z'
+        offsetFromArrival:
+          description: The number of days before the arrival date up to which the rate plan may be cancelled without penalty.
+          type: integer
+          example: 5
+        offsetFromBookingDate:
+          description: The number of days after the booking date up to which the rate plan may be cancelled without penalty.
+          type: integer
+          example: 5
+    OfferGuaranteePolicy:
+      type: object
+      description: Policy for guaranteeing reservation.
+      properties:
+        guaranteeCode:
+          description: The code of the guarantee type.
+          type: string
+          example: GX
+        guaranteeType:
+          description: 'The guarantee type associated with the guarantee code. PMT Valid values: 5 = Credit Card, 8 = Deposit, 19 = Travel agency IATA number, 22 = Frequent guest, 38 = None'
+          type: string
+          example: '5'
+        description:
+          description: Description of the guarantee type.
+          type: string
+          example: Credit Card Guaranteed
+        paymentTypes:
+          description: List of payment types that can be used to guarantee the rate plan.
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferPaymentCodeDescriptionType'
+        policyRequirements:
+          description: Additional requirement for the payment policy.
+          type: object
+          $ref: '#/components/schemas/GuaranteePolicyRequirements'
+        onHold:
+          description: When true the guarantee type is used to only hold and not guarantee the rate plan, works with releaseTime.
+          type: boolean
+          example: false
+        releaseTime:
+          description: Time till which the non-guaranteed or on hold  rate plan will be held.
+          type: string
+          pattern: ^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$
+          example: '22:00'
+    PropertyOffersResponse:
+      type: object
+      properties:
+        roomStays:
+          description: List of  available offers at the property including property information, availability status of the property, room types and rate plans information.
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyOffersRoomStay'
+    PostingRhythmType:
+      type: string
+      description: 'The posting frequency of the package element or package group associated to the rate plan.
+
+        EveryNight - Package charge posted every night of the stay
+
+        ArrivalNight - Package charge posted only on arrival night
+
+        EveryXNightsStartingNightY - Package charge posted every X nights, beginning the Y night of stay
+
+        CertainNightsOfTheWeek - Package charge posted on certain night of the stay determined by the property
+
+        LastNight - Package charge posted only on the last night of the stay
+
+        EveryNightExceptArrivalNight - Package charge posted on all nights of the stay except the arrival night
+
+        EveryNightExceptLast - Package charge posted on all nights of the stay except the last night
+
+        EveryNightExceptFirstAndLast - Package posted on all nights of the stay except the first and last nights of the stay
+
+        CustomStaySchedule - Package charge posted on stays determined by the property
+
+        CustomNightSchedule - Package charge posted on nights of the stay determined by the property
+
+        FloatingAllowancePerStay - Allows for the package allowance to be consumed at anytime during the stay
+
+        TicketPosting - Package charge posted immediately when a successful response is received back from the ticketing vendor (requires interface with a vendor)
+
+        '
+      enum:
+      - EveryNight
+      - ArrivalNight
+      - EveryXNightsStartingNightY
+      - CertainNightsOfTheWeek
+      - LastNight
+      - EveryNightExceptArrivalNight
+      - EveryNightExceptLast
+      - EveryNightExceptFirstAndLast
+      - CustomStaySchedule
+      - CustomNightSchedule
+      - FloatingAllowancePerStay
+      - TicketPosting
+    PackageRatesType:
+      description: Details on the package of the offer.
+      type: object
+      properties:
+        rates:
+          description: List of date ranges within the stay and corresponding charges.
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/OfferDateRange'
+            - $ref: '#/components/schemas/PackageAmountType'
+    PropertyOffersRoomType:
+      type: object
+      description: Room Type information
+      properties:
+        availabilityStatus:
+          type: object
+          $ref: '#/components/schemas/OfferRoomTypeAvailabilityStatus'
+        roomType:
+          description: The code for the room type.
+          type: string
+          example: XA1K
+        hotelRoomType:
+          description: A room type code for a hotel.
+          type: string
+        description:
+          description: Description of the room type.
+          type: array
+          items:
+            type: string
+            example: Deluxe King Room on my Channel
+        roomName:
+          description: Name of the room type.
+          type: string
+          example: 102
+        roomCategory:
+          description: Room category with which the room type is associated.
+          type: string
+          example: SUITE
+        roomAmenities:
+          description: List of amenities for the room type.
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyOffersRoomAmenity'
+        roomViewCode:
+          description: The code of view the room type offers.
+          type: string
+          example: 11
+        roomViewType:
+          description: The type of view the room type offers.
+          type: string
+          example: Ocean view
+        roomPrimaryBedType:
+          description: The primary bed type for the room type.
+          type: string
+        adultOccupancyMatch:
+          description: When true the room type matches the desired number of adult occupants.
+          type: boolean
+          example: false
+        childOccupancyMatch:
+          description: When true the room type matches the desired number of child occupants.
+          type: boolean
+          example: false
+        numberOfUnits:
+          description: The number of units for the room type.
+          type: integer
+          example: 1
+        nonSmokingInd:
+          description: When true the room type is non-smoking.
+          type: boolean
+          example: true
+        occupancy:
+          description: Details on the occupancy of the room type.
+          type: object
+          $ref: '#/components/schemas/Occupancy'
+        webDescription:
+          description: Detailed description of the Room Type.
+          type: string
+          maxLength: 2000
+    PropertySearchPropertyInfo:
+      description: Property information
+      type: object
+      properties:
+        hotelCode:
+          description: A unique identifier for the property.
+          type: string
+          example: XUSXXYY99
+        hotelName:
+          description: Name of the property.
+          type: string
+          example: Resort1
+        chainCode:
+          description: If the property is part of the chain, the associated chain code.
+          type: string
+          example: CHAIN1
+        isAlternate:
+          description: When true indicates the property returned is an alternate property.
+          type: boolean
+          example: true
+    deepLink:
+      type: object
+      description: Represents an book url.
+      properties:
+        deepLinkURL:
+          description: The book URL (hyperlink to the image).
+          type: string
+          minLength: 0
+    PropertyPackageInventoryItem:
+      type: object
+      properties:
+        code:
+          type: string
+          example: BRKFAST
+          minLength: 1
+          maxLength: 20
+        description:
+          type: string
+          example: Breakfast for two
+          minLength: 0
+          maxLength: 200
+        quantity:
+          type: integer
+          example: 4
+    OfferDetailsRoomStay:
+      description: Room stay information with all details per room per rate
+      type: object
+      properties:
+        propertyInfo:
+          $ref: '#/components/schemas/OfferDetailsPropertyInfo'
+        availability:
+          $ref: '#/components/schemas/HotelAvailabilityStatus'
+        roomType:
+          $ref: '#/components/schemas/OfferDetailsRoomType'
+        ratePlan:
+          $ref: '#/components/schemas/OfferDetailsRatePlan'
+        offer:
+          $ref: '#/components/schemas/Offer'
+    PolicyOffsetType:
+      type: object
+      description: Deposit deadline, relative.
+      properties:
+        offsetUnitMultiplier:
+          description: The number of days before the arrival date when the deposit is due.
+          type: integer
+          example: 5
+        offsetTimeUnit:
+          description: Time unit used to define the rule.
+          $ref: '#/components/schemas/OffsetTimeUnit'
+          example: Day
+    OfferPolicyRevenueType:
+      description: The revenue type the policy is associated to.
+      type: string
+      enum:
+      - Rooms
+    PropertyOffersPropertyInfo:
+      description: Property information
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/PropertySearchPropertyInfo'
+      - type: object
+        properties:
+          address:
+            description: Address Details such as city, state, country, postal code etc.
+            type: object
+            $ref: '#/components/schemas/Address'
+          distance:
+            description: Distance from the property to the alternate property.
+            type: object
+            $ref: '#/components/schemas/AlternatePropertyDistance'
+          propertyAmenities:
+            description: List of amenities offered at the property.
+            type: array
+            items:
+              $ref: '#/components/schemas/PropertyOffersHotelAmenity'
+          pointOfInterest:
+            description: List of locations near the property.
+            type: array
+            items:
+              $ref: '#/components/schemas/OfferPointOfInterest'
+          marketingMessage:
+            type: string
+            description: Marketing text information for the property.
+            example: Thank you for choosing our property.
+    OfferRateMode:
+      type: string
+      enum:
+      - Highest
+      - Average
+      - Arrival
+      - MostFrequent
+      description: 'Type of rate returned, useful on a request for multiple nights stay where multiple rates may apply during the stay.
+
+        Highest - The highest rate for the stay will be returned
+
+        Average - The average rate for the stay will be returned
+
+        Arrival - The first night''s rate for the stay will be returned
+
+        MostFrequent - The rate that occurs the highest number of times for the stay will be returned
+
+        '
+      example: Average
+    OfferDetailsRoomType:
+      description: Details of the room type selected during the request including room type information, availability status of the room type, and room amenities.
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/PropertyOffersRoomType'
+      - type: object
+    OfferCancellationPolicyType:
+      description: The cancellation rule associated to the cancellation policy.
+      type: object
+      properties:
+        policyCode:
+          description: The code for the cancellation rule.
+          type: string
+          maxLength: 20
+          example: POLICY001
+        deadline:
+          description: The deadline associated to the cancellation rule.
+          $ref: '#/components/schemas/CancelPolicyDeadlineType'
+          example:
+            absoluteDeadline: '2021-04-01T15:46:40.134Z'
+            offsetUnitMultiplier: 5
+        amountPercent:
+          description: The method used to compute the penalty associated to the cancellation rule.
+          $ref: '#/components/schemas/CancelPolicyAmountPercentType'
+          example:
+            basisType: FlatAmount
+            amount: 500
+            percent: 0
+        penaltyDescription:
+          description: Description of the cancellation rule.
+          type: string
+          example: Cancellation policy description in English
+      required:
+      - policyCode
+      - deadline
+      - amountPercent
+      - penaltyDescription
+    OfferPackage:
+      type: object
+      description: Package code details applied to an offer rate plan.
+      properties:
+        code:
+          description: The code of the package element or package group associated to the rate plan.
+          type: string
+          minLength: 0
+          maxLength: 20
+          example: PC1
+        description:
+          description: Description of the package element or package group associated to the rate plan.
+          type: string
+          minLength: 0
+          maxLength: 20
+          example: Package Code Des 1
+        postingRhythm:
+          $ref: '#/components/schemas/PostingRhythmType'
+        calculationRule:
+          type: string
+          description: The price calculation rule for this package.
+          enum:
+          - FlatRate
+          - PerPerson
+          - PerAdult
+          - PerChild
+          - PerRoom
+          example: FlatRate
+        includedInRate:
+          description: The package price is added to the room rate. DEPRECATED AND WILL BE REMOVED IN FUTURE VERSIONS
+          type: boolean
+          example: false
+        addToRate:
+          description: The package price is added to the room rate.
+          type: boolean
+          example: false
+        addRateSeparateLine:
+          description: The package price is printed on separate line of the folio. DEPRECATED AND WILL BE REMOVED IN FUTURE VERSIONS
+          type: boolean
+          example: true
+        printSeparateLine:
+          description: The package price is printed on separate line of the folio.
+          type: boolean
+          example: true
+        quantity:
+          description: Quantity of the package code included in the rate plan.
+          type: integer
+          example: 1
+        total:
+          description: Total amount of the package.
+          items:
+            $ref: '#/components/schemas/OfferTotalType'
+        inventoryItems:
+          type: array
+          description: Package Code Inventory Items type.
+          items:
+            $ref: '#/components/schemas/PackageInventoryItemType'
+        packageGroups:
+          type: array
+          description: Indicates if a package is part of a Package Group bundle.
+          items:
+            $ref: '#/components/schemas/PackageGroupType'
+    CurrencyCodeType:
+      type: string
+      description: The code used for the local currency of the property. ISO 4217 currency code
+      pattern: '[A-Z]{3}'
+      minLength: 3
+      maxLength: 3
+      example: USD
+    PropertyOffersRoomAmenity:
+      type: object
+      properties:
+        roomAmenity:
+          description: The code for an amenity offered with the room type.
+          type: string
+        description:
+          description: Description of the amenity for the room type.
+          type: string
+        availabilityStatus:
+          $ref: '#/components/schemas/OfferRoomAmenityAvailabilityStatus'
+        quantity:
+          description: The number of amenities within the room amenity code.
+          type: integer
+        includeInRate:
+          description: When true indicates if the room amenity is included with the room rate.
+          type: boolean
+        confirmable:
+          description: When true indicates there is a need to contact the property to confirm the availability of the room amenity.
+          type: boolean
+    BasicAmountPercentType:
+      type: object
+      properties:
+        nights:
+          description: The number of nights of the hotel stay used to calculate the cancellation amount when basis type is nights.
+          type: integer
+          example: 2
+        percent:
+          description: The percentage of the stay used to calculate the cancellation amount when basis type is Percentage or NightPercentage.
+          type: number
+          format: double
+          example: 50
+        amount:
+          description: The total amount of the cancellation penalty.
+          type: number
+          example: 540
+        basisType:
+          $ref: '#/components/schemas/PolicyBasisType'
+          description: Policy basis type which can be Full or Flat Amount, or percentage of/or room nights.
+          example: NightPercentage
+    GuaranteeRequirementType:
+      type: string
+      description: The guarantee requirement for the rate plan. <p> GuaranteeRequired - Required guarantee such as credit card, IATA number, etc. </p> <p> Deposit -  Deposit is required </> <p>  None -  No guarantee or deposit is required.
+      enum:
+      - GuaranteeRequired
+      - Deposit
+      - None
+    OfferAdditionalGuestAmountType:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/OfferTotalType'
+      - type: object
+        properties:
+          ageQualifyingCode:
+            $ref: '#/components/schemas/OfferAgeQualifyingCodeEnum'
+    PropertyAlternateOffersPropertyInfo:
+      description: Property information
+      type: object
+      properties:
+        hotelCode:
+          description: A unique identifier for the property.
+          type: string
+          example: XUSXXYY99
+        hotelName:
+          description: Name of the property.
+          type: string
+          example: Resort1
+        chainCode:
+          description: If the property is part of the chain, the associated chain code.
+          type: string
+          example: CHAIN1
+    Phone:
+      type: object
+      properties:
+        phoneTechType:
+          description: The ype of technology associated with the telephone number.
+          type: string
+        phoneLocationType:
+          description: 'Describes the location of the phone. '
+          type: string
+        phoneNumber:
+          description: The phone number assigned to a specific location.
+          type: string
+    OfferRatePlanCommission:
+      description: Information on commission rate associated to the rate plan.
+      type: object
+      properties:
+        percentage:
+          description: Commission rate in percentage associated to the rate plan.
+          type: number
+          example: 10.2
+    OfferDateRange:
+      type: object
+      description: Date range information
+      properties:
+        start:
+          description: The first night of the stay where the charge will be applied.
+          type: string
+          format: date
+          example: '2021-06-01'
+        end:
+          description: The last night of the stay where the charge will be applied.
+          type: string
+          format: date
+          example: '2021-06-05'
+    GuaranteePolicyRequirements:
+      description: Additional requirement for the payment policy.
+      type: object
+      properties:
+        travelAgent:
+          description: When true a valid travel agent ID is required for the guarantee type.
+          type: boolean
+          example: false
+        company:
+          description: When true a valid company ID is required for the guarantee type.
+          type: boolean
+          example: false
+        creditCard:
+          description: When true a valid credit card is required for the guarantee type.
+          type: boolean
+          example: true
+        deposit:
+          description: When true a deposit is required for the guarantee type.
+          type: boolean
+          example: true
+    PackageGroupType:
+      type: object
+      properties:
+        code:
+          description: Package group Code
+          type: string
+          minLength: 1
+          maxLength: 20
+          example: PKGROUP1
+        description:
+          description: Package group description
+          type: string
+          minLength: 1
+          maxLength: 2000
+          example: Package group 1
+    PolicyBasisType:
+      type: string
+      description: 'The basis type used to compute the amount due.
+
+        Nights -The  amount is based by the number of nights specified
+
+        Percentage - The  amount is based on a percentage of the entire stay
+
+        NightPercentage - The  amount is based on a percentage of the first night''s rate
+
+        FlatAmount - The  amount is based on exact amount specified
+
+        FullAmount - The  amount is the full amount of the entire stay
+
+        '
+      enum:
+      - Nights
+      - Percentage
+      - NightPercentage
+      - FlatAmount
+      - FullAmount
+    PropertyPackageGroup:
+      type: object
+      properties:
+        code:
+          type: string
+          example: MEALPLAN
+          minLength: 1
+          maxLength: 20
+        description:
+          type: string
+          example: All inclusive meals - Breakfast, lunch, dinner
+          minLength: 0
+          maxLength: 200
+        packageList:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyPackageListItem'
+        rateInformation:
+          description: Details on the package of the offer.
+          type: object
+          $ref: '#/components/schemas/PackageRatesType'
+        total:
+          description: Information on the total cost of package for the entire stay, including taxes.
+          $ref: '#/components/schemas/PackageTotalType'
+    PropertyPackageAddonsResponse:
+      description: Package Addons Response
+      type: object
+      properties:
+        addons:
+          description: List of add-on packages and package groups.
+          type: array
+          items:
+            type: object
+            properties:
+              packages:
+                description: Collection of the returned Packages
+                type: array
+                items:
+                  $ref: '#/components/schemas/PropertyPackage'
+              packageGroups:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PropertyPackageGroup'
+    OfferDetailsRatePlan:
+      description: Details of the rate plan selected during the request including rate plan information, availability status of the rate plan, and commission.
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/PropertyOffersRatePlan'
+    OfferRateTimeUnit:
+      description: Time unit used to define the rate of the rate plan.
+      type: string
+      enum:
+      - Day
+      example: Day
+    OfferRateRange:
+      type: object
+      description: Rate range information
+      allOf:
+      - $ref: '#/components/schemas/OfferDateRange'
+      - $ref: '#/components/schemas/OfferTotalType'
+      - type: object
+        properties:
+          rateTimeUnit:
+            description: Time unit used to define the rate of the rate plan.
+            $ref: '#/components/schemas/OfferRateTimeUnit'
+    Description:
+      type: object
+      description: Multi line description of the rate plan.
+      properties:
+        line1:
+          description: First line of rate plan description.
+          type: string
+        line2:
+          description: Second line of rate plan description.
+          type: string
+        line3:
+          description: Third line of rate plan description.
+          type: string
+        detailedDescription:
+          description: Detailed information about the rate plan.
+          type: string
+    PropertySearchResponse:
+      description: Property Search Response
+      type: object
+      properties:
+        roomStays:
+          description: List of properties including property information, availability status, and rate range for a given availability request.
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertySearchRoomStay'
+    OfferRatePlanMealPlanType:
+      type: string
+      enum:
+      - Breakfast
+      - Lunch
+      - Dinner
+      - AllInclusive
+      description: Type of meal plan the rate plan includes - DEPRECATED AND WILL BE REMOVED IN FUTURE VERSIONS
+    OfferRatePlanMealType:
+      type: string
+      enum:
+      - Breakfast
+      - Lunch
+      - Dinner
+    OfferPointOfInterest:
+      type: object
+      description: The point of interest for guests to get to the hotel.
+      properties:
+        name:
+          type: string
+          description: The name of the point of interest.
+          example: Dallas airport, Park
+        pointOfInterestType:
+          type: string
+          description: The point of interest type available near the property.
+          example: AIRPORT
+          enum:
+          - AIRPORT
+          - ATTRACTIONS
+        description:
+          description: Description for the point of interest.
+          type: string
+        airportCode:
+          description: The unique 3 letter IATA code to identify the airport near the property.
+          type: string
+          example: DAL
+        distance:
+          description: Distance  from the point of interest to the property.
+          type: number
+          format: double
+          example: 6
+        distanceUnit:
+          description: Distance measurement unit for the distance from  the point of interest to the property, or from the property to the point of interest.
+          type: string
+          example:
+          - Kilometers
+          - Miles
+        attractionDirection:
+          description: 'Relative direction from the point of interest to the property.
+
+            North, West, South, East
+
+            N: North, W: West, S: South, E: East, NW: North West, NE: North East, SW: South West, SE: South East
+
+            '
+          type: string
+          example: N
+          enum:
+          - N
+          - W
+          - S
+          - E
+          - NW
+          - NE
+          - SW
+          - SE
+        transportation:
+          description: List of transportation types available from  the point of interest to the property, or from the property to the point of interest.
+          type: array
+          items:
+            type: string
+          example:
+          - Taxi
+          - Shuttle
+        directionDescription:
+          description: Description on how to get from the point of interest to the property, or from the property to the point of interest.
+          type: string
+          example: Free text to describe route from property to attraction
+        drivingTime:
+          description: The driving time it will take to get from point of interest to the property.
+          type: number
+          format: double
+          example: 3.5
+    PropertyPackage:
+      type: object
+      properties:
+        code:
+          type: string
+          example: BRKFAST
+          minLength: 1
+          maxLength: 20
+        description:
+          type: string
+          example: Breakfast for two
+          minLength: 0
+          maxLength: 200
+        postingRhythm:
+          description: Posting Rhythm for the package.
+          $ref: '#/components/schemas/PostingRhythmType'
+        calculationRule:
+          description: The price calculation rule for this package.
+          $ref: '#/components/schemas/CalculationRuleType'
+        includedInRate:
+          type: boolean
+          example: false
+          description: The package price is added to the room rate. DEPRECATED AND WILL BE REMOVED IN FUTURE VERSIONS
+        addToRate:
+          type: boolean
+          example: false
+          description: The package price is added to the room rate.
+        addRateSeparateLine:
+          type: boolean
+          example: true
+          description: The package price is printed on separate line of the folio. DEPRECATED AND WILL BE REMOVED IN FUTURE VERSIONS
+        printSeparateLine:
+          type: boolean
+          example: true
+          description: The package price is printed on separate line of the folio.
+        allowance:
+          type: boolean
+          description: Package is marked as an allowance, in case charge is expected back to the guest account from external interface
+        startTime:
+          description: Start time the package is valid.
+          type: string
+          example: '10:00'
+        endTime:
+          description: End time the package is valid.
+          type: string
+          example: '18:00'
+        rateInformation:
+          description: Details on the package of the offer.
+          type: object
+          $ref: '#/components/schemas/PackageRatesType'
+        total:
+          description: Information on the total cost of package for the entire stay, including taxes.
+          $ref: '#/components/schemas/PackageTotalType'
+        inventoryItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyPackageInventoryItem'
+    Direction:
+      description: Details on directions from and to the property.
+      type: object
+      properties:
+        propertyDirection:
+          description: The direction to the property.
+          type: string
+          maxLength: 4000
+          example: SE ABC hills
+    OfferTotalType:
+      description: The daily rate of the offer.
+      type: object
+      properties:
+        amountBeforeTax:
+          description: The available room rate not including any associated taxes (e.g., sales tax, VAT, GST or any associated taxes).
+          type: number
+          example: 100.5
+        amountAfterTax:
+          description: The available room rate including all associated taxes (e.g., sales tax, VAT, GST or any associated tax).
+          type: number
+          example: 123.2
+        currencyCode:
+          $ref: '#/components/schemas/CurrencyCodeType'
+          example: USD
+    Offer:
+      type: object
+      properties:
+        bookingCode:
+          description: The code of the offer, this is a concatenation of channel room type code and channel rate plan code.
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: XA1KXDAILY
+        offerName:
+          type: string
+          description: Description of the offer, this includes information about the room type and rate plan.
+          example: Deluxe King Room Corporate Rate in CP
+          maxLength: 63
+        availabilityStatus:
+          $ref: '#/components/schemas/OfferAvailabilityStatus'
+        roomType:
+          description: The code for the room type of the offer.
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: XA1K
+        ratePlanCode:
+          description: The code for the rate plan of the offer.
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: XDAILY
+        rateChangeDuringStay:
+          description: When true there is a rate change over the course of the stay.
+          type: boolean
+          default: false
+          example: true
+        rateInformation:
+          description: Details on the rate plan of the offer.
+          type: object
+          $ref: '#/components/schemas/OfferRateInformation'
+        packages:
+          description: List of package elements and/or package groups associated to the rate plan.
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferPackage'
+        total:
+          description: Information on the total cost for the entire stay, including taxes.
+          $ref: '#/components/schemas/OfferTotalTypeWithTaxes'
+        blockInformation:
+          type: object
+          $ref: '#/components/schemas/BlockInformation'
+        deepLink:
+          description: Information on the deepLink url
+          $ref: '#/components/schemas/deepLink'
+    PropertyOffersRatePlan:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/PropertySearchRatePlan'
+      - type: object
+        properties:
+          ratePlanType:
+            description: The rate plan type associated with the rate plan.
+            type: string
+            example: 10
+          ratePlanName:
+            description: The name of the rate plan.
+            type: string
+          hotelRatePlanCode:
+            description: A rate plan code for a hotel.
+            type: string
+          accessCode:
+            description: The access code for a negotiated rate plan.
+            type: string
+          identificationRequired:
+            type: boolean
+            description: Indicates if an ID is required during the Check-In for this rate booking
+          accountId:
+            description: The account id assigned to to specific rate plan.
+            type: string
+          ratePlanLevel:
+            description: The rate level the rate plan is associated to.
+            type: string
+          ratePlanCategory:
+            description: The rate category the rate plan is associated to.
+            type: string
+          gdsDescription:
+            description: Multi line description of the rate plan.
+            type: object
+            $ref: '#/components/schemas/Description'
+          commissionable:
+            description: When true the Rate Plan is commissionable.
+            type: boolean
+            example: true
+            default: false
+          commissionDescription:
+            description: Description of the commission associated to the rate plan.
+            type: string
+            example: Commission of 10% available.
+          commission:
+            description: Information on commission rate associated to the rate plan.
+            type: object
+            $ref: '#/components/schemas/OfferRatePlanCommission'
+          packages:
+            description: List of package elements and/or package groups associated to the rate plan.
+            type: array
+            items:
+              $ref: '#/components/schemas/RatePackage'
+          mealPlan:
+            description: Details on meal plans included with the rate plan.
+            type: object
+            $ref: '#/components/schemas/OfferMealPlan'
+          promotionCodes:
+            description: List of promotion codes associated with rate plan.
+            type: array
+            items:
+              $ref: '#/components/schemas/PromotionCodeItem'
+    CalculationRuleType:
+      type: string
+      description: Simple type for package calculation rules.
+      enum:
+      - FlatRate
+      - PerPerson
+      - PerAdult
+      - PerChild
+      - PerRoom
+    OfferMealPlan:
+      description: Details on meal plans included with the rate plan.
+      type: object
+      properties:
+        mealPlanIncluded:
+          description: Type of meal plan - DEPRECATED AND WILL BE REMOVED IN FUTURE VERSIONS
+          type: object
+          $ref: '#/components/schemas/OfferRatePlanMealPlanType'
+        mealPlanCode:
+          description: The code of the meal plan included to the rate plan.
+          type: string
+          example: '1'
+        mealPlanDescription:
+          description: Description of the meal plan included to the rate plan.
+          type: string
+          example: All inclusive meal plan
+        mealsIncluded:
+          description: List of meal plan types included to the rate plan.
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferRatePlanMealType'
+    BlockInformation:
+      description: Block related information
+      type: object
+      properties:
+        blockCode:
+          description: A code to retrieve price and availability from OPERA Cloud business block
+          type: string
+          minLength: 1
+          maxLength: 20
+        blockId:
+          description: Unique OPERA Block ID which is a primary identification of a Block in OPERA
+          type: string
+          minLength: 1
+          maxLength: 40
+        blockName:
+          description: Name of block
+          type: string
+          minLength: 1
+          maxLength: 2000
+    OfferRatePlanAvailabilityStatus:
+      type: string
+      enum:
+      - AvailableForSale
+      - NoAvailability
+      - NotFound
+      - Restricted
+      description: "Availability status of the rate plan.\nAvailableForSale - Rate plan is available for sale\nNoAvailability - Rate plan is not available for sale\nNotFound - Rate plan is invalid or can't be located\nRestricted - Rate plan is restricted  \n"
+    PropertyOffersHotelAmenity:
+      type: object
+      properties:
+        hotelAmenity:
+          description: The code for an amenity offered at the property.
+          type: string
+          example: '12'
+        description:
+          description: Description of the amenity offered at the property.
+          type: string
+          example: Swimming Pool
+        quantity:
+          description: The number of amenities within the property amenity code.
+          type: integer
+          example: 1
+        includeInRate:
+          description: When true indicates the property amenity is included with the room rate.
+          type: boolean
+          example: true
+        confirmable:
+          description: When true indicates there is a need to contact the property to confirm the availability of the property amenity.
+          type: boolean
+          example: false
+    Transportation:
+      type: object
+      properties:
+        transportationCode:
+          type: string
+          description: The code of the transportation service such as Bus, Taxi. Enum values from globalCodes TRP - Transportation Code
+          example: Metro
+        description:
+          description: Description of the transportation service.
+          type: string
+          maxLength: 1024
+          example: Red line metro
+        includeInRate:
+          type: boolean
+          description: When true the transportation service is included with the room rate.
+          example: false
+        reservationRequired:
+          type: boolean
+          description: When true a reservation is required for the transportation service.
+          example: true
+    OfferCalendarItem:
+      type: object
+      properties:
+        arrivalDate:
+          description: Arrival date provided on the request, this will be used as the starting date to search for rates.
+          type: string
+          format: date
+          example: '2021-06-01'
+        availability:
+          $ref: '#/components/schemas/OfferAvailabilityStatus'
+        rate:
+          description: The best available rate
+          $ref: '#/components/schemas/OfferMinMaxTotalType'
+        roomType:
+          description: The code for the available room type.
+          type: string
+          minLength: 1
+          maxLength: 50
+          x-example: XA1K
+        ratePlanCode:
+          description: The code for the available rate plan.
+          type: string
+          minLength: 1
+          maxLength: 50
+          x-example: XDAILY
+        promotionCode:
+          description: Promotion code used for the rate plan when applicable.
+          type: string
+          minLength: 1
+          maxLength: 50
+          x-example: EARLYBIRD
+        total:
+          $ref: '#/components/schemas/OfferTotalTaxSurchargeType'
+        restrictions:
+          description: List of restrictions in case no offers available for the calendar day.
+          type: array
+          items:
+            $ref: '#/components/schemas/Restriction'
+    OffsetTimeUnit:
+      description: Time unit used to define the rule.
+      type: string
+      enum:
+      - Day
+    OfferRoomTypeAvailabilityStatus:
+      type: string
+      enum:
+      - AvailableForSale
+      - NoAvailability
+      - NotFound
+      - BelowRequestedUnits
+      description: 'Indicates the availability status of the room type.
+
+        AvailableForSale - Room type is available for sale
+
+        NoAvailability - Room type is not available for sale
+
+        NotFound - Room type is invalid or can''t be located
+
+        BelowRequestedUnits - The selected room type has units below the number of units requested
+
+        '
+    PropertyCalendarResponse:
+      type: object
+      properties:
+        roomStays:
+          description: List of  rates per day at the property including property information, rate availability, and availability status of the property.
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyCalendarRoomStay'
+    ExceptionDetail:
+      description: Common Error Response format
+      type: object
+      properties:
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+          example: Error in Application
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+          example: 400
+        o:errorCode:
+          type: string
+          description: Business specific Error code, which is different from HTTP error code.
+          example: RSV-34534534
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type. When dereferenced, it SHOULD provide a human-readable summary of the problem.
+          example: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4
+        timestamp:
+          type: string
+          format: date-time
+          description: The UTC Date and Time of the Error happened.
+          example: '2022-01-02T11:30:22.234Z'
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure
+          type: array
+          items:
+            $ref: '#/components/schemas/ExceptionDetail'
+        logId:
+          type: integer
+          description: An ID for support reasons to be able identify errors better.
+          example: '334543532224'
+    OfferAlternateOffersItem:
+      type: object
+      properties:
+        arrivalDate:
+          description: Arrival date provided on the request; starting date to search for alternate offers.
+          type: string
+          format: date
+          example: '2021-06-01'
+        availability:
+          $ref: '#/components/schemas/OfferAvailabilityStatus'
+        rate:
+          description: The best available rate
+          $ref: '#/components/schemas/OfferMinMaxTotalType'
+        roomType:
+          description: The code for the available room type.
+          type: string
+          minLength: 1
+          maxLength: 50
+          x-example: XA1K
+        ratePlanCode:
+          description: The code for the available rate plan.
+          type: string
+          minLength: 1
+          maxLength: 50
+          x-example: XDAILY
+        promotionCode:
+          description: Promotion code used for the rate plan when applicable.
+          type: string
+          minLength: 1
+          maxLength: 50
+          x-example: EARLYBIRD
+        total:
+          $ref: '#/components/schemas/OfferTotalTaxSurchargeType'
+        restrictions:
+          description: List of restrictions in case no offers available for the day.
+          type: array
+          items:
+            $ref: '#/components/schemas/Restriction'
+    OfferOverallRateInformation:
+      description: Rate plan information of the offer.
+      type: object
+      properties:
+        rateModeAmount:
+          $ref: '#/components/schemas/OfferTotalType'
+        additionalGuestAmounts:
+          description: List of charges for each additional adult and/or child.
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferAdditionalGuestAmountType'
+        rateMode:
+          $ref: '#/components/schemas/OfferRateMode'
+        rateTimeUnit:
+          $ref: '#/components/schemas/OfferRateTimeUnit'
+    Email:
+      type: object
+      properties:
+        emailType:
+          description: The email type.
+          type: string
+        email:
+          description: 'The email address for the specific emailType. '
+          type: string
+    PackageTotalType:
+      description: Information on the total cost for the entire stay, including taxes.
+      type: object
+      properties:
+        amountBeforeTax:
+          description: The total amount not including any associated tax (e.g., sales tax, VAT, GST or any associated tax).
+          type: number
+          example: 100.5
+        amountAfterTax:
+          description: The total amount including all associated taxes (e.g., sales tax, VAT, GST or any associated tax).
+          type: number
+          example: 123.2
+        currencyCode:
+          $ref: '#/components/schemas/CurrencyCodeType'
+          example: USD
+        taxes:
+          description: A collection of taxes.
+          $ref: '#/components/schemas/OfferTaxesType'
+    AlternatePropertyDistance:
+      type: object
+      properties:
+        distance:
+          type: number
+          format: double
+          description: Numeric value of the distance from the property to the alternate property.
+          example: 12
+          minimum: 0.01
+        distanceUnit:
+          type: string
+          description: 'Distance measurement unit for the distance from the property to the alternate property.
+
+            Kilometers
+
+            Miles
+
+            '
+          $ref: '#/components/schemas/DistanceUnit'
+        compassDirection:
+          type: string
+          description: Relative direction from hotel to alternate property
+          $ref: '#/components/schemas/CompassDirection'
+        comments:
+          type: string
+          description: Additional text that describes the alternate property.
+          example: Resort3 is the next preferred hotel after Resort1.
+    OfferDepositPolicyDeadlineType:
+      description: The deadline associated to the deposit rule.
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/PolicyOffsetType'
+      - type: object
+        properties:
+          offsetDropTime:
+            description: 'Defines as to when the deposit rule will take effect, works together with offsetTimeUnit and offsetMultiplier.
+
+              BeforeArrival - The rule will take effect before arrival of what is specified in offsetTimeUnit and offsetMultiplier
+
+              AfterBooking - The rule will take effect after booking of what is specified in offsetTimeUnit and offsetMultiplier'
+            $ref: '#/components/schemas/DepositOffsetDropTime'
+            example: BeforeArrival
+          absoluteDeadline:
+            description: The date and time the deposit rule will take effect.
+            type: string
+            format: date-time
+            example: '2021-04-01T15:46:40.134Z'
+    PropertyPackageListItem:
+      type: object
+      properties:
+        code:
+          type: string
+          example: BRKFAST
+          minLength: 1
+          maxLength: 20
+        description:
+          description: Description of the package.
+          example: Breakfast for two
+          type: string
+          minLength: 0
+          maxLength: 200
+    AccountType:
+      type: string
+      enum:
+      - Company
+      - TravelAgent
+      - Source
+      description: Rate Plan account type
+      example: Company
+    OfferDepositPolicy:
+      type: object
+      description: Deposit Policy Details
+      properties:
+        revenueType:
+          description: Type of revenue
+          $ref: '#/components/schemas/OfferPolicyRevenueType'
+          example: Rooms
+          default: Rooms
+        policy:
+          description: The deposit rule associated to the deposit policy.
+          $ref: '#/components/schemas/OfferDepositPolicyType'
+        description:
+          description: Description of the deposit rule.
+          type: string
+          example: Deposit policy description in English
+        depositPolicyMethod:
+          description: The methods of payment that can be used to pay the deposit.
+          type: string
+          example: Deposit can be made by AX, MC, VI
+        paymentTypes:
+          description: List of payment types that can be used to pay the deposit.
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferDepositPolicyPaymentCodeDescriptionType'
+    OfferCancelPenalty:
+      description: Cancellation Policy Details
+      type: object
+      properties:
+        revenueType:
+          description: The revenue type the cancellation policy is associated to.
+          $ref: '#/components/schemas/OfferPolicyRevenueType'
+          example: Rooms
+          default: Rooms
+        policy:
+          description: The cancellation rule associated to the cancellation policy.
+          $ref: '#/components/schemas/OfferCancellationPolicyType'
+    OfferDetailsResponse:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/OfferDetailsRoomStay'
+    CancelPolicyAmountPercentType:
+      description: The method used to compute the penalty associated to the cancellation rule.
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BasicAmountPercentType'
+      - type: object
+        properties:
+          taxInclusive:
+            description: When true the cancellation amount charged includes taxes.
+            type: boolean
+            example: true
+          currencyCode:
+            $ref: '#/components/schemas/CurrencyCodeType'
+            example: USD
+    PropertySearchRatePlan:
+      type: object
+      properties:
+        ratePlanCode:
+          description: The code for the rate plan.
+          type: string
+          example: XDAILY
+        accessCode:
+          description: The access code for a negotiated rate plan.
+          type: string
+        ratePlanType:
+          description: The rate plan type associated with the rate plan.
+          type: string
+          example: 10
+        identificationRequired:
+          description: When true indicates identification is required at checkin.
+          type: boolean
+        accountId:
+          description: The account id assigned to to specific rate plan.
+          type: string
+        accountType:
+          description: Rate Plan account type
+          type: string
+          $ref: '#/components/schemas/AccountType'
+          x-example: Company
+        availabilityStatus:
+          type: object
+          $ref: '#/components/schemas/OfferRatePlanAvailabilityStatus'
+        additionalDetails:
+          description: Additional information related to the rate plan.
+          type: object
+          $ref: '#/components/schemas/AdditionalDetails'
+        taxInclusive:
+          description: When true indicates the rate plan includes applicable taxes.
+          type: boolean
+          example: true
+        promotionCodes:
+          description: List of promotion codes associated with rate plan.
+          type: array
+          items:
+            $ref: '#/components/schemas/PromotionCodeItem'
+        restrictions:
+          description: List of restrictions for rate plan, only populated when rate plan codes are given in request
+          type: array
+          items:
+            $ref: '#/components/schemas/Restriction'
+    DepositOffsetDropTime:
+      description: Defines as to when the deposit rule will take effect, works together with offsetTimeUnit and offsetMultiplier. <p>  <strong>BeforeArrival</strong> - The rule will take effect before arrival of what is specified in offsetTimeUnit and offsetMultiplier </p>  <strong>AfterBooking</strong> - The rule will take effect after booking of what is specified in offsetTimeUnit and offsetMultiplier</p>
+      type: string
+      enum:
+      - BeforeArrival
+      - AfterBooking
+    PropertyCalendarRoomStay:
+      type: object
+      properties:
+        propertyInfo:
+          $ref: '#/components/schemas/PropertyCalendarPropertyInfo'
+        availability:
+          $ref: '#/components/schemas/HotelAvailabilityStatus'
+        calendarItems:
+          description: List of rates starting from arrival date provided on the request, availability status of the rate, and rate detail.
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferCalendarItem'
+    GeneralInformation:
+      description: General information about the property.
+      type: object
+      properties:
+        checkInTime:
+          description: The property's check-in time.
+          type: string
+          pattern: ^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$
+          example: 04:30
+        checkOutTime:
+          description: The property's check-out time.
+          type: string
+          pattern: ^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$
+          example: '14:30'
+    PropertySearchRoomStay:
+      type: object
+      properties:
+        propertyInfo:
+          description: Property information.
+          $ref: '#/components/schemas/PropertySearchPropertyInfo'
+        availability:
+          $ref: '#/components/schemas/HotelAvailabilityStatus'
+        ratePlans:
+          description: List of rate plans selected during the request including rate plan information, availability status of the rate plan, and commission.
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertySearchRatePlan'
+        minRate:
+          description: The daily minimum available room rate including additional amounts and fees.
+          $ref: '#/components/schemas/OfferMinMaxTotalType'
+        maxRate:
+          description: The daily maximum available room rate including additional amounts and fees.
+          $ref: '#/components/schemas/OfferMinMaxTotalType'
+    Address:
+      type: object
+      description: Address Details such as city, state, country, postal code etc.
+      properties:
+        addressLine:
+          description: Guest Address Details
+          type: array
+          items:
+            type: string
+          minItems: 1
+          maxItems: 2
+          example:
+          - Street 123
+          - Box 1
+        countryCode:
+          description: The property's two letter ISO country code.
+          type: string
+          example: US
+        cityName:
+          description: Name of the City
+          type: string
+          example: Miami
+        stateProv:
+          description: The state where the property is located.
+          type: string
+          example: Florida
+        postalCode:
+          description: Postal Code of the Guest Address
+          type: string
+          example: '90210'
+    OfferTotalTaxSurchargeType:
+      description: The daily rate of the offer including total tax and total fees (surcharges).
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/OfferTotalType'
+      - type: object
+        properties:
+          totalTax:
+            description: Total of all taxes.
+            type: number
+            example: 23.79
+          totalFees:
+            description: Total of all fees (surcharges).
+            type: number
+            example: 25
+    RatePackage:
+      type: object
+      description: Package code details applied to a rate plan.
+      properties:
+        code:
+          description: The code of the package element or package group associated to the rate plan.
+          type: string
+          minLength: 0
+          maxLength: 20
+          example: PC1
+        description:
+          description: Description of the package element or package group associated to the rate plan.
+          type: string
+          minLength: 0
+          maxLength: 20
+          example: Package Code Des 1
+        postingRhythm:
+          $ref: '#/components/schemas/PostingRhythmType'
+        calculationRule:
+          type: string
+          description: The price calculation rule for this package.
+          enum:
+          - FlatRate
+          - PerPerson
+          - PerAdult
+          - PerChild
+          - PerRoom
+          example: FlatRate
+        includedInRate:
+          description: The package price is added to the room rate. DEPRECATED AND WILL BE REMOVED IN FUTURE VERSIONS
+          type: boolean
+          example: false
+        addToRate:
+          description: The package price is added to the room rate.
+          type: boolean
+          example: false
+        addRateSeparateLine:
+          description: The package price is printed on separate line of the folio. DEPRECATED AND WILL BE REMOVED IN FUTURE VERSIONS
+          type: boolean
+          example: true
+        printSeparateLine:
+          description: The package price is printed on separate line of the folio.
+          type: boolean
+          example: true
+        quantity:
+          description: Quantity of the package code included in the rate plan.
+          type: integer
+          example: 1
+        inventoryItems:
+          type: array
+          description: Package Code Inventory Items type.
+          items:
+            $ref: '#/components/schemas/PackageInventoryItemType'
+        packageGroups:
+          type: array
+          description: Indicates if a package is part of a Package Group bundle.
+          items:
+            $ref: '#/components/schemas/PackageGroupType'
+    PropertyAlternateOffersResponse:
+      type: object
+      properties:
+        roomStays:
+          description: List of rates per day at the property including property information, rate availability, and availability status of the property.
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyAlternateOffersRoomStay'
+    OfferRateInformation:
+      description: Details on the rate plan of the offer.
+      type: object
+      properties:
+        rate:
+          description: Rate plan information of the offer.
+          type: object
+          $ref: '#/components/schemas/OfferOverallRateInformation'
+        cancellationPolicies:
+          description: List of cancellation policies associated to the rate plan.
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferCancelPenalty'
+        guaranteeRequirement:
+          $ref: '#/components/schemas/GuaranteeRequirementType'
+          example: GuaranteeRequired
+        depositPolicies:
+          description: List of deposit policies associated to the rate plan.
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferDepositPolicy'
+        paymentPolicies:
+          description: List of payment policies for guaranteeing the rate plan.
+          type: array
+          maxItems: 10
+          items:
+            $ref: '#/components/schemas/OfferGuaranteePolicy'
+        base:
+          description: List of date ranges within the stay and corresponding charges.
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferRateRange'
+    OfferAgeQualifyingCodeEnum:
+      type: string
+      enum:
+      - Adult
+      - Child
+      description: 'Indicates if the rate is for each additional adult or child.
+
+        '
+    Communications:
+      description: The contact information for the property.
+      type: object
+      properties:
+        phones:
+          description: List of phone numbers for the property.
+          type: array
+          items:
+            $ref: '#/components/schemas/Phone'
+          minItems: 1
+        emails:
+          description: List of emails addresses for the property.
+          type: array
+          items:
+            $ref: '#/components/schemas/Email'
+        urls:
+          description: List of urls for the property.
+          type: array
+          items:
+            $ref: '#/components/schemas/Url'
+    PropertyOffersRoomStay:
+      type: object
+      properties:
+        propertyInfo:
+          $ref: '#/components/schemas/PropertyOffersPropertyInfo'
+        availability:
+          $ref: '#/components/schemas/HotelAvailabilityStatus'
+        restrictions:
+          description: List of restrictions for property, only populated when no rate plan codes are given in request
+          type: array
+          items:
+            $ref: '#/components/schemas/Restriction'
+        roomTypes:
+          description: List of the room types selected during the request including room type information, availability status of the room type, and room amenities.
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyOffersRoomType'
+        ratePlans:
+          description: List of the rate plans selected during the request including rate plan information, availability status of the rate plan, and commission.
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyOffersRatePlan'
+        offers:
+          description: List of offers at the property, including availability status of the offer and policies associated with the offer.
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer'
+externalDocs:
+  description: Find out more about Oracle Hospitality
+  url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

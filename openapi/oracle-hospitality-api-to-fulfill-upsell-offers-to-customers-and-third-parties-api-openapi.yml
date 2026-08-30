@@ -1,0 +1,330 @@
+openapi: 3.2.0
+info:
+  description: An upsell service that can be consumed to display upgrade offers to a hotel guest prior to arrival. Pre-arrival upsells are becoming increasingly important due to the adoption of mobile and kiosk check-in which reduces the opportunity for front-desk upselling. Upgrade offers are based on PRiME(R) AI/ML decision intelligence and OPERA real-time inventory. The service allows instant fulfillment of the upgrade offer.<br /><br /> Compatible with OPERA Cloud release 26.2.0.0.<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>
+  version: 26.2.0.0
+  title: Nor1 Integrated Upsell API to Fulfill Upsell Offers to customers and third parties API
+  termsOfService: https://www.oracle.com/legal/terms.html
+  contact:
+    email: hospitality_apis_ww_grp@oracle.com
+  license:
+    name: UPL
+    url: https://opensource.org/licenses/upl
+servers:
+- url: https://oracle.api.com/ohcgep/v1
+tags:
+- name: API to Fulfill Upsell Offers to customers and third parties
+paths:
+  /hotels/{hotelId}/reservations/{reservationId}/arrivalDate/{arrivalDate}/upsellOffers:
+    post:
+      summary: Post Upsell Offers for a reservation
+      description: 'This API allows user to update a reservation by fulfilling an upsell offer selected from the list of available upsell offers, based on the unique offer ID provided in the request body.
+
+
+        If an upsell offer group has `selectionType` set to `zero_to_one`, the user can choose only one offer under a specific `offerType` group. To process multiple offers, submit a API request for a `offer` selected
+
+
+        If an upsell offer group has `selectionType` set to `zero_to_many`, the user can choose multiple offers under a specific `offerType` group. To process multiple offers, submit a separate API request for each `offer` selected
+
+        <p><strong>OperationId:</strong> postUpsellOffers</p>'
+      operationId: postUpsellOffers
+      tags:
+      - API to Fulfill Upsell Offers to customers and third parties
+      parameters:
+      - $ref: '#/components/parameters/acceptForPost'
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/providerId'
+      - $ref: '#/components/parameters/Accept-Language'
+      - name: hotelId
+        in: path
+        required: true
+        x-example: SAND01
+        description: Unique ID of the hotel where reservation is searched based on reservation Id.
+        schema:
+          type: string
+          pattern: ^[A-Z0-9]{6-10}$
+      - name: reservationId
+        in: path
+        required: true
+        x-example: '17158'
+        description: A unique identifying value for reservation assigned by the creating system.
+        schema:
+          type: string
+          pattern: ^[0-9]{5-7}$
+      - name: arrivalDate
+        in: path
+        required: true
+        x-example: '2022-03-28'
+        description: Arrival Date of the reservation.
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/UpsellOffers'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/errorInstanceUMT'
+        '404':
+          description: Unable to find HotelId or ReservationId
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/errorInstanceNF'
+        '500':
+          description: System Error
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/errorInstanceISE'
+        '502':
+          description: Bad Gateway
+        '503':
+          description: Service Unavailable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+        required: true
+components:
+  parameters:
+    acceptForPost:
+      name: consumes
+      in: header
+      x-example: application/json
+      schema:
+        type: string
+        enum:
+        - application/json; charset=UTF-8
+        - application/json
+    Accept-Language:
+      name: Accept-Language
+      in: header
+      description: Language code
+      schema:
+        type: string
+    authorization:
+      name: Authorization
+      in: header
+      x-example: Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      schema:
+        type: string
+    x-app-key:
+      name: x-app-key
+      in: header
+      x-example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+      schema:
+        type: string
+    providerId:
+      name: providerId
+      in: header
+      x-example: SAN
+      description: Partner's Unique Nor1 Provider ID
+      schema:
+        type: string
+  schemas:
+    errorInstanceISE:
+      type: object
+      description: Complex type that contains internal server error instance details for a REST call
+      properties:
+        type:
+          type: string
+          description: Holds error type
+          example: https://www.example.org/protocols/..
+        title:
+          type: string
+          description: Holds error details in short
+          example: Internal Server Error
+        status:
+          type: number
+          example: 500
+        detail:
+          type: string
+          description: Holds error details
+          example: Internal Server Error
+        errorCode:
+          type: string
+          description: Holds specific error code
+          example: null
+        errorDetails:
+          type: array
+          description: Holds List of errors
+          items:
+            $ref: '#/components/schemas/errorDetail'
+    Offers:
+      type: object
+      properties:
+        offerId:
+          type: string
+          format: uuid
+          description: A unique upsell ID per upsell offer
+        name:
+          type: string
+          example: Deluxe King Suite
+          description: offer name
+        description:
+          type: string
+          example: Rest easy in the 600-square-foot suite with sitting area and cityscape views. Enjoy pillow top mattress, pull out sofa bed, premium mini bar, 24 hour room service, and a large marble bathroom.
+        images:
+          $ref: '#/components/schemas/Image'
+        price:
+          type: object
+          properties:
+            amount:
+              type: number
+              example: 33.94
+            currency:
+              type: string
+              description: This is an ISO 4217(https://en.wikipedia.org/wiki/ISO_4217) currency code.
+              example: USD
+        savings:
+          type: string
+          example: '16.06'
+        chargeFrequency:
+          type: string
+          description: "chargeFrequency defines how often the upgrade charge is applied. \n\nPossible values: \n  - per_unit_per_night\n  - per_unit_per_stay\n  - per_person_per_stay\n  - per_person_per_night"
+          example: per_unit_per_night
+        fixedCharge:
+          type: number
+          example: 33.94
+        roomTypeCode:
+          type: array
+          items:
+            type: string
+            example: SGL
+    Image:
+      type: object
+      properties:
+        big:
+          type: string
+          example: https://example.com/img_url1.jpg
+        small:
+          type: string
+          example: https://example.com/img_url2.jpg
+    UpsellOffers:
+      type: object
+      description: Success and Failure Summary Data
+      properties:
+        Items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Items'
+        totalResults:
+          type: number
+          example: 1
+        offset:
+          type: number
+          example: 0
+        count:
+          type: number
+          example: 1
+        hasMore:
+          type: boolean
+          example: false
+        limit:
+          type: number
+          example: 0
+    Items:
+      type: object
+      description: Success and Failure Summary Data
+      properties:
+        upsellOffers:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpsellOffer'
+    Item:
+      type: object
+      properties:
+        offerId:
+          type: string
+          format: uuid
+    errorInstanceNF:
+      type: object
+      description: Complex type that contains not found error instance details for a REST call
+      properties:
+        type:
+          type: string
+          description: Holds error type
+          example: https://www.example.org/protocols/..
+        title:
+          type: string
+          description: Holds error details in short
+          example: Not Found
+        status:
+          type: number
+          example: 404
+        detail:
+          type: string
+          description: Holds error details
+          example: Unable to find HotelId or ReservationId
+        errorCode:
+          type: string
+          description: Holds specific error code
+          example: null
+        errorDetails:
+          type: array
+          description: Holds List of errors
+          items:
+            $ref: '#/components/schemas/errorDetail'
+    errorInstanceUMT:
+      type: object
+      description: Complex type that contains refuse request error instance details for a REST call
+      properties:
+        type:
+          type: string
+          description: Holds error type
+          example: https://www.example.org/protocols/..
+        title:
+          type: string
+          description: Holds error details in short
+          example: Unsupported Media Type
+        status:
+          type: number
+          example: 415
+        detail:
+          type: string
+          description: Holds error details
+          example: Unsupported Media Type
+        errorCode:
+          type: string
+          description: Holds specific error code
+          example: null
+    UpsellOffer:
+      type: object
+      properties:
+        offerType:
+          type: string
+          example: room_upgrade
+          description: "Describes type of an offer.\n\nPossible values: \n  - room_upgrade\n  - early_checkin\n  - late_checkout\n  - amenity\n  - spa_services\n  - extra_room\n  - extra_day\n  - food_beverage\n  - room_feature\n  - parking"
+        selectionType:
+          type: string
+          description: ''
+          example: zero_to_one
+          enum:
+          - zeroToOne
+          - zeroToMany
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offers'
+    errorDetail:
+      type: object
+      description: Complex type that contains error detail
+      properties:
+        title:
+          type: string
+          description: Holds error details in short
+        detail:
+          type: string
+          description: Holds error details
+        errorCode:
+          type: string
+          description: Holds specific error code

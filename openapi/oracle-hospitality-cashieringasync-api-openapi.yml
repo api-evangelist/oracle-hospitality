@@ -1,0 +1,229 @@
+openapi: 3.2.0
+info:
+  title: OPERA Cloud Cashiering Asynchronous Cashiering Async API
+  description: APIs to cater for Cashiering related asynchronous functionality in OPERA Cloud.<br /><br /> Compatible with OPERA Cloud release 26.2.0.0.<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>
+  version: 26.2.0.0
+  termsOfService: https://www.oracle.com/legal/terms.html
+  contact:
+    email: hospitality_apis_ww_grp@oracle.com
+  license:
+    name: UPL
+    url: https://opensource.org/licenses/upl
+servers:
+- url: /csh/async/v1
+tags:
+- name: CashieringAsync
+paths:
+  /hotels/{hotelId}/financialPostingsNetVat:
+    post:
+      summary: Get Financial Postings with Net and Vat breakdown.
+      description: You can use this API to get Financial postings with Net and Vat breakdown. <p><strong>OperationId:</strong>startFinancialPostingsAsync</p> <p>This API allows a time span of <strong>15</strong> days.</p>
+      operationId: startFinancialPostingsAsync
+      x-interaction:
+      - async-polling
+      responses:
+        '202':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of process status resource
+              schema:
+                type: string
+          description: Location of process status resource
+      parameters:
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique ID of the hotel
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/Accept-Language'
+      tags:
+      - CashieringAsync
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/netvatcriteriatype'
+        description: Request object for fetching financial postings with net vat asynchronously.
+        required: true
+  /hotels/{hotelId}/financialPostingsNetVat/{statusId}:
+    head:
+      summary: Check status of financial postings process
+      description: Use this to check whether the response is ready yet. You can get  the value of statusId with startFinancialPostingsAsync API response (under header location). <p><strong>OperationId:</strong>getFinancialPostingsProcessStatusAsync</p>
+      operationId: getFinancialPostingsProcessStatusAsync
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Status:
+              description: Status of the requested process.
+              schema:
+                type: string
+                enum:
+                - Processing
+                - Invalid
+            Cache-Control:
+              description: number of seconds to wait before polling again.
+              x-example: max-age=10
+              schema:
+                type: string
+          description: Response for status of scheduled asynchronous process.
+        '201':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Status:
+              description: Status of the requested process.
+              schema:
+                type: string
+                enum:
+                - Completed
+            Location:
+              description: Location of newly created resource once the status of process run is Complete.
+              schema:
+                type: string
+          description: Response for status of scheduled asynchronous process.
+      parameters:
+      - name: statusId
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique ID of the hotel
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/Accept-Language'
+      tags:
+      - CashieringAsync
+components:
+  schemas:
+    netvatcriteriatype:
+      type: object
+      description: Request object for fetching financial postings with net vat asynchronously.
+      properties:
+        netvatcriteriatype:
+          $ref: '#/components/schemas/fetchFinancialPostingsNetVatSearchType'
+    fetchFinancialPostingsNetVatSearchType:
+      type: object
+      properties:
+        hotelId:
+          description: The Hotel Code for which financial postings net vat search will be performed.
+          type: string
+          minLength: 0
+          maxLength: 20
+        folioWindowNo:
+          description: The Folio Window number of this posting.
+          type: array
+          collectionFormat: multi
+          items:
+            type: integer
+          required: false
+        includePseudoRooms:
+          required: false
+          type: string
+        reservationId:
+          required: true
+          type: string
+          minLength: 1
+          maxLength: 2000
+          description: Unique ID of the reservation
+        timeSpan:
+          description: The start date and time span for the search to be performed.
+          $ref: '#/components/schemas/timeSpanType'
+    timeSpanType:
+      type: object
+      description: Allows for a choice in description of the amount of time spanned by this type. EndDate specifies a specific date, whild Duration provides a measure of time to add to the StartDate to yield end date.
+      properties:
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+  parameters:
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
+      schema:
+        type: string
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
+      schema:
+        type: string
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
+      schema:
+        type: string
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
+externalDocs:
+  description: Find out more about Oracle Hospitality
+  url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

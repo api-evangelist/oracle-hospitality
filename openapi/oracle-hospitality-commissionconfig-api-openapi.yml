@@ -1,0 +1,1743 @@
+openapi: 3.2.0
+info:
+  title: OPERA Cloud Front Desk Configuration Commission Config API
+  description: APIs to cater for Front Desk Configuration in OPERA Cloud. Here you can find operations to get, post, put and delete front desk codes such as commission codes, transaction groups, codes & subgroups, articles, payment methods and credit card types.<br /><br />Compatible with OPERA Cloud release 26.2.0.0.<br /><br /><p>This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020,2023 Oracle and/or its affiliates.</p><br /><br /> Compatible with OPERA Cloud release 20.99.99.99.<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>
+  version: 26.2.0.0
+  termsOfService: https://www.oracle.com/legal/terms.html
+  contact:
+    email: hospitality_apis_ww_grp@oracle.com
+  license:
+    name: UPL
+    url: https://opensource.org/licenses/upl
+servers:
+- url: /fof/config/v1
+tags:
+- name: CommissionConfig
+  description: These Commission APIs allow you to get, update, and remove commissions on an Account Receivable (AR) profile in OPERA Cloud.
+paths:
+  /commissionCodes:
+    get:
+      summary: Operation to fetch commission codes.
+      description: ' <p><strong>OperationId:</strong>getCommissionCodes</p>'
+      operationId: getCommissionCodes
+      parameters:
+      - name: hotelIds
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          maxItems: 4000
+      - name: commissionCodes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          maxItems: 4000
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response object for fetching commission codes.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/commissionCodesSummary'
+        '204':
+          description: CommissionCodes not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CommissionConfig
+    put:
+      summary: Operation to change commission codes.
+      description: ' <p><strong>OperationId:</strong>putCommissionCodes</p>'
+      operationId: putCommissionCodes
+      parameters:
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: Response Body.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CommissionConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/commissionCodes'
+        description: Request object to update commission codes.
+        required: true
+    post:
+      summary: Operation to create commission codes.
+      description: ' <p><strong>OperationId:</strong>postCommissionCodes</p>'
+      operationId: postCommissionCodes
+      parameters:
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '201':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CommissionConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/commissionCodes'
+        description: Request object to create new commission codes.
+        required: true
+    delete:
+      summary: Operation to remove commission codes.
+      description: ' <p><strong>OperationId:</strong>deleteCommissionCodes</p>'
+      operationId: deleteCommissionCodes
+      parameters:
+      - name: hotelIds
+        in: query
+        description: Property of the commission code.
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: commissionCodes
+        in: query
+        description: Commission code for which details are deleted.
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CommissionConfig
+  /configBankAccounts:
+    get:
+      summary: Operation to fetch config bank accounts.
+      description: ' <p><strong>OperationId:</strong>getConfigBankAccounts</p>'
+      operationId: getConfigBankAccounts
+      parameters:
+      - name: hotels
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          maxItems: 4000
+      - name: bankCodes
+        in: query
+        description: Codes to be searched.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          maxItems: 4000
+      - name: wildCard
+        in: query
+        required: false
+        description: Wildcard search on the code.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response for fetching Bank Accounts
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/bankAccountsInfo'
+        '204':
+          description: ConfigBankAccounts not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CommissionConfig
+    put:
+      summary: Operation to change config bank accounts.
+      description: ' <p><strong>OperationId:</strong>putConfigBankAccounts</p>'
+      operationId: putConfigBankAccounts
+      parameters:
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: Response Body.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CommissionConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/bankAccounts'
+        description: Request object to edit Bank Accounts
+        required: true
+    delete:
+      summary: Operation to remove config bank accounts.
+      description: ' <p><strong>OperationId:</strong>deleteConfigBankAccounts</p>'
+      operationId: deleteConfigBankAccounts
+      parameters:
+      - name: hotelId
+        in: query
+        description: Property of the bank account.
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: bankAccountID
+        in: query
+        description: Bank account ID.
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: number
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CommissionConfig
+    post:
+      summary: Operation to create config bank accounts.
+      description: ' <p><strong>OperationId:</strong>postConfigBankAccounts</p>'
+      operationId: postConfigBankAccounts
+      parameters:
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '201':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CommissionConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/bankAccounts'
+        description: Request object to create Bank Accounts
+        required: true
+  /hotels/{hotelId}/commissionCode/{commissionCode}:
+    get:
+      summary: Operation to fetch commission code.
+      description: ' <p><strong>OperationId:</strong>getCommissionCode</p>'
+      operationId: getCommissionCode
+      parameters:
+      - name: commissionCode
+        in: path
+        required: true
+        description: Commission Code in OPERA
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique ID of the hotel in OPERA
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response object for fetching commission code details.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/commissionCodeDetail'
+        '204':
+          description: CommissionCode not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CommissionConfig
+  /services/commissionConfig/status:
+    get:
+      summary: Operation to ping.
+      description: ' <p><strong>OperationId:</strong>pingCommisionConfigServices</p>'
+      operationId: pingCommisionConfigServices
+      parameters:
+      - name: operaPingInput
+        in: query
+        required: false
+        description: Opera Ping request input type
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response for Ping operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/operaVersion'
+        '204':
+          description: pingCommisionConfigServices not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CommissionConfig
+  /stopProcessingReasons:
+    get:
+      summary: Operation to fetch stop processing reasons.
+      description: ' <p><strong>OperationId:</strong>getStopProcessingReasons</p>'
+      operationId: getStopProcessingReasons
+      parameters:
+      - name: fetchInactive
+        in: query
+        x-example: 'false'
+        required: false
+        description: Determines wether to fetch inactive records or not.
+        schema:
+          type: boolean
+      - name: codes
+        in: query
+        description: Codes to be searched.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          maxItems: 4000
+      - name: wildCard
+        in: query
+        required: false
+        description: Wildcard search on the code.
+        schema:
+          type: string
+      - name: description
+        in: query
+        required: false
+        description: Description of the code.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response object for fetching Stop Processing Reason.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/stopProcessingReasons'
+        '204':
+          description: StopProcessingReasons not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CommissionConfig
+    put:
+      summary: Operation to change stop processing reasons.
+      description: ' <p><strong>OperationId:</strong>putStopProcessingReasons</p>'
+      operationId: putStopProcessingReasons
+      parameters:
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: Response object for changing Stop Processing Reason.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/stopProcessingReasons'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CommissionConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/stopProcessingReasons'
+        description: Request object for changing Stop Processing Reason.
+        required: true
+    post:
+      summary: Operation to create stop processing reasons.
+      description: ' <p><strong>OperationId:</strong>postStopProcessingReasons</p>'
+      operationId: postStopProcessingReasons
+      parameters:
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '201':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CommissionConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/stopProcessingReasons'
+        description: Request object for creating Stop Processing Reason
+        required: true
+    delete:
+      summary: Operation to remove stop processing reasons.
+      description: ' <p><strong>OperationId:</strong>deleteStopProcessingReasons</p>'
+      operationId: deleteStopProcessingReasons
+      parameters:
+      - name: codes
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          maxItems: 4000
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CommissionConfig
+  /upsert/configBankAccounts:
+    put:
+      summary: Operation to create/change config bank accounts.
+      description: ' <p><strong>OperationId:</strong>putUpsertConfigBankAccounts</p>'
+      operationId: putUpsertConfigBankAccounts
+      parameters:
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: Response Body.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CommissionConfig
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/bankAccounts'
+        description: Request object to edit Bank Accounts
+        required: true
+components:
+  responses:
+    '406':
+      description: Not acceptable.
+    '414':
+      description: Request URI Too Large
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '403':
+      description: Forbidden
+    '413':
+      description: Request Entity Too Large
+    '415':
+      description: Unsupported Media Type
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '502':
+      description: Bad Gateway
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '503':
+      description: Service Unavailable
+    '401':
+      description: Unauthorized
+    '405':
+      description: Method not allowed
+  parameters:
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
+      schema:
+        type: string
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
+      schema:
+        type: string
+    x-externalsystem:
+      name: x-externalsystem
+      description: External system code.
+      in: header
+      x-example: EXTERNALSYSTEMCODE
+      schema:
+        type: string
+        maxLength: 40
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
+      schema:
+        type: string
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+  schemas:
+    managedByOptions:
+      description: Describes of the Configuration is Managed by Enterprise or Property.
+      type: string
+      enum:
+      - EnterpriseManaged
+      - PropertyManaged
+      - EnterpriseEnforced
+      - PropertyOverridden
+    commissionCodeSummaryInfoType:
+      type: object
+      description: Commission codes summary details.
+      properties:
+        hotelId:
+          description: Property of the commission codes.
+          type: string
+          minLength: 0
+          maxLength: 20
+        commissionCode:
+          description: Commission code details.
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: Commission code description for which details are fetched.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        sequence:
+          description: Commission code sequence number.
+          type: integer
+        basedOn:
+          description: Commission based on information.
+          $ref: '#/components/schemas/commissionBasedOnType'
+        commissionAmount:
+          description: Commission amount that needs to be paid.
+          $ref: '#/components/schemas/currencyAmountType'
+        taxPercentage:
+          description: Commission paid Tax details.
+          type: number
+        default:
+          type: boolean
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    commissionConfigPaymentMethodType:
+      type: string
+      description: This value of the enum is used for Payment methods
+      enum:
+      - Check
+      - CentrallyPaid
+      - Eft
+    commissionCodeDetailType:
+      type: object
+      description: Commission code detail.
+      properties:
+        commissionCodeInfo:
+          description: Commission code details.
+          $ref: '#/components/schemas/commissionCodeInfoType'
+    configBankAccountsType:
+      type: array
+      description: List of bank accounts.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/configBankAccountType'
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
+    bankAccounts:
+      type: object
+      description: Request object to edit Bank Accounts
+      properties:
+        bankAccounts:
+          description: Details of the Bank Accounts to edit
+          $ref: '#/components/schemas/configBankAccountsType'
+        updateDefault:
+          description: Update default confirmation response
+          type: boolean
+        updateDefaultForCurrency:
+          description: Update default for currency confirmation response
+          type: boolean
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    stopProcessingReasonsType:
+      type: array
+      description: List of the Stop Processing Reasons to be configured or fetched
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/stopProcessingReasonType'
+    warningType:
+      type: object
+      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
+          type: string
+          maxLength: 2000
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+          type: string
+          minLength: 0
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+          maxLength: 2000
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+          maxLength: 2000
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+          maxLength: 2000
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+          maxLength: 2000
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        rph:
+          description: Reference Place Holder used as an index for this warning.
+          type: string
+          minLength: 1
+          maxLength: 8
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
+    stopProcessingReasons:
+      type: object
+      description: Response object for fetching Stop Processing Reason.
+      properties:
+        stopProcessingReasons:
+          description: Collection of Stop Processing Reasons.
+          $ref: '#/components/schemas/stopProcessingReasonsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    reservationBasedCommissionType:
+      type: object
+      description: Reservation based commission details.
+      properties:
+        commissionPaidDetails:
+          $ref: '#/components/schemas/commissionPaidDetailsType'
+    commissionCodesSummaryType:
+      type: array
+      description: Commission code details.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/commissionCodeSummaryInfoType'
+    commissionCodeInfoType:
+      type: object
+      description: Commission code info.
+      properties:
+        hotelId:
+          description: Property of the commission codes.
+          type: string
+          minLength: 0
+          maxLength: 20
+        commissionCode:
+          description: Commission code for which details are fetched.
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: Commission code description for which details are fetched.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        sequence:
+          description: Commission code sequence number.
+          type: integer
+        commissionCodeHoldStatus:
+          description: Commission code hold status details.
+          $ref: '#/components/schemas/commissionCodeHoldStatusType'
+        reservationHistoryRecords:
+          description: Commission paid manually details.
+          $ref: '#/components/schemas/commissionPaidDetailsType'
+        commissionCalculation:
+          description: Commission calculation type based on details.
+          $ref: '#/components/schemas/commissionCalculationType'
+        taxPercentage:
+          description: Commission paid Tax details.
+          type: number
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    revenueBasedCommissionType:
+      type: array
+      description: Revenue based commission details.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/commissionCodeTransactionType'
+    commissionCodeHoldStatusType:
+      type: object
+      description: Commission Code Hold Status type
+      properties:
+        holdAlways:
+          description: Hold always status for commission code.
+          type: boolean
+        holdPrepaid:
+          description: Hold prepaid status for commission code.
+          type: boolean
+        holdAccountReceivables:
+          description: Hold accoutn receivables status for commission code.
+          type: boolean
+    status:
+      type: object
+      description: Response Body.
+      properties:
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    commissionCodes:
+      type: object
+      description: Request object to update commission codes.
+      properties:
+        commissionCodes:
+          description: Commission codes information to update.
+          $ref: '#/components/schemas/commissionCodesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    commissionCodesType:
+      type: array
+      description: Commission code details object.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/commissionCodeInfoType'
+    configBankAccountType:
+      type: object
+      description: Indentifier for a Bank Account.
+      properties:
+        hotelId:
+          description: Property of the bank account.
+          type: string
+          minLength: 0
+          maxLength: 20
+        bankAccountId:
+          description: Bank account ID.
+          type: number
+        bankAccountNumber:
+          description: Account number at the bank.
+          type: string
+          minLength: 0
+          maxLength: 80
+        bankCode:
+          description: Unique code of the bank.
+          type: string
+          minLength: 0
+          maxLength: 20
+        branchCode:
+          description: Code for the branch of the bank.
+          type: string
+          minLength: 0
+          maxLength: 20
+        bankName:
+          description: Name of the bank account.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        routingNumber:
+          description: Routing number for the bank account.
+          type: string
+          minLength: 0
+          maxLength: 20
+        paymentMethod:
+          description: Type of payment associated with the bank account.
+          $ref: '#/components/schemas/commissionConfigPaymentMethodType'
+        format:
+          description: Type of format for Payment Method.
+          type: string
+          minLength: 0
+          maxLength: 80
+        lastExportDate:
+          description: Used to hold last exported date for commission export.
+          type: string
+          format: date
+          maxLength: 8
+        lastExportFileNo:
+          description: Used to hold last exported filename for commission export.
+          type: integer
+        nextCheckNumber:
+          description: Next check number used by commission handling module for bank account selected.
+          type: number
+        minProcessingAmount:
+          description: Minimum amount required to produce a check through commission processing for the selected account.
+          type: number
+        currency:
+          description: Currency associated with the bank account.
+          type: string
+          minLength: 0
+          maxLength: 20
+        checkStubLines:
+          description: Number of lines to be printed on check stub.
+          type: number
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        sourceImportDirectory:
+          description: Source directory for importing commission information.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        targetImportDirectory:
+          description: Target directory where import files will be stored.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        editCheckNumber:
+          description: Check number allowed to be edited true/false.
+          type: boolean
+        validateIATANumber:
+          description: Force validation of TA/Source IATA number during commision payment process.
+          type: boolean
+        default:
+          description: Default Bank Account for that resort.
+          type: boolean
+        defaultForCurrency:
+          description: Used mainly to figure out default bank for resort and currency combination.
+          type: boolean
+        positivePayExport:
+          description: Indicate that the bank account uses Positive Pay Export.
+          type: boolean
+        report1099:
+          description: Indicates that bank account uses 1099 report.
+          type: boolean
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    bankAccountsInfo:
+      type: object
+      description: Response for fetching Bank Accounts
+      properties:
+        bankAccounts:
+          description: Collection of Bank Accounts
+          $ref: '#/components/schemas/configBankAccountsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    stopProcessingReasonType:
+      type: object
+      description: Details for Stop Processing Reason.
+      properties:
+        code:
+          description: Code is used to identify a Stop Processing Reason.
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: Description of the Stop Processing Reason.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        displaySequence:
+          description: Stop Processing Reason display sequence Number.
+          type: number
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    commissionCalculationType:
+      type: object
+      description: Commission calculation type based on details.
+      properties:
+        revenueBasedCommission:
+          $ref: '#/components/schemas/revenueBasedCommissionType'
+        reservationBasedCommission:
+          $ref: '#/components/schemas/reservationBasedCommissionType'
+    commissionCodesSummary:
+      type: object
+      description: Response object for fetching commission codes.
+      properties:
+        commissionCodesSummary:
+          description: Collection of commission code details.
+          $ref: '#/components/schemas/commissionCodesSummaryType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    commissionBasedOnType:
+      type: string
+      description: Commission based on Revenue.
+      enum:
+      - Reservation
+      - Revenue
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    commissionCodeTransactionType:
+      type: object
+      description: Revenue based commission details.
+      properties:
+        transactionCode:
+          type: string
+          minLength: 0
+          maxLength: 20
+        transactionCodeDesc:
+          type: string
+        basedOnNetAmount:
+          type: boolean
+        commissionPaidDetails:
+          $ref: '#/components/schemas/commissionPaidDetailsType'
+    operaVersion:
+      type: object
+      description: Response for Ping operation.
+      properties:
+        operaVersion:
+          description: Opera version number.
+          $ref: '#/components/schemas/operaVersionNumberType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    operaVersionNumberType:
+      type: string
+      description: Current Opera Version Number
+      minLength: 0
+      maxLength: 40
+    commissionPaidDetailsType:
+      type: object
+      description: Commission paid details.
+      properties:
+        perNight:
+          type: boolean
+        perStay:
+          type: boolean
+        commissionAmount:
+          description: Commission amount that needs to be paid.
+          $ref: '#/components/schemas/currencyAmountType'
+        weekEndCommissionAmount:
+          description: Commission amount that needs to be paid over weekend.
+          $ref: '#/components/schemas/currencyAmountType'
+        commissionType:
+          description: Indicates the type of commission paid to agent.
+          type: string
+          minLength: 1
+          maxLength: 1
+    commissionCodeDetail:
+      type: object
+      description: Response object for fetching commission code details.
+      properties:
+        commissionCodeDetail:
+          description: Collection of commission code details.
+          $ref: '#/components/schemas/commissionCodeDetailType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    currencyAmountType:
+      type: object
+      description: A monetary value expressed with a currency code.
+      properties:
+        amount:
+          description: A monetary amount.
+          type: number
+        currencyCode:
+          description: Provides a currency code to reflect the currency in which an amount may be expressed.
+          type: string
+          minLength: 3
+          maxLength: 3
+externalDocs:
+  description: Find out more about Oracle Hospitality
+  url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

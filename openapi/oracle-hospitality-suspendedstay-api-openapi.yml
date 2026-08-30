@@ -1,0 +1,1421 @@
+openapi: 3.2.0
+info:
+  title: OPERA Cloud Customer Relationship Management Suspended Stay API
+  description: APIs to cater for Customer Relationship Management (profile) functionality in OPERA Cloud.<br /><br /> There are different types of profiles in OPERA Cloud, including Guest, Company, Travel Agent, Source, Group, and Contact profile types.  A profile can store and display a wide range of information about the guest, company, travel agent etc., depending upon the type of profile.  For example, a guest profile can store the guest name, address, contact information, details on billing, membership benefits, preferences and much  more.  All profiles in OPERA when created are assigned a ProfileID.  This ID will be used throughout the CRM APIs.<br /><br /> Compatible with OPERA Cloud release 26.2.0.0.<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>
+  version: 26.2.0.0
+  termsOfService: https://www.oracle.com/legal/terms.html
+  contact:
+    email: hospitality_apis_ww_grp@oracle.com
+  license:
+    name: UPL
+    url: https://opensource.org/licenses/upl
+servers:
+- url: /crm/v1
+tags:
+- name: SuspendedStay
+  description: These APIs will allow you to view, create, update, and delete profiles in OPERA Cloud.
+paths:
+  /processSuspendedStays:
+    put:
+      summary: Process Suspended Stays
+      description: This API processes Suspended Stay. If no Suspended Stay Record IDs are sent in the body all suspended stays will be processed. <p><strong>OperationId:</strong>putProcessSuspendedStays</p>
+      operationId: putProcessSuspendedStays
+      parameters:
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response object for process Suspended Stays.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/suspendedStayErrorsType'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - SuspendedStay
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/suspendedStayDetails'
+        description: Request object for change/modification of Suspended Stay, including Revenue, Rate and Membership details. If no Suspended Stay Record IDs are sent in the body all suspended stays will be processed.
+        required: true
+  /suspendedStayRecordId/{suspendedStayRecordId}:
+    get:
+      summary: Get a Suspended Stay by the Suspended Stay Record ID.
+      description: This API provides Suspended Stay information including Revenue, Rate, Membership and Error details. <p><strong>OperationId:</strong>getSuspendedStay</p>
+      operationId: getSuspendedStay
+      parameters:
+      - name: suspendedStayRecordId
+        in: path
+        required: true
+        description: Suspended Stay Record ID.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response object for fetching Suspended Stay, including Revenue, Rate, Membership and Error details.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/suspendedStayType'
+        '204':
+          description: SuspendedStay not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - SuspendedStay
+    put:
+      summary: Update a Suspended Stay by the Suspended Stay Record ID.
+      description: Use this to update a Suspended Stay information including Revenue, Rate and Membership details.  <p><strong>OperationId:</strong>putSuspendedStay</p>
+      operationId: putSuspendedStay
+      parameters:
+      - name: suspendedStayRecordId
+        in: path
+        required: true
+        description: Suspended Stay Record ID.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: Response object for change/modification of Suspended Stay, including Revenue, Rate and Membership details.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - SuspendedStay
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/suspendedStayType'
+        description: Request object for change/modification of Suspended Stay, including Revenue, Rate and Membership details.
+        required: true
+    delete:
+      summary: Delete a suspended stay by the Suspended Stay Record ID.
+      description: Use this to remove a Suspended Stay from OPERA including all its details like Revenue, Rate, Membership, Errors. <p><strong>OperationId:</strong>deleteSuspendedStay</p>
+      operationId: deleteSuspendedStay
+      parameters:
+      - name: suspendedStayRecordId
+        in: path
+        required: true
+        description: Suspended Stay Record ID.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - SuspendedStay
+  /suspendedStays:
+    get:
+      summary: Get Suspended Stays
+      description: This API provides Suspended Stay information. Suspended stays are records that need to be manually processed, as they have been suspended during an upload to OPERA Cloud. <p><strong>OperationId:</strong>getSuspendedStays</p>
+      operationId: getSuspendedStays
+      parameters:
+      - name: hotelId
+        in: query
+        required: false
+        description: Hotel code.
+        schema:
+          type: string
+          maxLength: 20
+          minLength: 1
+      - name: reservationStatus
+        in: query
+        required: false
+        description: Status of reservation.
+        schema:
+          type: string
+          maxLength: 20
+          minLength: 1
+      - name: importDate
+        in: query
+        required: false
+        description: Date of creation or import of stay.
+        schema:
+          type: string
+          format: date
+      - name: importDateFrom
+        in: query
+        required: false
+        description: From date of creation or import of stay.
+        schema:
+          type: string
+          format: date
+      - name: importDateTo
+        in: query
+        required: false
+        description: To date of creation or import of stay.
+        schema:
+          type: string
+          format: date
+      - name: arrivalDateFrom
+        in: query
+        required: false
+        description: From date of arrival of reservation.
+        schema:
+          type: string
+          format: date
+      - name: arrivalDateTo
+        in: query
+        required: false
+        description: To date of arrival of reservation.
+        schema:
+          type: string
+          format: date
+      - name: departureDateFrom
+        in: query
+        required: false
+        description: From date of departure of reservation.
+        schema:
+          type: string
+          format: date
+      - name: departureDateTo
+        in: query
+        required: false
+        description: To date of departure of reservation.
+        schema:
+          type: string
+          format: date
+      - name: pmsResvConfNo
+        in: query
+        required: false
+        description: Reservation confirmation number in PMS.
+        schema:
+          type: string
+          maxLength: 50
+          minLength: 1
+      - name: clientID
+        in: query
+        required: false
+        description: Client ID/Corp/IATA of the profile in central.
+        schema:
+          type: string
+          maxLength: 20
+          minLength: 1
+      - name: pmsNameID
+        in: query
+        required: false
+        description: Profile number in PMS.
+        schema:
+          type: string
+          maxLength: 20
+          minLength: 1
+      - name: membershipType
+        in: query
+        required: false
+        description: Membership type of the profile.
+        schema:
+          type: string
+          maxLength: 20
+          minLength: 1
+      - name: membershipNo
+        in: query
+        required: false
+        description: Membership number of the profile.
+        schema:
+          type: string
+          maxLength: 50
+          minLength: 1
+      - name: errorDescription
+        in: query
+        required: false
+        description: Suspended reason description.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: limit
+        in: query
+        required: false
+        description: Indicates maximum number of records a Web Service should return.
+        schema:
+          type: integer
+          default: 20
+          maximum: 200
+      - name: offset
+        in: query
+        required: false
+        description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+        schema:
+          type: integer
+          default: 0
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response object for fetching Suspended Stays.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/suspendedStaySummariesType'
+        '204':
+          description: SuspendedStays not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - SuspendedStay
+  /suspendedStaysErrorsSummary:
+    get:
+      summary: Get suspended stays errors summary
+      description: Use this API to fetch the suspended stays errors summary.
+      operationId: getSuspendedStaysErrorsSummary
+      parameters:
+      - name: getByProperty
+        in: query
+        required: false
+        description: Indicates whether to fetch errors summary by property
+        schema:
+          type: boolean
+      - name: hotelId
+        in: query
+        required: false
+        description: Filter by specific property
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        description: Indicates maximum number of records a Web Service should return.
+        schema:
+          type: integer
+          default: 20
+          maximum: 200
+      - name: offset
+        in: query
+        required: false
+        description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+        schema:
+          type: integer
+          default: 0
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response object for fetching suspended stays errors summary
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/suspendedStaysErrorsSummaryResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - SuspendedStay
+components:
+  responses:
+    '406':
+      description: Not acceptable.
+    '414':
+      description: Request URI Too Large
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '403':
+      description: Forbidden
+    '413':
+      description: Request Entity Too Large
+    '415':
+      description: Unsupported Media Type
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '502':
+      description: Bad Gateway
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '503':
+      description: Service Unavailable
+    '401':
+      description: Unauthorized
+    '405':
+      description: Method not allowed
+  parameters:
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
+      schema:
+        type: string
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
+      schema:
+        type: string
+    x-externalsystem:
+      name: x-externalsystem
+      description: External system code.
+      in: header
+      x-example: EXTERNALSYSTEMCODE
+      schema:
+        type: string
+        maxLength: 40
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
+      schema:
+        type: string
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+  schemas:
+    suspendedStayRevenueType:
+      type: object
+      description: Suspended Stay Revenue information.
+      properties:
+        suspendedStayRecordId:
+          description: Suspended Stay Record ID.
+          type: string
+          minLength: 0
+          maxLength: 20
+        transactionDate:
+          description: Transaction date of the revenue.
+          type: string
+          format: date
+        revenueType:
+          description: Indicates the type of revenue.
+          type: string
+          minLength: 0
+          maxLength: 20
+        amount:
+          description: Revenue amount.
+          type: number
+    numericUDFType:
+      type: object
+      description: Used to hold user defined field of Numeric Type. It is highly recommended to use UDFN01, UDFN02,...UDFN40 (Total 40) as Numeric UDF names(commonly used on Reservation, Profile etc.). Name is not restricted using enumeration, to provide flexibility of different name usage if required.
+      properties:
+        name:
+          description: Name of user defined field.
+          type: string
+          minLength: 0
+          maxLength: 20
+        value:
+          description: Value of user defined field.
+          type: number
+        alternateName:
+          description: Label of user defined field used by vendors or customers.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    suspendedStayDailyRateType:
+      type: object
+      description: Suspended Stay Rate information.
+      properties:
+        suspendedStayRecordId:
+          description: Suspended Stay Record ID.
+          type: string
+          minLength: 0
+          maxLength: 20
+        transactionDate:
+          description: Transaction date of the rate.
+          type: string
+          format: date
+        rateCode:
+          description: Rate code used for the stay.
+          type: string
+          minLength: 0
+          maxLength: 20
+        marketCode:
+          description: Market Code of the stay.
+          type: string
+          minLength: 0
+          maxLength: 20
+        amount:
+          description: Rate amount.
+          $ref: '#/components/schemas/currencyAmountType'
+        numberDays:
+          description: Duration or length of the stay. The expected value is 1 for multiple Daily Rate records, and the actual number of nights for a single Daily Rate record.
+          type: number
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
+    userDefinedFieldsType:
+      type: object
+      description: A common type used to hold user defined fields(UDFs). This type should be used to handle UDFs on RReservation, Profiles, etc.
+      properties:
+        characterUDFs:
+          description: Collection of user defined fields of Character/String Type.
+          $ref: '#/components/schemas/characterUDFsType'
+        numericUDFs:
+          description: Collection of user defined fields of Numeric Type.
+          $ref: '#/components/schemas/numericUDFsType'
+        dateUDFs:
+          description: Collection of user defined fields of Date Type.
+          $ref: '#/components/schemas/dateUDFsType'
+    warningType:
+      type: object
+      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
+          type: string
+          maxLength: 2000
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+          type: string
+          minLength: 0
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+          maxLength: 2000
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+          maxLength: 2000
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+          maxLength: 2000
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+          maxLength: 2000
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        rph:
+          description: Reference Place Holder used as an index for this warning.
+          type: string
+          minLength: 1
+          maxLength: 8
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
+    numericUDFsType:
+      type: array
+      description: Used to hold collection of user defined fields of Numeric Type.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/numericUDFType'
+    suspendedStaysErrorsSummary:
+      type: object
+      properties:
+        property:
+          description: Property related to the errors
+          type: string
+        errorsDescription:
+          description: Description of the errors
+          type: string
+        errorCount:
+          description: Number of errors
+          type: integer
+      required:
+      - errorsDescription
+      - errorCount
+    suspendedStayErrorsType:
+      type: object
+      description: Collection of Suspended Stay Error information.
+      properties:
+        suspendedStays:
+          description: Suspended Stay Error information.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/suspendedStayErrorType'
+    dateUDFsType:
+      type: array
+      description: Used to hold collection of user defined fields of Date Type.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/dateUDFType'
+    status:
+      type: object
+      description: Response Body.
+      properties:
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    suspendedStayType:
+      type: object
+      description: Suspended Stay information.
+      properties:
+        hotelId:
+          description: Hotel code of the reservation.
+          type: string
+          minLength: 0
+          maxLength: 20
+        externalConfirmationNo:
+          description: External Confirmation number of the reservation on PMS side.
+          type: string
+          minLength: 0
+          maxLength: 50
+        reservationStatus:
+          description: Reservation status.
+          type: string
+          minLength: 0
+          maxLength: 20
+        createBusinessDate:
+          description: Business Date when the reservation was created.
+          type: string
+          format: date
+        importDate:
+          description: Date when the Suspended Stay record was created or imported.
+          type: string
+          format: date
+        confirmationNo:
+          description: Confirmation number of the reservation on central side.
+          type: string
+          minLength: 0
+          maxLength: 50
+        roomType:
+          description: Room type of the reservation.
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomTypeCharged:
+          description: Room Type used for the Rate calculation.
+          type: string
+          minLength: 0
+          maxLength: 20
+        sourceCode:
+          description: Source of the reservation.
+          type: string
+          minLength: 0
+          maxLength: 20
+        bookingMedium:
+          description: Classifies the medium(Channel field on reservation screen) through which the reservation is made.
+          type: string
+          minLength: 0
+          maxLength: 20
+        currencyCode:
+          description: Provides a currency code to reflect the currency in which an amount may be expressed.
+          type: string
+          minLength: 3
+          maxLength: 3
+        arrivalDate:
+          description: Date of arrival.
+          type: string
+          format: date
+        departureDate:
+          description: Date of departure.
+          type: string
+          format: date
+        adults:
+          description: Number of adults on the reservation.
+          type: number
+        children:
+          description: Number of children on the reservation.
+          type: number
+        cancellationDate:
+          description: Date of cancellation.
+          type: string
+          format: date
+        rateCode:
+          description: Rate Code of the reservation.
+          type: string
+          minLength: 0
+          maxLength: 20
+        rateCurrencyCode:
+          description: Currency code of the rate.
+          type: string
+          minLength: 3
+          maxLength: 3
+        rateAmount:
+          description: Rate amount.
+          type: number
+        complimentary:
+          description: Indicates if the reservation is complimentary.
+          type: boolean
+        paymentMethod:
+          description: Payment Method.
+          type: string
+          minLength: 0
+          maxLength: 20
+        stayStatus:
+          description: Status of the stay.
+          type: string
+          minLength: 0
+          maxLength: 20
+        fullGuestName:
+          description: Full display Name of guest profile.
+          type: string
+          minLength: 0
+          maxLength: 200
+        fullCompanyName:
+          description: Full display Name of company profile.
+          type: string
+          minLength: 0
+          maxLength: 200
+        fullTAName:
+          description: Full display Name of Travel Agent profile.
+          type: string
+          minLength: 0
+          maxLength: 200
+        fullSourceName:
+          description: Full display Name of Source profile.
+          type: string
+          minLength: 0
+          maxLength: 200
+        fullGroupName:
+          description: Full display Name of Group profile.
+          type: string
+          minLength: 0
+          maxLength: 200
+        posCode:
+          description: Point of Sales Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        interfaceId:
+          description: Identifier of the Interface.
+          type: string
+          minLength: 0
+          maxLength: 80
+        userDefinedFields:
+          description: Collection of user defined fields.
+          $ref: '#/components/schemas/userDefinedFieldsType'
+        suspendedStayRevenues:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/suspendedStayRevenueType'
+        suspendedStayErrors:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/suspendedStayErrorType'
+        suspendedStayDailyRates:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/suspendedStayDailyRateType'
+        suspendedStayMemberships:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/suspendedStayMembershipType'
+    dateUDFType:
+      type: object
+      description: Used to hold user defined field of Date Type.
+      properties:
+        name:
+          description: Used to hold user defined field of Date Type. It is highly recommended to use UDFD01, UDFD02,...UDFN20 (Total 20) as Date UDF names(commonly used on Reservation, Profile etc.). Name is not restricted using enumeration, to provide flexibility of different name usage if required.
+          type: string
+          minLength: 0
+          maxLength: 20
+        value:
+          description: Value of user defined field.
+          type: string
+          format: date
+          maxLength: 8
+        alternateName:
+          description: Label of user defined field used by vendors or customers.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    suspendedStayDetailType:
+      type: object
+      description: Suspended Stay Record ID detail about a Suspended Stay.
+      properties:
+        suspendedStayRecordId:
+          description: Suspended Stay Record ID.
+          type: string
+          minLength: 0
+          maxLength: 20
+    suspendedStayDetails:
+      type: object
+      description: Request object for process suspended stays.
+      properties:
+        suspendedStayDetailsInfo:
+          description: A collection of Suspended Stay Record IDs.
+          $ref: '#/components/schemas/suspendedStayDetailsType'
+        hotelId:
+          description: Hotel code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        reservationStatus:
+          description: Status of reservation.
+          type: string
+          minLength: 0
+          maxLength: 20
+        importDate:
+          description: Date of creation or import of stay.
+          type: string
+          format: date
+          maxLength: 8
+        importDateFrom:
+          description: From date of creation or import of stay.
+          type: string
+          format: date
+          maxLength: 8
+        importDateTo:
+          description: To date of creation or import of stay.
+          type: string
+          format: date
+          maxLength: 8
+        arrivalDateFrom:
+          description: From date of arrival of reservation.
+          type: string
+          format: date
+          maxLength: 8
+        arrivalDateTo:
+          description: To date of arrival of reservation.
+          type: string
+          format: date
+          maxLength: 8
+        departureDateFrom:
+          description: From date of departure of reservation.
+          type: string
+          format: date
+          maxLength: 8
+        departureDateTo:
+          description: To date of departure of reservation.
+          type: string
+          format: date
+          maxLength: 8
+        pmsResvConfNo:
+          description: Reservation confirmation number in PMS.
+          type: string
+          minLength: 0
+          maxLength: 50
+        clientID:
+          description: Client ID/Corp/IATA of the profile in central.
+          type: string
+          minLength: 0
+          maxLength: 20
+        pmsNameID:
+          description: Profile number in PMS.
+          type: string
+          minLength: 0
+          maxLength: 20
+        membershipType:
+          description: Membership type of the profile.
+          type: string
+          minLength: 0
+          maxLength: 20
+        membershipNo:
+          description: Membership number of the profile.
+          type: string
+          minLength: 0
+          maxLength: 50
+        errorDescription:
+          description: Suspended reason description.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    suspendedStayErrorType:
+      type: object
+      description: Suspended Stay Error information.
+      properties:
+        suspendedStayRecordId:
+          description: Suspended Stay Record ID.
+          type: string
+          minLength: 0
+          maxLength: 20
+        errorType:
+          description: Indicates the error type.
+          type: string
+          minLength: 0
+          maxLength: 20
+        errorDescription:
+          description: Indicates the description of the error.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    characterUDFsType:
+      type: array
+      description: Used to hold collection of user defined fields of Character/String Type.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/characterUDFType'
+    characterUDFType:
+      type: object
+      description: Used to hold user defined field of Character/String Type.
+      properties:
+        name:
+          description: Used to hold user defined field of Character Type. It is highly recommended to use UDFC01, UDFC02,...UDFC40 (Total 40) as Character/String UDF names(commonly used on Reservation, Profile etc.). Name is not restricted using enumeration, to provide flexibility of different name usage if required.
+          type: string
+          minLength: 0
+          maxLength: 20
+        value:
+          description: Value of user defined field.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        alternateName:
+          description: Label of user defined field used by vendors or customers.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    profileIdList:
+      type: array
+      description: Unique Id that references an object uniquely in the system.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/uniqueID_Type'
+    suspendedStaysErrorsSummaryType:
+      type: object
+      properties:
+        errorsSummary:
+          type: array
+          items:
+            $ref: '#/components/schemas/suspendedStaysErrorsSummary'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        count:
+          description: Total number of rows returned
+          type: integer
+    suspendedStaySummariesType:
+      type: object
+      description: A complex type containing the collection of Suspended Stay Summaries.
+      properties:
+        suspendedStaySummaries:
+          description: A collection of Suspended Stay Summaries.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/suspendedStaySummaryType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        count:
+          description: Total number of rows returned
+          type: integer
+    suspendedStaysErrorsSummaryResponse:
+      type: object
+      properties:
+        suspendedStaysErrorsSummary:
+          $ref: '#/components/schemas/suspendedStaysErrorsSummaryType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    suspendedStaySummaryType:
+      type: object
+      description: Collection of Suspended Stay information.
+      properties:
+        suspendedStayRecordId:
+          description: Suspended Stay Record ID.
+          type: string
+          minLength: 0
+          maxLength: 20
+        hotelId:
+          description: Hotel code of the reservation.
+          type: string
+          minLength: 0
+          maxLength: 20
+        reservationStatus:
+          description: Reservation status.
+          type: string
+          minLength: 0
+          maxLength: 20
+        externalConfirmationNo:
+          description: External Confirmation number of the reservation on PMS side.
+          type: string
+          minLength: 0
+          maxLength: 50
+        profileIdList:
+          description: Collection of unique profile identifiers
+          $ref: '#/components/schemas/profileIdList'
+        arrivalDate:
+          description: Date of arrival.
+          type: string
+          format: date
+        departureDate:
+          description: Date of departure.
+          type: string
+          format: date
+        stayStatus:
+          description: Status of the stay.
+          type: string
+          minLength: 0
+          maxLength: 20
+        stayMembershipDetails:
+          description: Pairs of membership type and number, comma separated values.
+          type: string
+        suspendedStayDate:
+          description: Suspended stay date
+          type: string
+          format: date
+        suspendedStayReason:
+          description: Suspended stay reason, comma separated values
+          type: string
+          minLength: 0
+          maxLength: 4000
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    suspendedStayDetailsType:
+      type: object
+      description: Suspended Stay Record ID details about a Suspended Stay.
+      properties:
+        suspendedStayRecordId:
+          description: List of Suspended Stay Record IDs.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/suspendedStayDetailType'
+    suspendedStayMembershipType:
+      type: object
+      description: Suspended Stay Membership information.
+      properties:
+        suspendedStayRecordId:
+          description: Suspended Stay Record ID.
+          type: string
+          minLength: 0
+          maxLength: 20
+        membershipType:
+          description: Membership Program Code or Membership Type.
+          type: string
+          minLength: 0
+          maxLength: 20
+        membershipId:
+          description: Membership Card Number.
+          type: string
+          minLength: 0
+          maxLength: 50
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    uniqueID_Type:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
+        idContext:
+          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+          type: string
+          minLength: 0
+          maxLength: 80
+    currencyAmountType:
+      type: object
+      description: A monetary value expressed with a currency code.
+      properties:
+        amount:
+          description: A monetary amount.
+          type: number
+        currencyCode:
+          description: Provides a currency code to reflect the currency in which an amount may be expressed.
+          type: string
+          minLength: 3
+          maxLength: 3
+externalDocs:
+  description: Find out more about Oracle Hospitality
+  url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

@@ -1,0 +1,1551 @@
+openapi: 3.2.0
+info:
+  title: OPERA Cloud Leisure Management API
+  description: APIs to cater for external Leisure Management functionality integrated with OPERA Cloud.<br /><br /> Compatible with OPERA Cloud release 26.2.0.0.<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>
+  version: 26.2.0.0
+  termsOfService: https://www.oracle.com/legal/terms.html
+  contact:
+    email: hospitality_apis_ww_grp@oracle.com
+  license:
+    name: UPL
+    url: https://opensource.org/licenses/upl
+servers:
+- url: /lms/v1
+tags:
+- name: LeisureManagement
+  description: The Leisure Management module offers a set of APIs to manage the activities for a guest like spa, golf, tours etc. The external system can create, change, cancel activities and send these updates to OPERA Cloud; either attached the activity to the OPERA Cloud Reservation or Profile.
+paths:
+  /hotels/{hotelId}/activityBookings:
+    get:
+      summary: Send a response to Look-up of Activity Bookings
+      description: This API will send a response to Look-up of Activity Bookings. <p><strong>OperationId:</strong>getActivityBookings</p>
+      operationId: getActivityBookings
+      parameters:
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique OPERA Hotel code
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: profileIds
+        in: query
+        description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: profileIdContext
+        in: query
+        description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          default:
+          - Opera
+      - name: profileIdsType
+        in: query
+        description: A reference to the type of object defined by the UniqueID element.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          default:
+          - Profile
+      - name: reservationIds
+        in: query
+        description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: reservationIdContext
+        in: query
+        description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          default:
+          - Opera
+      - name: reservationIdsType
+        in: query
+        description: A reference to the type of object defined by the UniqueID element.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          default:
+          - Reservation
+      - name: activityIds
+        in: query
+        description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: activityIdContext
+        in: query
+        description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: activityIdsType
+        in: query
+        description: A reference to the type of object defined by the UniqueID element.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystemreq'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Message received on an Activity Lookup.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/activityBookingsDetails'
+        '204':
+          description: ActivityBookings not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - LeisureManagement
+  /hotels/{hotelId}/profiles/{profileId}/activityBookings:
+    post:
+      summary: Send a response to Creation of Activity Booking
+      description: This API will send a response to Creation of Activity Booking. <p><strong>OperationId:</strong>postActivityBooking</p>
+      operationId: postActivityBookingForProfile
+      parameters:
+      - name: profileId
+        in: path
+        required: true
+        description: Unique OPERA Profile ID which is used to find any profile in OPERA.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique OPERA Hotel code
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystemreq'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '201':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - LeisureManagement
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/createActivityBooking'
+        description: Self-contained Request object that is used when Creating activities.
+        required: true
+    put:
+      summary: Send a response to Change in Activity Booking
+      description: This API will send a response to a  Change in Activity Booking request from external Activity Scheduler system. <p><strong>OperationId:</strong>putActivityBookingForProfile</p>
+      operationId: putActivityBookingForProfile
+      parameters:
+      - name: profileId
+        in: path
+        required: true
+        description: Unique OPERA Profile ID which is used to find any profile in OPERA.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique OPERA Hotel code
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystemreq'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: Self-contained response object that is used when Updating activities.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/activityBookingModified'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - LeisureManagement
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/changeActivityBooking'
+        description: Self-contained Request object that is used when Updating activities.
+        required: true
+    delete:
+      summary: Send a response to Cancellation of an Activity Booking
+      description: This API will send a response to Cancellation of an Activity Booking. <p><strong>OperationId:</strong>deleteActivityBooking</p>
+      operationId: deleteActivityBookingForProfile
+      parameters:
+      - name: profileId
+        in: path
+        required: true
+        description: Unique OPERA Profile ID which is used to find any profile in OPERA.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique OPERA Hotel code
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: activityId
+        in: query
+        required: true
+        description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        schema:
+          type: string
+      - name: activityIdType
+        in: query
+        x-example: EXTERNALSYSTEMCODE
+        required: true
+        description: A reference to the type of object defined by the UniqueID element.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystemreq'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - LeisureManagement
+  /hotels/{hotelId}/reservations/{reservationId}/activityBookings:
+    post:
+      summary: Send a response to Creation of Activity Booking
+      description: This API will send a response to Creation of Activity Booking. <p><strong>OperationId:</strong>postActivityBooking</p>
+      operationId: postActivityBooking
+      parameters:
+      - name: reservationId
+        in: path
+        required: true
+        description: Unique OPERA internal Reservation ID which is used to find any reservation in OPERA. This ID is a primary identification of a reservation in OPERA.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique OPERA Hotel code
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystemreq'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '201':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - LeisureManagement
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/createActivityBooking'
+        description: Self-contained Request object that is used when Creating activities.
+        required: true
+    put:
+      summary: Send a response to Change in Activity Booking
+      description: This API will send a response to a  Change in Activity Booking request from external Activity Scheduler system. <p><strong>OperationId:</strong>putActivityBooking</p>
+      operationId: putActivityBooking
+      parameters:
+      - name: reservationId
+        in: path
+        required: true
+        description: Unique OPERA internal Reservation ID which is used to find any reservation in OPERA. This ID is a primary identification of a reservation in OPERA.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique OPERA Hotel code
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystemreq'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: Self-contained response object that is used when Updating activities.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/activityBookingModified'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - LeisureManagement
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/changeActivityBooking'
+        description: Self-contained Request object that is used when Updating activities.
+        required: true
+    delete:
+      summary: Send a response to Cancellation of an Activity Booking
+      description: This API will send a response to Cancellation of an Activity Booking. <p><strong>OperationId:</strong>deleteActivityBooking</p>
+      operationId: deleteActivityBooking
+      parameters:
+      - name: reservationId
+        in: path
+        required: true
+        description: Unique OPERA internal Reservation ID which is used to find any reservation in OPERA. This ID is a primary identification of a reservation in OPERA.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique OPERA Hotel code
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: activityId
+        in: query
+        required: true
+        description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        schema:
+          type: string
+      - name: activityIdType
+        in: query
+        x-example: EXTERNALSYSTEMCODE
+        required: true
+        description: A reference to the type of object defined by the UniqueID element.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystemreq'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - LeisureManagement
+  /hotels/{hotelId}/reservations/{reservationId}/locationNotifications:
+    post:
+      summary: Send a response to Location Notification
+      description: This API will send a response to a Location Notification. <p><strong>OperationId:</strong>postLocationNotification</p>
+      operationId: postLocationNotification
+      parameters:
+      - name: reservationId
+        in: path
+        required: true
+        description: Unique OPERA internal Reservation ID which is used to find any reservation in OPERA. This ID is a primary identification of a reservation in OPERA.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique OPERA Hotel code
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '201':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: HATEOAS links which help the consumer to navigate to resources
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - LeisureManagement
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/locationNotificationToBeCreated'
+        description: Generic self-contained request object that is used for Location Notification
+        required: true
+  /services/leisureManagement/status:
+    get:
+      summary: Ping the Leisure Management Service
+      description: Service ping the Leisure Management Service. <p><strong>OperationId:</strong>pingLeisureManagementService</p>
+      operationId: pingLeisureManagementService
+      parameters:
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response for Ping operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/operaVersion'
+        '204':
+          description: pingLeisureManagementService not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - LeisureManagement
+components:
+  schemas:
+    changeActivityBooking:
+      type: object
+      properties:
+        activityBooking:
+          description: Information related to activity booking to be modified.
+          $ref: '#/components/schemas/activityBookingRQType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    activityBookingRQType:
+      type: object
+      description: The choice between a reservation header or a profile ID. One or the other is required.
+      properties:
+        hotelId:
+          description: This is not required if a Reservation Id is provided
+          type: string
+          minLength: 0
+          maxLength: 20
+        reservationId:
+          description: Required unique identifier of the reservation
+          $ref: '#/components/schemas/uniqueID_Type'
+        profileId:
+          description: ProfileID associated with the Activity.
+          $ref: '#/components/schemas/uniqueID_Type'
+        activities:
+          description: A collection of activities
+          $ref: '#/components/schemas/activityList'
+    activityBookingModified:
+      type: object
+      properties:
+        activityBooking:
+          description: Information related to modified activity booking.
+          $ref: '#/components/schemas/activityBookingRSType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    createActivityBooking:
+      type: object
+      properties:
+        activityBooking:
+          description: Information related to activity booking to be created.
+          $ref: '#/components/schemas/activityBookingRQType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    countryNameType:
+      type: object
+      description: Code for a country or a nationality.
+      properties:
+        value:
+          type: string
+          description: Used for Character Strings, length 0 to 200.
+          minLength: 0
+          maxLength: 200
+        code:
+          description: Code for a country or a nationality.
+          type: string
+          minLength: 0
+          maxLength: 20
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
+    locationNotificationStatus:
+      type: string
+      description: '(Enumeration) There are 3 possible values: SET, CLEAR and OTHER'
+      enum:
+      - Set
+      - Clear
+      - Other
+    personNameType:
+      type: object
+      description: This provides name information for a person.
+      properties:
+        namePrefix:
+          description: Salutation of honorific (e.g. Mr., Mrs., Ms., Miss, Dr.)
+          type: string
+          minLength: 0
+          maxLength: 40
+        givenName:
+          description: Given name, first name or names.
+          type: string
+          minLength: 0
+          maxLength: 40
+        middleName:
+          description: The middle name of the person name.
+          type: string
+          minLength: 0
+          maxLength: 40
+        surname:
+          description: Family name, last name. May also be used for full name if the sending system does not have the ability to separate a full name into its parts, e.g. the surname element may be used to pass the full name.
+          type: string
+          minLength: 0
+          maxLength: 40
+        nameSuffix:
+          description: Hold various name suffixes and letters (e.g. Jr., Sr., III, Ret., Esq.)
+          type: string
+          minLength: 0
+          maxLength: 40
+        nameTitle:
+          description: Degree or honors (e.g., Ph.D., M.D.)
+          type: string
+          minLength: 0
+          maxLength: 80
+        nameTitleSuffix:
+          description: Title Suffix. Must be populated if ADVANCED_TITLE is on.
+          type: integer
+        envelopeGreeting:
+          description: Envelope Greeting of the profile
+          type: string
+        salutation:
+          description: Salutation of the profile
+          type: string
+        nameType:
+          description: Type of name of the individual, such as former, nickname, alternate or alias name.
+          $ref: '#/components/schemas/personNameTypeType'
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        externalSystem:
+          description: When name type is external, indicates the external system the name belongs to.
+          type: string
+          minLength: 0
+          maxLength: 40
+    warningType:
+      type: object
+      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
+          type: string
+          maxLength: 2000
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+          type: string
+          minLength: 0
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+          maxLength: 2000
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+          maxLength: 2000
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+          maxLength: 2000
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+          maxLength: 2000
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        rph:
+          description: Reference Place Holder used as an index for this warning.
+          type: string
+          minLength: 1
+          maxLength: 8
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
+    activityList:
+      type: array
+      description: A collection of Activity objects.
+      maxItems: 4000
+      items:
+        type: object
+        properties:
+          activityIds:
+            description: A collection of reference ID values that identify this uniquely scheduled activity instance. May contain one ID per external system plus an internal identifier.
+            $ref: '#/components/schemas/uniqueIDListType'
+          type:
+            description: 'The Type of the activity. Eg: SPA, Golf etc.'
+            type: string
+          location:
+            description: 'The Location where the activity takes place. Eg: Salon'
+            type: string
+          name:
+            description: Name of the people for whom the activity is scheduled. Can be more than one but should be equal to the number of persons
+            type: array
+            maxItems: 4000
+            items:
+              type: string
+              minLength: 0
+              maxLength: 200
+          numberOfPersons:
+            description: The total number of the people for whom the activity is scheduled. Can be more than one but should be equal to the number of persons
+            type: integer
+          timeSpan:
+            description: The time with-in which an activity falls (Starts/Ends/Spans)
+            $ref: '#/components/schemas/dateTimeSpanType'
+          duration:
+            description: The time span of the activity falls
+            $ref: '#/components/schemas/dateTimeSpanType'
+          description:
+            description: Description of the activity
+            type: array
+            maxItems: 4000
+            items:
+              type: string
+              minLength: 0
+              maxLength: 2000
+          note:
+            description: Any additional notes or comments regarding the scheduled activity.
+            type: array
+            maxItems: 4000
+            items:
+              type: string
+              minLength: 0
+              maxLength: 2000
+          groupCode:
+            description: Any Block code associated with the activity if its a Group booking.
+            type: string
+          amount:
+            description: The amount charged for the activity.
+            $ref: '#/components/schemas/currencyAmountType'
+          deposit:
+            description: A monetary value expressed with a currency code.
+            type: object
+            properties:
+              amount:
+                description: A monetary amount.
+                type: number
+              currencyCode:
+                description: Provides a currency code to reflect the currency in which an amount may be expressed.
+                type: string
+                minLength: 3
+                maxLength: 3
+              collectedBy:
+                type: string
+                enum:
+                - Vendor
+                - Agent
+                - Other
+          inactiveDate:
+            description: The Date by which the activity is deemed Cancelled/Deleted.
+            type: string
+            format: date-time
+          participants:
+            description: The names of the participants.
+            type: array
+            maxItems: 4000
+            items:
+              $ref: '#/components/schemas/personNameType'
+          uRLLink:
+            description: The URL link to launch the Activity Reservation System to view or edit full details of this activity.
+            type: string
+          extensions:
+            description: Vendor extensions to the activity record.
+            type: array
+            maxItems: 4000
+            items:
+              type: string
+          status:
+            description: Activity reservation status. Typical examples are RESERVED, BOOKED, CANCELLED, and TENTATIVE.
+            type: string
+          statusDescription:
+            description: Activity reservation status description. Typical examples are RESERVED, BOOKED, CANCELLED, and TENTATIVE.
+            type: string
+          link:
+            description: When true indicates that activity link only needs to be inserted or deleted for this record.
+            type: boolean
+        description: Represents a single instance of a scheduled activity.
+    locationNotificationToBeCreated:
+      type: object
+      properties:
+        reservationId:
+          description: Required unique identifier of the reservation
+          $ref: '#/components/schemas/uniqueID_Type'
+        activityTime:
+          description: The scheduled start and End time of Location Notification.
+          $ref: '#/components/schemas/dateTimeSpanType'
+        locationText:
+          description: Location Text of the Notification
+          $ref: '#/components/schemas/formattedTextTextType'
+        profileId:
+          description: Required unique identifier of the Profile ID
+          $ref: '#/components/schemas/uniqueID_Type'
+        description:
+          description: Description of the Location Notification
+          $ref: '#/components/schemas/formattedTextTextType'
+        locationNotificationStatus:
+          description: Location Notification Status
+          $ref: '#/components/schemas/locationNotificationStatus'
+        otherLocationNotificationStatus:
+          type: string
+          maxLength: 2000
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    activityBookingRSType:
+      type: object
+      description: Generic self-contained response object that is used when inserting/ updating/ canceling activities.
+      properties:
+        activities:
+          description: A collection of activities
+          $ref: '#/components/schemas/activityList'
+    activityBookingsDetails:
+      type: object
+      properties:
+        activityLookUpList:
+          description: Criteria for fetching Activity Bookings.
+          type: array
+          items:
+            $ref: '#/components/schemas/fetchActivityBookingsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    fetchActivityBookingsType:
+      type: object
+      description: Used in the request message to describe the "filtering Criteria" when executing an activity lookup.
+      properties:
+        profileId:
+          description: ProfileID associated with the Activity under lookup.
+          $ref: '#/components/schemas/uniqueIDListType'
+        personName:
+          description: Detailed name information for the customer.
+          $ref: '#/components/schemas/personNameType'
+        address:
+          description: Detailed Address information for the customer.
+          $ref: '#/components/schemas/addressType'
+        activities:
+          description: The specific activity information to be used for filtering the Look-up.
+          $ref: '#/components/schemas/activityList'
+        hotelId:
+          description: Hotel Code, It is used to filter hotel specific children to this specific hotel code.
+          type: string
+          minLength: 0
+          maxLength: 20
+    personNameTypeType:
+      type: string
+      description: Person's name in an external system.
+      enum:
+      - Primary
+      - Alternate
+      - Incognito
+      - External
+      - Phonetic
+    status:
+      type: object
+      description: Response Body.
+      properties:
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    dateTimeSpanType:
+      type: object
+      description: Allows for a choice in description of the amount of time spanned by this type. EndDate specifies a specific date, while Duration provides a measure of time to add to the StartDate to yield end date.
+      properties:
+        startDateTime:
+          type: string
+          format: date-time
+        endDateTime:
+          type: string
+          format: date-time
+    uniqueIDListType:
+      type: array
+      description: Unique Id that references an object uniquely in the system.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/uniqueID_Type'
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    formattedTextTextType:
+      type: object
+      description: Provides text and indicates whether it is formatted or not.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+    operaVersion:
+      type: object
+      description: Response for Ping operation.
+      properties:
+        operaVersion:
+          description: Opera version number.
+          $ref: '#/components/schemas/operaVersionNumberType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    operaVersionNumberType:
+      type: string
+      description: Current Opera Version Number
+      minLength: 0
+      maxLength: 40
+    uniqueID_Type:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
+        idContext:
+          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+          type: string
+          minLength: 0
+          maxLength: 80
+    addressType:
+      type: object
+      description: Provides address information.
+      properties:
+        isValidated:
+          description: Indicator to define if the Address is validated by the Address Validation System.
+          type: boolean
+        addressLine:
+          description: When the address is unformatted (FormattedInd="false") these lines will contain free form address details. When the address is formatted and street number and street name must be sent independently, the street number will be sent using StreetNmbr, and the street name will be sent in the first AddressLine occurrence.
+          type: array
+          maxItems: 4
+          items:
+            type: string
+            minLength: 0
+            maxLength: 80
+        cityName:
+          description: City (e.g., Dublin), town, or postal station (i.e., a postal service territory, often used in a military address).
+          type: string
+          minLength: 0
+          maxLength: 40
+        postalCode:
+          description: Post Office Code number.
+          type: string
+          minLength: 0
+          maxLength: 15
+        cityExtension:
+          description: Post Office City Extension Code number. City Extension mainly used for UK addresses.
+          type: string
+          minLength: 0
+          maxLength: 20
+        county:
+          description: County or District Name (e.g., Fairfax). This is read only.
+          type: string
+          minLength: 0
+          maxLength: 20
+        state:
+          description: State or Province name (e.g., Texas).
+          type: string
+          minLength: 0
+          maxLength: 20
+        country:
+          description: Country name (e.g., Ireland).
+          $ref: '#/components/schemas/countryNameType'
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        type:
+          description: Defines the type of address (e.g. home, business, other).
+          type: string
+          minLength: 0
+          maxLength: 20
+        typeDescription:
+          description: Describes the type code
+          type: string
+        primaryInd:
+          description: When true, indicates a primary information.
+          type: boolean
+        updateReservations:
+          description: Indicates whether to update the reservations or not. If true and the address is primary, then all associated active reservations will be updated with the new primary address.
+          type: boolean
+        barCode:
+          description: The postal barcode for the address.
+          type: string
+          minLength: 0
+          maxLength: 100
+        createDateTime:
+          description: Time stamp of the creation.
+          type: string
+          format: date-time
+        creatorId:
+          description: ID of creator. The creator could be a software system identifier or an identifier of an employee responsible for the creation.
+          type: string
+          minLength: 0
+          maxLength: 200
+        lastModifyDateTime:
+          description: Time stamp of last modification.
+          type: string
+          format: date-time
+        lastModifierId:
+          description: Identifies the last software system or person to modify a record.
+          type: string
+          minLength: 0
+          maxLength: 200
+        purgeDate:
+          description: Date an item will be purged from a database (e.g., from a live database to an archive).
+          type: string
+          format: date
+          maxLength: 8
+    currencyAmountType:
+      type: object
+      description: A monetary value expressed with a currency code.
+      properties:
+        amount:
+          description: A monetary amount.
+          type: number
+        currencyCode:
+          description: Provides a currency code to reflect the currency in which an amount may be expressed.
+          type: string
+          minLength: 3
+          maxLength: 3
+  responses:
+    '406':
+      description: Not acceptable.
+    '414':
+      description: Request URI Too Large
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '403':
+      description: Forbidden
+    '413':
+      description: Request Entity Too Large
+    '415':
+      description: Unsupported Media Type
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '502':
+      description: Bad Gateway
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '503':
+      description: Service Unavailable
+    '401':
+      description: Unauthorized
+    '405':
+      description: Method not allowed
+  parameters:
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
+      schema:
+        type: string
+    x-externalsystemreq:
+      name: x-externalsystem
+      required: true
+      description: External system code.
+      in: header
+      x-example: EXTERNALSYSTEMCODE
+      schema:
+        type: string
+        maxLength: 80
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
+      schema:
+        type: string
+    x-externalsystem:
+      name: x-externalsystem
+      description: External system code.
+      in: header
+      x-example: EXTERNALSYSTEMCODE
+      schema:
+        type: string
+        maxLength: 40
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
+      schema:
+        type: string
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+externalDocs:
+  description: Find out more about Oracle Hospitality
+  url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

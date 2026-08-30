@@ -1,0 +1,2260 @@
+openapi: 3.2.0
+info:
+  title: OPERA Cloud Reservation Package Category API
+  description: APIs to cater for Reservation functionality in OPERA Cloud. <br /><br />OPERA Cloud Reservations provides a complete set of capabilities for creating and updating reservations. Reservations are a central feature of OPERA Cloud. As a key source of information, the reservation specifies a guest's arrival date, departure date, room type, rate, packages, and many other details. It is also a gateway to dozens of other functions that contribute to the guest's experience.  All reservations in OPERA Cloud require a guest profile.  <br /><br /> You can create profiles while booking a reservation. If a profile already exists, you can look it up (using getProfiles in CRM module) and attach it to the reservation during the reservation booking process using the Profile ID.<br /><br /> Compatible with OPERA Cloud release 26.2.0.0.<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>
+  version: 26.2.0.0
+  termsOfService: https://www.oracle.com/legal/terms.html
+  contact:
+    email: hospitality_apis_ww_grp@oracle.com
+  license:
+    name: UPL
+    url: https://opensource.org/licenses/upl
+servers:
+- url: /rsv/v1
+tags:
+- name: PackageCategory
+paths:
+  /hotels/{hotelId}/reservations/packageCategoryReservations:
+    get:
+      summary: Get Reservations by pacakge and consumption date
+      description: Use this API to get reservations with package consumption for a specific date. <p><strong>OperationId:</strong>getReservationsByPackage</p>
+      operationId: getReservationsByPackage
+      parameters:
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique ID of the hotel where reservation is searched based on reservation ID.
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: packageCategory
+        in: query
+        required: false
+        description: Package Category of the package attached to the reservation. Reserved for future development.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            maxItems: 20
+      - name: packageCode
+        in: query
+        required: false
+        description: Package code of the package attached to the reservation
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            maxItems: 20
+      - name: date
+        in: query
+        required: true
+        description: Forecasted package consumption date
+        schema:
+          type: string
+          format: date
+      - name: limit
+        in: query
+        required: false
+        description: Indicated maximum number of reservations to be sent in the response
+        schema:
+          type: integer
+          default: 30
+      - name: offset
+        in: query
+        required: false
+        description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response object to the Fetch Reservations by package request operation. Based on the criteria, reservation information is returned.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/packageCategoryReservations'
+        '204':
+          description: HotelReservations not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - PackageCategory
+components:
+  schemas:
+    guestHousekeepingServiceRequestType:
+      type: string
+      description: Possible values for the Guest Service Status.
+      enum:
+      - DoNotDisturb
+      - MakeUpRoom
+      - NoStatusSelected
+      - ServiceDeclined
+    cardReIssueType:
+      type: string
+      description: Request to re issue a new card.
+      enum:
+      - Pending
+      - NotApplicable
+      - Requested
+    stayInfoType:
+      type: object
+      description: Details on the Room Stay including Guest Counts, Time Span of this Room Stay, pointers to Res Guests, guest Memberships, Comments and Special Requests pertaining to this particular Room Stay and finally financial information related to the Room Stay, including Guarantee, Deposit and Payment and Cancellation Penalties.
+      properties:
+        arrivalDate:
+          type: string
+          format: date
+        departureDate:
+          type: string
+          format: date
+        originalTimeSpan:
+          description: The Original Time Span covers the Room Stay dates of the original reservation.
+          $ref: '#/components/schemas/timeSpanType'
+        bookingTimeSpan:
+          description: The booking time span of the reservation, only applicable when time increments are being used.
+          $ref: '#/components/schemas/bookingTimeSpanType'
+        expectedTimes:
+          description: The expected arrival, return and departure times of the guest.
+          $ref: '#/components/schemas/resExpectedTimesType'
+        adultCount:
+          description: A collection of Guest Counts associated with Room Stay.
+          type: integer
+        childCount:
+          description: A collection of Child Counts associated with Room Stay.
+          type: integer
+        childAges:
+          description: Defines Children's Ages. Number of children ages mentioned may mot match with children counts.
+          $ref: '#/components/schemas/childAgesType'
+        childBuckets:
+          description: Defines children counts with Age Qualifying Group(Child Bucket#1) classification.
+          $ref: '#/components/schemas/childBucketsType'
+        roomClass:
+          description: Room class code
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomType:
+          description: Room type code
+          type: string
+          minLength: 0
+          maxLength: 20
+        numberOfRooms:
+          description: Room Id
+          type: integer
+        roomId:
+          description: Room Id
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomOwnershipType:
+          description: Provides the information of the assigned reservation room is an Owner, Referral or regular room.This value is returned when Room Rotation OPERA Control is active and room number is assigned to a reservation.
+          $ref: '#/components/schemas/reservationRoomOwnershipType'
+        scheduledRoomMoveRoomPending:
+          type: boolean
+          description: Pending Scheduled Move Room.
+        ratePlanCode:
+          description: Rate plan code
+          type: string
+          minLength: 0
+          maxLength: 20
+        postingInterval:
+          description: Specifies the frequency at which charges are posted for the rate plan on the reservation.
+          $ref: '#/components/schemas/postingIntervalType'
+        rateAmount:
+          description: Rate amount
+          $ref: '#/components/schemas/currencyAmountType'
+        offshoreRateInformation:
+          $ref: '#/components/schemas/offshoreRateType'
+        points:
+          description: The Points contains the number of points used to book a particular room type.
+          $ref: '#/components/schemas/pointsType'
+        rateSuppressed:
+          description: Whether this rate should be suppressed from view
+          type: boolean
+        reservationBlock:
+          description: Key information about the block for this reservation.
+          $ref: '#/components/schemas/reservationBlockType'
+        bookingChannelCode:
+          description: Classifies the medium(Channel field on reservation screen) through which the reservation is made.
+          type: string
+          minLength: 0
+          maxLength: 40
+        linkCode:
+          description: Party code
+          type: string
+          maxLength: 2000
+        fixedRate:
+          description: True if the rate is a fixed rate, otherwise false
+          type: boolean
+        totalAmount:
+          description: The total amount charged for the Room Stay including additional occupant amounts and fees. If TaxInclusive is set to True, then taxes are included in the total amount.
+          $ref: '#/components/schemas/currencyAmountType'
+        guarantee:
+          description: The guarantee information associated to the Room Stay. A maximum of 5 occurances are available for use depending on the context.
+          $ref: '#/components/schemas/resGuaranteeType'
+        promotion:
+          description: Promotion Codes
+          $ref: '#/components/schemas/promotionType'
+        marketCode:
+          description: Market code
+          type: string
+          minLength: 0
+          maxLength: 20
+        sourceCode:
+          description: Source of business
+          type: string
+          minLength: 0
+          maxLength: 20
+        sourceCodeDescription:
+          description: Description of the source of business.
+          type: string
+          minLength: 0
+          maxLength: 4000
+        balance:
+          description: Balance amount
+          $ref: '#/components/schemas/currencyAmountType'
+        compBalance:
+          description: Comp Balance amount
+          $ref: '#/components/schemas/currencyAmountType'
+        roomTypeCharged:
+          description: Room type code that was charged
+          type: string
+          minLength: 0
+          maxLength: 20
+        depositPayments:
+          description: A collection of deposit and/or payments for the Room Stay.
+          $ref: '#/components/schemas/currencyAmountType'
+        guestServiceStatus:
+          description: Service Status of In House guest like DND or MUP
+          $ref: '#/components/schemas/guestHousekeepingServiceRequestType'
+        scheduledCheckoutTime:
+          description: Indicates that this reservation is scheduled for automated check out.
+          type: string
+          format: date
+        roomNumberLocked:
+          description: When true, indicates a room number cannot be changed. When false, indicates a room number may be changed.
+          type: boolean
+        pseudoRoom:
+          description: True indicates as pseudo room type. This is usually used for a posting master reservation.
+          type: boolean
+        assignedByAI:
+          description: Represents the room was assigned by AI Room Assignment.
+          type: boolean
+        upgradedByAI:
+          description: Represents the room was assigned by AI Room Assignment.
+          type: boolean
+        roomAvailableNights:
+          description: Number of nights this room is avaiable if room is assigned to reservation
+          type: integer
+        backToBack:
+          description: This attribute indicates if the linked reservation is marked as Back to Back or not.
+          type: boolean
+        backToBackSequence:
+          description: This attribute represents Back To Back Sequence of Linked Reservations(e.g. '1 of 2' i.e, 1 indicates Sequence Position of total count 2). This is applicable when OPERA control Back to Back Handling for Linked Reservations is active.
+          $ref: '#/components/schemas/backToBackResSequenceType'
+        scheduledRoomMoveResponseType:
+          description: Scheduled Room Move Response Information.
+          $ref: '#/components/schemas/scheduledRoomMoveResponseType'
+        backToBackGroupId:
+          description: This attribute represents a common identifier for a subgroup of linked reservations marked as Back to Back in a group of linked reservations.
+          type: string
+          minLength: 0
+          maxLength: 80
+    resAccompanyGuestInfoType:
+      type: object
+      properties:
+        firstName:
+          description: Given name, first name or names
+          type: string
+        lastName:
+          description: Family name, last name.
+          type: string
+        fullName:
+          description: String representation of the full name
+          type: string
+        alternateFirstName:
+          description: Alternate first name
+          type: string
+        alternateLastName:
+          description: Alternate last name.
+          type: string
+        alternateFullName:
+          description: Alternate full name
+          type: string
+        registrationCardNo:
+          description: Unique identifier of the police registration card number.
+          type: string
+          minLength: 0
+          maxLength: 40
+        profileIdList:
+          description: Unique identifiers for the Profile for both internal and external systems. In case of Travel Agent the IATA code and in case of Company can be any form of identifier as id.
+          $ref: '#/components/schemas/profileIdList'
+        externalReferences:
+          description: External References information for this Profile. Will be returned in getReservations and getHotelReservations when the 'profileExternalReferencesToFetch' query parameter is sent.
+          $ref: '#/components/schemas/externalReferencesType'
+    resSharedGuestInfoType:
+      type: object
+      description: Contains information regarding the share reservation.
+      properties:
+        profileId:
+          $ref: '#/components/schemas/profileId'
+        reservationId:
+          $ref: '#/components/schemas/reservationId'
+        firstName:
+          description: Given name, first name or names
+          type: string
+        lastName:
+          description: Family name, last name.
+          type: string
+        fullName:
+          description: String representation of the full name
+          type: string
+    cardTypeType:
+      type: string
+      description: This is required for Credit Card Payment Methods. This indicates the type of Credit Card associated with this payment method.
+      enum:
+      - Ab
+      - Am
+      - Ax
+      - Cb
+      - Dc
+      - Ds
+      - Dt
+      - Ec
+      - Er
+      - Jc
+      - Jl
+      - Mc
+      - Nb
+      - So
+      - St
+      - Sw
+      - Va
+      - Xy
+      - Zz
+      - Cp
+      - Cu
+    backToBackResSequenceType:
+      type: object
+      description: Type object represents Back To Back Sequence Position and Total Count of Linked Back To Back Reservations ordered by consecutive Stay Dates.
+      properties:
+        position:
+          description: Indicates the Sequence position of Back to Back Reservation.
+          type: integer
+        totalCount:
+          description: Indicates the total count of Back To Back Reservations in the group of Linked Reservations.
+          type: integer
+    namePrefixType:
+      type: string
+      description: Salutation of honorific. (e.g., Mr. Mrs., Ms., Miss, Dr.)
+      minLength: 0
+      maxLength: 40
+    pointsType:
+      type: object
+      description: The Redeem Points contains the number of points required to book a room type.
+      properties:
+        awardsType:
+          description: Awards type for the award type rate code.
+          type: string
+        points:
+          description: No of points required to book this Room Stay.
+          type: integer
+    packageCodeHeaderType:
+      type: object
+      properties:
+        primaryDetails:
+          description: Package code header primary details.
+          $ref: '#/components/schemas/configPackagePrimaryDetailsType'
+        transactionDetails:
+          description: Package code header transaction information.
+          $ref: '#/components/schemas/configPackageTransactionType'
+        postingAttributes:
+          description: Package code posting attributes.
+          $ref: '#/components/schemas/configPostingAttributesType'
+    membershipEarningPreferenceType:
+      type: string
+      description: The earning preference of a membership, it depends on the type of property. eg. when the property is a airline it should be Miles, other than Points.
+      enum:
+      - Points
+      - Miles
+    reservationIdList:
+      type: array
+      description: Unique Id that references an object uniquely in the system.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/uniqueID_Type'
+    reservationPackageScheduleType:
+      type: object
+      description: A HotelPackageSchedule type.
+      properties:
+        consumptionDate:
+          description: The date the package was used or can be used.
+          type: string
+          format: date
+        unitPrice:
+          description: The price per unit of the package.
+          type: number
+        totalQuantity:
+          description: The total quantity of the package for this date, calculated based on the calculation rule as defined in the PackageHeaderType
+          type: integer
+        computedResvPrice:
+          description: Computed Reservation Price of the package. Calculation Will Be Performed Based On Other Parameters.
+          type: number
+        computedResvAllowance:
+          description: Computed Reservation Allowance of the package. Calculation is based off of the allowance amount, posting rhythm, and quantity for the package.
+          type: number
+        unitAllowance:
+          description: The allowance per unit of the package.
+          type: number
+        reservationDate:
+          description: The date of the Reservation when this package is applicable. This can be different from the date the package will be consumed. Example are next day packages. Reservation date is when the package is applied to the guest and Consumption date is when the guest can consume the package.
+          type: string
+          format: date
+        originalUnitPrice:
+          description: The original price per unit of the package if it has been changed.
+          type: number
+        originalUnitAllowance:
+          description: The original allowance per unit of the package if it has been changed.
+          type: number
+        ageBucket2OriginalUnitPrice:
+          description: The original price per unit for Child Bucket 2 / Guest Age Category 2 of the package. Applicable when Child Bucket or Guest Age Categories functionality is active and package's price calculation rule is Per Child
+          type: number
+        ageBucket2OriginalUnitAllowance:
+          description: The original allowance per unit for Child Bucket 2 / Guest Age Category 2 of the package. Applicable when Child Bucket or Guest Age Categories functionality is active and package's price calculation rule is Per Child
+          type: number
+        ageBucket2UnitPrice:
+          description: Unit Price for Child Bucket 2 /Guest Age Category 2. Applicable when Child Bucket or Guest Age Categories functionality is active and package's price calculation rule is Per Child.
+          type: number
+        ageBucket2UnitAllowance:
+          description: Unit Allowance for Child Bucket 2 /Guest Age Category 2. Applicable when Child Bucket or Guest Age Categories functionality is active and package's price calculation rule is Per Child.
+          type: number
+        ageBucket3OriginalUnitPrice:
+          description: The original price per unit for Child Bucket 3 / Guest Age Category 3 of the package. Applicable when Child Bucket or Guest Age Categories functionality is active and package's price calculation rule is Per Child
+          type: number
+        ageBucket3OriginalUnitAllowance:
+          description: The original allowance per unit for Child Bucket 3 / Guest Age Category 3 of the package. Applicable when Child Bucket or Guest Age Categories functionality is active and package's price calculation rule is Per Child
+          type: number
+        ageBucket3UnitPrice:
+          description: Unit Price for Child Bucket 3 /Guest Age Category 3. Applicable when Child Bucket or Guest Age Categories functionality is active and package's price calculation rule is Per Child
+          type: number
+        ageBucket3UnitAllowance:
+          description: Unit Price for Child Bucket 3 /Guest Age Category 3. Applicable when Child Bucket or Guest Age Categories functionality is active and package's price calculation rule is Per Child
+          type: number
+        calculatedQuantity:
+          description: The calculated quantity available to be consumed for the package based on the package's quantity and posting rhythm.
+          type: integer
+        consumedQuantity:
+          description: The quantity consumed for the package.
+          type: integer
+        forecastConsumptionDate:
+          description: The forecasted consumption date of the package.
+          type: string
+          format: date
+        consumedAllowance:
+          description: The allowance amount consumed for the package based on transactions posted.
+          type: number
+    resPaymentCardType:
+      type: object
+      description: Information on a credit card for the customer.
+      properties:
+        cardId:
+          description: credit card id
+          $ref: '#/components/schemas/uniqueID_Type'
+        currentAuthorizedAmount:
+          $ref: '#/components/schemas/currencyAmountType'
+        approvalAmountNeeded:
+          $ref: '#/components/schemas/currencyAmountType'
+        approvalCode:
+          description: Approval code sent by the credit card company on a successful authorization.
+          type: string
+          minLength: 0
+          maxLength: 20
+        cardType:
+          description: Indicates the type of credit card from a defined list
+          $ref: '#/components/schemas/cardTypeType'
+        userDefinedCardType:
+          description: Indicates the user defined credit card type if credit card type from a defined list is not provided
+          type: string
+          minLength: 0
+          maxLength: 2
+        cardNumber:
+          type: string
+          minLength: 0
+          maxLength: 80
+        cardNumberMasked:
+          type: string
+          minLength: 0
+          maxLength: 80
+        cardNumberLast4Digits:
+          type: string
+          minLength: 0
+          maxLength: 80
+        expirationDate:
+          description: Expiration date of the credit card
+          type: string
+          format: date
+        expirationDateMasked:
+          description: Masked Expiration date of the credit card
+          type: string
+          minLength: 0
+          maxLength: 20
+        expirationDateExpired:
+          type: boolean
+        cardHolderName:
+          type: string
+          minLength: 0
+          maxLength: 200
+        storeToCreditCardWallet:
+          description: Indicate whether the credit card will be stored to the credit card wallet or not.
+          type: boolean
+        processing:
+          description: This contains information on whether EFT is enabled. A value of 'C' indicates EFT is enabled and 'M' indicates manual authorization is available for this payment card type.
+          $ref: '#/components/schemas/cardProcessingType'
+        swiped:
+          type: boolean
+        cardPresent:
+          description: Flag to determine if the credit card was swiped/manually entered , This element is only used when PAYMENT SERVICE DIRECTIVE(PSD) Opera Control is active.
+          type: boolean
+        cardOrToken:
+          description: This contains information on whether credit card is tokenized (token enabled). A value of 'Token' indicates credit card is token enabled and 'CardNumber' indicates non token environment for this payment card type.
+          $ref: '#/components/schemas/cardNumberTypeType'
+        citId:
+          description: Customer Initiated Transaction(CIT) Id for Credit Cards. This is only used when PAYMENT SERVICES DIRECTIVE (PSD2) Opera Control is active.
+          type: string
+          minLength: 0
+          maxLength: 30
+    pkgInventoryItemType:
+      type: object
+      properties:
+        articleNumber:
+          description: Article Number of the inventory item.
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: Description of the inventory item.
+          type: string
+          minLength: 0
+          maxLength: 200
+        quantity:
+          description: Quantity of the inventory item allocated to the package.
+          type: integer
+        itemId:
+          description: Identifier for the inventory item.
+          type: integer
+    reservationPaymentMethodType:
+      type: object
+      properties:
+        paymentCard:
+          $ref: '#/components/schemas/resPaymentCardType'
+        balance:
+          $ref: '#/components/schemas/currencyAmountType'
+        authorizationRule:
+          $ref: '#/components/schemas/authorizationRuleType'
+        emailFolioInfo:
+          description: Information on an email for the customer.
+          type: object
+          properties:
+            email:
+              description: eMail deatils for the profile.
+              $ref: '#/components/schemas/emailType'
+            emailFolio:
+              type: boolean
+            id:
+              description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+              type: string
+              minLength: 0
+              maxLength: 80
+            type:
+              description: A reference to the type of object defined by the UniqueID element.
+              type: string
+              minLength: 0
+              maxLength: 40
+        paymentMethod:
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          type: string
+          minLength: 0
+          maxLength: 2000
+        folioView:
+          type: integer
+        confidential:
+          type: boolean
+          description: Flag indicating a billing window (2-8) as confidential. Applied only when Confidential Billing Window Opera Control is active.
+    timeSpanType:
+      type: object
+      description: Allows for a choice in description of the amount of time spanned by this type. EndDate specifies a specific date, while Duration provides a measure of time to add to the StartDate to yield end date.
+      properties:
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        duration:
+          type: string
+    childBucketsType:
+      type: object
+      description: Defines children counts with Age Qualifying Group(Child Bucket) classification.
+      properties:
+        bucket1Count:
+          description: Number of children classified under the first Age Qualifying Group(Child Bucket#1).
+          type: integer
+        bucket2Count:
+          description: Number of children classified under the second Age Qualifying Group(Child Bucket#2).
+          type: integer
+        bucket3Count:
+          description: Number of children classified under the third Age Qualifying Group(Child Bucket#3).
+          type: integer
+        bucket4Count:
+          description: Number of children classified under the fourth Age Qualifying Group(Child Bucket#4).
+          type: integer
+        bucket5Count:
+          description: Number of children classified under the fifth Age Qualifying Group(Child Bucket#5).
+          type: integer
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    cardNumberTypeType:
+      type: string
+      description: Simple type for indicating if credit card number is tokenized.
+      enum:
+      - CardNumber
+      - Token
+    packageCategoryReservationType:
+      type: object
+      description: Information regarding each reservation being returned in the response
+      properties:
+        reservationIdList:
+          description: Unique identifiers for the reservation for both internal and external systems
+          $ref: '#/components/schemas/reservationIdList'
+        roomStay:
+          description: Collection of room stays.
+          $ref: '#/components/schemas/stayInfoType'
+        reservationGuest:
+          description: Collection of guests associated with the reservation.
+          $ref: '#/components/schemas/resGuestInfoType'
+        reservationMemberships:
+          description: List of reservation memberships which are attached from profile.
+          type: array
+          maxItems: 10
+          items:
+            $ref: '#/components/schemas/reservationMembershipType'
+        sharedGuests:
+          description: Collection of guests who share this reservation.
+          $ref: '#/components/schemas/resSharedGuestListType'
+        reservationPaymentMethod:
+          description: Payment method used for this reservation
+          $ref: '#/components/schemas/reservationPaymentMethodType'
+        advanceCheckIn:
+          description: Information relating to Reservation's Advance Checked In state and Expected Time of Return
+          $ref: '#/components/schemas/advanceCheckInType'
+        reservationStatus:
+          description: Indicates the status of the reservation.
+          $ref: '#/components/schemas/pMS_ResStatusType'
+        reservationPackages:
+          description: A Service object represents a non-room product provided to guests. Service products may have associated inventory and charges.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/reservationPackageType'
+        paymentMethod:
+          description: Payment Method.
+          type: string
+          minLength: 0
+          maxLength: 20
+        openFolio:
+          description: Returns true when reservation has an open folio.
+          type: boolean
+        preRegistered:
+          description: Defines if the reservation is pre-registered or not.
+          type: boolean
+        shareReservation:
+          description: Defines if the reservation is shared with another reservation or not
+          type: boolean
+        noPost:
+          description: Defines if the no post flag is set on the reservation or not
+          type: boolean
+    uniqueID_Type:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
+        idExtension:
+          description: 'Additional identifying value assigned by the creating system. Eg: ConfirmationLegNumber, ExternalLegNumber'
+          type: integer
+    currencyAmountType:
+      type: object
+      description: A monetary value expressed with a currency code.
+      properties:
+        amount:
+          description: A monetary amount.
+          type: number
+        currencyCode:
+          description: Provides a currency code to reflect the currency in which an amount may be expressed.
+          type: string
+          minLength: 3
+          maxLength: 3
+    housekeepingRoomStatusType:
+      type: string
+      description: Simple type for room status instructions to be used in requests for fetching housekeeping rooms. Valid status values are Clean, Dirty, Pickup, Inspected, OutOfOrder, OutOfService.
+      enum:
+      - Clean
+      - Dirty
+      - Pickup
+      - Inspected
+      - OutOfOrder
+      - OutOfService
+    tierAdministrationType:
+      type: string
+      description: Do not upgrade membership. The membership may be downgraded.
+      enum:
+      - Disabled
+      - NoUpgrade
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    configPostingAttributesType:
+      type: object
+      description: A config Package posting attributes type.
+      properties:
+        addToRate:
+          description: The package price is added to the room rate.
+          type: boolean
+        printSeparateLine:
+          description: The package price is printed on separate line of the folio.
+          type: boolean
+        sellSeparate:
+          description: Can the package be sold separate from rate plan code?
+          type: boolean
+        postNextDay:
+          description: package charges will be posted next business day.
+          type: boolean
+        forecastNextDay:
+          description: Package will be forecasted for consumption the next business day.
+          type: boolean
+        formula:
+          description: The custom formula used for this package, if any.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        startTime:
+          description: Start time the package is valid.
+          type: string
+        endTime:
+          description: End time the package is valid.
+          type: string
+        catering:
+          description: Is package used for catering?
+          type: boolean
+        postingRhythm:
+          description: The posting rhythm for this package.
+          $ref: '#/components/schemas/packagePostingRhythmType'
+        priceCalculationRule:
+          description: The price calculation rule for this package.
+          $ref: '#/components/schemas/packageCalculationRuleType'
+        ticket:
+          description: Indicates whether a package is configured as a ticket or not.
+          type: boolean
+        inventoryItems:
+          description: Package Code Inventory Items type.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/pkgInventoryItemType'
+        calculatedPrice:
+          description: Calculated Package Price based from Number of Adults, Children and Calculation Rule.
+          type: number
+    packagePostingRhythmType:
+      type: object
+      description: Package Posting rhythm type.
+      properties:
+        everyXNightsStartingNightY:
+          description: Post the package every X nights Staring from Night Y.
+          type: object
+          properties:
+            startOnNightY:
+              description: Starting night for consumption and posting prices.
+              type: integer
+            postEveryXNights:
+              description: Occurance of nights when the package needs to be posted and consumed.
+              type: integer
+        certainNightsOfTheWeek:
+          description: Post the package on certain nights of the week.
+          type: object
+          properties:
+            sunday:
+              type: boolean
+            monday:
+              type: boolean
+            tuesday:
+              type: boolean
+            wednesday:
+              type: boolean
+            thursday:
+              type: boolean
+            friday:
+              type: boolean
+            saturday:
+              type: boolean
+        customStaySchedule:
+          description: This user defined schedule lets you enter a posting rhythm over a 14-day period, starting with the arrival date, by assigning the day (number) within a guest stay for posting this package price.
+          type: object
+          properties:
+            night1:
+              description: Night 1 indicator.
+              type: boolean
+            night2:
+              description: Night 2 indicator.
+              type: boolean
+            night3:
+              description: Night 3 indicator.
+              type: boolean
+            night4:
+              description: Night 4 indicator.
+              type: boolean
+            night5:
+              description: Night 5 indicator.
+              type: boolean
+            night6:
+              description: Night 6 indicator.
+              type: boolean
+            night7:
+              description: Night 7 indicator.
+              type: boolean
+            night8:
+              description: Night 8 indicator.
+              type: boolean
+            night9:
+              description: Night 9 indicator.
+              type: boolean
+            night10:
+              description: Night 10 indicator.
+              type: boolean
+            night11:
+              description: Night 11 indicator.
+              type: boolean
+            night12:
+              description: Night 12 indicator.
+              type: boolean
+            night13:
+              description: Night 13 indicator.
+              type: boolean
+            night14:
+              description: Night 14 indicator.
+              type: boolean
+        customNightSchedule:
+          description: 'The start and end of the posting period is determined as follows: If the package is attached to a rate code: The period starts with the date when the rate code to which the package is attached becomes effective for the stay. The period ends with the date of the last night for that rate code (or the last night of the stay if the rate code remains in effect until the departure date). If the package is attached separately to the reservation: The Begin Date specified on the reservation when the package was attached is the start date for the period. The End Date specified on the reservation when the package was attached is the end date for the period. If no Begin Date and/or End Date are specified when the package is attached to the reservation, the Begin Date is assumed to be the arrival date and the End Date is assumed to be the departure date of the reservation, irrespective of when the package is attached to the reservation.'
+          type: object
+          properties:
+            night1:
+              description: Night 1 indicator.
+              type: boolean
+            night2:
+              description: Night 2 indicator.
+              type: boolean
+            night3:
+              description: Night 3 indicator.
+              type: boolean
+            night4:
+              description: Night 4 indicator.
+              type: boolean
+            night5:
+              description: Night 5 indicator.
+              type: boolean
+            night6:
+              description: Night 6 indicator.
+              type: boolean
+            night7:
+              description: Night 7 indicator.
+              type: boolean
+            night8:
+              description: Night 8 indicator.
+              type: boolean
+            night9:
+              description: Night 9 indicator.
+              type: boolean
+            night10:
+              description: Night 10 indicator.
+              type: boolean
+            night11:
+              description: Night 11 indicator.
+              type: boolean
+            night12:
+              description: Night 12 indicator.
+              type: boolean
+            night13:
+              description: Night 13 indicator.
+              type: boolean
+            night14:
+              description: Night 14 indicator.
+              type: boolean
+        type:
+          description: Posting Rhythm for the package.
+          $ref: '#/components/schemas/postingRhythmType'
+    cardProcessingType:
+      type: string
+      enum:
+      - Eft
+      - Manual
+    masterInfoType:
+      type: object
+      properties:
+        codeInfo:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/codeInfoType'
+        codeType:
+          $ref: '#/components/schemas/masterType'
+    promotionType:
+      type: object
+      description: 'Type to specify a rate promotion. Usually attached to a reservation to indicate a specific promotion is applied to the reservation. <p>Note: For putReservation when promotion type element is sent with no value, existing promotion codes on the reservation will be removed.</p>'
+      properties:
+        promotionCode:
+          description: Promotion code associated with the rate plan.
+          type: string
+          minLength: 0
+          maxLength: 20
+        promotionName:
+          description: Promotion code Name associated with the rate plan.
+          type: string
+          minLength: 0
+          maxLength: 20
+        couponCode:
+          description: Promotion Coupon Code when promotion is setup to have a valid coupon code.
+          type: string
+          minLength: 0
+          maxLength: 40
+    packageConsumptionType:
+      type: object
+      description: Package Consumption Information. Includes information on quantity of the package used, allowance consumption etc.
+      properties:
+        defaultQuantity:
+          description: Quantity of packages to be attached i.e. the multiplier to be applied against the calculation rule to determine the total quantity of the packages.
+          type: integer
+        excludedQuantity:
+          description: The quantity which has been excluded in the package.
+          type: integer
+        totalQuantity:
+          description: The total quantity of the package, calculated based on the calculation rule as defined in the PackageHeaderType and defaultQuantity.
+          type: integer
+        allowanceConsumed:
+          description: Indicates if Allowance(for POS packages) has been consumed/posted for today.
+          type: boolean
+    nameTypeType:
+      type: string
+      enum:
+      - Guest
+      - Company
+      - Agent
+      - Contact
+      - Source
+      - Group
+      - Employee
+      - Hotel
+      - Purge
+    membershipInfoType:
+      type: object
+      description: The Membership object identifies the frequent customer reward program.
+      properties:
+        membershipId:
+          description: Membership ID Number(Unique ID from the memberships table).
+          type: number
+        programCode:
+          description: The code or name of the membership program ('Hertz', 'AAdvantage', etc.).
+          type: string
+          minLength: 0
+          maxLength: 20
+        bonusCode:
+          description: The code or name of the bonus program. BonusCode can be used to indicate the level of membership (Gold Club, Platinum member, etc.)
+          type: string
+          minLength: 0
+          maxLength: 20
+        membershipTypeDesc:
+          description: The description of the ProgramCode.(Delta Previlige for code DP)
+          type: string
+          minLength: 0
+          maxLength: 2000
+        membershipLevelDesc:
+          description: The description of the Bonus Code.(Platinum for code P)
+          type: string
+          minLength: 0
+          maxLength: 2000
+        accountId:
+          description: The account identification or membership card number for this particular member in this particular program.
+          type: string
+          minLength: 0
+          maxLength: 50
+        membershipLevel:
+          description: The code or name of the membership level and indicates the level of membership (Gold Club, Platinum member, etc.). This is same as the BonusCode.
+          type: string
+          minLength: 0
+          maxLength: 20
+        playerRanking:
+          description: Ranking assigned to the Player Profile by the Gaming system.
+          type: integer
+    reservationMembershipType:
+      type: object
+      properties:
+        comment:
+          description: Additional comments regarding to the membership.
+          $ref: '#/components/schemas/paragraphType'
+        newMembershipNumber:
+          description: Card Number of the membership.
+          type: string
+        nameOnCard:
+          description: Name to be displayed on the membership card.
+          type: string
+        programDescription:
+          description: Description of the membership program.
+          type: string
+        membershipLevel:
+          description: Indicates the membership level.
+          type: string
+        membershipLevelDescription:
+          description: Indicates the membership level description.
+          type: string
+          minLength: 0
+          maxLength: 200
+        membershipClass:
+          description: Indicates the membership class.
+          type: string
+        earningPreference:
+          description: Earning preference to the membership.
+          $ref: '#/components/schemas/membershipEarningPreferenceType'
+        inactive:
+          description: Indicates whether membership is active or inactive.
+          type: boolean
+        benefits:
+          description: benefits for the membership.
+          $ref: '#/components/schemas/benefitsType'
+        tierAdministration:
+          description: Defines the degree of participation for this membership in the tier management portion of the program.
+          $ref: '#/components/schemas/tierAdministrationType'
+        downgrade:
+          description: Defines how downgrading will be handled for this membership.
+          $ref: '#/components/schemas/downgradeType'
+        reIssueNewCard:
+          description: The status of issuing new membership card to the member.
+          $ref: '#/components/schemas/cardReIssueType'
+        excludeFromBatch:
+          description: True if you want to exclude the member from the Membership Fulfillment extract,the member's actions will not be included in the fulfillment extract until this value set to false.
+          type: boolean
+        upgradeDescription:
+          description: Indicates Upgrade information which includes member's next tier level, requirements for the next upgrade.
+          type: string
+          minLength: 0
+          maxLength: 32000
+        downgradeDescription:
+          description: Indicates information regarding the member's possible downgrades.
+          type: string
+          minLength: 0
+          maxLength: 32000
+        rating:
+          description: Value Rating Type Description for this membership.
+          type: string
+        membershipEnrollmentCode:
+          description: Indicates how the guest enrolled in the program.
+          type: string
+          minLength: 0
+          maxLength: 20
+        memberStatus:
+          description: Indicates where the guest is in the membership enrollment process.
+          type: string
+          minLength: 0
+          maxLength: 20
+        currentPoints:
+          description: Profile MemberShip Points.
+          type: number
+        pointsLabel:
+          description: Label used to refer to points for this membership type
+          type: string
+          minLength: 0
+          maxLength: 20
+        enrollmentSource:
+          description: Source from where the enrollment is done.
+          type: string
+          minLength: 0
+          maxLength: 20
+        enrollmentResort:
+          description: Resort/CRO where enrollment is done.
+          type: string
+          minLength: 0
+          maxLength: 20
+        preferredCard:
+          description: Preferred Card.
+          type: boolean
+        membershipId:
+          description: Card Number of the membership.
+          type: string
+        membershipType:
+          description: Type of membership.
+          type: string
+        primaryMembershipYn:
+          description: Indicator if Membership is a Primary Membership.
+          type: string
+          minLength: 0
+          maxLength: 1
+        primaryMembership:
+          description: Boolean indicator set to True implies membership is a Primary Membership.
+          type: boolean
+        membershipIdNo:
+          description: Membership ID Number.
+          type: integer
+        playerRanking:
+          description: Ranking assigned to the Player Profile by the Gaming system.
+          type: integer
+        centralSetup:
+          description: Indicates how the award points for this membership type will be managed.
+          type: boolean
+        signupDate:
+          description: Indicates when the member signed up for the loyalty program.
+          type: string
+          format: date
+        effectiveDate:
+          description: Indicates the starting date.
+          type: string
+          format: date
+        expireDate:
+          description: Indicates the ending date.
+          type: string
+          format: date
+        expireDateExclusiveIndicator:
+          description: When true, indicates that the ExpireDate is the first day after the applicable period (e.g. when expire date is Oct 15 the last date of the period is Oct 14).
+          type: boolean
+        orderSequence:
+          description: Display Order sequence.
+          type: number
+        createDateTime:
+          description: Time stamp of the creation. Uses the hotel's time zone.
+          type: string
+          format: date-time
+        creatorId:
+          description: ID of creator. The creator could be a software system identifier or an identifier of an employee responsible for the creation.
+          type: string
+          minLength: 0
+          maxLength: 200
+        lastModifyDateTime:
+          description: Time stamp of last modification. Uses the hotel's time zone.
+          type: string
+          format: date-time
+        lastModifierId:
+          description: Identifies the last software system or person to modify a record.
+          type: string
+          minLength: 0
+          maxLength: 200
+        purgeDate:
+          description: Date an item will be purged from a database (e.g., from a live database to an archive).
+          type: string
+          format: date
+        linkMembership:
+          type: boolean
+        primary:
+          type: boolean
+      description: Detailed information of the memberships.
+    blockIdList:
+      type: array
+      description: Unique Id that references an object uniquely in the system.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/uniqueID_Type'
+    resAccompanyGuestListType:
+      type: array
+      description: Collection of accompany guests
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/resAccompanyGuestInfoType'
+    basicEmailType:
+      type: string
+      description: Email address
+      minLength: 0
+      maxLength: 2000
+    resSharedGuestListType:
+      type: array
+      description: Collection of shared guest reservations.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/resSharedGuestInfoType'
+    offshoreRateType:
+      type: object
+      description: Defines Offshore rate information.
+      properties:
+        offshoreRateCode:
+          description: Offshore Rate Code
+          type: string
+          minLength: 0
+          maxLength: 20
+        offshoreRateAmount:
+          description: Offshore Rate Amount
+          type: number
+        offshoreRateCurrency:
+          description: Offshore Rate Currency specifying the monetary unit for the Offshore Rate. Use ISO 4217, three alpha code
+          type: string
+          minLength: 0
+          maxLength: 20
+    benefitsType:
+      type: array
+      description: Basic information about membership benefit.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/benefitType'
+    reservationRoomOwnershipType:
+      type: string
+      description: Indicates if the assigned reservation room is an Owner/Referral or Regular room.
+      enum:
+      - Owner
+      - Referral
+      - Regular
+    downgradeType:
+      type: string
+      description: Do not downgrade membership when the next downgrade process runs. When the downgrade process runs, the membership will be automatically set to Grace.
+      enum:
+      - Grace
+      - Never
+      - Period
+    packageCategoryReservations:
+      type: object
+      description: Response object to the Fetch Reservations by package request operation. Based on the criteria, reservation information is returned.
+      properties:
+        reservations:
+          description: Collection of Reservations and their information.
+          type: object
+          properties:
+            reservationInfo:
+              description: Contains details of the reservations.
+              type: array
+              maxItems: 4000
+              items:
+                $ref: '#/components/schemas/packageCategoryReservationType'
+            totalPages:
+              description: Evaluated total page count based on the requested max fetch count.
+              type: integer
+            offset:
+              description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+              type: integer
+            limit:
+              description: Indicates maximum number of records a Web Service should return.
+              type: integer
+            hasMore:
+              description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+              type: boolean
+            totalResults:
+              description: Total number of rows queried
+              type: integer
+            count:
+              description: Total number of rows returned
+              type: integer
+        masterInfoList:
+          type: array
+          items:
+            $ref: '#/components/schemas/masterInfoType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    productSourceType:
+      type: string
+      description: Sources of Products
+      enum:
+      - Reservation
+      - RateHeader
+      - RateDetail
+    configPackageTransactionType:
+      type: object
+      description: A HotelPackageTransaction type.
+      properties:
+        allowance:
+          description: Package is marked as an allowance, in case charge is expected back to the guest account from external interface eg. POS. which need to be offset against a consumption allowance.
+          type: boolean
+        currency:
+          description: The currency code for this package.
+          type: string
+          minLength: 0
+          maxLength: 20
+        postingType:
+          description: The posting frequency for this package, e.g., daily, arrival, departure, etc.
+          type: string
+          minLength: 0
+          maxLength: 20
+        calculationRule:
+          description: The price calculation rule for this package.
+          type: string
+          minLength: 0
+          maxLength: 80
+    postingRhythmType:
+      type: string
+      description: Simple type for posting Rhythm types.
+      enum:
+      - EveryNight
+      - ArrivalNight
+      - EveryXNightsStartingNightY
+      - CertainNightsOfTheWeek
+      - LastNight
+      - EveryNightExceptArrivalNight
+      - EveryNightExceptLast
+      - EveryNightExceptFirstAndLast
+      - CustomStaySchedule
+      - CustomNightSchedule
+      - FloatingAllowancePerStay
+      - TicketPosting
+    surnameType:
+      type: string
+      description: Family name, last name.
+      minLength: 0
+      maxLength: 80
+    roomOccupancyType:
+      description: Room Occupancy information.
+      type: object
+      properties:
+        roomId:
+          type: string
+          description: Room Id.
+          minLength: 0
+          maxLength: 20
+        roomType:
+          type: string
+          description: Room Type.
+          minLength: 0
+          maxLength: 20
+        roomIsOccupied:
+          type: boolean
+          description: Indicates if the Room is currently occupied.
+        estimatedDepartureTime:
+          type: string
+          description: Estimated Time of Departure of reservation when room status is occupied.
+          format: date-time
+        guestFirstName:
+          type: string
+          description: Guest First/Given Name on reservation when room status is occupied.
+          minLength: 0
+          maxLength: 40
+        guestLastName:
+          type: string
+          description: Guest Last Name /Surname on reservation when room status is occupied.
+          minLength: 0
+          maxLength: 40
+        roomStatus:
+          description: Room status
+          $ref: '#/components/schemas/housekeepingRoomStatusType'
+        reservationIdList:
+          description: A list of Ids for reservation( ResvNameId and ConfirmationNumber).
+          $ref: '#/components/schemas/uniqueIDListType'
+        roomNumberLocked:
+          description: This attribute is to verify if room number is locked for the reservation. When true the room number cannot be changed. This is supported when OPERA Control Do Not Move is active.
+          type: boolean
+    guestLastStayInfoType:
+      type: object
+      description: Contains last stay related details of the guest.
+      properties:
+        lastStayDate:
+          description: Guest's last stay date.
+          type: string
+          format: date
+        lastStayRoom:
+          description: Room Number where the guest stayed.
+          type: string
+          minLength: 0
+          maxLength: 20
+        lastStayRate:
+          description: The Rate amount of the guest's last stay.
+          $ref: '#/components/schemas/currencyAmountType'
+        totalStay:
+          description: The total number of previous stay of the guest.
+          type: integer
+    warningType:
+      type: object
+      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
+          type: string
+          maxLength: 2000
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+          type: string
+          minLength: 0
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+          maxLength: 2000
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+          maxLength: 2000
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+          maxLength: 2000
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+          maxLength: 2000
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        rph:
+          description: Reference Place Holder used as an index for this warning.
+          type: string
+          minLength: 1
+          maxLength: 8
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
+    packageCalculationRuleType:
+      type: string
+      description: Simple type for package caluculation rules.
+      enum:
+      - FlatRate
+      - PerPerson
+      - PerAdult
+      - PerChild
+      - PerRoom
+    masterType:
+      type: string
+      enum:
+      - Country
+      - State
+      - AddressType
+      - PhoneType
+      - RateCategory
+      - CalculationRule
+      - PostingRythym
+      - BillingInstruction
+      - TransactionCode
+      - DisplaySet
+      - MailingActions
+      - DistanceType
+      - District
+      - Territory
+      - FiscalRegion
+      - InventoryItem
+      - Package
+      - RoomFeaturePreference
+      - SpecialPreference
+      - Promotion
+      - Department
+      - ReservationPreference
+      - FacilityTask
+      - RoomType
+      - RateCode
+      - OutOfOrderReason
+      - Block
+    resGuaranteeType:
+      type: object
+      description: Validations type record returned after Validations are done.
+      properties:
+        guaranteeCode:
+          description: Guarantee Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        shortDescription:
+          description: Guarantee Code.
+          type: string
+          minLength: 0
+          maxLength: 80
+        onHold:
+          description: Guarantee Code.
+          type: boolean
+    phoneNumberType:
+      type: string
+      description: Phone number
+      minLength: 0
+      maxLength: 40
+    givenNameType:
+      type: string
+      description: Given name, first name or names
+      minLength: 0
+      maxLength: 40
+    advanceCheckInType:
+      type: object
+      description: Information relating to Reservation's Advance Checked In state and Expected Time of Return
+      properties:
+        advanceCheckedIn:
+          description: Indicates if the reservation is marked as Advance Checked In
+          type: boolean
+        expectedReturnTime:
+          description: Expected Return Time in the property's timezone. Uses the hotel's time zone.
+          type: string
+          format: date-time
+        eTRComments:
+          description: ETR Comments
+          type: string
+          minLength: 0
+          maxLength: 2000
+        advanceCheckInTime:
+          description: Time in the property's timezone the reservation is advance checked in, returned only with operation getReservation when a reservation is advance checked in. Uses the hotel's time zone.
+          type: string
+          format: date-time
+    uniqueIDListType:
+      type: array
+      description: Unique Id that references an object uniquely in the system.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/uniqueID_Type'
+    emailType:
+      type: object
+      description: Information on an email for the customer.
+      properties:
+        emailAddress:
+          description: Defines the e-mail address.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        type:
+          description: Defines the purpose of the e-mail address (e.g. personal, business, listserve).
+          type: string
+          minLength: 0
+          maxLength: 20
+        typeDescription:
+          description: Describes the Type code
+          type: string
+          minLength: 0
+          maxLength: 2000
+        emailFormat:
+          description: Supported Email format.
+          type: string
+          enum:
+          - Html
+          - Text
+        primaryInd:
+          description: When true, indicates a primary information.
+          type: boolean
+        orderSequence:
+          description: Display Order sequence.
+          type: number
+        createDateTime:
+          description: Time stamp of the creation.
+          type: string
+          format: date-time
+        creatorId:
+          description: ID of creator. The creator could be a software system identifier or an identifier of an employee responsible for the creation.
+          type: string
+          minLength: 0
+          maxLength: 200
+        lastModifyDateTime:
+          description: Time stamp of last modification.
+          type: string
+          format: date-time
+        lastModifierId:
+          description: Identifies the last software system or person to modify a record.
+          type: string
+          minLength: 0
+          maxLength: 200
+    postingIntervalFrequency:
+      type: string
+      description: Specifies the frequency at which charges are posted for the rate plan on the reservation.
+      enum:
+      - Nightly
+      - Weekly
+      - Monthly
+    codeInfoType:
+      type: object
+      description: ''
+      properties:
+        description:
+          type: string
+          minLength: 0
+          maxLength: 80
+        hotelId:
+          type: string
+          minLength: 0
+          maxLength: 20
+        code:
+          type: string
+          minLength: 0
+          maxLength: 20
+    configPackagePrimaryDetailsType:
+      type: object
+      description: A Config Package Info type.
+      properties:
+        description:
+          description: The description of the package.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        shortDescription:
+          description: The short description of the package.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        forecastGroup:
+          description: The Forecast group package belongs to.
+          type: string
+          minLength: 0
+          maxLength: 20
+        arrangementCode:
+          description: Arrangement Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        beginSellDate:
+          description: Indicates the begin sell date of the package.
+          type: string
+          format: date
+        endSellDate:
+          description: Indicates the end sell date of the package.
+          type: string
+          format: date
+        externallyExcluded:
+          type: boolean
+          description: Flag to indicate if a package is configured as Externally Excluded.
+    vIPType:
+      type: object
+      description: The supplier's ranking of the customer.
+      properties:
+        vipCode:
+          description: VIP Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        vipDescription:
+          description: VIP Description.
+          type: string
+          minLength: 0
+          maxLength: 80
+    externalReferencesType:
+      type: array
+      description: This type contains unique information of external reference.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/externalReferenceType'
+    countryNameType:
+      type: object
+      description: Used for Character Strings, length 0 to 200 - It indicates country/nationality description.
+      properties:
+        value:
+          type: string
+          description: Used for Character Strings, length 0 to 200.
+          minLength: 0
+          maxLength: 200
+        code:
+          description: Code for a country or a nationality.
+          type: string
+          minLength: 0
+          maxLength: 20
+        displayCountryFlag:
+          description: Setting this to true will display the guest profile's country flag in the OPERA Cloud user interface, if it is configured.
+          type: boolean
+        isoCode:
+          description: ISO standard code for country.
+          type: string
+          minLength: 0
+          maxLength: 20
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
+    reservationPackageType:
+      type: object
+      description: A ReservationPackageType class.
+      properties:
+        packageHeaderType:
+          description: Package information from configuration.
+          $ref: '#/components/schemas/packageCodeHeaderType'
+        scheduleList:
+          description: A HotelPackageSchedule type.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/reservationPackageScheduleType'
+        newTimeSpan:
+          description: The changed dates(Start and End dates) for this product.
+          $ref: '#/components/schemas/timeSpanType'
+        consumptionDetails:
+          description: Package consumption details. Includes information for quantity , allowance etc.
+          $ref: '#/components/schemas/packageConsumptionType'
+        packageCode:
+          description: Package code. This is the unique code used for the package and is a required element.
+          type: string
+          minLength: 0
+          maxLength: 20
+        internalId:
+          description: Reservation Package Opera Internal Unique Id. This is the unique Id used for this reservation package.
+          type: number
+        ratePlanCode:
+          description: The rate code which contains this package. If the package is not part of a rate code, this will be empty. Required element and part of the key to fetch the correct package record on the reservation.
+          type: string
+          minLength: 0
+          maxLength: 20
+        startDate:
+          description: Required value when changing a reservation package. If the original start date was null, then null is required.
+          type: string
+          format: date
+        endDate:
+          description: Required value when changing a reservation package. If the original end date was null, then null is required.
+          type: string
+          format: date
+        packageGroup:
+          description: Package group code. If this package is part of a package group, the group code is indicated here. This is a required element and is part of the key to fetch the correct package record .
+          type: string
+          minLength: 0
+          maxLength: 20
+        source:
+          description: Indicates if the source of the product is Rate header, Rate Detail or Reservation. For new development this field is to be used for passing the product scource
+          $ref: '#/components/schemas/productSourceType'
+        awardCode:
+          description: This is the Award code used to redeem the package if the package is a redemption package.
+          type: string
+          minLength: 0
+          maxLength: 20
+        points:
+          description: Indicates the points used to redeem the redemption package.
+          type: integer
+    resExpectedTimesType:
+      type: object
+      description: Holds the Arrival and Departure Time Information
+      properties:
+        reservationExpectedArrivalTime:
+          description: Arrival Time. Uses the hotel's time zone.
+          type: string
+          format: date-time
+        reservationExpectedDepartureTime:
+          description: Departure Time. Uses the hotel's time zone.
+          type: string
+          format: date-time
+    pMS_ResStatusType:
+      type: string
+      description: This reservation is in checked in status and the business date is past departure date. This could occur when ORS and PMS are in same environment.
+      enum:
+      - Reserved
+      - Requested
+      - NoShow
+      - Cancelled
+      - InHouse
+      - CheckedOut
+      - Waitlisted
+      - DueIn
+      - DueOut
+      - Walkin
+      - PendingCheckout
+    benefitType:
+      type: object
+      description: Basic information about membership benefit.
+      properties:
+        code:
+          description: Benefit code associated with a membership.
+          type: string
+          minLength: 0
+          maxLength: 20
+        message:
+          description: Processing message for membership benefit.
+          type: string
+          minLength: 0
+          maxLength: 4000
+        inactive:
+          description: Indicates whether membership benefit is active or inactive.
+          type: boolean
+    resGuestInfoType:
+      type: object
+      description: Specifies Company or Travel Agent profile using IATA or Corp. No.
+      properties:
+        membership:
+          description: The Membership object identifying the frequent customer reward program.
+          $ref: '#/components/schemas/membershipInfoType'
+        namePrefix:
+          description: Salutation of honorific. (e.g., Mr. Mrs., Ms., Miss, Dr.)
+          $ref: '#/components/schemas/namePrefixType'
+        givenName:
+          description: Given name, first name or names
+          $ref: '#/components/schemas/givenNameType'
+        alternateGivenName:
+          description: Alternate given name, first name or names
+          type: string
+          minLength: 0
+          maxLength: 40
+        middleName:
+          description: The middle name of the person name
+          type: string
+          minLength: 0
+          maxLength: 40
+        surname:
+          description: Family name, last name.
+          $ref: '#/components/schemas/surnameType'
+        alternateSurname:
+          description: Alternate family name, last name.
+          type: string
+          minLength: 0
+          maxLength: 40
+        alternateFullName:
+          description: Alternate full name
+          type: string
+        nameTitle:
+          description: Degree or honors (e.g., Ph.D., M.D.)
+          type: string
+          minLength: 0
+          maxLength: 20
+        fullName:
+          description: Full display name
+          type: string
+        phoneNumber:
+          description: Phone number
+          $ref: '#/components/schemas/phoneNumberType'
+        email:
+          description: Email address
+          $ref: '#/components/schemas/basicEmailType'
+        birthDate:
+          description: Date of birth
+          type: string
+          format: date
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        nationality:
+          description: Affiliation or ethnicity to a particular country.
+          $ref: '#/components/schemas/countryNameType'
+        vip:
+          description: The supplier's ranking of the customer (e.g., VIP, numerical ranking).
+          $ref: '#/components/schemas/vIPType'
+        address:
+          description: Address information that is attached to the reservation guest
+          $ref: '#/components/schemas/addressSearchType'
+        anonymization:
+          description: Provides information about the guest's anonymization status
+          $ref: '#/components/schemas/anonymizationType'
+        accompanyGuests:
+          description: List of guest names that are accompanying the reservation guest
+          $ref: '#/components/schemas/resAccompanyGuestListType'
+        guestLastStayInformation:
+          description: Contains information regarding the last stay of this guest.
+          $ref: '#/components/schemas/guestLastStayInfoType'
+        guestRestrictedCode:
+          description: Guest profile restricted reason code
+          type: string
+        guestRestrictedReasonDesc:
+          description: Guest profile restricted reason description
+          type: string
+        guestRestricted:
+          description: True indicates there are restrictions associated with the current profile.
+          type: boolean
+        registrationCardNo:
+          description: Unique identifier of the police registration card number.
+          type: string
+          minLength: 0
+          maxLength: 40
+        nameType:
+          $ref: '#/components/schemas/nameTypeType'
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
+        externalReferences:
+          description: External References information for this Profile. Will be returned in getReservations and getHotelReservations when the 'profileExternalReferencesToFetch' query parameter is sent.
+          $ref: '#/components/schemas/externalReferencesType'
+    reservationBlockType:
+      type: object
+      description: Key information about the block for a reservation.
+      properties:
+        blockIdList:
+          description: Collection of unique block identifiers for the reservation.
+          $ref: '#/components/schemas/blockIdList'
+        blockName:
+          description: The Name of the block that is attached to the reservation.
+          type: string
+          minLength: 0
+          maxLength: 40
+        hotelId:
+          description: This is the HotelCode of the Block.
+          type: string
+          minLength: 0
+          maxLength: 20
+    profileId:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 20
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        idExtension:
+          description: Additional identifying value assigned by the creating system.
+          type: integer
+    reservationId:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        url:
+          description: URL that identifies the location associated with the record identified by the UniqueID.
+          type: string
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 20
+        instance:
+          description: The identification of a record as it exists at a point in time. An instance is used in update messages where the sender must assure the server that the update sent refers to the most recent modification level of the object being updated.
+          type: string
+          minLength: 0
+          maxLength: 80
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+    anonymizationStatusType:
+      type: string
+      description: Guest has been anonymized.
+      enum:
+      - Requested
+      - Anonymized
+    profileIdList:
+      type: array
+      description: Unique Id that references an object uniquely in the system.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/uniqueID_Type'
+    childAgeType:
+      type: object
+      description: Defines Child's Age.
+      properties:
+        age:
+          description: Age of a child in years.
+          type: integer
+    postingIntervalType:
+      type: object
+      description: Posting Interval details for the reservation including begin/end dates, amount and frequency for each posting interval cycle on the reservation. Only available to be returned for extended stay reservations with at least 1 rate code with either a weekly or monthly posting interval.
+      properties:
+        beginDate:
+          type: string
+          format: date
+          description: Begin Date of the Posting Interval.
+        endDate:
+          type: string
+          format: date
+          description: End Date of the Posting Interval.
+        frequency:
+          $ref: '#/components/schemas/postingIntervalFrequency'
+          description: Specifies the frequency at which charges are posted for the rate plan on the reservation.
+        postingAmount:
+          type: number
+          description: The amount to be posted for the rate plan on the begin date of the posting interval.
+        rateCode:
+          type: string
+          description: Rate code used for the reservation.
+        currencyCode:
+          type: string
+          description: Provides a currency code to reflect the currency in which an amount may be expressed.
+    formattedTextTextType:
+      type: object
+      description: Provides text and indicates whether it is formatted or not.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+    externalReferenceType:
+      type: object
+      description: This type contains unique information of external reference.
+      properties:
+        id:
+          description: Unique ID of external reference.
+          type: string
+          minLength: 0
+          maxLength: 80
+        idExtension:
+          description: Additional identifying value assigned by the creating system for the external reference number. It is only applicable to reservation external references.
+          type: integer
+        idContext:
+          description: ID context for external reference.
+          type: string
+          minLength: 0
+          maxLength: 80
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    paragraphType:
+      type: object
+      description: An indication of a new paragraph for a sub-section of a formatted text message.
+      properties:
+        text:
+          description: Formatted text content.
+          $ref: '#/components/schemas/formattedTextTextType'
+    addressSearchType:
+      type: object
+      description: Address Details such as city, state, country, postal code etc.
+      properties:
+        cityName:
+          description: City (e.g., Dublin), town, or postal station (i.e., a postal service territory, often used in a military address).
+          type: string
+          minLength: 0
+          maxLength: 40
+        postalCode:
+          description: Post Office Code number.
+          type: string
+          minLength: 0
+          maxLength: 15
+        state:
+          description: State or Province name (e.g., Texas).
+          type: string
+          minLength: 0
+          maxLength: 20
+        streetAddress:
+          description: First Line of Street Address. For profile search it matches the first Address line.
+          type: string
+          minLength: 0
+          maxLength: 80
+        country:
+          description: Country name (e.g., Ireland).
+          $ref: '#/components/schemas/countryNameType'
+        excludeNoCity:
+          description: When true indicates that only profiles with city will be fetched.
+          type: boolean
+    authorizationRuleType:
+      type: object
+      description: Configured rule for computing the amount to authorize.
+      properties:
+        code:
+          description: The authorization rule code.
+          type: integer
+          pattern: '[0-9]{1,9}'
+        amount:
+          description: The amount applicable to the authorization rule.
+          $ref: '#/components/schemas/currencyAmountType'
+        percent:
+          description: A percentage value if the authorization rule is percentage based.
+          type: number
+    anonymizationType:
+      type: object
+      description: Provides information about guest's anonymization status.
+      properties:
+        anonymizationStatus:
+          description: Status of anonymization such as Requested or Anonymized.
+          $ref: '#/components/schemas/anonymizationStatusType'
+    childAgesType:
+      type: array
+      description: Age of a child in years.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/childAgeType'
+    scheduledRoomMoveResponseType:
+      description: Scheduled Room Move information.
+      type: object
+      properties:
+        moveComments:
+          type: string
+          description: Comments about scheduled move.
+          minLength: 0
+          maxLength: 200
+        moveInRoomOccupancyInfo:
+          description: Scheduled Move In Room Occupancy Information.
+          $ref: '#/components/schemas/roomOccupancyType'
+        estimatedMoveTime:
+          type: string
+          description: Estimated Move Time in 24Hour Format. Uses the hotel's time zone.
+          format: date-time
+    bookingTimeSpanType:
+      type: object
+      description: The booking time span of the reservation, only applicable when time increments are being used.
+      properties:
+        startDateTime:
+          type: string
+          description: The start time of the reservation booking. Uses the hotel's time zone.
+          format: date-time
+        endDateTime:
+          type: string
+          description: The end time of the reservation booking. Uses the hotel's time zone.
+          format: date-time
+  responses:
+    '406':
+      description: Not acceptable.
+    '414':
+      description: Request URI Too Large
+    '503':
+      description: Service Unavailable
+    '413':
+      description: Request Entity Too Large
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '502':
+      description: Bad Gateway
+    '403':
+      description: Forbidden
+    '415':
+      description: Unsupported Media Type
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '401':
+      description: Unauthorized
+    '405':
+      description: Method not allowed
+externalDocs:
+  description: Find out more about Oracle Hospitality
+  url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

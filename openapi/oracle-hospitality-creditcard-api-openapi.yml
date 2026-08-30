@@ -1,0 +1,3977 @@
+openapi: 3.2.0
+info:
+  title: OPERA Cloud Front Desk Configuration Credit Card API
+  description: APIs to cater for Front Desk Configuration in OPERA Cloud. Here you can find operations to get, post, put and delete front desk codes such as commission codes, transaction groups, codes & subgroups, articles, payment methods and credit card types.<br /><br />Compatible with OPERA Cloud release 26.2.0.0.<br /><br /><p>This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020,2023 Oracle and/or its affiliates.</p><br /><br /> Compatible with OPERA Cloud release 20.99.99.99.<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>
+  version: 26.2.0.0
+  termsOfService: https://www.oracle.com/legal/terms.html
+  contact:
+    email: hospitality_apis_ww_grp@oracle.com
+  license:
+    name: UPL
+    url: https://opensource.org/licenses/upl
+servers:
+- url: /fof/config/v1
+tags:
+- name: CreditCard
+  description: The Credit Card Internal Service contains operations used internally by OPERA Cloud.
+paths:
+  /authorizationRule:
+    get:
+      summary: Operation to fetch AuthorizationRule.
+      description: ' <p><strong>OperationId:</strong>getAuthorizationRule</p>'
+      operationId: getAuthorizationRule
+      parameters:
+      - name: hotelId
+        in: query
+        required: false
+        description: The hotel code to retrieve authorization rules for.
+        schema:
+          type: string
+      - name: reservationId
+        in: query
+        required: false
+        description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        schema:
+          type: string
+      - name: idExtension
+        in: query
+        required: false
+        description: Additional identifying value assigned by the creating system.
+        schema:
+          type: integer
+      - name: idContext
+        in: query
+        required: false
+        description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: false
+        description: A reference to the type of object defined by the UniqueID element.
+        schema:
+          type: string
+      - name: guaranteeCode
+        in: query
+        required: false
+        description: The guarantee code to retrieve authorization rules for.
+        schema:
+          type: string
+      - name: rateCode
+        in: query
+        required: false
+        description: The rate code to retrieve authorization rules for.
+        schema:
+          type: string
+      - name: roomType
+        in: query
+        required: false
+        description: The room type to retrieve authorization rules for.
+        schema:
+          type: string
+      - name: sourceCode
+        in: query
+        required: false
+        description: The source code to retrieve authorization rules for.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: The result element containing the authorization rule matching the requested criteria.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/authorizationRule'
+        '204':
+          description: AuthorizationRule not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CreditCard
+  /cardReaderDelimiters:
+    get:
+      summary: Operation to fetch CardReaderDelimiters.
+      description: ' <p><strong>OperationId:</strong>getCardReaderDelimiters</p>'
+      operationId: getCardReaderDelimiters
+      parameters:
+      - name: deviceID
+        in: query
+        x-example: '120'
+        required: false
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response for reading the configured device delimiters.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/cardReaderDelimiters'
+        '204':
+          description: CardReaderDelimiters not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CreditCard
+  /creditCardInfo:
+    get:
+      summary: Operation to fetch CreditCardInfo.
+      description: Use this API to return the token inclusive cardType and expirationDate for the credit card used in a specific reservation. Oracle does not provide any credit card numbers. Include the hotelId and the cardId in the parameters. The cardId can be returned with the getReservation operation. <p><strong>OperationId:</strong>getCreditCardInfo</p>
+      operationId: getCreditCardInfo
+      parameters:
+      - name: hotelId
+        in: query
+        required: true
+        description: Used for codes in the OPERA Code tables. Possible values of this pattern are 1, 101, 101.EQP, or 101.EQP.X.
+        schema:
+          type: string
+      - name: reservationId
+        in: query
+        required: false
+        description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        schema:
+          type: string
+      - name: idExtension
+        in: query
+        required: false
+        description: Additional identifying value assigned by the creating system.
+        schema:
+          type: integer
+      - name: idContext
+        in: query
+        required: false
+        description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: false
+        description: A reference to the type of object defined by the UniqueID element.
+        schema:
+          type: string
+      - name: cardId
+        in: query
+        required: false
+        description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        schema:
+          type: string
+      - name: cardIdExtension
+        in: query
+        required: false
+        description: Additional identifying value assigned by the creating system.
+        schema:
+          type: integer
+      - name: cardIdContext
+        in: query
+        required: false
+        description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+        schema:
+          type: string
+      - name: cardIdType
+        in: query
+        required: false
+        description: A reference to the type of object defined by the UniqueID element.
+        schema:
+          type: string
+      - name: accessTransactionType
+        in: query
+        required: false
+        description: Currently supported transaction type categories used for credit card authorization.
+        schema:
+          type: string
+          enum:
+          - Additional
+          - ArPayment
+          - Batch
+          - BatchDeposit
+          - BatchDepositRefund
+          - Billing
+          - CheckIn
+          - CheckInManualAuth
+          - Deposit
+          - EndOfDay
+          - EndOfDayDeposit
+          - Manual
+          - Other
+          - PasserBy
+          - PostIt
+          - PreCheckIn
+          - Refund
+          - Scheduled
+          uniqueItems: true
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Respose for the fetch credit card information.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/creditCardInfo'
+        '204':
+          description: CreditCardInfo not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CreditCard
+  /creditCardTypes/validate:
+    get:
+      summary: Operation to validate CreditCardType.
+      description: ' <p><strong>OperationId:</strong>validateCreditCardType</p>'
+      operationId: validateCreditCardType
+      parameters:
+      - name: reservationID
+        in: query
+        required: false
+        description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        schema:
+          type: string
+      - name: reservationIDIdExtension
+        in: query
+        required: false
+        description: Additional identifying value assigned by the creating system.
+        schema:
+          type: integer
+      - name: reservationIDIdContext
+        in: query
+        required: false
+        description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+        schema:
+          type: string
+      - name: reservationIDType
+        in: query
+        required: false
+        description: A reference to the type of object defined by the UniqueID element.
+        schema:
+          type: string
+      - name: paymentMethodDescription
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: paymentMethodFolioView
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: paymentMethod
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: attachCreditCardToProfile
+        in: query
+        required: false
+        description: Attach the credit card to profile.
+        schema:
+          type: boolean
+      - name: cardHolderName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: cardNumber
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: cardNumberLast4Digits
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: cardNumberMasked
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: cardNumberType
+        in: query
+        required: false
+        description: Simple type for indicating if credit card number is tokenized.
+        schema:
+          type: string
+          enum:
+          - CardNumber
+          - Token
+          uniqueItems: true
+      - name: cardType
+        in: query
+        required: false
+        description: This is required for Credit Card Payment Methods. This indicates the type of Credit Card associated with this payment method.
+        schema:
+          type: string
+          enum:
+          - Ab
+          - Am
+          - Ax
+          - Cb
+          - Dc
+          - Ds
+          - Dt
+          - Ec
+          - Er
+          - Jc
+          - Jl
+          - Mc
+          - Nb
+          - So
+          - St
+          - Sw
+          - Va
+          - Xy
+          - Zz
+          - Cp
+          - Cu
+          uniqueItems: true
+      - name: expirationDate
+        in: query
+        required: false
+        description: Expiration date of the credit card
+        schema:
+          type: string
+          format: date
+      - name: expirationDateExpired
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: expirationDateMasked
+        in: query
+        required: false
+        description: Masked Expiration date of the credit card
+        schema:
+          type: string
+      - name: processing
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Eft
+          - Manual
+          uniqueItems: true
+      - name: swiped
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: userDefinedCardType
+        in: query
+        required: false
+        description: Indicates the user defined credit card type if credit card type from a defined list is not provided
+        schema:
+          type: string
+      - name: cardId
+        in: query
+        required: false
+        description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        schema:
+          type: string
+      - name: cardIdExtension
+        in: query
+        required: false
+        description: Additional identifying value assigned by the creating system.
+        schema:
+          type: integer
+      - name: cardIdContext
+        in: query
+        required: false
+        description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+        schema:
+          type: string
+      - name: cardIdType
+        in: query
+        required: false
+        description: A reference to the type of object defined by the UniqueID element.
+        schema:
+          type: string
+      - name: currentAuthorizedAmount
+        in: query
+        required: false
+        description: A monetary amount.
+        schema:
+          type: number
+      - name: currentAuthorizedAmountCurrencyCode
+        in: query
+        required: false
+        description: Provides a currency code to reflect the currency in which an amount may be expressed.
+        schema:
+          type: string
+      - name: approvalAmountNeeded
+        in: query
+        required: false
+        description: A monetary amount.
+        schema:
+          type: number
+      - name: approvalAmountNeededCurrencyCode
+        in: query
+        required: false
+        description: Provides a currency code to reflect the currency in which an amount may be expressed.
+        schema:
+          type: string
+      - name: balanceAmount
+        in: query
+        required: false
+        description: A monetary amount.
+        schema:
+          type: number
+      - name: balanceCurrencyCode
+        in: query
+        required: false
+        description: Provides a currency code to reflect the currency in which an amount may be expressed.
+        schema:
+          type: string
+      - name: authorizationRuleCode
+        in: query
+        required: false
+        description: The authorization rule code.
+        schema:
+          type: integer
+      - name: authorizationRuleAmount
+        in: query
+        required: false
+        description: A monetary amount.
+        schema:
+          type: number
+      - name: authorizationRuleCurrencyCode
+        in: query
+        required: false
+        description: Provides a currency code to reflect the currency in which an amount may be expressed.
+        schema:
+          type: string
+      - name: authorizationRulePercent
+        in: query
+        required: false
+        description: A percentage value if the authorization rule is percentage based.
+        schema:
+          type: number
+      - name: emailFolio
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: emailFolioInfoId
+        in: query
+        required: false
+        description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        schema:
+          type: string
+      - name: emailFolioInfoIDExtension
+        in: query
+        required: false
+        description: Additional identifying value assigned by the creating system.
+        schema:
+          type: integer
+      - name: emailFolioInfoIDContext
+        in: query
+        required: false
+        description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+        schema:
+          type: string
+      - name: emailFolioInfoType
+        in: query
+        required: false
+        description: A reference to the type of object defined by the UniqueID element.
+        schema:
+          type: string
+      - name: emailFolioInfoCreateDateTime
+        in: query
+        required: false
+        description: Time stamp of the creation.
+        schema:
+          type: string
+          format: date-time
+      - name: emailFolioInfoCreatorID
+        in: query
+        required: false
+        description: ID of creator. The creator could be a software system identifier or an identifier of an employee responsible for the creation.
+        schema:
+          type: string
+      - name: emailFolioInfoEmailAddress
+        in: query
+        required: false
+        description: Defines the e-mail address.
+        schema:
+          type: string
+      - name: emailFolioInfoEmailFormat
+        in: query
+        required: false
+        description: Supported Email format.
+        schema:
+          type: string
+          enum:
+          - Html
+          - Text
+          uniqueItems: true
+      - name: emailFolioInfoLastModifierID
+        in: query
+        required: false
+        description: Identifies the last software system or person to modify a record.
+        schema:
+          type: string
+      - name: emailFolioInfoLastModifyDateTime
+        in: query
+        required: false
+        description: Time stamp of last modification.
+        schema:
+          type: string
+          format: date-time
+      - name: emailFolioInfoOrderSequence
+        in: query
+        required: false
+        description: Display Order sequence.
+        schema:
+          type: number
+      - name: emailFolioInfoPrimaryInd
+        in: query
+        required: false
+        description: When true, indicates a primary information.
+        schema:
+          type: boolean
+      - name: emailFolioInfoPurgeDate
+        in: query
+        required: false
+        description: Date an item will be purged from a database (e.g., from a live database to an archive).
+        schema:
+          type: string
+          format: date
+      - name: emailEmailFolioInfoType
+        in: query
+        required: false
+        description: Defines the purpose of the e-mail address (e.g. personal, business, listserve).
+        schema:
+          type: string
+      - name: emailFolioInfoTypeDescription
+        in: query
+        required: false
+        description: Describes the Type code
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: The result element from validating a credit card number against its vendor's format requirements.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/creditCardTypeValidationStatus'
+        '204':
+          description: validateCreditCardType not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CreditCard
+  /creditCards/decode:
+    get:
+      summary: Operation to Decode Card.
+      description: ' <p><strong>OperationId:</strong>decodeCard</p>'
+      operationId: decodeCard
+      parameters:
+      - name: hotelId
+        in: query
+        required: true
+        description: Used for codes in the OPERA Code tables. Possible values of this pattern are 1, 101, 101.EQP, or 101.EQP.X.
+        schema:
+          type: string
+      - name: trackData
+        in: query
+        required: false
+        description: Used for Character Strings, length 0 to 200.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Respose for the decoded card information.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/decodedCard'
+        '204':
+          description: decodeCard not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CreditCard
+  /creditCards/readerDevices:
+    get:
+      summary: Operation to fetch CreditCardReaderDevices.
+      description: ' <p><strong>OperationId:</strong>getCreditCardReaderDevices</p>'
+      operationId: getCreditCardReaderDevices
+      parameters:
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response for fetching list of supported credit card reader devices.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/creditCardReaderDevices'
+        '204':
+          description: CreditCardReaderDevices not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CreditCard
+  /creditCards/vaultedId:
+    post:
+      summary: Operation to fetch CreditCardUniqueId.
+      description: ' <p><strong>OperationId:</strong>getCreditCardUniqueId</p>'
+      operationId: getCreditCardUniqueId
+      parameters:
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '201':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: Response for fetching credit card unique id.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/creditCardUniqueId'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CreditCard
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/creditCardUniqueIdRQ'
+        description: Request for fetching credit card unique id.
+        required: true
+  /hotels/{hotelId}/interfaces/{interfaceLogoId}/customData:
+    put:
+      summary: Operation to update hotel interface custom data.
+      description: Operation to update hotel interface custom data. <p><strong>OperationId:</strong>updateInterfaceCustomData</p>
+      operationId: updateInterfaceCustomData
+      parameters:
+      - name: interfaceLogoId
+        in: path
+        required: true
+        description: Unique ID of the hotel interface logo
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique ID of the hotel in OPERA
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: Response Body.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CreditCard
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/hotelInterfaceDetail'
+        description: Request object for updating a Hotel Interface.
+        required: true
+    get:
+      summary: Operation to fetch hotel interface custom data.
+      description: Operation to fetch hotel interface custom data. <p><strong>OperationId:</strong>getHotelInterfaceCustomData</p>
+      operationId: getHotelInterfaceCustomData
+      parameters:
+      - name: interfaceLogoId
+        in: path
+        required: true
+        description: Unique ID of the hotel interface logo
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: hotelId
+        in: path
+        required: true
+        description: Unique ID of the hotel in OPERA
+        schema:
+          type: string
+          maxLength: 2000
+          minLength: 1
+      - name: fetchInstructions
+        in: query
+        required: false
+        description: Transaction codes of a Hotel Interface.
+        schema:
+          type: string
+          enum:
+          - PrimaryInfo
+          - AdditionalInfo
+          - GeneralInfo
+          - CommunicationInfo
+          - IfcTranslation
+          - IfcClassOfService
+          - IfcImportRooms
+          - WorkstationSetupInfo
+          - PostingsInfo
+          - CustomDataInfo
+          - ExportDataInfo
+          - TransactionCodesInfo
+          uniqueItems: true
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response object for retrieving the details of a Hotel Interface.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/hotelInterfaceDetail'
+        '204':
+          description: HotelInterfaceCustomData not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CreditCard
+  /prepaidCard:
+    get:
+      summary: Operation to fetch Prepaid Card.
+      description: ' <p><strong>OperationId:</strong>getPrepaidCard</p>'
+      operationId: getPrepaidCard
+      deprecated: true
+      parameters:
+      - name: hotelId
+        in: query
+        required: true
+        description: Hotel code.
+        schema:
+          type: string
+      - name: cardNumber
+        in: query
+        required: true
+        description: Prepaid card number.
+        schema:
+          type: string
+      - name: interfaceId
+        in: query
+        required: false
+        description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        schema:
+          type: string
+      - name: interfaceIdType
+        in: query
+        required: false
+        description: A reference to the type of object defined by the UniqueID element.
+        schema:
+          type: string
+      - name: reservationId
+        in: query
+        required: false
+        description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        schema:
+          type: string
+      - name: reservationIdType
+        in: query
+        required: false
+        description: A reference to the type of object defined by the UniqueID element.
+        schema:
+          type: string
+      - name: pin
+        in: query
+        required: false
+        description: PIN code associated for the prepaid card.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response for fetch Prepaid card operation
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/prepaidCardDetails'
+        '204':
+          description: PrepaidCard not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CreditCard
+  /prepaidCard/search:
+    post:
+      summary: Operation to fetch Prepaid Card.
+      description: ' <p><strong>OperationId:</strong>searchPrepaidCard</p>'
+      operationId: searchPrepaidCard
+      parameters:
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response for fetch Prepaid card operation
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/prepaidCardDetails'
+        '204':
+          description: PrepaidCard not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CreditCard
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/searchPrepaidCardRequest'
+        description: Request body for search prepaid card
+        required: true
+  /prepaidCardBalance:
+    get:
+      summary: Operation to fetch prepaid card balance.
+      description: ' <p><strong>OperationId:</strong>getPrepaidCardBalance</p>'
+      operationId: getPrepaidCardBalance
+      deprecated: true
+      parameters:
+      - name: hotelId
+        in: query
+        required: true
+        description: Hotel code.
+        schema:
+          type: string
+      - name: cardNumber
+        in: query
+        required: true
+        description: Prepaid card number.
+        schema:
+          type: string
+      - name: interfaceId
+        in: query
+        required: false
+        description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        schema:
+          type: string
+      - name: interfaceIdType
+        in: query
+        required: false
+        description: A reference to the type of object defined by the UniqueID element.
+        schema:
+          type: string
+      - name: reservationId
+        in: query
+        required: false
+        description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        schema:
+          type: string
+      - name: reservationIdType
+        in: query
+        required: false
+        description: A reference to the type of object defined by the UniqueID element.
+        schema:
+          type: string
+      - name: pin
+        in: query
+        required: false
+        description: PIN code associated for the prepaid card.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response for fetch Prepaid card balance.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/prepaidCardBalanceDetails'
+        '204':
+          description: PrepaidCardBalance not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CreditCard
+  /prepaidCardBalance/search:
+    post:
+      summary: Operation to fetch prepaid card balance.
+      description: ' <p><strong>OperationId:</strong>searchPrepaidCardBalance</p>'
+      operationId: searchPrepaidCardBalance
+      parameters:
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response for fetch Prepaid card balance.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/prepaidCardBalanceDetails'
+        '204':
+          description: PrepaidCardBalance not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CreditCard
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/searchPrepaidCardBalanceRequest'
+        description: Request body for search prepaid card balance
+  /prepaidCards:
+    get:
+      summary: Operation to fetch PrepaidCards.
+      description: ' <p><strong>OperationId:</strong>getPrepaidCards</p>'
+      operationId: getPrepaidCards
+      parameters:
+      - name: hotelId
+        in: query
+        required: true
+        description: Hotel code.
+        schema:
+          type: string
+      - name: includeCardDetails
+        in: query
+        x-example: 'false'
+        required: false
+        description: Configuring this flag to be TRUE will fetch and return card details from vendor interface.
+        schema:
+          type: boolean
+      - name: reservationId
+        in: query
+        required: false
+        description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        schema:
+          type: string
+      - name: idExtension
+        in: query
+        required: false
+        description: Additional identifying value assigned by the creating system.
+        schema:
+          type: integer
+      - name: idContext
+        in: query
+        required: false
+        description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: false
+        description: A reference to the type of object defined by the UniqueID element.
+        schema:
+          type: string
+      - name: cardNo
+        in: query
+        required: false
+        description: Prepaid card number.
+        schema:
+          type: string
+      - name: roomNo
+        in: query
+        required: false
+        description: Room No search criteria.
+        schema:
+          type: string
+      - name: nameWildCard
+        in: query
+        required: false
+        description: Last name search criteria.
+        schema:
+          type: string
+      - name: firstNameWildCard
+        in: query
+        required: false
+        description: First name search criteria.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response for fetch Prepaid cards operation
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/prepaidCards'
+        '204':
+          description: PrepaidCards not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CreditCard
+  /secureApplicationSettings:
+    put:
+      summary: Operation to change AR SecureApplicationSettings.
+      description: Operation to update one or more secure application settings. <p><strong>OperationId:</strong>putSecureApplicationSettings</p>
+      operationId: putSecureApplicationSettings
+      parameters:
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+            Location:
+              description: Location of newly created resource
+              schema:
+                type: string
+          description: Response Body.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CreditCard
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/applicationSecureSetting'
+        description: Request for reading the configured device delimiters.
+        required: true
+  /services/creditCard/status:
+    get:
+      summary: Operation to ping.
+      description: ' <p><strong>OperationId:</strong>pingCreditCardService</p>'
+      operationId: pingCreditCardService
+      parameters:
+      - name: operaPingInput
+        in: query
+        required: false
+        description: Opera Ping request input type
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authKey'
+      - $ref: '#/components/parameters/externalData'
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-originating-application'
+      - $ref: '#/components/parameters/x-hotelid'
+      - $ref: '#/components/parameters/x-externalsystem'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          headers:
+            Content-Language:
+              description: Audience language
+              x-example: en-GB
+              schema:
+                type: string
+                pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+          description: Response for Ping operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/operaVersion'
+        '204':
+          description: pingCreditCardService not found.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '413':
+          $ref: '#/components/responses/413'
+        '414':
+          $ref: '#/components/responses/414'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '502':
+          $ref: '#/components/responses/502'
+        '503':
+          $ref: '#/components/responses/503'
+      tags:
+      - CreditCard
+components:
+  schemas:
+    prepaidCardsType:
+      type: array
+      description: Holds fixed charge detail.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/prepaidCardType'
+    cardTypeType:
+      type: string
+      description: This is required for Credit Card Payment Methods. This indicates the type of Credit Card associated with this payment method.
+      enum:
+      - Ab
+      - Am
+      - Ax
+      - Cb
+      - Dc
+      - Ds
+      - Dt
+      - Ec
+      - Er
+      - Jc
+      - Jl
+      - Mc
+      - Nb
+      - So
+      - St
+      - Sw
+      - Va
+      - Xy
+      - Zz
+      - Cp
+      - Cu
+    listOfDevicesType:
+      type: array
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/creditCardReaderDevicesType'
+    prepaidCardTransactionType:
+      type: object
+      description: Prepaid Card transaction.
+      properties:
+        transactionType:
+          description: Transaction type enumeration.
+          $ref: '#/components/schemas/prepaidCardTrxTypeType'
+        transactionDate:
+          description: Transaction number of the Prepaid card transaction.
+          type: string
+          format: date
+          maxLength: 8
+        transactionNo:
+          description: Transaction number of the Prepaid card transaction.
+          type: number
+        amount:
+          description: Prepaid Card Amount.
+          $ref: '#/components/schemas/currencyAmountType'
+        createDateTime:
+          description: Time stamp of the creation.
+          type: string
+          format: date-time
+        creatorId:
+          description: ID of creator. The creator could be a software system identifier or an identifier of an employee responsible for the creation.
+          type: string
+          minLength: 0
+          maxLength: 200
+        lastModifyDateTime:
+          description: Time stamp of last modification.
+          type: string
+          format: date-time
+        lastModifierId:
+          description: Identifies the last software system or person to modify a record.
+          type: string
+          minLength: 0
+          maxLength: 200
+        purgeDate:
+          description: Date an item will be purged from a database (e.g., from a live database to an archive).
+          type: string
+          format: date
+          maxLength: 8
+    interfaceAdditionalInfoType:
+      type: object
+      properties:
+        menuType:
+          description: Internal representation for Interface Type
+          $ref: '#/components/schemas/ifcMenuTypeType'
+        menuName:
+          description: Name of the Interface sub-menu
+          type: string
+          minLength: 0
+          maxLength: 20
+        controllerPort:
+          description: Opera IFC controller (server) port for the connecting clients.
+          type: integer
+        vncPort:
+          description: VNC server port for connecting to a VNC server.
+          type: integer
+        cashierId:
+          description: Cashier Number.
+          type: integer
+        pathId1:
+          description: Used if interface has to support more than one front office system.
+          type: integer
+        timeout:
+          description: Used by the Interface module. ( IFC7.exe )
+          type: string
+          minLength: 0
+          maxLength: 3
+        displayFlag:
+          description: True if the interface will be displayed.
+          type: boolean
+        autoStartFlag:
+          description: Decides if the interface will be started automatically when the controller is restarted.
+          type: boolean
+        activeFlag:
+          description: Indicator if the Hotel Interface is active or not. This is different from the Interface Status, which is either STOPPED or RUNNING.
+          type: boolean
+        interfaceStatus:
+          description: Status if the Hotel Interface is STOPPED or RUNNING. This is different from the Active Flag, which is either 1 or 0.
+          $ref: '#/components/schemas/hotelInterfaceStatusType'
+        version:
+          description: Version no. of each external interface that is installed
+          type: string
+          minLength: 0
+          maxLength: 10
+        msgExpiresAfter:
+          description: (Internal Use) Message Expires After
+          type: string
+          minLength: 0
+          maxLength: 8
+        useDataThroughFlag:
+          type: boolean
+        nAStart:
+          description: Indicator if the Hotel Interface handles night audit commands.
+          type: boolean
+        multipleRoomKey:
+          description: Indicator if the Hotel Interface allows multiple room selection for keys.
+          type: boolean
+        onlineKeySystem:
+          description: Indicator if the Hotel Interface is an online key system.
+          type: boolean
+        deleteIfcKeysOnKeyDelete:
+          description: Indicator if the Interface Keys will be deleted on KeyDelete.
+          type: boolean
+        sendTrack1Data:
+          description: Indicator for Hotel Interface Send Track 1 Data.
+          type: boolean
+        sendTrack2Data:
+          description: Indicator for Hotel Interface Send Track 2 Data.
+          type: boolean
+        sendRoomStatus:
+          description: Indicator if the Room Status will be sent.
+          type: boolean
+        telephoneCharge:
+          description: Indicates on what the post unit charge is based on.
+          $ref: '#/components/schemas/telephoneChargeType'
+        additionalRoomsLimit:
+          description: Maximum number of additional rooms allowed.
+          type: integer
+          minimum: 1
+          maximum: 999
+        sendValidStartDateTime:
+          description: Indicator if the DLS Interface allows to send valid start date and time.
+          type: boolean
+    prepaidCardDetails:
+      type: object
+      description: Response for fetch Prepaid card operation
+      properties:
+        prepaidCardDetails:
+          description: Prepaid Card details type.
+          $ref: '#/components/schemas/prepaidCardInfoType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    sVTransactionType:
+      type: string
+      description: Status of the Hotel Interface either STOPPED or RUNNING.
+      enum:
+      - OperaTransaction
+      - VendorTransaction
+      - OperaAndVendorTransaction
+    prepaidCards:
+      type: object
+      properties:
+        prepaidCards:
+          description: Prepaid Card details type.
+          $ref: '#/components/schemas/prepaidCardsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    classOfServiceType:
+      type: object
+      properties:
+        cosMsgLmpRg:
+          description: ''
+          type: string
+          minLength: 0
+          maxLength: 1
+        cosChkRg:
+          description: ''
+          type: string
+          minLength: 0
+          maxLength: 1
+        cosMsgCmdRg:
+          description: ''
+          type: string
+          minLength: 0
+          maxLength: 1
+        roomEquipCi:
+          description: ''
+          type: boolean
+        roomEquipCo:
+          description: ''
+          type: boolean
+        guestDataChangeCo:
+          description: ''
+          type: boolean
+        standardNameFormat:
+          description: Standard name format in the class of service.
+          type: string
+          minLength: 0
+          maxLength: 5
+        definedNameFormat:
+          description: Defined name format in the class of service.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/definedNameFormatType'
+        resvInQueue:
+          description: Indicates whethe a message will be triggered when a room/reservation is placed on QUEUE
+          type: boolean
+    resPaymentCardType:
+      type: object
+      description: Information on a credit card for the customer.
+      properties:
+        cardId:
+          description: credit card id
+          $ref: '#/components/schemas/uniqueID_Type'
+        currentAuthorizedAmount:
+          $ref: '#/components/schemas/currencyAmountType'
+        approvalAmountNeeded:
+          $ref: '#/components/schemas/currencyAmountType'
+        approvalCode:
+          description: Approval code sent by the credit card company on a successful authorization.
+          type: string
+          minLength: 0
+          maxLength: 20
+        cardType:
+          description: Indicates the type of credit card from a defined list
+          $ref: '#/components/schemas/cardTypeType'
+        userDefinedCardType:
+          description: Indicates the user defined credit card type if credit card type from a defined list is not provided
+          type: string
+          minLength: 0
+          maxLength: 2
+        cardNumber:
+          type: string
+          minLength: 0
+          maxLength: 80
+        cardNumberMasked:
+          type: string
+          minLength: 0
+          maxLength: 80
+        cardNumberLast4Digits:
+          type: string
+          minLength: 0
+          maxLength: 80
+        expirationDate:
+          description: Expiration date of the credit card
+          type: string
+          format: date
+          maxLength: 8
+        expirationDateMasked:
+          description: Masked Expiration date of the credit card
+          type: string
+          minLength: 0
+          maxLength: 20
+        expirationDateExpired:
+          type: boolean
+        cardHolderName:
+          type: string
+          minLength: 0
+          maxLength: 200
+        attachCreditCardToProfile:
+          description: Attach the credit card to profile.
+          type: boolean
+        processing:
+          description: This contains information on whether EFT is enabled. A value of 'C' indicates EFT is enabled and 'M' indicates manual authorization is available for this payment card type.
+          $ref: '#/components/schemas/cardProcessingType'
+        swiped:
+          type: boolean
+        cardPresent:
+          description: Flag to determine if the credit card was swiped/manually entered , This element is only used when PAYMENT SERVICE DIRECTIVE(PSD) Opera Control is active.
+          type: boolean
+        cardOrToken:
+          description: This contains information on whether credit card is tokenized (token enabled). A value of 'Token' indicates credit card is token enabled and 'CardNumber' indicates non token environment for this payment card type.
+          $ref: '#/components/schemas/cardNumberTypeType'
+        citId:
+          description: Customer Initiated Transaction(CIT) Id for Credit Cards. This is only used when PAYMENT SERVICES DIRECTIVE (PSD2) Opera Control is active.
+          type: string
+          minLength: 0
+          maxLength: 30
+    reservationPaymentMethodType:
+      type: object
+      properties:
+        paymentCard:
+          $ref: '#/components/schemas/resPaymentCardType'
+        balance:
+          $ref: '#/components/schemas/currencyAmountType'
+        authorizationRule:
+          $ref: '#/components/schemas/authorizationRuleType'
+        emailFolioInfo:
+          description: Information on an email for the customer.
+          type: object
+          properties:
+            email:
+              description: eMail deatils for the profile.
+              $ref: '#/components/schemas/emailType'
+            emailFolio:
+              type: boolean
+            id:
+              description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+              type: string
+              minLength: 0
+              maxLength: 80
+            type:
+              description: A reference to the type of object defined by the UniqueID element.
+              type: string
+              minLength: 0
+              maxLength: 40
+        paymentMethod:
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          type: string
+          minLength: 0
+          maxLength: 2000
+        folioView:
+          type: integer
+    authorizationRule:
+      type: object
+      properties:
+        authorizationRule:
+          description: The authorization rule details.
+          $ref: '#/components/schemas/authorizationRuleType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    cardNumberTypeType:
+      type: string
+      description: Simple type for indicating if credit card number is tokenized.
+      enum:
+      - CardNumber
+      - Token
+    uniqueID_Type:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
+    searchPrepaidCardBalanceRequest:
+      type: object
+      properties:
+        hotelId:
+          type: string
+          description: Hotel code.
+        cardNumber:
+          type: string
+          description: Prepaid card number.
+        interfaceId:
+          type: string
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        interfaceIdType:
+          type: string
+          description: A reference to the type of object defined by the UniqueID element.
+        reservationId:
+          type: string
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        reservationIdType:
+          type: string
+          description: A reference to the type of object defined by the UniqueID element.
+        pin:
+          type: string
+          description: PIN code associated for the prepaid card.
+      required:
+      - hotelId
+      - cardNumber
+    currencyAmountType:
+      type: object
+      description: A monetary value expressed with a currency code.
+      properties:
+        amount:
+          description: A monetary amount.
+          type: number
+        currencyCode:
+          description: Provides a currency code to reflect the currency in which an amount may be expressed.
+          type: string
+          minLength: 3
+          maxLength: 3
+    creditCardUniqueIdType:
+      type: object
+      description: Information about the credit card unique id.
+      properties:
+        creditCardType:
+          description: Credit card type.
+          type: string
+        uniqueId:
+          description: Unique id of credit card.
+          type: string
+        creditCardName:
+          description: Card name holder.
+          type: string
+        creditCardNumber:
+          description: Credit card number.
+          type: string
+        expirationDateString:
+          description: Expiration date in string representation.
+          type: string
+        creditCardNumberLast4Digits:
+          description: Last 4 digits of a credit card.
+          type: string
+        actionType:
+          description: Based on Action Type credit card services will be called. By default it will call IFC service. e.g. IFC, Direct Vendor
+          $ref: '#/components/schemas/creditCardServiceActionType'
+        cardPresent:
+          description: Flag to determine if the credit card was swiped/manually entered , This element is only used when PAYMENT SERVICES DIRECTIVE (PSD2) Opera Control is active.
+          type: boolean
+        citId:
+          description: Customer Initiated Transaction(CIT) Id for Credit Cards. This is only used when PAYMENT SERVICES DIRECTIVE (PSD2) Opera Control is active.
+          type: string
+          minLength: 0
+          maxLength: 30
+        terminalId:
+          description: Terminal ID from where this request originated.
+          type: string
+          minLength: 0
+          maxLength: 128
+    importRoomsType:
+      type: object
+      properties:
+        requiresLineNumberSetup:
+          description: Indicator for Requires line number setup, from Import Rooms related information of a Hotel Interface.
+          type: boolean
+        virtualNumberSetup:
+          description: Indicator for Virtual number setup, from Import Rooms related information of a Hotel Interface.
+          type: boolean
+        ioLines:
+          description: Indicator for support of Input/Output Lines for Hotel Room Categories.
+          type: boolean
+        inXlatId:
+          description: Translation table for incoming messages.
+          type: string
+          minLength: 0
+          maxLength: 100
+        ouXlatId:
+          description: Translation table for outgoing messages.
+          type: string
+          minLength: 0
+          maxLength: 100
+        selectedRoomTypes:
+          description: Concatenated label of Hotel Room Categories for which SendToInterface flag should be set as true.
+          type: string
+          minLength: 0
+          maxLength: 4000
+    creditCardServiceActionType:
+      type: string
+      description: Instruction to call direct vendor service.
+      enum:
+      - IfcInterface
+      - DirectVendor
+    tCPConfigType:
+      type: object
+      properties:
+        iPAddress:
+          description: IP address of the interface server
+          type: string
+          minLength: 0
+          maxLength: 20
+        portNumber:
+          description: Logical Port assignment
+          type: string
+          minLength: 0
+          maxLength: 80
+    decodedCard:
+      type: object
+      properties:
+        creditCard:
+          description: This object will be present if the requested card was successfully evaluated to be a credit card.
+          $ref: '#/components/schemas/resPaymentCardType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    ifcMenuTypeType:
+      type: string
+      enum:
+      - Cas
+      - Kss
+      - Mbs
+      - Pbx
+      - Pos
+      - Vss
+      - Dcs
+      description: Data Card System
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    prepaidCardTransactionsType:
+      type: array
+      description: Prepaid card transaction details.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/prepaidCardTransactionInfoType'
+    prepaidCardTransactionInfoType:
+      type: object
+      description: Prepaid Card Transactions
+      properties:
+        amount:
+          description: Prepaid card transaction amount.
+          $ref: '#/components/schemas/currencyAmountType'
+        type:
+          description: Prepaid card transaction type.
+          $ref: '#/components/schemas/prepaidCardTrxTypeType'
+        date:
+          description: Prepaid card transaction date.
+          type: string
+          format: date
+          maxLength: 8
+        transactionNo:
+          description: Opera transaction number.
+          type: integer
+        vendorTransactionNo:
+          description: Vendor transaction number.
+          type: string
+          minLength: 0
+          maxLength: 100
+        profileId:
+          description: The guest name id associated to the card.
+          $ref: '#/components/schemas/uniqueID_Type'
+        source:
+          description: Prepaid card transaction source.
+          $ref: '#/components/schemas/prepaidCardTransactionSourceType'
+        cancellable:
+          description: Indicate if the transaction is cancellable or not.
+          type: boolean
+    generalInfoType:
+      type: object
+      properties:
+        createSVCheckIn:
+          description: Create stored value during checkin of a Hotel Interface
+          type: boolean
+        enableFailover:
+          description: Enable failover of a Hotel Interface
+          type: boolean
+        ccVaultFunction:
+          description: CC vault of a Hotel Interface
+          type: boolean
+        enableResend:
+          description: Enable resend of a Hotel Interface
+          type: boolean
+        sendARAuthType:
+          description: Send AR auth type of a Hotel Interface
+          type: boolean
+        enableDBVerification:
+          description: Enable DB verification of a Hotel Interface
+          type: boolean
+        allowCCCancelTransaction:
+          description: Allow CC cancel transactions of a Hotel Interface
+          type: boolean
+        showStoredValuePin:
+          description: Show stored value pin of a Hotel Interface
+          type: boolean
+        showSVTransaction:
+          description: Show SV transaction of a Hotel Interface
+          $ref: '#/components/schemas/sVTransactionType'
+        storedValueSystem:
+          description: Stored value system of a Hotel Interface
+          type: boolean
+        sendEnhancedFields:
+          description: Send enhanced fields of a Hotel Interface
+          type: boolean
+        cardPresentFlag:
+          description: Card present of a Hotel Interface
+          type: boolean
+        handleNightAudit:
+          description: Handle night audit command of a Hotel Interface
+          type: boolean
+        regularTransaction:
+          description: Regular transaction command of a Hotel Interface
+          type: boolean
+        courtesyCardHandling:
+          description: Courtesy card handling command of a Hotel Interface
+          type: boolean
+        sendEndOfDay:
+          description: Send end of day of a Hotel Interface
+          type: boolean
+        portNumber1:
+          description: Logical port number 1 of a the Hotel Interface
+          type: string
+          minLength: 0
+          maxLength: 40
+        portNumber2:
+          description: Logical port number 2 of a the Hotel Interface
+          type: string
+          minLength: 0
+          maxLength: 40
+        portNumber3:
+          description: Logical port number 3 of a the Hotel Interface
+          type: string
+          minLength: 0
+          maxLength: 40
+        portNumber4:
+          description: Logical port number 4 of a the Hotel Interface
+          type: string
+          minLength: 0
+          maxLength: 200
+        iPAddress:
+          description: IP Address of a the Hotel Interface
+          type: string
+          minLength: 0
+          maxLength: 40
+        sVRedeemTrx:
+          description: Stored value reedeem transaction of a the Hotel Interface
+          type: string
+          minLength: 0
+          maxLength: 40
+        device:
+          description: Device of a the Hotel Interface
+          type: string
+          minLength: 0
+          maxLength: 40
+        departmentCode1:
+          description: Department code 1 of a the Hotel Interface
+          type: string
+          minLength: 0
+          maxLength: 40
+        departmentCode2:
+          description: Department code 2 of a the Hotel Interface
+          type: string
+          minLength: 0
+          maxLength: 40
+        rollupTransactions:
+          description: Rollup transactions flag of the Hotel Interface
+          type: boolean
+        allowVideoCheckout:
+          description: Indicator if video checkout is allowed or not.
+          type: boolean
+        checkCreditLimit:
+          description: One of the video checkout options whether to check the credit limit.
+          type: boolean
+        checkBalance:
+          description: One of the video checkout options whether to check the balance.
+          type: boolean
+        checkRouting:
+          description: One of the video checkout options whether to check the routing.
+          type: boolean
+        wakeupYn:
+          description: Indicator if the Hotel Interface handles wakeup calls.
+          type: boolean
+        wakeupHandledBy:
+          description: Determines who handles the wakeup calls, either by Opera (0) or a Vendor (1).
+          type: string
+          minLength: 0
+          maxLength: 1
+        wakeRetry:
+          description: Wakeup retry limit of the Hotel Interface. Value range is 0 to 999.
+          type: integer
+        wakeDelay:
+          description: Wakeup delay value of the Hotel Interface.
+          type: integer
+        prevWake:
+          description: Used by the Interface module (IFC7.exe).
+          type: integer
+        folioDisplayOption:
+          description: Folio display option of the Hotel Interface applicable to VID and MSC. "0" means folio display option off. "A" means a guest folio display option. "U" means user defined folio display option.
+          type: string
+          minLength: 0
+          maxLength: 1
+        userDefinedFolio1:
+          description: Indicator if the User defined folio 1 is utilized.
+          type: boolean
+        userDefinedFolio2:
+          description: Indicator if the User defined folio 2 is utilized.
+          type: boolean
+        userDefinedFolio3:
+          description: Indicator if the User defined folio 3 is utilized.
+          type: boolean
+        userDefinedFolio4:
+          description: Indicator if the User defined folio 4 is utilized.
+          type: boolean
+        displayPhoneName:
+          description: Indicator if the phone name will be displayed.
+          type: boolean
+        keyPinActive:
+          description: Indicator if the Key Pin is active or not.
+          type: boolean
+        allPrintDetailOn:
+          description: Indicator for Default All Print Details On.
+          type: boolean
+    cardProcessingType:
+      type: string
+      enum:
+      - Eft
+      - Manual
+    creditCardUniqueIdRQ:
+      type: object
+      description: Request for fetching credit card unique id.
+      properties:
+        creditCardUniqueId:
+          description: Contains the unique id information request.
+          $ref: '#/components/schemas/creditCardUniqueIdType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    status:
+      type: object
+      description: Response Body.
+      properties:
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    interfaceCustomDataDetailsType:
+      type: array
+      description: Collection of custom data details of a hotel interface.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/interfaceCustomDataDetailType'
+    postingAccountType:
+      type: object
+      properties:
+        id:
+          description: Internal ID to reference the records.
+          type: number
+        paymentMethod:
+          description: Payment method of posting accounts in transaction codes setup.
+          type: string
+          minLength: 0
+          maxLength: 10
+        account:
+          description: Account of posting accounts in transaction codes setup.
+          type: string
+          minLength: 0
+          maxLength: 50
+        accountDescription:
+          description: Account description of posting accounts in transaction codes setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+        salesOutlet:
+          description: Sales outlet of posting accounts in transaction codes setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+        transactionCode:
+          description: Transaction code of posting accounts in transaction codes setup.
+          type: string
+          minLength: 0
+          maxLength: 40
+        description:
+          description: Description of posting accounts in transaction codes setup.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        autoBalance:
+          description: Auto balance flag of postings setup.
+          type: boolean
+    prepaidCardBalanceDetails:
+      type: object
+      description: Response for fetch Prepaid card balance operation
+      properties:
+        prepaidCardDetails:
+          description: Prepaid Card balance details type.
+          $ref: '#/components/schemas/prepaidCardInfoType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    itemizerType:
+      type: object
+      properties:
+        splitCode:
+          description: Split code of the itemizer setup.
+          type: string
+          minLength: 0
+          maxLength: 10
+        splitPost:
+          description: Split posting of the itemizer setup.
+          type: integer
+        splitText:
+          description: Split text of the itemizer setup.
+          type: string
+          minLength: 0
+          maxLength: 50
+        splitFactor:
+          description: Split factor of the itemizer setup.
+          type: integer
+    prepaidCardType:
+      type: object
+      description: Holds fixed charge information.
+      properties:
+        hotelId:
+          description: Hotel context for the Reservations.
+          type: string
+          minLength: 0
+          maxLength: 20
+        reservationId:
+          description: The unique ID of the reservation to which this record applies.
+          $ref: '#/components/schemas/reservationId'
+        name:
+          description: Family name, last name or Company Name.
+          type: string
+          minLength: 0
+          maxLength: 80
+        firstName:
+          description: Given name, first name or names.
+          type: string
+          minLength: 0
+          maxLength: 80
+        profileId:
+          description: Card / Account holder name ID
+          $ref: '#/components/schemas/profileId'
+        cardNo:
+          description: Prepaid card / account number.
+          type: string
+          minLength: 0
+          maxLength: 80
+        cardNumberMasked:
+          description: Masked Prepaid card / account number.
+          type: string
+          minLength: 0
+          maxLength: 80
+        amount:
+          description: Prepaid Card Amount.
+          $ref: '#/components/schemas/currencyAmountType'
+        pinCode:
+          description: Prepaid card pin code.
+          type: string
+          minLength: 0
+          maxLength: 10
+        interfaceId:
+          description: The unique ID for the Interface.
+          $ref: '#/components/schemas/uniqueID_Type'
+        cardDetails:
+          description: Prepaid Card details from vendor.
+          $ref: '#/components/schemas/prepaidCardDetailsType'
+        createDateTime:
+          description: Time stamp of the creation.
+          type: string
+          format: date-time
+        creatorId:
+          description: ID of creator. The creator could be a software system identifier or an identifier of an employee responsible for the creation.
+          type: string
+          minLength: 0
+          maxLength: 200
+        lastModifyDateTime:
+          description: Time stamp of last modification.
+          type: string
+          format: date-time
+        lastModifierId:
+          description: Identifies the last software system or person to modify a record.
+          type: string
+          minLength: 0
+          maxLength: 200
+        purgeDate:
+          description: Date an item will be purged from a database (e.g., from a live database to an archive).
+          type: string
+          format: date
+          maxLength: 8
+        giftCard:
+          description: Indicates a gift card type.
+          type: boolean
+    interfaceControlSpecType:
+      type: object
+      properties:
+        hotelId:
+          description: Hotel Code of the hotel interface.
+          type: string
+          minLength: 0
+          maxLength: 20
+        logo:
+          description: Logo of the hotel interface.
+          type: string
+          minLength: 0
+          maxLength: 20
+        internalCode:
+          description: Internal code of a translation specification setup.
+          type: integer
+        selector:
+          description: Selector of a translation specification setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+        specification:
+          description: Specification of a translation specification setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+        priority:
+          description: Priority of a translation specification setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+        position:
+          description: Position of a translation specification setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+    applicationSettingLevelType:
+      type: string
+      enum:
+      - Global
+      - Hotel
+      - Cro
+    interfacePrimaryInfoType:
+      type: object
+      properties:
+        interfaceId:
+          description: Unique DB internal number of a Hotel Interface record.
+          $ref: '#/components/schemas/uniqueID_Type'
+        hotelId:
+          description: Hotel Code
+          type: string
+          minLength: 0
+          maxLength: 20
+        logo:
+          description: Hotel Interface Logo. On the database, this is also referred as DBF Logo. This is a three letter code followed by an underscore(_). This tells us which DBF files and log files with the prefix that IFC7 is going to create.
+          type: string
+          minLength: 0
+          maxLength: 20
+        interfaceName:
+          description: Name of the Hotel Interface
+          type: string
+          minLength: 0
+          maxLength: 40
+        interfaceType:
+          description: Three letter code for each interface that identifies the interface.
+          $ref: '#/components/schemas/hotelInterfaceTypeType'
+        productCode:
+          description: Three letter code that uniquely identifies the external interface.
+          type: string
+          minLength: 0
+          maxLength: 4
+        licenseCode:
+          description: Interface License code
+          type: string
+          minLength: 0
+          maxLength: 20
+        machineId:
+          description: The ID stored in IFC_MACHINES table.
+          type: integer
+        machineName:
+          description: Unique machine name of the running IFC.
+          type: string
+          minLength: 0
+          maxLength: 80
+        interfaceProductCode:
+          description: FKT Logo required for the external interface.
+          type: string
+          minLength: 0
+          maxLength: 40
+    definedNameFormatType:
+      type: object
+      properties:
+        hotelId:
+          description: Hotel Code where the defined name format is associated.
+          type: string
+          minLength: 0
+          maxLength: 20
+        definedFormatId:
+          description: ID of the defined name format.
+          type: string
+          minLength: 0
+          maxLength: 20
+        expressionTable:
+          description: Table from which the info will be retrieved.
+          type: string
+          minLength: 0
+          maxLength: 200
+        expression:
+          description: Expression of the defined name format It basically contains all formats that are being set.
+          type: string
+          minLength: 0
+          maxLength: 200
+        logo:
+          description: Logo of the hotel interface.
+          type: string
+          minLength: 0
+          maxLength: 20
+    interfaceCommunicationInfoType:
+      type: object
+      properties:
+        tCPConfig:
+          $ref: '#/components/schemas/tCPConfigType'
+        serialPortConfig:
+          $ref: '#/components/schemas/serialPortConfigType'
+    interfaceExportDataDetailsType:
+      type: array
+      description: Collection of export data details of a hotel interface.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/interfaceExportDataDetailType'
+    transactionCodeDetailType:
+      type: object
+      properties:
+        servingPeriod:
+          description: Serving period of transaction code setup.
+          type: string
+          minLength: 0
+          maxLength: 50
+        rowNum:
+          description: Row number of transaction code setup.
+          type: integer
+        revenueCenter:
+          description: Revenue center of transaction code setup.
+          type: string
+          minLength: 0
+          maxLength: 50
+        terminal:
+          description: Terminal of transaction code setup.
+          type: string
+          minLength: 0
+          maxLength: 50
+        paymentNum:
+          description: Payment number of transaction code setup.
+          type: string
+          minLength: 0
+          maxLength: 50
+        userId:
+          description: User id of transaction code setup.
+          type: string
+          minLength: 0
+          maxLength: 50
+        postRoute:
+          description: Post route of transaction code setup.
+          type: string
+          minLength: 0
+          maxLength: 50
+        dialedDigits:
+          description: Dialed digits of transaction code setup.
+          type: string
+          minLength: 0
+          maxLength: 50
+        lineType:
+          description: Line type of transaction code setup.
+          type: string
+          minLength: 0
+          maxLength: 50
+        code:
+          description: Code of transaction code setup.
+          type: string
+          minLength: 0
+          maxLength: 50
+        tipCode:
+          description: Tip code of transaction code setup.
+          type: string
+          minLength: 0
+          maxLength: 50
+        description:
+          description: Description of transaction code setup.
+          type: string
+          minLength: 0
+          maxLength: 50
+        itemizersShortInfo:
+          description: Itemizer short info of transaction code setup.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/itemizerShortInfoType'
+    warningType:
+      type: object
+      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
+          type: string
+          maxLength: 2000
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+          type: string
+          minLength: 0
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+          maxLength: 2000
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+          maxLength: 2000
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+          maxLength: 2000
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+          maxLength: 2000
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        rph:
+          description: Reference Place Holder used as an index for this warning.
+          type: string
+          minLength: 1
+          maxLength: 8
+    creditCardInfo:
+      type: object
+      properties:
+        creditCard:
+          description: Credit card information.
+          $ref: '#/components/schemas/resPaymentCardType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
+    interfaceExportDataDetailType:
+      type: object
+      description: This gives information of export detail of a hotel interface.
+      properties:
+        sourceTableName:
+          description: Specifies the table where the event data is stored.
+          type: string
+          minLength: 0
+          maxLength: 50
+        columnName:
+          description: Specifies the column name found in the table.
+          type: string
+          minLength: 0
+          maxLength: 50
+        dataType:
+          description: Specifies the type of data in the column.
+          type: string
+          minLength: 0
+          maxLength: 20
+        dataLength:
+          description: Specifies the length of data in the column.
+          type: integer
+        xMLTagName:
+          description: Specifies the tag name found in the export.
+          type: string
+          minLength: 0
+          maxLength: 50
+        columnSelected:
+          description: Specifies whether the column is chosen to be included in the export.
+          type: boolean
+    interfaceControlArticleType:
+      type: object
+      properties:
+        hotelId:
+          description: Hotel Code of the hotel interface.
+          type: string
+          minLength: 0
+          maxLength: 20
+        logo:
+          description: Logo of the hotel interface.
+          type: string
+          minLength: 0
+          maxLength: 20
+        internalCode:
+          description: Internal code of a translation article setup.
+          type: integer
+        selector:
+          description: Selector of a translation article setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+        articleNo:
+          description: Article Number of a translation article setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+        description:
+          description: Description of a translation article setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+    hotelInterfaceStatusType:
+      type: string
+      description: Status of the Hotel Interface either STOPPED or RUNNING.
+      enum:
+      - Stopped
+      - Running
+      - Waiting
+      - StopInitiated
+      - StartInitiated
+      - RebootInitiated
+      - Other
+    prepaidCardTransactionSourceType:
+      type: string
+      description: Vendor transaction source type.
+      enum:
+      - Opera
+      - Vendor
+    prepaidCardTrxTypeType:
+      type: string
+      description: Reload transaction.
+      enum:
+      - Activate
+      - Cancel
+      - Cashout
+      - Inquiry
+      - Issue
+      - Redeem
+      - Reload
+    interfaceControlCfgType:
+      type: object
+      properties:
+        hotelId:
+          description: Hotel Code of the hotel interface.
+          type: string
+          minLength: 0
+          maxLength: 20
+        logo:
+          description: Logo of the hotel interface.
+          type: string
+          minLength: 0
+          maxLength: 20
+        internalCode:
+          description: Internal code of a translation configuration setup.
+          type: integer
+        originCode:
+          description: Origin code of a translation configuration setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+        merchantId:
+          description: Merchant Id of a translation configuration setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+    workstationSetupType:
+      type: array
+      description: List of workstations of a hotel interface.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/interfaceWorkstationType'
+    creditCardReaderDevices:
+      type: object
+      properties:
+        devices:
+          description: List of supported credit card reader devices.
+          $ref: '#/components/schemas/listOfDevicesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    transactionCodeInfoType:
+      type: object
+      properties:
+        allChargesCode:
+          description: All charges code of transaction code setup
+          type: string
+          minLength: 0
+          maxLength: 10
+        miniBarCode:
+          description: Minibar charges code of transaction code setup
+          type: string
+          minLength: 0
+          maxLength: 10
+        cashCreditCardPosting:
+          description: Cash or credit card posting of transaction code setup
+          type: string
+          minLength: 0
+          maxLength: 1
+        subtotalPosting:
+          description: Subtotal posting of transaction code setup
+          type: string
+          minLength: 0
+          maxLength: 1
+        differencePosting:
+          description: Difference posting of transaction code setup
+          type: string
+          minLength: 0
+          maxLength: 1
+        calcTrxCodePosting:
+          description: Calculated transaction code posting of transaction code setup
+          type: string
+          minLength: 0
+          maxLength: 1
+        numberOfDialedDigits:
+          description: Number of dialed digits transaction code setup
+          type: string
+          minLength: 0
+          maxLength: 1
+        postingAccounts:
+          description: Postings information of transaction codes setup.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/postingAccountType'
+        itemizers:
+          description: Split information of transaction code setup.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/itemizerType'
+        transactionCodes:
+          description: Split information of transaction code setup.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/transactionCodeDetailType'
+    emailType:
+      type: object
+      description: Information on an email for the customer.
+      properties:
+        emailAddress:
+          description: Defines the e-mail address.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        type:
+          description: Defines the purpose of the e-mail address (e.g. personal, business, listserve).
+          type: string
+          minLength: 0
+          maxLength: 20
+        typeDescription:
+          description: Describes the Type code
+          type: string
+          minLength: 0
+          maxLength: 2000
+        emailFormat:
+          description: Supported Email format.
+          type: string
+          enum:
+          - Html
+          - Text
+        primaryInd:
+          description: When true, indicates a primary information.
+          type: boolean
+        orderSequence:
+          description: Display Order sequence.
+          type: number
+        createDateTime:
+          description: Time stamp of the creation.
+          type: string
+          format: date-time
+        creatorId:
+          description: ID of creator. The creator could be a software system identifier or an identifier of an employee responsible for the creation.
+          type: string
+          minLength: 0
+          maxLength: 200
+        lastModifyDateTime:
+          description: Time stamp of last modification.
+          type: string
+          format: date-time
+        lastModifierId:
+          description: Identifies the last software system or person to modify a record.
+          type: string
+          minLength: 0
+          maxLength: 200
+        purgeDate:
+          description: Date an item will be purged from a database (e.g., from a live database to an archive).
+          type: string
+          format: date
+          maxLength: 8
+    maskDialNumberType:
+      type: string
+      description: Mask the dialled digits as per the room configuration.
+      enum:
+      - NoMasking
+      - MaskLast2Digits
+      - MaskLast4Digits
+      - Mask4DigitsLeaveLast2Intact
+      - MaskAllExceptFirst2
+      - MaskAll
+      - MaskingPerRoom
+    interfaceExportDataInfoType:
+      type: object
+      description: This type holds the export data of a hotel interface.
+      properties:
+        interfaceExportDataDetails:
+          description: Collection which shows the manually selected columns for the export data of a hotel interface.
+          $ref: '#/components/schemas/interfaceExportDataDetailsType'
+        interfaceExportDataMandatoryDetails:
+          description: Collection which shows the mandatory columns for the export data of a hotel interface.
+          $ref: '#/components/schemas/interfaceExportDataDetailsType'
+    interfaceCustomDataInfoType:
+      type: object
+      description: This type holds the custom data of a hotel interface.
+      properties:
+        exportAsXml:
+          description: Specifies whether the details have to be exported as XML. If true, then the details are exported as XML else details are exported as text.
+          type: boolean
+        includeDoorcardField:
+          description: Specifies whether the Doorcard field details have to be included in the XML Export. If true, Doorcard field details will be included in the XML Export else details will not be included. This field is available only when the Export as XML field is selected.
+          type: boolean
+        interfaceCustomDataDetails:
+          description: Collection of custom data details of a hotel interface.
+          $ref: '#/components/schemas/interfaceCustomDataDetailsType'
+    operaVersionNumberType:
+      type: string
+      description: Current Opera Version Number
+      minLength: 0
+      maxLength: 40
+    cardReaderDelimiters:
+      type: object
+      properties:
+        delimiters:
+          description: Delimiters configured for the requested device.
+          $ref: '#/components/schemas/cardReaderDelimitersType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    creditCardTypeValidationStatus:
+      type: object
+      properties:
+        valid:
+          description: A flag indicating whether the credit card number meets its vendor's format requirements
+          type: boolean
+        validatedPaymentMethod:
+          description: Validated card type payment method. This object will be present if the requested payment method was successfully evaluated to be a credit card.
+          $ref: '#/components/schemas/reservationPaymentMethodType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    applicationSecureSettingType:
+      type: object
+      description: Internal settings that is mainly used to get a secure information on the type.
+      properties:
+        name:
+          type: string
+          minLength: 0
+          maxLength: 80
+        levelType:
+          $ref: '#/components/schemas/applicationSettingLevelType'
+        levelCode:
+          type: string
+          minLength: 0
+          maxLength: 20
+        securedValue:
+          type: string
+          minLength: 0
+          maxLength: 2000
+    itemizerShortInfoType:
+      type: object
+      properties:
+        code:
+          description: Code of the itemizer on a transaction code setup.
+          type: string
+          minLength: 0
+          maxLength: 50
+        itemizerName:
+          description: Itemizer name on a transaction code setup.
+          type: string
+          minLength: 0
+          maxLength: 50
+        itemNumber:
+          description: Itemizer number which is the split post on a transaction code setup.
+          type: integer
+    interfaceCustomDataDetailType:
+      type: object
+      description: This gives information of custom detail of a hotel interface.
+      properties:
+        customDataField:
+          description: Specifies the type of data stored.
+          type: string
+          minLength: 0
+          maxLength: 200
+        customDataValue:
+          description: Specifies the actual data corresponding to each value in the field.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    translationType:
+      type: object
+      properties:
+        guestNoLength:
+          description: Guest number length of a translation setup.
+          type: string
+          minLength: 0
+          maxLength: 2
+        guestMessageIdLength:
+          description: Guest message id length of a translation setup.
+          type: string
+          minLength: 0
+          maxLength: 2
+        groupNoLength:
+          description: Group number length of a translation setup.
+          type: string
+          minLength: 0
+          maxLength: 2
+        defaultCharge:
+          description: Default charge of a translation setup.
+          type: integer
+        configuation:
+          description: Translation configuration of a hotel interface.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/interfaceControlCfgType'
+        articles:
+          description: Translation article setup of a hotel interface.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/interfaceControlArticleType'
+        specifications:
+          description: Translation specifications setup of a hotel interface.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/interfaceControlSpecType'
+        languages:
+          description: Translation languages setup of a hotel interface.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/interfaceControlLangType'
+    creditCardReaderDevicesType:
+      type: object
+      description: Supported credit card reader devices.
+      properties:
+        deviceId:
+          description: Device ID assigned to the credit card reader device.
+          type: integer
+        description:
+          description: Description of the device.
+          type: string
+        secureDevice:
+          description: A flag indicating whether the data from the device is encrypted or not.
+          type: boolean
+        trackDataPattern:
+          description: The Regular Expression pattern of the track data that is generated by this device.
+          type: string
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
+    interfaceControlLangType:
+      type: object
+      properties:
+        hotelId:
+          description: Hotel Code of the hotel interface.
+          type: string
+          minLength: 0
+          maxLength: 20
+        logo:
+          description: Logo of the hotel interface.
+          type: string
+          minLength: 0
+          maxLength: 20
+        internalCode:
+          description: Internal code of a translation language setup.
+          type: integer
+        selector:
+          description: Selector of a translation language setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+        languageCode:
+          description: Language code of a translation language setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+    hotelInterfaceDetailType:
+      type: object
+      properties:
+        primaryInfo:
+          description: Primary information of a Hotel Interface.
+          $ref: '#/components/schemas/interfacePrimaryInfoType'
+        additionalInfo:
+          description: Additional information of a Hotel Interface.
+          $ref: '#/components/schemas/interfaceAdditionalInfoType'
+        generalInfo:
+          description: General information of a Hotel Interface.
+          $ref: '#/components/schemas/generalInfoType'
+        communicationInfo:
+          description: Communication related information of a Hotel Interface.
+          $ref: '#/components/schemas/interfaceCommunicationInfoType'
+        translationInfo:
+          description: Communication related information of a Hotel Interface.
+          $ref: '#/components/schemas/translationType'
+        classOfServiceInfo:
+          description: Information related to Class of Service of a Hotel Interface.
+          $ref: '#/components/schemas/classOfServiceType'
+        importRoomsInfo:
+          description: Information related to Import Rooms of a Hotel Interface.
+          $ref: '#/components/schemas/importRoomsType'
+        workstationSetupInfo:
+          description: Workstation setup of a hotel interface.
+          $ref: '#/components/schemas/workstationSetupType'
+        postingsInfo:
+          description: Postings of a hotel interface.
+          $ref: '#/components/schemas/postingInfoType'
+        customDataInfo:
+          description: Information related to Custom Data of a Hotel Interface.
+          $ref: '#/components/schemas/interfaceCustomDataInfoType'
+        exportDataInfo:
+          description: Information related to Export Data of a Hotel Interface.
+          $ref: '#/components/schemas/interfaceExportDataInfoType'
+        transactionsInfo:
+          description: Postings of a hotel interface.
+          $ref: '#/components/schemas/transactionCodeInfoType'
+    postingInfoType:
+      type: object
+      properties:
+        referenceField:
+          description: Reference field of postings setup.
+          type: string
+          minLength: 0
+          maxLength: 1
+        chargeScaling:
+          description: Charge scaling of postings setup.
+          type: string
+          minLength: 0
+          maxLength: 1
+        zeroChargePostings:
+          description: Zero charge posting of postings setup.
+          type: string
+          minLength: 0
+          maxLength: 1
+        postings:
+          description: Postings of postings setup.
+          type: string
+          minLength: 0
+          maxLength: 1
+        postType:
+          description: Post type of postings setup.
+          type: string
+          minLength: 0
+          maxLength: 1
+        conversion:
+          description: Conversion of postings setup.
+          type: integer
+        reference:
+          description: Reference of postings setup.
+          type: string
+          minLength: 0
+          maxLength: 50
+        supplement:
+          description: Supplement of postings setup.
+          type: string
+          minLength: 0
+          maxLength: 50
+        overrideCreditLimit:
+          description: Override credit limit of postings setup.
+          type: boolean
+        noPostFlag:
+          description: No post flag of postings setup.
+          type: boolean
+        generatesTax:
+          description: IFC generate tax of postings setup.
+          type: boolean
+        dialedNumberMasking:
+          description: Type of number masking used for the dialed numbers in the particular interface.
+          $ref: '#/components/schemas/maskDialNumberType'
+        articleNoPrefix:
+          description: Article Prefix of postings setup.
+          type: boolean
+    hotelInterfaceDetail:
+      type: object
+      description: Request object for changing Hotel Interface Data.
+      properties:
+        details:
+          description: Details.
+          $ref: '#/components/schemas/hotelInterfaceDetailType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    prepaidCardInfoType:
+      type: object
+      description: Detailed information about the prepaid card.
+      properties:
+        hotelId:
+          description: Hotel context for the prepaid card.
+          type: string
+          minLength: 0
+          maxLength: 20
+        reservationId:
+          description: The reservation name id where the transaction is associated.
+          $ref: '#/components/schemas/uniqueID_Type'
+        cardNo:
+          description: Prepaid card number.
+          type: string
+          minLength: 0
+          maxLength: 80
+        cardNumberMasked:
+          description: Masked Prepaid card / account number.
+          type: string
+          minLength: 0
+          maxLength: 80
+        interfaceId:
+          description: The unique ID for the Interface.
+          $ref: '#/components/schemas/uniqueID_Type'
+        initialLoadDate:
+          description: Initial Load Date of the prepaid card.
+          type: string
+          format: date
+          maxLength: 8
+        issueDate:
+          description: Issue Date of the prepaid card.
+          type: string
+          format: date
+          maxLength: 8
+        validUntil:
+          description: Validity of the prepaid card amount.
+          type: string
+          format: date
+          maxLength: 8
+        expiryDate:
+          description: Expiry Date of the prepaid card.
+          type: string
+          format: date
+          maxLength: 8
+        initialCredit:
+          description: Initial Credit of the prepaid card.
+          $ref: '#/components/schemas/currencyAmountType'
+        totalDebit:
+          description: Total Debt of the prepaid card.
+          $ref: '#/components/schemas/currencyAmountType'
+        totalCredit:
+          description: Total Credit of the prepaid card.
+          $ref: '#/components/schemas/currencyAmountType'
+        balance:
+          description: Balance of the prepaid card.
+          $ref: '#/components/schemas/currencyAmountType'
+        availableCashoutAmount:
+          description: Available cashout of the prepaid card.
+          $ref: '#/components/schemas/currencyAmountType'
+        reservedAmount:
+          description: Reserved Amount of the prepaid card.
+          $ref: '#/components/schemas/currencyAmountType'
+        prepaidCardTransactions:
+          description: List of prepaid card transactions.
+          $ref: '#/components/schemas/prepaidCardTransactionsType'
+        vendorTransactionsActive:
+          description: Indicate if vendor transactions are included on the transactions list.
+          type: boolean
+        operaTransactionsActive:
+          description: Indicate if opera transactions are included on the transactions list.
+          type: boolean
+    profileId:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        url:
+          description: URL that identifies the location associated with the record identified by the UniqueID.
+          type: string
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 20
+        instance:
+          description: The identification of a record as it exists at a point in time. An instance is used in update messages where the sender must assure the server that the update sent refers to the most recent modification level of the object being updated.
+          type: string
+          minLength: 0
+          maxLength: 80
+        idContext:
+          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+          type: string
+          minLength: 0
+          maxLength: 80
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        idExtension:
+          description: Additional identifying value assigned by the creating system.
+          type: integer
+    creditCardUniqueId:
+      type: object
+      properties:
+        creditCardUniqueIdInfo:
+          description: This object will be present if the requested card was successfully evaluated to be a credit card.
+          $ref: '#/components/schemas/creditCardUniqueIdInfoType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    telephoneChargeType:
+      type: string
+      enum:
+      - '0'
+      - '1'
+      - '2'
+      description: Auto Choose
+    reservationId:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        url:
+          description: URL that identifies the location associated with the record identified by the UniqueID.
+          type: string
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 20
+        instance:
+          description: The identification of a record as it exists at a point in time. An instance is used in update messages where the sender must assure the server that the update sent refers to the most recent modification level of the object being updated.
+          type: string
+          minLength: 0
+          maxLength: 80
+        idContext:
+          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+          type: string
+          minLength: 0
+          maxLength: 80
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        idExtension:
+          description: Additional identifying value assigned by the creating system.
+          type: integer
+    cardReaderDelimitersType:
+      type: object
+      description: Configured delimiters for parsing a card track data based on a particular card reader device.
+      properties:
+        deviceId:
+          description: Device ID to which this delimiter is assigned.
+          type: integer
+        track2Separator:
+          description: Character to be used as Track2 Separator.
+          type: string
+          minLength: 0
+          maxLength: 3
+        expirationDateStartCharacter:
+          description: Character that will denote the start of Expiry Date.
+          type: string
+          minLength: 0
+          maxLength: 3
+        cardHolderNameSeparator:
+          description: Character to be used as Guest Name separator.
+          type: string
+          minLength: 0
+          maxLength: 3
+        endOfTrackSeparator:
+          description: Character to be used as End of Track Separator.
+          type: string
+          minLength: 0
+          maxLength: 3
+        secureDevice:
+          description: A flag indicating whether the data from the device is encrypted or not.
+          type: boolean
+        additionalInfoSeparator:
+          description: Character to be used as Additional Info Separator.
+          type: string
+          minLength: 0
+          maxLength: 3
+        kSNField:
+          description: Interpreted as the field position or field ID of KSN, depending on the value of Additional Information Format Type.
+          type: integer
+        eT1Field:
+          description: Interpreted as the field position or field ID of Encrypted Track 1, depending on the value of Additional Information Format Type.
+          type: integer
+        eT2Field:
+          description: Interpreted as the field position or field ID of Encrypted Track 2, depending on the value of Additional Information Format Type.
+          type: integer
+        encryptionFormatCode:
+          description: Encryption Format Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        additionalInfoEndSeparator:
+          description: Character to be used as Additional Info End Separator.
+          type: string
+          minLength: 0
+          maxLength: 3
+        additionalInfoFormatType:
+          description: String to be used to indicate whether KSNField, ET1Field, ET2Field should be interpreted as field positions or field IDs.
+          type: string
+        trackDataPattern:
+          description: The Regular Expression pattern of the track data that is generated by this device.
+          type: string
+        manualTokenPattern:
+          description: The Regular Expression pattern of the token that is present in the track data if data was inputted manually through the device instead of swiping.
+          type: string
+        softwareId:
+          description: Software ID of device.
+          type: string
+          minLength: 0
+          maxLength: 20
+    interfaceWorkstationType:
+      type: object
+      properties:
+        hotelId:
+          description: Hotel Code of a workstation.
+          type: string
+          minLength: 0
+          maxLength: 20
+        logo:
+          description: Logo of a workstation.
+          type: string
+          minLength: 0
+          maxLength: 20
+        internalCode:
+          description: Internal code of a workstation.
+          type: integer
+        workstation:
+          description: Workstation of a hotel interface.
+          type: string
+          minLength: 0
+          maxLength: 200
+        deviceIp:
+          description: IP of a workstation.
+          type: string
+          minLength: 0
+          maxLength: 200
+        location:
+          description: Location of a workstation.
+          type: string
+          minLength: 0
+          maxLength: 200
+        type:
+          description: Type of a workstation.
+          type: string
+          minLength: 0
+          maxLength: 2
+        deviceLocation:
+          description: Device Group / Area.
+          type: string
+          minLength: 0
+          maxLength: 40
+    applicationSecureSetting:
+      type: object
+      properties:
+        settings:
+          description: Contains a single application setting to update.
+          type: array
+          items:
+            $ref: '#/components/schemas/applicationSecureSettingType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    searchPrepaidCardRequest:
+      type: object
+      properties:
+        hotelId:
+          type: string
+          description: Hotel code.
+        cardNumber:
+          type: string
+          description: Prepaid card number.
+        interfaceId:
+          type: string
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        interfaceIdType:
+          type: string
+          description: A reference to the type of object defined by the UniqueID element.
+        reservationId:
+          type: string
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        reservationIdType:
+          type: string
+          description: A reference to the type of object defined by the UniqueID element.
+        pin:
+          type: string
+          description: PIN code associated for the prepaid card.
+      required:
+      - hotelId
+      - cardNumber
+    prepaidCardDetailsType:
+      type: object
+      description: Prepaid Card Details.
+      properties:
+        initialLoadDate:
+          description: Holds fixed charge detail.
+          type: string
+          format: date
+          maxLength: 8
+        activateDate:
+          description: Holds fixed charge detail.
+          type: string
+          format: date
+          maxLength: 8
+        initialCreditTotal:
+          description: Holds fixed charge detail.
+          $ref: '#/components/schemas/currencyAmountType'
+        creditTotal:
+          description: Holds fixed charge detail.
+          $ref: '#/components/schemas/currencyAmountType'
+        debitTotal:
+          description: Holds fixed charge detail.
+          $ref: '#/components/schemas/currencyAmountType'
+        reservedTotal:
+          description: Holds fixed charge detail.
+          $ref: '#/components/schemas/currencyAmountType'
+        balanceTotal:
+          description: Holds fixed charge detail.
+          $ref: '#/components/schemas/currencyAmountType'
+        validUntilDate:
+          description: Holds fixed charge detail.
+          type: string
+          format: date
+          maxLength: 8
+        expiredDate:
+          description: Holds fixed charge detail.
+          type: string
+          format: date
+          maxLength: 8
+        transactions:
+          description: Holds fixed charge detail.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/prepaidCardTransactionType'
+    operaVersion:
+      type: object
+      description: Response for Ping operation.
+      properties:
+        operaVersion:
+          description: Opera version number.
+          $ref: '#/components/schemas/operaVersionNumberType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    serialPortConfigType:
+      type: object
+      properties:
+        portNumber:
+          description: IP address of the interface server
+          type: string
+          minLength: 0
+          maxLength: 80
+        baudRate:
+          type: string
+          minLength: 0
+          maxLength: 30
+        parity:
+          type: string
+          enum:
+          - Odd
+          - Even
+        dataBits:
+          type: integer
+        stopBits:
+          type: integer
+    authorizationRuleType:
+      type: object
+      description: Configured rule for computing the amount to authorize.
+      properties:
+        code:
+          description: The authorization rule code.
+          type: integer
+          pattern: '[0-9]{1,9}'
+        amount:
+          description: The amount applicable to the authorization rule.
+          $ref: '#/components/schemas/currencyAmountType'
+        percent:
+          description: A percentage value if the authorization rule is percentage based.
+          type: number
+    hotelInterfaceTypeType:
+      type: string
+      enum:
+      - Bms
+      - Cas
+      - Ccw
+      - Dls
+      - Eft
+      - Exp
+      - Mak
+      - Mbs
+      - Msc
+      - Pbx
+      - Pos
+      - Svs
+      - Tik
+      - Vid
+      - Vms
+      - Www
+      - Xml
+      description: XML Posting Interface
+    creditCardUniqueIdInfoType:
+      type: object
+      description: Information about the credit card unique id.
+      properties:
+        creditCardType:
+          description: Credit card type.
+          type: string
+        uniqueId:
+          description: Unique id of credit card.
+          type: string
+        creditCardName:
+          description: Card name holder.
+          type: string
+        creditCardNumber:
+          description: Credit card number.
+          type: string
+        expirationDateString:
+          description: Expiration date in string representation.
+          type: string
+        creditCardNumberLast4Digits:
+          description: Last 4 digits of a credit card.
+          type: string
+        actionType:
+          description: Based on Action Type credit card services will be called. By default it will call IFC service. e.g. IFC, Direct Vendor
+          $ref: '#/components/schemas/creditCardServiceActionType'
+        cardPresent:
+          description: Flag to determine if the credit card was swiped/manually entered , This element is only used when PAYMENT SERVICES DIRECTIVE (PSD2) Opera Control is active.
+          type: boolean
+        citId:
+          description: Customer Initiated Transaction(CIT) Id for Credit Cards. This is only used when PAYMENT SERVICES DIRECTIVE (PSD2) Opera Control is active.
+          type: string
+          minLength: 0
+          maxLength: 30
+        terminalId:
+          description: Terminal ID from where this request originated.
+          type: string
+          minLength: 0
+          maxLength: 128
+        successYn:
+          description: Success flag after requesting a unique id.
+          type: string
+        errorCode:
+          description: Error code for a unique id request failure.
+          type: string
+        errorMessage:
+          description: Error message for a unique id request failure.
+          type: string
+  responses:
+    '406':
+      description: Not acceptable.
+    '414':
+      description: Request URI Too Large
+    '503':
+      description: Service Unavailable
+    '413':
+      description: Request Entity Too Large
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '502':
+      description: Bad Gateway
+    '403':
+      description: Forbidden
+    '405':
+      description: Method not allowed
+    '415':
+      description: Unsupported Media Type
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '401':
+      description: Unauthorized
+  parameters:
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
+      schema:
+        type: string
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
+      schema:
+        type: string
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
+      schema:
+        type: string
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    x-externalsystem:
+      name: x-externalsystem
+      description: External system code.
+      in: header
+      x-example: EXTERNALSYSTEMCODE
+      schema:
+        type: string
+        maxLength: 40
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+externalDocs:
+  description: Find out more about Oracle Hospitality
+  url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

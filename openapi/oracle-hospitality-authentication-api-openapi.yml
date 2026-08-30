@@ -1,0 +1,181 @@
+openapi: 3.2.0
+info:
+  title: Oracle Hospitality Authentication API
+  contact:
+    email: hospitality_apis_ww_grp@oracle.com
+  license:
+    name: UPL
+    url: https://opensource.org/licenses/upl
+  termsOfService: https://www.oracle.com/legal/terms.html
+  x-refined-note:
+  - x-summary differs across the merged source definitions and was not carried
+  version: '1.0'
+  description: 'Operations tagged Authentication across 2 of this provider''s published API definitions: oracle-hospitality-distribution-v1-hdpbaoauth2.json, oracle-hospitality-property-v1-oauth.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /hdpba/oauth2/v1
+- url: /oauth/v1
+tags:
+- name: Authentication
+  description: Authentication service
+paths:
+  /token:
+    post:
+      description: <p>This is required to access the OPERA Cloud Distribution REST APIs.</p> <h3>Obtaining a token</h3> <p>To obtain a token include the following body parameters:</p> <ul> <li><strong>username</strong>.  set this to your OPERA Cloud Distribution username.</strong></li> <li><strong>password</strong>.  Set this to your OPERA Cloud Distribution user's password.</li> </ul></p><p><strong>OperationId:</strong>getToken</p>
+      summary: Authenticate with the identity server
+      operationId: getToken
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuth2TokenResponse'
+        '400':
+          description: Bad Request. This error is returned if the authentication information provided is not valid.
+        '401':
+          description: Unauthorized. Username, and/or password doesn't match the IDP records.
+        '500':
+          description: Returned for any unexpected processing issue that isn't an explicit 400 or 401
+      parameters:
+      - name: x-app-key
+        in: header
+        required: false
+        description: not in use
+        schema:
+          type: string
+      tags:
+      - Authentication
+      x-internal-id: v0-oauth2Token-post
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: Your OPERA Cloud Distribution User Name.
+                password:
+                  type: string
+                  description: Your OPERA Cloud Distribution user's password.
+              required:
+              - username
+              - password
+    servers:
+    - url: /hdpba/oauth2/v1
+  /tokens:
+    post:
+      description: <p>This is required to access Oracle Hospitality OPERA Cloud REST APIs.  </p><h3>Obtaining a token</h3><p>To obtain a token include the following headers:</p> <ul><li>A Basic authentication header using the base64 hash of your Client ID and Client Secret in the format <code>ClientID:ClientSecret</code> - base64 encoded to the Basic Access Authorization standard</li> <li>Your application key in the <code>x-app-key</code> header</li></ul> <p>And the following body parameters:</p> <h4>Body parameters for obtaining your initial access token</h4> <ul><li><strong>grant_type</strong>.  Required to be "password" or "client_credentials"</strong></li><li><strong>username</strong>.  If grant_type is password, set this to your OPERA Cloud integration username.</strong></li><li><strong>password</strong>.  If grant_type is password, set this to your OPERA Cloud integration user's password.</li> <li><strong>scope</strong>. If grant_type is client_credentials, set this to your assigned scope. </li> </strong></li></ul> <h3>JSON Web Token (JWT)</h3><p> An open standard (<a href="https://tools.ietf.org/html/rfc7519" title="Definition of RFC7519, the standard for JWT tokens">RFC 7519</a>) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed.</p><p><strong>OperationId:</strong>getToken</p>
+      summary: Authenticate with the identity server
+      operationId: getToken
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuth2TokenResponse_2'
+        '400':
+          description: Bad Request. This error is returned if the authentication information provided is not valid.
+        '401':
+          description: Unauthorized. Invalid client ID, client secret, username, and/or password, and/or scope.
+        '403':
+          description: Forbidden. This error is returned if the operation is not allowed for the request.
+      parameters:
+      - $ref: '#/components/parameters/x-app-key'
+      - $ref: '#/components/parameters/enterpriseId'
+      tags:
+      - Authentication
+      x-internal-id: v1-oauth2Token-post
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  enum:
+                  - password
+                  - client_credentials
+                  description: The grant type.  This value will depend on the API you are passing the OAuth token to.
+                username:
+                  type: string
+                  description: Your OPERA Cloud integration user name. Required value when requesting a token using the password grant.
+                password:
+                  type: string
+                  description: Your OPERA Cloud integration user password. Required value when requesting a token using the password grant.
+                scope:
+                  type: string
+                  description: Your assigned scope. Required value when requesting a token using the client_credentials grant.
+              required:
+              - grant_type
+      security:
+      - basicAuth: []
+    servers:
+    - url: /oauth/v1
+components:
+  schemas:
+    OAuth2TokenResponse:
+      type: object
+      description: OAuth2 token object sent as a response to the token request
+      required:
+      - access_token
+      properties:
+        access_token:
+          type: string
+          description: The access token.  Include this in the header for every subsequent request.
+        expires_in:
+          type: integer
+          format: int64
+          description: 'Time in seconds for the access token to expire (typically, 3600 i.e. 60 minutes)          '
+    OAuth2TokenResponse_2:
+      type: object
+      description: OAuth2 token object sent as a response to the token request
+      required:
+      - access_token
+      properties:
+        access_token:
+          type: string
+          description: The access token.  Include this in the header for every subsequent request.
+        expires_in:
+          type: integer
+          format: int64
+          description: Time in seconds for the access token to expire (typically, 3600 i.e. 60 minutes)
+        token_type:
+          type: string
+          description: The type of access token issued (Bearer).
+        oracle_tk_context:
+          type: string
+          description: Always user_assertion.
+  parameters:
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      x-example: 41ecd082-8997-4c69-af34-2f72b83645ff
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    enterpriseId:
+      name: enterpriseId
+      description: Global unique ID of the Enterprise. Only while using Client Credentials workflow with OCIM environments, users should pass this header.
+      in: header
+      required: false
+      x-example: ENT123
+      schema:
+        type: string
+        maxLength: 8
+        minLength: 1
+        pattern: ^[A-Z0-9]{1,8}$
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Find out more about Oracle Hospitality
+  url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html
+x-refined-from:
+- oracle-hospitality-distribution-v1-hdpbaoauth2.json
+- oracle-hospitality-property-v1-oauth.json
