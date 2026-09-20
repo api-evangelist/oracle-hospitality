@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 24
+edge_count: 28
 edges:
 - tag: Housekeeping
   spec_file: oracle-hospitality-housekeeping-api-openapi.yml
@@ -124,6 +124,19 @@ edges:
   reason: Bulk/asynchronous operations over existing reservations (details, traces, preferences, housekeeping
     options, rooming list validation, daily summary) — reservation lifecycle management; spans several
     sub-capabilities so only L1 asserted.
+- tag: AccountsReceivablesConfig
+  spec_file: oracle-hospitality-accountsreceivablesconfig-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.8
+  evidence: putARAccountTypes  Operation to modify AR Account Types; getARFlaggedReasons  Operation to
+    fetch AR flagged reasons
+  reason: Reference-data configuration for the Accounts Receivable module (AR account types, flagged reasons,
+    reminder/finance-charge cycles in schemas such as aRFinanceChargeType). It is configuration rather
+    than transaction processing, so confidence is moderated, but the capability it serves is clearly AR
+    management.
+  recovered_from: sweep-20260828T235257Z-edges.json
 - tag: Commissions
   spec_file: oracle-hospitality-commissions-api-openapi.yml
   capability_id: BC-4020.60
@@ -200,6 +213,18 @@ edges:
     rateAmountsType, massRateChangeRecordStatusType'
   reason: Defines and adjusts rate plans, BAR, rate strategies and promotion codes for hotel properties
     — rate and pricing strategy management.
+- tag: Activity
+  spec_file: oracle-hospitality-activity-api-openapi.yml
+  capability_id: BC-410
+  capability_id_l1: BC-410
+  capability_name: Sales Management
+  confidence: 0.75
+  evidence: APIs to cater for Sales Activity functionality in OPERA Cloud ... an account management tool
+    for managing daily tasks such as appointments, sales calls, contact follow-up
+  reason: Sales activity tracking (calls, appointments, follow-ups, activity statistics) against accounts
+    — a sales execution surface. L1 Sales Management is supported; the evidence spans account management
+    and general sales activity administration, so no L2 is asserted.
+  recovered_from: sweep-20260828T235257Z-edges.json
 - tag: Cashiering
   spec_file: oracle-hospitality-cashiering-api-openapi.yml
   capability_id: BC-4060.10
@@ -275,3 +300,26 @@ edges:
   reason: Read-only operational statistics for the front office, housekeeping status and reservation queues
     at a property — front-desk operational reporting. Some ambiguity between front office and housekeeping
     sub-capabilities, and between operations and management reporting, so confidence is moderate.
+- tag: Inventory
+  spec_file: oracle-hospitality-inventory-api-openapi.yml
+  capability_id: BC-530
+  capability_id_l1: BC-530
+  capability_name: Inventory Management
+  confidence: 0.7
+  evidence: '"Get hotel inventory", "Get item inventory", "Hold item inventory", "Set sell limits by date
+    range"'
+  reason: Operations manage available room/item inventory, holds (reservations of stock) and sell limits
+    by date — inventory availability and allocation control. Cross-industry Inventory Management is the
+    closest fit; no hospitality-specific candidate exists.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: Report
+  spec_file: oracle-hospitality-report-api-openapi.yml
+  capability_id: BC-610.50
+  capability_id_l1: BC-610
+  capability_name: Analytics & BI Management
+  confidence: 0.7
+  evidence: '"APIs for adding, updating, and deleting stationery reports in OPERA Cloud"; "Return report
+    parameters."; "Operation to change/create manager report statistics."'
+  reason: Manages the catalogue of reports, report groups, parameters and text configuration — delivery
+    and administration of reporting/BI output rather than any domain process.
+  recovered_from: sweep-20260828T235257Z-edges.json
