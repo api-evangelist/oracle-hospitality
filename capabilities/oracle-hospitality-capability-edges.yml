@@ -1,0 +1,275 @@
+slug: oracle-hospitality
+provider: Oracle Hospitality
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Travel & Hospitality
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 24
+edges:
+- tag: Housekeeping
+  spec_file: oracle-hospitality-housekeeping-api-openapi.yml
+  capability_id: BC-4060.20
+  capability_id_l1: BC-4060
+  capability_name: Housekeeping Operations
+  confidence: 0.95
+  evidence: '"Housekeeping enables you to schedule daily room cleaning, maintenance, and housekeeping
+    staff activities"; getHousekeepingAttendantsSchedule, getHousekeepingDiscrepancies'
+  reason: Explicitly hotel housekeeping operations — room cleaning schedules, task sheets, room conditions,
+    discrepancies — a direct match to Housekeeping Operations.
+- tag: Reservation
+  spec_file: oracle-hospitality-reservation-api-openapi.yml
+  capability_id: BC-4020
+  capability_id_l1: BC-4020
+  capability_name: Reservation & Booking Management
+  confidence: 0.95
+  evidence: '"postReservation  Create Reservation"; "postCancelReservation  Cancel Reservation"; "putReinstateReservation  Reinstate
+    a Reservation"'
+  reason: Core hotel reservation lifecycle — create, retrieve, update, cancel, reinstate reservations
+    for a hotel. Plainly Reservation & Booking Management; the surface spans capture, modification and
+    cancellation so no single L2 is named.
+- tag: AccountsReceivables
+  spec_file: oracle-hospitality-accountsreceivables-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.9
+  evidence: '''The OPERA Cloud Accounts Receivable module enables you to manage debtors'' accounts, invoices,
+    and remittance''; GET /accounts/{accountId}/statements getStatements; GET /hotels/{hotelId}/accounts/invoicesOnHold'
+  reason: Operations create and maintain AR accounts, invoices, statements, reminder letters and AR transactions
+    — customer invoicing and collections, i.e. Accounts Receivable Management.
+- tag: FrontDeskOperations
+  spec_file: oracle-hospitality-frontdeskoperations-api-openapi.yml
+  capability_id: BC-4060.10
+  capability_id_l1: BC-4060
+  capability_name: Front Office Operations
+  confidence: 0.9
+  evidence: Front Desk features some of the most commonly used operations in OPERA Cloud, such as managing
+    guest arrivals, managing in-house guests, and managing guest departures... room assignments, and quick
+    check outs as well as opening folios; POST /hotels/{hotelId}/externalRoomKeys  Requests room key(s)
+  reason: 'The operations are canonical front-office work: arrivals/in-house/departures, room assignment,
+    folios, room keys, billing reservations and daily docket at a specific hotel. Front Office Operations
+    is the plain reading.'
+- tag: ARI Publication
+  spec_file: oracle-hospitality-ari-publication-api-openapi.yml
+  capability_id: BC-4010.50
+  capability_id_l1: BC-4010
+  capability_name: Channel Manager Operations
+  confidence: 0.85
+  evidence: POST /inventory Publish Inventory; POST /rates Publish Rates; POST /restrictions Publish Restrictions
+    — 'for distribution partners to receive in real time property restrictions/availability, rate, and
+    inventory schedules updates, also known as ARI'
+  reason: Publishes availability, rate and inventory updates to distribution channel partners with delivery
+    status visible in OPERA — exactly channel-manager hub synchronisation of inventory, rates and restrictions
+    across distribution channels.
+- tag: Channel
+  spec_file: oracle-hospitality-channel-api-openapi.yml
+  capability_id: BC-4010.50
+  capability_id_l1: BC-4010
+  capability_name: Channel Manager Operations
+  confidence: 0.85
+  evidence: '"Channel Management allows a property to configure and administer channels such as OTAs,
+    and web channels, covering functionality such as channel configuration, availability, inventory and
+    restrictions"'
+  reason: Explicit channel-manager functionality synchronising rates, inventory and restrictions across
+    OTA and web distribution channels.
+- tag: EventManagement
+  spec_file: oracle-hospitality-eventmanagement-api-openapi.yml
+  capability_id: BC-4110
+  capability_id_l1: BC-4110
+  capability_name: Events & Group Operations Management
+  confidence: 0.85
+  evidence: The Events feature in OPERA Cloud is designed to manage any kind of catering activity... a
+    three-day business meeting with meals, breaks, and specific meeting functionSpaceDetails with setupCode
+    and resource requirements; POST /blocks/{blockId}/cateringPackages  Add catering packages to a block
+  reason: Operations create and manage catering events against group blocks, event resources, function
+    space details and catering package revenue — clearly meetings/banqueting event operations at hospitality
+    venues. Left at L1 because the surface spans space/resources, BEO-style execution and event revenue
+    rather than one sub-capability.
+- tag: ProfileMembership
+  spec_file: oracle-hospitality-profilemembership-api-openapi.yml
+  capability_id: BC-4050
+  capability_id_l1: BC-4050
+  capability_name: Travel Loyalty Programme Management
+  confidence: 0.85
+  evidence: postEnrollment "Create an Enrollment"; redeemAward "Redeem an award"; getAwardsToGrant; getMemberHistory
+    "Get primary membership history details of a guest"; schemas tierAdministrationType, memberAwardType,
+    benefitsType
+  reason: Operations run loyalty membership enrollment, award issuance and redemption, points/tier administration
+    and claims — clearly loyalty programme operation; spans earn, burn and tier so no single L2 is chosen.
+- tag: Reservation Request
+  spec_file: oracle-hospitality-reservation-request-api-openapi.yml
+  capability_id: BC-4020.10
+  capability_id_l1: BC-4020
+  capability_name: Reservation Capture
+  confidence: 0.85
+  evidence: '"postReservation  Create reservation"; "postOnHoldReservation  Commit/Ignore an onHold reservation"'
+  reason: Create, modify, retrieve, cancel and commit on-hold reservations for properties on behalf of
+    distribution partners — reservation capture across originating channels.
+- tag: ReservationAsync
+  spec_file: oracle-hospitality-reservationasync-api-openapi.yml
+  capability_id: BC-4020
+  capability_id_l1: BC-4020
+  capability_name: Reservation & Booking Management
+  confidence: 0.85
+  evidence: '"startReservationDetailsMassUpdateProcess  Updates reservation details of a given list of
+    reservations"; "startRoomingListValidationProcess  Validate Rooming List Reservations"'
+  reason: Bulk/asynchronous operations over existing reservations (details, traces, preferences, housekeeping
+    options, rooming list validation, daily summary) — reservation lifecycle management; spans several
+    sub-capabilities so only L1 asserted.
+- tag: Commissions
+  spec_file: oracle-hospitality-commissions-api-openapi.yml
+  capability_id: BC-4020.60
+  capability_id_l1: BC-4020
+  capability_name: Booking Payment & Settlement
+  confidence: 0.8
+  evidence: GET /hotels/{hotelId}/bankAccounts/{bankAccountId}/agents/{agentId}/reservationsForCommissions
+    Operation to fetch Reservations for Commissions associated to a Travel Agent; changeCommissionCheck
+  reason: Processing and payment of travel-agent commissions against reservations — booking-level partner
+    settlement.
+- tag: Content
+  spec_file: oracle-hospitality-content-api-openapi.yml
+  capability_id: BC-4010.70
+  capability_id_l1: BC-4010
+  capability_name: Distribution Content Syndication
+  confidence: 0.8
+  evidence: '"for distribution partners to retrieve property Channel content information"; GET /hotels/{hotelCode}/roomTypes
+    Room Types Information'
+  reason: Exposes property, room type and rate plan content to distribution partners — content syndication
+    to channels.
+- tag: MembershipConfig
+  spec_file: oracle-hospitality-membershipconfig-api-openapi.yml
+  capability_id: BC-4050.10
+  capability_id_l1: BC-4050
+  capability_name: Loyalty Programme Design
+  confidence: 0.8
+  evidence: postMembershipBenefitPrograms "Create Membership Benefit Program"; getMembershipClasses; "retrieve
+    membership levels that are configured for a property, or create new membership enrollment codes";
+    schemas membershipLevelType, membershipLevelRules
+  reason: Configuration of membership levels, classes, awards and benefit programmes is loyalty programme
+    architecture and benefit catalogue design.
+- tag: Profile
+  spec_file: oracle-hospitality-profile-api-openapi.yml
+  capability_id: BC-4040.10
+  capability_id_l1: BC-4040
+  capability_name: Guest Profile & Identity Management
+  confidence: 0.8
+  evidence: '"This API facilitates creation of a company/agent/group/source profile in OPERA"; getDuplicateOPERASubscriptions
+    "Get profiles with duplicate OPERA Cloud subscriptions"; schema recentlyAccessedProfileType, suspendedProfilesMatchStatsByMatchCriteriaType'
+  reason: CRM profile surface creates and maintains guest/company profiles including duplicate detection
+    and match status — stewardship of the single guest/traveller record.
+- tag: RatePlanAsync
+  spec_file: oracle-hospitality-rateplanasync-api-openapi.yml
+  capability_id: BC-4030.20
+  capability_id_l1: BC-4030
+  capability_name: Pricing & Rate Strategy Management
+  confidence: 0.8
+  evidence: '"adding/updating daily rates'' pricing schedules and best available rates by day or length
+    of stay"; "startHurdleRatesProcess  Operation to configure hurdle rates."'
+  reason: Operations set daily rate-plan pricing schedules, best-available-rate by length of stay, and
+    hurdle rates — rate strategy and yield controls for hotel rate plans, i.e. travel revenue/rate strategy
+    management rather than product master or reservation handling.
+- tag: Reservation Notification
+  spec_file: oracle-hospitality-reservation-notification-api-openapi.yml
+  capability_id: BC-4020.10
+  capability_id_l1: BC-4020
+  capability_name: Reservation Capture
+  confidence: 0.8
+  evidence: '"allows authorized channel partners to create and update reservations for any active property";
+    "postReservationNotif  Notify of new reservation"'
+  reason: Channel partners transmit already-committed reservations into the property systems — reservation
+    capture from an originating channel, without pricing/availability validation. Booking lifecycle capability
+    rather than channel connectivity configuration.
+- tag: RatePlan
+  spec_file: oracle-hospitality-rateplan-api-openapi.yml
+  capability_id: BC-4030.20
+  capability_id_l1: BC-4030
+  capability_name: Pricing & Rate Strategy Management
+  confidence: 0.78
+  evidence: '"Rate Management provides all the tools you need to effectively define and manage the rate
+    structures for a property ... creating and managing rate codes, rate classes, rate categories, display
+    sets, rate strategies, as well as managing promotion groups and codes"; getBestAvailableRates; schemas
+    rateAmountsType, massRateChangeRecordStatusType'
+  reason: Defines and adjusts rate plans, BAR, rate strategies and promotion codes for hotel properties
+    — rate and pricing strategy management.
+- tag: Cashiering
+  spec_file: oracle-hospitality-cashiering-api-openapi.yml
+  capability_id: BC-4060.10
+  capability_id_l1: BC-4060
+  capability_name: Front Office Operations
+  confidence: 0.75
+  evidence: GET /cashiers/{cashierId}/transactions Get Cashier Transactions; PUT /cashiers/{cashierId}/closure
+    Close Cashier; GET /cashierReportPostings
+  reason: Front office cashiering — folio postings, cashier shift closure, comp redemptions at the property.
+    Sits in front office operations (folio settlement) rather than corporate finance.
+- tag: Content Notification
+  spec_file: oracle-hospitality-content-notification-api-openapi.yml
+  capability_id: BC-4010.70
+  capability_id_l1: BC-4010
+  capability_name: Distribution Content Syndication
+  confidence: 0.75
+  evidence: '"notification message specification for distribution partners to receive in real time property
+    content, channel room and rate updates"'
+  reason: Push syndication of property content and channel room/rate updates to distribution partners;
+    notification mechanics but the payload is distribution content syndication.
+- tag: Shop
+  spec_file: oracle-hospitality-shop-api-openapi.yml
+  capability_id: BC-4010
+  capability_id_l1: BC-4010
+  capability_name: Travel Distribution & Channel Management
+  confidence: 0.75
+  evidence: '"for distribution partners to find properties availability, room-rates offers for a single
+    property or a specific room-rate offer detail"; "getPropertyOffers  Property Offers"'
+  reason: Shopping surface exposed to distribution partners for property search, offers, addons and availability
+    calendar — merchandising travel product through indirect distribution channels. Only L1 asserted since
+    the partner type (OTA, GDS, wholesaler) is not specified.
+- tag: Distribution Controls
+  spec_file: oracle-hospitality-distribution-controls-api-openapi.yml
+  capability_id: BC-4010.50
+  capability_id_l1: BC-4010
+  capability_name: Channel Manager Operations
+  confidence: 0.72
+  evidence: Oracle Hospitality Distribution Property Controls specification for distribution partners
+    to retrieve property controls and settings; getPropertyControls  Fetch Channel Property Controls for
+    a given channel and a Hotel; schema ChannelPropertyControls
+  reason: The single operation exposes per-channel property control settings to distribution partners,
+    which is channel-hub/distribution connectivity configuration. Only one operation, so sub-capability
+    choice between channel-manager operations and general channel distribution carries some ambiguity.
+- tag: ProfileExternal
+  spec_file: oracle-hospitality-profileexternal-api-openapi.yml
+  capability_id: BC-4040.10
+  capability_id_l1: BC-4040
+  capability_name: Guest Profile & Identity Management
+  confidence: 0.72
+  evidence: getExternalProfiles "Retrieve profiles from external system"; getValidatedAddresses "Retrive
+    valid addresses from a third party vendor"; validateEmail, validatePhone; checkIataNumber "Validate
+    IATA number"
+  reason: Interchange and third-party verification of guest/company profile identity data (address, email,
+    phone, membership number) — profile identity management and verification.
+- tag: BlockStats
+  spec_file: oracle-hospitality-blockstats-api-openapi.yml
+  capability_id: BC-4110.70
+  capability_id_l1: BC-4110
+  capability_name: Event Performance & Post-Event Reporting
+  confidence: 0.7
+  evidence: GET /blocks/statistics getBlockStats Get Block statistics; "A block is a group of rooms held
+    for guests who are attending an event, meeting, or function"
+  reason: Reporting/statistics over hotel business blocks (group event room blocks) — best fits event/group
+    performance reporting; could also be group room block management, hence moderate confidence.
+- tag: FOFStats
+  spec_file: oracle-hospitality-fofstats-api-openapi.yml
+  capability_id: BC-4060.10
+  capability_id_l1: BC-4060
+  capability_name: Front Office Operations
+  confidence: 0.7
+  evidence: getFrontOfficeStatistics  Get front office Statistics; getRoomsByRoomStatus  Get counts of
+    rooms by housekeeping status and front office status; getTaskSheetStatistics  Get housekeeping statistics
+  reason: Read-only operational statistics for the front office, housekeeping status and reservation queues
+    at a property — front-desk operational reporting. Some ambiguity between front office and housekeeping
+    sub-capabilities, and between operations and management reporting, so confidence is moderate.
