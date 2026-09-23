@@ -18,7 +18,7 @@ paths:
   /externalSystems/{extSystemCode}/chains/{chainCode}/externalProfiles:
     get:
       summary: Retrieve profiles from external system
-      description: Use this API when you want to search for profiles in an external system. The response will include a list of profiles that exist in the external system, based on your search criteria.  For example, you want to see if the external system has a profile for Mr David Smith.  The GET API will send a request to external system, and the response will include a list of any profiles that exist for Mr Davis Smith in that system.  If a profile does exist, and the user would like to 'download' that profile into OPERA, you would then proceed to use the downlodExternalProfiles API.
+      description: Use this API when you want to search for profiles in an external system. The response will include a list of profiles that exist in the external system, based on your search criteria. For example, you want to see if the external system has a profile for Mr David Smith. The GET API will send a request to external system, and the response will include a list of any profiles that exist for Mr Davis Smith in that system. If a profile does exist, and the user would like to 'download' that profile into OPERA, you would then proceed to use the downlodExternalProfiles API.
       operationId: getExternalProfiles
       responses:
         '200':
@@ -218,7 +218,9 @@ paths:
   /externalSystems/{extSystemCode}/chains/{chainCode}/externalProfiles/{profileExternalId}:
     get:
       summary: Download a Profile from external system
-      description: After searching for profiles in an external system using getExternalProfiles, proceed to use this API knowing the external profile ID in the path.  The result will be a new profile created in OPERA. <p><strong>OperationId:</strong>downloadExternalProfile</p>
+      description: 'After searching for profiles in an external system using getExternalProfiles, proceed to use this API knowing the external profile ID in the path. The result will be a new profile created in OPERA.
+
+        OperationId:downloadExternalProfile'
       operationId: downloadExternalProfile
       parameters:
       - name: extSystemCode
@@ -309,7 +311,9 @@ paths:
   /externalSystems/{extSystemCode}/playerStatistics/{profileId}:
     get:
       summary: Retrieve player statistics
-      description: Request for the fetch player statistics WS operation <p><strong>OperationId:</strong>getPlayerStatistics</p>
+      description: 'Request for the fetch player statistics WS operation
+
+        OperationId:getPlayerStatistics'
       operationId: getPlayerStatistics
       parameters:
       - name: profileId
@@ -411,7 +415,9 @@ paths:
   /externalSystems/{extSystemCode}/gamingOffers/{membershipNo}:
     get:
       summary: Get offers that can be attached for a profile
-      description: Use this API when you have a guest profile and you want to get the offers available from an external system. <p><strong>OperationId:</strong>getGamingOffers</p>
+      description: 'Use this API when you have a guest profile and you want to get the offers available from an external system.
+
+        OperationId:getGamingOffers'
       operationId: getGamingOffers
       parameters:
       - name: membershipNo
@@ -500,8 +506,10 @@ paths:
     - url: /crm/v1
   /hotels/{hotelId}/travelAgents/{iataNumber}:
     get:
-      summary: Validate IATA number.
-      description: This API will validate and check an IATA number. <p><strong>OperationId:</strong>checkIataNumber</p>
+      summary: Validate IATA number
+      description: 'This API will validate and check an IATA number.
+
+        OperationId:checkIataNumber'
       operationId: checkIataNumber
       parameters:
       - name: iataNumber
@@ -573,8 +581,10 @@ paths:
     - url: /crm/v1
   /validatedAddresses:
     get:
-      summary: Retrive valid addresses from a third party vendor.
-      description: Use this API when you want to validate address from a third party vendor. The response will be a list of addresses with its address ID based on the search criteria. <p><strong>OperationId:</strong>getValidatedAddresses</p>
+      summary: Retrive valid addresses from a third party vendor
+      description: 'Use this API when you want to validate address from a third party vendor. The response will be a list of addresses with its address ID based on the search criteria.
+
+        OperationId:getValidatedAddresses'
       operationId: getValidatedAddresses
       parameters:
       - name: addressText
@@ -653,8 +663,10 @@ paths:
     - url: /crm/v1
   /validatedAddresses/{externalAddressId}:
     get:
-      summary: Get full Address information from third party system for a given external Address ID. The external Address ID is fetched from valdatedAddresses service.
-      description: Use this API when you want to fetch full address information for a given address Id. <p><strong>OperationId:</strong>getValidatedAddress</p>
+      summary: Get full Address information from third party system for a given external…
+      description: 'Use this API when you want to fetch full address information for a given address Id.
+
+        OperationId:getValidatedAddress'
       operationId: getValidatedAddress
       parameters:
       - name: externalAddressId
@@ -724,7 +736,9 @@ paths:
   /externalSystems/{extSystemCode}/chains/{chainCode}/validateMembershipNumber:
     get:
       summary: Validate Membership Number attached to a membership
-      description: Use this API when you want to validate membership numbers from external system. <p><strong>OperationId:</strong>validateMembershipNumber</p>
+      description: 'Use this API when you want to validate membership numbers from external system.
+
+        OperationId:validateMembershipNumber'
       operationId: validateMembershipNumber
       parameters:
       - name: chainCode
@@ -814,7 +828,7 @@ paths:
   /services/profileExternal/status:
     get:
       summary: Operation to check status of ProfileExternal service
-      description: ' <p><strong>OperationId:</strong>pingProfileExternalService</p>'
+      description: OperationId:pingProfileExternalService
       operationId: pingProfileExternalService
       parameters:
       - $ref: '#/components/parameters/authKey'
@@ -871,8 +885,10 @@ paths:
     - url: /crm/v1
   /validateEmail:
     post:
-      summary: Validate email Id from a third party vendor.
-      description: Use this API when you want to validate email Id from a third party vendor. <p><strong>OperationId:</strong>validateEmail</p>
+      summary: Validate email Id from a third party vendor
+      description: 'Use this API when you want to validate email Id from a third party vendor.
+
+        OperationId:validateEmail'
       operationId: validateEmail
       parameters:
       - $ref: '#/components/parameters/authKey'
@@ -950,8 +966,10 @@ paths:
     - url: /crm/v1
   /validatePhone:
     post:
-      summary: Validate phone number from a third party vendor.
-      description: Use this API when you want to validate phone number from a third party vendor. <p><strong>OperationId:</strong>validatePhone</p>
+      summary: Validate phone number from a third party vendor
+      description: 'Use this API when you want to validate phone number from a third party vendor.
+
+        OperationId:validatePhone'
       operationId: validatePhone
       parameters:
       - $ref: '#/components/parameters/authKey'
@@ -1028,212 +1046,7 @@ paths:
     servers:
     - url: /crm/v1
 components:
-  responses:
-    '406':
-      description: Not acceptable.
-    '414':
-      description: Request URI Too Large
-    '503':
-      description: Service Unavailable
-    '413':
-      description: Request Entity Too Large
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '502':
-      description: Bad Gateway
-    '403':
-      description: Forbidden
-    '415':
-      description: Unsupported Media Type
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '401':
-      description: Unauthorized
-    '405':
-      description: Method not allowed
   schemas:
-    fetchPlayerStatisticsRS:
-      type: object
-      description: Response of the WS operation to fetch player statistics.
-      properties:
-        playerStatistics:
-          description: The player statistics details for the given profile.
-          $ref: '#/components/schemas/playerStatisticsType'
-        links:
-          $ref: '#/components/schemas/links'
-    ownersType:
-      type: array
-      description: Generic type for a list of owners.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/ownerType'
-    cardReIssueType:
-      type: string
-      description: Request to re issue a new card.
-      enum:
-      - Pending
-      - NotApplicable
-      - Requested
-    lastStayInfoType:
-      type: object
-      description: Contains last stay related details for the profile
-      properties:
-        lastVisit:
-          description: Used to hold last stay information for the profile.
-          type: string
-          format: date
-        lastRoom:
-          description: Used to hold last room information for the profile.
-          type: string
-          maxLength: 2000
-        lastRate:
-          description: Used to hold last rate information for the profile.
-          $ref: '#/components/schemas/currencyAmountType'
-        totalStay:
-          description: The total number of previous stay of the profile.
-          type: integer
-    validatedAddress:
-      type: object
-      description: Response object for fetching full address based on ID from external system.
-      properties:
-        addressValidationInfo:
-          description: Type contains Address information.
-          $ref: '#/components/schemas/addressType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    profileSharedLevelType:
-      type: string
-      description: Simple types for Shared level.
-      enum:
-      - Global
-      - Property
-      - Cro
-    numericUDFType:
-      type: object
-      description: Used to hold user defined field of Numeric Type. It is highly recommended to use UDFN01, UDFN02,...UDFN40 (Total 40) as Numeric UDF names(commonly used on Reservation, Profile etc.). Name is not restricted using enumeration, to provide flexibility of different name usage if required.
-      properties:
-        name:
-          description: Name of user defined field.
-          type: string
-          minLength: 0
-          maxLength: 20
-        value:
-          description: Value of user defined field.
-          type: number
-        altname:
-          description: Label of user defined field used by vendors or customers.
-          type: string
-          minLength: 0
-          maxLength: 2000
-    personNameType:
-      type: object
-      description: This provides name information for a person.
-      properties:
-        namePrefix:
-          description: Salutation of honorific (e.g. Mr., Mrs., Ms., Miss, Dr.)
-          type: string
-          minLength: 0
-          maxLength: 40
-        givenName:
-          description: Given name, first name or names.
-          type: string
-          minLength: 0
-          maxLength: 40
-        middleName:
-          description: The middle name of the person name.
-          type: string
-          minLength: 0
-          maxLength: 40
-        surname:
-          description: Family name, last name. May also be used for full name if the sending system does not have the ability to separate a full name into its parts, e.g. the surname element may be used to pass the full name.
-          type: string
-          minLength: 0
-          maxLength: 40
-        nameSuffix:
-          description: Hold various name suffixes and letters (e.g. Jr., Sr., III, Ret., Esq.)
-          type: string
-          minLength: 0
-          maxLength: 40
-        nameTitle:
-          description: Degree or honors (e.g., Ph.D., M.D.)
-          type: string
-          minLength: 0
-          maxLength: 80
-        nameTitleSuffix:
-          description: Title Suffix. Must be populated if ADVANCED_TITLE is on.
-          type: integer
-        envelopeGreeting:
-          description: Envelope Greeting of the profile
-          type: string
-          maxLength: 2000
-        salutation:
-          description: Salutation of the profile
-          type: string
-          maxLength: 2000
-        nameType:
-          description: Type of name of the individual, such as former, nickname, alternate or alias name.
-          $ref: '#/components/schemas/personNameTypeType'
-        language:
-          description: Language identification.
-          type: string
-          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
-    membershipEarningPreferenceType:
-      type: string
-      description: The earning preference of a membership, it depends on the type of property. eg. when the property is a airline it should be Miles, other than Points.
-      enum:
-      - Points
-      - Miles
-    commentInfoType:
-      type: object
-      description: Comment related to the profile/reservation.
-      properties:
-        comment:
-          description: Comment details for the comment. It will be empty in case of delete comment.
-          $ref: '#/components/schemas/commentType'
-        createDateTime:
-          description: Time stamp of the creation.
-          type: string
-          format: date-time
-        creatorId:
-          description: ID of creator. The creator could be a software system identifier or an identifier of an employee resposible for the creation.
-          type: string
-          minLength: 0
-          maxLength: 200
-        lastModifyDateTime:
-          description: Time stamp of last modification.
-          type: string
-          format: date-time
-        lastModifierId:
-          description: Identifies the last software system or person to modify a record.
-          type: string
-          minLength: 0
-          maxLength: 200
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 20
     profileMembershipType:
       type: object
       description: Detailed information of the memberships.
@@ -1388,128 +1201,13 @@ components:
           type: string
           minLength: 0
           maxLength: 200
-    characterUDFsType:
-      type: array
-      description: Used to hold collection of user defined fields of Character/String Type.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/characterUDFType'
-    indicatorsType:
-      type: array
-      description: Collection of lamp indicators.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/indicatorType'
-    profile:
+    commentInfoType:
       type: object
-      description: Object for creation of profiles. This object contains profile details with unique identifiers for each profile.
+      description: Comment related to the profile/reservation.
       properties:
-        profileIdList:
-          description: Unique identifiers for the Profile for both internal and external systems. In case of Travel Agent the IATA code and in case of Company can be any form of identifier as ID.
-          $ref: '#/components/schemas/profileIdList'
-        profileDetails:
-          description: Provides detailed information regarding either a company or a customer profile.
-          $ref: '#/components/schemas/profileType'
-        links:
-          $ref: '#/components/schemas/links'
-    indicatorType:
-      type: object
-      description: Lamp indicator Type.
-      properties:
-        indicatorName:
-          description: Name of the indicator.
-          type: string
-          minLength: 0
-          maxLength: 80
-        count:
-          description: Indicates number of occurrences of the indicator.
-          type: integer
-    imageStyleType:
-      type: string
-      description: An enumeration of image styles.
-      enum:
-      - Full
-      - Thumbnail
-      - Icon
-      - Square
-      - Banner
-      - Button
-      - Lowres
-      - Highres
-    addressInfoType:
-      type: object
-      description: Provides address information.
-      properties:
-        address:
-          description: Address details for the profile.
-          $ref: '#/components/schemas/addressType'
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 20
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    keywordType:
-      type: object
-      properties:
-        keywordDetail:
-          description: The keyword new value, in case keyword value is modified.
-          $ref: '#/components/schemas/keywordDetailType'
-        type:
-          description: The type of keyword
-          type: string
-          minLength: 0
-          maxLength: 20
-        keyword:
-          description: The keyword value.
-          type: string
-          minLength: 0
-          maxLength: 80
-    telephoneType:
-      type: object
-      description: Information on a telephone number for the customer.
-      properties:
-        phoneTechType:
-          description: Indicates type of technology associated with this telephone number, such as Voice, Data, Fax, Pager, Mobile, TTY, etc.
-          type: string
-          minLength: 0
-          maxLength: 20
-        phoneUseType:
-          description: Describes the type of telephone number, in the context of its general use (e.g. Home, Business, Emergency Contact, Travel Arranger, Day, Evening).
-          type: string
-          minLength: 0
-          maxLength: 20
-        phoneUseTypeDescription:
-          description: Description of the PhoneUseType code
-          type: string
-          minLength: 0
-          maxLength: 2000
-        phoneNumber:
-          description: Telephone number assigned to a single location.
-          type: string
-          minLength: 0
-          maxLength: 40
-        extension:
-          description: Extension to reach a specific party at the phone number.
-          type: string
-          minLength: 0
-          maxLength: 20
-        primaryInd:
-          description: When true, indicates a primary information.
-          type: boolean
-        orderSequence:
-          description: Display Order sequence.
-          type: number
+        comment:
+          description: Comment details for the comment. It will be empty in case of delete comment.
+          $ref: '#/components/schemas/commentType'
         createDateTime:
           description: Time stamp of the creation.
           type: string
@@ -1528,704 +1226,46 @@ components:
           type: string
           minLength: 0
           maxLength: 200
-    uniqueID_Type:
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 20
+    membershipEarningPreferenceType:
+      type: string
+      description: The earning preference of a membership, it depends on the type of property. eg. when the property is a airline it should be Miles, other than Points.
+      enum:
+      - Points
+      - Miles
+    profileId:
       type: object
       description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
       properties:
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
         type:
           description: A reference to the type of object defined by the UniqueID element.
           type: string
           minLength: 0
           maxLength: 20
-    currencyAmountType:
-      type: object
-      description: A monetary value expressed with a currency code.
-      properties:
-        amount:
-          description: A monetary amount.
-          type: number
-    customerType:
-      type: object
-      description: Contains basic data on the customer's identity, location, relationships, finances, memberships, etc.
-      properties:
-        personName:
-          description: Detailed name information for the customer.
-          type: array
-          maxItems: 5
-          items:
-            $ref: '#/components/schemas/personNameType'
-        anonymization:
-          description: Provides information about the guest's anonymization status
-          $ref: '#/components/schemas/anonymizationType'
-        citizenCountry:
-          description: Name of the (self-professed) country that is claimed for citizenship.
-          $ref: '#/components/schemas/countryNameType'
-        identifications:
-          description: List of identification of the customer.
-          type: object
-          properties:
-            identificationInfo:
-              description: Collection of detailed information on the identification of the customer.
-              type: array
-              maxItems: 4000
-              items:
-                $ref: '#/components/schemas/identificationInfoType'
-            allRowsFetched:
-              description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-              type: boolean
-            totalRows:
-              description: Total number of rows queried
-              type: integer
-        profession:
-          description: Profession of a person.
-          type: string
-          minLength: 0
-          maxLength: 80
-        alienInfo:
-          description: Immigration/visa information of a foreign person.
-          $ref: '#/components/schemas/alienInfoType'
-        birthCountry:
-          description: Country of birth.
-          $ref: '#/components/schemas/countryNameType'
-        businessTitle:
-          description: Business Title.
-          type: string
-          minLength: 0
-          maxLength: 80
-        gender:
-          description: Identifies the profile gender code selected from Gender types List of values. Gender types LOV provides the values configured at gender configuration.
-          type: string
-          minLength: 0
-          maxLength: 20
-        birthDate:
-          description: Indicates the date of birth as indicated in the document, in ISO 8601 prescribed format.
-          type: string
-          format: date
-        birthDateMasked:
-          description: Indicates the date of birth as masked.
-          type: string
-          maxLength: 2000
-        language:
-          description: Language identification.
-          type: string
-          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
-        nationality:
-          description: Nationality code identification
-          type: string
-          minLength: 0
-          maxLength: 20
-        nationalityDescription:
-          description: Nationality code description
-          type: string
-          minLength: 0
-          maxLength: 80
-        customerValue:
-          description: The supplier's ranking of the customer (e.g., VIP, numerical ranking).
-          type: string
-          minLength: 0
-          maxLength: 20
-        creditRating:
-          description: Credit Rating of the customer.
-          type: string
-          minLength: 0
-          maxLength: 20
-        vipStatus:
-          description: VIP status of the customer.
-          type: string
-          minLength: 0
-          maxLength: 20
-        vipDescription:
-          description: Description of the VIP status.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        birthPlace:
-          description: Place of birth.
-          type: string
-          minLength: 0
-          maxLength: 80
-        privateProfile:
-          description: This element tells profile is property exclusive or not.
-          type: boolean
-        blacklist:
-          description: This element tells if profile is blacklisted or not.
-          type: boolean
-    telephoneInfoType:
-      type: object
-      description: Information on a telephone number for the customer.
-      properties:
-        telephone:
-          description: Phone details for the profile.
-          $ref: '#/components/schemas/telephoneType'
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 20
-    preferenceType:
-      type: object
-      description: Guest Preference details for the profile.
-      properties:
-        preferenceValue:
-          description: Preference value for display purposes.
-          type: string
-          minLength: 0
-          maxLength: 200
-        description:
-          description: Preference Description for display purposes.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        global:
-          description: Whether this preference is property specific or not.
-          type: boolean
-        source:
-          description: Source of the preference.
-          type: string
-          minLength: 0
-          maxLength: 40
-        hotels:
-          description: If specified preference belongs to the Hotels listed, otherwise it is a global preference.
-          type: array
-          maxItems: 4000
-          items:
-            type: string
-            minLength: 0
-            maxLength: 20
-        preferenceCode:
-          type: string
-          minLength: 0
-          maxLength: 20
-        excludedPreferencesCount:
-          description: Specifies the count of preferences excluded for the attached reservation preference.
-          type: integer
-    tierAdministrationType:
-      type: string
-      description: Do not upgrade membership. The membership may be downgraded.
-      enum:
-      - Disabled
-      - NoUpgrade
-    instanceLink:
-      type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
-      properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
-          type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
-        title:
-          description: Exact copy of the "summary" field on the linked operation.
-          type: string
-    identificationInfoType:
-      type: object
-      description: Information on the identification of the customer.
-      properties:
-        identification:
-          description: Detailed information on the identification of the customer.
-          $ref: '#/components/schemas/identificationType'
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 20
-    commentType:
-      type: object
-      description: An indication of a new paragraph for a sub-section of a formatted text message.
-      properties:
-        text:
-          description: Formatted text content.
-          $ref: '#/components/schemas/formattedTextTextType'
-        commentTitle:
-          description: Specifies Comment's Title.
-          type: string
-          minLength: 0
-          maxLength: 4000
-        notificationLocation:
-          description: Notification Location associated with the Note.
-          type: string
-          minLength: 0
-          maxLength: 20
-        type:
-          description: Specifies type of the comment.
-          type: string
-          minLength: 0
-          maxLength: 20
-        typeDescription:
-          description: Comment type Description.
-          type: string
-          minLength: 0
-          maxLength: 200
-        internal:
-          description: When true, the comment may not be shown to the consumer. When false, the comment may be shown to the consumer.
-          type: boolean
-        confidential:
-          description: When true, the comment may be confidential.
-          type: boolean
-        overrideInternal:
-          description: When true, the note internal could be modified.
-          type: boolean
-        hotelId:
-          description: If specified comment belongs to the Hotel, otherwise it is a global comment.
-          type: string
-          minLength: 0
-          maxLength: 20
-        createDateTime:
-          description: Time stamp of the creation.
-          type: string
-          format: date-time
-        creatorId:
-          description: ID of creator. The creator could be a software system identifier or an identifier of an employee resposible for the creation.
-          type: string
-          minLength: 0
-          maxLength: 200
-        lastModifyDateTime:
-          description: Time stamp of last modification.
-          type: string
-          format: date-time
-        lastModifierId:
-          description: Identifies the last software system or person to modify a record.
-          type: string
-          minLength: 0
-          maxLength: 200
-    profileRestrictions:
-      type: object
-      properties:
-        reason:
-          description: Restriction reason associated with the current profile.
-          type: string
-          minLength: 0
-          maxLength: 20
-        reasonDescription:
-          description: Description of restriction reason.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        restricted:
-          description: True indicates there are restrictions associated with the current profile.
-          type: boolean
-    validateMembershipNumber:
-      type: object
-      description: Response object for fetching offers from external system.
-      properties:
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    gamingOffersType:
-      type: array
-      description: Offers that are availabl to be attached
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/codeDescriptionType'
-    benefitsType:
-      type: array
-      description: Basic information about membership benefit.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/benefitType'
-    externalStatusType:
-      type: string
-      description: Success return when there is no error and operation is successful.
-      enum:
-      - NotEnoughCriteria
-      - IgnoredUnsupportedCriteria
-      - ExternalError
-      - CommunicationError
-      - Success
-    downgradeType:
-      type: string
-      description: Do not downgrade membership when the next downgrade process runs. When the downgrade process runs, the membership will be automatically set to Grace.
-      enum:
-      - Grace
-      - Never
-      - Period
-    codeDescriptionType:
-      type: object
-      description: This contains a generic code and description information.
-      properties:
-        code:
-          description: Code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          description: description.
-          type: string
-          minLength: 0
-          maxLength: 2000
-    identificationType:
-      type: object
-      description: Identification information of the customer.
-      properties:
-        idType:
-          description: Identification Type. Eg Passport, Driving License etc.
-          type: string
-          minLength: 0
-          maxLength: 40
-        idNumber:
-          description: Identification Number.
-          type: string
-          minLength: 0
-          maxLength: 80
-        idNumberMasked:
-          description: Masked Identification Number.
-          type: string
-          minLength: 0
-          maxLength: 80
-        issuedCountry:
-          description: The country where Identification was issued.
-          type: string
-          minLength: 0
-          maxLength: 20
-        issuedDate:
-          description: Issued date of Identification.
-          type: string
-          format: date
-        issuedPlace:
-          description: The place where Identification was issued.
-          type: string
-          minLength: 0
-          maxLength: 80
-        expirationDate:
-          description: Expiration date of Identification.
-          type: string
-          format: date
-        registeredProperty:
-          description: Property where the identification belongs to.
-          type: string
-          minLength: 0
-          maxLength: 20
-        primaryInd:
-          description: When true, indicates a primary information.
-          type: boolean
-        orderSequence:
-          description: Display Order sequence.
-          type: number
-    playerStatisticsType:
-      type: object
-      description: Contains Player Statistics information
-      properties:
-        enrollmentDate:
-          type: string
-          maxLength: 2000
-        compDollars:
-          type: string
-          maxLength: 2000
-        actualTableWins:
-          type: string
-          maxLength: 2000
-        actualOtherWins:
-          type: string
-          maxLength: 2000
-        tableTimePlayed:
-          type: string
-          maxLength: 2000
-        otherTimePlayed:
-          type: string
-          maxLength: 2000
-        averageSlotBet:
-          type: string
-          maxLength: 2000
-        skillRating:
-          type: string
-          maxLength: 2000
-        playerTableWins:
-          type: string
-          maxLength: 2000
-        playerOtherWins:
-          type: string
-          maxLength: 2000
-        theoriticalTableWins:
-          type: string
-          maxLength: 2000
-        theoriticalOtherWins:
-          type: string
-          maxLength: 2000
-        expectedProfit:
-          type: string
-          maxLength: 2000
-        grossMarkers:
-          type: string
-          maxLength: 2000
-        compPoints:
-          type: string
-          maxLength: 2000
-        totalComps:
-          type: string
-          maxLength: 2000
-        actualSlotWins:
-          type: string
-          maxLength: 2000
-        creditLimit:
-          type: string
-          maxLength: 2000
-        slotTimePlayed:
-          type: string
-          maxLength: 2000
-        avgTableBet:
-          type: string
-          maxLength: 2000
-        avgOtherBet:
-          type: string
-          maxLength: 2000
-        preferredGame:
-          type: string
-          maxLength: 2000
-        playerSlotWins:
-          type: string
-          maxLength: 2000
-        noOfRatings:
-          type: string
-          maxLength: 2000
-        theoSlotWins:
-          type: string
-          maxLength: 2000
-        theoProfit:
-          type: string
-          maxLength: 2000
-        bettingLimit:
-          type: string
-          maxLength: 2000
-        netMarkers:
-          type: string
-          maxLength: 2000
-        notes:
-          type: string
-          maxLength: 2000
-    emailInfoType:
-      type: object
-      description: Information on an email for the customer.
-      properties:
-        email:
-          description: eMail deatils for the profile.
-          $ref: '#/components/schemas/emailType'
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 20
-    ownerType:
-      type: object
-      description: Generic type for information about an owner.
-      properties:
-        hotel:
-          description: Hotel to which the owner belongs to.
-          $ref: '#/components/schemas/codeDescriptionType'
-        userId:
-          description: Unique application user ID.
-          $ref: '#/components/schemas/uniqueID_Type'
-        userName:
-          description: Unique application user name of the owner.
-          type: string
-          minLength: 0
-          maxLength: 40
-        ownerCode:
-          description: Unique Code to identify the owner.
-          type: string
-          minLength: 0
-          maxLength: 20
-        profileId:
-          description: Unique owner profile information.
-          $ref: '#/components/schemas/profileId'
-        name:
-          description: Provides name information of the owner.
-          $ref: '#/components/schemas/personNameType'
-        department:
-          description: Department to which the owner belongs to.
-          $ref: '#/components/schemas/codeDescriptionType'
-        email:
-          description: Email information of the owner.
-          $ref: '#/components/schemas/emailInfoType'
-        phone:
-          description: Information on the telephone number of the owner.
-          $ref: '#/components/schemas/telephoneInfoType'
-        relationship:
-          description: Relationship of the owner within the profile or block.
-          $ref: '#/components/schemas/codeDescriptionType'
-        primary:
-          description: When true, this is a primary owner.
-          type: boolean
-    validatedAddresses:
-      type: object
-      description: Response object for fetching Addresses from external system.
-      properties:
-        addressValidationsInfo:
-          description: Type contains Address information.
-          $ref: '#/components/schemas/addressValidationsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    gamingOffers:
-      type: object
-      description: Response object for fetching offers from external system.
-      properties:
-        gamingOffersInfo:
-          description: Type contains offers information.
-          $ref: '#/components/schemas/gamingOffersType'
-        links:
-          $ref: '#/components/schemas/links'
-    warningType:
-      type: object
-      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
-      properties:
-        value:
-          type: string
-          description: Property Value
-        shortText:
-          description: An abbreviated version of the error in textual format.
-          type: string
-          maxLength: 2000
-        code:
-          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
-          type: string
-          minLength: 0
-          maxLength: 20
-        docURL:
-          description: If present, this URL refers to an online description of the error that occurred.
-          type: string
-          maxLength: 2000
-        status:
-          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
-          type: string
-          maxLength: 2000
-        tag:
-          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
-          type: string
-          maxLength: 2000
-        recordId:
-          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
-          type: string
-          maxLength: 2000
-        type:
-          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
-          type: string
-          minLength: 0
-          maxLength: 20
-        language:
-          description: Language identification.
-          type: string
-          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
-        rph:
-          description: Reference Place Holder used as an index for this warning.
-          type: string
-          minLength: 1
-          maxLength: 8
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
         instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
-    numericUDFsType:
-      type: array
-      description: Used to hold collection of user defined fields of Numeric Type.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/numericUDFType'
-    personNameTypeType:
-      type: string
-      description: Person's name in an external system.
-      enum:
-      - Primary
-      - Alternate
-      - Incognito
-      - External
-      - Phonetic
-    dateUDFsType:
-      type: array
-      description: Used to hold collection of user defined fields of Date Type.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/dateUDFType'
-    dateUDFType:
-      type: object
-      description: Used to hold user defined field of Date Type.
-      properties:
-        name:
-          description: Used to hold user defined field of Date Type. It is highly recommended to use UDFD01, UDFD02,...UDFN20 (Total 20) as Date UDF names(commonly used on Reservation, Profile etc.). Name is not restricted using enumeration, to provide flexibility of different name usage if required.
+          description: The identification of a record as it exists at a point in time. An instance is used in update messages where the sender must assure the server that the update sent refers to the most recent modification level of the object being updated.
           type: string
           minLength: 0
-          maxLength: 20
-        value:
-          description: Value of user defined field.
-          type: string
-          format: date
-        altname:
-          description: Label of user defined field used by vendors or customers.
+          maxLength: 80
+        idContext:
+          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
           type: string
           minLength: 0
-          maxLength: 2000
+          maxLength: 80
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
     externalProfileSummaryType:
       type: object
       description: Type provides the basic information about the external profile.
@@ -2354,56 +1394,78 @@ components:
           type: string
           minLength: 0
           maxLength: 20
-    imageSetType:
+    keywordDetailType:
       type: object
-      description: Represents on image set record.
       properties:
-        language:
-          description: Language identification.
-          type: string
-          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
-        imageSet:
-          description: The image set name.
-          type: string
-          minLength: 0
-          maxLength: 800
-        sequenceId:
-          description: The image set sequence ID.
-          type: integer
-        imageStyle:
-          description: The image set enumerated style.
-          $ref: '#/components/schemas/imageStyleType'
-        imageType:
-          description: The image set type.
+        newKeyword:
+          description: The new keyword value.
           type: string
           minLength: 0
           maxLength: 80
-        hotelId:
-          description: The image set hotel code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        imageURL:
-          description: The image set URL.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        description:
-          description: The image set description.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        imageOrder:
-          description: The image set order.
-          type: integer
-        website:
-          description: The image set website.
-          type: string
-          minLength: 0
-          maxLength: 2000
-    uRLInfoType:
+    indicatorsType:
+      type: array
+      description: Collection of lamp indicators.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/indicatorType'
+    profileTypeType:
+      type: string
+      description: The types of Profile handled by the web service.
+      enum:
+      - Guest
+      - Agent
+      - Company
+      - Group
+      - Source
+      - Employee
+      - Hotel
+      - Vendor
+      - Contact
+      - Purge
+      - BusinessHeader
+      - BillingAccount
+      - Activity
+      - Potential
+      - Account
+    profileStatusType:
+      type: string
+      enum:
+      - Active
+      - Inactive
+    indicatorType:
       type: object
-      description: Web site address.
+      description: Lamp indicator Type.
+      properties:
+        indicatorName:
+          description: Name of the indicator.
+          type: string
+          minLength: 0
+          maxLength: 80
+        count:
+          description: Indicates number of occurrences of the indicator.
+          type: integer
+    externalProfileSummariesType:
+      type: object
+      description: A complex type containing the collection of Profile objects or Unique IDs of Profiles.
+      properties:
+        profileInfo:
+          description: A collection of Profiles or Unique IDs of Profiles.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/externalProfileSummaryInfoType'
+        totalRows:
+          description: Total number of rows queried
+          type: integer
+        status:
+          description: Status of external Profile operation.
+          $ref: '#/components/schemas/externalStatusType'
+        haltOperation:
+          description: Hold/Continue external Profile operation.
+          type: boolean
+    uniqueID_Type:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
       properties:
         id:
           description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
@@ -2415,160 +1477,71 @@ components:
           type: string
           minLength: 0
           maxLength: 20
-    iATAInfoType:
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
       type: object
-      description: IATA Information of the profile.
       properties:
-        iATACompany:
-          description: IATA Company Detail.
+        type:
           type: string
-          minLength: 0
-          maxLength: 20
-        iATAConsortia:
-          description: IATA Consortia.
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
           type: string
-          minLength: 0
-          maxLength: 40
-        iATAValidationResult:
-          description: IATA Validation Result.
-          type: boolean
-    preferenceTypeType:
-      type: object
-      description: Preference details for the profile.
-      properties:
-        preference:
-          description: Collection of Preferences for the profile.
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
           type: array
-          maxItems: 4000
           items:
-            $ref: '#/components/schemas/preferenceType'
-        preferenceType:
-          description: Preference group code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        preferenceTypeDescription:
-          description: Preference group description.
-          type: string
-          maxLength: 2000
-        sequence:
-          description: Preference Sequence.
-          type: string
-          maxLength: 2000
-        maxQuantity:
-          description: Maximum quantity of preferences allowed per preference group.
-          type: integer
-        availableQuantity:
-          description: Available quantity of preferences (maximum quantity - Existing preferences)per preference group.
-          type: integer
-        maxResortUsedQuantity:
-          description: Maximum quantity of preferences used by any resort per preference group.
-          type: integer
-        reservationPreference:
-          description: Whether this preference is reservation preference or not.
-          type: boolean
-        createDateTime:
-          description: Time stamp of the creation.
-          type: string
-          format: date-time
-        creatorId:
-          description: ID of creator. The creator could be a software system identifier or an identifier of an employee resposible for the creation.
-          type: string
-          minLength: 0
-          maxLength: 200
-        lastModifyDateTime:
-          description: Time stamp of last modification.
-          type: string
-          format: date-time
-        lastModifierId:
-          description: Identifies the last software system or person to modify a record.
-          type: string
-          minLength: 0
-          maxLength: 200
+            $ref: '#/components/schemas/errorInstance'
         links:
           $ref: '#/components/schemas/links'
-    externalProfileSummaryInfoType:
+    externalProfiles:
       type: object
-      description: Summary information about a external profile and the associated Unique IDs.
+      description: Response object for fetching profiles from external CRM System. This object contains profile primary details, profile summary details, master info list containing code and description used as lookup for description.
       properties:
-        profileIdList:
-          description: Unique identifiers each of maximum length of 20 characters for the Profile for both internal and external systems.
-          $ref: '#/components/schemas/profileIdList'
-        profile:
-          description: Provides summary information regarding profile.
-          $ref: '#/components/schemas/externalProfileSummaryType'
-    emailType:
+        externalProfileSummaries:
+          description: Type contains Profile's summary information.
+          $ref: '#/components/schemas/externalProfileSummariesType'
+        links:
+          $ref: '#/components/schemas/links'
+    emailInfoType:
       type: object
       description: Information on an email for the customer.
       properties:
-        emailAddress:
-          description: Defines the e-mail address.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        type:
-          description: Defines the purpose of the e-mail address (e.g. personal, business, listserve).
-          type: string
-          minLength: 0
-          maxLength: 20
-        typeDescription:
-          description: Describes the Type code
-          type: string
-          minLength: 0
-          maxLength: 2000
-        emailFormat:
-          description: Supported Email format.
-          type: string
-        primaryInd:
-          description: When true, indicates a primary information.
-          type: boolean
-        orderSequence:
-          description: Display Order sequence.
-          type: number
-        createDateTime:
-          description: Time stamp of the creation.
-          type: string
-          format: date-time
-        creatorId:
-          description: ID of creator. The creator could be a software system identifier or an identifier of an employee resposible for the creation.
-          type: string
-          minLength: 0
-          maxLength: 200
-        lastModifyDateTime:
-          description: Time stamp of last modification.
-          type: string
-          format: date-time
-        lastModifierId:
-          description: Identifies the last software system or person to modify a record.
-          type: string
-          minLength: 0
-          maxLength: 200
-    alienInfoType:
-      type: object
-      description: immigration/visa information of a foreign person.
-      properties:
-        alienRegistrationNo:
-          description: Alien Registration Number.
-          type: string
-          maxLength: 2000
-        immigrationStatus:
-          description: Immigration Status on an Alien.
-          type: string
-          minLength: 0
-          maxLength: 40
-        visaValidityType:
-          description: Visa Type of an Alien.
-          type: string
-          minLength: 0
-          maxLength: 40
-    keywordDetailType:
-      type: object
-      properties:
-        newKeyword:
-          description: The new keyword value.
+        email:
+          description: eMail deatils for the profile.
+          $ref: '#/components/schemas/emailType'
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
           type: string
           minLength: 0
           maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 20
+    gamingOffersType:
+      type: array
+      description: Offers that are availabl to be attached
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/codeDescriptionType'
     addressType:
       type: object
       description: Provides address information.
@@ -2651,52 +1624,227 @@ components:
           type: string
           minLength: 0
           maxLength: 200
-    companyType:
+    iATAInfoType:
       type: object
+      description: IATA Information of the profile.
       properties:
-        companyName:
-          description: Name of the company.
-          type: string
-          minLength: 0
-          maxLength: 40
-        companyName2:
-          description: Second Name of the company.
-          type: string
-          minLength: 0
-          maxLength: 40
-        companyName3:
-          description: Third Name of the company.
-          type: string
-          minLength: 0
-          maxLength: 40
-        alternateName:
-          description: Alternate Name of the Company. Mainly, it's the name of the company written in the Alternate Language.
-          type: string
-          minLength: 0
-          maxLength: 40
-        alternateLanguage:
-          description: Alternate Language of the company.
+        iATACompany:
+          description: IATA Company Detail.
           type: string
           minLength: 0
           maxLength: 20
-        businessLocale:
-          description: A jurisdiction(Territory) in which a company is authorized to do business.
+        iATAConsortia:
+          description: IATA Consortia.
           type: string
           minLength: 0
           maxLength: 40
-        iATAInfo:
-          description: IATA Information of the profile.
-          $ref: '#/components/schemas/iATAInfoType'
+        iATAValidationResult:
+          description: IATA Validation Result.
+          type: boolean
+    gamingOffers:
+      type: object
+      description: Response object for fetching offers from external system.
+      properties:
+        gamingOffersInfo:
+          description: Type contains offers information.
+          $ref: '#/components/schemas/gamingOffersType'
+        links:
+          $ref: '#/components/schemas/links'
+    profileIdList:
+      type: array
+      description: Unique Id that references an object uniquely in the system.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/uniqueID_Type'
+    telephoneType:
+      type: object
+      description: Information on a telephone number for the customer.
+      properties:
+        phoneTechType:
+          description: Indicates type of technology associated with this telephone number, such as Voice, Data, Fax, Pager, Mobile, TTY, etc.
+          type: string
+          minLength: 0
+          maxLength: 20
+        phoneUseType:
+          description: Describes the type of telephone number, in the context of its general use (e.g. Home, Business, Emergency Contact, Travel Arranger, Day, Evening).
+          type: string
+          minLength: 0
+          maxLength: 20
+        phoneUseTypeDescription:
+          description: Description of the PhoneUseType code
+          type: string
+          minLength: 0
+          maxLength: 2000
+        phoneNumber:
+          description: Telephone number assigned to a single location.
+          type: string
+          minLength: 0
+          maxLength: 40
+        extension:
+          description: Extension to reach a specific party at the phone number.
+          type: string
+          minLength: 0
+          maxLength: 20
+        primaryInd:
+          description: When true, indicates a primary information.
+          type: boolean
+        orderSequence:
+          description: Display Order sequence.
+          type: number
+        createDateTime:
+          description: Time stamp of the creation.
+          type: string
+          format: date-time
+        creatorId:
+          description: ID of creator. The creator could be a software system identifier or an identifier of an employee resposible for the creation.
+          type: string
+          minLength: 0
+          maxLength: 200
+        lastModifyDateTime:
+          description: Time stamp of last modification.
+          type: string
+          format: date-time
+        lastModifierId:
+          description: Identifies the last software system or person to modify a record.
+          type: string
+          minLength: 0
+          maxLength: 200
+    numericUDFType:
+      type: object
+      description: Used to hold user defined field of Numeric Type. It is highly recommended to use UDFN01, UDFN02,...UDFN40 (Total 40) as Numeric UDF names(commonly used on Reservation, Profile etc.). Name is not restricted using enumeration, to provide flexibility of different name usage if required.
+      properties:
+        name:
+          description: Name of user defined field.
+          type: string
+          minLength: 0
+          maxLength: 20
+        value:
+          description: Value of user defined field.
+          type: number
+        altname:
+          description: Label of user defined field used by vendors or customers.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    externalProfileSummaryInfoType:
+      type: object
+      description: Summary information about a external profile and the associated Unique IDs.
+      properties:
+        profileIdList:
+          description: Unique identifiers each of maximum length of 20 characters for the Profile for both internal and external systems.
+          $ref: '#/components/schemas/profileIdList'
+        profile:
+          description: Provides summary information regarding profile.
+          $ref: '#/components/schemas/externalProfileSummaryType'
+    tierAdministrationType:
+      type: string
+      description: Do not upgrade membership. The membership may be downgraded.
+      enum:
+      - Disabled
+      - NoUpgrade
+    formattedTextTextType:
+      type: object
+      description: Provides text and indicates whether it is formatted or not.
+      properties:
+        value:
+          type: string
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+    uRLInfoType:
+      type: object
+      description: Web site address.
+      properties:
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 20
+    anonymizationType:
+      type: object
+      description: Provides information about guest's anonymization status.
+      properties:
+        anonymizationStatus:
+          description: Status of anonymization such as Requested or Anonymized.
+          $ref: '#/components/schemas/anonymizationStatusType'
+        anonymizationDate:
+          description: Date and Time when the guest was anonymized.
+          type: string
+          format: date-time
+    cardReIssueType:
+      type: string
+      description: Request to re issue a new card.
+      enum:
+      - Pending
+      - NotApplicable
+      - Requested
+    customerType:
+      type: object
+      description: Contains basic data on the customer's identity, location, relationships, finances, memberships, etc.
+      properties:
+        personName:
+          description: Detailed name information for the customer.
+          type: array
+          maxItems: 5
+          items:
+            $ref: '#/components/schemas/personNameType'
+        anonymization:
+          description: Provides information about the guest's anonymization status
+          $ref: '#/components/schemas/anonymizationType'
+        citizenCountry:
+          description: Name of the (self-professed) country that is claimed for citizenship.
+          $ref: '#/components/schemas/countryNameType'
+        identifications:
+          description: List of identification of the customer.
+          type: object
+          properties:
+            identificationInfo:
+              description: Collection of detailed information on the identification of the customer.
+              type: array
+              maxItems: 4000
+              items:
+                $ref: '#/components/schemas/identificationInfoType'
+            allRowsFetched:
+              description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+              type: boolean
+            totalRows:
+              description: Total number of rows queried
+              type: integer
+        profession:
+          description: Profession of a person.
+          type: string
+          minLength: 0
+          maxLength: 80
+        alienInfo:
+          description: Immigration/visa information of a foreign person.
+          $ref: '#/components/schemas/alienInfoType'
+        birthCountry:
+          description: Country of birth.
+          $ref: '#/components/schemas/countryNameType'
         businessTitle:
           description: Business Title.
           type: string
           minLength: 0
           maxLength: 80
-        currencyCode:
-          description: The code specifying a monetary unit. Use ISO 4217, three alpha code.
+        gender:
+          description: Identifies the profile gender code selected from Gender types List of values. Gender types LOV provides the values configured at gender configuration.
           type: string
           minLength: 0
           maxLength: 20
+        birthDate:
+          description: Indicates the date of birth as indicated in the document, in ISO 8601 prescribed format.
+          type: string
+          format: date
+        birthDateMasked:
+          description: Indicates the date of birth as masked.
+          type: string
+          maxLength: 2000
         language:
           description: Language identification.
           type: string
@@ -2711,23 +1859,18 @@ components:
           type: string
           minLength: 0
           maxLength: 80
-        commissionCode:
-          description: Commission code of the company.
+        customerValue:
+          description: The supplier's ranking of the customer (e.g., VIP, numerical ranking).
           type: string
           minLength: 0
           maxLength: 20
         creditRating:
-          description: Credit Rating of the company.
-          type: string
-          minLength: 0
-          maxLength: 20
-        corporateIdType:
-          description: The type of corporate ID
+          description: Credit Rating of the customer.
           type: string
           minLength: 0
           maxLength: 20
         vipStatus:
-          description: VIP status of the company.
+          description: VIP status of the customer.
           type: string
           minLength: 0
           maxLength: 20
@@ -2736,174 +1879,101 @@ components:
           type: string
           minLength: 0
           maxLength: 2000
+        birthPlace:
+          description: Place of birth.
+          type: string
+          minLength: 0
+          maxLength: 80
+        privateProfile:
+          description: This element tells profile is property exclusive or not.
+          type: boolean
         blacklist:
           description: This element tells if profile is blacklisted or not.
           type: boolean
-    checkIataNumberType:
+    addressInfoType:
       type: object
-      description: Type provides the IATA Validation information.
+      description: Provides address information.
       properties:
-        code:
-          description: IATA Number.
-          type: string
-          minLength: 0
-          maxLength: 20
-        lastRefreshDate:
-          description: Last Refresh Date.
-          type: string
-          minLength: 0
-          maxLength: 20
-        reason:
-          description: Reason.
-          type: string
-          minLength: 0
-          maxLength: 40
-        agencyName:
-          description: Agency Name.
-          type: string
-          minLength: 0
-          maxLength: 100
-        approvalDate:
-          description: Approval Date.
-          type: string
-          minLength: 0
-          maxLength: 100
-        agencyClass:
-          description: Agency Class.
-          type: string
-          minLength: 0
-          maxLength: 100
-        siteType:
-          description: Site Type.
-          type: string
-          minLength: 0
-          maxLength: 100
         address:
-          description: Address.
+          description: Address details for the profile.
+          $ref: '#/components/schemas/addressType'
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
           type: string
           minLength: 0
-          maxLength: 1000
-        city:
-          description: City.
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
           type: string
           minLength: 0
-          maxLength: 100
-        postalCode:
-          description: Postal Code.
-          type: string
-          minLength: 0
-          maxLength: 100
-        state:
-          description: State.
-          type: string
-          minLength: 0
-          maxLength: 40
-        country:
-          description: Country.
-          type: string
-          minLength: 0
-          maxLength: 40
-        phoneNumber:
-          description: Phone Number.
-          type: string
-          minLength: 0
-          maxLength: 40
-        message:
-          description: Message.
-          type: string
-          minLength: 0
-          maxLength: 100
-    countryNameType:
+          maxLength: 20
+    preferenceType:
       type: object
-      description: Code for a country or a nationality.
+      description: Guest Preference details for the profile.
       properties:
-        value:
+        preferenceValue:
+          description: Preference value for display purposes.
           type: string
-          description: Used for Character Strings, length 0 to 200.
           minLength: 0
           maxLength: 200
-        code:
-          description: Code for a country or a nationality.
+        description:
+          description: Preference Description for display purposes.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        global:
+          description: Whether this preference is property specific or not.
+          type: boolean
+        source:
+          description: Source of the preference.
+          type: string
+          minLength: 0
+          maxLength: 40
+        hotels:
+          description: If specified preference belongs to the Hotels listed, otherwise it is a global preference.
+          type: array
+          maxItems: 4000
+          items:
+            type: string
+            minLength: 0
+            maxLength: 20
+        preferenceCode:
           type: string
           minLength: 0
           maxLength: 20
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
+        excludedPreferencesCount:
+          description: Specifies the count of preferences excluded for the attached reservation preference.
           type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-    userDefinedFieldsType:
+    lastStayInfoType:
       type: object
-      description: A common type used to hold user defined fields(UDFs). This type should be used to handle UDFs on RReservation, Profiles, etc.
+      description: Contains last stay related details for the profile
       properties:
-        characterUDFs:
-          description: Collection of user defined fields of Character/String Type.
-          $ref: '#/components/schemas/characterUDFsType'
-        numericUDFs:
-          description: Collection of user defined fields of Numeric Type.
-          $ref: '#/components/schemas/numericUDFsType'
-        dateUDFs:
-          description: Collection of user defined fields of Date Type.
-          $ref: '#/components/schemas/dateUDFsType'
-    addressValidationInfoType:
-      type: object
-      properties:
-        addressText:
-          description: The suggestion that should be presented to the user as a possible match to their input.
+        lastVisit:
+          description: Used to hold last stay information for the profile.
           type: string
-          minLength: 0
+          format: date
+        lastRoom:
+          description: Used to hold last room information for the profile.
+          type: string
           maxLength: 2000
-        externalAddressId:
-          description: The ID of the address recieved as part of an address search validation.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        addressType:
-          description: If the Type is 'Address' then the Id can be passed to the Retrieve service. Any other Id should be passed as the Container to a further Find request to get more results.
-          type: string
-          minLength: 0
-          maxLength: 20
-    iataNumberDetails:
-      type: object
-      description: Response object to fetch IATA Number validation for Travel Agency Profile.
-      properties:
-        checkIataNumberInfo:
-          description: Type contains profile enrollment information.
-          $ref: '#/components/schemas/checkIataNumberType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    externalProfiles:
-      type: object
-      description: Response object for fetching profiles from external CRM System. This object contains profile primary details, profile summary details, master info list containing code and description used as lookup for description.
-      properties:
-        externalProfileSummaries:
-          description: Type contains Profile's summary information.
-          $ref: '#/components/schemas/externalProfileSummariesType'
-        links:
-          $ref: '#/components/schemas/links'
+        lastRate:
+          description: Used to hold last rate information for the profile.
+          $ref: '#/components/schemas/currencyAmountType'
+        totalStay:
+          description: The total number of previous stay of the profile.
+          type: integer
+    anonymizationStatusType:
+      type: string
+      description: Guest has been anonymized.
+      enum:
+      - Requested
+      - Anonymized
+    characterUDFsType:
+      type: array
+      description: Used to hold collection of user defined fields of Character/String Type.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/characterUDFType'
     benefitType:
       type: object
       description: Basic information about membership benefit.
@@ -2921,184 +1991,6 @@ components:
         inactive:
           description: Indicates whether membership benefit is active or inactive.
           type: boolean
-    mailingActionsType:
-      type: object
-      description: Defines mailing action list for the profile.
-      properties:
-        mailingAction:
-          description: Defines mailing action code and description.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/codeDescriptionType'
-        active:
-          description: When true indicates that profile has subscribed to the mailing list.
-          type: boolean
-        totalRows:
-          description: Total number of rows queried
-          type: integer
-    profileId:
-      type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
-      properties:
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 20
-        instance:
-          description: The identification of a record as it exists at a point in time. An instance is used in update messages where the sender must assure the server that the update sent refers to the most recent modification level of the object being updated.
-          type: string
-          minLength: 0
-          maxLength: 80
-        idContext:
-          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
-          type: string
-          minLength: 0
-          maxLength: 80
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-    profileTypeType:
-      type: string
-      description: The types of Profile handled by the web service.
-      enum:
-      - Guest
-      - Agent
-      - Company
-      - Group
-      - Source
-      - Employee
-      - Hotel
-      - Vendor
-      - Contact
-      - Purge
-      - BusinessHeader
-      - BillingAccount
-      - Activity
-      - Potential
-      - Account
-    anonymizationStatusType:
-      type: string
-      description: Guest has been anonymized.
-      enum:
-      - Requested
-      - Anonymized
-    characterUDFType:
-      type: object
-      description: Used to hold user defined field of Character/String Type.
-      properties:
-        name:
-          description: Used to hold user defined field of Character Type. It is highly recommended to use UDFC01, UDFC02,...UDFC40 (Total 40) as Character/String UDF names(commonly used on Reservation, Profile etc.). Name is not restricted using enumeration, to provide flexibility of different name usage if required.
-          type: string
-          minLength: 0
-          maxLength: 20
-        value:
-          description: Value of user defined field.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        altname:
-          description: Label of user defined field used by vendors or customers.
-          type: string
-          minLength: 0
-          maxLength: 2000
-    profileIdList:
-      type: array
-      description: Unique Id that references an object uniquely in the system.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/uniqueID_Type'
-    profileStatusType:
-      type: string
-      enum:
-      - Active
-      - Inactive
-    addressValidationsType:
-      type: array
-      description: A collection of validated Addresses.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/addressValidationInfoType'
-    privacyInfoType:
-      type: object
-      description: Defines Privacy related information for the profile.
-      properties:
-        marketResearchParticipation:
-          description: Indicates if the profile participates in market research.
-          type: boolean
-        lastPrivacyPromptDate:
-          description: Indicate the last privacy prompt date of the guest.
-          type: string
-          format: date
-        infoFromThirdParty:
-          description: Indicates if the profile is ok getting info from third parties.
-          type: boolean
-        autoEnrollLoyaltyProgram:
-          description: Indicates if the profile wishes to be automatically enrolled in the property's loyalty program.
-          type: boolean
-        allowPhone:
-          description: Indicates if the profile wishes to allow phone calls.
-          type: boolean
-        allowSMS:
-          description: Indicates if the profile wishes to allow SMS.
-          type: boolean
-        allowEmail:
-          description: Indicates if the profile wishes to allow Email.
-          type: boolean
-        optInMailingList:
-          description: Indicates if the profile wishes to opt in for Mailing List.
-          type: boolean
-        optInMarketResearch:
-          description: Indicates if the profile wishes to opt in for Market Research.
-          type: boolean
-        optInThirdParty:
-          description: Indicates if the profile wishes to opt in for Third Party.
-          type: boolean
-        optInAutoEnrollmentMember:
-          description: Indicates if the profile wishes to opt in for Auto Enrolment Member.
-          type: boolean
-        optInPhone:
-          description: Indicates if the profile wishes to opt in for Phone.
-          type: boolean
-        optInSms:
-          description: Indicates if the profile wishes to opt in for SMS.
-          type: boolean
-        optInEmail:
-          description: Indicates if the profile wishes to opt in for Email.
-          type: boolean
-    formattedTextTextType:
-      type: object
-      description: Provides text and indicates whether it is formatted or not.
-      properties:
-        value:
-          type: string
-        language:
-          description: Language identification.
-          type: string
-          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
-    profileAccessType:
-      type: object
-      properties:
-        croCode:
-          description: Indicates the CRO code where the profile was created
-          type: string
-          minLength: 0
-          maxLength: 200
-        hotelId:
-          description: Indicates the Hotel code where the profile was created
-          type: string
-          minLength: 0
-          maxLength: 200
-        sharedLevel:
-          description: 'Indicates whether the profile is shared at the following levels : global/property/CRO'
-          $ref: '#/components/schemas/profileSharedLevelType'
     profileType:
       type: object
       description: Type provides the detailed information about the profile and its children.
@@ -3301,6 +2193,467 @@ components:
         hasCommission:
           description: Populates true if the profile has commission configured false otherwise.
           type: boolean
+    dateUDFType:
+      type: object
+      description: Used to hold user defined field of Date Type.
+      properties:
+        name:
+          description: Used to hold user defined field of Date Type. It is highly recommended to use UDFD01, UDFD02,...UDFN20 (Total 20) as Date UDF names(commonly used on Reservation, Profile etc.). Name is not restricted using enumeration, to provide flexibility of different name usage if required.
+          type: string
+          minLength: 0
+          maxLength: 20
+        value:
+          description: Value of user defined field.
+          type: string
+          format: date
+        altname:
+          description: Label of user defined field used by vendors or customers.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    keywordType:
+      type: object
+      properties:
+        keywordDetail:
+          description: The keyword new value, in case keyword value is modified.
+          $ref: '#/components/schemas/keywordDetailType'
+        type:
+          description: The type of keyword
+          type: string
+          minLength: 0
+          maxLength: 20
+        keyword:
+          description: The keyword value.
+          type: string
+          minLength: 0
+          maxLength: 80
+    ownersType:
+      type: array
+      description: Generic type for a list of owners.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/ownerType'
+    iataNumberDetails:
+      type: object
+      description: Response object to fetch IATA Number validation for Travel Agency Profile.
+      properties:
+        checkIataNumberInfo:
+          description: Type contains profile enrollment information.
+          $ref: '#/components/schemas/checkIataNumberType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    telephoneInfoType:
+      type: object
+      description: Information on a telephone number for the customer.
+      properties:
+        telephone:
+          description: Phone details for the profile.
+          $ref: '#/components/schemas/telephoneType'
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 20
+    addressValidationInfoType:
+      type: object
+      properties:
+        addressText:
+          description: The suggestion that should be presented to the user as a possible match to their input.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        externalAddressId:
+          description: The ID of the address recieved as part of an address search validation.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        addressType:
+          description: If the Type is 'Address' then the Id can be passed to the Retrieve service. Any other Id should be passed as the Container to a further Find request to get more results.
+          type: string
+          minLength: 0
+          maxLength: 20
+    userDefinedFieldsType:
+      type: object
+      description: A common type used to hold user defined fields(UDFs). This type should be used to handle UDFs on RReservation, Profiles, etc.
+      properties:
+        characterUDFs:
+          description: Collection of user defined fields of Character/String Type.
+          $ref: '#/components/schemas/characterUDFsType'
+        numericUDFs:
+          description: Collection of user defined fields of Numeric Type.
+          $ref: '#/components/schemas/numericUDFsType'
+        dateUDFs:
+          description: Collection of user defined fields of Date Type.
+          $ref: '#/components/schemas/dateUDFsType'
+    currencyAmountType:
+      type: object
+      description: A monetary value expressed with a currency code.
+      properties:
+        amount:
+          description: A monetary amount.
+          type: number
+    privacyInfoType:
+      type: object
+      description: Defines Privacy related information for the profile.
+      properties:
+        marketResearchParticipation:
+          description: Indicates if the profile participates in market research.
+          type: boolean
+        lastPrivacyPromptDate:
+          description: Indicate the last privacy prompt date of the guest.
+          type: string
+          format: date
+        infoFromThirdParty:
+          description: Indicates if the profile is ok getting info from third parties.
+          type: boolean
+        autoEnrollLoyaltyProgram:
+          description: Indicates if the profile wishes to be automatically enrolled in the property's loyalty program.
+          type: boolean
+        allowPhone:
+          description: Indicates if the profile wishes to allow phone calls.
+          type: boolean
+        allowSMS:
+          description: Indicates if the profile wishes to allow SMS.
+          type: boolean
+        allowEmail:
+          description: Indicates if the profile wishes to allow Email.
+          type: boolean
+        optInMailingList:
+          description: Indicates if the profile wishes to opt in for Mailing List.
+          type: boolean
+        optInMarketResearch:
+          description: Indicates if the profile wishes to opt in for Market Research.
+          type: boolean
+        optInThirdParty:
+          description: Indicates if the profile wishes to opt in for Third Party.
+          type: boolean
+        optInAutoEnrollmentMember:
+          description: Indicates if the profile wishes to opt in for Auto Enrolment Member.
+          type: boolean
+        optInPhone:
+          description: Indicates if the profile wishes to opt in for Phone.
+          type: boolean
+        optInSms:
+          description: Indicates if the profile wishes to opt in for SMS.
+          type: boolean
+        optInEmail:
+          description: Indicates if the profile wishes to opt in for Email.
+          type: boolean
+    validatedAddresses:
+      type: object
+      description: Response object for fetching Addresses from external system.
+      properties:
+        addressValidationsInfo:
+          description: Type contains Address information.
+          $ref: '#/components/schemas/addressValidationsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    personNameTypeType:
+      type: string
+      description: Person's name in an external system.
+      enum:
+      - Primary
+      - Alternate
+      - Incognito
+      - External
+      - Phonetic
+    checkIataNumberType:
+      type: object
+      description: Type provides the IATA Validation information.
+      properties:
+        code:
+          description: IATA Number.
+          type: string
+          minLength: 0
+          maxLength: 20
+        lastRefreshDate:
+          description: Last Refresh Date.
+          type: string
+          minLength: 0
+          maxLength: 20
+        reason:
+          description: Reason.
+          type: string
+          minLength: 0
+          maxLength: 40
+        agencyName:
+          description: Agency Name.
+          type: string
+          minLength: 0
+          maxLength: 100
+        approvalDate:
+          description: Approval Date.
+          type: string
+          minLength: 0
+          maxLength: 100
+        agencyClass:
+          description: Agency Class.
+          type: string
+          minLength: 0
+          maxLength: 100
+        siteType:
+          description: Site Type.
+          type: string
+          minLength: 0
+          maxLength: 100
+        address:
+          description: Address.
+          type: string
+          minLength: 0
+          maxLength: 1000
+        city:
+          description: City.
+          type: string
+          minLength: 0
+          maxLength: 100
+        postalCode:
+          description: Postal Code.
+          type: string
+          minLength: 0
+          maxLength: 100
+        state:
+          description: State.
+          type: string
+          minLength: 0
+          maxLength: 40
+        country:
+          description: Country.
+          type: string
+          minLength: 0
+          maxLength: 40
+        phoneNumber:
+          description: Phone Number.
+          type: string
+          minLength: 0
+          maxLength: 40
+        message:
+          description: Message.
+          type: string
+          minLength: 0
+          maxLength: 100
+    addressValidationsType:
+      type: array
+      description: A collection of validated Addresses.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/addressValidationInfoType'
+    codeDescriptionType:
+      type: object
+      description: This contains a generic code and description information.
+      properties:
+        code:
+          description: Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: description.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    playerStatisticsType:
+      type: object
+      description: Contains Player Statistics information
+      properties:
+        enrollmentDate:
+          type: string
+          maxLength: 2000
+        compDollars:
+          type: string
+          maxLength: 2000
+        actualTableWins:
+          type: string
+          maxLength: 2000
+        actualOtherWins:
+          type: string
+          maxLength: 2000
+        tableTimePlayed:
+          type: string
+          maxLength: 2000
+        otherTimePlayed:
+          type: string
+          maxLength: 2000
+        averageSlotBet:
+          type: string
+          maxLength: 2000
+        skillRating:
+          type: string
+          maxLength: 2000
+        playerTableWins:
+          type: string
+          maxLength: 2000
+        playerOtherWins:
+          type: string
+          maxLength: 2000
+        theoriticalTableWins:
+          type: string
+          maxLength: 2000
+        theoriticalOtherWins:
+          type: string
+          maxLength: 2000
+        expectedProfit:
+          type: string
+          maxLength: 2000
+        grossMarkers:
+          type: string
+          maxLength: 2000
+        compPoints:
+          type: string
+          maxLength: 2000
+        totalComps:
+          type: string
+          maxLength: 2000
+        actualSlotWins:
+          type: string
+          maxLength: 2000
+        creditLimit:
+          type: string
+          maxLength: 2000
+        slotTimePlayed:
+          type: string
+          maxLength: 2000
+        avgTableBet:
+          type: string
+          maxLength: 2000
+        avgOtherBet:
+          type: string
+          maxLength: 2000
+        preferredGame:
+          type: string
+          maxLength: 2000
+        playerSlotWins:
+          type: string
+          maxLength: 2000
+        noOfRatings:
+          type: string
+          maxLength: 2000
+        theoSlotWins:
+          type: string
+          maxLength: 2000
+        theoProfit:
+          type: string
+          maxLength: 2000
+        bettingLimit:
+          type: string
+          maxLength: 2000
+        netMarkers:
+          type: string
+          maxLength: 2000
+        notes:
+          type: string
+          maxLength: 2000
+    countryNameType:
+      type: object
+      description: Code for a country or a nationality.
+      properties:
+        value:
+          type: string
+          description: Used for Character Strings, length 0 to 200.
+          minLength: 0
+          maxLength: 200
+        code:
+          description: Code for a country or a nationality.
+          type: string
+          minLength: 0
+          maxLength: 20
+    profile:
+      type: object
+      description: Object for creation of profiles. This object contains profile details with unique identifiers for each profile.
+      properties:
+        profileIdList:
+          description: Unique identifiers for the Profile for both internal and external systems. In case of Travel Agent the IATA code and in case of Company can be any form of identifier as ID.
+          $ref: '#/components/schemas/profileIdList'
+        profileDetails:
+          description: Provides detailed information regarding either a company or a customer profile.
+          $ref: '#/components/schemas/profileType'
+        links:
+          $ref: '#/components/schemas/links'
+    imageSetType:
+      type: object
+      description: Represents on image set record.
+      properties:
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        imageSet:
+          description: The image set name.
+          type: string
+          minLength: 0
+          maxLength: 800
+        sequenceId:
+          description: The image set sequence ID.
+          type: integer
+        imageStyle:
+          description: The image set enumerated style.
+          $ref: '#/components/schemas/imageStyleType'
+        imageType:
+          description: The image set type.
+          type: string
+          minLength: 0
+          maxLength: 80
+        hotelId:
+          description: The image set hotel code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        imageURL:
+          description: The image set URL.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        description:
+          description: The image set description.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        imageOrder:
+          description: The image set order.
+          type: integer
+        website:
+          description: The image set website.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    validateMembershipNumber:
+      type: object
+      description: Response object for fetching offers from external system.
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    mailingActionsType:
+      type: object
+      description: Defines mailing action list for the profile.
+      properties:
+        mailingAction:
+          description: Defines mailing action code and description.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/codeDescriptionType'
+        active:
+          description: When true indicates that profile has subscribed to the mailing list.
+          type: boolean
+        totalRows:
+          description: Total number of rows queried
+          type: integer
+    numericUDFsType:
+      type: array
+      description: Used to hold collection of user defined fields of Numeric Type.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/numericUDFType'
     paragraphType:
       type: object
       description: An indication of a new paragraph for a sub-section of a formatted text message.
@@ -3308,37 +2661,491 @@ components:
         text:
           description: Formatted text content.
           $ref: '#/components/schemas/formattedTextTextType'
-    anonymizationType:
+    companyType:
       type: object
-      description: Provides information about guest's anonymization status.
       properties:
-        anonymizationStatus:
-          description: Status of anonymization such as Requested or Anonymized.
-          $ref: '#/components/schemas/anonymizationStatusType'
-        anonymizationDate:
-          description: Date and Time when the guest was anonymized.
+        companyName:
+          description: Name of the company.
+          type: string
+          minLength: 0
+          maxLength: 40
+        companyName2:
+          description: Second Name of the company.
+          type: string
+          minLength: 0
+          maxLength: 40
+        companyName3:
+          description: Third Name of the company.
+          type: string
+          minLength: 0
+          maxLength: 40
+        alternateName:
+          description: Alternate Name of the Company. Mainly, it's the name of the company written in the Alternate Language.
+          type: string
+          minLength: 0
+          maxLength: 40
+        alternateLanguage:
+          description: Alternate Language of the company.
+          type: string
+          minLength: 0
+          maxLength: 20
+        businessLocale:
+          description: A jurisdiction(Territory) in which a company is authorized to do business.
+          type: string
+          minLength: 0
+          maxLength: 40
+        iATAInfo:
+          description: IATA Information of the profile.
+          $ref: '#/components/schemas/iATAInfoType'
+        businessTitle:
+          description: Business Title.
+          type: string
+          minLength: 0
+          maxLength: 80
+        currencyCode:
+          description: The code specifying a monetary unit. Use ISO 4217, three alpha code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        nationality:
+          description: Nationality code identification
+          type: string
+          minLength: 0
+          maxLength: 20
+        nationalityDescription:
+          description: Nationality code description
+          type: string
+          minLength: 0
+          maxLength: 80
+        commissionCode:
+          description: Commission code of the company.
+          type: string
+          minLength: 0
+          maxLength: 20
+        creditRating:
+          description: Credit Rating of the company.
+          type: string
+          minLength: 0
+          maxLength: 20
+        corporateIdType:
+          description: The type of corporate ID
+          type: string
+          minLength: 0
+          maxLength: 20
+        vipStatus:
+          description: VIP status of the company.
+          type: string
+          minLength: 0
+          maxLength: 20
+        vipDescription:
+          description: Description of the VIP status.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        blacklist:
+          description: This element tells if profile is blacklisted or not.
+          type: boolean
+    identificationType:
+      type: object
+      description: Identification information of the customer.
+      properties:
+        idType:
+          description: Identification Type. Eg Passport, Driving License etc.
+          type: string
+          minLength: 0
+          maxLength: 40
+        idNumber:
+          description: Identification Number.
+          type: string
+          minLength: 0
+          maxLength: 80
+        idNumberMasked:
+          description: Masked Identification Number.
+          type: string
+          minLength: 0
+          maxLength: 80
+        issuedCountry:
+          description: The country where Identification was issued.
+          type: string
+          minLength: 0
+          maxLength: 20
+        issuedDate:
+          description: Issued date of Identification.
+          type: string
+          format: date
+        issuedPlace:
+          description: The place where Identification was issued.
+          type: string
+          minLength: 0
+          maxLength: 80
+        expirationDate:
+          description: Expiration date of Identification.
+          type: string
+          format: date
+        registeredProperty:
+          description: Property where the identification belongs to.
+          type: string
+          minLength: 0
+          maxLength: 20
+        primaryInd:
+          description: When true, indicates a primary information.
+          type: boolean
+        orderSequence:
+          description: Display Order sequence.
+          type: number
+    identificationInfoType:
+      type: object
+      description: Information on the identification of the customer.
+      properties:
+        identification:
+          description: Detailed information on the identification of the customer.
+          $ref: '#/components/schemas/identificationType'
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 20
+    emailType:
+      type: object
+      description: Information on an email for the customer.
+      properties:
+        emailAddress:
+          description: Defines the e-mail address.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        type:
+          description: Defines the purpose of the e-mail address (e.g. personal, business, listserve).
+          type: string
+          minLength: 0
+          maxLength: 20
+        typeDescription:
+          description: Describes the Type code
+          type: string
+          minLength: 0
+          maxLength: 2000
+        emailFormat:
+          description: Supported Email format.
+          type: string
+        primaryInd:
+          description: When true, indicates a primary information.
+          type: boolean
+        orderSequence:
+          description: Display Order sequence.
+          type: number
+        createDateTime:
+          description: Time stamp of the creation.
           type: string
           format: date-time
-    externalProfileSummariesType:
+        creatorId:
+          description: ID of creator. The creator could be a software system identifier or an identifier of an employee resposible for the creation.
+          type: string
+          minLength: 0
+          maxLength: 200
+        lastModifyDateTime:
+          description: Time stamp of last modification.
+          type: string
+          format: date-time
+        lastModifierId:
+          description: Identifies the last software system or person to modify a record.
+          type: string
+          minLength: 0
+          maxLength: 200
+    alienInfoType:
       type: object
-      description: A complex type containing the collection of Profile objects or Unique IDs of Profiles.
+      description: immigration/visa information of a foreign person.
       properties:
-        profileInfo:
-          description: A collection of Profiles or Unique IDs of Profiles.
+        alienRegistrationNo:
+          description: Alien Registration Number.
+          type: string
+          maxLength: 2000
+        immigrationStatus:
+          description: Immigration Status on an Alien.
+          type: string
+          minLength: 0
+          maxLength: 40
+        visaValidityType:
+          description: Visa Type of an Alien.
+          type: string
+          minLength: 0
+          maxLength: 40
+    imageStyleType:
+      type: string
+      description: An enumeration of image styles.
+      enum:
+      - Full
+      - Thumbnail
+      - Icon
+      - Square
+      - Banner
+      - Button
+      - Lowres
+      - Highres
+    characterUDFType:
+      type: object
+      description: Used to hold user defined field of Character/String Type.
+      properties:
+        name:
+          description: Used to hold user defined field of Character Type. It is highly recommended to use UDFC01, UDFC02,...UDFC40 (Total 40) as Character/String UDF names(commonly used on Reservation, Profile etc.). Name is not restricted using enumeration, to provide flexibility of different name usage if required.
+          type: string
+          minLength: 0
+          maxLength: 20
+        value:
+          description: Value of user defined field.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        altname:
+          description: Label of user defined field used by vendors or customers.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    benefitsType:
+      type: array
+      description: Basic information about membership benefit.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/benefitType'
+    personNameType:
+      type: object
+      description: This provides name information for a person.
+      properties:
+        namePrefix:
+          description: Salutation of honorific (e.g. Mr., Mrs., Ms., Miss, Dr.)
+          type: string
+          minLength: 0
+          maxLength: 40
+        givenName:
+          description: Given name, first name or names.
+          type: string
+          minLength: 0
+          maxLength: 40
+        middleName:
+          description: The middle name of the person name.
+          type: string
+          minLength: 0
+          maxLength: 40
+        surname:
+          description: Family name, last name. May also be used for full name if the sending system does not have the ability to separate a full name into its parts, e.g. the surname element may be used to pass the full name.
+          type: string
+          minLength: 0
+          maxLength: 40
+        nameSuffix:
+          description: Hold various name suffixes and letters (e.g. Jr., Sr., III, Ret., Esq.)
+          type: string
+          minLength: 0
+          maxLength: 40
+        nameTitle:
+          description: Degree or honors (e.g., Ph.D., M.D.)
+          type: string
+          minLength: 0
+          maxLength: 80
+        nameTitleSuffix:
+          description: Title Suffix. Must be populated if ADVANCED_TITLE is on.
+          type: integer
+        envelopeGreeting:
+          description: Envelope Greeting of the profile
+          type: string
+          maxLength: 2000
+        salutation:
+          description: Salutation of the profile
+          type: string
+          maxLength: 2000
+        nameType:
+          description: Type of name of the individual, such as former, nickname, alternate or alias name.
+          $ref: '#/components/schemas/personNameTypeType'
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+    profileSharedLevelType:
+      type: string
+      description: Simple types for Shared level.
+      enum:
+      - Global
+      - Property
+      - Cro
+    preferenceTypeType:
+      type: object
+      description: Preference details for the profile.
+      properties:
+        preference:
+          description: Collection of Preferences for the profile.
           type: array
           maxItems: 4000
           items:
-            $ref: '#/components/schemas/externalProfileSummaryInfoType'
-        totalRows:
-          description: Total number of rows queried
+            $ref: '#/components/schemas/preferenceType'
+        preferenceType:
+          description: Preference group code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        preferenceTypeDescription:
+          description: Preference group description.
+          type: string
+          maxLength: 2000
+        sequence:
+          description: Preference Sequence.
+          type: string
+          maxLength: 2000
+        maxQuantity:
+          description: Maximum quantity of preferences allowed per preference group.
           type: integer
-        status:
-          description: Status of external Profile operation.
-          $ref: '#/components/schemas/externalStatusType'
-        haltOperation:
-          description: Hold/Continue external Profile operation.
+        availableQuantity:
+          description: Available quantity of preferences (maximum quantity - Existing preferences)per preference group.
+          type: integer
+        maxResortUsedQuantity:
+          description: Maximum quantity of preferences used by any resort per preference group.
+          type: integer
+        reservationPreference:
+          description: Whether this preference is reservation preference or not.
           type: boolean
-    errorInstance_2:
+        createDateTime:
+          description: Time stamp of the creation.
+          type: string
+          format: date-time
+        creatorId:
+          description: ID of creator. The creator could be a software system identifier or an identifier of an employee resposible for the creation.
+          type: string
+          minLength: 0
+          maxLength: 200
+        lastModifyDateTime:
+          description: Time stamp of last modification.
+          type: string
+          format: date-time
+        lastModifierId:
+          description: Identifies the last software system or person to modify a record.
+          type: string
+          minLength: 0
+          maxLength: 200
+        links:
+          $ref: '#/components/schemas/links'
+    fetchPlayerStatisticsRS:
+      type: object
+      description: Response of the WS operation to fetch player statistics.
+      properties:
+        playerStatistics:
+          description: The player statistics details for the given profile.
+          $ref: '#/components/schemas/playerStatisticsType'
+        links:
+          $ref: '#/components/schemas/links'
+    profileRestrictions:
+      type: object
+      properties:
+        reason:
+          description: Restriction reason associated with the current profile.
+          type: string
+          minLength: 0
+          maxLength: 20
+        reasonDescription:
+          description: Description of restriction reason.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        restricted:
+          description: True indicates there are restrictions associated with the current profile.
+          type: boolean
+    profileAccessType:
+      type: object
+      properties:
+        croCode:
+          description: Indicates the CRO code where the profile was created
+          type: string
+          minLength: 0
+          maxLength: 200
+        hotelId:
+          description: Indicates the Hotel code where the profile was created
+          type: string
+          minLength: 0
+          maxLength: 200
+        sharedLevel:
+          description: 'Indicates whether the profile is shared at the following levels : global/property/CRO'
+          $ref: '#/components/schemas/profileSharedLevelType'
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    ownerType:
+      type: object
+      description: Generic type for information about an owner.
+      properties:
+        hotel:
+          description: Hotel to which the owner belongs to.
+          $ref: '#/components/schemas/codeDescriptionType'
+        userId:
+          description: Unique application user ID.
+          $ref: '#/components/schemas/uniqueID_Type'
+        userName:
+          description: Unique application user name of the owner.
+          type: string
+          minLength: 0
+          maxLength: 40
+        ownerCode:
+          description: Unique Code to identify the owner.
+          type: string
+          minLength: 0
+          maxLength: 20
+        profileId:
+          description: Unique owner profile information.
+          $ref: '#/components/schemas/profileId'
+        name:
+          description: Provides name information of the owner.
+          $ref: '#/components/schemas/personNameType'
+        department:
+          description: Department to which the owner belongs to.
+          $ref: '#/components/schemas/codeDescriptionType'
+        email:
+          description: Email information of the owner.
+          $ref: '#/components/schemas/emailInfoType'
+        phone:
+          description: Information on the telephone number of the owner.
+          $ref: '#/components/schemas/telephoneInfoType'
+        relationship:
+          description: Relationship of the owner within the profile or block.
+          $ref: '#/components/schemas/codeDescriptionType'
+        primary:
+          description: When true, this is a primary owner.
+          type: boolean
+    errorInstance:
       title: Error Instance Details
       description: Complex type that contains error instance details for a REST call.
       type: object
@@ -3364,9 +3171,202 @@ components:
         o:errorPath:
           type: string
           description: Path to the problem at the resource or property level.
-      required:
-      - type
-      - title
+    externalStatusType:
+      type: string
+      description: Success return when there is no error and operation is successful.
+      enum:
+      - NotEnoughCriteria
+      - IgnoredUnsupportedCriteria
+      - ExternalError
+      - CommunicationError
+      - Success
+    dateUDFsType:
+      type: array
+      description: Used to hold collection of user defined fields of Date Type.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/dateUDFType'
+    downgradeType:
+      type: string
+      description: Do not downgrade membership when the next downgrade process runs. When the downgrade process runs, the membership will be automatically set to Grace.
+      enum:
+      - Grace
+      - Never
+      - Period
+    validatedAddress:
+      type: object
+      description: Response object for fetching full address based on ID from external system.
+      properties:
+        addressValidationInfo:
+          description: Type contains Address information.
+          $ref: '#/components/schemas/addressType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    warningType:
+      type: object
+      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
+          type: string
+          maxLength: 2000
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+          type: string
+          minLength: 0
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+          maxLength: 2000
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+          maxLength: 2000
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+          maxLength: 2000
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+          maxLength: 2000
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        rph:
+          description: Reference Place Holder used as an index for this warning.
+          type: string
+          minLength: 1
+          maxLength: 8
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    commentType:
+      type: object
+      description: An indication of a new paragraph for a sub-section of a formatted text message.
+      properties:
+        text:
+          description: Formatted text content.
+          $ref: '#/components/schemas/formattedTextTextType'
+        commentTitle:
+          description: Specifies Comment's Title.
+          type: string
+          minLength: 0
+          maxLength: 4000
+        notificationLocation:
+          description: Notification Location associated with the Note.
+          type: string
+          minLength: 0
+          maxLength: 20
+        type:
+          description: Specifies type of the comment.
+          type: string
+          minLength: 0
+          maxLength: 20
+        typeDescription:
+          description: Comment type Description.
+          type: string
+          minLength: 0
+          maxLength: 200
+        internal:
+          description: When true, the comment may not be shown to the consumer. When false, the comment may be shown to the consumer.
+          type: boolean
+        confidential:
+          description: When true, the comment may be confidential.
+          type: boolean
+        overrideInternal:
+          description: When true, the note internal could be modified.
+          type: boolean
+        hotelId:
+          description: If specified comment belongs to the Hotel, otherwise it is a global comment.
+          type: string
+          minLength: 0
+          maxLength: 20
+        createDateTime:
+          description: Time stamp of the creation.
+          type: string
+          format: date-time
+        creatorId:
+          description: ID of creator. The creator could be a software system identifier or an identifier of an employee resposible for the creation.
+          type: string
+          minLength: 0
+          maxLength: 200
+        lastModifyDateTime:
+          description: Time stamp of last modification.
+          type: string
+          format: date-time
+        lastModifierId:
+          description: Identifies the last software system or person to modify a record.
+          type: string
+          minLength: 0
+          maxLength: 200
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    validatePhone:
+      type: object
+      description: Request object for validating phone number from external system.
+      properties:
+        phone:
+          description: Defines the phone number.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        timeoutSeconds:
+          description: Maximum time you are prepared to wait for a response.
+          type: integer
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    validatePhoneStatus:
+      type: object
+      description: Response Body.
+      properties:
+        isValid:
+          description: Indicator to define if the Phone Number is valid.
+          type: boolean
+        reason:
+          description: Reason if validation of Phone Number is failed on source system.
+          type: string
+          minLength: 0
+          maxLength: 200
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    validateEmail:
+      type: object
+      description: Request object for validating email Id from external system.
+      properties:
+        emailAddress:
+          description: Defines the e-mail address.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        timeoutSeconds:
+          description: Maximum time you are prepared to wait for a response.
+          type: integer
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
     exceptionDetailType_2:
       title: Error Detail
       description: Complex type that contains error details for a REST call.
@@ -3403,46 +3403,46 @@ components:
       required:
       - type
       - title
-    validatePhoneStatus:
+    errorInstance_2:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
       type: object
-      description: Response Body.
       properties:
-        isValid:
-          description: Indicator to define if the Phone Number is valid.
-          type: boolean
-        reason:
-          description: Reason if validation of Phone Number is failed on source system.
+        type:
           type: string
-          minLength: 0
-          maxLength: 200
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    validatePhone:
-      type: object
-      description: Request object for validating phone number from external system.
-      properties:
-        phone:
-          description: Defines the phone number.
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
           type: string
-          minLength: 0
-          maxLength: 2000
-        timeoutSeconds:
-          description: Maximum time you are prepared to wait for a response.
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
           type: integer
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    status:
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
+    operaVersion:
       type: object
-      description: Response Body.
+      description: Response for Ping operation.
       properties:
-        warnings:
-          $ref: '#/components/schemas/warningsType'
+        operaVersion:
+          description: Opera version number.
+          $ref: '#/components/schemas/operaVersionNumberType'
         links:
           $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
     validateEmailStatus:
       type: object
       description: Response Body.
@@ -3459,55 +3459,60 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    validateEmail:
-      type: object
-      description: Request object for validating email Id from external system.
-      properties:
-        emailAddress:
-          description: Defines the e-mail address.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        timeoutSeconds:
-          description: Maximum time you are prepared to wait for a response.
-          type: integer
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    operaVersion:
-      type: object
-      description: Response for Ping operation.
-      properties:
-        operaVersion:
-          description: Opera version number.
-          $ref: '#/components/schemas/operaVersionNumberType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
     operaVersionNumberType:
       type: string
       description: Current Opera Version Number
       minLength: 0
       maxLength: 40
+    status:
+      type: object
+      description: Response Body.
+      properties:
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+  responses:
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '406':
+      description: Not acceptable.
+    '414':
+      description: Request URI Too Large
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '502':
+      description: Bad Gateway
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '413':
+      description: Request Entity Too Large
+    '401':
+      description: Unauthorized
+    '403':
+      description: Forbidden
+    '405':
+      description: Method not allowed
+    '503':
+      description: Service Unavailable
   parameters:
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
-      in: header
-      required: true
-      schema:
-        type: string
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
-      in: header
-      schema:
-        type: string
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
       in: header
       schema:
         type: string
@@ -3525,10 +3530,17 @@ components:
       schema:
         type: string
         pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
       in: header
+      schema:
+        type: string
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
       schema:
         type: string
     x-request-id:
@@ -3538,6 +3550,12 @@ components:
       schema:
         type: string
         pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
     x-hotelid:
       name: x-hotelid
       description: Mandatory parameter to identify the hotel code where the end user is logged in

@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: OPERA Cloud Price Availability Rate Availability External API
-  description: APIs to cater for Price and Rate Availability functionality in OPERA Cloud. <br /><br />Availability enables you to manage your room inventory by providing a detailed view of all available and sold rooms at a property. Some of the tasks you can perform include defining conditions for stay restrictions, setting room sell limits, and searching for and viewing room availability.<br /><br /> Compatible with OPERA Cloud release 26.2.0.0.<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>
+  title: OPERA Cloud Price Availability Rate Availability External…
+  description: APIs to cater for Price and Rate Availability functionality in OPERA Cloud.
   version: 26.2.0.0
   termsOfService: https://www.oracle.com/legal/terms.html
   contact:
@@ -17,7 +17,9 @@ paths:
   /externalControlSegment:
     post:
       summary: External Control Segment Lookup
-      description: Use this API To LookUp Control Segment In An External System:<p><strong>OperationId:</strong>retriveExternalControlSegment</p>
+      description: 'Use this API To LookUp Control Segment In An External System:
+
+        OperationId:retriveExternalControlSegment'
       operationId: retriveExternalControlSegment
       parameters:
       - $ref: '#/components/parameters/authKey'
@@ -82,8 +84,10 @@ paths:
         required: true
   /hotels/{hotelId}/yieldMarketType:
     get:
-      summary: Yield Market Type LookUp.
-      description: Use this API To LookUp Yield Market Type In An External System:<p><strong>OperationId:</strong>getExternalYieldMarketType</p>
+      summary: Yield Market Type LookUp
+      description: 'Use this API To LookUp Yield Market Type In An External System:
+
+        OperationId:getExternalYieldMarketType'
       operationId: getExternalYieldMarketType
       parameters:
       - name: membershipId
@@ -153,7 +157,162 @@ paths:
       tags:
       - AvailabilityExternal
 components:
+  parameters:
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
+      schema:
+        type: string
+    x-externalsystem:
+      name: x-externalsystem
+      description: External system code.
+      in: header
+      x-example: EXTERNALSYSTEMCODE
+      schema:
+        type: string
+        maxLength: 40
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
+      schema:
+        type: string
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
+      schema:
+        type: string
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+  responses:
+    '503':
+      description: Service Unavailable
+    '403':
+      description: Forbidden
+    '502':
+      description: Bad Gateway
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '406':
+      description: Not acceptable.
+    '413':
+      description: Request Entity Too Large
+    '401':
+      description: Unauthorized
+    '414':
+      description: Request URI Too Large
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '405':
+      description: Method not allowed
   schemas:
+    externalControlSegmentCriteria:
+      type: object
+      description: The request element containing criteria to retrieve control segment code.
+      properties:
+        externalControlSegmentCriteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/externalControlSegmentCriteriaType'
+          minItems: 1
+          maxItems: 80
+          description: External control segment criteria
+    yieldMarketInfoType:
+      type: object
+      description: Type provides the Yield Market Type information.
+      properties:
+        membershipId:
+          description: Membership Card Number.
+          type: string
+          minLength: 1
+          maxLength: 2000
+        yieldMarketType:
+          description: Yield Market Type.
+          type: string
+          minLength: 1
+          maxLength: 2000
+        hotelId:
+          description: Hotel Code.
+          type: string
+          minLength: 1
+          maxLength: 2000
+        flexValues:
+          description: Yield Market Type FlexValues.
+          type: array
+          maxItems: 4000
+          items:
+            type: string
+            minLength: 0
+            maxLength: 2000
+    externalControlSegmentDetails:
+      type: object
+      description: Response object Of Control Segment Look Up.
+      properties:
+        externalControlSegments:
+          description: Type contains Control Segment information.
+          type: array
+          items:
+            $ref: '#/components/schemas/externalControlSegmentType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    yieldMarketTypeDetails:
+      type: object
+      description: Response object Of Yield Market Type LookUp.
+      properties:
+        yieldMarketTypeInfo:
+          description: Type contains Yield Market Type information.
+          $ref: '#/components/schemas/yieldMarketInfoType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
     externalControlSegmentCriteriaType:
       type: object
       description: The request element containing criteria to retrieve control segment code.
@@ -168,36 +327,6 @@ components:
           type: string
           minLength: 1
           maxLength: 40
-    externalControlSegmentType:
-      type: object
-      description: Type provides the Control Segment information.
-      properties:
-        membershipId:
-          description: Membership Card Number.
-          type: string
-          minLength: 1
-          maxLength: 2000
-        controlSegment:
-          description: Control Segment.
-          type: string
-          minLength: 1
-          maxLength: 2000
-        hotelId:
-          description: Hotel Code.
-          type: string
-          minLength: 1
-          maxLength: 2000
-    yieldMarketTypeDetails:
-      type: object
-      description: Response object Of Yield Market Type LookUp.
-      properties:
-        yieldMarketTypeInfo:
-          description: Type contains Yield Market Type information.
-          $ref: '#/components/schemas/yieldMarketInfoType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
     instanceLink:
       type: object
       description: Metadata describing link description objects that MAY appear in the JSON instance representation.
@@ -232,6 +361,42 @@ components:
         title:
           description: Exact copy of the "summary" field on the linked operation.
           type: string
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
     errorInstance:
       title: Error Instance Details
       description: Complex type that contains error instance details for a REST call.
@@ -307,53 +472,23 @@ components:
           type: string
           minLength: 1
           maxLength: 8
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    externalControlSegmentType:
       type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
-      required:
-      - type
-      - title
-    yieldMarketInfoType:
-      type: object
-      description: Type provides the Yield Market Type information.
+      description: Type provides the Control Segment information.
       properties:
         membershipId:
           description: Membership Card Number.
           type: string
           minLength: 1
           maxLength: 2000
-        yieldMarketType:
-          description: Yield Market Type.
+        controlSegment:
+          description: Control Segment.
           type: string
           minLength: 1
           maxLength: 2000
@@ -362,141 +497,10 @@ components:
           type: string
           minLength: 1
           maxLength: 2000
-        flexValues:
-          description: Yield Market Type FlexValues.
-          type: array
-          maxItems: 4000
-          items:
-            type: string
-            minLength: 0
-            maxLength: 2000
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    externalControlSegmentCriteria:
-      type: object
-      description: The request element containing criteria to retrieve control segment code.
-      properties:
-        externalControlSegmentCriteria:
-          type: array
-          items:
-            $ref: '#/components/schemas/externalControlSegmentCriteriaType'
-          minItems: 1
-          maxItems: 80
-          description: External control segment criteria
     links:
       type: array
       items:
         $ref: '#/components/schemas/instanceLink'
-    externalControlSegmentDetails:
-      type: object
-      description: Response object Of Control Segment Look Up.
-      properties:
-        externalControlSegments:
-          description: Type contains Control Segment information.
-          type: array
-          items:
-            $ref: '#/components/schemas/externalControlSegmentType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-  responses:
-    '406':
-      description: Not acceptable.
-    '414':
-      description: Request URI Too Large
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '403':
-      description: Forbidden
-    '413':
-      description: Request Entity Too Large
-    '415':
-      description: Unsupported Media Type
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '502':
-      description: Bad Gateway
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '503':
-      description: Service Unavailable
-    '401':
-      description: Unauthorized
-    '405':
-      description: Method not allowed
-  parameters:
-    x-hotelid:
-      name: x-hotelid
-      description: Mandatory parameter to identify the hotel code where the end user is logged in
-      in: header
-      required: true
-      schema:
-        type: string
-    x-app-key:
-      name: x-app-key
-      description: Client or Partner's Application Key
-      in: header
-      required: true
-      schema:
-        type: string
-        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
-      in: header
-      required: true
-      schema:
-        type: string
-    x-externalsystem:
-      name: x-externalsystem
-      description: External system code.
-      in: header
-      x-example: EXTERNALSYSTEMCODE
-      schema:
-        type: string
-        maxLength: 40
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
-      in: header
-      schema:
-        type: string
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
-      in: header
-      schema:
-        type: string
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
-      in: header
-      schema:
-        type: string
-    x-request-id:
-      name: x-request-id
-      description: Request Id of an incoming request
-      in: header
-      schema:
-        type: string
-        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

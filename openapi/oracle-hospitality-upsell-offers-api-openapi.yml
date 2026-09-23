@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: An upsell service that can be consumed to display upgrade offers to a hotel guest prior to arrival. Pre-arrival upsells are becoming increasingly important due to the adoption of mobile and kiosk check-in which reduces the opportunity for front-desk upselling. Upgrade offers are based on PRiME(R) AI/ML decision intelligence and OPERA real-time inventory. The service allows instant fulfillment of the upgrade offer.<br /><br /> Compatible with OPERA Cloud release 26.2.0.0.<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>
+  description: An upsell service that can be consumed to display upgrade offers to a hotel guest prior to arrival.
   version: 26.2.0.0
   title: Nor1 Integrated Upsell Upsell Offers API
   termsOfService: https://www.oracle.com/legal/terms.html
@@ -19,7 +19,8 @@ paths:
       summary: Get Upsell Offers for a reservation
       description: 'This API will allow a user to retrieve a retrieve a list of available upsell offers based on the search criteria specified in the request body, inventory availability and current reservation details.
 
-        <p><strong>OperationId:</strong> getUpsellOffers</p>'
+
+        OperationId: getUpsellOffers'
       operationId: getUpsellOffers
       tags:
       - Upsell Offers
@@ -85,43 +86,75 @@ paths:
         '503':
           description: Service Unavailable
 components:
-  parameters:
-    authorization:
-      name: Authorization
-      in: header
-      x-example: Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-      schema:
-        type: string
-    Accept-Language:
-      name: Accept-Language
-      in: header
-      description: Language code
-      schema:
-        type: string
-    accept:
-      name: Accept
-      in: header
-      required: true
-      x-example: application/json; charset=UTF-8
-      schema:
-        type: string
-        enum:
-        - application/json; charset=UTF-8
-        - application/json
-    x-app-key:
-      name: x-app-key
-      in: header
-      x-example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-      schema:
-        type: string
-    providerId:
-      name: providerId
-      in: header
-      x-example: SAN
-      description: Partner's Unique Nor1 Provider ID
-      schema:
-        type: string
   schemas:
+    UpsellOffers:
+      type: object
+      description: Success and Failure Summary Data
+      properties:
+        Items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Items'
+        totalResults:
+          type: number
+          example: 1
+        offset:
+          type: number
+          example: 0
+        count:
+          type: number
+          example: 1
+        hasMore:
+          type: boolean
+          example: false
+        limit:
+          type: number
+          example: 0
+    Image:
+      type: object
+      properties:
+        big:
+          type: string
+          example: https://example.com/img_url1.jpg
+        small:
+          type: string
+          example: https://example.com/img_url2.jpg
+    errorInstanceNF:
+      type: object
+      description: Complex type that contains not found error instance details for a REST call
+      properties:
+        type:
+          type: string
+          description: Holds error type
+          example: https://www.example.org/protocols/..
+        title:
+          type: string
+          description: Holds error details in short
+          example: Not Found
+        status:
+          type: number
+          example: 404
+        detail:
+          type: string
+          description: Holds error details
+          example: Unable to find HotelId or ReservationId
+        errorCode:
+          type: string
+          description: Holds specific error code
+          example: null
+        errorDetails:
+          type: array
+          description: Holds List of errors
+          items:
+            $ref: '#/components/schemas/errorDetail'
+    Items:
+      type: object
+      description: Success and Failure Summary Data
+      properties:
+        upsellOffers:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpsellOffer'
     errorInstanceISE:
       type: object
       description: Complex type that contains internal server error instance details for a REST call
@@ -150,6 +183,37 @@ components:
           description: Holds List of errors
           items:
             $ref: '#/components/schemas/errorDetail'
+    errorDetail:
+      type: object
+      description: Complex type that contains error detail
+      properties:
+        title:
+          type: string
+          description: Holds error details in short
+        detail:
+          type: string
+          description: Holds error details
+        errorCode:
+          type: string
+          description: Holds specific error code
+    UpsellOffer:
+      type: object
+      properties:
+        offerType:
+          type: string
+          example: room_upgrade
+          description: "Describes type of an offer.\n\nPossible values: \n  - room_upgrade\n  - early_checkin\n  - late_checkout\n  - amenity\n  - spa_services\n  - extra_room\n  - extra_day\n  - food_beverage\n  - room_feature\n  - parking"
+        selectionType:
+          type: string
+          description: ''
+          example: zero_to_one
+          enum:
+          - zeroToOne
+          - zeroToMany
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offers'
     Offers:
       type: object
       properties:
@@ -191,102 +255,39 @@ components:
           items:
             type: string
             example: SGL
-    Image:
-      type: object
-      properties:
-        big:
-          type: string
-          example: https://example.com/img_url1.jpg
-        small:
-          type: string
-          example: https://example.com/img_url2.jpg
-    UpsellOffers:
-      type: object
-      description: Success and Failure Summary Data
-      properties:
-        Items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Items'
-        totalResults:
-          type: number
-          example: 1
-        offset:
-          type: number
-          example: 0
-        count:
-          type: number
-          example: 1
-        hasMore:
-          type: boolean
-          example: false
-        limit:
-          type: number
-          example: 0
-    Items:
-      type: object
-      description: Success and Failure Summary Data
-      properties:
-        upsellOffers:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpsellOffer'
-    errorInstanceNF:
-      type: object
-      description: Complex type that contains not found error instance details for a REST call
-      properties:
-        type:
-          type: string
-          description: Holds error type
-          example: https://www.example.org/protocols/..
-        title:
-          type: string
-          description: Holds error details in short
-          example: Not Found
-        status:
-          type: number
-          example: 404
-        detail:
-          type: string
-          description: Holds error details
-          example: Unable to find HotelId or ReservationId
-        errorCode:
-          type: string
-          description: Holds specific error code
-          example: null
-        errorDetails:
-          type: array
-          description: Holds List of errors
-          items:
-            $ref: '#/components/schemas/errorDetail'
-    UpsellOffer:
-      type: object
-      properties:
-        offerType:
-          type: string
-          example: room_upgrade
-          description: "Describes type of an offer.\n\nPossible values: \n  - room_upgrade\n  - early_checkin\n  - late_checkout\n  - amenity\n  - spa_services\n  - extra_room\n  - extra_day\n  - food_beverage\n  - room_feature\n  - parking"
-        selectionType:
-          type: string
-          description: ''
-          example: zero_to_one
-          enum:
-          - zeroToOne
-          - zeroToMany
-        offers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Offers'
-    errorDetail:
-      type: object
-      description: Complex type that contains error detail
-      properties:
-        title:
-          type: string
-          description: Holds error details in short
-        detail:
-          type: string
-          description: Holds error details
-        errorCode:
-          type: string
-          description: Holds specific error code
+  parameters:
+    authorization:
+      name: Authorization
+      in: header
+      x-example: Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      schema:
+        type: string
+    accept:
+      name: Accept
+      in: header
+      required: true
+      x-example: application/json; charset=UTF-8
+      schema:
+        type: string
+        enum:
+        - application/json; charset=UTF-8
+        - application/json
+    x-app-key:
+      name: x-app-key
+      in: header
+      x-example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+      schema:
+        type: string
+    providerId:
+      name: providerId
+      in: header
+      x-example: SAN
+      description: Partner's Unique Nor1 Provider ID
+      schema:
+        type: string
+    Accept-Language:
+      name: Accept-Language
+      in: header
+      description: Language code
+      schema:
+        type: string

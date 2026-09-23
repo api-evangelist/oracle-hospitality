@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
   title: OPERA Cloud Service Data Value Mapping API
-  description: APIs which offer external systems to config and use values different than what are configured in opera<br /><br /> Compatible with OPERA Cloud release 26.2.0.0.<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>
+  description: 'APIs which offer external systems to config and use values different than what are configured in opera
+
+
+    Compatible with OPERA Cloud release 26.2.0.0.
+
+
+    This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.'
   version: 26.2.0.0
   termsOfService: https://www.oracle.com/legal/terms.html
   contact:
@@ -18,7 +24,9 @@ paths:
   /externalSystems/{extSystemCode}/hotels/{externalHotelId}/conversions:
     get:
       summary: Fetch Converted Hotel Code
-      description: This API allows you to get the converted hotel code <p><strong>OperationId:</strong>getOperaHotelCode</p>
+      description: 'This API allows you to get the converted hotel code
+
+        OperationId:getOperaHotelCode'
       operationId: getOperaHotelCode
       parameters:
       - name: externalHotelId
@@ -96,7 +104,9 @@ paths:
   /externalSystems/{extSystemCode}/hotels/{operaHotelId}/convertedValues:
     get:
       summary: Fetch Converted Values
-      description: This API allows you to get the converted values <p><strong>OperationId:</strong>getConvertedValues</p>
+      description: 'This API allows you to get the converted values
+
+        OperationId:getConvertedValues'
       operationId: getConvertedValues
       parameters:
       - name: operaHotelId
@@ -325,7 +335,9 @@ paths:
   /externalSystems/{extSystemCode}/hotels/{operaHotelId}/defaultValues:
     get:
       summary: Fetch Default values
-      description: This API allows you to get default values <p><strong>OperationId:</strong>getDefaultValues</p>
+      description: 'This API allows you to get default values
+
+        OperationId:getDefaultValues'
       operationId: getDefaultValues
       parameters:
       - name: operaHotelId
@@ -397,7 +409,9 @@ paths:
   /externalSystems/{externalSystem}/conversionCodes:
     get:
       summary: Fetch Data Value Mapping Conversion Codes
-      description: API to fetch Data Value Mapping Conversion Codes for a given external system. Filters include optional hotelId and group (XML Type).<p><strong>OperationId:</strong>getDvmConversionCodes</p>
+      description: 'API to fetch Data Value Mapping Conversion Codes for a given external system. Filters include optional hotelId and group (XML Type).
+
+        OperationId:getDvmConversionCodes'
       operationId: getDvmConversionCodes
       parameters:
       - name: externalSystem
@@ -495,8 +509,10 @@ paths:
       - DataValueMapping
   /externalSystems/{externalSystem}/conversionCodes/{conversionCode}/dataValueMappings:
     get:
-      summary: Fetch Data Value Mappings for specific conversion code.
-      description: Retrieve mappings for a specific conversion code configured for external system, hotelId and Global mappings.<p><strong>OperationId:</strong>getDataValueMappings</p>
+      summary: Fetch Data Value Mappings for specific conversion code
+      description: 'Retrieve mappings for a specific conversion code configured for external system, hotelId and Global mappings.
+
+        OperationId:getDataValueMappings'
       operationId: getDataValueMappings
       parameters:
       - name: externalSystem
@@ -593,7 +609,9 @@ paths:
       - DataValueMapping
     post:
       summary: Create Conversion Code Mappings
-      description: API to create Data Value Mapping (DVM) Conversion Codes by External System and Conversion Code. <p><strong>OperationId:</strong>postDataValueMappings</p>
+      description: 'API to create Data Value Mapping (DVM) Conversion Codes by External System and Conversion Code.
+
+        OperationId:postDataValueMappings'
       operationId: postDataValueMappings
       parameters:
       - name: externalSystem
@@ -667,7 +685,9 @@ paths:
         required: true
     put:
       summary: Update Conversion Code Mappings
-      description: API to update existing Data Value Mapping (DVM) Conversion Code records for a given External System and Conversion Code. <p><strong>OperationId:</strong>putDataValueMappings</p>
+      description: 'API to update existing Data Value Mapping (DVM) Conversion Code records for a given External System and Conversion Code.
+
+        OperationId:putDataValueMappings'
       operationId: putDataValueMappings
       parameters:
       - name: externalSystem
@@ -743,7 +763,9 @@ paths:
         required: true
     delete:
       summary: Remove Conversion Codes Mappings
-      description: API to Delete Interface Mapping Conversion Codes by providing one or more Mapping IDs as query parameter. <p><strong>OperationId:</strong>deleteDataValueMappings</p>
+      description: 'API to Delete Interface Mapping Conversion Codes by providing one or more Mapping IDs as query parameter.
+
+        OperationId:deleteDataValueMappings'
       operationId: deleteDataValueMappings
       parameters:
       - name: externalSystem
@@ -818,7 +840,9 @@ paths:
   /services/datavaluemapping/defaultValueCache:
     delete:
       summary: Clear Default Value Cache
-      description: This API allows you to delete the default values cache <p><strong>OperationId:</strong>clearDefaultValueCache</p>
+      description: 'This API allows you to delete the default values cache
+
+        OperationId:clearDefaultValueCache'
       operationId: clearDefaultValueCache
       parameters:
       - $ref: '#/components/parameters/authKey'
@@ -876,7 +900,9 @@ paths:
   /services/datavaluemapping/status:
     get:
       summary: ping Data Value Mapping Service
-      description: ping Data Value Mapping Service <p><strong>OperationId:</strong>pingDataValueMappingService</p>
+      description: 'ping Data Value Mapping Service
+
+        OperationId:pingDataValueMappingService'
       operationId: pingDataValueMappingService
       parameters:
       - $ref: '#/components/parameters/authKey'
@@ -931,79 +957,20 @@ paths:
       - DataValueMapping
 components:
   schemas:
-    conversionHotelInfoType:
+    convertedHotelCode:
       type: object
-      description: Generic information of the resort , external resort and external system.
       properties:
-        operaHotelCode:
-          description: Opera Resort for which conversion is needed.
+        externalSystem:
+          description: ExternalSystem for which the conversion is needed.
           type: string
-          minLength: 0
-          maxLength: 20
-        externalHotelCode:
-          description: External value of resort for which conversion is needed.
-          type: string
-          minLength: 0
-          maxLength: 20
-    createdDvmConversionCodeMappings:
-      type: object
-      properties:
-        conversionCodesCreated:
-          type: array
-          description: List of successfully created Conversion Codes with the request Id and OPERA Id.
-          items:
-            $ref: '#/components/schemas/ConversionCodeCreatedType'
-          maxItems: 4000
-        conversionCodesFailed:
-          type: array
-          description: List of Conversion Codes failed to create in OPERA System.
-          items:
-            $ref: '#/components/schemas/ConversionCodeFailedType'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-        links:
-          $ref: '#/components/schemas/links'
-    dvmConversionCodeMappingsToBeCreated:
-      type: object
-      properties:
-        conversionCodeMappings:
-          type: array
-          description: Conversion Code Mapping details that should be created.
-          items:
-            $ref: '#/components/schemas/dvmConversionCodeMappingType'
-          maxItems: 4000
+          maxLength: 2000
+        hotelInfo:
+          description: Converted hotel information.
+          $ref: '#/components/schemas/conversionHotelInfoType'
         links:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    convertedValueType:
-      type: object
-      description: Details of the converted value.
-      properties:
-        operaValue:
-          description: Opera Value
-          type: string
-        externalValue:
-          description: Value used by the external vendors.
-          type: string
-        conversionCode:
-          description: Enumeration of conversion codes.
-          $ref: '#/components/schemas/dataValueMappingCodeType'
-        masterValue:
-          description: Opera Master Value
-          type: string
-        pmsDefaultConversion:
-          description: The flag will be true for all the conversions that are pms defaults. In case there are more than one conversions available in opera.
-          type: boolean
-        crsDefaultConversion:
-          description: The flag will be true for all the conversions that are crs defaults. In case there are more than one conversions available in opera.
-          type: boolean
-    convertedValuesType:
-      type: array
-      description: A collection of converted values.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/convertedValueType'
     dataValueMappingCodeType:
       type: string
       description: Enumeration of the different conversion codes needed for data value mapping.
@@ -1127,6 +1094,79 @@ components:
       - VipLevel
       - WaitlistCodes
       - WebuserSecurityQuestion
+    convertedValueType:
+      type: object
+      description: Details of the converted value.
+      properties:
+        operaValue:
+          description: Opera Value
+          type: string
+        externalValue:
+          description: Value used by the external vendors.
+          type: string
+        conversionCode:
+          description: Enumeration of conversion codes.
+          $ref: '#/components/schemas/dataValueMappingCodeType'
+        masterValue:
+          description: Opera Master Value
+          type: string
+        pmsDefaultConversion:
+          description: The flag will be true for all the conversions that are pms defaults. In case there are more than one conversions available in opera.
+          type: boolean
+        crsDefaultConversion:
+          description: The flag will be true for all the conversions that are crs defaults. In case there are more than one conversions available in opera.
+          type: boolean
+    convertedValues:
+      type: object
+      properties:
+        externalSystem:
+          description: ExternalSystem for which the conversion is needed.
+          type: string
+          maxLength: 2000
+        hotelInfo:
+          description: Converted hotel information.
+          $ref: '#/components/schemas/conversionHotelInfoType'
+        convertedValues:
+          description: List all the converted values fetched for an interface, resort.
+          $ref: '#/components/schemas/convertedValuesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    dvmConversionCodeMappingType:
+      type: object
+      description: A type containing DVM Conversion Code Mapping information.
+      properties:
+        id:
+          description: Mapping identifier for tracking.
+          type: string
+        operaValue:
+          description: Internal OPERA value to be mapped.
+          type: string
+        externalValue:
+          description: External system value to be mapped.
+          type: string
+        description:
+          description: Description for the external value.
+          type: string
+        operaToExternalDefault:
+          description: Flag indicating if the mapping is default from OPERA to External.
+          type: boolean
+        externalToOperaDefault:
+          description: Flag indicating if the mapping is default from External to OPERA.
+          type: boolean
+        isGlobal:
+          description: Flag to indicate whether the mapping is global.
+          type: boolean
+        hotelId:
+          description: Hotel Id for which this mapping applies.
+          type: string
+        overrideExternalDefault:
+          description: A flag to indicate whether the current External Value should be considered as default, when there is already a default External Value mapped for the same OPERA Value.
+          type: boolean
+        overrideOperaDefault:
+          description: A flag to indicate whether the current OPERA Value should be considered as default, when there is already a default OPERA Value mapped for the same External Value.
+          type: boolean
     ConversionCodeCreatedType:
       type: object
       properties:
@@ -1136,6 +1176,286 @@ components:
         operaId:
           type: integer
           description: Conversion Code Id in OPERA System.
+    convertedValuesType:
+      type: array
+      description: A collection of converted values.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/convertedValueType'
+    ConversionCodeFailedType:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the failed Conversion Code Mapping from the request
+        reason:
+          type: string
+          description: Reason for the Conversion Code Mapping failure.
+    defaultValuesType:
+      type: array
+      description: A collection of default values.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/defaultValueType'
+    updatedDvmConversionCodeMappings:
+      type: object
+      properties:
+        conversionCodesUpdated:
+          type: array
+          description: List of successfully updated Conversion Codes Mapping Id's.
+          items:
+            type: integer
+            description: List of updated ID's for Conversion Code Mapping
+          maxItems: 4000
+        conversionCodeFailed:
+          type: array
+          description: List of Conversion Code Mappings that failed to update with reasons.
+          items:
+            $ref: '#/components/schemas/ConversionCodeFailedType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    defaultValues:
+      type: object
+      properties:
+        defaultValues:
+          description: List all the Opera and External default values fetched for an interface, resort.
+          $ref: '#/components/schemas/defaultValuesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    deleteDvmMappingResponse:
+      type: object
+      description: Response for delete operation on DVM mappings.
+      properties:
+        conversionCodesDeleted:
+          type: array
+          description: List of successfully deleted mapping Id's
+          items:
+            type: integer
+            example: 123456
+        conversionCodesDeleteFailed:
+          type: array
+          description: List of failed deletions with reasons
+          items:
+            $ref: '#/components/schemas/ConversionCodeFailedType'
+    dvmMappingType:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique ID of the conversion code in  OPERA.
+        operaValue:
+          type: string
+          description: Indicates OPERA value.
+        externalValue:
+          type: string
+          description: External system's mapped value.
+        description:
+          type: string
+          description: Description of the external value mapping.
+        hotelId:
+          type: string
+          description: Hotel code if the mappings are property-specific.
+        isGlobal:
+          type: boolean
+          description: Flag to indicate whether the mapping is global.
+        operaToExternalDefault:
+          type: boolean
+          description: Flag indicating this mapping is default from OPERA to external system.
+        externalToOperaDefault:
+          type: boolean
+          description: Flag indicating this mapping is default from external system to OPERA.
+    conversionHotelInfoType:
+      type: object
+      description: Generic information of the resort , external resort and external system.
+      properties:
+        operaHotelCode:
+          description: Opera Resort for which conversion is needed.
+          type: string
+          minLength: 0
+          maxLength: 20
+        externalHotelCode:
+          description: External value of resort for which conversion is needed.
+          type: string
+          minLength: 0
+          maxLength: 20
+    fetchDvmMappings:
+      type: object
+      properties:
+        conversionCodeMappings:
+          type: array
+          description: List of value mappings.
+          items:
+            $ref: '#/components/schemas/dvmMappingType'
+        links:
+          $ref: '#/components/schemas/links'
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
+    dvmConversionCodeType:
+      type: object
+      properties:
+        conversionCode:
+          type: string
+          description: Type of conversion code.
+          minLength: 1
+          maxLength: 80
+        label:
+          type: string
+          description: Label of the conversion code.
+          minLength: 0
+          maxLength: 200
+        description:
+          type: string
+          description: Description of the conversion code.
+          minLength: 0
+          maxLength: 2000
+        group:
+          type: string
+          description: Group or XML Type the conversion code belongs to.
+          minLength: 0
+          maxLength: 2000
+        hotelId:
+          type: string
+          description: Associated hotel Id if applicable.
+          minLength: 0
+          maxLength: 20
+    operaVersion:
+      type: object
+      description: Response for Ping operation.
+      properties:
+        operaVersion:
+          description: Current Opera Version Number
+          type: string
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    dvmConversionCodeMappingsToBeCreated:
+      type: object
+      properties:
+        conversionCodeMappings:
+          type: array
+          description: Conversion Code Mapping details that should be created.
+          items:
+            $ref: '#/components/schemas/dvmConversionCodeMappingType'
+          maxItems: 4000
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    fetchDvmConversionCodes:
+      type: object
+      properties:
+        conversionCodes:
+          type: array
+          description: List of conversion codes for the given filters.
+          items:
+            $ref: '#/components/schemas/dvmConversionCodeType'
+          maxItems: 4000
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
     defaultValueCodeType:
       type: string
       description: Enumeration of the different default codes.
@@ -1205,113 +1525,6 @@ components:
       - WaitlistCodes
       - ProfileNoteType
       - BlockNoteType
-    convertedValues:
-      type: object
-      properties:
-        externalSystem:
-          description: ExternalSystem for which the conversion is needed.
-          type: string
-          maxLength: 2000
-        hotelInfo:
-          description: Converted hotel information.
-          $ref: '#/components/schemas/conversionHotelInfoType'
-        convertedValues:
-          description: List all the converted values fetched for an interface, resort.
-          $ref: '#/components/schemas/convertedValuesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    instanceLink:
-      type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
-      properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
-          type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
-        title:
-          description: Exact copy of the "summary" field on the linked operation.
-          type: string
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-      required:
-      - type
-      - title
-    defaultValueType:
-      type: object
-      description: Details of the default value fetched for an interface and resort.
-      properties:
-        operaDefault:
-          description: Opera Value
-          type: string
-        externalDefault:
-          description: Value used by the external vendors.
-          type: string
-        defaultValueType:
-          description: This element states the type of Default value. For example if the operaDefault and external default is Market code's default then the value will be MarketCode.
-          $ref: '#/components/schemas/defaultValueCodeType'
-    convertedHotelCode:
-      type: object
-      properties:
-        externalSystem:
-          description: ExternalSystem for which the conversion is needed.
-          type: string
-          maxLength: 2000
-        hotelInfo:
-          description: Converted hotel information.
-          $ref: '#/components/schemas/conversionHotelInfoType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
     warningType:
       type: object
       description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
@@ -1358,95 +1571,12 @@ components:
           type: string
           minLength: 1
           maxLength: 8
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
-      required:
-      - type
-      - title
-    defaultValues:
-      type: object
-      properties:
-        defaultValues:
-          description: List all the Opera and External default values fetched for an interface, resort.
-          $ref: '#/components/schemas/defaultValuesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    dvmConversionCodeMappingType:
-      type: object
-      description: A type containing DVM Conversion Code Mapping information.
-      properties:
-        id:
-          description: Mapping identifier for tracking.
-          type: string
-        operaValue:
-          description: Internal OPERA value to be mapped.
-          type: string
-        externalValue:
-          description: External system value to be mapped.
-          type: string
-        description:
-          description: Description for the external value.
-          type: string
-        operaToExternalDefault:
-          description: Flag indicating if the mapping is default from OPERA to External.
-          type: boolean
-        externalToOperaDefault:
-          description: Flag indicating if the mapping is default from External to OPERA.
-          type: boolean
-        isGlobal:
-          description: Flag to indicate whether the mapping is global.
-          type: boolean
-        hotelId:
-          description: Hotel Id for which this mapping applies.
-          type: string
-        overrideExternalDefault:
-          description: A flag to indicate whether the current External Value should be considered as default, when there is already a default External Value mapped for the same OPERA Value.
-          type: boolean
-        overrideOperaDefault:
-          description: A flag to indicate whether the current OPERA Value should be considered as default, when there is already a default OPERA Value mapped for the same External Value.
-          type: boolean
-    ConversionCodeFailedType:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Id of the failed Conversion Code Mapping from the request
-        reason:
-          type: string
-          description: Reason for the Conversion Code Mapping failure.
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
     status:
       type: object
       description: Response Body.
@@ -1455,130 +1585,37 @@ components:
           $ref: '#/components/schemas/warningsType'
         links:
           $ref: '#/components/schemas/links'
-    fetchDvmMappings:
+    defaultValueType:
+      type: object
+      description: Details of the default value fetched for an interface and resort.
+      properties:
+        operaDefault:
+          description: Opera Value
+          type: string
+        externalDefault:
+          description: Value used by the external vendors.
+          type: string
+        defaultValueType:
+          description: This element states the type of Default value. For example if the operaDefault and external default is Market code's default then the value will be MarketCode.
+          $ref: '#/components/schemas/defaultValueCodeType'
+    createdDvmConversionCodeMappings:
       type: object
       properties:
-        conversionCodeMappings:
+        conversionCodesCreated:
           type: array
-          description: List of value mappings.
+          description: List of successfully created Conversion Codes with the request Id and OPERA Id.
           items:
-            $ref: '#/components/schemas/dvmMappingType'
-        links:
-          $ref: '#/components/schemas/links'
-    defaultValuesType:
-      type: array
-      description: A collection of default values.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/defaultValueType'
-    updatedDvmConversionCodeMappings:
-      type: object
-      properties:
-        conversionCodesUpdated:
-          type: array
-          description: List of successfully updated Conversion Codes Mapping Id's.
-          items:
-            type: integer
-            description: List of updated ID's for Conversion Code Mapping
+            $ref: '#/components/schemas/ConversionCodeCreatedType'
           maxItems: 4000
-        conversionCodeFailed:
+        conversionCodesFailed:
           type: array
-          description: List of Conversion Code Mappings that failed to update with reasons.
+          description: List of Conversion Codes failed to create in OPERA System.
           items:
             $ref: '#/components/schemas/ConversionCodeFailedType'
-        links:
-          $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    dvmMappingType:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique ID of the conversion code in  OPERA.
-        operaValue:
-          type: string
-          description: Indicates OPERA value.
-        externalValue:
-          type: string
-          description: External system's mapped value.
-        description:
-          type: string
-          description: Description of the external value mapping.
-        hotelId:
-          type: string
-          description: Hotel code if the mappings are property-specific.
-        isGlobal:
-          type: boolean
-          description: Flag to indicate whether the mapping is global.
-        operaToExternalDefault:
-          type: boolean
-          description: Flag indicating this mapping is default from OPERA to external system.
-        externalToOperaDefault:
-          type: boolean
-          description: Flag indicating this mapping is default from external system to OPERA.
-    fetchDvmConversionCodes:
-      type: object
-      properties:
-        conversionCodes:
-          type: array
-          description: List of conversion codes for the given filters.
-          items:
-            $ref: '#/components/schemas/dvmConversionCodeType'
-          maxItems: 4000
         links:
           $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    operaVersion:
-      type: object
-      description: Response for Ping operation.
-      properties:
-        operaVersion:
-          description: Current Opera Version Number
-          type: string
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
-    dvmConversionCodeType:
-      type: object
-      properties:
-        conversionCode:
-          type: string
-          description: Type of conversion code.
-          minLength: 1
-          maxLength: 80
-        label:
-          type: string
-          description: Label of the conversion code.
-          minLength: 0
-          maxLength: 200
-        description:
-          type: string
-          description: Description of the conversion code.
-          minLength: 0
-          maxLength: 2000
-        group:
-          type: string
-          description: Group or XML Type the conversion code belongs to.
-          minLength: 0
-          maxLength: 2000
-        hotelId:
-          type: string
-          description: Associated hotel Id if applicable.
-          minLength: 0
-          maxLength: 20
     dvmConversionCodeMappingsToBeUpdated:
       type: object
       description: Request object for updating DVM Conversion Code Mappings.
@@ -1593,77 +1630,14 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    deleteDvmMappingResponse:
-      type: object
-      description: Response for delete operation on DVM mappings.
-      properties:
-        conversionCodesDeleted:
-          type: array
-          description: List of successfully deleted mapping Id's
-          items:
-            type: integer
-            example: 123456
-        conversionCodesDeleteFailed:
-          type: array
-          description: List of failed deletions with reasons
-          items:
-            $ref: '#/components/schemas/ConversionCodeFailedType'
-  responses:
-    '406':
-      description: Not acceptable.
-    '414':
-      description: Request URI Too Large
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '403':
-      description: Forbidden
-    '413':
-      description: Request Entity Too Large
-    '415':
-      description: Unsupported Media Type
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '502':
-      description: Bad Gateway
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '503':
-      description: Service Unavailable
-    '401':
-      description: Unauthorized
-    '405':
-      description: Method not allowed
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
   parameters:
     x-hotelid:
       name: x-hotelid
       description: Mandatory parameter to identify the hotel code where the end user is logged in
-      in: header
-      required: true
-      schema:
-        type: string
-    x-app-key:
-      name: x-app-key
-      description: Client or Partner's Application Key
-      in: header
-      required: true
-      schema:
-        type: string
-        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
       in: header
       required: true
       schema:
@@ -1676,22 +1650,31 @@ components:
       schema:
         type: string
         maxLength: 40
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
-      in: header
-      schema:
-        type: string
     x-originating-application:
       name: x-originating-application
       description: Customer's Integration Application Id
       in: header
       schema:
         type: string
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
       in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
+      schema:
+        type: string
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
       schema:
         type: string
     x-request-id:
@@ -1701,6 +1684,49 @@ components:
       schema:
         type: string
         pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+  responses:
+    '503':
+      description: Service Unavailable
+    '403':
+      description: Forbidden
+    '502':
+      description: Bad Gateway
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '406':
+      description: Not acceptable.
+    '413':
+      description: Request Entity Too Large
+    '401':
+      description: Unauthorized
+    '414':
+      description: Request URI Too Large
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '405':
+      description: Method not allowed
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

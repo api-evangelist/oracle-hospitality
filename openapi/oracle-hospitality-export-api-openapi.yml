@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
   title: OPERA Cloud Configuration Export API
-  description: APIs catering to the managing export master data configuration. <br /><The exports feature in OPERA Cloud provides the ability to create and export data files, such as back office data, to third-party interfaces and receiving systems.<br /><br /> Compatible with OPERA Cloud release 26.2.0.0.<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>
+  description: 'APIs catering to the managing export master data configuration.
+
+    <The exports feature in OPERA Cloud provides the ability to create and export data files, such as back office data, to third-party interfaces and receiving systems.
+
+
+    Compatible with OPERA Cloud release 26.2.0.0.
+
+
+    This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.'
   version: 26.2.0.0
   termsOfService: https://www.oracle.com/legal/terms.html
   contact:
@@ -17,8 +25,10 @@ tags:
 paths:
   /availableExports:
     get:
-      summary: Operation to fetch exports available.
-      description: Use this API to return available exports based on search criteria such as fetchColumns, fetchDataSetup, fetchDestinationSetup, fetchGenerateConfiguration, limit, exportFileId, idExtension, idContext, type, hotelIds, fileGroup, includeInactive, includeComponents. <p><strong>OperationId:</strong>getExportsAvailable</p>
+      summary: Operation to fetch exports available
+      description: 'Use this API to return available exports based on search criteria such as fetchColumns, fetchDataSetup, fetchDestinationSetup, fetchGenerateConfiguration, limit, exportFileId, idExtension, idContext, type, hotelIds, fileGroup, includeInactive, includeComponents.
+
+        OperationId:getExportsAvailable'
       operationId: getExportsAvailable
       parameters:
       - name: fetchColumns
@@ -169,8 +179,10 @@ paths:
       - Export
   /columnsAndFunctions:
     get:
-      summary: Operation to fetch export columns and functions.
-      description: Use this API to return export columns and functions based on search criteria such as fetchDbColumns, fetchOperaApis, fetchPrePostProcedures, dataSource, exportFileId, category. <p><strong>OperationId:</strong>getExportColumnsAndFunctions</p>
+      summary: Operation to fetch export columns and functions
+      description: 'Use this API to return export columns and functions based on search criteria such as fetchDbColumns, fetchOperaApis, fetchPrePostProcedures, dataSource, exportFileId, category.
+
+        OperationId:getExportColumnsAndFunctions'
       operationId: getExportColumnsAndFunctions
       parameters:
       - name: fetchDbColumns
@@ -262,8 +274,8 @@ paths:
       - Export
   /exportMappingCodes:
     post:
-      summary: Operation to create export mapping codes.
-      description: ' <p><strong>OperationId:</strong>postExportMappingCodes</p>'
+      summary: Operation to create export mapping codes
+      description: OperationId:postExportMappingCodes
       operationId: postExportMappingCodes
       parameters:
       - $ref: '#/components/parameters/authKey'
@@ -327,8 +339,8 @@ paths:
         description: Request to create export mapping code for a given export.
         required: true
     put:
-      summary: Operation to update export mapping codes.
-      description: ' <p><strong>OperationId:</strong>putExportMappingCodes</p>'
+      summary: Operation to update export mapping codes
+      description: OperationId:putExportMappingCodes
       operationId: putExportMappingCodes
       parameters:
       - $ref: '#/components/parameters/authKey'
@@ -393,8 +405,8 @@ paths:
         required: true
   /exportMappingLinkedTypes:
     put:
-      summary: Operation to update export mapping linked types.
-      description: ' <p><strong>OperationId:</strong>putExportMappingLinkedTypes</p>'
+      summary: Operation to update export mapping linked types
+      description: OperationId:putExportMappingLinkedTypes
       operationId: putExportMappingLinkedTypes
       parameters:
       - $ref: '#/components/parameters/authKey'
@@ -459,8 +471,8 @@ paths:
         required: true
   /exportMappings:
     get:
-      summary: Operation to fetch export mappings by chain.
-      description: ' <p><strong>OperationId:</strong>getExportMappingsByChain</p>'
+      summary: Operation to fetch export mappings by chain
+      description: OperationId:getExportMappingsByChain
       operationId: getExportMappingsByChain
       parameters:
       - name: hotelId
@@ -552,8 +564,10 @@ paths:
       - Export
   /exportSchedules:
     post:
-      summary: Operation to create export schedules.
-      description: Use this API to create export schedules. <p><strong>OperationId:</strong>postExportSchedules</p>
+      summary: Operation to create export schedules
+      description: 'Use this API to create export schedules.
+
+        OperationId:postExportSchedules'
       operationId: postExportSchedules
       parameters:
       - $ref: '#/components/parameters/authKey'
@@ -617,8 +631,10 @@ paths:
         description: Request to create export schedules
         required: true
     delete:
-      summary: Operation to remove export schedules.
-      description: Use this API to delete export schedules based on the jobNames. <p><strong>OperationId:</strong>removeExportSchedules</p>
+      summary: Operation to remove export schedules
+      description: 'Use this API to delete export schedules based on the jobNames.
+
+        OperationId:removeExportSchedules'
       operationId: removeExportSchedules
       parameters:
       - name: jobNames
@@ -685,8 +701,8 @@ paths:
       - Export
   /exportSchedules/{exportFileId}:
     put:
-      summary: Operation to change export schedules.
-      description: ' <p><strong>OperationId:</strong>changeExportSchedulesByChain</p>'
+      summary: Operation to change export schedules
+      description: OperationId:changeExportSchedulesByChain
       operationId: changeExportSchedulesByChain
       parameters:
       - name: exportFileId
@@ -759,8 +775,8 @@ paths:
         required: true
   /hotels/{hotelId}/configTypes/{configType}/exportMappingCodesToLink:
     get:
-      summary: Operation to fetch export mapping codes to link.
-      description: ' <p><strong>OperationId:</strong>getExportMappingCodesToLink</p>'
+      summary: Operation to fetch export mapping codes to link
+      description: OperationId:getExportMappingCodesToLink
       operationId: getExportMappingCodesToLink
       parameters:
       - name: configType
@@ -857,8 +873,13 @@ paths:
       - Export
   /hotels/{hotelId}/exportActivityLog:
     get:
-      summary: Operation to fetch activity logs for Export Data.
-      description: Use this API to return activity logs for export data for a specific property based on search criteria such as hotelId, activityType, fromDate, toDate, limit, offset, module, parameterName, parameterValue, activityGroup, searchText, userByIds, userForIds.  <p><strong>OperationId:</strong>getExportActivityLog</p> <p>The maximum allowable limit for this API is <strong>25</strong>.</p>
+      summary: Operation to fetch activity logs for Export Data
+      description: 'Use this API to return activity logs for export data for a specific property based on search criteria such as hotelId, activityType, fromDate, toDate, limit, offset, module, parameterName, parameterValue, activityGroup, searchText, userByIds, userForIds.
+
+        OperationId:getExportActivityLog
+
+
+        The maximum allowable limit for this API is 25.'
       operationId: getExportActivityLog
       parameters:
       - name: hotelId
@@ -1022,8 +1043,10 @@ paths:
       - Export
   /hotels/{hotelId}/exportMappingId/{exportMappingId}/exportMappings:
     delete:
-      summary: Operation to remove export mappings.
-      description: Use this API to delete export mappings for a specific property based on the exportMappingId and the hotelId. <p><strong>OperationId:</strong>deleteExistingExportMappings</p>
+      summary: Operation to remove export mappings
+      description: 'Use this API to delete export mappings for a specific property based on the exportMappingId and the hotelId.
+
+        OperationId:deleteExistingExportMappings'
       operationId: deleteExistingExportMappings
       parameters:
       - name: exportMappingId
@@ -1096,8 +1119,8 @@ paths:
       - Export
   /hotels/{hotelId}/exportMappingTypes/{exportMappingTypeId}/exportMappingCodes:
     get:
-      summary: Operation to fetch export mapping codes.
-      description: ' <p><strong>OperationId:</strong>getExportMappingCodes</p>'
+      summary: Operation to fetch export mapping codes
+      description: OperationId:getExportMappingCodes
       operationId: getExportMappingCodes
       parameters:
       - name: exportMappingTypeId
@@ -1168,8 +1191,8 @@ paths:
       - Export
   /hotels/{hotelId}/exportMappings:
     get:
-      summary: Operation to fetch export mappings.
-      description: ' <p><strong>OperationId:</strong>getExportMappings</p>'
+      summary: Operation to fetch export mappings
+      description: OperationId:getExportMappings
       operationId: getExportMappings
       parameters:
       - name: hotelId
@@ -1262,8 +1285,8 @@ paths:
       tags:
       - Export
     post:
-      summary: Operation to create export mappings.
-      description: ' <p><strong>OperationId:</strong>postExportMappings</p>'
+      summary: Operation to create export mappings
+      description: OperationId:postExportMappings
       operationId: postExportMappings
       parameters:
       - name: hotelId
@@ -1334,8 +1357,8 @@ paths:
         description: Request to create export definitions for a given export.
         required: true
     put:
-      summary: Operation to update export mappings.
-      description: ' <p><strong>OperationId:</strong>putExportMappings</p>'
+      summary: Operation to update export mappings
+      description: OperationId:putExportMappings
       operationId: putExportMappings
       parameters:
       - name: hotelId
@@ -1407,8 +1430,8 @@ paths:
         required: true
   /hotels/{hotelId}/exportMappings/linkedCodes:
     get:
-      summary: Operation to fetch export mapping linked codes.
-      description: ' <p><strong>OperationId:</strong>getExportMappingLinkedCodes</p>'
+      summary: Operation to fetch export mapping linked codes
+      description: OperationId:getExportMappingLinkedCodes
       operationId: getExportMappingLinkedCodes
       parameters:
       - name: hotelId
@@ -1528,8 +1551,8 @@ paths:
       - Export
   /hotels/{hotelId}/exportMappings/{exportMappingId}/mappingTypes/{mappingTypeCode}/exportMappingCodes:
     delete:
-      summary: Operation to remove export mapping codes.
-      description: ' <p><strong>OperationId:</strong>deleteExportMappingCodes</p>'
+      summary: Operation to remove export mapping codes
+      description: OperationId:deleteExportMappingCodes
       operationId: deleteExportMappingCodes
       parameters:
       - name: mappingTypeCode
@@ -1610,8 +1633,10 @@ paths:
       - Export
   /hotels/{hotelId}/exportSchedules:
     get:
-      summary: Operation to fetch export schedules.
-      description: Use this API to return export schedules for a specific property based on search criteria such as hotelId, timeZone, exportFileId, idExtension, idContext, type, exportGroup, exportName, startDate, endDate, frequency, includeInactive.  <p><strong>OperationId:</strong>getExportSchedules</p>
+      summary: Operation to fetch export schedules
+      description: 'Use this API to return export schedules for a specific property based on search criteria such as hotelId, timeZone, exportFileId, idExtension, idContext, type, exportGroup, exportName, startDate, endDate, frequency, includeInactive.
+
+        OperationId:getExportSchedules'
       operationId: getExportSchedules
       parameters:
       - name: hotelId
@@ -1756,8 +1781,10 @@ paths:
       - Export
   /hotels/{hotelId}/exportSchedules/{exportFileId}:
     put:
-      summary: Operation to change export schedules.
-      description: Use this API to update export schedules based on the exportFileId and exportSchedulesToBeChanged. <p><strong>OperationId:</strong>changeExportSchedules</p>
+      summary: Operation to change export schedules
+      description: 'Use this API to update export schedules based on the exportFileId and exportSchedulesToBeChanged.
+
+        OperationId:changeExportSchedules'
       operationId: changeExportSchedules
       parameters:
       - name: hotelId
@@ -1838,8 +1865,8 @@ paths:
         required: true
   /services/export/status:
     get:
-      summary: Operation to ping.
-      description: ' <p><strong>OperationId:</strong>pingExportServices</p>'
+      summary: Operation to ping
+      description: OperationId:pingExportServices
       operationId: pingExportServices
       parameters:
       - $ref: '#/components/parameters/authKey'
@@ -1894,8 +1921,11 @@ paths:
       - Export
   /{exportFileId}/generatedExports:
     get:
-      summary: Operation to fetch exports generated.
-      description: ' <p><strong>OperationId:</strong>getExportsGenerated</p> <p>The maximum allowable limit for this API is <strong>25</strong>.</p>'
+      summary: Operation to fetch exports generated
+      description: 'OperationId:getExportsGenerated
+
+
+        The maximum allowable limit for this API is 25.'
       operationId: getExportsGenerated
       parameters:
       - name: exportFileId
@@ -1977,106 +2007,63 @@ paths:
       tags:
       - Export
 components:
-  responses:
-    '406':
-      description: Not acceptable.
-    '414':
-      description: Request URI Too Large
-    '503':
-      description: Service Unavailable
-    '413':
-      description: Request Entity Too Large
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '502':
-      description: Bad Gateway
-    '403':
-      description: Forbidden
-    '415':
-      description: Unsupported Media Type
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '401':
-      description: Unauthorized
-    '405':
-      description: Method not allowed
+  parameters:
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
+      schema:
+        type: string
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    x-externalsystem:
+      name: x-externalsystem
+      description: External system code.
+      in: header
+      x-example: EXTERNALSYSTEMCODE
+      schema:
+        type: string
+        maxLength: 40
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
+      schema:
+        type: string
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
+      schema:
+        type: string
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
   schemas:
-    exportScheduleFrequencyMonthlyType:
-      type: object
-      description: If specified then export is scheduled to run Monthly
-      properties:
-        interval:
-          description: Determines how often the export needs to run. Value needs to be between 1 and 99
-          $ref: '#/components/schemas/exportScheduleFrequencyIntervalType'
-        weekToRepeat:
-          description: Determines how often the export needs to run. Value needs to be between 1 and 5 or -1
-          $ref: '#/components/schemas/exportScheduleWeekToRepeatType'
-        sunday:
-          type: boolean
-        monday:
-          type: boolean
-        tuesday:
-          type: boolean
-        wednesday:
-          type: boolean
-        thursday:
-          type: boolean
-        friday:
-          type: boolean
-        saturday:
-          type: boolean
-    exportMappingMasterInfoType:
-      type: object
-      description: Contains information about the various mapping types and the mapping codes.
-      properties:
-        mappingTypes:
-          description: Provides information about the mapping type.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/exportMappingType'
-        mappingCodes:
-          description: Provides information about the mapping type.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/exportMappingCodeType'
-        mappingTypesCount:
-          type: integer
-        mappingCodesCount:
-          type: integer
-    exportMappingsDetails:
-      type: object
-      description: Response Body.
-      properties:
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    fileDeliveryCommunicationType:
-      type: string
-      description: Enumeration of export file groups.
-      enum:
-      - Ftp
-      - SftpPublicKey
-      - SftpPassword
-      - SftpCn
-      - Http
-      - FileSystem
     generatedExports:
       type: object
       description: Response object including a list of generated exports.
@@ -2106,13 +2093,284 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    exportScheduleFrequencyHourlyType:
+    expDataSourceColumnsType:
+      type: array
+      description: Function parameters
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/expDataSourceColumnType'
+    exportDestinationType:
       type: object
-      description: If specified then export is scheduled to run at hourly intervals
+      description: Details of the export's destination and format.
       properties:
-        interval:
-          description: Determines how often the export needs to run. Value needs to be between 1 and 99
-          $ref: '#/components/schemas/exportScheduleFrequencyIntervalType'
+        transportMethod:
+          description: Method of transport that will be used to deliver a generated export.
+          $ref: '#/components/schemas/transportMethodType'
+        fileDeliveryConfig:
+          description: Contains the file delivery configuration for an export.
+          $ref: '#/components/schemas/fileDeliveryConfigType'
+        useOXIInterface:
+          description: Specify if the OXI interface will be used for export file delivery.
+          type: boolean
+        oXIInterfaceId:
+          description: Interface ID from OXI, required if UploadType is not available.
+          type: string
+          minLength: 0
+          maxLength: 80
+        uploadType:
+          description: Protocol used to upload the export file to FTP server.
+          type: string
+          minLength: 0
+          maxLength: 20
+        protocol:
+          description: Protocol used to upload the export file to HTTP server.
+          type: string
+          minLength: 0
+          maxLength: 100
+        httpAddress:
+          description: URL address of HTTP server which received export file.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        sOAPActionInformation:
+          description: Soap Action information if SOAP protocol is used to upload the export file.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        encryptionType:
+          description: Name of an encryption algorithm that will be used to encrypt an export file upon generation. This is used for the Default transport method.
+          type: string
+          minLength: 0
+          maxLength: 20
+        encryptionKey:
+          description: Key that will be used during export file encryption; this is only needed if an Encryption Type has been specified.
+          type: string
+          minLength: 0
+          maxLength: 100
+        xMLDocumentName:
+          description: Main tag for the XML document.
+          type: string
+          minLength: 0
+          maxLength: 80
+        fileName:
+          description: Formula used to generate the name of the export file.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        fileExtension:
+          description: Formula used to generate the extension of the export file.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        zipFileName:
+          description: The zip file name based on the formula used in the setup.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        zipFileLocation:
+          description: The zip file location where the zip file is saved after being generated.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    exportXMLElementType:
+      type: object
+      description: Type that holds all attributes associated with this tag together
+      properties:
+        simpleElement:
+          description: XML simple element type that holds all the information related to simple element tag
+          $ref: '#/components/schemas/exportXMLSimpleType'
+        complexElement:
+          description: XML complex element type that holds all the information related to complex element tag
+          $ref: '#/components/schemas/exportXMLComplexType'
+        complexElementWithSource:
+          description: XML complex element type that holds all the information related to complex element with source tag
+          $ref: '#/components/schemas/exportXMLComplexWithSourceType'
+    exportScheduleFrequencyByHourType:
+      type: integer
+      description: Specifies the hour on which the job is to run. Valid values are 0 to 23.
+      minimum: 0
+      maximum: 23
+    exportScheduleEODRepeatIntervalType:
+      type: string
+      description: Frequency for which export schedules needs to be run during EOD
+      enum:
+      - Daily
+      - Weekly
+      - Monthly
+      - Yearly
+    exportsAvailable:
+      type: object
+      description: Response object including a list of available exports.
+      properties:
+        exports:
+          description: Contains the list of available exports.
+          $ref: '#/components/schemas/exportListType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    uniqueID_Type:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
+    generatedExportStatusType:
+      type: string
+      description: Status indicates whether job is running or not
+      enum:
+      - InQueue
+      - Running
+      - Completed
+      - Failed
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
+    exportComponentsType:
+      type: array
+      description: A collection of export components.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/exportComponentType'
+    exportType:
+      type: string
+      description: Enumeration of export file groups.
+      enum:
+      - Miscellaneous
+      - Memberships
+      - Country
+      - Delphi
+      - BackOffice
+      - BackOfficeRevenue
+      - BackOfficeCityLedger
+      - BackOfficeMarketStatistics
+      - BackOfficeDailyStatistics
+      - CommissionEft
+    codeType:
+      type: string
+      description: Used for codes in the OPERA Code tables. Possible values of this pattern are 1, 101, 101.EQP, or 101.EQP.X.
+      minLength: 0
+      maxLength: 20
+    operaVersion:
+      type: object
+      description: Response for Ping operation.
+      properties:
+        operaVersion:
+          description: Opera version number.
+          $ref: '#/components/schemas/operaVersionNumberType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    exportMappingsDetails:
+      type: object
+      description: Response Body.
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    exportScheduleFrequencyEODType:
+      type: object
+      description: If specified then export is scheduled to run during end of day
+      properties:
+        repeatInterval:
+          description: Frequency for which export schedules needs to be run during EOD
+          $ref: '#/components/schemas/exportScheduleEODRepeatIntervalType'
+        sunday:
+          type: boolean
+        monday:
+          type: boolean
+        tuesday:
+          type: boolean
+        wednesday:
+          type: boolean
+        thursday:
+          type: boolean
+        friday:
+          type: boolean
+        saturday:
+          type: boolean
+    exportMappingType:
+      type: object
+      description: Details of one export.
+      properties:
+        exportMappingId:
+          description: Primary key for this mapping type, internal ID.
+          $ref: '#/components/schemas/uniqueID_Type'
+        configType:
+          description: Configuration item this export mapping type applies to.
+          $ref: '#/components/schemas/exportMappingConfigType'
+        mappingType:
+          description: Code for the export mapping type.
+          type: string
+          minLength: 0
+          maxLength: 20
+        hasDefaultValue:
+          description: Specify whether the mapping type has default value.
+          type: boolean
+        description:
+          description: Description of the export mapping type.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    exportMappingLinkedTypes:
+      type: object
+      description: Request to fetch codes linked to export mapping codes.
+      properties:
+        hotelId:
+          description: The hotel code associated with the linked codes.
+          $ref: '#/components/schemas/codeType'
+        linkedCodes:
+          description: The linked codes for the given hotel.
+          type: array
+          items:
+            $ref: '#/components/schemas/exportMappingLinkedCodeType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
     exportXMLSimpleType:
       type: object
       description: Base type that holds information related to xml tag types
@@ -2139,6 +2397,133 @@ components:
         parentDataID:
           description: Id of the parent that holds this tag. If this tag is clid of root tag then this can be omitted.
           $ref: '#/components/schemas/uniqueID_Type'
+    exportGenerateConfigurationType:
+      type: object
+      description: Details of how and when the export is to be executed.
+      properties:
+        autoExport:
+          description: A flag to set export to generate automatically.
+          type: boolean
+        nightAudit:
+          description: A flag to set export to be run in Night Audit.
+          type: object
+          properties:
+            runInNightAudit:
+              description: A flag to set export to be run in Night Audit.
+              type: boolean
+            nightAuditFrequency:
+              description: The frequency at which export should be generated. Eg. Nightly, End of Month or End of Year.
+              type: string
+              minLength: 0
+              maxLength: 20
+            nightAuditExportDetail:
+              description: Day of the week, when the export routine is run in the night audit and the NA_FREQUENCY is set to 'Day of Week'.
+              type: string
+              minLength: 0
+              maxLength: 20
+    exportScheduleFrequencyDailyType:
+      type: object
+      description: If specified then export is scheduled to run daily
+      properties:
+        interval:
+          description: Determines how often the export needs to run. Value needs to be between 1 and 99
+          $ref: '#/components/schemas/exportScheduleFrequencyIntervalType'
+        hour:
+          description: Specifies the hour on which the job is to run. Valid values are 0 to 23.
+          $ref: '#/components/schemas/exportScheduleFrequencyByHourType'
+    exportMappingLinkedTypesDetails:
+      type: object
+      description: Response Body.
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    exportXMLComplexWithSourceType:
+      type: object
+      description: XML simple type that holds all the information related to complex element tag
+      properties:
+        name:
+          description: XML simple tag name
+          type: string
+          minLength: 0
+          maxLength: 80
+        attributes:
+          description: Attributes associated with the complex type
+          $ref: '#/components/schemas/exportXMLAttributesType'
+        elements:
+          description: Elements associated with the complex type
+          $ref: '#/components/schemas/exportXMLElementsType'
+        source:
+          description: Source from where data needs to be extracted
+          type: string
+          minLength: 0
+          maxLength: 100
+        filter:
+          description: Filter data using this attribute
+          type: string
+          minLength: 0
+          maxLength: 2000
+        required:
+          description: Determines if the tag need to be present in the data even if there is no value available
+          type: boolean
+    exportSchedulesType:
+      type: array
+      description: Export Schedule
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/exportScheduleType'
+    transportMethodType:
+      type: string
+      description: Enumeration of transport methods used to deliver exports.
+      enum:
+      - Ftp
+      - Sftp
+      - SftpCn
+      - Http
+      - FileSystem
+      - Default
+    exportActivityLog:
+      type: object
+      description: Response object for the request for the export user activity log.
+      properties:
+        activityLog:
+          description: Collection of the list of Activities(Log) requested.
+          $ref: '#/components/schemas/activityLogListType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    exportScheduleFrequencyHourlyType:
+      type: object
+      description: If specified then export is scheduled to run at hourly intervals
+      properties:
+        interval:
+          description: Determines how often the export needs to run. Value needs to be between 1 and 99
+          $ref: '#/components/schemas/exportScheduleFrequencyIntervalType'
+    exportMappingCodes:
+      type: object
+      description: Request to create export mapping code for a given export.
+      properties:
+        hotelId:
+          description: The hotel code for the export.
+          $ref: '#/components/schemas/codeType'
+        exportMappingCodes:
+          description: The details of the export mapping code being created.
+          type: array
+          items:
+            $ref: '#/components/schemas/exportMappingCodeType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    exportColumnInfoType:
+      type: string
+      description: Enumeration of export file groups.
+      enum:
+      - Data
+      - Header
+      - Footer
     exportHeaderSummaryType:
       type: object
       description: Details of one export.
@@ -2192,27 +2577,781 @@ components:
         containsSensitiveData:
           description: Indicates if the export has sensitive data
           type: boolean
+    exportListType:
+      type: object
+      description: Contains a collection of available export records.
+      properties:
+        export:
+          description: The list of export records.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/exportConfigurationType'
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        count:
+          description: Total number of rows returned
+          type: integer
     exportScheduleJobNameType:
       type: string
       description: Unique name that identifies export schedule
       minLength: 0
       maxLength: 100
-    exportColumnLengthType:
+    exportColumnsType:
+      type: array
+      description: A collection of export columns.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/exportColumnDetailType'
+    activityLogType:
       type: object
-      description: Type that determines the length of the export column
       properties:
-        value:
+        hotelId:
+          type: string
+          minLength: 0
+          maxLength: 20
+        module:
+          type: string
+        logDate:
+          type: string
+          format: date-time
+        refActionId:
+          type: number
+        logUserId:
           type: integer
-          description: Property Value
-        variable:
-          description: If variable is true then value cannot be specified and value can be of variable length
+        logUserName:
+          type: string
+        machineStation:
+          type: string
+        croCode:
+          type: string
+          minLength: 0
+          maxLength: 20
+        actionType:
+          type: string
+          minLength: 0
+          maxLength: 100
+        actionDescription:
+          type: string
+          minLength: 0
+          maxLength: 2000
+        iPAddress:
+          description: The IP Address of the machine that performed the activity
+          type: string
+          minLength: 0
+          maxLength: 2000
+        deviceCode:
+          description: The selected device code
+          type: string
+          minLength: 0
+          maxLength: 2000
+    exportScheduleWeekToRepeatType:
+      type: string
+      description: Frequency for which export schedules needs to be returned
+      enum:
+      - First
+      - Second
+      - Third
+      - Fourth
+      - Fifth
+      - Last
+    exportMappingCodesDetails:
+      type: object
+      description: Response Body.
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    exportXMLElementsType:
+      type: array
+      description: XML element type that holds all the information related to element tag
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/exportXMLElementType'
+    exportSchedulesDetails:
+      type: object
+      description: Export Schedules collection matching the crieteria specified in the request
+      properties:
+        exportSchedules:
+          description: Collection of export schedules
+          $ref: '#/components/schemas/exportSchedulesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    exportComponentType:
+      type: object
+      description: Details of a specific export component.
+      properties:
+        exportFileId:
+          description: The unique ID that identifies the export.
+          $ref: '#/components/schemas/uniqueID_Type'
+        fileType:
+          description: The file type of the export.
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: The description of the export.
+          type: string
+          minLength: 0
+          maxLength: 200
+        parameterForm:
+          description: The name of the parameter form used to collect runtime information.
+          type: string
+          minLength: 0
+          maxLength: 40
+        exportSequence:
+          description: Component export sequence
+          type: integer
+        containsSensitiveData:
+          description: Indicates if the export has sensitive data
           type: boolean
+    exportXMLComplexType:
+      type: object
+      description: XML simple type that holds all the information related to complex element tag
+      properties:
+        name:
+          description: XML simple tag name
+          type: string
+          minLength: 0
+          maxLength: 80
+        attributes:
+          description: Attributes associated with the complex type
+          $ref: '#/components/schemas/exportXMLAttributesType'
+        elements:
+          description: Elements associated with the complex type
+          $ref: '#/components/schemas/exportXMLElementsType'
+        required:
+          description: Determines if the tag need to be present in the data even if there is no value available
+          type: boolean
+    exportSchedulesStatus:
+      type: object
+      description: Response Body.
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    exportXMLColumnsType:
+      type: object
+      description: XML Columns type that hold information to all the element and attribute configuations
+      properties:
+        attributes:
+          description: Attributes associated with the complex type
+          $ref: '#/components/schemas/exportXMLAttributesType'
+        elements:
+          description: Elements associated with the complex type
+          $ref: '#/components/schemas/exportXMLElementsType'
+    exportConfigurationType:
+      type: object
+      description: Type that hold configuration information related to export
+      properties:
+        summaryInfo:
+          description: The summary information of the given export.
+          $ref: '#/components/schemas/exportHeaderSummaryType'
+        dataSetup:
+          description: Details of processing data for export being setup.
+          $ref: '#/components/schemas/exportDataSetupType'
+        generateConfigSetup:
+          description: Details of how and when the export is to be executed.
+          $ref: '#/components/schemas/exportGenerateConfigurationType'
+        destinationSetup:
+          description: Details of the export's destination and format.
+          $ref: '#/components/schemas/exportDestinationType'
+        components:
+          description: A listing of components associated with the given export.
+          $ref: '#/components/schemas/exportComponentsType'
+        columns:
+          description: Columns associated with the given export
+          $ref: '#/components/schemas/exportColumnsType'
+        xmlColumns:
+          description: Columns associated with the xml export
+          $ref: '#/components/schemas/exportXMLColumnsType'
+    exportColumnsAndFunctionsType:
+      type: object
+      description: Contains columns, pre post functions and export functions
+      properties:
+        dbColumns:
+          description: The list of export records.
+          $ref: '#/components/schemas/expDataSourceColumnsType'
+        prePostFunctions:
+          description: List of pre post functions available for this export or for the data source mentioned in the request
+          $ref: '#/components/schemas/expFunctionsType'
+        functions:
+          description: List of db functions available for configuring export
+          $ref: '#/components/schemas/expFunctionsType'
     expFunctionsType:
       type: array
       description: Function parameters
       maxItems: 4000
       items:
         $ref: '#/components/schemas/expFunctionType'
+    scheduleExportGroupType:
+      type: string
+      description: Enumeration of export file groups.
+      enum:
+      - Miscellaneous
+      - Memberships
+      - Country
+      - BackOffice
+    exportCodeDataType:
+      type: string
+      description: Enumeration of export mapping types.
+      enum:
+      - Character
+      - Date
+      - Number
+    generatedExportType:
+      type: object
+      description: Information of one generated export.
+      properties:
+        dataHeader:
+          description: The unique ID that identifies the export.
+          $ref: '#/components/schemas/exportHeaderSummaryType'
+        exportDataId:
+          description: The unique ID that identifies this instance of the export.
+          $ref: '#/components/schemas/uniqueID_Type'
+        generatedDate:
+          description: The date that the export was generated.
+          type: string
+          format: date
+          maxLength: 8
+        totalRecords:
+          description: The total number of records generated.
+          type: integer
+        hasCreditCardData:
+          description: A flag that shows whether the there is credit card information in the export. Certain restrictions apply when this is detected.
+          type: boolean
+        generatedFileName:
+          description: The generated file name.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        zipFileName:
+          description: The zip file name based on the formula used in the setup.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        generatedFileExtension:
+          description: The generated file extension.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        generatedFileLocation:
+          description: The generated file location.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        generatedFilePath:
+          description: The generated file path.
+          type: string
+          minLength: 0
+          maxLength: 4000
+        dataFromDate:
+          description: The beginning date for the export.
+          type: string
+          format: date
+          maxLength: 8
+        dataToDate:
+          description: The ending date for the export.
+          type: string
+          format: date
+          maxLength: 8
+        checksumEnabled:
+          description: A flag that shows whether the checksum functionality is enabled.
+          type: boolean
+        generatedErrors:
+          description: The errors generated during the export.
+          type: string
+          minLength: 0
+          maxLength: 4000
+        hTTPUpload:
+          description: A flag to indicate if export file has to be uploaded automatically by IAS to HTTP site
+          type: boolean
+        status:
+          description: The current status of the export
+          $ref: '#/components/schemas/generatedExportStatusType'
+        jobCompleted:
+          description: A Flag that indicates whether job completed successfully or not.
+          type: boolean
+    expDataSourceColumnType:
+      type: object
+      description: Information related to database columns
+      properties:
+        name:
+          description: Database columns Name
+          type: string
+          minLength: 0
+          maxLength: 200
+        description:
+          description: Database columns description
+          type: string
+          minLength: 0
+          maxLength: 2000
+        dataType:
+          description: Database columns description
+          type: string
+          minLength: 0
+          maxLength: 200
+    fetchExportMappingCodes:
+      type: object
+      properties:
+        exportMappingCodes:
+          type: array
+          description: The details of the export mapping code being fetched.
+          items:
+            $ref: '#/components/schemas/exportMappingCodeType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    exportSchedulesToBeChanged:
+      type: object
+      description: Request object for changing export schedules
+      properties:
+        exportScheduleConfig:
+          description: Collection of export schedules
+          $ref: '#/components/schemas/exportSchedulesConfigType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    exportSchedulesCriteria:
+      type: object
+      description: Request to create export schedules
+      properties:
+        exportScheduleConfig:
+          description: Collection of export schedules
+          $ref: '#/components/schemas/exportSchedulesConfigType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    fetchExportMappings:
+      type: object
+      description: Response to fetch the export definitions for a given export.
+      properties:
+        hotelId:
+          description: The hotel code for the export.
+          $ref: '#/components/schemas/codeType'
+        exportMappings:
+          description: The export file ID to delete definition.
+          type: array
+          items:
+            $ref: '#/components/schemas/exportMappingType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    fileDeliveryCommunicationType:
+      type: string
+      description: Enumeration of export file groups.
+      enum:
+      - Ftp
+      - SftpPublicKey
+      - SftpPassword
+      - SftpCn
+      - Http
+      - FileSystem
+    exportMappingLinkedCodeType:
+      type: object
+      description: Details of linked code.
+      properties:
+        linkedCode:
+          description: Linked code.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        exportMappingId:
+          description: Mapping id associated with linked code.
+          $ref: '#/components/schemas/uniqueID_Type'
+        exportMappingCode:
+          description: Mapping code attached to linked code.
+          type: string
+          minLength: 0
+          maxLength: 100
+        defaultMappedValue:
+          description: Default value.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        mappedValue:
+          description: Linked code.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        mappingTypeDescription:
+          description: Description of the export mapping type.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        mappingCodeDescription:
+          description: Description of the export mapping code.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        lovName:
+          description: Name of the LOV group to be used.
+          type: string
+          minLength: 0
+          maxLength: 40
+    exportXMLAttributesType:
+      type: array
+      description: XML attribute type that holds all the information related to attribute tag
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/exportXMLAttributeType'
+    exportMappings:
+      type: object
+      description: Request to create export definitions for a given export.
+      properties:
+        hotelId:
+          description: The hotel code for the export.
+          $ref: '#/components/schemas/codeType'
+        exportMapping:
+          description: The details of the export definition being created.
+          type: array
+          items:
+            $ref: '#/components/schemas/exportMappingType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    exportColumnDetailType:
+      type: object
+      properties:
+        exportDataId:
+          description: The internal identifier of the export column. Used in conjunction with the export file ID to create a unique identifier.
+          $ref: '#/components/schemas/uniqueID_Type'
+        parentColumnId:
+          description: The internal identifier of the parent export column. This is used if the current column is a child of another column.
+          $ref: '#/components/schemas/uniqueID_Type'
+        columnName:
+          description: Name of the column to Export.
+          type: string
+          minLength: 0
+          maxLength: 80
+        columnLength:
+          description: Length of the column.
+          type: integer
+        columnOrderBy:
+          description: Order by column.
+          type: integer
+        columnFormat:
+          description: Column format.
+          type: string
+          minLength: 0
+          maxLength: 80
+        columnAlignment:
+          description: Column Alignment.
+          type: string
+          minLength: 0
+          maxLength: 80
+        columnType:
+          description: Type of the column.
+          type: string
+          minLength: 0
+          maxLength: 20
+        xMLColumnType:
+          description: Indicates the type of XML Column.
+          $ref: '#/components/schemas/exportColumnXMLType'
+        formula:
+          description: Formula for the Formula Column.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        sourceViewName:
+          description: Name of an additional database view that the column, and its descendants, may be derived from. This column, and its descendants, may also be derived from the export header's source view, as well as any ancestor's source view.
+          type: string
+          minLength: 0
+          maxLength: 80
+        filter:
+          description: Filter on the Additional Source View for XML Complex Elements.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        defaultValue:
+          description: Default value of the column.
+          type: string
+          minLength: 0
+          maxLength: 80
+        databaseColumn:
+          type: boolean
+        columnDataType:
+          $ref: '#/components/schemas/exportColumnInfoType'
+        ignoreLength:
+          type: boolean
+        tagRequired:
+          type: boolean
+        xMLAttribute:
+          type: boolean
+    exportMappingCodesToLinkType:
+      type: object
+      description: Details of code which is being mapped.
+      properties:
+        codeToLink:
+          description: The code with which the mapping is linked to in the external system.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        codeToLinkDescription:
+          description: The description of code with which the mapping is linked to in the external system.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        configType:
+          description: Configuration item this export mapping type applies to.
+          $ref: '#/components/schemas/exportMappingConfigType'
+        sequenceNumber:
+          description: Display sequence.
+          type: number
+    exportScheduleFrequencyType:
+      type: object
+      description: Frequency at which exports is scheduled to run
+      properties:
+        once:
+          description: Run only once
+          $ref: '#/components/schemas/exportScheduleFrequencyOnceType'
+        hourly:
+          description: Run Hourly
+          $ref: '#/components/schemas/exportScheduleFrequencyHourlyType'
+        daily:
+          description: Run Daily
+          $ref: '#/components/schemas/exportScheduleFrequencyDailyType'
+        weekly:
+          description: Run Weeekly
+          $ref: '#/components/schemas/exportScheduleFrequencyWeeklyType'
+        monthly:
+          description: Run Monthly
+          $ref: '#/components/schemas/exportScheduleFrequencyMonthlyType'
+        endOfDay:
+          description: Run during end of day
+          $ref: '#/components/schemas/exportScheduleFrequencyEODType'
+    exportScheduleFrequencyWeeklyType:
+      type: object
+      description: If specified then export is scheduled to run Weekly
+      properties:
+        interval:
+          description: Determines how often the export needs to run. Value needs to be between 1 and 99
+          $ref: '#/components/schemas/exportScheduleFrequencyIntervalType'
+        sunday:
+          type: boolean
+        monday:
+          type: boolean
+        tuesday:
+          type: boolean
+        wednesday:
+          type: boolean
+        thursday:
+          type: boolean
+        friday:
+          type: boolean
+        saturday:
+          type: boolean
+    exportMappingCodesToLink:
+      type: object
+      properties:
+        codesToLink:
+          type: array
+          description: The codes for a given property which are to be linked to the mapping code.
+          items:
+            $ref: '#/components/schemas/exportMappingCodesToLinkType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        count:
+          description: Total number of rows returned
+          type: integer
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    exportSchedulesConfigType:
+      type: object
+      description: Export schedules information that are required to configure schedules
+      properties:
+        exportSchedules:
+          description: Export Schedule
+          $ref: '#/components/schemas/exportSchedulesType'
+        timeZone:
+          description: Time zone hour and minute specified in the format TZH:TZM example:-05:00
+          type: string
+    exportMappingCodeType:
+      type: object
+      description: Details of one export.
+      properties:
+        exportMappingId:
+          description: Primary key for this mapping type, internal ID.
+          $ref: '#/components/schemas/uniqueID_Type'
+        mappingTypeCode:
+          description: Code for the export mapping type.
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: Description of the export mapping code.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        dataType:
+          description: Data type of the export mapping code.
+          $ref: '#/components/schemas/exportCodeDataType'
+        sequenceNumber:
+          description: Display sequence.
+          type: number
+        lovName:
+          description: Name of the LOV group to be used.
+          type: string
+          minLength: 0
+          maxLength: 40
+        useLov:
+          description: This flag show LOV button when linking this mapping code to the configuration item.
+          type: boolean
+        required:
+          description: This flag indicates the configuration item cannot be saved until a mapping for this mapping detail has been entered.
+          type: boolean
+    exportScheduleFrequencyMonthlyType:
+      type: object
+      description: If specified then export is scheduled to run Monthly
+      properties:
+        interval:
+          description: Determines how often the export needs to run. Value needs to be between 1 and 99
+          $ref: '#/components/schemas/exportScheduleFrequencyIntervalType'
+        weekToRepeat:
+          description: Determines how often the export needs to run. Value needs to be between 1 and 5 or -1
+          $ref: '#/components/schemas/exportScheduleWeekToRepeatType'
+        sunday:
+          type: boolean
+        monday:
+          type: boolean
+        tuesday:
+          type: boolean
+        wednesday:
+          type: boolean
+        thursday:
+          type: boolean
+        friday:
+          type: boolean
+        saturday:
+          type: boolean
+    exportMappingConfigType:
+      type: string
+      description: Enumeration  of Types allowed for Export Mapping
+      enum:
+      - TransactionCodes
+      - MarketCodes
+      - PackageCodes
+      - PaymentMethods
+      - ProfileIdTypes
+      - StatisticCodes
+      - PropertyCodes
+      - CountryCodes
+      - NationalityCodes
+      - StateCodes
+      - DistrictCodes
+      - CityCodes
+      - CountryCities
+      - PurposeOfStayCodes
+      - TransportationCodes
+      - CancelReasons
+      - Gender
+      - RoomTypes
+      - IdCountryCodes
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    exportScheduleType:
+      type: object
+      description: Type that holds all the information related to export schedule
+      properties:
+        jobName:
+          description: Unique name that identifies export schedule
+          $ref: '#/components/schemas/exportScheduleJobNameType'
+        exportFileId:
+          description: Unique Id that identifies export
+          $ref: '#/components/schemas/uniqueID_Type'
+        exportName:
+          description: Name of the export
+          type: string
+          minLength: 0
+          maxLength: 20
+        exportDescription:
+          description: Export Description
+          type: string
+          minLength: 0
+          maxLength: 200
+        exportGroup:
+          description: Export category
+          $ref: '#/components/schemas/scheduleExportGroupType'
+        createdBy:
+          description: User who created the export schedule
+          type: string
+        runcount:
+          description: Number of time export generated
+          type: integer
+        nextScheduledRun:
+          description: Export is expected to run at time specified by this element. Time will be specified in the format dd-MM-yyyy:hh:mm:ss a Z
+          type: string
+        startDate:
+          description: Export scheduled started at this time. Time will be specified in the format dd-MM-yyyy:hh:mm:ss a Z
+          type: string
+        endDate:
+          description: Export schedule is expected to end around this time. Time will be specified in the format dd-MM-yyyy:hh:mm:ss a Z
+          type: string
+        status:
+          description: Export schedule status
+          type: string
+        inactive:
+          description: Indicates whether schedule export is active or not
+          type: boolean
+        frequency:
+          description: Frequency at which export needs to be scheduled
+          $ref: '#/components/schemas/exportScheduleFrequencyType'
+    activityLogListType:
+      type: object
+      properties:
+        activityLog:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/activityLogType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        count:
+          description: Total number of rows returned
+          type: integer
     exportXMLAttributeType:
       type: object
       description: Base type that holds information related to xml tag types
@@ -2239,31 +3378,137 @@ components:
         parentDataID:
           description: Id of the parent that holds this tag. If this tag is clid of root tag then this can be omitted.
           $ref: '#/components/schemas/uniqueID_Type'
-    generatedExportStatusType:
+    expFunctionType:
+      type: object
+      description: Information related to export function
+      properties:
+        functionParameter:
+          description: Function parameters
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/expFunctionParamType'
+        functionName:
+          description: Name of the function
+          type: string
+          minLength: 0
+          maxLength: 200
+    expFunctionParamType:
+      type: object
+      description: Parameters related to export functions
+      properties:
+        name:
+          description: Parameter Name
+          type: string
+          minLength: 0
+          maxLength: 200
+        dataType:
+          description: Parameter Type
+          type: string
+          minLength: 0
+          maxLength: 200
+        position:
+          description: Paramter Position
+          type: integer
+        required:
+          description: Flag that determines whether parameter is required or not
+          type: boolean
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    exportColumnLengthType:
+      type: object
+      description: Type that determines the length of the export column
+      properties:
+        value:
+          type: integer
+          description: Property Value
+        variable:
+          description: If variable is true then value cannot be specified and value can be of variable length
+          type: boolean
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
+    exportColumnXMLType:
       type: string
-      description: Status indicates whether job is running or not
+      description: Enumeration of export column XML types.
       enum:
-      - InQueue
-      - Running
-      - Completed
-      - Failed
-    exportScheduleWeekToRepeatType:
-      type: string
-      description: Frequency for which export schedules needs to be returned
-      enum:
-      - First
-      - Second
-      - Third
-      - Fourth
-      - Fifth
-      - Last
-    exportColumnInfoType:
-      type: string
-      description: Enumeration of export file groups.
-      enum:
-      - Data
-      - Header
-      - Footer
+      - Simple
+      - Complex
+      - ComplexAddSource
+    exportMappingLinkedCodes:
+      type: object
+      description: Response to fetch codes linked to export mapping codes.
+      properties:
+        linkedCodes:
+          description: The linked codes for the given hotel.
+          type: array
+          items:
+            $ref: '#/components/schemas/exportMappingLinkedCodeType'
+        masterInfo:
+          description: The information details about the mapping code and mapping type.
+          $ref: '#/components/schemas/exportMappingMasterInfoType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
     fileDeliveryConfigType:
       type: object
       properties:
@@ -2340,65 +3585,6 @@ components:
           type: string
           format: date
           maxLength: 8
-    exportMappingType:
-      type: object
-      description: Details of one export.
-      properties:
-        exportMappingId:
-          description: Primary key for this mapping type, internal ID.
-          $ref: '#/components/schemas/uniqueID_Type'
-        configType:
-          description: Configuration item this export mapping type applies to.
-          $ref: '#/components/schemas/exportMappingConfigType'
-        mappingType:
-          description: Code for the export mapping type.
-          type: string
-          minLength: 0
-          maxLength: 20
-        hasDefaultValue:
-          description: Specify whether the mapping type has default value.
-          type: boolean
-        description:
-          description: Description of the export mapping type.
-          type: string
-          minLength: 0
-          maxLength: 2000
-    exportCodeDataType:
-      type: string
-      description: Enumeration of export mapping types.
-      enum:
-      - Character
-      - Date
-      - Number
-    exportScheduleFrequencyIntervalType:
-      type: integer
-      description: Interval at which export needs to be scheduled
-      minimum: 1
-      maximum: 99
-    exportGenerateConfigurationType:
-      type: object
-      description: Details of how and when the export is to be executed.
-      properties:
-        autoExport:
-          description: A flag to set export to generate automatically.
-          type: boolean
-        nightAudit:
-          description: A flag to set export to be run in Night Audit.
-          type: object
-          properties:
-            runInNightAudit:
-              description: A flag to set export to be run in Night Audit.
-              type: boolean
-            nightAuditFrequency:
-              description: The frequency at which export should be generated. Eg. Nightly, End of Month or End of Year.
-              type: string
-              minLength: 0
-              maxLength: 20
-            nightAuditExportDetail:
-              description: Day of the week, when the export routine is run in the night audit and the NA_FREQUENCY is set to 'Day of Week'.
-              type: string
-              minLength: 0
-              maxLength: 20
     generatedExportListType:
       type: object
       description: Contains a collection of available export instance records.
@@ -2418,284 +3604,68 @@ components:
         count:
           description: Total number of rows returned
           type: integer
+    exportScheduleFrequencyIntervalType:
+      type: integer
+      description: Interval at which export needs to be scheduled
+      minimum: 1
+      maximum: 99
+    operaVersionNumberType:
+      type: string
+      description: Current Opera Version Number
+      minLength: 0
+      maxLength: 40
+    warningType:
+      type: object
+      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
+          type: string
+          maxLength: 2000
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+          type: string
+          minLength: 0
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+          maxLength: 2000
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+          maxLength: 2000
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+          maxLength: 2000
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+          maxLength: 2000
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        rph:
+          description: Reference Place Holder used as an index for this warning.
+          type: string
+          minLength: 1
+          maxLength: 8
     warningsType:
       type: array
       description: Used in conjunction with the Success element to define a business error.
       maxItems: 4000
       items:
         $ref: '#/components/schemas/warningType'
-    exportColumnsAndFunctionsDetails:
-      type: object
-      description: Response that contains columns, pre post functions and export functions.
-      properties:
-        columnsAndFunctions:
-          description: Contains the list of available columns, pre post functions and export functions.
-          $ref: '#/components/schemas/exportColumnsAndFunctionsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    exportsAvailable:
-      type: object
-      description: Response object including a list of available exports.
-      properties:
-        exports:
-          description: Contains the list of available exports.
-          $ref: '#/components/schemas/exportListType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    uniqueID_Type:
-      type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
-      properties:
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 40
-    fetchExportMappingCodes:
-      type: object
-      properties:
-        exportMappingCodes:
-          type: array
-          description: The details of the export mapping code being fetched.
-          items:
-            $ref: '#/components/schemas/exportMappingCodeType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    exportSchedulesType:
-      type: array
-      description: Export Schedule
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/exportScheduleType'
-    generatedExportType:
-      type: object
-      description: Information of one generated export.
-      properties:
-        dataHeader:
-          description: The unique ID that identifies the export.
-          $ref: '#/components/schemas/exportHeaderSummaryType'
-        exportDataId:
-          description: The unique ID that identifies this instance of the export.
-          $ref: '#/components/schemas/uniqueID_Type'
-        generatedDate:
-          description: The date that the export was generated.
-          type: string
-          format: date
-          maxLength: 8
-        totalRecords:
-          description: The total number of records generated.
-          type: integer
-        hasCreditCardData:
-          description: A flag that shows whether the there is credit card information in the export. Certain restrictions apply when this is detected.
-          type: boolean
-        generatedFileName:
-          description: The generated file name.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        zipFileName:
-          description: The zip file name based on the formula used in the setup.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        generatedFileExtension:
-          description: The generated file extension.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        generatedFileLocation:
-          description: The generated file location.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        generatedFilePath:
-          description: The generated file path.
-          type: string
-          minLength: 0
-          maxLength: 4000
-        dataFromDate:
-          description: The beginning date for the export.
-          type: string
-          format: date
-          maxLength: 8
-        dataToDate:
-          description: The ending date for the export.
-          type: string
-          format: date
-          maxLength: 8
-        checksumEnabled:
-          description: A flag that shows whether the checksum functionality is enabled.
-          type: boolean
-        generatedErrors:
-          description: The errors generated during the export.
-          type: string
-          minLength: 0
-          maxLength: 4000
-        hTTPUpload:
-          description: A flag to indicate if export file has to be uploaded automatically by IAS to HTTP site
-          type: boolean
-        status:
-          description: The current status of the export
-          $ref: '#/components/schemas/generatedExportStatusType'
-        jobCompleted:
-          description: A Flag that indicates whether job completed successfully or not.
-          type: boolean
-    activityLogListType:
-      type: object
-      properties:
-        activityLog:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/activityLogType'
-        totalPages:
-          description: Evaluated total page count based on the requested max fetch count.
-          type: integer
-        offset:
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-          type: integer
-        limit:
-          description: Indicates maximum number of records a Web Service should return.
-          type: integer
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        count:
-          description: Total number of rows returned
-          type: integer
-    instanceLink:
-      type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
-      properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
-          type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
-        title:
-          description: Exact copy of the "summary" field on the linked operation.
-          type: string
-    exportConfigurationType:
-      type: object
-      description: Type that hold configuration information related to export
-      properties:
-        summaryInfo:
-          description: The summary information of the given export.
-          $ref: '#/components/schemas/exportHeaderSummaryType'
-        dataSetup:
-          description: Details of processing data for export being setup.
-          $ref: '#/components/schemas/exportDataSetupType'
-        generateConfigSetup:
-          description: Details of how and when the export is to be executed.
-          $ref: '#/components/schemas/exportGenerateConfigurationType'
-        destinationSetup:
-          description: Details of the export's destination and format.
-          $ref: '#/components/schemas/exportDestinationType'
-        components:
-          description: A listing of components associated with the given export.
-          $ref: '#/components/schemas/exportComponentsType'
-        columns:
-          description: Columns associated with the given export
-          $ref: '#/components/schemas/exportColumnsType'
-        xmlColumns:
-          description: Columns associated with the xml export
-          $ref: '#/components/schemas/exportXMLColumnsType'
-    exportScheduleFrequencyOnceType:
-      type: object
-      description: If specified then export is scheduled to run only once
-      properties:
-        runAt:
-          description: Export will be generated using the date and time specified. Time will be specified in the format dd-MM-yyyy:hh:mm:ss a Z
-          type: string
-    expDataSourceColumnsType:
-      type: array
-      description: Function parameters
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/expDataSourceColumnType'
-    exportScheduleType:
-      type: object
-      description: Type that holds all the information related to export schedule
-      properties:
-        jobName:
-          description: Unique name that identifies export schedule
-          $ref: '#/components/schemas/exportScheduleJobNameType'
-        exportFileId:
-          description: Unique Id that identifies export
-          $ref: '#/components/schemas/uniqueID_Type'
-        exportName:
-          description: Name of the export
-          type: string
-          minLength: 0
-          maxLength: 20
-        exportDescription:
-          description: Export Description
-          type: string
-          minLength: 0
-          maxLength: 200
-        exportGroup:
-          description: Export category
-          $ref: '#/components/schemas/scheduleExportGroupType'
-        createdBy:
-          description: User who created the export schedule
-          type: string
-        runcount:
-          description: Number of time export generated
-          type: integer
-        nextScheduledRun:
-          description: Export is expected to run at time specified by this element. Time will be specified in the format dd-MM-yyyy:hh:mm:ss a Z
-          type: string
-        startDate:
-          description: Export scheduled started at this time. Time will be specified in the format dd-MM-yyyy:hh:mm:ss a Z
-          type: string
-        endDate:
-          description: Export schedule is expected to end around this time. Time will be specified in the format dd-MM-yyyy:hh:mm:ss a Z
-          type: string
-        status:
-          description: Export schedule status
-          type: string
-        inactive:
-          description: Indicates whether schedule export is active or not
-          type: boolean
-        frequency:
-          description: Frequency at which export needs to be scheduled
-          $ref: '#/components/schemas/exportScheduleFrequencyType'
     status:
       type: object
       description: Response Body.
@@ -2704,54 +3674,6 @@ components:
           $ref: '#/components/schemas/warningsType'
         links:
           $ref: '#/components/schemas/links'
-    exportXMLColumnsType:
-      type: object
-      description: XML Columns type that hold information to all the element and attribute configuations
-      properties:
-        attributes:
-          description: Attributes associated with the complex type
-          $ref: '#/components/schemas/exportXMLAttributesType'
-        elements:
-          description: Elements associated with the complex type
-          $ref: '#/components/schemas/exportXMLElementsType'
-    exportXMLComplexWithSourceType:
-      type: object
-      description: XML simple type that holds all the information related to complex element tag
-      properties:
-        name:
-          description: XML simple tag name
-          type: string
-          minLength: 0
-          maxLength: 80
-        attributes:
-          description: Attributes associated with the complex type
-          $ref: '#/components/schemas/exportXMLAttributesType'
-        elements:
-          description: Elements associated with the complex type
-          $ref: '#/components/schemas/exportXMLElementsType'
-        source:
-          description: Source from where data needs to be extracted
-          type: string
-          minLength: 0
-          maxLength: 100
-        filter:
-          description: Filter data using this attribute
-          type: string
-          minLength: 0
-          maxLength: 2000
-        required:
-          description: Determines if the tag need to be present in the data even if there is no value available
-          type: boolean
-    exportSchedulesConfigType:
-      type: object
-      description: Export schedules information that are required to configure schedules
-      properties:
-        exportSchedules:
-          description: Export Schedule
-          $ref: '#/components/schemas/exportSchedulesType'
-        timeZone:
-          description: Time zone hour and minute specified in the format TZH:TZM example:-05:00
-          type: string
     exportDataSetupType:
       type: object
       description: Details of processing data for export being setup.
@@ -2826,973 +3748,81 @@ components:
           type: string
           minLength: 0
           maxLength: 100
-    exportSchedulesCriteria:
+    exportColumnsAndFunctionsDetails:
       type: object
-      description: Request to create export schedules
+      description: Response that contains columns, pre post functions and export functions.
       properties:
-        exportScheduleConfig:
-          description: Collection of export schedules
-          $ref: '#/components/schemas/exportSchedulesConfigType'
+        columnsAndFunctions:
+          description: Contains the list of available columns, pre post functions and export functions.
+          $ref: '#/components/schemas/exportColumnsAndFunctionsType'
         links:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    exportScheduleFrequencyByHourType:
-      type: integer
-      description: Specifies the hour on which the job is to run. Valid values are 0 to 23.
-      minimum: 0
-      maximum: 23
-    exportType:
-      type: string
-      description: Enumeration of export file groups.
-      enum:
-      - Miscellaneous
-      - Memberships
-      - Country
-      - Delphi
-      - BackOffice
-      - BackOfficeRevenue
-      - BackOfficeCityLedger
-      - BackOfficeMarketStatistics
-      - BackOfficeDailyStatistics
-      - CommissionEft
-    exportScheduleFrequencyWeeklyType:
+    exportScheduleFrequencyOnceType:
       type: object
-      description: If specified then export is scheduled to run Weekly
+      description: If specified then export is scheduled to run only once
       properties:
-        interval:
-          description: Determines how often the export needs to run. Value needs to be between 1 and 99
-          $ref: '#/components/schemas/exportScheduleFrequencyIntervalType'
-        sunday:
-          type: boolean
-        monday:
-          type: boolean
-        tuesday:
-          type: boolean
-        wednesday:
-          type: boolean
-        thursday:
-          type: boolean
-        friday:
-          type: boolean
-        saturday:
-          type: boolean
-    exportSchedulesToBeChanged:
+        runAt:
+          description: Export will be generated using the date and time specified. Time will be specified in the format dd-MM-yyyy:hh:mm:ss a Z
+          type: string
+    exportMappingMasterInfoType:
       type: object
-      description: Request object for changing export schedules
+      description: Contains information about the various mapping types and the mapping codes.
       properties:
-        exportScheduleConfig:
-          description: Collection of export schedules
-          $ref: '#/components/schemas/exportSchedulesConfigType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    exportScheduleFrequencyDailyType:
-      type: object
-      description: If specified then export is scheduled to run daily
-      properties:
-        interval:
-          description: Determines how often the export needs to run. Value needs to be between 1 and 99
-          $ref: '#/components/schemas/exportScheduleFrequencyIntervalType'
-        hour:
-          description: Specifies the hour on which the job is to run. Valid values are 0 to 23.
-          $ref: '#/components/schemas/exportScheduleFrequencyByHourType'
-    exportScheduleFrequencyType:
-      type: object
-      description: Frequency at which exports is scheduled to run
-      properties:
-        once:
-          description: Run only once
-          $ref: '#/components/schemas/exportScheduleFrequencyOnceType'
-        hourly:
-          description: Run Hourly
-          $ref: '#/components/schemas/exportScheduleFrequencyHourlyType'
-        daily:
-          description: Run Daily
-          $ref: '#/components/schemas/exportScheduleFrequencyDailyType'
-        weekly:
-          description: Run Weeekly
-          $ref: '#/components/schemas/exportScheduleFrequencyWeeklyType'
-        monthly:
-          description: Run Monthly
-          $ref: '#/components/schemas/exportScheduleFrequencyMonthlyType'
-        endOfDay:
-          description: Run during end of day
-          $ref: '#/components/schemas/exportScheduleFrequencyEODType'
-    exportColumnXMLType:
-      type: string
-      description: Enumeration of export column XML types.
-      enum:
-      - Simple
-      - Complex
-      - ComplexAddSource
-    scheduleExportGroupType:
-      type: string
-      description: Enumeration of export file groups.
-      enum:
-      - Miscellaneous
-      - Memberships
-      - Country
-      - BackOffice
-    exportComponentType:
-      type: object
-      description: Details of a specific export component.
-      properties:
-        exportFileId:
-          description: The unique ID that identifies the export.
-          $ref: '#/components/schemas/uniqueID_Type'
-        fileType:
-          description: The file type of the export.
-          type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          description: The description of the export.
-          type: string
-          minLength: 0
-          maxLength: 200
-        parameterForm:
-          description: The name of the parameter form used to collect runtime information.
-          type: string
-          minLength: 0
-          maxLength: 40
-        exportSequence:
-          description: Component export sequence
-          type: integer
-        containsSensitiveData:
-          description: Indicates if the export has sensitive data
-          type: boolean
-    warningType:
-      type: object
-      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
-      properties:
-        value:
-          type: string
-          description: Property Value
-        shortText:
-          description: An abbreviated version of the error in textual format.
-          type: string
-          maxLength: 2000
-        code:
-          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
-          type: string
-          minLength: 0
-          maxLength: 20
-        docURL:
-          description: If present, this URL refers to an online description of the error that occurred.
-          type: string
-          maxLength: 2000
-        status:
-          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
-          type: string
-          maxLength: 2000
-        tag:
-          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
-          type: string
-          maxLength: 2000
-        recordId:
-          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
-          type: string
-          maxLength: 2000
-        type:
-          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
-          type: string
-          minLength: 0
-          maxLength: 20
-        language:
-          description: Language identification.
-          type: string
-          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
-        rph:
-          description: Reference Place Holder used as an index for this warning.
-          type: string
-          minLength: 1
-          maxLength: 8
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
+        mappingTypes:
+          description: Provides information about the mapping type.
           type: array
+          maxItems: 4000
           items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
-      required:
-      - type
-      - title
-    exportMappingConfigType:
-      type: string
-      description: Enumeration  of Types allowed for Export Mapping
-      enum:
-      - TransactionCodes
-      - MarketCodes
-      - PackageCodes
-      - PaymentMethods
-      - ProfileIdTypes
-      - StatisticCodes
-      - PropertyCodes
-      - CountryCodes
-      - NationalityCodes
-      - StateCodes
-      - DistrictCodes
-      - CityCodes
-      - CountryCities
-      - PurposeOfStayCodes
-      - TransportationCodes
-      - CancelReasons
-      - Gender
-      - RoomTypes
-      - IdCountryCodes
-    activityLogType:
-      type: object
-      properties:
-        hotelId:
-          type: string
-          minLength: 0
-          maxLength: 20
-        module:
-          type: string
-        logDate:
-          type: string
-          format: date-time
-        refActionId:
-          type: number
-        logUserId:
-          type: integer
-        logUserName:
-          type: string
-        machineStation:
-          type: string
-        croCode:
-          type: string
-          minLength: 0
-          maxLength: 20
-        actionType:
-          type: string
-          minLength: 0
-          maxLength: 100
-        actionDescription:
-          type: string
-          minLength: 0
-          maxLength: 2000
-        iPAddress:
-          description: The IP Address of the machine that performed the activity
-          type: string
-          minLength: 0
-          maxLength: 2000
-        deviceCode:
-          description: The selected device code
-          type: string
-          minLength: 0
-          maxLength: 2000
-    exportSchedulesStatus:
-      type: object
-      description: Response Body.
-      properties:
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    exportMappingCodes:
-      type: object
-      description: Request to create export mapping code for a given export.
-      properties:
-        hotelId:
-          description: The hotel code for the export.
-          $ref: '#/components/schemas/codeType'
-        exportMappingCodes:
-          description: The details of the export mapping code being created.
+            $ref: '#/components/schemas/exportMappingType'
+        mappingCodes:
+          description: Provides information about the mapping type.
           type: array
+          maxItems: 4000
           items:
             $ref: '#/components/schemas/exportMappingCodeType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    expDataSourceColumnType:
-      type: object
-      description: Information related to database columns
-      properties:
-        name:
-          description: Database columns Name
-          type: string
-          minLength: 0
-          maxLength: 200
-        description:
-          description: Database columns description
-          type: string
-          minLength: 0
-          maxLength: 2000
-        dataType:
-          description: Database columns description
-          type: string
-          minLength: 0
-          maxLength: 200
-    exportSchedulesDetails:
-      type: object
-      description: Export Schedules collection matching the crieteria specified in the request
-      properties:
-        exportSchedules:
-          description: Collection of export schedules
-          $ref: '#/components/schemas/exportSchedulesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    exportMappingLinkedCodes:
-      type: object
-      description: Response to fetch codes linked to export mapping codes.
-      properties:
-        linkedCodes:
-          description: The linked codes for the given hotel.
-          type: array
-          items:
-            $ref: '#/components/schemas/exportMappingLinkedCodeType'
-        masterInfo:
-          description: The information details about the mapping code and mapping type.
-          $ref: '#/components/schemas/exportMappingMasterInfoType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    exportXMLAttributesType:
-      type: array
-      description: XML attribute type that holds all the information related to attribute tag
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/exportXMLAttributeType'
-    exportMappings:
-      type: object
-      description: Request to create export definitions for a given export.
-      properties:
-        hotelId:
-          description: The hotel code for the export.
-          $ref: '#/components/schemas/codeType'
-        exportMapping:
-          description: The details of the export definition being created.
-          type: array
-          items:
-            $ref: '#/components/schemas/exportMappingType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    exportMappingCodesDetails:
-      type: object
-      description: Response Body.
-      properties:
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    exportListType:
-      type: object
-      description: Contains a collection of available export records.
-      properties:
-        export:
-          description: The list of export records.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/exportConfigurationType'
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
+        mappingTypesCount:
           type: integer
-        count:
-          description: Total number of rows returned
+        mappingCodesCount:
           type: integer
-    exportColumnsType:
-      type: array
-      description: A collection of export columns.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/exportColumnDetailType'
-    fetchExportMappings:
-      type: object
-      description: Response to fetch the export definitions for a given export.
-      properties:
-        hotelId:
-          description: The hotel code for the export.
-          $ref: '#/components/schemas/codeType'
-        exportMappings:
-          description: The export file ID to delete definition.
-          type: array
-          items:
-            $ref: '#/components/schemas/exportMappingType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    exportScheduleFrequencyEODType:
-      type: object
-      description: If specified then export is scheduled to run during end of day
-      properties:
-        repeatInterval:
-          description: Frequency for which export schedules needs to be run during EOD
-          $ref: '#/components/schemas/exportScheduleEODRepeatIntervalType'
-        sunday:
-          type: boolean
-        monday:
-          type: boolean
-        tuesday:
-          type: boolean
-        wednesday:
-          type: boolean
-        thursday:
-          type: boolean
-        friday:
-          type: boolean
-        saturday:
-          type: boolean
-    operaVersionNumberType:
-      type: string
-      description: Current Opera Version Number
-      minLength: 0
-      maxLength: 40
-    exportActivityLog:
-      type: object
-      description: Response object for the request for the export user activity log.
-      properties:
-        activityLog:
-          description: Collection of the list of Activities(Log) requested.
-          $ref: '#/components/schemas/activityLogListType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    exportMappingCodesToLink:
-      type: object
-      properties:
-        codesToLink:
-          type: array
-          description: The codes for a given property which are to be linked to the mapping code.
-          items:
-            $ref: '#/components/schemas/exportMappingCodesToLinkType'
-        totalPages:
-          description: Evaluated total page count based on the requested max fetch count.
-          type: integer
-        offset:
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-          type: integer
-        limit:
-          description: Indicates maximum number of records a Web Service should return.
-          type: integer
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        count:
-          description: Total number of rows returned
-          type: integer
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    codeType:
-      type: string
-      description: Used for codes in the OPERA Code tables. Possible values of this pattern are 1, 101, 101.EQP, or 101.EQP.X.
-      minLength: 0
-      maxLength: 20
-    exportMappingLinkedTypes:
-      type: object
-      description: Request to fetch codes linked to export mapping codes.
-      properties:
-        hotelId:
-          description: The hotel code associated with the linked codes.
-          $ref: '#/components/schemas/codeType'
-        linkedCodes:
-          description: The linked codes for the given hotel.
-          type: array
-          items:
-            $ref: '#/components/schemas/exportMappingLinkedCodeType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    exportScheduleEODRepeatIntervalType:
-      type: string
-      description: Frequency for which export schedules needs to be run during EOD
-      enum:
-      - Daily
-      - Weekly
-      - Monthly
-      - Yearly
-    expFunctionParamType:
-      type: object
-      description: Parameters related to export functions
-      properties:
-        name:
-          description: Parameter Name
-          type: string
-          minLength: 0
-          maxLength: 200
-        dataType:
-          description: Parameter Type
-          type: string
-          minLength: 0
-          maxLength: 200
-        position:
-          description: Paramter Position
-          type: integer
-        required:
-          description: Flag that determines whether parameter is required or not
-          type: boolean
-    exportMappingLinkedCodeType:
-      type: object
-      description: Details of linked code.
-      properties:
-        linkedCode:
-          description: Linked code.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        exportMappingId:
-          description: Mapping id associated with linked code.
-          $ref: '#/components/schemas/uniqueID_Type'
-        exportMappingCode:
-          description: Mapping code attached to linked code.
-          type: string
-          minLength: 0
-          maxLength: 100
-        defaultMappedValue:
-          description: Default value.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        mappedValue:
-          description: Linked code.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        mappingTypeDescription:
-          description: Description of the export mapping type.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        mappingCodeDescription:
-          description: Description of the export mapping code.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        lovName:
-          description: Name of the LOV group to be used.
-          type: string
-          minLength: 0
-          maxLength: 40
-    exportColumnDetailType:
-      type: object
-      properties:
-        exportDataId:
-          description: The internal identifier of the export column. Used in conjunction with the export file ID to create a unique identifier.
-          $ref: '#/components/schemas/uniqueID_Type'
-        parentColumnId:
-          description: The internal identifier of the parent export column. This is used if the current column is a child of another column.
-          $ref: '#/components/schemas/uniqueID_Type'
-        columnName:
-          description: Name of the column to Export.
-          type: string
-          minLength: 0
-          maxLength: 80
-        columnLength:
-          description: Length of the column.
-          type: integer
-        columnOrderBy:
-          description: Order by column.
-          type: integer
-        columnFormat:
-          description: Column format.
-          type: string
-          minLength: 0
-          maxLength: 80
-        columnAlignment:
-          description: Column Alignment.
-          type: string
-          minLength: 0
-          maxLength: 80
-        columnType:
-          description: Type of the column.
-          type: string
-          minLength: 0
-          maxLength: 20
-        xMLColumnType:
-          description: Indicates the type of XML Column.
-          $ref: '#/components/schemas/exportColumnXMLType'
-        formula:
-          description: Formula for the Formula Column.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        sourceViewName:
-          description: Name of an additional database view that the column, and its descendants, may be derived from. This column, and its descendants, may also be derived from the export header's source view, as well as any ancestor's source view.
-          type: string
-          minLength: 0
-          maxLength: 80
-        filter:
-          description: Filter on the Additional Source View for XML Complex Elements.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        defaultValue:
-          description: Default value of the column.
-          type: string
-          minLength: 0
-          maxLength: 80
-        databaseColumn:
-          type: boolean
-        columnDataType:
-          $ref: '#/components/schemas/exportColumnInfoType'
-        ignoreLength:
-          type: boolean
-        tagRequired:
-          type: boolean
-        xMLAttribute:
-          type: boolean
-    exportComponentsType:
-      type: array
-      description: A collection of export components.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/exportComponentType'
-    expFunctionType:
-      type: object
-      description: Information related to export function
-      properties:
-        functionParameter:
-          description: Function parameters
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/expFunctionParamType'
-        functionName:
-          description: Name of the function
-          type: string
-          minLength: 0
-          maxLength: 200
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-      required:
-      - type
-      - title
-    transportMethodType:
-      type: string
-      description: Enumeration of transport methods used to deliver exports.
-      enum:
-      - Ftp
-      - Sftp
-      - SftpCn
-      - Http
-      - FileSystem
-      - Default
-    exportDestinationType:
-      type: object
-      description: Details of the export's destination and format.
-      properties:
-        transportMethod:
-          description: Method of transport that will be used to deliver a generated export.
-          $ref: '#/components/schemas/transportMethodType'
-        fileDeliveryConfig:
-          description: Contains the file delivery configuration for an export.
-          $ref: '#/components/schemas/fileDeliveryConfigType'
-        useOXIInterface:
-          description: Specify if the OXI interface will be used for export file delivery.
-          type: boolean
-        oXIInterfaceId:
-          description: Interface ID from OXI, required if UploadType is not available.
-          type: string
-          minLength: 0
-          maxLength: 80
-        uploadType:
-          description: Protocol used to upload the export file to FTP server.
-          type: string
-          minLength: 0
-          maxLength: 20
-        protocol:
-          description: Protocol used to upload the export file to HTTP server.
-          type: string
-          minLength: 0
-          maxLength: 100
-        httpAddress:
-          description: URL address of HTTP server which received export file.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        sOAPActionInformation:
-          description: Soap Action information if SOAP protocol is used to upload the export file.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        encryptionType:
-          description: Name of an encryption algorithm that will be used to encrypt an export file upon generation. This is used for the Default transport method.
-          type: string
-          minLength: 0
-          maxLength: 20
-        encryptionKey:
-          description: Key that will be used during export file encryption; this is only needed if an Encryption Type has been specified.
-          type: string
-          minLength: 0
-          maxLength: 100
-        xMLDocumentName:
-          description: Main tag for the XML document.
-          type: string
-          minLength: 0
-          maxLength: 80
-        fileName:
-          description: Formula used to generate the name of the export file.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        fileExtension:
-          description: Formula used to generate the extension of the export file.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        zipFileName:
-          description: The zip file name based on the formula used in the setup.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        zipFileLocation:
-          description: The zip file location where the zip file is saved after being generated.
-          type: string
-          minLength: 0
-          maxLength: 2000
-    exportMappingCodeType:
-      type: object
-      description: Details of one export.
-      properties:
-        exportMappingId:
-          description: Primary key for this mapping type, internal ID.
-          $ref: '#/components/schemas/uniqueID_Type'
-        mappingTypeCode:
-          description: Code for the export mapping type.
-          type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          description: Description of the export mapping code.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        dataType:
-          description: Data type of the export mapping code.
-          $ref: '#/components/schemas/exportCodeDataType'
-        sequenceNumber:
-          description: Display sequence.
-          type: number
-        lovName:
-          description: Name of the LOV group to be used.
-          type: string
-          minLength: 0
-          maxLength: 40
-        useLov:
-          description: This flag show LOV button when linking this mapping code to the configuration item.
-          type: boolean
-        required:
-          description: This flag indicates the configuration item cannot be saved until a mapping for this mapping detail has been entered.
-          type: boolean
-    exportXMLComplexType:
-      type: object
-      description: XML simple type that holds all the information related to complex element tag
-      properties:
-        name:
-          description: XML simple tag name
-          type: string
-          minLength: 0
-          maxLength: 80
-        attributes:
-          description: Attributes associated with the complex type
-          $ref: '#/components/schemas/exportXMLAttributesType'
-        elements:
-          description: Elements associated with the complex type
-          $ref: '#/components/schemas/exportXMLElementsType'
-        required:
-          description: Determines if the tag need to be present in the data even if there is no value available
-          type: boolean
-    exportColumnsAndFunctionsType:
-      type: object
-      description: Contains columns, pre post functions and export functions
-      properties:
-        dbColumns:
-          description: The list of export records.
-          $ref: '#/components/schemas/expDataSourceColumnsType'
-        prePostFunctions:
-          description: List of pre post functions available for this export or for the data source mentioned in the request
-          $ref: '#/components/schemas/expFunctionsType'
-        functions:
-          description: List of db functions available for configuring export
-          $ref: '#/components/schemas/expFunctionsType'
-    exportXMLElementsType:
-      type: array
-      description: XML element type that holds all the information related to element tag
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/exportXMLElementType'
-    exportMappingCodesToLinkType:
-      type: object
-      description: Details of code which is being mapped.
-      properties:
-        codeToLink:
-          description: The code with which the mapping is linked to in the external system.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        codeToLinkDescription:
-          description: The description of code with which the mapping is linked to in the external system.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        configType:
-          description: Configuration item this export mapping type applies to.
-          $ref: '#/components/schemas/exportMappingConfigType'
-        sequenceNumber:
-          description: Display sequence.
-          type: number
-    exportXMLElementType:
-      type: object
-      description: Type that holds all attributes associated with this tag together
-      properties:
-        simpleElement:
-          description: XML simple element type that holds all the information related to simple element tag
-          $ref: '#/components/schemas/exportXMLSimpleType'
-        complexElement:
-          description: XML complex element type that holds all the information related to complex element tag
-          $ref: '#/components/schemas/exportXMLComplexType'
-        complexElementWithSource:
-          description: XML complex element type that holds all the information related to complex element with source tag
-          $ref: '#/components/schemas/exportXMLComplexWithSourceType'
-    operaVersion:
-      type: object
-      description: Response for Ping operation.
-      properties:
-        operaVersion:
-          description: Opera version number.
-          $ref: '#/components/schemas/operaVersionNumberType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
-    exportMappingLinkedTypesDetails:
-      type: object
-      description: Response Body.
-      properties:
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-  parameters:
-    x-hotelid:
-      name: x-hotelid
-      description: Mandatory parameter to identify the hotel code where the end user is logged in
-      in: header
-      required: true
-      schema:
-        type: string
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
-      in: header
-      required: true
-      schema:
-        type: string
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
-      in: header
-      schema:
-        type: string
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
-      in: header
-      schema:
-        type: string
-    x-app-key:
-      name: x-app-key
-      description: Client or Partner's Application Key
-      in: header
-      required: true
-      schema:
-        type: string
-        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    x-externalsystem:
-      name: x-externalsystem
-      description: External system code.
-      in: header
-      x-example: EXTERNALSYSTEMCODE
-      schema:
-        type: string
-        maxLength: 40
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
-      in: header
-      schema:
-        type: string
-    x-request-id:
-      name: x-request-id
-      description: Request Id of an incoming request
-      in: header
-      schema:
-        type: string
-        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+  responses:
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '406':
+      description: Not acceptable.
+    '414':
+      description: Request URI Too Large
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '502':
+      description: Bad Gateway
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '413':
+      description: Request Entity Too Large
+    '401':
+      description: Unauthorized
+    '403':
+      description: Forbidden
+    '405':
+      description: Method not allowed
+    '503':
+      description: Service Unavailable
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

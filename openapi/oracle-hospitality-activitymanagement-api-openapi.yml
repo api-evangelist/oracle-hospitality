@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: OPERA Cloud Activity Management API
-  description: APIs to cater for Activity Configuration functionality in OPERA Cloud. In this module you can retrieve, create, update Activity configuration codes, for example create a new Activity Type.<br /><br />Compatible with OPERA Cloud release 26.2.0.0.<br /><br /><p>This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020,2023 Oracle and/or its affiliates.</p><br /><br /> Compatible with OPERA Cloud release 20.99.99.99.<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>
+  description: APIs to cater for Activity Configuration functionality in OPERA Cloud.
   version: 26.2.0.0
   termsOfService: https://www.oracle.com/legal/terms.html
   contact:
@@ -17,8 +17,13 @@ tags:
 paths:
   /activityResults:
     get:
-      summary: 'Get all Configured Activity Result Codes '
-      description: Retrieve a list of all configured Activity Result codes and descriptions.  Activity Results appear on the Activities screen in the Results field after the Activity is completed.  And example could be Call Again - an activity is Completed but the result code as part of the completion is to Call Again. <p><strong>OperationId:</strong>getActivityResultsConfig</p> <p>The maximum allowable limit for this API is <strong>25</strong>.</p>
+      summary: Get all Configured Activity Result Codes
+      description: 'Retrieve a list of all configured Activity Result codes and descriptions. Activity Results appear on the Activities screen in the Results field after the Activity is completed. And example could be Call Again - an activity is Completed but the result code as part of the completion is to Call Again.
+
+        OperationId:getActivityResultsConfig
+
+
+        The maximum allowable limit for this API is 25.'
       operationId: getActivityResultsConfig
       parameters:
       - name: limit
@@ -115,7 +120,9 @@ paths:
       - ActivityManagement
     post:
       summary: Create an Activity results code
-      description: Create a new Activity Results Code, for example SUCCESS, END, CALLAGAIN.  These codes are used when you complete an activity.  You need to specify an Activity Result Code as part of that completion process. <p><strong>OperationId:</strong>postActivityResultsConfig</p>
+      description: 'Create a new Activity Results Code, for example SUCCESS, END, CALLAGAIN. These codes are used when you complete an activity. You need to specify an Activity Result Code as part of that completion process.
+
+        OperationId:postActivityResultsConfig'
       operationId: postActivityResultsConfig
       parameters:
       - $ref: '#/components/parameters/authKey'
@@ -181,7 +188,9 @@ paths:
   /activityResults/{activityResultCode}:
     delete:
       summary: Delete an Activity results code
-      description: Delete an Activity Result Code from OPERA Cloud. <p><strong>OperationId:</strong>deleteActivityResultsConfig</p>
+      description: 'Delete an Activity Result Code from OPERA Cloud.
+
+        OperationId:deleteActivityResultsConfig'
       operationId: deleteActivityResultsConfig
       parameters:
       - name: activityResultCode
@@ -246,7 +255,9 @@ paths:
       - ActivityManagement
     put:
       summary: Change an Activity Result Code
-      description: Change or update details of an existing Activity Results Code. <p><strong>OperationId:</strong>putActivityResultsConfig</p>
+      description: 'Change or update details of an existing Activity Results Code.
+
+        OperationId:putActivityResultsConfig'
       operationId: putActivityResultsConfig
       parameters:
       - name: activityResultCode
@@ -320,7 +331,12 @@ paths:
   /autoTraceCodes:
     get:
       summary: Get Auto Trace codes
-      description: Retrieve a list of all configured Auto Trace Codes for a property. <p><strong>OperationId:</strong>getAutoTraceCodes</p> <p>The maximum allowable limit for this API is <strong>25</strong>.</p>
+      description: 'Retrieve a list of all configured Auto Trace Codes for a property.
+
+        OperationId:getAutoTraceCodes
+
+
+        The maximum allowable limit for this API is 25.'
       operationId: getAutoTraceCodes
       parameters:
       - name: limit
@@ -420,7 +436,9 @@ paths:
       - ActivityManagement
     post:
       summary: Create an Auto Trace code
-      description: Create an Auto trace code. <p><strong>OperationId:</strong>postAutoTraceCodes</p>
+      description: 'Create an Auto trace code.
+
+        OperationId:postAutoTraceCodes'
       operationId: postAutoTraceCodes
       parameters:
       - $ref: '#/components/parameters/authKey'
@@ -486,7 +504,9 @@ paths:
   /autoTraceCodes/{autoTraceCode}:
     delete:
       summary: Delete an Auto Trace code
-      description: Delete an Auto trace code. <p><strong>OperationId:</strong>deleteAutoTraceCodes</p>
+      description: 'Delete an Auto trace code.
+
+        OperationId:deleteAutoTraceCodes'
       operationId: deleteAutoTraceCodes
       parameters:
       - name: autoTraceCode
@@ -551,7 +571,9 @@ paths:
       - ActivityManagement
     put:
       summary: Change an Auto Trace code
-      description: Update an Auto Trace Code. <p><strong>OperationId:</strong>putAutoTraceCodes</p>
+      description: 'Update an Auto Trace Code.
+
+        OperationId:putAutoTraceCodes'
       operationId: putAutoTraceCodes
       parameters:
       - name: autoTraceCode
@@ -625,7 +647,9 @@ paths:
   /autoTraceDefinitions/{autoTraceDefinitionId}:
     delete:
       summary: Delete an Auto Trace definitions Code
-      description: Delete an Auto trace definition code. <p><strong>OperationId:</strong>deleteAutoTraceDefinitions</p>
+      description: 'Delete an Auto trace definition code.
+
+        OperationId:deleteAutoTraceDefinitions'
       operationId: deleteAutoTraceDefinitions
       parameters:
       - name: autoTraceDefinitionId
@@ -690,8 +714,10 @@ paths:
       - ActivityManagement
   /autoTraceOwnerAssignments/{autoTraceOwnerAssignmentID}:
     delete:
-      summary: 'Delete an Auto Trace owner assignment '
-      description: Delete a Trace owner assignment configured for a property. <p><strong>OperationId:</strong>deleteAutoTraceOwnerAssignments</p>
+      summary: Delete an Auto Trace owner assignment
+      description: 'Delete a Trace owner assignment configured for a property.
+
+        OperationId:deleteAutoTraceOwnerAssignments'
       operationId: deleteAutoTraceOwnerAssignments
       parameters:
       - name: autoTraceOwnerAssignmentID
@@ -757,7 +783,9 @@ paths:
   /copyActivityTypes/sourceHotel/{hotelId}:
     post:
       summary: Copy Activity Types configuration codes
-      description: With this API you can select  existing Activity Type Codes from the source property and copy them to another (target) property. <p><strong>OperationId:</strong>copyActivityTypesConfig</p>
+      description: 'With this API you can select existing Activity Type Codes from the source property and copy them to another (target) property.
+
+        OperationId:copyActivityTypesConfig'
       operationId: copyActivityTypesConfig
       parameters:
       - name: hotelId
@@ -830,7 +858,9 @@ paths:
   /copyAutoTraceDefinitions/sourceHotel/{hotelId}:
     post:
       summary: Copy an Auto Trace definition Code
-      description: Copy an existing auto trace definition code to another property. <p><strong>OperationId:</strong>copyAutoTraceDefinitions</p>
+      description: 'Copy an existing auto trace definition code to another property.
+
+        OperationId:copyAutoTraceDefinitions'
       operationId: copyAutoTraceDefinitions
       parameters:
       - name: hotelId
@@ -904,7 +934,12 @@ paths:
   /hotels/{hotelId}/activityTypes:
     get:
       summary: Get all Activity Type Codes
-      description: Retrieve all configured Activity types for a specified hotel. <p><strong>OperationId:</strong>getActivityTypes</p> <p>The maximum allowable limit for this API is <strong>25</strong>.</p>
+      description: 'Retrieve all configured Activity types for a specified hotel.
+
+        OperationId:getActivityTypes
+
+
+        The maximum allowable limit for this API is 25.'
       operationId: getActivityTypes
       parameters:
       - name: hotelId
@@ -1002,7 +1037,9 @@ paths:
       - ActivityManagement
     post:
       summary: Create a new Activity type in configuration
-      description: Create a new Activity Type for a specified hotel. Examples could be  MEETING, LUNCH, EXTMEETING. <p><strong>OperationId:</strong>postActivityTypes</p>
+      description: 'Create a new Activity Type for a specified hotel. Examples could be MEETING, LUNCH, EXTMEETING.
+
+        OperationId:postActivityTypes'
       operationId: postActivityTypes
       parameters:
       - name: hotelId
@@ -1076,7 +1113,9 @@ paths:
   /hotels/{hotelId}/activityTypes/{activityTypeCode}:
     delete:
       summary: Delete an Activity Type Code
-      description: This will delete an Activity Type Code from the properties configuration. <p><strong>OperationId:</strong>deleteActivityTypes</p>
+      description: 'This will delete an Activity Type Code from the properties configuration.
+
+        OperationId:deleteActivityTypes'
       operationId: deleteActivityTypes
       parameters:
       - name: activityTypeCode
@@ -1149,7 +1188,9 @@ paths:
       - ActivityManagement
     put:
       summary: Update Activity Types
-      description: Change or update details of an existing Activity Type for a property. <p><strong>OperationId:</strong>putActivityTypes</p>
+      description: 'Change or update details of an existing Activity Type for a property.
+
+        OperationId:putActivityTypes'
       operationId: putActivityTypes
       parameters:
       - name: activityTypeCode
@@ -1231,7 +1272,12 @@ paths:
   /hotels/{hotelId}/autoTraceDefinitions:
     get:
       summary: Get a list of Auto Trace definition Codes
-      description: Get a list of all Auto trace definitions for a property. <p><strong>OperationId:</strong>getAutoTraceDefinitions</p> <p>The maximum allowable limit for this API is <strong>25</strong>.</p>
+      description: 'Get a list of all Auto trace definitions for a property.
+
+        OperationId:getAutoTraceDefinitions
+
+
+        The maximum allowable limit for this API is 25.'
       operationId: getAutoTraceDefinitions
       parameters:
       - name: hotelId
@@ -1339,7 +1385,9 @@ paths:
       - ActivityManagement
     post:
       summary: Create an Auto Trace Definition Code
-      description: Create a new Auto Trace Definition code for a specified property. <p><strong>OperationId:</strong>postAutoTraceDefinitions</p>
+      description: 'Create a new Auto Trace Definition code for a specified property.
+
+        OperationId:postAutoTraceDefinitions'
       operationId: postAutoTraceDefinitions
       parameters:
       - name: hotelId
@@ -1413,7 +1461,9 @@ paths:
   /hotels/{hotelId}/autoTraceDefinitions/{autoTraceDefinitionId}:
     put:
       summary: Change an Auto Trace definition Code
-      description: Change an Auto Trace Definition code for a specified property. <p><strong>OperationId:</strong>putAutoTraceDefinitions</p>
+      description: 'Change an Auto Trace Definition code for a specified property.
+
+        OperationId:putAutoTraceDefinitions'
       operationId: putAutoTraceDefinitions
       parameters:
       - name: autoTraceDefinitionId
@@ -1495,7 +1545,12 @@ paths:
   /hotels/{hotelId}/autoTraceOwnerAssignments:
     get:
       summary: Get an Auto Trace owner mappings
-      description: This API will provide a list of all configured Auto Trace Owner Mappings.   <p><strong>OperationId:</strong>getAutoTraceOwnerAssignments</p> <p>The maximum allowable limit for this API is <strong>25</strong>.</p>
+      description: 'This API will provide a list of all configured Auto Trace Owner Mappings.
+
+        OperationId:getAutoTraceOwnerAssignments
+
+
+        The maximum allowable limit for this API is 25.'
       operationId: getAutoTraceOwnerAssignments
       parameters:
       - name: hotelId
@@ -1591,7 +1646,9 @@ paths:
       - ActivityManagement
     post:
       summary: Create an Auto Trace owner assignment
-      description: You can create Auto traces so that activities are created automatically under certain configured conditions. You first need a Trace code configured, and then using this API you can link the Owner code and Trace Code to a Trace Group (account, contact, activity, or block). <p><strong>OperationId:</strong>postAutoTraceOwnerAssignments</p>
+      description: 'You can create Auto traces so that activities are created automatically under certain configured conditions. You first need a Trace code configured, and then using this API you can link the Owner code and Trace Code to a Trace Group (account, contact, activity, or block).
+
+        OperationId:postAutoTraceOwnerAssignments'
       operationId: postAutoTraceOwnerAssignments
       parameters:
       - name: hotelId
@@ -1665,7 +1722,9 @@ paths:
   /hotels/{hotelId}/autoTraceOwnerAssignments/{autoTraceOwnerAssignmentID}:
     put:
       summary: Change Trace owner assignments
-      description: Change a Trace owner assignment configured for a property. <p><strong>OperationId:</strong>putAutoTraceOwnerAssignments</p>
+      description: 'Change a Trace owner assignment configured for a property.
+
+        OperationId:putAutoTraceOwnerAssignments'
       operationId: putAutoTraceOwnerAssignments
       parameters:
       - name: autoTraceOwnerAssignmentID
@@ -1746,8 +1805,8 @@ paths:
         required: true
   /services/activityManagement/status:
     get:
-      summary: Operation to ping.
-      description: ' <p><strong>OperationId:</strong>pingActivityManagementServices</p>'
+      summary: Operation to ping
+      description: OperationId:pingActivityManagementServices
       operationId: pingActivityManagementServices
       parameters:
       - $ref: '#/components/parameters/authKey'
@@ -1803,7 +1862,9 @@ paths:
   /upsert/hotels/{hotelId}/autoTraceDefinitions:
     put:
       summary: Create/Change an Auto Trace definition Code
-      description: Create/Change an Auto Trace Definition code for a specified property. <p><strong>OperationId:</strong>putUpsertAutoTraceDefinitions</p>
+      description: 'Create/Change an Auto Trace Definition code for a specified property.
+
+        OperationId:putUpsertAutoTraceDefinitions'
       operationId: putUpsertAutoTraceDefinitions
       parameters:
       - name: hotelId
@@ -1877,7 +1938,9 @@ paths:
   /upsert/hotels/{hotelId}/autoTraceOwnerAssignments:
     put:
       summary: Create/Change Trace owner assignments
-      description: Create/Change a Trace owner assignment configured for a property. <p><strong>OperationId:</strong>putUpsertAutoTraceOwnerAssignments</p>
+      description: 'Create/Change a Trace owner assignment configured for a property.
+
+        OperationId:putUpsertAutoTraceOwnerAssignments'
       operationId: putUpsertAutoTraceOwnerAssignments
       parameters:
       - name: hotelId
@@ -1950,6 +2013,558 @@ paths:
         required: true
 components:
   schemas:
+    codeListType10:
+      type: array
+      maxItems: 10
+      items:
+        type: string
+        minLength: 0
+        maxLength: 20
+    autoTraceDefinitionsInfo:
+      type: object
+      description: Request object for creating/changing Auto Trace Definitions.
+      properties:
+        autoTraceDefinitions:
+          description: Auto Trace Definition details to be created/updated.
+          $ref: '#/components/schemas/autoTraceDefinitionListType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    autoTraceOwnerAssignmentListType:
+      type: array
+      description: Detailed information of trace owner assignment.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/autoTraceOwnerAssignmentType'
+    autoTraceDefinitionsDetails:
+      type: object
+      description: Response object after fetching Auto Trace Definitions.
+      properties:
+        autoTraceDefinitions:
+          description: Collection of fetched Auto Trace Definitions.
+          $ref: '#/components/schemas/autoTraceDefinitionListType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        count:
+          description: Total number of rows returned
+          type: integer
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    autoTraceCodesDetails:
+      type: object
+      description: Response object to fetch Auto Trace Codes.
+      properties:
+        autoTraceCodesConfig:
+          description: Collection of fetched Auto Trace Codes.
+          $ref: '#/components/schemas/autoTraceCodesListType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        count:
+          description: Total number of rows returned
+          type: integer
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    autoTraceOwnerAssignmentsStatus:
+      type: object
+      description: Response Body.
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    autoTraceOwnerAssignmentsDetails:
+      type: object
+      description: Response object to fetch trace owner assignments.
+      properties:
+        autoTraceOwnerAssignments:
+          description: Collection of fetched trace owner assignments.
+          $ref: '#/components/schemas/autoTraceOwnerAssignmentListType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        count:
+          description: Total number of rows returned
+          type: integer
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    uniqueID_Type:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
+    autoTraceDefinitionDetailType:
+      type: object
+      description: Auto Trace Definition detail information.
+      properties:
+        autoTraceId:
+          description: Trace ID.
+          $ref: '#/components/schemas/autoTraceId'
+        hotelId:
+          description: The hotel code where the Auto Trace should be created.
+          type: string
+          minLength: 0
+          maxLength: 20
+        traceCode:
+          description: Trace code
+          type: string
+          minLength: 0
+          maxLength: 20
+        traceGroup:
+          description: Trace Group.
+          $ref: '#/components/schemas/autoTraceGroupConfigType'
+        autoTraceBlockCategory:
+          description: Additional Block information
+          $ref: '#/components/schemas/autoTraceBlockCategoryType'
+        autoTraceTrigger:
+          description: Element to hold information on when auto trace would be created.
+          $ref: '#/components/schemas/autoTraceTriggerCategoryType'
+        fieldNameOnUpdate:
+          description: Element to hold column name of relevant table on selection of Update in AutoTraceTriggerCategoryType.
+          type: string
+        fieldNameOnUpdateId:
+          description: Element to hold column ID of relevant table on selection of Update in AutoTraceTriggerCategoryType.
+          type: string
+        conditions:
+          description: Conditions for trace.
+          $ref: '#/components/schemas/conditionGroupType'
+    operaVersion:
+      type: object
+      description: Response for Ping operation.
+      properties:
+        operaVersion:
+          description: Opera version number.
+          $ref: '#/components/schemas/operaVersionNumberType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    autoTraceId:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        url:
+          description: URL that identifies the location associated with the record identified by the UniqueID.
+          type: string
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 20
+        instance:
+          description: The identification of a record as it exists at a point in time. An instance is used in update messages where the sender must assure the server that the update sent refers to the most recent modification level of the object being updated.
+          type: string
+          minLength: 0
+          maxLength: 80
+        idContext:
+          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+          type: string
+          minLength: 0
+          maxLength: 80
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        idExtension:
+          description: Additional identifying value assigned by the creating system.
+          type: integer
+    copyActivityConfigCriteriaType:
+      type: object
+      description: Criteria to copy multiple Activity Types from one Hotel to another Hotel.
+      properties:
+        copyActivityConfig:
+          description: The hotel code where the activity type was created.
+          type: object
+          properties:
+            sourceHotelCode:
+              description: The hotel code where the activity type was created.
+              type: string
+              minLength: 0
+              maxLength: 20
+            activityCodeList:
+              description: List of Codes for which the activity types are to be searched for.
+              $ref: '#/components/schemas/codeListType'
+            targetHotelCode:
+              description: The hotel code(s) where the activity type should be copied to.
+              $ref: '#/components/schemas/codeListType10'
+    conditionGroupType:
+      type: object
+      properties:
+        condition:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/conditionType'
+        conditionGroup:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/conditionGroupType'
+        logicalOperator:
+          $ref: '#/components/schemas/logicalOperatorType'
+    autoTraceDefinitionActivityInfoType:
+      type: object
+      description: Activity Related Information of Auto Trace.
+      properties:
+        activityClass:
+          description: Activity Class Information.
+          $ref: '#/components/schemas/activityConfigClassType'
+        activityTypeCode:
+          description: Type for the Activity.
+          type: string
+          minLength: 0
+          maxLength: 20
+        purpose:
+          description: Purpose for the Activity.
+          type: string
+          minLength: 0
+          maxLength: 100
+        activityStartTime:
+          description: Start Time of the Activity.
+          type: string
+        activityStartDate:
+          description: Start Date of the Activity.Input for this field is selected from the list.
+          type: string
+        daysFromActivityStartDate:
+          description: Number of days from activity start date
+          type: integer
+    codeListType:
+      type: array
+      maxItems: 4000
+      items:
+        type: string
+        minLength: 0
+        maxLength: 20
+    translationTextType2000:
+      type: object
+      description: Contains Multiple translated texts and language codes.
+      properties:
+        defaultText:
+          description: Default text with Character length from 0 to 2000.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        translatedTexts:
+          description: List of translated text and language codes.
+          $ref: '#/components/schemas/translationsTextType'
+    autoTraceDefinitionOwnerInfoType:
+      type: object
+      description: Owner Information of Auto Trace.
+      properties:
+        ownerofActivity:
+          description: Owner of Auto Trace
+          $ref: '#/components/schemas/activityOwnerType'
+        customOwnerCode:
+          description: Custom owner code
+          type: string
+          minLength: 0
+          maxLength: 20
+        ownerAssignmentExist:
+          description: Indicates if Owner Assignment exists
+          type: boolean
+        ownerAssignment:
+          description: Owner Assignment Information
+          $ref: '#/components/schemas/autoTraceOwnerAssignmentListType'
+    activityTypesConfigInfo:
+      type: object
+      description: Request object for creating/changing activity types.
+      properties:
+        activityConfigTypes:
+          description: Activity type details to be created/updated.
+          $ref: '#/components/schemas/activityConfigListType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    autoTraceCodeDetailType:
+      type: object
+      description: Auto Trace Code detail information.
+      properties:
+        traceCode:
+          description: Trace Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: Description for the Trace Code.
+          type: string
+          minLength: 0
+          maxLength: 100
+        traceGroup:
+          description: Trace Group for the Code.
+          $ref: '#/components/schemas/autoTraceGroupConfigType'
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    activityResultsConfigDetailType:
+      type: object
+      description: Contains Common Master configuration detail.
+      properties:
+        code:
+          description: Common Master unique code.
+          type: string
+          minLength: 0
+          maxLength: 40
+        description:
+          description: Description of the Master code.
+          $ref: '#/components/schemas/translationTextType2000'
+        displayOrder:
+          description: Common Master record sequence number.
+          type: number
+        inactive:
+          description: Indicates the Activity Results is inactive or not.
+          type: boolean
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    autoTraceOwnerAssignmentsInfo:
+      type: object
+      description: Request object for creating/changing trace owner assignments.
+      properties:
+        autoTraceOwnerAssignments:
+          description: Trace owner assignments to be created/updated.
+          $ref: '#/components/schemas/autoTraceOwnerAssignmentListType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    activityConfigClassType:
+      type: string
+      description: A collection of supported list of activity classes.
+      enum:
+      - Appointment
+      - Todo
+    autoTraceOwnerAssignmentType:
+      type: object
+      description: Trace owner assignment detail information.
+      properties:
+        autoTraceOwnerAssignmentId:
+          description: Trace Owner Assignment ID.
+          $ref: '#/components/schemas/uniqueID_Type'
+        hotelId:
+          description: The hotel code where trace owner assignments are created.
+          type: string
+          minLength: 0
+          maxLength: 20
+        ownerCode:
+          description: Owner code of trace owner assignment.
+          type: string
+          minLength: 0
+          maxLength: 20
+        ownerName:
+          description: Owner name of trace owner assignment.
+          type: string
+        traceOwnerCode:
+          description: Trace Owner code of trace owner assignment.
+          type: string
+          minLength: 0
+          maxLength: 20
+        traceOwnerName:
+          description: Trace Owner name of trace owner assignment.
+          type: string
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    autoTraceBlockCategoryType:
+      type: string
+      description: Additional Block information used to trigger activities.
+      enum:
+      - Deposits
+      - Details
+    activityResultsConfigDetails:
+      type: object
+      description: Response object for fetching configured Activity Results.
+      properties:
+        activityResultsConfiguration:
+          description: Collection of configured Activity Results.
+          $ref: '#/components/schemas/activityResultsConfigListType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        count:
+          description: Total number of rows returned
+          type: integer
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    expressionOperatorType:
+      type: object
+      properties:
+        operatorName:
+          type: string
+          minLength: 0
+          maxLength: 40
+        operatorDescription:
+          type: string
+          minLength: 0
+          maxLength: 40
+        parameterSize:
+          type: number
+    activityTypesConfigCopy:
+      type: object
+      properties:
+        criteria:
+          description: Criteria for copying activity types.
+          $ref: '#/components/schemas/copyActivityConfigCriteriaType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    expressionFieldType:
+      type: object
+      properties:
+        fieldName:
+          type: string
+          minLength: 0
+          maxLength: 40
+        fieldDescription:
+          type: string
+          minLength: 0
+          maxLength: 40
+        tableName:
+          type: string
+          minLength: 0
+          maxLength: 40
+        virtual:
+          type: boolean
+        dataType:
+          type: string
+          minLength: 0
+          maxLength: 40
+        lovSelected:
+          type: string
+          minLength: 0
+          maxLength: 20
+    autoTraceDefinitionListType:
+      type: array
+      description: Auto Trace Definition.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/autoTraceDefinitionType'
+    logicalOperatorType:
+      type: string
+      enum:
+      - And
+      - Or
+    managedByOptions:
+      description: Describes of the Configuration is Managed by Enterprise or Property.
+      type: string
+      enum:
+      - EnterpriseManaged
+      - PropertyManaged
+      - EnterpriseEnforced
+      - PropertyOverridden
+    activityResultsConfigListType:
+      type: array
+      description: List of configured Activity Results.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/activityResultsConfigDetailType'
+    autoTraceDefinitionCopy:
+      type: object
+      description: Request object for copying trace definition.
+      properties:
+        criteria:
+          description: Criteria for copying trace definitions.
+          $ref: '#/components/schemas/copyAutoTraceDefinitionCriteriaType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
     activityConfigTypeDetailType:
       type: object
       description: Activity Type detail information.
@@ -2005,39 +2620,80 @@ components:
       maxItems: 4000
       items:
         $ref: '#/components/schemas/activityConfigTypeDetailType'
-    copyActivityConfigCriteriaType:
+    activityResultsConfigInfo:
       type: object
-      description: Criteria to copy multiple Activity Types from one Hotel to another Hotel.
+      description: Request object for creating/changing Activity Results Configuration.
       properties:
-        copyActivityConfig:
-          description: The hotel code where the activity type was created.
-          type: object
-          properties:
-            sourceHotelCode:
-              description: The hotel code where the activity type was created.
-              type: string
-              minLength: 0
-              maxLength: 20
-            activityCodeList:
-              description: List of Codes for which the activity types are to be searched for.
-              $ref: '#/components/schemas/codeListType'
-            targetHotelCode:
-              description: The hotel code(s) where the activity type should be copied to.
-              $ref: '#/components/schemas/codeListType10'
-    expressionParameterType:
+        activityResultsConfiguration:
+          description: Activity Results Configuration to be created/changed.
+          $ref: '#/components/schemas/activityResultsConfigListType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    autoTraceCodesInfo:
+      type: object
+      description: Request object for creating/changing Auto Trace Codes.
+      properties:
+        autoTraceCodesConfig:
+          description: Auto Trace Code details to be created/updated.
+          $ref: '#/components/schemas/autoTraceCodesListType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    uniqueIDListType:
+      type: array
+      description: Unique Id that references an object uniquely in the system.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/uniqueID_Type'
+    conditionType:
       type: object
       properties:
-        parameter:
-          type: array
-          maxItems: 3
-          items:
-            type: string
-            minLength: 0
-            maxLength: 40
-        functionIdOne:
-          type: number
-        functionIdTwo:
-          type: number
+        leftExpression:
+          $ref: '#/components/schemas/expressionFieldType'
+        operator:
+          $ref: '#/components/schemas/expressionOperatorType'
+        rightExpression:
+          $ref: '#/components/schemas/expressionParameterType'
+        logicalOperator:
+          $ref: '#/components/schemas/logicalOperatorType'
+    autoTraceCodesListType:
+      type: array
+      description: Detailed information of configured Auto Trace Codes.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/autoTraceCodeDetailType'
+    autoTraceDefinitionType:
+      type: object
+      description: Auto Trace Definition information.
+      properties:
+        autoTraceDefinitionDetail:
+          description: Auto Trace Definition detail information.
+          $ref: '#/components/schemas/autoTraceDefinitionDetailType'
+        autoTraceDefinitionActivityInfo:
+          description: Details of Activity Information associated with Auto Trace Definition.
+          $ref: '#/components/schemas/autoTraceDefinitionActivityInfoType'
+        autoTraceDefinitionOwnerInfo:
+          description: Details of Owner Information associated with Auto Trace Definition.
+          $ref: '#/components/schemas/autoTraceDefinitionOwnerInfoType'
+        inactive:
+          description: Determines whether to fetch inactive records or not.
+          type: boolean
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+        code:
+          description: This type holds code of AutoTraceDefinition.
+          type: string
+          minLength: 0
+          maxLength: 20
+    activityOwnerType:
+      type: string
+      description: Activity owner.
+      enum:
+      - Current
+      - Primary
+      - Custom
+      - Block
+      - Room
+      - Catering
     activityTypesConfigDetails:
       type: object
       description: Response object after fetching the activity types.
@@ -2045,153 +2701,6 @@ components:
         activityConfigTypes:
           description: Collection of fetched activity types.
           $ref: '#/components/schemas/activityConfigListType'
-        totalPages:
-          description: Evaluated total page count based on the requested max fetch count.
-          type: integer
-        offset:
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-          type: integer
-        limit:
-          description: Indicates maximum number of records a Web Service should return.
-          type: integer
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        count:
-          description: Total number of rows returned
-          type: integer
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    activityConfigClassType:
-      type: string
-      description: A collection of supported list of activity classes.
-      enum:
-      - Appointment
-      - Todo
-    copyAutoTraceDefinitionCriteriaType:
-      type: object
-      description: Criteria to copy multiple trace definitions from one property to another.
-      properties:
-        copyAutoTraceDefinition:
-          description: The hotel code where the trace definition was created.
-          type: object
-          properties:
-            sourceHotelCode:
-              description: The hotel code where the trace definition was created.
-              type: string
-              minLength: 0
-              maxLength: 20
-            traceDefinitionCodeList:
-              description: List of Trace Definition IDs.
-              $ref: '#/components/schemas/uniqueIDListType'
-            targetHotelCode:
-              description: The hotel code(s) where the activity type should be copied to.
-              $ref: '#/components/schemas/codeListType'
-            copyInstructions:
-              description: Instructions which will be considered when copying from the template. If this element is not sent, all the flags will be ignored.
-              type: object
-              properties:
-                allowOwnerAssignmentsCopy:
-                  description: When true, this will copy the owner assignments to the trace definition.
-                  type: boolean
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    activityTypesConfigInfo:
-      type: object
-      description: Request object for creating/changing activity types.
-      properties:
-        activityConfigTypes:
-          description: Activity type details to be created/updated.
-          $ref: '#/components/schemas/activityConfigListType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    activityResultsConfigDetailType:
-      type: object
-      description: Contains Common Master configuration detail.
-      properties:
-        code:
-          description: Common Master unique code.
-          type: string
-          minLength: 0
-          maxLength: 40
-        description:
-          description: Description of the Master code.
-          $ref: '#/components/schemas/translationTextType2000'
-        displayOrder:
-          description: Common Master record sequence number.
-          type: number
-        inactive:
-          description: Indicates the Activity Results is inactive or not.
-          type: boolean
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-    autoTraceOwnerAssignmentListType:
-      type: array
-      description: Detailed information of trace owner assignment.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/autoTraceOwnerAssignmentType'
-    codeListType10:
-      type: array
-      maxItems: 10
-      items:
-        type: string
-        minLength: 0
-        maxLength: 20
-    conditionGroupType:
-      type: object
-      properties:
-        condition:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/conditionType'
-        conditionGroup:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/conditionGroupType'
-        logicalOperator:
-          $ref: '#/components/schemas/logicalOperatorType'
-    uniqueID_Type:
-      type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
-      properties:
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 40
-    codeListType:
-      type: array
-      maxItems: 4000
-      items:
-        type: string
-        minLength: 0
-        maxLength: 20
-    autoTraceDefinitionsDetails:
-      type: object
-      description: Response object after fetching Auto Trace Definitions.
-      properties:
-        autoTraceDefinitions:
-          description: Collection of fetched Auto Trace Definitions.
-          $ref: '#/components/schemas/autoTraceDefinitionListType'
         totalPages:
           description: Evaluated total page count based on the requested max fetch count.
           type: integer
@@ -2248,315 +2757,74 @@ components:
         title:
           description: Exact copy of the "summary" field on the linked operation.
           type: string
-    autoTraceId:
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
       type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
       properties:
-        url:
-          description: URL that identifies the location associated with the record identified by the UniqueID.
-          type: string
         type:
-          description: A reference to the type of object defined by the UniqueID element.
           type: string
-          minLength: 0
-          maxLength: 20
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
         instance:
-          description: The identification of a record as it exists at a point in time. An instance is used in update messages where the sender must assure the server that the update sent refers to the most recent modification level of the object being updated.
           type: string
-          minLength: 0
-          maxLength: 80
-        idContext:
-          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
           type: string
-          minLength: 0
-          maxLength: 80
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
           type: string
-          minLength: 0
-          maxLength: 80
-        idExtension:
-          description: Additional identifying value assigned by the creating system.
-          type: integer
-    autoTraceDefinitionActivityInfoType:
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
+    copyAutoTraceDefinitionCriteriaType:
       type: object
-      description: Activity Related Information of Auto Trace.
+      description: Criteria to copy multiple trace definitions from one property to another.
       properties:
-        activityClass:
-          description: Activity Class Information.
-          $ref: '#/components/schemas/activityConfigClassType'
-        activityTypeCode:
-          description: Type for the Activity.
-          type: string
-          minLength: 0
-          maxLength: 20
-        purpose:
-          description: Purpose for the Activity.
-          type: string
-          minLength: 0
-          maxLength: 100
-        activityStartTime:
-          description: Start Time of the Activity.
-          type: string
-        activityStartDate:
-          description: Start Date of the Activity.Input for this field is selected from the list.
-          type: string
-        daysFromActivityStartDate:
-          description: Number of days from activity start date
-          type: integer
-    activityResultsConfigInfo:
-      type: object
-      description: Request object for creating/changing Activity Results Configuration.
-      properties:
-        activityResultsConfiguration:
-          description: Activity Results Configuration to be created/changed.
-          $ref: '#/components/schemas/activityResultsConfigListType'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    autoTraceOwnerAssignmentsStatus:
-      type: object
-      description: Response Body.
-      properties:
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    autoTraceCodesInfo:
-      type: object
-      description: Request object for creating/changing Auto Trace Codes.
-      properties:
-        autoTraceCodesConfig:
-          description: Auto Trace Code details to be created/updated.
-          $ref: '#/components/schemas/autoTraceCodesListType'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    autoTraceOwnerAssignmentsDetails:
-      type: object
-      description: Response object to fetch trace owner assignments.
-      properties:
-        autoTraceOwnerAssignments:
-          description: Collection of fetched trace owner assignments.
-          $ref: '#/components/schemas/autoTraceOwnerAssignmentListType'
-        totalPages:
-          description: Evaluated total page count based on the requested max fetch count.
-          type: integer
-        offset:
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-          type: integer
-        limit:
-          description: Indicates maximum number of records a Web Service should return.
-          type: integer
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        count:
-          description: Total number of rows returned
-          type: integer
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    autoTraceCodesDetails:
-      type: object
-      description: Response object to fetch Auto Trace Codes.
-      properties:
-        autoTraceCodesConfig:
-          description: Collection of fetched Auto Trace Codes.
-          $ref: '#/components/schemas/autoTraceCodesListType'
-        totalPages:
-          description: Evaluated total page count based on the requested max fetch count.
-          type: integer
-        offset:
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-          type: integer
-        limit:
-          description: Indicates maximum number of records a Web Service should return.
-          type: integer
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        count:
-          description: Total number of rows returned
-          type: integer
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    autoTraceDefinitionsInfo:
-      type: object
-      description: Request object for creating/changing Auto Trace Definitions.
-      properties:
-        autoTraceDefinitions:
-          description: Auto Trace Definition details to be created/updated.
-          $ref: '#/components/schemas/autoTraceDefinitionListType'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    status:
-      type: object
-      description: Response Body.
-      properties:
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-        links:
-          $ref: '#/components/schemas/links'
-    autoTraceDefinitionOwnerInfoType:
-      type: object
-      description: Owner Information of Auto Trace.
-      properties:
-        ownerofActivity:
-          description: Owner of Auto Trace
-          $ref: '#/components/schemas/activityOwnerType'
-        customOwnerCode:
-          description: Custom owner code
-          type: string
-          minLength: 0
-          maxLength: 20
-        ownerAssignmentExist:
-          description: Indicates if Owner Assignment exists
-          type: boolean
-        ownerAssignment:
-          description: Owner Assignment Information
-          $ref: '#/components/schemas/autoTraceOwnerAssignmentListType'
-    activityResultsConfigDetails:
-      type: object
-      description: Response object for fetching configured Activity Results.
-      properties:
-        activityResultsConfiguration:
-          description: Collection of configured Activity Results.
-          $ref: '#/components/schemas/activityResultsConfigListType'
-        totalPages:
-          description: Evaluated total page count based on the requested max fetch count.
-          type: integer
-        offset:
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-          type: integer
-        limit:
-          description: Indicates maximum number of records a Web Service should return.
-          type: integer
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        count:
-          description: Total number of rows returned
-          type: integer
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    autoTraceDefinitionCopy:
-      type: object
-      description: Request object for copying trace definition.
-      properties:
-        criteria:
-          description: Criteria for copying trace definitions.
-          $ref: '#/components/schemas/copyAutoTraceDefinitionCriteriaType'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    autoTraceDefinitionDetailType:
-      type: object
-      description: Auto Trace Definition detail information.
-      properties:
-        autoTraceId:
-          description: Trace ID.
-          $ref: '#/components/schemas/autoTraceId'
-        hotelId:
-          description: The hotel code where the Auto Trace should be created.
-          type: string
-          minLength: 0
-          maxLength: 20
-        traceCode:
-          description: Trace code
-          type: string
-          minLength: 0
-          maxLength: 20
-        traceGroup:
-          description: Trace Group.
-          $ref: '#/components/schemas/autoTraceGroupConfigType'
-        autoTraceBlockCategory:
-          description: Additional Block information
-          $ref: '#/components/schemas/autoTraceBlockCategoryType'
-        autoTraceTrigger:
-          description: Element to hold information on when auto trace would be created.
-          $ref: '#/components/schemas/autoTraceTriggerCategoryType'
-        fieldNameOnUpdate:
-          description: Element to hold column name of relevant table on selection of Update in AutoTraceTriggerCategoryType.
-          type: string
-        fieldNameOnUpdateId:
-          description: Element to hold column ID of relevant table on selection of Update in AutoTraceTriggerCategoryType.
-          type: string
-        conditions:
-          description: Conditions for trace.
-          $ref: '#/components/schemas/conditionGroupType'
-    managedByOptions:
-      description: Describes of the Configuration is Managed by Enterprise or Property.
+        copyAutoTraceDefinition:
+          description: The hotel code where the trace definition was created.
+          type: object
+          properties:
+            sourceHotelCode:
+              description: The hotel code where the trace definition was created.
+              type: string
+              minLength: 0
+              maxLength: 20
+            traceDefinitionCodeList:
+              description: List of Trace Definition IDs.
+              $ref: '#/components/schemas/uniqueIDListType'
+            targetHotelCode:
+              description: The hotel code(s) where the activity type should be copied to.
+              $ref: '#/components/schemas/codeListType'
+            copyInstructions:
+              description: Instructions which will be considered when copying from the template. If this element is not sent, all the flags will be ignored.
+              type: object
+              properties:
+                allowOwnerAssignmentsCopy:
+                  description: When true, this will copy the owner assignments to the trace definition.
+                  type: boolean
+    autoTraceGroupConfigType:
       type: string
+      description: A collection of supported list of Auto Trace Groups.
       enum:
-      - EnterpriseManaged
-      - PropertyManaged
-      - EnterpriseEnforced
-      - PropertyOverridden
-    logicalOperatorType:
+      - Accounts
+      - Contacts
+      - Blocks
+      - Activities
+    operaVersionNumberType:
       type: string
-      enum:
-      - And
-      - Or
-    autoTraceCodesListType:
-      type: array
-      description: Detailed information of configured Auto Trace Codes.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/autoTraceCodeDetailType'
-    autoTraceDefinitionListType:
-      type: array
-      description: Auto Trace Definition.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/autoTraceDefinitionType'
-    conditionType:
-      type: object
-      properties:
-        leftExpression:
-          $ref: '#/components/schemas/expressionFieldType'
-        operator:
-          $ref: '#/components/schemas/expressionOperatorType'
-        rightExpression:
-          $ref: '#/components/schemas/expressionParameterType'
-        logicalOperator:
-          $ref: '#/components/schemas/logicalOperatorType'
-    expressionFieldType:
-      type: object
-      properties:
-        fieldName:
-          type: string
-          minLength: 0
-          maxLength: 40
-        fieldDescription:
-          type: string
-          minLength: 0
-          maxLength: 40
-        tableName:
-          type: string
-          minLength: 0
-          maxLength: 40
-        virtual:
-          type: boolean
-        dataType:
-          type: string
-          minLength: 0
-          maxLength: 40
-        lovSelected:
-          type: string
-          minLength: 0
-          maxLength: 20
+      description: Current Opera Version Number
+      minLength: 0
+      maxLength: 40
     warningType:
       type: object
       description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
@@ -2603,120 +2871,20 @@ components:
           type: string
           minLength: 1
           maxLength: 8
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
-      required:
-      - type
-      - title
-    activityTypesConfigCopy:
-      type: object
-      properties:
-        criteria:
-          description: Criteria for copying activity types.
-          $ref: '#/components/schemas/copyActivityConfigCriteriaType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    translationTextType2000:
-      type: object
-      description: Contains Multiple translated texts and language codes.
-      properties:
-        defaultText:
-          description: Default text with Character length from 0 to 2000.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        translatedTexts:
-          description: List of translated text and language codes.
-          $ref: '#/components/schemas/translationsTextType'
-    autoTraceDefinitionsStatus:
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    status:
       type: object
       description: Response Body.
       properties:
-        links:
-          $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    autoTraceCodeDetailType:
-      type: object
-      description: Auto Trace Code detail information.
-      properties:
-        traceCode:
-          description: Trace Code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          description: Description for the Trace Code.
-          type: string
-          minLength: 0
-          maxLength: 100
-        traceGroup:
-          description: Trace Group for the Code.
-          $ref: '#/components/schemas/autoTraceGroupConfigType'
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-    autoTraceGroupConfigType:
-      type: string
-      description: A collection of supported list of Auto Trace Groups.
-      enum:
-      - Accounts
-      - Contacts
-      - Blocks
-      - Activities
-    uniqueIDListType:
-      type: array
-      description: Unique Id that references an object uniquely in the system.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/uniqueID_Type'
-    operaVersionNumberType:
-      type: string
-      description: Current Opera Version Number
-      minLength: 0
-      maxLength: 40
-    activityOwnerType:
-      type: string
-      description: Activity owner.
-      enum:
-      - Current
-      - Primary
-      - Custom
-      - Block
-      - Room
-      - Catering
+        links:
+          $ref: '#/components/schemas/links'
     translationsTextType:
       type: array
       description: Language code for the translation.
@@ -2735,123 +2903,24 @@ components:
             minLength: 0
             maxLength: 20
         description: Language code for the translation.
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
+    expressionParameterType:
       type: object
       properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-      required:
-      - type
-      - title
-    expressionOperatorType:
-      type: object
-      properties:
-        operatorName:
-          type: string
-          minLength: 0
-          maxLength: 40
-        operatorDescription:
-          type: string
-          minLength: 0
-          maxLength: 40
-        parameterSize:
+        parameter:
+          type: array
+          maxItems: 3
+          items:
+            type: string
+            minLength: 0
+            maxLength: 40
+        functionIdOne:
           type: number
-    autoTraceDefinitionType:
+        functionIdTwo:
+          type: number
+    autoTraceDefinitionsStatus:
       type: object
-      description: Auto Trace Definition information.
+      description: Response Body.
       properties:
-        autoTraceDefinitionDetail:
-          description: Auto Trace Definition detail information.
-          $ref: '#/components/schemas/autoTraceDefinitionDetailType'
-        autoTraceDefinitionActivityInfo:
-          description: Details of Activity Information associated with Auto Trace Definition.
-          $ref: '#/components/schemas/autoTraceDefinitionActivityInfoType'
-        autoTraceDefinitionOwnerInfo:
-          description: Details of Owner Information associated with Auto Trace Definition.
-          $ref: '#/components/schemas/autoTraceDefinitionOwnerInfoType'
-        inactive:
-          description: Determines whether to fetch inactive records or not.
-          type: boolean
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-        code:
-          description: This type holds code of AutoTraceDefinition.
-          type: string
-          minLength: 0
-          maxLength: 20
-    autoTraceOwnerAssignmentsInfo:
-      type: object
-      description: Request object for creating/changing trace owner assignments.
-      properties:
-        autoTraceOwnerAssignments:
-          description: Trace owner assignments to be created/updated.
-          $ref: '#/components/schemas/autoTraceOwnerAssignmentListType'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    autoTraceOwnerAssignmentType:
-      type: object
-      description: Trace owner assignment detail information.
-      properties:
-        autoTraceOwnerAssignmentId:
-          description: Trace Owner Assignment ID.
-          $ref: '#/components/schemas/uniqueID_Type'
-        hotelId:
-          description: The hotel code where trace owner assignments are created.
-          type: string
-          minLength: 0
-          maxLength: 20
-        ownerCode:
-          description: Owner code of trace owner assignment.
-          type: string
-          minLength: 0
-          maxLength: 20
-        ownerName:
-          description: Owner name of trace owner assignment.
-          type: string
-        traceOwnerCode:
-          description: Trace Owner code of trace owner assignment.
-          type: string
-          minLength: 0
-          maxLength: 20
-        traceOwnerName:
-          description: Trace Owner name of trace owner assignment.
-          type: string
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-    activityResultsConfigListType:
-      type: array
-      description: List of configured Activity Results.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/activityResultsConfigDetailType'
-    operaVersion:
-      type: object
-      description: Response for Ping operation.
-      properties:
-        operaVersion:
-          description: Opera version number.
-          $ref: '#/components/schemas/operaVersionNumberType'
         links:
           $ref: '#/components/schemas/links'
         warnings:
@@ -2860,12 +2929,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/instanceLink'
-    autoTraceBlockCategoryType:
-      type: string
-      description: Additional Block information used to trigger activities.
-      enum:
-      - Deposits
-      - Details
   parameters:
     x-hotelid:
       name: x-hotelid
@@ -2874,22 +2937,9 @@ components:
       required: true
       schema:
         type: string
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
-      in: header
-      required: true
-      schema:
-        type: string
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
-      in: header
-      schema:
-        type: string
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
       in: header
       schema:
         type: string
@@ -2909,10 +2959,17 @@ components:
       schema:
         type: string
         maxLength: 40
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
       in: header
+      schema:
+        type: string
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
       schema:
         type: string
     x-request-id:
@@ -2922,43 +2979,49 @@ components:
       schema:
         type: string
         pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
   responses:
-    '406':
-      description: Not acceptable.
-    '414':
-      description: Request URI Too Large
-    '503':
-      description: Service Unavailable
-    '413':
-      description: Request Entity Too Large
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
     '400':
       description: Bad Request
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/exceptionDetailType'
-    '502':
-      description: Bad Gateway
-    '403':
-      description: Forbidden
     '415':
       description: Unsupported Media Type
+    '406':
+      description: Not acceptable.
     '404':
       description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/exceptionDetailType'
+    '414':
+      description: Request URI Too Large
+    '502':
+      description: Bad Gateway
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '413':
+      description: Request Entity Too Large
     '401':
       description: Unauthorized
+    '403':
+      description: Forbidden
     '405':
       description: Method not allowed
+    '503':
+      description: Service Unavailable
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

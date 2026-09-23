@@ -2,7 +2,13 @@ openapi: 3.2.0
 info:
   title: OPERA Cloud Distribution Outbound Lookup API
   version: 26.2.0.0
-  description: Oracle Hospitality Distribution External Lookup is to get rate plan and room types from external channel partners.<br /><br /> Compatible with OPERA Cloud release 26.2.0.0<br /><br /><p> This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.</p>
+  description: 'Oracle Hospitality Distribution External Lookup is to get rate plan and room types from external channel partners.
+
+
+    Compatible with OPERA Cloud release 26.2.0.0
+
+
+    This document and all content within is available under the Universal Permissive License v 1.0 (https://oss.oracle.com/licenses/upl). Copyright (c) 2020, 2026 Oracle and/or its affiliates.'
   contact:
     email: hospitality_apis_ww_grp@oracle.com
   license:
@@ -228,8 +234,71 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExceptionDetail'
 components:
+  parameters:
+    hotelCode:
+      name: hotelCode
+      description: A unique identifier value for the property/hotel associated with a channel.
+      in: path
+      required: true
+      x-example: XUSXXYY99
+      schema:
+        type: string
+        maxLength: 50
+        minLength: 1
+    channelCode:
+      name: channelCode
+      description: A unique identifier value for the channel associated with a property/hotel.
+      in: query
+      required: false
+      x-example: CH1
+      schema:
+        type: string
+        maxLength: 50
+        minLength: 1
+    authorization:
+      name: authorization
+      description: A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.
+      in: header
+      required: true
+      schema:
+        type: string
+    offset:
+      name: offset
+      in: query
+      description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+      required: true
+      x-example: 1
+      schema:
+        type: integer
+    limit:
+      name: limit
+      in: query
+      description: Indicates maximum number of records a Web Service should return in the response. Maximum record limit is 1000.
+      required: true
+      x-example: 1000
+      schema:
+        type: integer
+        default: 1000
+        maximum: 1000
+    lang:
+      name: lang
+      in: query
+      description: ISO639 / BCP 47 language code format.
+      required: false
+      x-example: en-US
+      schema:
+        type: string
+    roomType:
+      name: roomType
+      description: The OPERA Cloud Hotel/proeprty Room type code.
+      in: query
+      required: false
+      x-example: XA1K
+      schema:
+        type: string
+        minLength: 1
   schemas:
-    ExternalRoomTypesResponse:
+    ExternalRatePlansResponse:
       type: object
       properties:
         property:
@@ -238,7 +307,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/RoomTypeItem'
+            $ref: '#/components/schemas/RatePlanItem'
         hasMore:
           type: boolean
           example: true
@@ -259,28 +328,6 @@ components:
           type: integer
           example: 0
           description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-    RatePlanItem:
-      type: object
-      properties:
-        ratePlan:
-          type: object
-          $ref: '#/components/schemas/RatePlan'
-      required:
-      - ratePlan
-    Property:
-      type: object
-      properties:
-        hotelCode:
-          type: string
-          example: XUSXXYY99
-          description: A unique identifier value for the property/hotel associated with a channel.
-        channelCode:
-          type: string
-          example: CH1
-          description: ' A code for the channel partner that is set up in the Oracle Hospitality Distribution.'
-      required:
-      - hotelCode
-      - channelCode
     Room:
       type: object
       properties:
@@ -298,23 +345,6 @@ components:
           description: Description of the room type.
       required:
       - roomType
-    RatePlan:
-      type: object
-      properties:
-        ratePlanCode:
-          type: string
-          example: XDAILY
-          description: The code for a rate plan.
-        ratePlanName:
-          type: string
-          example: Corporate
-          description: The name of the rate plan.
-        ratePlanDescription:
-          type: string
-          example: Daily discount for a corporation.
-          description: Description of the rate plan code.
-      required:
-      - ratePlanCode
     ExceptionDetail:
       description: Common Error Response format.
       type: object
@@ -349,22 +379,49 @@ components:
           type: integer
           description: An ID for support reasons to be able identify errors better.
           example: '334543532224'
-    Occupancy:
+    Property:
       type: object
       properties:
-        maxOccupancy:
-          type: integer
-          example: 3
-          description: The maximum number of individuals allowed in the room type.
-        maxAdultOccupancy:
-          type: integer
-          example: 3
-          description: The maximum number of adults allowed in the room type.
-        maxChildOccupancy:
-          type: integer
-          example: 2
-          description: The maximum number of children allowed in the room type.
-    ExternalRatePlansResponse:
+        hotelCode:
+          type: string
+          example: XUSXXYY99
+          description: A unique identifier value for the property/hotel associated with a channel.
+        channelCode:
+          type: string
+          example: CH1
+          description: ' A code for the channel partner that is set up in the Oracle Hospitality Distribution.'
+      required:
+      - hotelCode
+      - channelCode
+    RoomTypeItem:
+      type: object
+      properties:
+        room:
+          type: object
+          $ref: '#/components/schemas/Room'
+        occupancy:
+          type: object
+          $ref: '#/components/schemas/Occupancy'
+      required:
+      - room
+    RatePlan:
+      type: object
+      properties:
+        ratePlanCode:
+          type: string
+          example: XDAILY
+          description: The code for a rate plan.
+        ratePlanName:
+          type: string
+          example: Corporate
+          description: The name of the rate plan.
+        ratePlanDescription:
+          type: string
+          example: Daily discount for a corporation.
+          description: Description of the rate plan code.
+      required:
+      - ratePlanCode
+    ExternalRoomTypesResponse:
       type: object
       properties:
         property:
@@ -373,7 +430,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/RatePlanItem'
+            $ref: '#/components/schemas/RoomTypeItem'
         hasMore:
           type: boolean
           example: true
@@ -394,80 +451,29 @@ components:
           type: integer
           example: 0
           description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-    RoomTypeItem:
+    Occupancy:
       type: object
       properties:
-        room:
+        maxOccupancy:
+          type: integer
+          example: 3
+          description: The maximum number of individuals allowed in the room type.
+        maxAdultOccupancy:
+          type: integer
+          example: 3
+          description: The maximum number of adults allowed in the room type.
+        maxChildOccupancy:
+          type: integer
+          example: 2
+          description: The maximum number of children allowed in the room type.
+    RatePlanItem:
+      type: object
+      properties:
+        ratePlan:
           type: object
-          $ref: '#/components/schemas/Room'
-        occupancy:
-          type: object
-          $ref: '#/components/schemas/Occupancy'
+          $ref: '#/components/schemas/RatePlan'
       required:
-      - room
-  parameters:
-    authorization:
-      name: authorization
-      description: A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.
-      in: header
-      required: true
-      schema:
-        type: string
-    limit:
-      name: limit
-      in: query
-      description: Indicates maximum number of records a Web Service should return in the response. Maximum record limit is 1000.
-      required: true
-      x-example: 1000
-      schema:
-        type: integer
-        default: 1000
-        maximum: 1000
-    offset:
-      name: offset
-      in: query
-      description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-      required: true
-      x-example: 1
-      schema:
-        type: integer
-    lang:
-      name: lang
-      in: query
-      description: ISO639 / BCP 47 language code format.
-      required: false
-      x-example: en-US
-      schema:
-        type: string
-    roomType:
-      name: roomType
-      description: The OPERA Cloud Hotel/proeprty Room type code.
-      in: query
-      required: false
-      x-example: XA1K
-      schema:
-        type: string
-        minLength: 1
-    hotelCode:
-      name: hotelCode
-      description: A unique identifier value for the property/hotel associated with a channel.
-      in: path
-      required: true
-      x-example: XUSXXYY99
-      schema:
-        type: string
-        maxLength: 50
-        minLength: 1
-    channelCode:
-      name: channelCode
-      description: A unique identifier value for the channel associated with a property/hotel.
-      in: query
-      required: false
-      x-example: CH1
-      schema:
-        type: string
-        maxLength: 50
-        minLength: 1
+      - ratePlan
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html
