@@ -639,195 +639,43 @@ paths:
       - Customer Management
 components:
   schemas:
-    trackItGroupEnum:
-      type: string
-      enum:
-      - Parcel
-      - Valet
-      - Baggage
-      - Lost
-    givenNameType:
-      type: string
-      description: Given name, first name or names
-      minLength: 0
-      maxLength: 40
-    userSessionDefaultsType:
+    trackItLogType:
       type: object
+      description: Individual activity log related to the Track It ticket.
       properties:
-        dbDateFormat:
-          type: string
-        oracleDateFormat:
-          type: string
-        oracleTimeFormat:
-          type: string
-        javaDateFormat:
-          type: string
-        javaTimeFormat:
-          type: string
-        currencyCode:
+        hotelId:
           type: string
           minLength: 0
           maxLength: 20
-        currencyFormat:
-          type: string
-        defaultLanguage:
-          type: string
-        baseLanguage:
-          type: string
-          minLength: 0
-          maxLength: 20
-    timeSpanType:
-      type: object
-      description: Allows for a choice in description of the amount of time spanned by this type. EndDate specifies a specific date, while Duration provides a measure of time to add to the StartDate to yield end date.
-      properties:
-        startDate:
-          type: string
-          format: date
-          maxLength: 8
-        endDate:
-          type: string
-          format: date
-          maxLength: 8
-        duration:
-          type: string
-    trackItItemsType:
-      type: array
-      description: ''
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/trackItItemType'
-    resGuaranteeType:
-      type: object
-      description: Validations type record returned after Validations are done.
-      properties:
-        guaranteeCode:
-          description: Guarantee Code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        shortDescription:
-          description: Guarantee Code.
-          type: string
-          minLength: 0
-          maxLength: 80
-        onHold:
-          description: Guarantee Code.
-          type: boolean
-    uniqueID_Type:
-      type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
-      properties:
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
+        trackItLogId:
+          $ref: '#/components/schemas/uniqueID_Type'
+        trackItId:
+          $ref: '#/components/schemas/trackItId'
         type:
-          description: A reference to the type of object defined by the UniqueID element.
           type: string
           minLength: 0
-          maxLength: 40
-    searchTrackItItemsRequest:
-      type: object
-      properties:
-        ticketId:
-          type: string
-          description: Complete ticket number of the Track It item.
-        reservationId:
-          type: string
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-        reservationIdContext:
-          type: string
-          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
-        reservationIdType:
-          type: string
-          description: A reference to the type of object defined by the UniqueID element.
-        givenName:
-          type: string
-          description: Given name, first name or names.
-        surname:
-          type: string
-          description: Family name, last name. May also be used for full name if the sending system does not have the ability to separate a full name into its parts, e.g. the surname element may be used to pass the full name.
-        trackItGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/trackItGroupEnum'
-          uniqueItems: true
-          description: Group to which the Track It items belong.
-        types:
-          type: array
-          maxItems: 4000
-          items:
-            type: string
-          description: Track It types based on the Track It group.
-        locations:
-          type: array
-          maxItems: 4000
-          items:
-            type: string
-          description: Locations for Track It location.
-        actions:
-          type: array
-          maxItems: 4000
-          items:
-            type: string
-          description: Track It actions based on Track It groups.
-        actionStatuses:
-          type: array
-          items:
-            $ref: '#/components/schemas/actionStatusEnum'
-          uniqueItems: true
-          description: Action status of the Track It item(Open, Closed).
-        appUserId:
-          type: string
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-        appUserIdContext:
-          type: string
-          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
-        appUserIdType:
-          type: string
-          description: A reference to the type of object defined by the UniqueID element.
-        assignedStatuses:
-          type: array
-          items:
-            $ref: '#/components/schemas/assignedStatusEnum'
-          uniqueItems: true
-          description: Assignment status of the Track It item(Assigned, Unassigned).
-        room:
-          type: string
-          description: Guest's room number if ticket associated with a reservation.
-        followUpDate:
-          type: string
-          format: date
-          description: Follow up date for the ticket.
-        createdOn:
-          type: string
-          format: date
-          description: Date when the ticket was created.
-        createdByUserId:
-          type: string
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-        createdByUserIdContext:
-          type: string
-          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
-        createdByUserIdType:
-          type: string
-          description: A reference to the type of object defined by the UniqueID element.
+          maxLength: 20
         description:
           type: string
-          description: Description associated with the Track It item.
-    trackItItems:
-      type: object
-      description: Response object that retrieves Track It items.
-      properties:
-        trackItItemsInfo:
-          $ref: '#/components/schemas/trackItItemsType'
-        hotelId:
-          $ref: '#/components/schemas/codeType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
+          minLength: 0
+          maxLength: 200
+        businessDate:
+          type: string
+          format: date
+          maxLength: 8
+        logUserId:
+          type: integer
+        logUserName:
+          type: string
+        logDate:
+          type: string
+          format: date-time
+          description: Uses the hotel's time zone.
+    operaVersionNumberType:
+      type: string
+      description: Current Opera Version Number
+      minLength: 0
+      maxLength: 40
     exceptionDetailType:
       title: Error Detail
       description: Complex type that contains error details for a REST call.
@@ -864,6 +712,256 @@ components:
       required:
       - type
       - title
+    trackItId:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        url:
+          description: URL that identifies the location associated with the record identified by the UniqueID.
+          type: string
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 20
+        instance:
+          description: The identification of a record as it exists at a point in time. An instance is used in update messages where the sender must assure the server that the update sent refers to the most recent modification level of the object being updated.
+          type: string
+          minLength: 0
+          maxLength: 80
+        idContext:
+          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+          type: string
+          minLength: 0
+          maxLength: 80
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        idExtension:
+          description: Additional identifying value assigned by the creating system.
+          type: integer
+    pMS_ResStatusType:
+      type: string
+      description: This reservation is in checked in status and the business date is past departure date. This could occur when ORS and PMS are in same environment.
+      enum:
+      - Reserved
+      - Requested
+      - NoShow
+      - Cancelled
+      - InHouse
+      - CheckedOut
+      - Waitlisted
+      - DueIn
+      - DueOut
+      - Walkin
+      - PendingCheckout
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    codeDescriptionType:
+      type: object
+      description: This contains a generic code and description information.
+      properties:
+        code:
+          description: Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: description.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    assignedStatusEnum:
+      type: string
+      enum:
+      - Assigned
+      - Unassigned
+    nameTypeType:
+      type: string
+      enum:
+      - Guest
+      - Company
+      - Agent
+      - Contact
+      - Source
+      - Group
+      - Employee
+      - Hotel
+      - Purge
+    telephoneInfoType:
+      type: object
+      description: Information on a telephone number for the customer.
+      properties:
+        telephone:
+          description: Phone details for the profile.
+          $ref: '#/components/schemas/telephoneType'
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
+    addressSearchType:
+      type: object
+      description: Address Details such as city, state, country, postal code etc.
+      properties:
+        cityName:
+          description: City (e.g., Dublin), town, or postal station (i.e., a postal service territory, often used in a military address).
+          type: string
+          minLength: 0
+          maxLength: 40
+        postalCode:
+          description: Post Office Code number.
+          type: string
+          minLength: 0
+          maxLength: 15
+        state:
+          description: State or Province name (e.g., Texas).
+          type: string
+          minLength: 0
+          maxLength: 20
+        country:
+          description: Country name (e.g., Ireland).
+          $ref: '#/components/schemas/countryNameType'
+        streetAddress:
+          description: First Line of Street Address. For profile search it matches the first Address line.
+          type: string
+          minLength: 0
+          maxLength: 80
+        excludeNoCity:
+          description: When true indicates that only profiles with city will be fetched.
+          type: boolean
+    basicEmailType:
+      type: string
+      description: Email address
+      minLength: 0
+      maxLength: 2000
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
+    userSessionDefaultsType:
+      type: object
+      properties:
+        dbDateFormat:
+          type: string
+        oracleDateFormat:
+          type: string
+        oracleTimeFormat:
+          type: string
+        javaDateFormat:
+          type: string
+        javaTimeFormat:
+          type: string
+        currencyCode:
+          type: string
+          minLength: 0
+          maxLength: 20
+        currencyFormat:
+          type: string
+        defaultLanguage:
+          type: string
+        baseLanguage:
+          type: string
+          minLength: 0
+          maxLength: 20
+    codeType:
+      type: string
+      description: Used for codes in the OPERA Code tables. Possible values of this pattern are 1, 101, 101.EQP, or 101.EQP.X.
+      minLength: 0
+      maxLength: 20
+    currencyAmountType:
+      type: object
+      description: A monetary value expressed with a currency code.
+      properties:
+        amount:
+          description: A monetary amount.
+          type: number
+        currencyCode:
+          description: Provides a currency code to reflect the currency in which an amount may be expressed.
+          type: string
+          minLength: 3
+          maxLength: 3
+    resGuaranteeType:
+      type: object
+      description: Validations type record returned after Validations are done.
+      properties:
+        guaranteeCode:
+          description: Guarantee Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        shortDescription:
+          description: Guarantee Code.
+          type: string
+          minLength: 0
+          maxLength: 80
+        onHold:
+          description: Guarantee Code.
+          type: boolean
     emailInfoType:
       type: object
       description: Information on an email for the customer.
@@ -881,56 +979,41 @@ components:
           type: string
           minLength: 0
           maxLength: 40
-    operaVersion:
+    trackItType:
       type: object
-      description: Response for Ping operation.
+      description: Identifies the kind of Parcel, Baggage, or Lost items or Valet-managed vehicles or services.
       properties:
-        operaVersion:
-          description: Opera version number.
-          $ref: '#/components/schemas/operaVersionNumberType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    codeType:
-      type: string
-      description: Used for codes in the OPERA Code tables. Possible values of this pattern are 1, 101, 101.EQP, or 101.EQP.X.
-      minLength: 0
-      maxLength: 20
-    resAccompanyGuestInfoType:
+        type:
+          $ref: '#/components/schemas/codeDescriptionType'
+        url:
+          $ref: '#/components/schemas/uRLType'
+    attendantType:
       type: object
       properties:
-        firstName:
-          description: Given name, first name or names
-          type: string
-        lastName:
-          description: Family name, last name.
-          type: string
-        fullName:
-          description: String representation of the full name
-          type: string
-        registrationCardNo:
-          description: Unique identifier of the police registration card number.
-          type: string
-          minLength: 0
-          maxLength: 40
-        profileIdList:
-          description: Unique identifiers for the Profile for both internal and external systems. In case of Travel Agent the IATA code and in case of Company can be any form of identifier as id.
-          $ref: '#/components/schemas/profileIdList'
-    vIPType:
-      type: object
-      description: The supplier's ranking of the customer.
-      properties:
-        vipCode:
-          description: VIP Code.
+        attendantId:
           type: string
           minLength: 0
           maxLength: 20
-        vipDescription:
-          description: VIP Description.
+        hotelId:
           type: string
           minLength: 0
-          maxLength: 80
+          maxLength: 20
+    resGuestExternalInfoType:
+      type: object
+      description: Specifies Company or Travel Agent profile using IATA or Corp. No.
+      properties:
+        givenName:
+          description: Given name, first name or names
+          $ref: '#/components/schemas/givenNameType'
+        surname:
+          description: Family name, last name.
+          $ref: '#/components/schemas/surnameType'
+    reservationIdList:
+      type: array
+      description: Unique Id that references an object uniquely in the system.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/uniqueID_Type'
     addressType:
       type: object
       description: Provides address information.
@@ -1020,41 +1103,57 @@ components:
           type: string
           format: date
           maxLength: 8
-    profileIdList:
-      type: array
-      description: Unique Id that references an object uniquely in the system.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/uniqueID_Type'
-    telephoneType:
+    actionStatusEnum:
+      type: string
+      enum:
+      - Open
+      - Closed
+    trackItActionType:
       type: object
-      description: Information on a telephone number for the customer.
+      description: Identifies the response expected from staff or other parties relative to a Track It ticket.
       properties:
-        phoneTechType:
-          description: Indicates type of technology associated with this telephone number, such as Voice, Data, Fax, Pager, Mobile, TTY, etc.
-          type: string
-          minLength: 0
-          maxLength: 20
-        phoneUseType:
-          description: Describes the type of telephone number, in the context of its general use (e.g. Home, Business, Emergency Contact, Travel Arranger, Day, Evening).
-          type: string
-          minLength: 0
-          maxLength: 20
-        phoneUseTypeDescription:
-          description: Description of the PhoneUseType code
+        trackItAction:
+          $ref: '#/components/schemas/codeDescriptionType'
+        status:
+          $ref: '#/components/schemas/actionStatusType'
+    status:
+      type: object
+      description: Response Body.
+      properties:
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    givenNameType:
+      type: string
+      description: Given name, first name or names
+      minLength: 0
+      maxLength: 40
+    emailType:
+      type: object
+      description: Information on an email for the customer.
+      properties:
+        emailAddress:
+          description: Defines the e-mail address.
           type: string
           minLength: 0
           maxLength: 2000
-        phoneNumber:
-          description: Telephone number assigned to a single location.
-          type: string
-          minLength: 0
-          maxLength: 40
-        extension:
-          description: Extension to reach a specific party at the phone number.
+        type:
+          description: Defines the purpose of the e-mail address (e.g. personal, business, listserve).
           type: string
           minLength: 0
           maxLength: 20
+        typeDescription:
+          description: Describes the Type code
+          type: string
+          minLength: 0
+          maxLength: 2000
+        emailFormat:
+          description: Supported Email format.
+          type: string
+          enum:
+          - Html
+          - Text
         primaryInd:
           description: When true, indicates a primary information.
           type: boolean
@@ -1084,32 +1183,6 @@ components:
           type: string
           format: date
           maxLength: 8
-    trackItReservationInfoType:
-      type: object
-      description: Reservation info associated with a Track It item.
-      properties:
-        reservationIdList:
-          $ref: '#/components/schemas/reservationIdList'
-        timeSpan:
-          $ref: '#/components/schemas/timeSpanType'
-        guestInfo:
-          $ref: '#/components/schemas/resGuestInfoType'
-        roomType:
-          type: string
-          minLength: 0
-          maxLength: 20
-        roomId:
-          type: string
-          minLength: 0
-          maxLength: 20
-        roomStatus:
-          $ref: '#/components/schemas/housekeepingRoomStatusType'
-        guarantee:
-          $ref: '#/components/schemas/resGuaranteeType'
-        reservationStatus:
-          $ref: '#/components/schemas/pMS_ResStatusType'
-        computedReservationStatus:
-          $ref: '#/components/schemas/pMS_ResStatusType'
     anonymizationType:
       type: object
       description: Provides information about guest's anonymization status.
@@ -1121,354 +1194,21 @@ components:
           description: Date and Time when the guest was anonymized.
           type: string
           format: date-time
-    trackItLogListType:
-      type: array
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/trackItLogType'
-    membershipInfoType:
-      type: object
-      description: The Membership object identifies the frequent customer reward program.
-      properties:
-        membershipId:
-          description: Membership ID (Unique ID from the memberships table).
-          type: number
-        programCode:
-          description: The code or name of the membership program ('Hertz', 'AAdvantage', etc.).
-          type: string
-          minLength: 0
-          maxLength: 20
-        bonusCode:
-          description: The code or name of the bonus program. BonusCode can be used to indicate the level of membership (Gold Club, Platinum member, etc.)
-          type: string
-          minLength: 0
-          maxLength: 20
-        membershipTypeDesc:
-          description: The description of the ProgramCode.(Delta Previlige for code DP)
-          type: string
-          minLength: 0
-          maxLength: 2000
-        membershipLevelDesc:
-          description: The description of the Bonus Code.(Platinum for code P)
-          type: string
-          minLength: 0
-          maxLength: 2000
-        accountId:
-          description: The account identification number for this particular member in this particular program.
-          type: string
-          minLength: 0
-          maxLength: 50
-        membershipLevel:
-          description: The code or name of the membership level and indicates the level of membership (Gold Club, Platinum member, etc.). This is same as the BonusCode.
-          type: string
-          minLength: 0
-          maxLength: 20
-        playerRanking:
-          description: Ranking assigned to the Player Profile by the Gaming system.
-          type: integer
-    basicEmailType:
-      type: string
-      description: Email address
-      minLength: 0
-      maxLength: 2000
-    trackItItemType:
-      type: object
-      description: Detailed information of a Track It item.
-      properties:
-        hotelId:
-          type: string
-          minLength: 0
-          maxLength: 20
-        trackItId:
-          $ref: '#/components/schemas/trackItId'
-        group:
-          $ref: '#/components/schemas/trackItGroup'
-        ticketNumber:
-          type: string
-          minLength: 0
-          maxLength: 80
-        referenceNumber:
-          type: string
-          minLength: 0
-          maxLength: 20
-        type:
-          $ref: '#/components/schemas/trackItType'
-        action:
-          $ref: '#/components/schemas/trackItActionType'
-        location:
-          $ref: '#/components/schemas/codeDescriptionType'
-        quantity:
-          type: integer
-        followUpDate:
-          type: string
-          format: date
-          maxLength: 8
-        description:
-          type: string
-          minLength: 0
-          maxLength: 2000
-        assignedTo:
-          $ref: '#/components/schemas/applicationUserType'
-        reservationInfo:
-          $ref: '#/components/schemas/trackItReservationInfoType'
-        trackItLogList:
-          $ref: '#/components/schemas/trackItLogListType'
-    uRLType:
-      type: object
-      description: Web site address, in IETF(The Internet Engineering Task Force) specified format.
-      properties:
-        value:
-          type: string
-          description: Property Value
-        type:
-          description: Defines the purpose of the URL address, such as personal, business, public, etc.
-          type: string
-          minLength: 0
-          maxLength: 20
-        typeDescription:
-          description: Describes the Type code
-          type: string
-          minLength: 0
-          maxLength: 2000
-        primaryInd:
-          description: When true, indicates a primary information.
-          type: boolean
-        orderSequence:
-          description: Display Order sequence.
-          type: number
-    addressInfoType:
-      type: object
-      description: Provides address information.
-      properties:
-        address:
-          description: Address details for the profile.
-          $ref: '#/components/schemas/addressType'
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 40
-    resGuestExternalInfoType:
-      type: object
-      description: Specifies Company or Travel Agent profile using IATA or Corp. No.
-      properties:
-        givenName:
-          description: Given name, first name or names
-          $ref: '#/components/schemas/givenNameType'
-        surname:
-          description: Family name, last name.
-          $ref: '#/components/schemas/surnameType'
-    anonymizationStatusType:
-      type: string
-      description: Guest has been anonymized.
-      enum:
-      - Requested
-      - Anonymized
-    nameTypeType:
-      type: string
-      enum:
-      - Guest
-      - Company
-      - Agent
-      - Contact
-      - Source
-      - Group
-      - Employee
-      - Hotel
-      - Purge
     parametersType:
       type: array
       description: Collection of generic Name-Value-Pair parameters.
       maxItems: 4000
       items:
         $ref: '#/components/schemas/parameterType'
-    trackItActionType:
-      type: object
-      description: Identifies the response expected from staff or other parties relative to a Track It ticket.
-      properties:
-        trackItAction:
-          $ref: '#/components/schemas/codeDescriptionType'
-        status:
-          $ref: '#/components/schemas/actionStatusType'
-    employeeInfoType:
-      type: object
-      properties:
-        personName:
-          $ref: '#/components/schemas/personNameType'
-        profileId:
-          $ref: '#/components/schemas/uniqueID_Type'
-        addressInfo:
-          $ref: '#/components/schemas/addressInfoType'
-        emailInfo:
-          $ref: '#/components/schemas/emailInfoType'
-        phoneInfo:
-          $ref: '#/components/schemas/telephoneInfoType'
-        department:
-          $ref: '#/components/schemas/codeDescriptionType'
-        gender:
-          description: Identifies the profile gender code selected from Gender types List of values. Gender types LOV provides the values configured at gender configuration.
-          type: string
-          minLength: 0
-          maxLength: 20
-        birthDate:
-          description: Indicates the date of birth as indicated in the document, in ISO 8601 prescribed format.
-          type: string
-          format: date
-          maxLength: 8
-        birthDateMasked:
-          description: Indicates the date of birth as masked.
-          type: string
-    trackItLogType:
-      type: object
-      description: Individual activity log related to the Track It ticket.
-      properties:
-        hotelId:
-          type: string
-          minLength: 0
-          maxLength: 20
-        trackItLogId:
-          $ref: '#/components/schemas/uniqueID_Type'
-        trackItId:
-          $ref: '#/components/schemas/trackItId'
-        type:
-          type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          type: string
-          minLength: 0
-          maxLength: 200
-        businessDate:
-          type: string
-          format: date
-          maxLength: 8
-        logUserId:
-          type: integer
-        logUserName:
-          type: string
-        logDate:
-          type: string
-          format: date-time
-          description: Uses the hotel's time zone.
-    trackItId:
-      type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
-      properties:
-        url:
-          description: URL that identifies the location associated with the record identified by the UniqueID.
-          type: string
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 20
-        instance:
-          description: The identification of a record as it exists at a point in time. An instance is used in update messages where the sender must assure the server that the update sent refers to the most recent modification level of the object being updated.
-          type: string
-          minLength: 0
-          maxLength: 80
-        idContext:
-          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
-          type: string
-          minLength: 0
-          maxLength: 80
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        idExtension:
-          description: Additional identifying value assigned by the creating system.
-          type: integer
-    telephoneInfoType:
-      type: object
-      description: Information on a telephone number for the customer.
-      properties:
-        telephone:
-          description: Phone details for the profile.
-          $ref: '#/components/schemas/telephoneType'
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 40
-    currencyAmountType:
-      type: object
-      description: A monetary value expressed with a currency code.
-      properties:
-        amount:
-          description: A monetary amount.
-          type: number
-        currencyCode:
-          description: Provides a currency code to reflect the currency in which an amount may be expressed.
-          type: string
-          minLength: 3
-          maxLength: 3
-    reservationIdList:
+    links:
       type: array
-      description: Unique Id that references an object uniquely in the system.
-      maxItems: 4000
       items:
-        $ref: '#/components/schemas/uniqueID_Type'
-    personNameTypeType:
+        $ref: '#/components/schemas/instanceLink'
+    phoneNumberType:
       type: string
-      description: Person's name in an external system.
-      enum:
-      - Primary
-      - Alternate
-      - Incognito
-      - External
-      - Phonetic
-    addressSearchType:
-      type: object
-      description: Address Details such as city, state, country, postal code etc.
-      properties:
-        cityName:
-          description: City (e.g., Dublin), town, or postal station (i.e., a postal service territory, often used in a military address).
-          type: string
-          minLength: 0
-          maxLength: 40
-        postalCode:
-          description: Post Office Code number.
-          type: string
-          minLength: 0
-          maxLength: 15
-        state:
-          description: State or Province name (e.g., Texas).
-          type: string
-          minLength: 0
-          maxLength: 20
-        country:
-          description: Country name (e.g., Ireland).
-          $ref: '#/components/schemas/countryNameType'
-        streetAddress:
-          description: First Line of Street Address. For profile search it matches the first Address line.
-          type: string
-          minLength: 0
-          maxLength: 80
-        excludeNoCity:
-          description: When true indicates that only profiles with city will be fetched.
-          type: boolean
-    namePrefixType:
-      type: string
-      description: Salutation of honorific. (e.g., Mr. Mrs., Ms., Miss, Dr.)
+      description: Phone number
       minLength: 0
       maxLength: 40
-    actionStatusEnum:
-      type: string
-      enum:
-      - Open
-      - Closed
     applicationUserType:
       type: object
       properties:
@@ -1535,96 +1275,134 @@ components:
           $ref: '#/components/schemas/userSessionInfoType'
         attendantInfo:
           $ref: '#/components/schemas/attendantType'
-    surnameType:
+    personNameTypeType:
       type: string
-      description: Family name, last name.
-      minLength: 0
-      maxLength: 40
-    codeDescriptionType:
-      type: object
-      description: This contains a generic code and description information.
-      properties:
-        code:
-          description: Code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          description: description.
-          type: string
-          minLength: 0
-          maxLength: 2000
-    countryNameType:
-      type: object
-      description: Code for a country or a nationality.
-      properties:
-        value:
-          type: string
-          description: Used for Character Strings, length 0 to 200.
-          minLength: 0
-          maxLength: 200
-        code:
-          description: Code for a country or a nationality.
-          type: string
-          minLength: 0
-          maxLength: 20
-    parameterType:
-      type: object
-      description: Name value pair type that will hold generic parameter information. Only use this type when the parameters being passed are too dynamic to be defined.
-      properties:
-        parameterName:
-          description: Name of the parameter.
-          type: string
-        parameterValue:
-          description: Value of the parameter.
-          type: string
-    assignedStatusEnum:
-      type: string
+      description: Person's name in an external system.
       enum:
-      - Assigned
-      - Unassigned
-    resAccompanyGuestListType:
+      - Primary
+      - Alternate
+      - Incognito
+      - External
+      - Phonetic
+    anonymizationStatusType:
+      type: string
+      description: Guest has been anonymized.
+      enum:
+      - Requested
+      - Anonymized
+    housekeepingRoomStatusType:
+      type: string
+      description: Simple type for room status instructions to be used in requests for fetching housekeeping rooms. Valid status values are Clean, Dirty, Pickup, Inspected, OutOfOrder, OutOfService.
+      enum:
+      - Clean
+      - Dirty
+      - Pickup
+      - Inspected
+      - OutOfOrder
+      - OutOfService
+    trackItItemsType:
       type: array
-      description: Collection of accompany guests
+      description: ''
       maxItems: 4000
       items:
-        $ref: '#/components/schemas/resAccompanyGuestInfoType'
-    attendantType:
+        $ref: '#/components/schemas/trackItItemType'
+    trackItItemType:
       type: object
+      description: Detailed information of a Track It item.
       properties:
-        attendantId:
-          type: string
-          minLength: 0
-          maxLength: 20
         hotelId:
           type: string
           minLength: 0
           maxLength: 20
-    emailType:
-      type: object
-      description: Information on an email for the customer.
-      properties:
-        emailAddress:
-          description: Defines the e-mail address.
+        trackItId:
+          $ref: '#/components/schemas/trackItId'
+        group:
+          $ref: '#/components/schemas/trackItGroup'
+        ticketNumber:
           type: string
           minLength: 0
-          maxLength: 2000
-        type:
-          description: Defines the purpose of the e-mail address (e.g. personal, business, listserve).
+          maxLength: 80
+        referenceNumber:
           type: string
           minLength: 0
           maxLength: 20
-        typeDescription:
-          description: Describes the Type code
+        type:
+          $ref: '#/components/schemas/trackItType'
+        action:
+          $ref: '#/components/schemas/trackItActionType'
+        location:
+          $ref: '#/components/schemas/codeDescriptionType'
+        quantity:
+          type: integer
+        followUpDate:
+          type: string
+          format: date
+          maxLength: 8
+        description:
           type: string
           minLength: 0
           maxLength: 2000
-        emailFormat:
-          description: Supported Email format.
+        assignedTo:
+          $ref: '#/components/schemas/applicationUserType'
+        reservationInfo:
+          $ref: '#/components/schemas/trackItReservationInfoType'
+        trackItLogList:
+          $ref: '#/components/schemas/trackItLogListType'
+    profileIdList:
+      type: array
+      description: Unique Id that references an object uniquely in the system.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/uniqueID_Type'
+    resAccompanyGuestInfoType:
+      type: object
+      properties:
+        firstName:
+          description: Given name, first name or names
           type: string
-          enum:
-          - Html
-          - Text
+        lastName:
+          description: Family name, last name.
+          type: string
+        fullName:
+          description: String representation of the full name
+          type: string
+        registrationCardNo:
+          description: Unique identifier of the police registration card number.
+          type: string
+          minLength: 0
+          maxLength: 40
+        profileIdList:
+          description: Unique identifiers for the Profile for both internal and external systems. In case of Travel Agent the IATA code and in case of Company can be any form of identifier as id.
+          $ref: '#/components/schemas/profileIdList'
+    telephoneType:
+      type: object
+      description: Information on a telephone number for the customer.
+      properties:
+        phoneTechType:
+          description: Indicates type of technology associated with this telephone number, such as Voice, Data, Fax, Pager, Mobile, TTY, etc.
+          type: string
+          minLength: 0
+          maxLength: 20
+        phoneUseType:
+          description: Describes the type of telephone number, in the context of its general use (e.g. Home, Business, Emergency Contact, Travel Arranger, Day, Evening).
+          type: string
+          minLength: 0
+          maxLength: 20
+        phoneUseTypeDescription:
+          description: Description of the PhoneUseType code
+          type: string
+          minLength: 0
+          maxLength: 2000
+        phoneNumber:
+          description: Telephone number assigned to a single location.
+          type: string
+          minLength: 0
+          maxLength: 40
+        extension:
+          description: Extension to reach a specific party at the phone number.
+          type: string
+          minLength: 0
+          maxLength: 20
         primaryInd:
           description: When true, indicates a primary information.
           type: boolean
@@ -1654,98 +1432,55 @@ components:
           type: string
           format: date
           maxLength: 8
-    personNameType:
-      type: object
-      description: This provides name information for a person.
-      properties:
-        namePrefix:
-          description: Salutation of honorific (e.g. Mr., Mrs., Ms., Miss, Dr.)
-          type: string
-          minLength: 0
-          maxLength: 40
-        givenName:
-          description: Given name, first name or names.
-          type: string
-          minLength: 0
-          maxLength: 40
-        middleName:
-          description: The middle name of the person name.
-          type: string
-          minLength: 0
-          maxLength: 40
-        surname:
-          description: Family name, last name. May also be used for full name if the sending system does not have the ability to separate a full name into its parts, e.g. the surname element may be used to pass the full name.
-          type: string
-          minLength: 0
-          maxLength: 40
-        nameSuffix:
-          description: Hold various name suffixes and letters (e.g. Jr., Sr., III, Ret., Esq.)
-          type: string
-          minLength: 0
-          maxLength: 40
-        nameTitle:
-          description: Degree or honors (e.g., Ph.D., M.D.)
-          type: string
-          minLength: 0
-          maxLength: 80
-        nameTitleSuffix:
-          description: Title Suffix. Must be populated if ADVANCED_TITLE is on.
-          type: integer
-        envelopeGreeting:
-          description: Envelope Greeting of the profile
-          type: string
-        salutation:
-          description: Salutation of the profile
-          type: string
-        nameType:
-          description: Type of name of the individual, such as former, nickname, alternate or alias name.
-          $ref: '#/components/schemas/personNameTypeType'
-        language:
-          description: Language identification.
-          type: string
-          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
-        externalSystem:
-          description: When name type is external, indicates the external system the name belongs to.
-          type: string
-          minLength: 0
-          maxLength: 40
-    trackItType:
-      type: object
-      description: Identifies the kind of Parcel, Baggage, or Lost items or Valet-managed vehicles or services.
-      properties:
-        type:
-          $ref: '#/components/schemas/codeDescriptionType'
-        url:
-          $ref: '#/components/schemas/uRLType'
-    pMS_ResStatusType:
-      type: string
-      description: This reservation is in checked in status and the business date is past departure date. This could occur when ORS and PMS are in same environment.
-      enum:
-      - Reserved
-      - Requested
-      - NoShow
-      - Cancelled
-      - InHouse
-      - CheckedOut
-      - Waitlisted
-      - DueIn
-      - DueOut
-      - Walkin
-      - PendingCheckout
-    trackItGroup:
-      type: string
-      description: Group to which the Track It items belong.
-      enum:
-      - Parcel
-      - Valet
-      - Baggage
-      - Lost
     actionStatusType:
       type: string
       description: Action status of the Track It item(Open, Closed).
       enum:
       - Open
       - Closed
+    vIPType:
+      type: object
+      description: The supplier's ranking of the customer.
+      properties:
+        vipCode:
+          description: VIP Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        vipDescription:
+          description: VIP Description.
+          type: string
+          minLength: 0
+          maxLength: 80
+    trackItItems:
+      type: object
+      description: Response object that retrieves Track It items.
+      properties:
+        trackItItemsInfo:
+          $ref: '#/components/schemas/trackItItemsType'
+        hotelId:
+          $ref: '#/components/schemas/codeType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    addressInfoType:
+      type: object
+      description: Provides address information.
+      properties:
+        address:
+          description: Address details for the profile.
+          $ref: '#/components/schemas/addressType'
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
     resGuestInfoType:
       type: object
       description: Specifies Company or Travel Agent profile using IATA or Corp. No.
@@ -1860,109 +1595,318 @@ components:
           type: string
           minLength: 0
           maxLength: 40
-    guestLastStayInfoType:
+    timeSpanType:
       type: object
-      description: Contains last stay related details of the guest.
+      description: Allows for a choice in description of the amount of time spanned by this type. EndDate specifies a specific date, while Duration provides a measure of time to add to the StartDate to yield end date.
       properties:
-        lastStayDate:
-          description: Guest's last stay date.
+        startDate:
           type: string
           format: date
           maxLength: 8
-        lastStayRoom:
-          description: Room Number where the guest stayed.
+        endDate:
+          type: string
+          format: date
+          maxLength: 8
+        duration:
+          type: string
+    trackItLogListType:
+      type: array
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/trackItLogType'
+    trackItReservationInfoType:
+      type: object
+      description: Reservation info associated with a Track It item.
+      properties:
+        reservationIdList:
+          $ref: '#/components/schemas/reservationIdList'
+        timeSpan:
+          $ref: '#/components/schemas/timeSpanType'
+        guestInfo:
+          $ref: '#/components/schemas/resGuestInfoType'
+        roomType:
           type: string
           minLength: 0
           maxLength: 20
-        lastStayRate:
-          description: The Rate amount of the guest's last stay.
-          $ref: '#/components/schemas/currencyAmountType'
-        totalStay:
-          description: The total number of previous stay of the guest.
-          type: integer
-    instanceLink:
+        roomId:
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomStatus:
+          $ref: '#/components/schemas/housekeepingRoomStatusType'
+        guarantee:
+          $ref: '#/components/schemas/resGuaranteeType'
+        reservationStatus:
+          $ref: '#/components/schemas/pMS_ResStatusType'
+        computedReservationStatus:
+          $ref: '#/components/schemas/pMS_ResStatusType'
+    uRLType:
       type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      description: Web site address, in IETF(The Internet Engineering Task Force) specified format.
       properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+        value:
           type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
-        title:
-          description: Exact copy of the "summary" field on the linked operation.
-          type: string
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
-      type: object
-      properties:
+          description: Property Value
         type:
+          description: Defines the purpose of the URL address, such as personal, business, public, etc.
           type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
+          minLength: 0
+          maxLength: 20
+        typeDescription:
+          description: Describes the Type code
           type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
+          minLength: 0
+          maxLength: 2000
+        primaryInd:
+          description: When true, indicates a primary information.
+          type: boolean
+        orderSequence:
+          description: Display Order sequence.
+          type: number
+    personNameType:
+      type: object
+      description: This provides name information for a person.
+      properties:
+        namePrefix:
+          description: Salutation of honorific (e.g. Mr., Mrs., Ms., Miss, Dr.)
+          type: string
+          minLength: 0
+          maxLength: 40
+        givenName:
+          description: Given name, first name or names.
+          type: string
+          minLength: 0
+          maxLength: 40
+        middleName:
+          description: The middle name of the person name.
+          type: string
+          minLength: 0
+          maxLength: 40
+        surname:
+          description: Family name, last name. May also be used for full name if the sending system does not have the ability to separate a full name into its parts, e.g. the surname element may be used to pass the full name.
+          type: string
+          minLength: 0
+          maxLength: 40
+        nameSuffix:
+          description: Hold various name suffixes and letters (e.g. Jr., Sr., III, Ret., Esq.)
+          type: string
+          minLength: 0
+          maxLength: 40
+        nameTitle:
+          description: Degree or honors (e.g., Ph.D., M.D.)
+          type: string
+          minLength: 0
+          maxLength: 80
+        nameTitleSuffix:
+          description: Title Suffix. Must be populated if ADVANCED_TITLE is on.
           type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
+        envelopeGreeting:
+          description: Envelope Greeting of the profile
           type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
+        salutation:
+          description: Salutation of the profile
           type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
+        nameType:
+          description: Type of name of the individual, such as former, nickname, alternate or alias name.
+          $ref: '#/components/schemas/personNameTypeType'
+        language:
+          description: Language identification.
           type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        externalSystem:
+          description: When name type is external, indicates the external system the name belongs to.
           type: string
-          description: Path to the problem at the resource or property level.
-      required:
-      - type
-      - title
-    phoneNumberType:
+          minLength: 0
+          maxLength: 40
+    membershipInfoType:
+      type: object
+      description: The Membership object identifies the frequent customer reward program.
+      properties:
+        membershipId:
+          description: Membership ID (Unique ID from the memberships table).
+          type: number
+        programCode:
+          description: The code or name of the membership program ('Hertz', 'AAdvantage', etc.).
+          type: string
+          minLength: 0
+          maxLength: 20
+        bonusCode:
+          description: The code or name of the bonus program. BonusCode can be used to indicate the level of membership (Gold Club, Platinum member, etc.)
+          type: string
+          minLength: 0
+          maxLength: 20
+        membershipTypeDesc:
+          description: The description of the ProgramCode.(Delta Previlige for code DP)
+          type: string
+          minLength: 0
+          maxLength: 2000
+        membershipLevelDesc:
+          description: The description of the Bonus Code.(Platinum for code P)
+          type: string
+          minLength: 0
+          maxLength: 2000
+        accountId:
+          description: The account identification number for this particular member in this particular program.
+          type: string
+          minLength: 0
+          maxLength: 50
+        membershipLevel:
+          description: The code or name of the membership level and indicates the level of membership (Gold Club, Platinum member, etc.). This is same as the BonusCode.
+          type: string
+          minLength: 0
+          maxLength: 20
+        playerRanking:
+          description: Ranking assigned to the Player Profile by the Gaming system.
+          type: integer
+    trackItGroupEnum:
       type: string
-      description: Phone number
-      minLength: 0
-      maxLength: 40
-    housekeepingRoomStatusType:
-      type: string
-      description: Simple type for room status instructions to be used in requests for fetching housekeeping rooms. Valid status values are Clean, Dirty, Pickup, Inspected, OutOfOrder, OutOfService.
       enum:
-      - Clean
-      - Dirty
-      - Pickup
-      - Inspected
-      - OutOfOrder
-      - OutOfService
-    operaVersionNumberType:
-      type: string
-      description: Current Opera Version Number
-      minLength: 0
-      maxLength: 40
+      - Parcel
+      - Valet
+      - Baggage
+      - Lost
+    userSessionInfoType:
+      type: object
+      properties:
+        businessDate:
+          type: string
+          format: date
+          maxLength: 8
+        systemDate:
+          type: string
+          format: date
+          maxLength: 8
+        terminal:
+          type: string
+        runningApp:
+          type: string
+        shareProfiles:
+          type: boolean
+        hotel:
+          $ref: '#/components/schemas/codeDescriptionType'
+        cro:
+          $ref: '#/components/schemas/codeDescriptionType'
+        chain:
+          type: string
+          minLength: 0
+          maxLength: 20
+        cROCountryCode:
+          type: string
+          minLength: 0
+          maxLength: 20
+        sessionDefaults:
+          $ref: '#/components/schemas/userSessionDefaultsType'
+        parameters:
+          $ref: '#/components/schemas/parametersType'
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    searchTrackItItemsRequest:
+      type: object
+      properties:
+        ticketId:
+          type: string
+          description: Complete ticket number of the Track It item.
+        reservationId:
+          type: string
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        reservationIdContext:
+          type: string
+          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+        reservationIdType:
+          type: string
+          description: A reference to the type of object defined by the UniqueID element.
+        givenName:
+          type: string
+          description: Given name, first name or names.
+        surname:
+          type: string
+          description: Family name, last name. May also be used for full name if the sending system does not have the ability to separate a full name into its parts, e.g. the surname element may be used to pass the full name.
+        trackItGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/trackItGroupEnum'
+          uniqueItems: true
+          description: Group to which the Track It items belong.
+        types:
+          type: array
+          maxItems: 4000
+          items:
+            type: string
+          description: Track It types based on the Track It group.
+        locations:
+          type: array
+          maxItems: 4000
+          items:
+            type: string
+          description: Locations for Track It location.
+        actions:
+          type: array
+          maxItems: 4000
+          items:
+            type: string
+          description: Track It actions based on Track It groups.
+        actionStatuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/actionStatusEnum'
+          uniqueItems: true
+          description: Action status of the Track It item(Open, Closed).
+        appUserId:
+          type: string
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        appUserIdContext:
+          type: string
+          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+        appUserIdType:
+          type: string
+          description: A reference to the type of object defined by the UniqueID element.
+        assignedStatuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/assignedStatusEnum'
+          uniqueItems: true
+          description: Assignment status of the Track It item(Assigned, Unassigned).
+        room:
+          type: string
+          description: Guest's room number if ticket associated with a reservation.
+        followUpDate:
+          type: string
+          format: date
+          description: Follow up date for the ticket.
+        createdOn:
+          type: string
+          format: date
+          description: Date when the ticket was created.
+        createdByUserId:
+          type: string
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        createdByUserIdContext:
+          type: string
+          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+        createdByUserIdType:
+          type: string
+          description: A reference to the type of object defined by the UniqueID element.
+        description:
+          type: string
+          description: Description associated with the Track It item.
+    uniqueID_Type:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
     warningType:
       type: object
       description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
@@ -2009,69 +1953,164 @@ components:
           type: string
           minLength: 1
           maxLength: 8
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    status:
+    guestLastStayInfoType:
       type: object
-      description: Response Body.
+      description: Contains last stay related details of the guest.
       properties:
-        warnings:
-          $ref: '#/components/schemas/warningsType'
+        lastStayDate:
+          description: Guest's last stay date.
+          type: string
+          format: date
+          maxLength: 8
+        lastStayRoom:
+          description: Room Number where the guest stayed.
+          type: string
+          minLength: 0
+          maxLength: 20
+        lastStayRate:
+          description: The Rate amount of the guest's last stay.
+          $ref: '#/components/schemas/currencyAmountType'
+        totalStay:
+          description: The total number of previous stay of the guest.
+          type: integer
+    employeeInfoType:
+      type: object
+      properties:
+        personName:
+          $ref: '#/components/schemas/personNameType'
+        profileId:
+          $ref: '#/components/schemas/uniqueID_Type'
+        addressInfo:
+          $ref: '#/components/schemas/addressInfoType'
+        emailInfo:
+          $ref: '#/components/schemas/emailInfoType'
+        phoneInfo:
+          $ref: '#/components/schemas/telephoneInfoType'
+        department:
+          $ref: '#/components/schemas/codeDescriptionType'
+        gender:
+          description: Identifies the profile gender code selected from Gender types List of values. Gender types LOV provides the values configured at gender configuration.
+          type: string
+          minLength: 0
+          maxLength: 20
+        birthDate:
+          description: Indicates the date of birth as indicated in the document, in ISO 8601 prescribed format.
+          type: string
+          format: date
+          maxLength: 8
+        birthDateMasked:
+          description: Indicates the date of birth as masked.
+          type: string
+    parameterType:
+      type: object
+      description: Name value pair type that will hold generic parameter information. Only use this type when the parameters being passed are too dynamic to be defined.
+      properties:
+        parameterName:
+          description: Name of the parameter.
+          type: string
+        parameterValue:
+          description: Value of the parameter.
+          type: string
+    trackItGroup:
+      type: string
+      description: Group to which the Track It items belong.
+      enum:
+      - Parcel
+      - Valet
+      - Baggage
+      - Lost
+    surnameType:
+      type: string
+      description: Family name, last name.
+      minLength: 0
+      maxLength: 40
+    namePrefixType:
+      type: string
+      description: Salutation of honorific. (e.g., Mr. Mrs., Ms., Miss, Dr.)
+      minLength: 0
+      maxLength: 40
+    countryNameType:
+      type: object
+      description: Code for a country or a nationality.
+      properties:
+        value:
+          type: string
+          description: Used for Character Strings, length 0 to 200.
+          minLength: 0
+          maxLength: 200
+        code:
+          description: Code for a country or a nationality.
+          type: string
+          minLength: 0
+          maxLength: 20
+    operaVersion:
+      type: object
+      description: Response for Ping operation.
+      properties:
+        operaVersion:
+          description: Opera version number.
+          $ref: '#/components/schemas/operaVersionNumberType'
         links:
           $ref: '#/components/schemas/links'
-    userSessionInfoType:
-      type: object
-      properties:
-        businessDate:
-          type: string
-          format: date
-          maxLength: 8
-        systemDate:
-          type: string
-          format: date
-          maxLength: 8
-        terminal:
-          type: string
-        runningApp:
-          type: string
-        shareProfiles:
-          type: boolean
-        hotel:
-          $ref: '#/components/schemas/codeDescriptionType'
-        cro:
-          $ref: '#/components/schemas/codeDescriptionType'
-        chain:
-          type: string
-          minLength: 0
-          maxLength: 20
-        cROCountryCode:
-          type: string
-          minLength: 0
-          maxLength: 20
-        sessionDefaults:
-          $ref: '#/components/schemas/userSessionDefaultsType'
-        parameters:
-          $ref: '#/components/schemas/parametersType'
-    links:
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    resAccompanyGuestListType:
       type: array
+      description: Collection of accompany guests
+      maxItems: 4000
       items:
-        $ref: '#/components/schemas/instanceLink'
+        $ref: '#/components/schemas/resAccompanyGuestInfoType'
+  responses:
+    '405':
+      description: Method not allowed
+    '413':
+      description: Request Entity Too Large
+    '406':
+      description: Not acceptable.
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '401':
+      description: Unauthorized
+    '502':
+      description: Bad Gateway
+    '414':
+      description: Request URI Too Large
+    '503':
+      description: Service Unavailable
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '403':
+      description: Forbidden
+    '415':
+      description: Unsupported Media Type
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
   parameters:
+    x-externalsystem:
+      name: x-externalsystem
+      description: External system code.
+      in: header
+      x-example: EXTERNALSYSTEMCODE
+      schema:
+        type: string
+        maxLength: 40
     x-hotelid:
       name: x-hotelid
       description: Mandatory parameter to identify the hotel code where the end user is logged in
       in: header
       required: true
-      schema:
-        type: string
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
-      in: header
       schema:
         type: string
     x-app-key:
@@ -2082,17 +2121,9 @@ components:
       schema:
         type: string
         pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    x-externalsystem:
-      name: x-externalsystem
-      description: External system code.
-      in: header
-      x-example: EXTERNALSYSTEMCODE
-      schema:
-        type: string
-        maxLength: 40
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
       in: header
       schema:
         type: string
@@ -2103,6 +2134,12 @@ components:
       required: true
       schema:
         type: string
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
+      schema:
+        type: string
     x-request-id:
       name: x-request-id
       description: Request Id of an incoming request
@@ -2110,49 +2147,12 @@ components:
       schema:
         type: string
         pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
       in: header
       schema:
         type: string
-  responses:
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '415':
-      description: Unsupported Media Type
-    '406':
-      description: Not acceptable.
-    '414':
-      description: Request URI Too Large
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '502':
-      description: Bad Gateway
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '413':
-      description: Request Entity Too Large
-    '401':
-      description: Unauthorized
-    '403':
-      description: Forbidden
-    '405':
-      description: Method not allowed
-    '503':
-      description: Service Unavailable
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

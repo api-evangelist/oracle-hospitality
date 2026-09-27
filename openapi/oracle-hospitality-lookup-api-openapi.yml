@@ -234,70 +234,136 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExceptionDetail'
 components:
-  parameters:
-    hotelCode:
-      name: hotelCode
-      description: A unique identifier value for the property/hotel associated with a channel.
-      in: path
-      required: true
-      x-example: XUSXXYY99
-      schema:
-        type: string
-        maxLength: 50
-        minLength: 1
-    channelCode:
-      name: channelCode
-      description: A unique identifier value for the channel associated with a property/hotel.
-      in: query
-      required: false
-      x-example: CH1
-      schema:
-        type: string
-        maxLength: 50
-        minLength: 1
-    authorization:
-      name: authorization
-      description: A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.
-      in: header
-      required: true
-      schema:
-        type: string
-    offset:
-      name: offset
-      in: query
-      description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-      required: true
-      x-example: 1
-      schema:
-        type: integer
-    limit:
-      name: limit
-      in: query
-      description: Indicates maximum number of records a Web Service should return in the response. Maximum record limit is 1000.
-      required: true
-      x-example: 1000
-      schema:
-        type: integer
-        default: 1000
-        maximum: 1000
-    lang:
-      name: lang
-      in: query
-      description: ISO639 / BCP 47 language code format.
-      required: false
-      x-example: en-US
-      schema:
-        type: string
-    roomType:
-      name: roomType
-      description: The OPERA Cloud Hotel/proeprty Room type code.
-      in: query
-      required: false
-      x-example: XA1K
-      schema:
-        type: string
-        minLength: 1
   schemas:
+    RatePlan:
+      type: object
+      properties:
+        ratePlanCode:
+          type: string
+          example: XDAILY
+          description: The code for a rate plan.
+        ratePlanName:
+          type: string
+          example: Corporate
+          description: The name of the rate plan.
+        ratePlanDescription:
+          type: string
+          example: Daily discount for a corporation.
+          description: Description of the rate plan code.
+      required:
+      - ratePlanCode
+    Occupancy:
+      type: object
+      properties:
+        maxOccupancy:
+          type: integer
+          example: 3
+          description: The maximum number of individuals allowed in the room type.
+        maxAdultOccupancy:
+          type: integer
+          example: 3
+          description: The maximum number of adults allowed in the room type.
+        maxChildOccupancy:
+          type: integer
+          example: 2
+          description: The maximum number of children allowed in the room type.
+    RatePlanItem:
+      type: object
+      properties:
+        ratePlan:
+          type: object
+          $ref: '#/components/schemas/RatePlan'
+      required:
+      - ratePlan
+    RoomTypeItem:
+      type: object
+      properties:
+        room:
+          type: object
+          $ref: '#/components/schemas/Room'
+        occupancy:
+          type: object
+          $ref: '#/components/schemas/Occupancy'
+      required:
+      - room
+    ExceptionDetail:
+      description: Common Error Response format.
+      type: object
+      properties:
+        title:
+          type: string
+          description: Short, human-readable summary of the problem. The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+          example: Error in Application
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+          example: 400
+        o:errorCode:
+          type: string
+          description: Business specific Error code, which is different from HTTP error code.
+          example: RSV-34534534
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type. When dereferenced, it SHOULD provide a human-readable summary of the problem.
+          example: 'http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4'
+        timestamp:
+          type: string
+          format: date-time
+          description: The UTC Date and Time of the Error happened.
+          example: '2022-01-02T11: 30: 22.234Z'
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/ExceptionDetail'
+        logId:
+          type: integer
+          description: An ID for support reasons to be able identify errors better.
+          example: '334543532224'
+    ExternalRoomTypesResponse:
+      type: object
+      properties:
+        property:
+          type: object
+          $ref: '#/components/schemas/Property'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoomTypeItem'
+        hasMore:
+          type: boolean
+          example: true
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+        totalResults:
+          type: integer
+          example: 300
+          description: Total number of records queried.
+        limit:
+          type: integer
+          example: 200
+          description: Indicates maximum number of records a Web Service should return in the response.
+        count:
+          type: integer
+          example: 100
+          description: Total number of rows returned.
+        offset:
+          type: integer
+          example: 0
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+    Property:
+      type: object
+      properties:
+        hotelCode:
+          type: string
+          example: XUSXXYY99
+          description: A unique identifier value for the property/hotel associated with a channel.
+        channelCode:
+          type: string
+          example: CH1
+          description: ' A code for the channel partner that is set up in the Oracle Hospitality Distribution.'
+      required:
+      - hotelCode
+      - channelCode
     ExternalRatePlansResponse:
       type: object
       properties:
@@ -345,135 +411,69 @@ components:
           description: Description of the room type.
       required:
       - roomType
-    ExceptionDetail:
-      description: Common Error Response format.
-      type: object
-      properties:
-        title:
-          type: string
-          description: Short, human-readable summary of the problem. The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-          example: Error in Application
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-          example: 400
-        o:errorCode:
-          type: string
-          description: Business specific Error code, which is different from HTTP error code.
-          example: RSV-34534534
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type. When dereferenced, it SHOULD provide a human-readable summary of the problem.
-          example: 'http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4'
-        timestamp:
-          type: string
-          format: date-time
-          description: The UTC Date and Time of the Error happened.
-          example: '2022-01-02T11: 30: 22.234Z'
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/ExceptionDetail'
-        logId:
-          type: integer
-          description: An ID for support reasons to be able identify errors better.
-          example: '334543532224'
-    Property:
-      type: object
-      properties:
-        hotelCode:
-          type: string
-          example: XUSXXYY99
-          description: A unique identifier value for the property/hotel associated with a channel.
-        channelCode:
-          type: string
-          example: CH1
-          description: ' A code for the channel partner that is set up in the Oracle Hospitality Distribution.'
-      required:
-      - hotelCode
-      - channelCode
-    RoomTypeItem:
-      type: object
-      properties:
-        room:
-          type: object
-          $ref: '#/components/schemas/Room'
-        occupancy:
-          type: object
-          $ref: '#/components/schemas/Occupancy'
-      required:
-      - room
-    RatePlan:
-      type: object
-      properties:
-        ratePlanCode:
-          type: string
-          example: XDAILY
-          description: The code for a rate plan.
-        ratePlanName:
-          type: string
-          example: Corporate
-          description: The name of the rate plan.
-        ratePlanDescription:
-          type: string
-          example: Daily discount for a corporation.
-          description: Description of the rate plan code.
-      required:
-      - ratePlanCode
-    ExternalRoomTypesResponse:
-      type: object
-      properties:
-        property:
-          type: object
-          $ref: '#/components/schemas/Property'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/RoomTypeItem'
-        hasMore:
-          type: boolean
-          example: true
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-        totalResults:
-          type: integer
-          example: 300
-          description: Total number of records queried.
-        limit:
-          type: integer
-          example: 200
-          description: Indicates maximum number of records a Web Service should return in the response.
-        count:
-          type: integer
-          example: 100
-          description: Total number of rows returned.
-        offset:
-          type: integer
-          example: 0
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-    Occupancy:
-      type: object
-      properties:
-        maxOccupancy:
-          type: integer
-          example: 3
-          description: The maximum number of individuals allowed in the room type.
-        maxAdultOccupancy:
-          type: integer
-          example: 3
-          description: The maximum number of adults allowed in the room type.
-        maxChildOccupancy:
-          type: integer
-          example: 2
-          description: The maximum number of children allowed in the room type.
-    RatePlanItem:
-      type: object
-      properties:
-        ratePlan:
-          type: object
-          $ref: '#/components/schemas/RatePlan'
-      required:
-      - ratePlan
+  parameters:
+    roomType:
+      name: roomType
+      description: The OPERA Cloud Hotel/proeprty Room type code.
+      in: query
+      required: false
+      x-example: XA1K
+      schema:
+        type: string
+        minLength: 1
+    limit:
+      name: limit
+      in: query
+      description: Indicates maximum number of records a Web Service should return in the response. Maximum record limit is 1000.
+      required: true
+      x-example: 1000
+      schema:
+        type: integer
+        default: 1000
+        maximum: 1000
+    offset:
+      name: offset
+      in: query
+      description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+      required: true
+      x-example: 1
+      schema:
+        type: integer
+    channelCode:
+      name: channelCode
+      description: A unique identifier value for the channel associated with a property/hotel.
+      in: query
+      required: false
+      x-example: CH1
+      schema:
+        type: string
+        maxLength: 50
+        minLength: 1
+    hotelCode:
+      name: hotelCode
+      description: A unique identifier value for the property/hotel associated with a channel.
+      in: path
+      required: true
+      x-example: XUSXXYY99
+      schema:
+        type: string
+        maxLength: 50
+        minLength: 1
+    authorization:
+      name: authorization
+      description: A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.
+      in: header
+      required: true
+      schema:
+        type: string
+    lang:
+      name: lang
+      in: query
+      description: ISO639 / BCP 47 language code format.
+      required: false
+      x-example: en-US
+      schema:
+        type: string
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

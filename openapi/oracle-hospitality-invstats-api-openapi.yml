@@ -847,6 +847,355 @@ paths:
       - INVStats
 components:
   schemas:
+    datesType:
+      type: array
+      description: Specifies a single date.
+      maxItems: 4000
+      items:
+        type: string
+        format: date
+        maxLength: 8
+    blockNonCompeteType:
+      type: object
+      description: Block Non Compete code information.
+      properties:
+        industry:
+          description: Specifies the Non-Compete Industry.>
+          type: string
+          minLength: 0
+          maxLength: 20
+        industryDescription:
+          description: Specifies the Non-Compete Industry description.>
+          type: string
+          minLength: 0
+          maxLength: 2000
+        criteria:
+          description: Indicates the type of Non-Compete. 'All' means all dates are Non-Compete. 'None' specifies Non-Compete is disabled. 'Selected' specifies few dates are Non-Compete.
+          $ref: '#/components/schemas/rateProtectionType'
+        protectedDates:
+          description: Specifies all the Non-Compete dates in the selected date range.
+          $ref: '#/components/schemas/datesType'
+    blockInfoType:
+      type: object
+      description: Contains information of the business block .
+      properties:
+        hotelId:
+          description: The hotel code of the business block.
+          type: string
+          minLength: 0
+          maxLength: 20
+        blockId:
+          description: The unique identifier of the business block.
+          $ref: '#/components/schemas/uniqueID_Type'
+        blockName:
+          description: Name of the business block.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        blockCode:
+          description: Block code for the block.
+          type: string
+          minLength: 0
+          maxLength: 20
+        startDate:
+          description: Start date for this block.
+          type: string
+          format: date
+          maxLength: 8
+        endDate:
+          description: End date for this block.
+          type: string
+          format: date
+          maxLength: 8
+        cutOffDate:
+          description: Date after which unused block rooms should be returned to house.
+          type: string
+          format: date
+          maxLength: 8
+        blockStatus:
+          description: Code and Description used to define a status e.g. (INT, TENT, DEF, CXL) (initial, tentative, definite, cancelled).
+          $ref: '#/components/schemas/codeDescriptionType'
+        blockStatusColor:
+          description: Color from block status configuration.
+          $ref: '#/components/schemas/statusColorType'
+        accountId:
+          description: The unique identifier of the Account Name.
+          $ref: '#/components/schemas/uniqueID_Type'
+        accountName:
+          description: Account name attached to the business block.
+          type: string
+          minLength: 0
+          maxLength: 200
+        contactId:
+          description: The unique identifier of the Contact Name.
+          $ref: '#/components/schemas/uniqueID_Type'
+        contactName:
+          description: Contact name attached to the business block.
+          type: string
+          minLength: 0
+          maxLength: 200
+        roomSalesManager:
+          description: Room Sales Manager Code and Name attached to the business block.
+          $ref: '#/components/schemas/codeDescriptionType'
+        currencyCode:
+          description: Currency Code attached to the business block.
+          type: string
+          minLength: 0
+          maxLength: 20
+        averageRoomRate:
+          description: Average room rate of the business block.
+          type: number
+        conversionCode:
+          description: Indicates the likelihood of the block moving to the next active block status.
+          type: string
+          minLength: 0
+          maxLength: 20
+        rankingCode:
+          description: Indicates the ranking of the block.
+          type: string
+          minLength: 0
+          maxLength: 20
+        guaranteeCode:
+          description: Guarantee Code for the block.
+          type: string
+          minLength: 0
+          maxLength: 20
+        rateProtectionDetails:
+          description: Indicates the Rate Protection details for the block.
+          $ref: '#/components/schemas/blockRateProtectionType'
+        nonCompeteDetails:
+          description: Indicates the non-competing industry details.
+          $ref: '#/components/schemas/blockNonCompeteType'
+        blockClassification:
+          description: Indicate Block Classification.
+          $ref: '#/components/schemas/blockClassificationType'
+    revenueCategorySummaryType:
+      type: object
+      description: This element has revenue amount data for its revenue category such as Room Revenue, Food and Beverage Revenue.
+      properties:
+        code:
+          description: The representation of a revenue category.
+          type: string
+          minLength: 0
+          maxLength: 40
+        amount:
+          description: A monetary amount.
+          type: number
+        currencyCode:
+          description: Provides a currency code to reflect the currency in which an amount may be expressed.
+          type: string
+          minLength: 3
+          maxLength: 3
+    usedInModuleType:
+      type: string
+      description: Simple type for indicating the module for which user wants to create the SellMessage. Valid module types are Look To Book Sales,Reservations,Blocks,Function Diary and Group Rooms Control.
+      enum:
+      - Blocks
+      - Reservations
+      - FunctionDiary
+      - LookToBookSales
+      - GroupRoomsControl
+    blockInventoryStatistic:
+      type: object
+      description: Response object for information regarding Block Inventory Statistics.
+      properties:
+        blockInventoryStatistics:
+          description: List of block inventory statistics that is grouped by statistic date.
+          type: object
+          properties:
+            blockInventoryStatistic:
+              description: Summary and Detail statistic for block inventory that is group by statistic date.
+              type: array
+              items:
+                $ref: '#/components/schemas/blockInventoryStatisticType'
+            totalPages:
+              description: Evaluated total page count based on the requested max fetch count.
+              type: integer
+            offset:
+              description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+              type: integer
+            limit:
+              description: Indicates maximum number of records a Web Service should return.
+              type: integer
+            allRowsFetched:
+              description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+              type: boolean
+            totalRows:
+              description: Total number of rows queried
+              type: integer
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    operaVersionNumberType:
+      type: string
+      description: Current Opera Version Number
+      minLength: 0
+      maxLength: 40
+    statisticSetType:
+      type: object
+      description: An instance of a statistic, which is a set containing revenue category and number category summaries.
+      properties:
+        revenue:
+          description: Collection of RevenueCategorySummary elements. Used if revenue values reported.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/revenueCategorySummaryType'
+        inventory:
+          description: Collection of CountCategorySummary elements. Used if count values reported.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/numericCategorySummaryType'
+        statisticDate:
+          description: Date of the statistic.
+          type: string
+          format: date
+          maxLength: 8
+        weekendDate:
+          description: Determines whether statistic date is a weekend date.
+          type: boolean
+    blockDetailStatisticType:
+      type: object
+      description: Information and statistic summary for a particular block.
+      properties:
+        blockInformation:
+          description: Contains information like Block Name, Account Name, Average Room Rate of the block.
+          $ref: '#/components/schemas/blockInfoType'
+        blockStatistics:
+          description: Statistic summary for the block.
+          $ref: '#/components/schemas/blockStatusStatisticsType'
+    blockSummaryStatisticsType:
+      type: array
+      description: Statistic units group by status, booking and daily targets.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/blockSummaryStatisticType'
+    statusStatisticType:
+      type: object
+      description: List of statistic units for a particular status.
+      properties:
+        statisticUnit:
+          description: Unit type to hold statistic code and value pair.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/statisticUnitType'
+        status:
+          description: Status type of statistic, e.g. Definite.
+          type: string
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
+    inventoryStatistics:
+      type: array
+      description: List of inventory statistics that is grouped by statistic date.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/statisticType'
+    blockSummaryStatisticType:
+      type: object
+      description: Statistic units group by status, booking and daily targets.
+      properties:
+        statusSummaryStatistic:
+          description: List of Statistic Units for Status Types e.g. Definite, Inquiry, Actual.
+          $ref: '#/components/schemas/statusSummaryStatisticType'
+        bookingSummaryStatistic:
+          description: List of Statistic Units for Booking types e.g. Sales Allowance, Total House Availability.
+          $ref: '#/components/schemas/statisticUnitsType'
+        dailyTargetsSummaryStatistic:
+          description: List of Statistic Units for Daily Targets types e.g. Room Nights, Room Rates, Room Revenue.
+          $ref: '#/components/schemas/statisticUnitsType'
+        statisticDate:
+          description: Date of the block inventory statistic.
+          type: string
+          format: date
+          maxLength: 8
+    statisticUnitsType:
+      type: array
+      description: Unit type to hold statistic code and value pair.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/statisticUnitType'
+    pingDetail:
+      type: object
+      description: Response for Ping operation.
+      properties:
+        operaVersion:
+          description: Opera version number.
+          $ref: '#/components/schemas/operaVersionNumberType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
     statisticType:
       type: object
       description: Defines all details needed to create a statistical report.
@@ -872,191 +1221,6 @@ components:
           type: string
           minLength: 0
           maxLength: 2000
-    blockInventoryStatisticType:
-      type: object
-      description: Summary and Detail statistics for block inventory.
-      properties:
-        blockSummaryStatistics:
-          description: Summary statistic for all blocks.
-          $ref: '#/components/schemas/blockSummaryStatisticsType'
-        blockDetailStatistics:
-          description: Detailed summary statistics for each block.
-          $ref: '#/components/schemas/blockDetailStatisticsType'
-        sellMessages:
-          description: Group Rooms Control Sell Messages configured for a particular date range.
-          $ref: '#/components/schemas/sellMessagesType'
-    statusColorType:
-      type: string
-      description: Status code color configuration type.
-      enum:
-      - White
-      - Red
-      - Blue
-      - Cyan
-      - Magenta
-      - Green
-      - Brown
-      - Black
-      - Yellow
-      - Gray
-    blockSummaryStatisticType:
-      type: object
-      description: Statistic units group by status, booking and daily targets.
-      properties:
-        statusSummaryStatistic:
-          description: List of Statistic Units for Status Types e.g. Definite, Inquiry, Actual.
-          $ref: '#/components/schemas/statusSummaryStatisticType'
-        bookingSummaryStatistic:
-          description: List of Statistic Units for Booking types e.g. Sales Allowance, Total House Availability.
-          $ref: '#/components/schemas/statisticUnitsType'
-        dailyTargetsSummaryStatistic:
-          description: List of Statistic Units for Daily Targets types e.g. Room Nights, Room Rates, Room Revenue.
-          $ref: '#/components/schemas/statisticUnitsType'
-        statisticDate:
-          description: Date of the block inventory statistic.
-          type: string
-          format: date
-          maxLength: 8
-    blockDetailStatisticType:
-      type: object
-      description: Information and statistic summary for a particular block.
-      properties:
-        blockInformation:
-          description: Contains information like Block Name, Account Name, Average Room Rate of the block.
-          $ref: '#/components/schemas/blockInfoType'
-        blockStatistics:
-          description: Statistic summary for the block.
-          $ref: '#/components/schemas/blockStatusStatisticsType'
-    pingDetail:
-      type: object
-      description: Response for Ping operation.
-      properties:
-        operaVersion:
-          description: Opera version number.
-          $ref: '#/components/schemas/operaVersionNumberType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    blockDetailStatisticsType:
-      type: array
-      description: Compose of block information and statistic summary for a particular block.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/blockDetailStatisticType'
-    blockRateProtectionType:
-      type: object
-      description: Block Rate Protection code information.
-      properties:
-        criteria:
-          description: Indicates the type of rate protection. 'All' means all dates are rate protected. 'None' specifies no rate protection. 'Selected' specifies few dates are rate protected.
-          $ref: '#/components/schemas/rateProtectionType'
-        protectedDates:
-          description: Specifies all the Rate protected dates in the selected range.
-          $ref: '#/components/schemas/datesType'
-    numericCategorySummaryType:
-      type: object
-      description: This element has count data for each count category such as number of guests, rooms occupied, etc.
-      properties:
-        value:
-          description: The total count for the category in NumericCategoryCode.
-          type: number
-        code:
-          description: 'The representation of a numeric category such as Guests : Number of guests, RoomsOcc : Rooms occupied.'
-          type: string
-          minLength: 0
-          maxLength: 40
-    statisticSetType:
-      type: object
-      description: An instance of a statistic, which is a set containing revenue category and number category summaries.
-      properties:
-        revenue:
-          description: Collection of RevenueCategorySummary elements. Used if revenue values reported.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/revenueCategorySummaryType'
-        inventory:
-          description: Collection of CountCategorySummary elements. Used if count values reported.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/numericCategorySummaryType'
-        statisticDate:
-          description: Date of the statistic.
-          type: string
-          format: date
-          maxLength: 8
-        weekendDate:
-          description: Determines whether statistic date is a weekend date.
-          type: boolean
-    statusSummaryStatisticType:
-      type: array
-      description: Statistic summary for a particular status.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/statusStatisticType'
-    usedInModuleType:
-      type: string
-      description: Simple type for indicating the module for which user wants to create the SellMessage. Valid module types are Look To Book Sales,Reservations,Blocks,Function Diary and Group Rooms Control.
-      enum:
-      - Blocks
-      - Reservations
-      - FunctionDiary
-      - LookToBookSales
-      - GroupRoomsControl
-    revenueCategorySummaryType:
-      type: object
-      description: This element has revenue amount data for its revenue category such as Room Revenue, Food and Beverage Revenue.
-      properties:
-        code:
-          description: The representation of a revenue category.
-          type: string
-          minLength: 0
-          maxLength: 40
-        amount:
-          description: A monetary amount.
-          type: number
-        currencyCode:
-          description: Provides a currency code to reflect the currency in which an amount may be expressed.
-          type: string
-          minLength: 3
-          maxLength: 3
-    datesType:
-      type: array
-      description: Specifies a single date.
-      maxItems: 4000
-      items:
-        type: string
-        format: date
-        maxLength: 8
-    rateProtectionType:
-      type: string
-      description: Simple type for specifying the block protection type.
-      enum:
-      - All
-      - Selected
-      - None
-    blockNonCompeteType:
-      type: object
-      description: Block Non Compete code information.
-      properties:
-        industry:
-          description: Specifies the Non-Compete Industry.>
-          type: string
-          minLength: 0
-          maxLength: 20
-        industryDescription:
-          description: Specifies the Non-Compete Industry description.>
-          type: string
-          minLength: 0
-          maxLength: 2000
-        criteria:
-          description: Indicates the type of Non-Compete. 'All' means all dates are Non-Compete. 'None' specifies Non-Compete is disabled. 'Selected' specifies few dates are Non-Compete.
-          $ref: '#/components/schemas/rateProtectionType'
-        protectedDates:
-          description: Specifies all the Non-Compete dates in the selected date range.
-          $ref: '#/components/schemas/datesType'
     statisticCodeType:
       type: object
       description: Defines the codes and corresponding categories for which the data in the other elements has been gathered.
@@ -1087,6 +1251,44 @@ components:
           type: string
           minLength: 0
           maxLength: 2000
+    codeDescriptionType:
+      type: object
+      description: This contains a generic code and description information.
+      properties:
+        code:
+          description: Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: description.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    propertyStatisticUnitType:
+      type: object
+      description: Unit type to hold statistic code and value pair e.g. [resort - value] [BHOTEL - 20] [MHOTEL - 30] and its sub units per property wise
+      properties:
+        hotelId:
+          description: Unique ID of the hotel.
+          type: string
+        value:
+          description: Value of the statistic unit.
+          type: integer
+          format: int32
+    rateProtectionType:
+      type: string
+      description: Simple type for specifying the block protection type.
+      enum:
+      - All
+      - Selected
+      - None
     blockClassificationType:
       type: string
       description: Simple type for block instructions to be used in requests for fetching blocks. Valid status values are MASTER_BLOCK, MASTER_TOUR, FIT_MASTER, MASTER_ALLOCATION, MASTER_ITINERARY, LEAD_MASTER, REGULAR_BOOKING, SUB_BLOCK, SUB_TOUR, FIT_CONTRACT, SUB_ALLOCATION, SUB_ITINERARY, LEAD.
@@ -1183,26 +1385,34 @@ components:
         idExtension:
           description: Additional identifying value assigned by the creating system.
           type: integer
+    numericCategorySummaryType:
+      type: object
+      description: This element has count data for each count category such as number of guests, rooms occupied, etc.
+      properties:
+        value:
+          description: The total count for the category in NumericCategoryCode.
+          type: number
+        code:
+          description: 'The representation of a numeric category such as Guests : Number of guests, RoomsOcc : Rooms occupied.'
+          type: string
+          minLength: 0
+          maxLength: 40
+    blockRateProtectionType:
+      type: object
+      description: Block Rate Protection code information.
+      properties:
+        criteria:
+          description: Indicates the type of rate protection. 'All' means all dates are rate protected. 'None' specifies no rate protection. 'Selected' specifies few dates are rate protected.
+          $ref: '#/components/schemas/rateProtectionType'
+        protectedDates:
+          description: Specifies all the Rate protected dates in the selected range.
+          $ref: '#/components/schemas/datesType'
     blockStatusStatisticsType:
       type: array
       description: Summary statistics of a block for each date.
       maxItems: 4000
       items:
         $ref: '#/components/schemas/blockStatusStatisticType'
-    codeDescriptionType:
-      type: object
-      description: This contains a generic code and description information.
-      properties:
-        code:
-          description: Code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          description: description.
-          type: string
-          minLength: 0
-          maxLength: 2000
     uniqueID_Type:
       type: object
       description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
@@ -1217,259 +1427,6 @@ components:
           type: string
           minLength: 0
           maxLength: 40
-    instanceLink:
-      type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
-      properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
-          type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
-        title:
-          description: Exact copy of the "summary" field on the linked operation.
-          type: string
-    blockInfoType:
-      type: object
-      description: Contains information of the business block .
-      properties:
-        hotelId:
-          description: The hotel code of the business block.
-          type: string
-          minLength: 0
-          maxLength: 20
-        blockId:
-          description: The unique identifier of the business block.
-          $ref: '#/components/schemas/uniqueID_Type'
-        blockName:
-          description: Name of the business block.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        blockCode:
-          description: Block code for the block.
-          type: string
-          minLength: 0
-          maxLength: 20
-        startDate:
-          description: Start date for this block.
-          type: string
-          format: date
-          maxLength: 8
-        endDate:
-          description: End date for this block.
-          type: string
-          format: date
-          maxLength: 8
-        cutOffDate:
-          description: Date after which unused block rooms should be returned to house.
-          type: string
-          format: date
-          maxLength: 8
-        blockStatus:
-          description: Code and Description used to define a status e.g. (INT, TENT, DEF, CXL) (initial, tentative, definite, cancelled).
-          $ref: '#/components/schemas/codeDescriptionType'
-        blockStatusColor:
-          description: Color from block status configuration.
-          $ref: '#/components/schemas/statusColorType'
-        accountId:
-          description: The unique identifier of the Account Name.
-          $ref: '#/components/schemas/uniqueID_Type'
-        accountName:
-          description: Account name attached to the business block.
-          type: string
-          minLength: 0
-          maxLength: 200
-        contactId:
-          description: The unique identifier of the Contact Name.
-          $ref: '#/components/schemas/uniqueID_Type'
-        contactName:
-          description: Contact name attached to the business block.
-          type: string
-          minLength: 0
-          maxLength: 200
-        roomSalesManager:
-          description: Room Sales Manager Code and Name attached to the business block.
-          $ref: '#/components/schemas/codeDescriptionType'
-        currencyCode:
-          description: Currency Code attached to the business block.
-          type: string
-          minLength: 0
-          maxLength: 20
-        averageRoomRate:
-          description: Average room rate of the business block.
-          type: number
-        conversionCode:
-          description: Indicates the likelihood of the block moving to the next active block status.
-          type: string
-          minLength: 0
-          maxLength: 20
-        rankingCode:
-          description: Indicates the ranking of the block.
-          type: string
-          minLength: 0
-          maxLength: 20
-        guaranteeCode:
-          description: Guarantee Code for the block.
-          type: string
-          minLength: 0
-          maxLength: 20
-        rateProtectionDetails:
-          description: Indicates the Rate Protection details for the block.
-          $ref: '#/components/schemas/blockRateProtectionType'
-        nonCompeteDetails:
-          description: Indicates the non-competing industry details.
-          $ref: '#/components/schemas/blockNonCompeteType'
-        blockClassification:
-          description: Indicate Block Classification.
-          $ref: '#/components/schemas/blockClassificationType'
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
-      required:
-      - type
-      - title
-    blockSummaryStatisticsType:
-      type: array
-      description: Statistic units group by status, booking and daily targets.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/blockSummaryStatisticType'
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-      required:
-      - type
-      - title
-    statisticUnitsType:
-      type: array
-      description: Unit type to hold statistic code and value pair.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/statisticUnitType'
-    propertyStatisticUnitType:
-      type: object
-      description: Unit type to hold statistic code and value pair e.g. [resort - value] [BHOTEL - 20] [MHOTEL - 30] and its sub units per property wise
-      properties:
-        hotelId:
-          description: Unique ID of the hotel.
-          type: string
-        value:
-          description: Value of the statistic unit.
-          type: integer
-          format: int32
-    statusStatisticType:
-      type: object
-      description: List of statistic units for a particular status.
-      properties:
-        statisticUnit:
-          description: Unit type to hold statistic code and value pair.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/statisticUnitType'
-        status:
-          description: Status type of statistic, e.g. Definite.
-          type: string
-    sellMessagesType:
-      type: object
-      description: The SellMessagesType is the list of message and attributes returned by web service.
-      properties:
-        sellMessage:
-          description: This is the message text.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/sellMessageType'
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        count:
-          description: Total number of rows returned
-          type: integer
-    operaVersionNumberType:
-      type: string
-      description: Current Opera Version Number
-      minLength: 0
-      maxLength: 40
     warningType:
       type: object
       description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
@@ -1516,12 +1473,97 @@ components:
           type: string
           minLength: 1
           maxLength: 8
-    warningsType:
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
+    links:
       type: array
-      description: Used in conjunction with the Success element to define a business error.
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    blockInventoryStatisticType:
+      type: object
+      description: Summary and Detail statistics for block inventory.
+      properties:
+        blockSummaryStatistics:
+          description: Summary statistic for all blocks.
+          $ref: '#/components/schemas/blockSummaryStatisticsType'
+        blockDetailStatistics:
+          description: Detailed summary statistics for each block.
+          $ref: '#/components/schemas/blockDetailStatisticsType'
+        sellMessages:
+          description: Group Rooms Control Sell Messages configured for a particular date range.
+          $ref: '#/components/schemas/sellMessagesType'
+    blockDetailStatisticsType:
+      type: array
+      description: Compose of block information and statistic summary for a particular block.
       maxItems: 4000
       items:
-        $ref: '#/components/schemas/warningType'
+        $ref: '#/components/schemas/blockDetailStatisticType'
+    statusSummaryStatisticType:
+      type: array
+      description: Statistic summary for a particular status.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/statusStatisticType'
+    statusColorType:
+      type: string
+      description: Status code color configuration type.
+      enum:
+      - White
+      - Red
+      - Blue
+      - Cyan
+      - Magenta
+      - Green
+      - Brown
+      - Black
+      - Yellow
+      - Gray
+    sellMessagesType:
+      type: object
+      description: The SellMessagesType is the list of message and attributes returned by web service.
+      properties:
+        sellMessage:
+          description: This is the message text.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/sellMessageType'
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        count:
+          description: Total number of rows returned
+          type: integer
     statisticUnitType:
       type: object
       description: Unit type to hold statistic code and value pair e.g. [code - value] [Definite - 20] [Sales Allowance - 30] and its sub units.
@@ -1550,56 +1592,78 @@ components:
           type: string
           format: date
           maxLength: 8
-    blockInventoryStatistic:
-      type: object
-      description: Response object for information regarding Block Inventory Statistics.
-      properties:
-        blockInventoryStatistics:
-          description: List of block inventory statistics that is grouped by statistic date.
-          type: object
-          properties:
-            blockInventoryStatistic:
-              description: Summary and Detail statistic for block inventory that is group by statistic date.
-              type: array
-              items:
-                $ref: '#/components/schemas/blockInventoryStatisticType'
-            totalPages:
-              description: Evaluated total page count based on the requested max fetch count.
-              type: integer
-            offset:
-              description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-              type: integer
-            limit:
-              description: Indicates maximum number of records a Web Service should return.
-              type: integer
-            allRowsFetched:
-              description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-              type: boolean
-            totalRows:
-              description: Total number of rows queried
-              type: integer
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
-    inventoryStatistics:
-      type: array
-      description: List of inventory statistics that is grouped by statistic date.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/statisticType'
+  responses:
+    '405':
+      description: Method not allowed
+    '413':
+      description: Request Entity Too Large
+    '403':
+      description: Forbidden
+    '503':
+      description: Service Unavailable
+    '406':
+      description: Not acceptable.
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '401':
+      description: Unauthorized
+    '415':
+      description: Unsupported Media Type
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '502':
+      description: Bad Gateway
+    '414':
+      description: Request URI Too Large
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
   parameters:
-    x-hotelid:
-      name: x-hotelid
-      description: Mandatory parameter to identify the hotel code where the endDate user is logged in
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
       in: header
       required: true
       schema:
         type: string
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
+      schema:
+        type: string
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
     x-externalsystem:
       name: x-externalsystem
       description: External system code.
@@ -1614,77 +1678,13 @@ components:
       in: header
       schema:
         type: string
-    x-app-key:
-      name: x-app-key
-      description: Client or Partner's Application Key
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the endDate user is logged in
       in: header
       required: true
       schema:
         type: string
-        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
-      in: header
-      schema:
-        type: string
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
-      in: header
-      required: true
-      schema:
-        type: string
-    x-request-id:
-      name: x-request-id
-      description: Request Id of an incoming request
-      in: header
-      schema:
-        type: string
-        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
-      in: header
-      schema:
-        type: string
-  responses:
-    '503':
-      description: Service Unavailable
-    '403':
-      description: Forbidden
-    '502':
-      description: Bad Gateway
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '415':
-      description: Unsupported Media Type
-    '406':
-      description: Not acceptable.
-    '413':
-      description: Request Entity Too Large
-    '401':
-      description: Unauthorized
-    '414':
-      description: Request URI Too Large
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '405':
-      description: Method not allowed
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

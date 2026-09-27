@@ -121,7 +121,7 @@ paths:
 
         OperationId:getToken'
       summary: Authenticate with the identity server
-      operationId: getToken
+      operationId: postTokens
       responses:
         '200':
           description: OK
@@ -166,6 +166,8 @@ paths:
               - grant_type
       security:
       - basicAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: getToken
     servers:
     - url: /oauth/v1
 components:
@@ -203,15 +205,6 @@ components:
           type: string
           description: Always user_assertion.
   parameters:
-    x-app-key:
-      name: x-app-key
-      description: Client or Partner's Application Key
-      in: header
-      required: true
-      x-example: 41ecd082-8997-4c69-af34-2f72b83645ff
-      schema:
-        type: string
-        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
     enterpriseId:
       name: enterpriseId
       description: Global unique ID of the Enterprise. Only while using Client Credentials workflow with OCIM environments, users should pass this header.
@@ -223,6 +216,15 @@ components:
         maxLength: 8
         minLength: 1
         pattern: ^[A-Z0-9]{1,8}$
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      x-example: 41ecd082-8997-4c69-af34-2f72b83645ff
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
   securitySchemes:
     basicAuth:
       type: http

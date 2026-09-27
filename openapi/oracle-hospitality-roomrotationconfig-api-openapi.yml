@@ -2366,213 +2366,57 @@ paths:
       tags:
       - RoomRotationConfig
 components:
-  parameters:
-    x-hotelid:
-      name: x-hotelid
-      description: Mandatory parameter to identify the hotel code where the end user is logged in
-      in: header
-      required: true
-      schema:
-        type: string
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
-      in: header
-      schema:
-        type: string
-    x-app-key:
-      name: x-app-key
-      description: Client or Partner's Application Key
-      in: header
-      required: true
-      schema:
-        type: string
-        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    x-externalsystem:
-      name: x-externalsystem
-      description: External system code.
-      in: header
-      x-example: EXTERNALSYSTEMCODE
-      schema:
-        type: string
-        maxLength: 40
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
-      in: header
-      schema:
-        type: string
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
-      in: header
-      required: true
-      schema:
-        type: string
-    x-request-id:
-      name: x-request-id
-      description: Request Id of an incoming request
-      in: header
-      schema:
-        type: string
-        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
-      in: header
-      schema:
-        type: string
+  responses:
+    '405':
+      description: Method not allowed
+    '413':
+      description: Request Entity Too Large
+    '406':
+      description: Not acceptable.
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '401':
+      description: Unauthorized
+    '502':
+      description: Bad Gateway
+    '414':
+      description: Request URI Too Large
+    '503':
+      description: Service Unavailable
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '403':
+      description: Forbidden
+    '415':
+      description: Unsupported Media Type
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
   schemas:
-    ChangeRevenueTransactionCodesCriteria:
-      type: object
-      description: Request object for updating the rotation revenue status of a transaction code for a given property.
-      properties:
-        revenueTransactionCodes:
-          description: Revenue transaction codes for a given property value.
-          $ref: '#/components/schemas/rotationRevenueTransactionCodesChangeType'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    rotationPeriodFrequencyType:
+    rotationRuleStatusType:
       type: string
-      description: Simple type for Rotation Period Type.
+      description: Simple type for Rotation Setup Rule System Status.
       enum:
-      - Monthly
-      - Quarterly
-      - SemiAnnually
-      - Annually
-      - Never
-    pingDetail:
-      type: object
-      description: Response for Ping operation.
-      properties:
-        operaVersion:
-          description: Opera version number.
-          $ref: '#/components/schemas/operaVersionNumberType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    roomOwnershipDetails:
-      type: object
-      description: Response object containing room ownership details.
-      properties:
-        roomOwnerships:
-          description: Room ownership details for the profile.
-          $ref: '#/components/schemas/roomOwnershipsList'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    roomOwnerReferralList:
-      description: Room Owner Referral records.
-      type: object
-      properties:
-        roomOwnerReferrals:
-          description: Collection of Detailed information on Room Owner's Referral records.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/roomOwnerReferralType'
-    ChangeAdjustmentReasonsDetails:
-      type: object
-      description: Request object for changing Room Rotation Adjustment Reasons.
-      properties:
-        adjustmentReasons:
-          description: Room Rotation Adjustment Reasons to be updated.
-          $ref: '#/components/schemas/roomRotationAdjustmentReasonsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    fetchRotationPeriod:
-      type: object
-      description: Response Object for Fetch Rotation Period
-      properties:
-        hotelId:
-          description: Property code for Room Rotation Period.
-          type: string
-          minLength: 0
-          maxLength: 20
-        startDate:
-          description: Represents Effective start date for the Room Rotation Period Setup.
-          type: string
-          format: date
-        periodFrequency:
-          description: Represents Effective Period reset frequency for the Room Rotation Period Setup.
-          $ref: '#/components/schemas/rotationPeriodFrequencyType'
-        currentPeriodStartDate:
-          description: The start date for the property's current Rotation Period.
-          type: string
-          format: date
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    masterInfoType:
-      type: object
-      properties:
-        codeInfo:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/codeInfoType'
-        codeType:
-          $ref: '#/components/schemas/masterType'
-    uniqueID_Type:
-      type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
-      properties:
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 40
-    CreateUnitGradesDetails:
-      type: object
-      description: Request object for creating a new Room Rotation Owner Room Grade Code.
-      properties:
-        unitGrades:
-          description: Room Rotation Owner Room Grade Codes to be created.
-          $ref: '#/components/schemas/roomRotationUnitGradesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    masterType:
+      - Changed
+      - Deleted
+      - New
+      - Queried
+    operaVersionNumberType:
       type: string
-      enum:
-      - Country
-      - State
-      - AddressType
-      - PhoneType
-      - RateCategory
-      - CalculationRule
-      - PostingRythym
-      - BillingInstruction
-      - TransactionCode
-      - DisplaySet
-      - MailingActions
-      - DistanceType
-      - District
-      - Territory
-      - FiscalRegion
-      - InventoryItem
-      - Package
-      - RoomFeaturePreference
-      - SpecialPreference
-      - Promotion
-      - Department
-      - ReservationPreference
-      - FacilityTask
-      - RoomType
-      - RateCode
-      - OutOfOrderReason
-      - Block
+      description: Current Opera Version Number
+      minLength: 0
+      maxLength: 40
     exceptionDetailType:
       title: Error Detail
       description: Complex type that contains error details for a REST call.
@@ -2609,80 +2453,386 @@ components:
       required:
       - type
       - title
-    rotationRulesType:
+    roomRotationOverrideReasonsType:
+      type: array
+      description: Room Rotation Override Reason Enumeration element.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/roomRotationOverrideReasonType'
+    rotationRuleType:
       type: object
-      description: Collection of Room Rotation Setup Rules elements.
       properties:
-        hotelId:
-          description: Hotel code for Room Rotation Setup Rules.
-          type: string
-          minLength: 0
-          maxLength: 20
+        status:
+          description: Represents Record Status of Room Rotation Setup Rule.
+          $ref: '#/components/schemas/rotationRuleStatusType'
         setupType:
           description: Represents Setup type for Room Rotation Setup Rule.
           $ref: '#/components/schemas/rotationRuleSetupType'
-        rule:
-          description: Description of the Room Rotation Setup Rule.
+        ruleId:
+          description: Unique ID for Room Rotation Setup Rule.
+          type: number
+        startDate:
+          description: Represents start date for Room Rotation Setup Rule.
+          type: string
+          format: date
+        endDate:
+          description: Represents end date for Room Rotation Setup Rule.
+          type: string
+          format: date
+        daysOfWeek:
+          description: Represents the days for which the Room Rotation Setup Rule are applicable.
+          $ref: '#/components/schemas/daysOfWeekAttrType'
+        calculationRule:
+          description: Represents the calculation type applicable for Rotation Point Rules.
+          $ref: '#/components/schemas/rotationRuleCalculationRuleType'
+        referral:
+          description: Indicates that this Rotation Setup Rule is to be used for Owner Referral Reservations.
+          type: boolean
+        points:
+          description: Represents total points for a Rotation Setup Rule. (To be used with Rotation Point Rules)
+          type: number
+        multiplier:
+          description: Represents multiplier value to be used for an Owner Multiplier Rule or an Out of Order / Service Multiplier rule.
+          type: number
+        reasons:
+          description: Represents Out Of Order/Service reasons in which an Owner Multiplier Rule is applicable for.
+          $ref: '#/components/schemas/codeListType'
+        rateCodes:
+          description: Represents Rate Codes in which the Rotation Setup Rule is applicable for (Either for Rotation Point Rules, or Owner Multiplier Rules).
+          $ref: '#/components/schemas/codeListType'
+        roomTypes:
+          description: Represents Room Types in which the Room Rotation Setup Rule is applicable for (At least 1 Room Type is required).
+          $ref: '#/components/schemas/codeListType'
+    translationTextType2000:
+      type: object
+      description: Contains Multiple translated texts and language codes.
+      properties:
+        defaultText:
+          description: Default text with Character length from 1 to 2000.
+          type: string
+          minLength: 1
+          maxLength: 2000
+        translatedTexts:
+          description: List of translated text and language codes.
+          $ref: '#/components/schemas/translationsTextType'
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    referralType:
+      description: Indicates the type of referral for a Profile to the Room Owner.
+      type: string
+      enum:
+      - Owner
+      - OwnerReferral
+    roomRotationAdjustmentReasonType:
+      type: object
+      description: Defines Rotation Adjustment Reason Details.
+      properties:
+        code:
+          description: Defines the Rotation Adjustment Reason Code.
+          type: string
+          minLength: 1
+          maxLength: 40
+        description:
+          description: Description of the Rotation Adjustment Reason.
+          $ref: '#/components/schemas/translationTextType2000'
+        displayOrder:
+          description: Rotation Adjustment Reason sequence number.
+          type: number
+          minimum: 0
+          maximum: 99999
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    roomRotationOverrideReasonType:
+      type: object
+      description: Defines Rotation Override Reason Details.
+      properties:
+        code:
+          description: Defines the Rotation Override Reason Code.
+          type: string
+          minLength: 1
+          maxLength: 40
+        description:
+          description: Description of the Rotation Override Reason.
+          $ref: '#/components/schemas/translationTextType2000'
+        displayOrder:
+          description: Rotation Override Reason sequence number.
+          type: number
+          minimum: 0
+          maximum: 99999
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    errorsType:
+      type: array
+      description: An error that occurred during the processing of a message.
+      maxItems: 99
+      items:
+        $ref: '#/components/schemas/errorType'
+    translationsTextType:
+      type: array
+      description: Language code for the translation.
+      maxItems: 4000
+      items:
+        type: object
+        properties:
+          value:
+            type: string
+            description: Used for Character Strings, length 0 to 2000.
+            minLength: 0
+            maxLength: 2000
+          language:
+            description: Language identification.
+            type: string
+            minLength: 0
+            maxLength: 20
+        description: Language code for the translation.
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
+    rotationPeriodFrequencyType:
+      type: string
+      description: Simple type for Rotation Period Type.
+      enum:
+      - Monthly
+      - Quarterly
+      - SemiAnnually
+      - Annually
+      - Never
+    ChangeRevenueTransactionCodesDetails:
+      type: object
+      description: Response Body.
+      properties:
+        success:
+          description: Refer to Generic common types document.
+          $ref: '#/components/schemas/successType'
+        warnings:
+          description: Refer to Generic common types document.
+          $ref: '#/components/schemas/warningsType'
+        errors:
+          description: Refer to Generic common types document.
+          $ref: '#/components/schemas/errorsType'
+        echoToken:
+          description: A reference for additional message identification, assigned by the requesting host system. When a request message includes an echo token the corresponding response message MUST include an echo token with an identical value.
+          type: string
+          minLength: 0
+          maxLength: 128
+        timeStamp:
+          description: Indicates the creation date and time of the message in UTC using the following format specified by ISO 8601; YYYY-MM-DDThh:mm:ssZ with time values using the 24 hour clock (e.g. 20 November 2003, 1:59:38 pm UTC becomes 2003-11-20T13:59:38Z).
+          type: string
+          format: date-time
+        version:
+          description: For all Opera versioned messages, the version of the message is indicated by a Opera Version value.
+          type: string
+          minLength: 0
+          maxLength: 40
+        correlationId:
+          description: Allow end-to-end correlation of log messages with the corresponding Web service message throughout the processing of the Web service message.
+          type: string
+          minLength: 0
+          maxLength: 80
+        retryAllowed:
+          description: Indicates if the operation supports the ability to retry the request.
+          type: boolean
+          default: false
+        enforceAllowed:
+          description: Indicates if the operation supports the ability to force the retry request through OPERA services in the case where the external system continues to fail.
+          type: boolean
+          default: false
+        useLocalAllowed:
+          description: This attribute carries the user selected confirmation value on confirmation popup.
+          type: boolean
+          default: false
+    rotationRuleSetupType:
+      type: string
+      description: Simple type for Rotation Rule Setup.
+      enum:
+      - Points
+      - OwnerMultiplier
+      - RoomStatusMultiplier
+    overrideReasonsCriteria:
+      type: object
+      description: Request object for creating a new Room Rotation Override Reason.
+      properties:
+        overrideReasons:
+          description: Room Rotation Override Reasons to be created.
+          $ref: '#/components/schemas/roomRotationOverrideReasonsType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    masterInfoType:
+      type: object
+      properties:
+        codeInfo:
           type: array
           maxItems: 4000
           items:
-            $ref: '#/components/schemas/rotationRuleType'
-    FetchAdjustmentReasonsDetails:
+            $ref: '#/components/schemas/codeInfoType'
+        codeType:
+          $ref: '#/components/schemas/masterType'
+    CreateAdjustmentReasonsDetails:
       type: object
-      description: Response object for creating Room Rotation Adjustment Reasons.
+      description: Request object for fetching Room Rotation Adjustment Reasons.
       properties:
         adjustmentReasons:
-          description: Collection of Room Rotation Adjustment Reasons.
+          description: Room Rotation Adjustment Reasons to be created.
           $ref: '#/components/schemas/roomRotationAdjustmentReasonsType'
         links:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    roomOwnerReferralType:
+    rotationPeriodType:
       type: object
-      description: Define the search criteria for retrieving Room Owner Referral records
+      description: Rotation Period Frequency and Start Date Details for a Property
       properties:
         hotelId:
-          description: Hotel Code of Room Owner Referral record.
+          description: Hotel code for Room Rotation Period.
           type: string
           minLength: 0
           maxLength: 20
-        roomOwnerId:
-          description: Unique Id for Room Ownership record.
-          type: number
-        roomOwnerReferralId:
-          description: Unique Id for Room Owner Referral record.
-          type: number
-        referral:
-          description: Type of referral to the room owner/target profile.
-          $ref: '#/components/schemas/referralType'
         startDate:
-          description: Start Date of the Room Owner Referral record.
+          description: Represents Effective start date for the Room Rotation Period Setup.
+          type: string
+          format: date
+        periodFrequency:
+          description: Represents the frequency in which a Rotation Period resets for the Room Rotation Period Setup.
+          $ref: '#/components/schemas/rotationPeriodFrequencyType'
+        forceRecalculate:
+          description: Represents if Rotation points/rules recalculation job should be re-triggered.
+          type: boolean
+          default: false
+    FetchUnitGradesDetails:
+      type: object
+      description: Response object for fetching Room Rotation Owner Room Grade Codes.
+      properties:
+        unitGrades:
+          description: Collection of Room Rotation Owner Room Grade Codes.
+          $ref: '#/components/schemas/roomRotationUnitGradesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    rotationRules:
+      type: object
+      description: Request object for creating room rotation setup rules.
+      properties:
+        rotationRules:
+          description: Collection of Room Rotation Setup Rules to be created.
+          $ref: '#/components/schemas/rotationRulesType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    roomRotationAdjustmentReasonsType:
+      type: array
+      description: Room Rotation Adjustment Reason Enumeration element.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/roomRotationAdjustmentReasonType'
+    roomOwnershipType:
+      type: object
+      description: Define the search criteria for retrieving room ownership records
+      properties:
+        hotelId:
+          description: Hotel Code of Room Ownership record.
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomOwnershipId:
+          description: Unique Id for Room Ownership record.
+          type: integer
+        contractNumber:
+          description: Contract number for Room Ownership record.
+          type: string
+          maxLength: 50
+        startDate:
+          description: Start Date of the Room Ownership record.
           type: string
           format: date
         endDate:
-          description: End Date of the Room Owner Referral record.
+          description: End Date of the Room Ownership record.
           type: string
           format: date
         roomId:
-          description: Room Id of Room Owner Referral record.
+          description: Room Id of Room Ownership record.
           type: string
-        profileName:
-          description: Profile Name of the Room Owner Referral record.
-          $ref: '#/components/schemas/profileNameType'
-        profileAddress:
-          description: Address details for the profile on the Room Owner Referral record
-          $ref: '#/components/schemas/addressType'
+          minLength: 0
+          maxLength: 20
+        roomCategory:
+          description: Room Category of the Room Ownership record.
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomType:
+          description: Room Type of the Room Ownership record.
+          type: string
+          minLength: 0
+          maxLength: 20
         profileId:
-          description: Profile ID of the Room Owner Referral record.
+          description: Profile ID of the Room Ownership record.
           $ref: '#/components/schemas/uniqueID_Type'
-        inactive:
-          description: Status of the Room Owner Referral record.
-          type: boolean
-        inactiveDate:
-          description: Date in which the room owner referral record was marked as inactive.
+        profileName:
+          description: Name of owner profile.
+          $ref: '#/components/schemas/profileNameType'
+        status:
+          description: Status of the Room Ownership record. (Active or Inactive)
           type: string
-          format: date
+        ownerExclusive:
+          type: boolean
+          description: Whether Room is available for the exclusive use of its designated owner and owner referrals, or if it is available in general availability.
     addressType:
       type: object
       description: Provides address information.
@@ -2767,97 +2917,249 @@ components:
           type: string
           minLength: 0
           maxLength: 200
-    codeListType:
+    status:
+      type: object
+      description: Response Body.
+      properties:
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    createRoomOwnerReferralDetails:
+      type: object
+      description: Request object for creating Room Owner Referral records.
+      properties:
+        roomOwnerReferrals:
+          description: Details to create Room Owner Referral records.
+          $ref: '#/components/schemas/roomOwnerReferralList'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    UnitGradesDetailsUpdated:
+      type: object
+      description: Response Body.
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    roomRotationRules:
+      type: object
+      description: Request object for saving changes to room type rotation rules.
+      properties:
+        forceRecalculate:
+          description: Indicates if Rotation points recalculation job should be re-triggered.
+          type: boolean
+          default: false
+        rotationRules:
+          type: array
+          description: Defines collection of Room Rotation Setup Rules.
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/rotationRuleType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    AdjustmentReasonsDetailsUpdated:
+      type: object
+      description: Response Body.
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    links:
       type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    rotationRevenueTransactionCodesType:
+      type: array
+      description: A revenue transaction code.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/rotationRevenueTransactionCodeType'
+    profileNameType:
+      type: object
+      description: This provides name information for a person.
+      properties:
+        name:
+          description: Family name, last name or Company Name.
+          type: string
+          minLength: 0
+          maxLength: 40
+        fullName:
+          description: Full display Name.
+          type: string
+          minLength: 0
+          maxLength: 200
+        namePrefix:
+          description: Salutation of honorific (e.g. Mr., Mrs., Ms., Miss, Dr.)
+          type: string
+          minLength: 0
+          maxLength: 40
+        givenName:
+          description: Given name, first name or names.
+          type: string
+          minLength: 0
+          maxLength: 40
+        middleName:
+          description: The middle name of the person name.
+          type: string
+          minLength: 0
+          maxLength: 40
+        nameTitle:
+          description: Degree or honors (e.g., Ph.D., M.D.)
+          type: string
+          minLength: 0
+          maxLength: 80
+        nameType:
+          description: Type of name of the individual, such as former, nickname, alternate or alias name.
+          $ref: '#/components/schemas/personNameTypeType'
+    roomOwnershipDetails:
+      type: object
+      description: Response object containing room ownership details.
+      properties:
+        roomOwnerships:
+          description: Room ownership details for the profile.
+          $ref: '#/components/schemas/roomOwnershipsList'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    personNameTypeType:
+      type: string
+      description: Person's name in an external system.
+      enum:
+      - Primary
+      - Alternate
+      - Incognito
+      - External
+      - Phonetic
+    daysOfWeekAttrType:
+      type: object
+      description: Days of the Week
+      properties:
+        sunday:
+          type: boolean
+          default: false
+        monday:
+          type: boolean
+          default: false
+        tuesday:
+          type: boolean
+          default: false
+        wednesday:
+          type: boolean
+          default: false
+        thursday:
+          type: boolean
+          default: false
+        friday:
+          type: boolean
+          default: false
+        saturday:
+          type: boolean
+          default: false
+    rotationRevenueTransactionCodesChangeType:
+      type: object
+      description: Two collections of transaction codes for a resort. One collection lists codes to be changed to Rotation Revenue transaction codes and the other to be changed to non Rotation Revenue Transaction codes.
+      properties:
+        hotelId:
+          description: Hotel code of revenue transaction code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        rotationRevenueTransactionCodes:
+          description: List of transaction codes to be updated to rotation revenue transaction codes.
+          $ref: '#/components/schemas/transactionCodesType'
+        nonRotationRevenueTransactionCodes:
+          description: List of transaction codes to be updated to non rotation revenue transaction codes.
+          $ref: '#/components/schemas/transactionCodesType'
+    successType:
+      type: object
+      description: Returning an empty element of this type indicates the successful processing of an message. This is used in conjunction with the Warning Type to report any warnings or business errors.
+      properties: {}
+    roomRotationUnitGradesType:
+      type: array
+      description: Room Rotation Owner Room Grade Enumeration element.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/roomRotationUnitGradeType'
+    pingDetail:
+      type: object
+      description: Response for Ping operation.
+      properties:
+        operaVersion:
+          description: Opera version number.
+          $ref: '#/components/schemas/operaVersionNumberType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    roomOwnerReferralDetails:
+      type: object
+      description: Response object containing Room Owner Referral details.
+      properties:
+        roomOwnerReferrals:
+          description: Room Owner Referral details.
+          $ref: '#/components/schemas/roomOwnerReferralList'
+        hasOwnershipRecords:
+          type: boolean
+          description: Flag to indicate if the associated profile has any active Room Ownership records attached to it.
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    ChangeUnitGradesDetails:
+      type: object
+      description: Request object for changing an existing Room Rotation Owner Room Grade Codes.
+      properties:
+        unitGrades:
+          description: Room Rotation Owner Room Grade Codes to be changed.
+          $ref: '#/components/schemas/roomRotationUnitGradesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    overrideReasonsDetails:
+      type: object
+      description: Response object for fetching Room Rotation Override Reasons.
+      properties:
+        overrideReasons:
+          description: Collection of Room Rotation Override Reasons.
+          $ref: '#/components/schemas/roomRotationOverrideReasonsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    ChangeRevenueTransactionCodesCriteria:
+      type: object
+      description: Request object for updating the rotation revenue status of a transaction code for a given property.
+      properties:
+        revenueTransactionCodes:
+          description: Revenue transaction codes for a given property value.
+          $ref: '#/components/schemas/rotationRevenueTransactionCodesChangeType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    changeRoomOwnerDetails:
+      type: object
+      description: Request object for changing room ownership records.
+      properties:
+        roomOwners:
+          description: Criteria to change the room ownership records
+          $ref: '#/components/schemas/roomOwnershipsList'
+        overrideOwnerExclusive:
+          description: Indicate to override the Owner Exclusive flag in room ownership records with overlapping dates
+          type: boolean
+          default: false
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    transactionCodesType:
+      type: array
+      description: Revenue transaction code.
       maxItems: 4000
       items:
         type: string
         minLength: 0
         maxLength: 20
-    overrideReasonsCriteria:
-      type: object
-      description: Request object for creating a new Room Rotation Override Reason.
-      properties:
-        overrideReasons:
-          description: Room Rotation Override Reasons to be created.
-          $ref: '#/components/schemas/roomRotationOverrideReasonsType'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    translationTextType2000:
-      type: object
-      description: Contains Multiple translated texts and language codes.
-      properties:
-        defaultText:
-          description: Default text with Character length from 1 to 2000.
-          type: string
-          minLength: 1
-          maxLength: 2000
-        translatedTexts:
-          description: List of translated text and language codes.
-          $ref: '#/components/schemas/translationsTextType'
-    FetchRotationRules:
-      type: object
-      description: Response object for retrieving rotation setup rules for a given property
-      properties:
-        rotationRulesResult:
-          description: Retrieve Rotation Setup Rules for a given property.
-          $ref: '#/components/schemas/rotationRulesResultType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    roomOwnershipsList:
-      description: Room Ownership records.
-      type: object
-      properties:
-        roomOwnershipInfo:
-          description: Collection of Detailed information on Room Ownership records.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/roomOwnershipType'
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        count:
-          description: Total number of rows returned
-          type: integer
-    rotationPeriodType:
-      type: object
-      description: Rotation Period Frequency and Start Date Details for a Property
-      properties:
-        hotelId:
-          description: Hotel code for Room Rotation Period.
-          type: string
-          minLength: 0
-          maxLength: 20
-        startDate:
-          description: Represents Effective start date for the Room Rotation Period Setup.
-          type: string
-          format: date
-        periodFrequency:
-          description: Represents the frequency in which a Rotation Period resets for the Room Rotation Period Setup.
-          $ref: '#/components/schemas/rotationPeriodFrequencyType'
-        forceRecalculate:
-          description: Represents if Rotation points/rules recalculation job should be re-triggered.
-          type: boolean
-          default: false
-    errorsType:
-      type: array
-      description: An error that occurred during the processing of a message.
-      maxItems: 99
-      items:
-        $ref: '#/components/schemas/errorType'
-    rotationRuleCalculationRuleType:
-      type: string
-      description: Simple type for Rotation Setup Rule Calculation Rule.
-      enum:
-      - PerRevenue
-      - PerNight
-      - PerStay
     errorType:
       type: object
       description: Standard way to indicate that an error occurred during the processing of an message. If the message successfully processes, but there are business errors, those errors should be passed in the warning element.
@@ -2897,104 +3199,6 @@ components:
         nodeList:
           description: An XPath expression that selects all the nodes whose data caused this error. Further, this expression should have an additional constraint which contains the data of the node. This will provide the offending data back to systems that cannot maintain the original message.
           type: string
-    roomRotationAdjustmentReasonsType:
-      type: array
-      description: Room Rotation Adjustment Reason Enumeration element.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/roomRotationAdjustmentReasonType'
-    roomRotationRules:
-      type: object
-      description: Request object for saving changes to room type rotation rules.
-      properties:
-        forceRecalculate:
-          description: Indicates if Rotation points recalculation job should be re-triggered.
-          type: boolean
-          default: false
-        rotationRules:
-          type: array
-          description: Defines collection of Room Rotation Setup Rules.
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/rotationRuleType'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    daysOfWeekAttrType:
-      type: object
-      description: Days of the Week
-      properties:
-        sunday:
-          type: boolean
-          default: false
-        monday:
-          type: boolean
-          default: false
-        tuesday:
-          type: boolean
-          default: false
-        wednesday:
-          type: boolean
-          default: false
-        thursday:
-          type: boolean
-          default: false
-        friday:
-          type: boolean
-          default: false
-        saturday:
-          type: boolean
-          default: false
-    rotationPeriod:
-      type: object
-      description: Request Object for changing Rotation Period.
-      properties:
-        rotationPeriod:
-          description: Rotation Period data (Start date/Period Frequency) to be changed
-          $ref: '#/components/schemas/rotationPeriodType'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    roomRotationOverrideReasonsType:
-      type: array
-      description: Room Rotation Override Reason Enumeration element.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/roomRotationOverrideReasonType'
-    createRoomOwnerReferralDetails:
-      type: object
-      description: Request object for creating Room Owner Referral records.
-      properties:
-        roomOwnerReferrals:
-          description: Details to create Room Owner Referral records.
-          $ref: '#/components/schemas/roomOwnerReferralList'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    transactionCodesType:
-      type: array
-      description: Revenue transaction code.
-      maxItems: 4000
-      items:
-        type: string
-        minLength: 0
-        maxLength: 20
-    roomRotationAdjustmentReasonType:
-      type: object
-      description: Defines Rotation Adjustment Reason Details.
-      properties:
-        code:
-          description: Defines the Rotation Adjustment Reason Code.
-          type: string
-          minLength: 1
-          maxLength: 40
-        description:
-          description: Description of the Rotation Adjustment Reason.
-          $ref: '#/components/schemas/translationTextType2000'
-        displayOrder:
-          description: Rotation Adjustment Reason sequence number.
-          type: number
-          minimum: 0
-          maximum: 99999
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
     rotationRevenueTransactionCodeType:
       type: object
       description: A revenue transaction code
@@ -3018,311 +3222,42 @@ components:
           type: string
           minLength: 0
           maxLength: 2000
-    roomRotationUnitGradeType:
+    overrideReasonsToBeChanged:
       type: object
-      description: Defines Owner Room Grade Code Details.
+      description: Request object for changing an existing Room Rotation Override Reason.
       properties:
-        code:
-          description: Defines the Owner Room Grade Code.
-          type: string
-          minLength: 1
-          maxLength: 40
-        description:
-          description: Description of the Owner Room Grade Code.
-          $ref: '#/components/schemas/translationTextType2000'
-        displayOrder:
-          description: Owner Room Grade Code sequence number.
-          type: number
-          minimum: 0
-          maximum: 99999
-        hotelId:
-          description: Hotel of the Owner Room Grade Code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-    roomRotationUnitGradesType:
+        overrideReasons:
+          description: Room Rotation Override Reason to be changed.
+          $ref: '#/components/schemas/roomRotationOverrideReasonsType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    FetchRotationRules:
+      type: object
+      description: Response object for retrieving rotation setup rules for a given property
+      properties:
+        rotationRulesResult:
+          description: Retrieve Rotation Setup Rules for a given property.
+          $ref: '#/components/schemas/rotationRulesResultType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    rotationPeriod:
+      type: object
+      description: Request Object for changing Rotation Period.
+      properties:
+        rotationPeriod:
+          description: Rotation Period data (Start date/Period Frequency) to be changed
+          $ref: '#/components/schemas/rotationPeriodType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    codeListType:
       type: array
-      description: Room Rotation Owner Room Grade Enumeration element.
       maxItems: 4000
       items:
-        $ref: '#/components/schemas/roomRotationUnitGradeType'
-    changeRoomOwnerDetails:
-      type: object
-      description: Request object for changing room ownership records.
-      properties:
-        roomOwners:
-          description: Criteria to change the room ownership records
-          $ref: '#/components/schemas/roomOwnershipsList'
-        overrideOwnerExclusive:
-          description: Indicate to override the Owner Exclusive flag in room ownership records with overlapping dates
-          type: boolean
-          default: false
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    ChangeUnitGradesDetails:
-      type: object
-      description: Request object for changing an existing Room Rotation Owner Room Grade Codes.
-      properties:
-        unitGrades:
-          description: Room Rotation Owner Room Grade Codes to be changed.
-          $ref: '#/components/schemas/roomRotationUnitGradesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    rotationRulesResultType:
-      type: object
-      description: Collection of Room Rotation Setup Rules Results.
-      properties:
-        rotationRules:
-          description: Information representing Room Rotation Setup Rules.
-          $ref: '#/components/schemas/rotationRulesType'
-        masterInfo:
-          description: Collection of RateCodes, RoomTypes, Out of Order Reasons
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/masterInfoType'
-        totalPages:
-          description: Evaluated total page count based on the requested max fetch count.
-          type: integer
-        offset:
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-          type: integer
-          default: 0
-        limit:
-          description: Indicates maximum number of records a Web Service should return.
-          type: integer
-          default: 25
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        count:
-          description: Total number of rows returned
-          type: integer
-    managedByOptions:
-      description: Describes of the Configuration is Managed by Enterprise or Property.
-      type: string
-      enum:
-      - EnterpriseManaged
-      - PropertyManaged
-      - EnterpriseEnforced
-      - PropertyOverridden
-    roomOwnerReferralDetails:
-      type: object
-      description: Response object containing Room Owner Referral details.
-      properties:
-        roomOwnerReferrals:
-          description: Room Owner Referral details.
-          $ref: '#/components/schemas/roomOwnerReferralList'
-        hasOwnershipRecords:
-          type: boolean
-          description: Flag to indicate if the associated profile has any active Room Ownership records attached to it.
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    createRoomOwnerDetails:
-      type: object
-      description: Request object for creating room ownership records.
-      properties:
-        roomOwner:
-          description: Details to create room ownership records
-          $ref: '#/components/schemas/roomOwnershipType'
-        overrideOwnerExclusive:
-          description: Indicate to override the Owner Exclusive flag in room ownership records with overlapping dates
-          type: boolean
-          default: false
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    CreateAdjustmentReasonsDetails:
-      type: object
-      description: Request object for fetching Room Rotation Adjustment Reasons.
-      properties:
-        adjustmentReasons:
-          description: Room Rotation Adjustment Reasons to be created.
-          $ref: '#/components/schemas/roomRotationAdjustmentReasonsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    codeInfoType:
-      type: object
-      description: ''
-      properties:
-        description:
-          type: string
-          minLength: 0
-          maxLength: 80
-        hotelId:
-          type: string
-          minLength: 0
-          maxLength: 20
-        code:
-          type: string
-          minLength: 0
-          maxLength: 20
-    ChangeRevenueTransactionCodesDetails:
-      type: object
-      description: Response Body.
-      properties:
-        success:
-          description: Refer to Generic common types document.
-          $ref: '#/components/schemas/successType'
-        warnings:
-          description: Refer to Generic common types document.
-          $ref: '#/components/schemas/warningsType'
-        errors:
-          description: Refer to Generic common types document.
-          $ref: '#/components/schemas/errorsType'
-        echoToken:
-          description: A reference for additional message identification, assigned by the requesting host system. When a request message includes an echo token the corresponding response message MUST include an echo token with an identical value.
-          type: string
-          minLength: 0
-          maxLength: 128
-        timeStamp:
-          description: Indicates the creation date and time of the message in UTC using the following format specified by ISO 8601; YYYY-MM-DDThh:mm:ssZ with time values using the 24 hour clock (e.g. 20 November 2003, 1:59:38 pm UTC becomes 2003-11-20T13:59:38Z).
-          type: string
-          format: date-time
-        version:
-          description: For all Opera versioned messages, the version of the message is indicated by a Opera Version value.
-          type: string
-          minLength: 0
-          maxLength: 40
-        correlationId:
-          description: Allow end-to-end correlation of log messages with the corresponding Web service message throughout the processing of the Web service message.
-          type: string
-          minLength: 0
-          maxLength: 80
-        retryAllowed:
-          description: Indicates if the operation supports the ability to retry the request.
-          type: boolean
-          default: false
-        enforceAllowed:
-          description: Indicates if the operation supports the ability to force the retry request through OPERA services in the case where the external system continues to fail.
-          type: boolean
-          default: false
-        useLocalAllowed:
-          description: This attribute carries the user selected confirmation value on confirmation popup.
-          type: boolean
-          default: false
-    personNameTypeType:
-      type: string
-      description: Person's name in an external system.
-      enum:
-      - Primary
-      - Alternate
-      - Incognito
-      - External
-      - Phonetic
-    countryNameType:
-      type: object
-      description: Code for a country or a nationality.
-      properties:
-        value:
-          type: string
-          description: Used for Character Strings, length 0 to 200.
-          minLength: 0
-          maxLength: 200
-        code:
-          description: Code for a country or a nationality.
-          type: string
-          minLength: 0
-          maxLength: 20
-    rotationRuleSetupType:
-      type: string
-      description: Simple type for Rotation Rule Setup.
-      enum:
-      - Points
-      - OwnerMultiplier
-      - RoomStatusMultiplier
-    rotationRuleStatusType:
-      type: string
-      description: Simple type for Rotation Setup Rule System Status.
-      enum:
-      - Changed
-      - Deleted
-      - New
-      - Queried
-    successType:
-      type: object
-      description: Returning an empty element of this type indicates the successful processing of an message. This is used in conjunction with the Warning Type to report any warnings or business errors.
-      properties: {}
-    FetchUnitGradesDetails:
-      type: object
-      description: Response object for fetching Room Rotation Owner Room Grade Codes.
-      properties:
-        unitGrades:
-          description: Collection of Room Rotation Owner Room Grade Codes.
-          $ref: '#/components/schemas/roomRotationUnitGradesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    rotationRules:
-      type: object
-      description: Request object for creating room rotation setup rules.
-      properties:
-        rotationRules:
-          description: Collection of Room Rotation Setup Rules to be created.
-          $ref: '#/components/schemas/rotationRulesType'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    referralType:
-      description: Indicates the type of referral for a Profile to the Room Owner.
-      type: string
-      enum:
-      - Owner
-      - OwnerReferral
-    rotationRuleType:
-      type: object
-      properties:
-        status:
-          description: Represents Record Status of Room Rotation Setup Rule.
-          $ref: '#/components/schemas/rotationRuleStatusType'
-        setupType:
-          description: Represents Setup type for Room Rotation Setup Rule.
-          $ref: '#/components/schemas/rotationRuleSetupType'
-        ruleId:
-          description: Unique ID for Room Rotation Setup Rule.
-          type: number
-        startDate:
-          description: Represents start date for Room Rotation Setup Rule.
-          type: string
-          format: date
-        endDate:
-          description: Represents end date for Room Rotation Setup Rule.
-          type: string
-          format: date
-        daysOfWeek:
-          description: Represents the days for which the Room Rotation Setup Rule are applicable.
-          $ref: '#/components/schemas/daysOfWeekAttrType'
-        calculationRule:
-          description: Represents the calculation type applicable for Rotation Point Rules.
-          $ref: '#/components/schemas/rotationRuleCalculationRuleType'
-        referral:
-          description: Indicates that this Rotation Setup Rule is to be used for Owner Referral Reservations.
-          type: boolean
-        points:
-          description: Represents total points for a Rotation Setup Rule. (To be used with Rotation Point Rules)
-          type: number
-        multiplier:
-          description: Represents multiplier value to be used for an Owner Multiplier Rule or an Out of Order / Service Multiplier rule.
-          type: number
-        reasons:
-          description: Represents Out Of Order/Service reasons in which an Owner Multiplier Rule is applicable for.
-          $ref: '#/components/schemas/codeListType'
-        rateCodes:
-          description: Represents Rate Codes in which the Rotation Setup Rule is applicable for (Either for Rotation Point Rules, or Owner Multiplier Rules).
-          $ref: '#/components/schemas/codeListType'
-        roomTypes:
-          description: Represents Room Types in which the Room Rotation Setup Rule is applicable for (At least 1 Room Type is required).
-          $ref: '#/components/schemas/codeListType'
+        type: string
+        minLength: 0
+        maxLength: 20
     ChangeRotationPeriodDetails:
       type: object
       description: Response Body.
@@ -3369,49 +3304,54 @@ components:
           default: false
         links:
           $ref: '#/components/schemas/links'
-    rotationRevenueTransactionCodesType:
-      type: array
-      description: A revenue transaction code.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/rotationRevenueTransactionCodeType'
-    profileNameType:
+    fetchRotationPeriod:
       type: object
-      description: This provides name information for a person.
+      description: Response Object for Fetch Rotation Period
       properties:
-        name:
-          description: Family name, last name or Company Name.
+        hotelId:
+          description: Property code for Room Rotation Period.
           type: string
           minLength: 0
+          maxLength: 20
+        startDate:
+          description: Represents Effective start date for the Room Rotation Period Setup.
+          type: string
+          format: date
+        periodFrequency:
+          description: Represents Effective Period reset frequency for the Room Rotation Period Setup.
+          $ref: '#/components/schemas/rotationPeriodFrequencyType'
+        currentPeriodStartDate:
+          description: The start date for the property's current Rotation Period.
+          type: string
+          format: date
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    roomRotationUnitGradeType:
+      type: object
+      description: Defines Owner Room Grade Code Details.
+      properties:
+        code:
+          description: Defines the Owner Room Grade Code.
+          type: string
+          minLength: 1
           maxLength: 40
-        fullName:
-          description: Full display Name.
+        description:
+          description: Description of the Owner Room Grade Code.
+          $ref: '#/components/schemas/translationTextType2000'
+        displayOrder:
+          description: Owner Room Grade Code sequence number.
+          type: number
+          minimum: 0
+          maximum: 99999
+        hotelId:
+          description: Hotel of the Owner Room Grade Code.
           type: string
           minLength: 0
-          maxLength: 200
-        namePrefix:
-          description: Salutation of honorific (e.g. Mr., Mrs., Ms., Miss, Dr.)
-          type: string
-          minLength: 0
-          maxLength: 40
-        givenName:
-          description: Given name, first name or names.
-          type: string
-          minLength: 0
-          maxLength: 40
-        middleName:
-          description: The middle name of the person name.
-          type: string
-          minLength: 0
-          maxLength: 40
-        nameTitle:
-          description: Degree or honors (e.g., Ph.D., M.D.)
-          type: string
-          minLength: 0
-          maxLength: 80
-        nameType:
-          description: Type of name of the individual, such as former, nickname, alternate or alias name.
-          $ref: '#/components/schemas/personNameTypeType'
+          maxLength: 20
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
     changeRoomOwnerReferralDetails:
       type: object
       description: Request object for changing Room Owner Referral records.
@@ -3421,167 +3361,106 @@ components:
           $ref: '#/components/schemas/roomOwnerReferralType'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    UnitGradesDetailsUpdated:
+    ChangeAdjustmentReasonsDetails:
       type: object
-      description: Response Body.
+      description: Request object for changing Room Rotation Adjustment Reasons.
       properties:
+        adjustmentReasons:
+          description: Room Rotation Adjustment Reasons to be updated.
+          $ref: '#/components/schemas/roomRotationAdjustmentReasonsType'
         links:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    overrideReasonsDetails:
+    managedByOptions:
+      description: Describes of the Configuration is Managed by Enterprise or Property.
+      type: string
+      enum:
+      - EnterpriseManaged
+      - PropertyManaged
+      - EnterpriseEnforced
+      - PropertyOverridden
+    rotationRulesType:
       type: object
-      description: Response object for fetching Room Rotation Override Reasons.
-      properties:
-        overrideReasons:
-          description: Collection of Room Rotation Override Reasons.
-          $ref: '#/components/schemas/roomRotationOverrideReasonsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    instanceLink:
-      type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
-      properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
-          type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
-        title:
-          description: Exact copy of the "summary" field on the linked operation.
-          type: string
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-      required:
-      - type
-      - title
-    roomOwnershipType:
-      type: object
-      description: Define the search criteria for retrieving room ownership records
+      description: Collection of Room Rotation Setup Rules elements.
       properties:
         hotelId:
-          description: Hotel Code of Room Ownership record.
+          description: Hotel code for Room Rotation Setup Rules.
           type: string
           minLength: 0
           maxLength: 20
-        roomOwnershipId:
-          description: Unique Id for Room Ownership record.
-          type: integer
-        contractNumber:
-          description: Contract number for Room Ownership record.
-          type: string
-          maxLength: 50
-        startDate:
-          description: Start Date of the Room Ownership record.
-          type: string
-          format: date
-        endDate:
-          description: End Date of the Room Ownership record.
-          type: string
-          format: date
-        roomId:
-          description: Room Id of Room Ownership record.
-          type: string
-          minLength: 0
-          maxLength: 20
-        roomCategory:
-          description: Room Category of the Room Ownership record.
-          type: string
-          minLength: 0
-          maxLength: 20
-        roomType:
-          description: Room Type of the Room Ownership record.
-          type: string
-          minLength: 0
-          maxLength: 20
-        profileId:
-          description: Profile ID of the Room Ownership record.
-          $ref: '#/components/schemas/uniqueID_Type'
-        profileName:
-          description: Name of owner profile.
-          $ref: '#/components/schemas/profileNameType'
-        status:
-          description: Status of the Room Ownership record. (Active or Inactive)
-          type: string
-        ownerExclusive:
+        setupType:
+          description: Represents Setup type for Room Rotation Setup Rule.
+          $ref: '#/components/schemas/rotationRuleSetupType'
+        rule:
+          description: Description of the Room Rotation Setup Rule.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/rotationRuleType'
+    createRoomOwnerDetails:
+      type: object
+      description: Request object for creating room ownership records.
+      properties:
+        roomOwner:
+          description: Details to create room ownership records
+          $ref: '#/components/schemas/roomOwnershipType'
+        overrideOwnerExclusive:
+          description: Indicate to override the Owner Exclusive flag in room ownership records with overlapping dates
           type: boolean
-          description: Whether Room is available for the exclusive use of its designated owner and owner referrals, or if it is available in general availability.
-    roomRotationOverrideReasonType:
-      type: object
-      description: Defines Rotation Override Reason Details.
-      properties:
-        code:
-          description: Defines the Rotation Override Reason Code.
-          type: string
-          minLength: 1
-          maxLength: 40
-        description:
-          description: Description of the Rotation Override Reason.
-          $ref: '#/components/schemas/translationTextType2000'
-        displayOrder:
-          description: Rotation Override Reason sequence number.
-          type: number
-          minimum: 0
-          maximum: 99999
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-    overrideReasonsToBeChanged:
-      type: object
-      description: Request object for changing an existing Room Rotation Override Reason.
-      properties:
-        overrideReasons:
-          description: Room Rotation Override Reason to be changed.
-          $ref: '#/components/schemas/roomRotationOverrideReasonsType'
+          default: false
         warnings:
           $ref: '#/components/schemas/warningsType'
+    roomOwnerReferralList:
+      description: Room Owner Referral records.
+      type: object
+      properties:
+        roomOwnerReferrals:
+          description: Collection of Detailed information on Room Owner's Referral records.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/roomOwnerReferralType'
+    rotationRuleCalculationRuleType:
+      type: string
+      description: Simple type for Rotation Setup Rule Calculation Rule.
+      enum:
+      - PerRevenue
+      - PerNight
+      - PerStay
+    CreateUnitGradesDetails:
+      type: object
+      description: Request object for creating a new Room Rotation Owner Room Grade Code.
+      properties:
+        unitGrades:
+          description: Room Rotation Owner Room Grade Codes to be created.
+          $ref: '#/components/schemas/roomRotationUnitGradesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    codeInfoType:
+      type: object
+      description: ''
+      properties:
+        description:
+          type: string
+          minLength: 0
+          maxLength: 80
+        hotelId:
+          type: string
+          minLength: 0
+          maxLength: 20
+        code:
+          type: string
+          minLength: 0
+          maxLength: 20
     FetchRevenueTransactionCodesDetails:
       type: object
       description: Response object for retrieving revenue transaction codes for a given property
@@ -3591,34 +3470,50 @@ components:
           $ref: '#/components/schemas/rotationRevenueTransactionCodesType'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    rotationRevenueTransactionCodesChangeType:
+    masterType:
+      type: string
+      enum:
+      - Country
+      - State
+      - AddressType
+      - PhoneType
+      - RateCategory
+      - CalculationRule
+      - PostingRythym
+      - BillingInstruction
+      - TransactionCode
+      - DisplaySet
+      - MailingActions
+      - DistanceType
+      - District
+      - Territory
+      - FiscalRegion
+      - InventoryItem
+      - Package
+      - RoomFeaturePreference
+      - SpecialPreference
+      - Promotion
+      - Department
+      - ReservationPreference
+      - FacilityTask
+      - RoomType
+      - RateCode
+      - OutOfOrderReason
+      - Block
+    uniqueID_Type:
       type: object
-      description: Two collections of transaction codes for a resort. One collection lists codes to be changed to Rotation Revenue transaction codes and the other to be changed to non Rotation Revenue Transaction codes.
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
       properties:
-        hotelId:
-          description: Hotel code of revenue transaction code.
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
           type: string
           minLength: 0
-          maxLength: 20
-        rotationRevenueTransactionCodes:
-          description: List of transaction codes to be updated to rotation revenue transaction codes.
-          $ref: '#/components/schemas/transactionCodesType'
-        nonRotationRevenueTransactionCodes:
-          description: List of transaction codes to be updated to non rotation revenue transaction codes.
-          $ref: '#/components/schemas/transactionCodesType'
-    AdjustmentReasonsDetailsUpdated:
-      type: object
-      description: Response Body.
-      properties:
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    operaVersionNumberType:
-      type: string
-      description: Current Opera Version Number
-      minLength: 0
-      maxLength: 40
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
     warningType:
       type: object
       description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
@@ -3665,79 +3560,184 @@ components:
           type: string
           minLength: 1
           maxLength: 8
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    translationsTextType:
-      type: array
-      description: Language code for the translation.
-      maxItems: 4000
-      items:
-        type: object
-        properties:
-          value:
-            type: string
-            description: Used for Character Strings, length 0 to 2000.
-            minLength: 0
-            maxLength: 2000
-          language:
-            description: Language identification.
-            type: string
-            minLength: 0
-            maxLength: 20
-        description: Language code for the translation.
-    status:
+    FetchAdjustmentReasonsDetails:
       type: object
-      description: Response Body.
+      description: Response object for creating Room Rotation Adjustment Reasons.
       properties:
-        warnings:
-          $ref: '#/components/schemas/warningsType'
+        adjustmentReasons:
+          description: Collection of Room Rotation Adjustment Reasons.
+          $ref: '#/components/schemas/roomRotationAdjustmentReasonsType'
         links:
           $ref: '#/components/schemas/links'
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
-  responses:
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '415':
-      description: Unsupported Media Type
-    '406':
-      description: Not acceptable.
-    '414':
-      description: Request URI Too Large
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '502':
-      description: Bad Gateway
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '413':
-      description: Request Entity Too Large
-    '401':
-      description: Unauthorized
-    '403':
-      description: Forbidden
-    '405':
-      description: Method not allowed
-    '503':
-      description: Service Unavailable
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    roomOwnerReferralType:
+      type: object
+      description: Define the search criteria for retrieving Room Owner Referral records
+      properties:
+        hotelId:
+          description: Hotel Code of Room Owner Referral record.
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomOwnerId:
+          description: Unique Id for Room Ownership record.
+          type: number
+        roomOwnerReferralId:
+          description: Unique Id for Room Owner Referral record.
+          type: number
+        referral:
+          description: Type of referral to the room owner/target profile.
+          $ref: '#/components/schemas/referralType'
+        startDate:
+          description: Start Date of the Room Owner Referral record.
+          type: string
+          format: date
+        endDate:
+          description: End Date of the Room Owner Referral record.
+          type: string
+          format: date
+        roomId:
+          description: Room Id of Room Owner Referral record.
+          type: string
+        profileName:
+          description: Profile Name of the Room Owner Referral record.
+          $ref: '#/components/schemas/profileNameType'
+        profileAddress:
+          description: Address details for the profile on the Room Owner Referral record
+          $ref: '#/components/schemas/addressType'
+        profileId:
+          description: Profile ID of the Room Owner Referral record.
+          $ref: '#/components/schemas/uniqueID_Type'
+        inactive:
+          description: Status of the Room Owner Referral record.
+          type: boolean
+        inactiveDate:
+          description: Date in which the room owner referral record was marked as inactive.
+          type: string
+          format: date
+    roomOwnershipsList:
+      description: Room Ownership records.
+      type: object
+      properties:
+        roomOwnershipInfo:
+          description: Collection of Detailed information on Room Ownership records.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/roomOwnershipType'
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        count:
+          description: Total number of rows returned
+          type: integer
+    countryNameType:
+      type: object
+      description: Code for a country or a nationality.
+      properties:
+        value:
+          type: string
+          description: Used for Character Strings, length 0 to 200.
+          minLength: 0
+          maxLength: 200
+        code:
+          description: Code for a country or a nationality.
+          type: string
+          minLength: 0
+          maxLength: 20
+    rotationRulesResultType:
+      type: object
+      description: Collection of Room Rotation Setup Rules Results.
+      properties:
+        rotationRules:
+          description: Information representing Room Rotation Setup Rules.
+          $ref: '#/components/schemas/rotationRulesType'
+        masterInfo:
+          description: Collection of RateCodes, RoomTypes, Out of Order Reasons
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/masterInfoType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+          default: 0
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+          default: 25
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        count:
+          description: Total number of rows returned
+          type: integer
+  parameters:
+    x-externalsystem:
+      name: x-externalsystem
+      description: External system code.
+      in: header
+      x-example: EXTERNALSYSTEMCODE
+      schema:
+        type: string
+        maxLength: 40
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
+      schema:
+        type: string
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
+      schema:
+        type: string
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
+      schema:
+        type: string
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

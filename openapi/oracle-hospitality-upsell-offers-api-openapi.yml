@@ -87,74 +87,24 @@ paths:
           description: Service Unavailable
 components:
   schemas:
-    UpsellOffers:
+    UpsellOffer:
       type: object
-      description: Success and Failure Summary Data
       properties:
-        Items:
+        offerType:
+          type: string
+          example: room_upgrade
+          description: "Describes type of an offer.\n\nPossible values: \n  - room_upgrade\n  - early_checkin\n  - late_checkout\n  - amenity\n  - spa_services\n  - extra_room\n  - extra_day\n  - food_beverage\n  - room_feature\n  - parking"
+        selectionType:
+          type: string
+          description: ''
+          example: zero_to_one
+          enum:
+          - zeroToOne
+          - zeroToMany
+        offers:
           type: array
           items:
-            $ref: '#/components/schemas/Items'
-        totalResults:
-          type: number
-          example: 1
-        offset:
-          type: number
-          example: 0
-        count:
-          type: number
-          example: 1
-        hasMore:
-          type: boolean
-          example: false
-        limit:
-          type: number
-          example: 0
-    Image:
-      type: object
-      properties:
-        big:
-          type: string
-          example: https://example.com/img_url1.jpg
-        small:
-          type: string
-          example: https://example.com/img_url2.jpg
-    errorInstanceNF:
-      type: object
-      description: Complex type that contains not found error instance details for a REST call
-      properties:
-        type:
-          type: string
-          description: Holds error type
-          example: https://www.example.org/protocols/..
-        title:
-          type: string
-          description: Holds error details in short
-          example: Not Found
-        status:
-          type: number
-          example: 404
-        detail:
-          type: string
-          description: Holds error details
-          example: Unable to find HotelId or ReservationId
-        errorCode:
-          type: string
-          description: Holds specific error code
-          example: null
-        errorDetails:
-          type: array
-          description: Holds List of errors
-          items:
-            $ref: '#/components/schemas/errorDetail'
-    Items:
-      type: object
-      description: Success and Failure Summary Data
-      properties:
-        upsellOffers:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpsellOffer'
+            $ref: '#/components/schemas/Offers'
     errorInstanceISE:
       type: object
       description: Complex type that contains internal server error instance details for a REST call
@@ -183,6 +133,29 @@ components:
           description: Holds List of errors
           items:
             $ref: '#/components/schemas/errorDetail'
+    UpsellOffers:
+      type: object
+      description: Success and Failure Summary Data
+      properties:
+        Items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Items'
+        totalResults:
+          type: number
+          example: 1
+        offset:
+          type: number
+          example: 0
+        count:
+          type: number
+          example: 1
+        hasMore:
+          type: boolean
+          example: false
+        limit:
+          type: number
+          example: 0
     errorDetail:
       type: object
       description: Complex type that contains error detail
@@ -196,24 +169,23 @@ components:
         errorCode:
           type: string
           description: Holds specific error code
-    UpsellOffer:
+    Image:
       type: object
       properties:
-        offerType:
+        big:
           type: string
-          example: room_upgrade
-          description: "Describes type of an offer.\n\nPossible values: \n  - room_upgrade\n  - early_checkin\n  - late_checkout\n  - amenity\n  - spa_services\n  - extra_room\n  - extra_day\n  - food_beverage\n  - room_feature\n  - parking"
-        selectionType:
+          example: https://example.com/img_url1.jpg
+        small:
           type: string
-          description: ''
-          example: zero_to_one
-          enum:
-          - zeroToOne
-          - zeroToMany
-        offers:
+          example: https://example.com/img_url2.jpg
+    Items:
+      type: object
+      description: Success and Failure Summary Data
+      properties:
+        upsellOffers:
           type: array
           items:
-            $ref: '#/components/schemas/Offers'
+            $ref: '#/components/schemas/UpsellOffer'
     Offers:
       type: object
       properties:
@@ -255,7 +227,47 @@ components:
           items:
             type: string
             example: SGL
+    errorInstanceNF:
+      type: object
+      description: Complex type that contains not found error instance details for a REST call
+      properties:
+        type:
+          type: string
+          description: Holds error type
+          example: https://www.example.org/protocols/..
+        title:
+          type: string
+          description: Holds error details in short
+          example: Not Found
+        status:
+          type: number
+          example: 404
+        detail:
+          type: string
+          description: Holds error details
+          example: Unable to find HotelId or ReservationId
+        errorCode:
+          type: string
+          description: Holds specific error code
+          example: null
+        errorDetails:
+          type: array
+          description: Holds List of errors
+          items:
+            $ref: '#/components/schemas/errorDetail'
   parameters:
+    Accept-Language:
+      name: Accept-Language
+      in: header
+      description: Language code
+      schema:
+        type: string
+    x-app-key:
+      name: x-app-key
+      in: header
+      x-example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+      schema:
+        type: string
     authorization:
       name: Authorization
       in: header
@@ -272,22 +284,10 @@ components:
         enum:
         - application/json; charset=UTF-8
         - application/json
-    x-app-key:
-      name: x-app-key
-      in: header
-      x-example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-      schema:
-        type: string
     providerId:
       name: providerId
       in: header
       x-example: SAN
       description: Partner's Unique Nor1 Provider ID
-      schema:
-        type: string
-    Accept-Language:
-      name: Accept-Language
-      in: header
-      description: Language code
       schema:
         type: string

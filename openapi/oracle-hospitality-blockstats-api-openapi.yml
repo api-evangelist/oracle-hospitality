@@ -473,196 +473,105 @@ paths:
       tags:
       - BlockStats
 components:
+  responses:
+    '405':
+      description: Method not allowed
+    '413':
+      description: Request Entity Too Large
+    '403':
+      description: Forbidden
+    '503':
+      description: Service Unavailable
+    '406':
+      description: Not acceptable.
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '401':
+      description: Unauthorized
+    '415':
+      description: Unsupported Media Type
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '502':
+      description: Bad Gateway
+    '414':
+      description: Request URI Too Large
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+  parameters:
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
+      schema:
+        type: string
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
+      schema:
+        type: string
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    x-externalsystem:
+      name: x-externalsystem
+      description: External system code.
+      in: header
+      x-example: EXTERNALSYSTEMCODE
+      schema:
+        type: string
+        maxLength: 40
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
+      schema:
+        type: string
   schemas:
-    statUnitCategoryType:
+    operaVersionNumberType:
       type: string
-      description: Supported statistical units.
-      enum:
-      - Numeric
-      - Amount
-    hSKStatReportCodeType:
-      type: string
-      description: Supported Housekeeping report codes.
-      enum:
-      - HouseSummary
-      - HouseSummaryMonthToDate
-      - HouseSummaryYearToDate
-      - ReservationActivity
-      - ReservationActivityDaily
-      - ReservationActivityMonthToDate
-      - ReservationActivityYearToDate
-      - ComplimentaryOrHouseUse
-      - DailyProjection
-      - RoomStatus
-      - LastHourStatus
-      - Turndown
-      - InHouse
-      - CheckIns
-      - CheckOuts
-      - AvailableRooms
-      - RoomMaintenance
-      - ReservationStatistics
-      - VIPGuests
-      - AdvanceCheckIn
-      - BlockArrivals
-      - ReservationsCancellationsToday
-      - AIRoomAssignment
-      - CompRouting
-    hSKStatType:
-      type: object
-      description: Since the statistical value can be represented in different measure of units, this element will provide a flexible definition for the supported Opera9 statistical units.
-      properties:
-        unitType:
-          description: Unit of measurement or the actual code that defines the value. Eg. CurrencyCode for the Amount Category.
-          type: string
-          minLength: 3
-          maxLength: 3
-        unitValue:
-          description: Statistical value.
-          type: number
-        unitCategory:
-          description: Statistical unit category.
-          $ref: '#/components/schemas/statUnitCategoryType'
-        code:
-          $ref: '#/components/schemas/hSKStatCodeType'
-    blockStatReportType:
-      type: object
-      description: Base abstraction defining all details needed to create a statistical report.
-      properties:
-        chainCode:
-          description: The code that identifies a hotel chain or management group. The hotel chain code is decided between vendors. This attribute is optional if the hotel is an independent property that can be identified by the HotelCode attribute.
-          type: string
-          minLength: 0
-          maxLength: 20
-        hotelId:
-          description: The code that uniquely identifies a single hotel property. The hotel code is decided between vendors.
-          type: string
-          minLength: 0
-          maxLength: 20
-        hotelCityCode:
-          description: The IATA city code; for example DCA, ORD.
-          type: string
-          minLength: 0
-          maxLength: 40
-        hotelName:
-          description: A text field used to communicate the proper name of the hotel.
-          type: string
-          minLength: 0
-          maxLength: 80
-        hotelCodeContext:
-          description: A text field used to communicate the context (or source of - ex Sabre, Galileo, Worldspan, Amadeus) the HotelReferenceGroup codes.
-          type: string
-          minLength: 0
-          maxLength: 40
-        chainName:
-          description: The name of the hotel chain (e.g., Hilton, Marriott, Hyatt).
-          type: string
-          minLength: 0
-          maxLength: 80
-        calendarDate:
-          description: Statistical date of the requested report.
-          type: string
-          format: date
-          maxLength: 8
-        description:
-          type: string
-          minLength: 0
-          maxLength: 2000
-        statCategory:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/hSKStatCategoryType'
-        reportCode:
-          $ref: '#/components/schemas/hSKStatReportCodeType'
-    blockStats:
-      type: object
-      description: Response element for block statistics.
-      properties:
-        reports:
-          description: Statistical report - each report is determined by the requested report in the service request criteria.
-          type: array
-          items:
-            $ref: '#/components/schemas/blockStatReportType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    hSKStatCategoryCodeType:
-      type: string
-      description: Supported housekeeping statistical category codes.
-      enum:
-      - HotelCode
-    instanceLink:
-      type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
-      properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
-          type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
-        title:
-          description: Exact copy of the "summary" field on the linked operation.
-          type: string
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
-      required:
-      - type
-      - title
+      description: Current Opera Version Number
+      minLength: 0
+      maxLength: 40
     hSKStatCodeType:
       type: string
       description: Supported housekeeping statistical codes.
@@ -820,9 +729,34 @@ components:
       - ArrivalAIAssgnVIPResvs
       - ArrivalAIAssgnMemberResvs
       - ArrivalAIAssgnOverridden
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
+    hSKStatCategoryType:
+      type: object
+      description: Defines the codes and corresponding categories for which the data in the other elements has been gathered.
+      properties:
+        statCode:
+          description: Defines where this statistical data is applied.
+          type: string
+          minLength: 0
+          maxLength: 20
+        statCodeClass:
+          description: Classification of the statistical data.
+          type: string
+          minLength: 0
+          maxLength: 40
+        description:
+          type: string
+          minLength: 0
+          maxLength: 2000
+        statSet:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/hSKStatSetType'
+        statCategoryCode:
+          $ref: '#/components/schemas/hSKStatCategoryCodeType'
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
       type: object
       properties:
         type:
@@ -846,25 +780,181 @@ components:
         o:errorPath:
           type: string
           description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
       required:
       - type
       - title
-    operaVersion:
+    blockStatReportType:
       type: object
-      description: Response for Ping operation.
+      description: Base abstraction defining all details needed to create a statistical report.
       properties:
-        operaVersion:
-          description: Opera version number.
-          $ref: '#/components/schemas/operaVersionNumberType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    operaVersionNumberType:
+        chainCode:
+          description: The code that identifies a hotel chain or management group. The hotel chain code is decided between vendors. This attribute is optional if the hotel is an independent property that can be identified by the HotelCode attribute.
+          type: string
+          minLength: 0
+          maxLength: 20
+        hotelId:
+          description: The code that uniquely identifies a single hotel property. The hotel code is decided between vendors.
+          type: string
+          minLength: 0
+          maxLength: 20
+        hotelCityCode:
+          description: The IATA city code; for example DCA, ORD.
+          type: string
+          minLength: 0
+          maxLength: 40
+        hotelName:
+          description: A text field used to communicate the proper name of the hotel.
+          type: string
+          minLength: 0
+          maxLength: 80
+        hotelCodeContext:
+          description: A text field used to communicate the context (or source of - ex Sabre, Galileo, Worldspan, Amadeus) the HotelReferenceGroup codes.
+          type: string
+          minLength: 0
+          maxLength: 40
+        chainName:
+          description: The name of the hotel chain (e.g., Hilton, Marriott, Hyatt).
+          type: string
+          minLength: 0
+          maxLength: 80
+        calendarDate:
+          description: Statistical date of the requested report.
+          type: string
+          format: date
+          maxLength: 8
+        description:
+          type: string
+          minLength: 0
+          maxLength: 2000
+        statCategory:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/hSKStatCategoryType'
+        reportCode:
+          $ref: '#/components/schemas/hSKStatReportCodeType'
+    hSKStatType:
+      type: object
+      description: Since the statistical value can be represented in different measure of units, this element will provide a flexible definition for the supported Opera9 statistical units.
+      properties:
+        unitType:
+          description: Unit of measurement or the actual code that defines the value. Eg. CurrencyCode for the Amount Category.
+          type: string
+          minLength: 3
+          maxLength: 3
+        unitValue:
+          description: Statistical value.
+          type: number
+        unitCategory:
+          description: Statistical unit category.
+          $ref: '#/components/schemas/statUnitCategoryType'
+        code:
+          $ref: '#/components/schemas/hSKStatCodeType'
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    hSKStatCategoryCodeType:
       type: string
-      description: Current Opera Version Number
-      minLength: 0
-      maxLength: 40
+      description: Supported housekeeping statistical category codes.
+      enum:
+      - HotelCode
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    hSKStatReportCodeType:
+      type: string
+      description: Supported Housekeeping report codes.
+      enum:
+      - HouseSummary
+      - HouseSummaryMonthToDate
+      - HouseSummaryYearToDate
+      - ReservationActivity
+      - ReservationActivityDaily
+      - ReservationActivityMonthToDate
+      - ReservationActivityYearToDate
+      - ComplimentaryOrHouseUse
+      - DailyProjection
+      - RoomStatus
+      - LastHourStatus
+      - Turndown
+      - InHouse
+      - CheckIns
+      - CheckOuts
+      - AvailableRooms
+      - RoomMaintenance
+      - ReservationStatistics
+      - VIPGuests
+      - AdvanceCheckIn
+      - BlockArrivals
+      - ReservationsCancellationsToday
+      - AIRoomAssignment
+      - CompRouting
+    hSKStatSetType:
+      type: object
+      description: Base statistic set holder which defines the span of the statistical data.
+      properties:
+        start:
+          type: string
+          format: date
+          maxLength: 8
+        end:
+          type: string
+          format: date
+          maxLength: 8
+        stat:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/hSKStatType'
+        code:
+          type: string
+    statUnitCategoryType:
+      type: string
+      description: Supported statistical units.
+      enum:
+      - Numeric
+      - Amount
     warningType:
       type: object
       description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
@@ -911,153 +1001,63 @@ components:
           type: string
           minLength: 1
           maxLength: 8
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    hSKStatCategoryType:
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
       type: object
-      description: Defines the codes and corresponding categories for which the data in the other elements has been gathered.
       properties:
-        statCode:
-          description: Defines where this statistical data is applied.
+        type:
           type: string
-          minLength: 0
-          maxLength: 20
-        statCodeClass:
-          description: Classification of the statistical data.
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
           type: string
-          minLength: 0
-          maxLength: 40
-        description:
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
           type: string
-          minLength: 0
-          maxLength: 2000
-        statSet:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/hSKStatSetType'
-        statCategoryCode:
-          $ref: '#/components/schemas/hSKStatCategoryCodeType'
-    hSKStatSetType:
-      type: object
-      description: Base statistic set holder which defines the span of the statistical data.
-      properties:
-        start:
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
           type: string
-          format: date
-          maxLength: 8
-        end:
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
           type: string
-          format: date
-          maxLength: 8
-        stat:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/hSKStatType'
-        code:
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
           type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
     links:
       type: array
       items:
         $ref: '#/components/schemas/instanceLink'
-  parameters:
-    x-hotelid:
-      name: x-hotelid
-      description: Mandatory parameter to identify the hotel code where the end user is logged in
-      in: header
-      required: true
-      schema:
-        type: string
-    x-externalsystem:
-      name: x-externalsystem
-      description: External system code.
-      in: header
-      x-example: EXTERNALSYSTEMCODE
-      schema:
-        type: string
-        maxLength: 40
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
-      in: header
-      schema:
-        type: string
-    x-app-key:
-      name: x-app-key
-      description: Client or Partner's Application Key
-      in: header
-      required: true
-      schema:
-        type: string
-        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
-      in: header
-      schema:
-        type: string
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
-      in: header
-      required: true
-      schema:
-        type: string
-    x-request-id:
-      name: x-request-id
-      description: Request Id of an incoming request
-      in: header
-      schema:
-        type: string
-        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
-      in: header
-      schema:
-        type: string
-  responses:
-    '503':
-      description: Service Unavailable
-    '403':
-      description: Forbidden
-    '502':
-      description: Bad Gateway
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '415':
-      description: Unsupported Media Type
-    '406':
-      description: Not acceptable.
-    '413':
-      description: Request Entity Too Large
-    '401':
-      description: Unauthorized
-    '414':
-      description: Request URI Too Large
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '405':
-      description: Method not allowed
+    blockStats:
+      type: object
+      description: Response element for block statistics.
+      properties:
+        reports:
+          description: Statistical report - each report is determined by the requested report in the service request criteria.
+          type: array
+          items:
+            $ref: '#/components/schemas/blockStatReportType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    operaVersion:
+      type: object
+      description: Response for Ping operation.
+      properties:
+        operaVersion:
+          description: Opera version number.
+          $ref: '#/components/schemas/operaVersionNumberType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

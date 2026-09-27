@@ -350,18 +350,16 @@ paths:
         required: true
 components:
   responses:
-    '503':
-      description: Service Unavailable
+    '405':
+      description: Method not allowed
+    '413':
+      description: Request Entity Too Large
     '403':
       description: Forbidden
-    '502':
-      description: Bad Gateway
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
+    '503':
+      description: Service Unavailable
+    '406':
+      description: Not acceptable.
     '500':
       description: System Error
       content:
@@ -370,103 +368,25 @@ components:
             $ref: '#/components/schemas/exceptionDetailType'
     '415':
       description: Unsupported Media Type
-    '406':
-      description: Not acceptable.
-    '413':
-      description: Request Entity Too Large
     '401':
       description: Unauthorized
-    '414':
-      description: Request URI Too Large
     '404':
       description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/exceptionDetailType'
-    '405':
-      description: Method not allowed
+    '502':
+      description: Bad Gateway
+    '414':
+      description: Request URI Too Large
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
   schemas:
-    roomKeyExternal:
-      type: object
-      description: Request for generation of room key used for OutBound.
-      properties:
-        encoderId:
-          type: string
-          description: Unique Id as defined by Door Lock System.
-          minLength: 1
-          maxLength: 2000
-        encoderTerminal:
-          type: string
-          description: The Unique PMS encoder name linked with the encoderId
-          minLength: 1
-          maxLength: 2000
-        roomId:
-          description: The PMS room number to generate a key for.
-          type: string
-          maxLength: 2000
-        oldRoomId:
-          description: Old Room Number is used when a room move (keyType RoomMove) is performed.
-          type: string
-          maxLength: 2000
-        noOfKeys:
-          type: integer
-          description: Number of keys to be created.The value is always 1
-          minimum: 1
-          maximum: 1
-          default: 1
-        reservationIdList:
-          description: Collection of unique reservation identifiers for the reservation we are trying to make a room key for.
-          $ref: '#/components/schemas/uniqueIDListType'
-        guestShareFlag:
-          type: boolean
-          description: Indicates if Guest is a sharer or not
-        OldGuestShareFlag:
-          type: boolean
-          description: Indicates if old Guest room is a sharer or not when a room move (keyType RoomMove) is performed.
-        keyOptions:
-          type: string
-          maxLength: 2000
-          description: Lists the access areas defined in PMS valid for the room key.
-        keyValidityStart:
-          type: string
-          description: The date/time the room key is valid from.
-          format: date-time
-        keyValidityEnd:
-          type: string
-          description: The date/time the room key is valid to.
-          format: date-time
-        keyType:
-          $ref: '#/components/schemas/roomKeyOutBoundType'
-        keyTrack:
-          description: KeyTrack Data.
-          $ref: '#/components/schemas/keyTrackType'
-        additionalRooms:
-          description: Collection of additional rooms to be included in key creation of reservation room.
-          type: array
-          maxItems: 999
-          items:
-            type: string
-            minLength: 0
-            maxLength: 20
-        oldAdditionalRooms:
-          description: Collection of old additional rooms in key creation of reservation room when a room move (keyType RoomMove) is performed.
-          type: array
-          maxItems: 999
-          items:
-            type: string
-            minLength: 0
-            maxLength: 20
-        userId:
-          type: string
-          description: Unique identifier for the PMS user.
-          maxLength: 2000
-        requestType:
-          $ref: '#/components/schemas/requestType'
-      required:
-      - keyType
-      - encoderTerminal
-      - encoderId
     keyOptionsResponseType:
       type: object
       description: This contains code and description information for key options.
@@ -487,220 +407,33 @@ components:
         default:
           description: Indicates that this keyOption is a default access.
           type: boolean
-    roomKeyExternalDetails:
-      type: object
-      description: Response for the key request made to DLS from OPERA Cloud.
-      properties:
-        encoderId:
-          type: string
-          description: Unique Id as defined by Door Lock System.
-          maxLength: 2000
-        encoderTerminal:
-          type: string
-          description: The Unique PMS encoder name linked with the encoderId
-          minLength: 1
-          maxLength: 2000
-        reservationIdList:
-          description: Collection of unique reservation identifiers for the reservation we are trying to make a room key for.
-          $ref: '#/components/schemas/uniqueIDListType'
-        roomId:
-          description: The PMS room number to generate a key for.
-          type: string
-          maxLength: 2000
-        keyTrack:
-          description: KeyTrack Data.
-          type: array
-          items:
-            $ref: '#/components/schemas/keyTrackType'
-        keyOptions:
-          type: string
-          maxLength: 200
-          description: 'Lists all PMS access areas - only send in response for keyType: ''Read'' request'
-        keyValidityStart:
-          type: string
-          description: 'Date/Time Key is valid from - only send in response for keyType: ''Read'' request'
-          format: date-time
-        keyValidityEnd:
-          type: string
-          description: 'Date/Time Key is valid to - only send in response for keyType: ''Read'' request'
-          format: date-time
-        responseText:
-          type: string
-          description: A user-friendly text with information on why a request is not successful
-          maxLength: 2000
-        responseCode:
-          $ref: '#/components/schemas/roomKeyResponseCodeType'
-        additionalRooms:
-          description: Collection of additional rooms to be included in key creation of reservation room.
-          type: array
-          maxItems: 999
-          items:
-            type: string
-            minLength: 0
-            maxLength: 20
-      required:
-      - roomId
-      - responseCode
-      - encoderTerminal
-    roomKeysOutboundDetails:
-      type: object
-      description: Response for the key request made to DLS from OPERA Cloud.
-      properties:
-        encoderId:
-          type: string
-          description: Unique Id as defined by Door Lock System.
-          maxLength: 2000
-        encoderTerminal:
-          type: string
-          description: The Unique PMS encoder name linked with the encoderId
-          minLength: 1
-          maxLength: 2000
-        reservationIdList:
-          description: Collection of unique reservation identifiers for the reservation we are trying to make a room key for.
-          $ref: '#/components/schemas/uniqueIDListType'
-        roomId:
-          description: The PMS room number to generate a key for.
-          type: string
-          maxLength: 2000
-        keyTrack:
-          description: KeyTrack Data.
-          type: array
-          items:
-            $ref: '#/components/schemas/keyTrackType'
-        keyValidityStart:
-          type: string
-          description: 'Date/Time Key is valid from - only send in response for keyType: ''Read'' request. Uses the hotel''s time zone.'
-          format: date-time
-        keyValidityEnd:
-          type: string
-          description: 'Date/Time Key is valid to - only send in response for keyType: ''Read'' request. Uses the hotel''s time zone.'
-          format: date-time
-        noOfKeys:
-          type: integer
-          description: Number of keys to be created.The value is always 1
-        responseText:
-          type: string
-          description: A user-friendly text with information on why a request is not successful
-          maxLength: 2000
-        responseCode:
-          $ref: '#/components/schemas/roomKeyResponseCodeType'
-        additionalRooms:
-          description: Collection of additional rooms to be included in key creation of reservation room.
-          type: array
-          maxItems: 999
-          items:
-            type: string
-            minLength: 0
-            maxLength: 20
-        keyOptions:
-          description: Lists all PMS access areas.
-          type: array
-          maxItems: 1000
-          items:
-            $ref: '#/components/schemas/keyOptionsResponseType'
-        userId:
-          type: string
-          description: Unique identifier for the PMS user.
-          maxLength: 2000
-        digitalKeyData:
-          description: 'Base64 format of Mobile Key data provided by DLS System which the external system requested - only send in response for roomKeyType: ''MobileKey'''
-          type: string
-          format: byte
-        keyImage:
-          description: 'Image of the created key - only send in response for roomKeyType: ''KeyPayload'''
-          type: string
-          format: byte
-        cardSerialNumber:
-          description: 'Unique identifier of RFID card used for KeyPayload generation - only send in response for roomKeyType: ''KeyPayload''.'
-          type: string
-          maxLength: 80
-        keyCreationTime:
-          type: string
-          description: Date/Time the key has been generated by Door Locking system. Uses the hotel's time zone.
-          format: date-time
-        roomKeyType:
-          $ref: '#/components/schemas/externalRoomKeyType'
-        keyUserType:
-          $ref: '#/components/schemas/keyUserType'
-      required:
-      - roomId
-      - responseCode
-      - encoderTerminal
-      - roomKeyType
-      - keyUserType
-      - keyValidityStart
-      - keyValidityEnd
-      - keyCreationTime
-    keyOptionsType:
-      type: object
-      description: This contains code and description information for key options.
-      properties:
-        keyOptionsCode:
-          description: key options code.
-          type: string
-          minLength: 0
-          maxLength: 40
-        keyOptionDescription:
-          description: key options description.
-          type: string
-          minLength: 0
-          maxLength: 40
-    externalRoomKeyType:
+    uniqueIDListType:
+      type: array
+      description: Unique Id that references an object uniquely in the system.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/uniqueID_Type'
+    roomKeyResponseCodeType:
       type: string
-      description: Simple type for representing room key request type. 'HardKey' = request for physical key card with RFID; 'MobileKey' = request for mobile key (no physical key); 'PinCode' = request for PinCode; 'KeyPayload' = request Key image from DLS System
+      description: 'Response Codes supported: OK - Successful; BY - Encoder Busy; UR - Unprocessable Request; RY - Retry'
       enum:
-      - HardKey
-      - MobileKey
-      - PinCode
-      - KeyPayload
-    uniqueID_Type:
-      type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
-      properties:
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 40
-    instanceLink:
-      type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
-      properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
-          type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
-        title:
-          description: Exact copy of the "summary" field on the linked operation.
-          type: string
+      - OK
+      - BY
+      - UR
+      - RY
+    roomKeyOutBoundType:
+      type: string
+      description: Simple type for representing room key type.
+      enum:
+      - New
+      - Duplicate
+      - Lost
+      - OneShot
+      - RoomMove
+      - ReEncode
+      - Remove
+      - ModifyStay
+      - Read
     exceptionDetailType:
       title: Error Detail
       description: Complex type that contains error details for a REST call.
@@ -832,6 +565,262 @@ components:
       - roomKeyType
       - keyUserType
       - keyRequestTime
+    keyTrackType:
+      type: object
+      properties:
+        keyTrack1:
+          type: string
+          minLength: 0
+          maxLength: 80
+          description: specific data if configured
+        keyTrack2:
+          type: string
+          minLength: 0
+          maxLength: 2000
+          description: Track2 data string sent by PMS if defined or string (e.g. RFID ID) sent by DLS system in response
+        keyTrack3:
+          type: string
+          minLength: 0
+          maxLength: 2000
+          description: Includes the Key Pincode or a digital key string for use (in 201 response only)
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    keyUserType:
+      type: string
+      description: Simple type for representing key user type. 'Guest' = request Opera Guest room key
+      enum:
+      - Guest
+    requestType:
+      type: string
+      description: Simple type for representing request type.  Request specific data in response message. 'R1' = request for regular room Key; 'R2' = request for UDID or Track2 of room key; 'R3' = request for PinCode; 'R4' = request for mobile key (no physical key)
+      enum:
+      - R1
+      - R2
+      - R3
+      - R4
+    roomKeyExternal:
+      type: object
+      description: Request for generation of room key used for OutBound.
+      properties:
+        encoderId:
+          type: string
+          description: Unique Id as defined by Door Lock System.
+          minLength: 1
+          maxLength: 2000
+        encoderTerminal:
+          type: string
+          description: The Unique PMS encoder name linked with the encoderId
+          minLength: 1
+          maxLength: 2000
+        roomId:
+          description: The PMS room number to generate a key for.
+          type: string
+          maxLength: 2000
+        oldRoomId:
+          description: Old Room Number is used when a room move (keyType RoomMove) is performed.
+          type: string
+          maxLength: 2000
+        noOfKeys:
+          type: integer
+          description: Number of keys to be created.The value is always 1
+          minimum: 1
+          maximum: 1
+          default: 1
+        reservationIdList:
+          description: Collection of unique reservation identifiers for the reservation we are trying to make a room key for.
+          $ref: '#/components/schemas/uniqueIDListType'
+        guestShareFlag:
+          type: boolean
+          description: Indicates if Guest is a sharer or not
+        OldGuestShareFlag:
+          type: boolean
+          description: Indicates if old Guest room is a sharer or not when a room move (keyType RoomMove) is performed.
+        keyOptions:
+          type: string
+          maxLength: 2000
+          description: Lists the access areas defined in PMS valid for the room key.
+        keyValidityStart:
+          type: string
+          description: The date/time the room key is valid from.
+          format: date-time
+        keyValidityEnd:
+          type: string
+          description: The date/time the room key is valid to.
+          format: date-time
+        keyType:
+          $ref: '#/components/schemas/roomKeyOutBoundType'
+        keyTrack:
+          description: KeyTrack Data.
+          $ref: '#/components/schemas/keyTrackType'
+        additionalRooms:
+          description: Collection of additional rooms to be included in key creation of reservation room.
+          type: array
+          maxItems: 999
+          items:
+            type: string
+            minLength: 0
+            maxLength: 20
+        oldAdditionalRooms:
+          description: Collection of old additional rooms in key creation of reservation room when a room move (keyType RoomMove) is performed.
+          type: array
+          maxItems: 999
+          items:
+            type: string
+            minLength: 0
+            maxLength: 20
+        userId:
+          type: string
+          description: Unique identifier for the PMS user.
+          maxLength: 2000
+        requestType:
+          $ref: '#/components/schemas/requestType'
+      required:
+      - keyType
+      - encoderTerminal
+      - encoderId
+    externalRoomKeyType:
+      type: string
+      description: Simple type for representing room key request type. 'HardKey' = request for physical key card with RFID; 'MobileKey' = request for mobile key (no physical key); 'PinCode' = request for PinCode; 'KeyPayload' = request Key image from DLS System
+      enum:
+      - HardKey
+      - MobileKey
+      - PinCode
+      - KeyPayload
+    uniqueID_Type:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
+    roomKeysOutboundDetails:
+      type: object
+      description: Response for the key request made to DLS from OPERA Cloud.
+      properties:
+        encoderId:
+          type: string
+          description: Unique Id as defined by Door Lock System.
+          maxLength: 2000
+        encoderTerminal:
+          type: string
+          description: The Unique PMS encoder name linked with the encoderId
+          minLength: 1
+          maxLength: 2000
+        reservationIdList:
+          description: Collection of unique reservation identifiers for the reservation we are trying to make a room key for.
+          $ref: '#/components/schemas/uniqueIDListType'
+        roomId:
+          description: The PMS room number to generate a key for.
+          type: string
+          maxLength: 2000
+        keyTrack:
+          description: KeyTrack Data.
+          type: array
+          items:
+            $ref: '#/components/schemas/keyTrackType'
+        keyValidityStart:
+          type: string
+          description: 'Date/Time Key is valid from - only send in response for keyType: ''Read'' request. Uses the hotel''s time zone.'
+          format: date-time
+        keyValidityEnd:
+          type: string
+          description: 'Date/Time Key is valid to - only send in response for keyType: ''Read'' request. Uses the hotel''s time zone.'
+          format: date-time
+        noOfKeys:
+          type: integer
+          description: Number of keys to be created.The value is always 1
+        responseText:
+          type: string
+          description: A user-friendly text with information on why a request is not successful
+          maxLength: 2000
+        responseCode:
+          $ref: '#/components/schemas/roomKeyResponseCodeType'
+        additionalRooms:
+          description: Collection of additional rooms to be included in key creation of reservation room.
+          type: array
+          maxItems: 999
+          items:
+            type: string
+            minLength: 0
+            maxLength: 20
+        keyOptions:
+          description: Lists all PMS access areas.
+          type: array
+          maxItems: 1000
+          items:
+            $ref: '#/components/schemas/keyOptionsResponseType'
+        userId:
+          type: string
+          description: Unique identifier for the PMS user.
+          maxLength: 2000
+        digitalKeyData:
+          description: 'Base64 format of Mobile Key data provided by DLS System which the external system requested - only send in response for roomKeyType: ''MobileKey'''
+          type: string
+          format: byte
+        keyImage:
+          description: 'Image of the created key - only send in response for roomKeyType: ''KeyPayload'''
+          type: string
+          format: byte
+        cardSerialNumber:
+          description: 'Unique identifier of RFID card used for KeyPayload generation - only send in response for roomKeyType: ''KeyPayload''.'
+          type: string
+          maxLength: 80
+        keyCreationTime:
+          type: string
+          description: Date/Time the key has been generated by Door Locking system. Uses the hotel's time zone.
+          format: date-time
+        roomKeyType:
+          $ref: '#/components/schemas/externalRoomKeyType'
+        keyUserType:
+          $ref: '#/components/schemas/keyUserType'
+      required:
+      - roomId
+      - responseCode
+      - encoderTerminal
+      - roomKeyType
+      - keyUserType
+      - keyValidityStart
+      - keyValidityEnd
+      - keyCreationTime
     errorInstance:
       title: Error Instance Details
       description: Complex type that contains error instance details for a REST call.
@@ -858,19 +847,6 @@ components:
         o:errorPath:
           type: string
           description: Path to the problem at the resource or property level.
-    roomKeyOutBoundType:
-      type: string
-      description: Simple type for representing room key type.
-      enum:
-      - New
-      - Duplicate
-      - Lost
-      - OneShot
-      - RoomMove
-      - ReEncode
-      - Remove
-      - ModifyStay
-      - Read
     printDataType:
       type: object
       description: Lists the text, file or picture to print onto a Guest room key (only for roomKeyType is HardKey).
@@ -888,81 +864,91 @@ components:
           description: Base64 format of picture representing data to print.
           type: string
           format: byte
-    requestType:
-      type: string
-      description: Simple type for representing request type.  Request specific data in response message. 'R1' = request for regular room Key; 'R2' = request for UDID or Track2 of room key; 'R3' = request for PinCode; 'R4' = request for mobile key (no physical key)
-      enum:
-      - R1
-      - R2
-      - R3
-      - R4
-    uniqueIDListType:
-      type: array
-      description: Unique Id that references an object uniquely in the system.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/uniqueID_Type'
-    roomKeyResponseCodeType:
-      type: string
-      description: 'Response Codes supported: OK - Successful; BY - Encoder Busy; UR - Unprocessable Request; RY - Retry'
-      enum:
-      - OK
-      - BY
-      - UR
-      - RY
-    keyUserType:
-      type: string
-      description: Simple type for representing key user type. 'Guest' = request Opera Guest room key
-      enum:
-      - Guest
-    keyTrackType:
-      type: object
-      properties:
-        keyTrack1:
-          type: string
-          minLength: 0
-          maxLength: 80
-          description: specific data if configured
-        keyTrack2:
-          type: string
-          minLength: 0
-          maxLength: 2000
-          description: Track2 data string sent by PMS if defined or string (e.g. RFID ID) sent by DLS system in response
-        keyTrack3:
-          type: string
-          minLength: 0
-          maxLength: 2000
-          description: Includes the Key Pincode or a digital key string for use (in 201 response only)
     links:
       type: array
       items:
         $ref: '#/components/schemas/instanceLink'
+    keyOptionsType:
+      type: object
+      description: This contains code and description information for key options.
+      properties:
+        keyOptionsCode:
+          description: key options code.
+          type: string
+          minLength: 0
+          maxLength: 40
+        keyOptionDescription:
+          description: key options description.
+          type: string
+          minLength: 0
+          maxLength: 40
+    roomKeyExternalDetails:
+      type: object
+      description: Response for the key request made to DLS from OPERA Cloud.
+      properties:
+        encoderId:
+          type: string
+          description: Unique Id as defined by Door Lock System.
+          maxLength: 2000
+        encoderTerminal:
+          type: string
+          description: The Unique PMS encoder name linked with the encoderId
+          minLength: 1
+          maxLength: 2000
+        reservationIdList:
+          description: Collection of unique reservation identifiers for the reservation we are trying to make a room key for.
+          $ref: '#/components/schemas/uniqueIDListType'
+        roomId:
+          description: The PMS room number to generate a key for.
+          type: string
+          maxLength: 2000
+        keyTrack:
+          description: KeyTrack Data.
+          type: array
+          items:
+            $ref: '#/components/schemas/keyTrackType'
+        keyOptions:
+          type: string
+          maxLength: 200
+          description: 'Lists all PMS access areas - only send in response for keyType: ''Read'' request'
+        keyValidityStart:
+          type: string
+          description: 'Date/Time Key is valid from - only send in response for keyType: ''Read'' request'
+          format: date-time
+        keyValidityEnd:
+          type: string
+          description: 'Date/Time Key is valid to - only send in response for keyType: ''Read'' request'
+          format: date-time
+        responseText:
+          type: string
+          description: A user-friendly text with information on why a request is not successful
+          maxLength: 2000
+        responseCode:
+          $ref: '#/components/schemas/roomKeyResponseCodeType'
+        additionalRooms:
+          description: Collection of additional rooms to be included in key creation of reservation room.
+          type: array
+          maxItems: 999
+          items:
+            type: string
+            minLength: 0
+            maxLength: 20
+      required:
+      - roomId
+      - responseCode
+      - encoderTerminal
   parameters:
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
-      in: header
-      schema:
-        type: string
-    x-app-key:
-      name: x-app-key
-      description: Client or Partner's Application Key
-      in: header
-      required: true
-      schema:
-        type: string
-        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
-      in: header
-      schema:
-        type: string
     authKey:
       name: authorization
       description: Bearer token that needs to be passed which is generated post user authentication
       in: header
       required: false
+      schema:
+        type: string
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
       schema:
         type: string
     x-request-id:
@@ -972,6 +958,20 @@ components:
       schema:
         type: string
         pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

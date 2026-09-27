@@ -1093,13 +1093,223 @@ paths:
       tags:
       - RoomRotation
 components:
+  responses:
+    '405':
+      description: Method not allowed
+    '413':
+      description: Request Entity Too Large
+    '403':
+      description: Forbidden
+    '503':
+      description: Service Unavailable
+    '406':
+      description: Not acceptable.
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '401':
+      description: Unauthorized
+    '415':
+      description: Unsupported Media Type
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '502':
+      description: Bad Gateway
+    '414':
+      description: Request URI Too Large
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
   schemas:
+    putReservationRotationPointsDetails:
+      type: object
+      description: Collection of Reservation Rotation Points Details.
+      properties:
+        reservationRotationPointsDetailsList:
+          $ref: '#/components/schemas/reservationRotationPointsDetailsListType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    reservationDetailsType:
+      type: object
+      description: Reservation Details
+      properties:
+        hotelId:
+          description: Hotel Id
+          type: string
+          minLength: 0
+          maxLength: 20
+        reservationIdList:
+          type: array
+          description: Unique identifier of the reservation like Reservation Name Id, Confirmation Number.
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/uniqueID_Type'
+        arrival:
+          description: Reservation arrival date
+          type: string
+          format: date
+        departure:
+          description: Reservation departure date
+          type: string
+          format: date
+        nights:
+          description: The number of nights of the reservation.
+          type: integer
+        roomId:
+          description: Room Number
+          type: string
+          minLength: 0
+          maxLength: 20
+        profileId:
+          description: Unique identifier of the guest.
+          $ref: '#/components/schemas/profileId'
+        surname:
+          description: Family name, last name.
+          type: string
+          minLength: 0
+          maxLength: 40
+        givenName:
+          description: Given name, first name or names
+          type: string
+          minLength: 0
+          maxLength: 40
+    operaVersionNumberType:
+      type: string
+      description: Current Opera Version Number
+      minLength: 0
+      maxLength: 40
+    roomOwnersListDetails:
+      type: object
+      description: Provides Pagination Information for the REST API.
+      allOf:
+      - $ref: '#/components/schemas/rESTPaginationGroup'
+      properties:
+        roomOwnerInfoTypeList:
+          description: Collection of Room Owners with Room Ownership details.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/roomOwnerInfoType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
     associatedRoomOwnershipType:
       type: string
       description: Indicates if the associated room is an Owner or Referral room.
       enum:
       - Owner
       - Referral
+    getReservationRotationPointsDetails:
+      type: object
+      description: Response object for Reservation Rotation Points Details.
+      properties:
+        reservationDetails:
+          $ref: '#/components/schemas/reservationDetailsType'
+        reservationRotationPointsDetailsList:
+          $ref: '#/components/schemas/reservationRotationPointsDetailsListType'
+        adjustmentLogList:
+          $ref: '#/components/schemas/reservationRotationPointsAdjustmentLogListType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
+    getReservationRotationPoints:
+      type: object
+      description: Provides Pagination Information for the REST API.
+      allOf:
+      - $ref: '#/components/schemas/rESTPaginationGroup'
+      properties:
+        reservationRotationPoints:
+          description: Collection of reservation and associated rotation points details.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/reservationRotationPointsType'
+    associatedRoomOwnershipInfoType:
+      type: object
+      description: Associated Room Ownership Information
+      properties:
+        roomOwnershipId:
+          description: Unique Id for Room Owner record.
+          type: integer
+        hotelId:
+          description: Hotel Id
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomId:
+          description: Room Number
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomType:
+          description: Room Type
+          type: string
+          minLength: 0
+          maxLength: 20
+        startDate:
+          description: Start date of Room Ownership contract
+          type: string
+          format: date
+        endDate:
+          description: End date of Room Ownership contract
+          type: string
+          format: date
+        ownerExclusive:
+          type: boolean
+          description: Whether Room is available for the exclusive use of its designated owner and owner referrals, or if it is available in general availability
+        associatedRoomOwnershipType:
+          description: Whether the associated room is an Owner or Referral.
+          $ref: '#/components/schemas/associatedRoomOwnershipType'
     reservationRotationPointsDetailsType:
       type: object
       description: Rotation Points Details of a reservation
@@ -1137,6 +1347,120 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
+    reservationRotationPointsAdjustmentLogType:
+      type: object
+      description: Reservation rotation points adjustment log.
+      properties:
+        logDate:
+          type: string
+          format: date-time
+          description: The date and time that the adjustment was made to the rotation points for the room. Uses the hotel's time zone.
+        type:
+          description: The type of the calculation rule that was overridden with a new point value.
+          $ref: '#/components/schemas/rotationRuleCalculationRuleType'
+        userId:
+          description: Unique application user ID.
+          $ref: '#/components/schemas/uniqueID_Type'
+        userName:
+          description: Unique application login of the user who made the adjustment.
+          type: string
+          minLength: 0
+          maxLength: 40
+        originalPoints:
+          type: number
+          description: The points that were applicable for the specific calculation rule before the change of points.
+        adjustedPointsTo:
+          type: number
+          description: The number of points for the specific calculation rule after the change of points.
+        adjustmentReason:
+          description: The code and description associated with the reason the adjustment was made.
+          $ref: '#/components/schemas/reservationRotationPointsAdjustmentReasonType'
+    roomRotationPointsInfoType:
+      type: object
+      description: Room Rotation Points Information
+      properties:
+        roomId:
+          description: Room Number
+          type: string
+          minLength: 0
+          maxLength: 20
+        outOfOrderServicePoints:
+          description: Out of Order / Out of Service points
+          type: number
+        balanceForwardPoints:
+          description: Balance forward points
+          type: number
+        roomAdjustedPoints:
+          description: Room adjusted points
+          type: number
+        reservationAdjustedPoints:
+          description: Reservation adjusted points
+          type: number
+        randomPoints:
+          description: Random points
+          type: number
+        calculatedPoints:
+          description: Calculated points
+          type: number
+        proratedAveragePoints:
+          description: Prorated average points
+          type: number
+        forecastedPoints:
+          description: Forecasted points
+          type: number
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    pingDetail:
+      type: object
+      description: Response for Ping operation.
+      properties:
+        operaVersion:
+          description: Opera version number.
+          $ref: '#/components/schemas/operaVersionNumberType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    rotationRuleCalculationRuleType:
+      type: string
+      description: Simple type for Rotation Rule Calculation Rule.
+      enum:
+      - PerRevenue
+      - PerNight
+      - PerStay
+      - AvgRateAmount
     roomOwnerInfoType:
       type: object
       description: Room Owners with Room Ownership details.
@@ -1186,144 +1510,6 @@ components:
         inactive:
           type: boolean
           description: Indicates if the Room Owner is inactive.
-    roomRotationPointsAdjustmentInfoType:
-      type: object
-      description: Room Rotation Points Update Information
-      properties:
-        roomId:
-          description: Room Number
-          type: string
-          minLength: 0
-          maxLength: 20
-        balanceForwardPoints:
-          description: Balance forward points to update
-          type: number
-        roomAdjustedPoints:
-          description: Room adjusted points to update
-          type: number
-    pingDetail:
-      type: object
-      description: Response for Ping operation.
-      properties:
-        operaVersion:
-          description: Opera version number.
-          $ref: '#/components/schemas/operaVersionNumberType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    profileId:
-      type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
-      properties:
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 20
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        idExtension:
-          description: Additional identifying value assigned by the creating system.
-          type: integer
-    rotationRuleCalculationRuleType:
-      type: string
-      description: Simple type for Rotation Rule Calculation Rule.
-      enum:
-      - PerRevenue
-      - PerNight
-      - PerStay
-      - AvgRateAmount
-    reservationRotationPointsAdjustmentLogType:
-      type: object
-      description: Reservation rotation points adjustment log.
-      properties:
-        logDate:
-          type: string
-          format: date-time
-          description: The date and time that the adjustment was made to the rotation points for the room. Uses the hotel's time zone.
-        type:
-          description: The type of the calculation rule that was overridden with a new point value.
-          $ref: '#/components/schemas/rotationRuleCalculationRuleType'
-        userId:
-          description: Unique application user ID.
-          $ref: '#/components/schemas/uniqueID_Type'
-        userName:
-          description: Unique application login of the user who made the adjustment.
-          type: string
-          minLength: 0
-          maxLength: 40
-        originalPoints:
-          type: number
-          description: The points that were applicable for the specific calculation rule before the change of points.
-        adjustedPointsTo:
-          type: number
-          description: The number of points for the specific calculation rule after the change of points.
-        adjustmentReason:
-          description: The code and description associated with the reason the adjustment was made.
-          $ref: '#/components/schemas/reservationRotationPointsAdjustmentReasonType'
-    rESTPaginationGroup:
-      type: object
-      description: Provides Pagination Information for the REST API.
-      properties:
-        offset:
-          description: Indicates the index of the next applicable set(page).
-          type: integer
-        limit:
-          description: Indicates number of records the API can return as per the API request limit sent. A maximum of 200 records can be only returned at a time.
-          type: integer
-        count:
-          description: Indicates number of records the API has returned actually as per the API request criteria.
-          type: integer
-        hasMore:
-          description: Indicates whether there are more records available to be returned as per the API request criteria or not.
-          type: boolean
-        totalResults:
-          description: Indicates total number of records available that can be returned as per the API request criteria.
-          type: integer
-    roomOwnersListDetails:
-      type: object
-      description: Provides Pagination Information for the REST API.
-      allOf:
-      - $ref: '#/components/schemas/rESTPaginationGroup'
-      properties:
-        roomOwnerInfoTypeList:
-          description: Collection of Room Owners with Room Ownership details.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/roomOwnerInfoType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    associatedRoomOwnershipListDetails:
-      type: object
-      description: Associated Room Ownerships List
-      properties:
-        associatedRoomOwnershipInfoTypeList:
-          description: List of Associated Room Ownerships
-          type: array
-          maxItems: 2000
-          items:
-            $ref: '#/components/schemas/associatedRoomOwnershipInfoType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    reservationRotationPointsAdjustmentLogListType:
-      type: object
-      description: Reservation rotation points adjustment log.
-      properties:
-        adjustmentLog:
-          description: Collection of reservation rotation points adjustment log.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/reservationRotationPointsAdjustmentLogType'
     searchReservationRotationPointsRequest:
       type: object
       properties:
@@ -1391,208 +1577,27 @@ components:
           default: 0
       required:
       - roomIds
-    reservationRotationPointsAdjustmentReasonType:
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    roomRotationPointsAdjustmentInfoType:
       type: object
-      description: Contains adjustment reason code and description.
-      properties:
-        code:
-          description: Code.
-          type: string
-          minLength: 0
-          maxLength: 40
-        description:
-          description: Description of the code.
-          type: string
-          minLength: 0
-          maxLength: 2000
-    reservationRotationPointsDetailsListType:
-      type: object
-      description: Reservation Rotation points details with total points.
-      properties:
-        reservationRotationPointsDetails:
-          description: Collection of reservation rotation points details.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/reservationRotationPointsDetailsType'
-        totalReservationPoints:
-          type: number
-          description: Total points including any applied adjustments.
-    reservationRotationPointsType:
-      type: object
-      description: Individual reservation and associated rotation points information
+      description: Room Rotation Points Update Information
       properties:
         roomId:
           description: Room Number
           type: string
           minLength: 0
           maxLength: 20
-        arrivalDate:
-          description: Reservation arrival date
-          type: string
-          format: date
-        departureDate:
-          description: Reservation departure date
-          type: string
-          format: date
-        nights:
-          description: The number of nights of the reservation.
-          type: integer
-        reservationIdList:
-          type: array
-          description: Unique identifier of the reservation like Reservation Name Id, Confirmation Number.
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/uniqueID_Type'
-        profileId:
-          description: Unique identifier of the guest.
-          $ref: '#/components/schemas/profileId'
-        guestName:
-          description: The guest name on the reservation.
-          type: string
-          minLength: 0
-          maxLength: 200
-        totalPoints:
+        balanceForwardPoints:
+          description: Balance forward points to update
           type: number
-          description: Total rotation points for the room.
-        pointsAdjusted:
-          type: boolean
-          description: Whether rotation points for the room have been adjusted.
-    uniqueID_Type:
-      type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
-      properties:
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 40
-    instanceLink:
-      type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
-      properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
-          type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
-        title:
-          description: Exact copy of the "summary" field on the linked operation.
-          type: string
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
-      required:
-      - type
-      - title
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-      required:
-      - type
-      - title
-    getReservationRotationPoints:
-      type: object
-      description: Provides Pagination Information for the REST API.
-      allOf:
-      - $ref: '#/components/schemas/rESTPaginationGroup'
-      properties:
-        reservationRotationPoints:
-          description: Collection of reservation and associated rotation points details.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/reservationRotationPointsType'
-    putReservationRotationPointsDetails:
-      type: object
-      description: Collection of Reservation Rotation Points Details.
-      properties:
-        reservationRotationPointsDetailsList:
-          $ref: '#/components/schemas/reservationRotationPointsDetailsListType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
+        roomAdjustedPoints:
+          description: Room adjusted points to update
+          type: number
     searchRoomOwnersRequest:
       type: object
       properties:
@@ -1674,103 +1679,92 @@ components:
           default: 0
       required:
       - hotelIds
-    roomRotationPointsInfoType:
+    reservationRotationPointsType:
       type: object
-      description: Room Rotation Points Information
+      description: Individual reservation and associated rotation points information
       properties:
         roomId:
           description: Room Number
           type: string
           minLength: 0
           maxLength: 20
-        outOfOrderServicePoints:
-          description: Out of Order / Out of Service points
+        arrivalDate:
+          description: Reservation arrival date
+          type: string
+          format: date
+        departureDate:
+          description: Reservation departure date
+          type: string
+          format: date
+        nights:
+          description: The number of nights of the reservation.
+          type: integer
+        reservationIdList:
+          type: array
+          description: Unique identifier of the reservation like Reservation Name Id, Confirmation Number.
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/uniqueID_Type'
+        profileId:
+          description: Unique identifier of the guest.
+          $ref: '#/components/schemas/profileId'
+        guestName:
+          description: The guest name on the reservation.
+          type: string
+          minLength: 0
+          maxLength: 200
+        totalPoints:
           type: number
-        balanceForwardPoints:
-          description: Balance forward points
-          type: number
-        roomAdjustedPoints:
-          description: Room adjusted points
-          type: number
-        reservationAdjustedPoints:
-          description: Reservation adjusted points
-          type: number
-        randomPoints:
-          description: Random points
-          type: number
-        calculatedPoints:
-          description: Calculated points
-          type: number
-        proratedAveragePoints:
-          description: Prorated average points
-          type: number
-        forecastedPoints:
-          description: Forecasted points
-          type: number
-    getRoomRotationPoints:
+          description: Total rotation points for the room.
+        pointsAdjusted:
+          type: boolean
+          description: Whether rotation points for the room have been adjusted.
+    reservationRotationPointsAdjustmentLogListType:
       type: object
+      description: Reservation rotation points adjustment log.
       properties:
-        roomRotationPointsInfoList:
-          description: List of Room Rotation Points Information.
+        adjustmentLog:
+          description: Collection of reservation rotation points adjustment log.
           type: array
           maxItems: 4000
           items:
-            $ref: '#/components/schemas/roomRotationPointsInfoType'
-        outOfOrderServiceActive:
-          description: Indicates whether Out of Order/ Out of Service Room Rotation Points is active
-          type: boolean
-        startRoomRotationPeriodDate:
-          description: Start date of the Room Rotation Period
-          type: string
-          format: date
-        endRoomRotationPeriodDate:
-          description: End date of the Room Rotation Period
-          type: string
-          format: date
-        balanceForwardActive:
-          description: Indicates whether the balance forward is active
-          type: boolean
-        balanceForwardEditable:
-          description: Indicates whether the user is allowed to edit balance forward points
-          type: boolean
-        offset:
-          description: Indicates the index of the next applicable set(page).
-          type: integer
-        limit:
-          description: Indicates number of records the API can return as per the API request limit sent.
-          type: integer
-        count:
-          description: Indicates number of records the API has returned actually as per the API request criteria.
-          type: integer
-        hasMore:
-          description: Indicates whether there are more records available to be returned as per the API request criteria or not.
-          type: boolean
-        totalResults:
-          description: Indicates total number of records available that can be returned as per the API request criteria.
-          type: integer
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    getReservationRotationPointsDetails:
+            $ref: '#/components/schemas/reservationRotationPointsAdjustmentLogType'
+    status:
       type: object
-      description: Response object for Reservation Rotation Points Details.
+      description: Response Body.
       properties:
-        reservationDetails:
-          $ref: '#/components/schemas/reservationDetailsType'
-        reservationRotationPointsDetailsList:
-          $ref: '#/components/schemas/reservationRotationPointsDetailsListType'
-        adjustmentLogList:
-          $ref: '#/components/schemas/reservationRotationPointsAdjustmentLogListType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    associatedRoomOwnershipListDetails:
+      type: object
+      description: Associated Room Ownerships List
+      properties:
+        associatedRoomOwnershipInfoTypeList:
+          description: List of Associated Room Ownerships
+          type: array
+          maxItems: 2000
+          items:
+            $ref: '#/components/schemas/associatedRoomOwnershipInfoType'
         links:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    operaVersionNumberType:
-      type: string
-      description: Current Opera Version Number
-      minLength: 0
-      maxLength: 40
+    uniqueID_Type:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
     warningType:
       type: object
       description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
@@ -1817,112 +1811,182 @@ components:
           type: string
           minLength: 1
           maxLength: 8
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    status:
+    profileId:
       type: object
-      description: Response Body.
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
       properties:
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-        links:
-          $ref: '#/components/schemas/links'
-    associatedRoomOwnershipInfoType:
-      type: object
-      description: Associated Room Ownership Information
-      properties:
-        roomOwnershipId:
-          description: Unique Id for Room Owner record.
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 20
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        idExtension:
+          description: Additional identifying value assigned by the creating system.
           type: integer
-        hotelId:
-          description: Hotel Id
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
           type: string
-          minLength: 0
-          maxLength: 20
-        roomId:
-          description: Room Number
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
           type: string
-          minLength: 0
-          maxLength: 20
-        roomType:
-          description: Room Type
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
           type: string
-          minLength: 0
-          maxLength: 20
-        startDate:
-          description: Start date of Room Ownership contract
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
           type: string
-          format: date
-        endDate:
-          description: End date of Room Ownership contract
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
           type: string
-          format: date
-        ownerExclusive:
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
+    rESTPaginationGroup:
+      type: object
+      description: Provides Pagination Information for the REST API.
+      properties:
+        offset:
+          description: Indicates the index of the next applicable set(page).
+          type: integer
+        limit:
+          description: Indicates number of records the API can return as per the API request limit sent. A maximum of 200 records can be only returned at a time.
+          type: integer
+        count:
+          description: Indicates number of records the API has returned actually as per the API request criteria.
+          type: integer
+        hasMore:
+          description: Indicates whether there are more records available to be returned as per the API request criteria or not.
           type: boolean
-          description: Whether Room is available for the exclusive use of its designated owner and owner referrals, or if it is available in general availability
-        associatedRoomOwnershipType:
-          description: Whether the associated room is an Owner or Referral.
-          $ref: '#/components/schemas/associatedRoomOwnershipType'
+        totalResults:
+          description: Indicates total number of records available that can be returned as per the API request criteria.
+          type: integer
+    reservationRotationPointsDetailsListType:
+      type: object
+      description: Reservation Rotation points details with total points.
+      properties:
+        reservationRotationPointsDetails:
+          description: Collection of reservation rotation points details.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/reservationRotationPointsDetailsType'
+        totalReservationPoints:
+          type: number
+          description: Total points including any applied adjustments.
     links:
       type: array
       items:
         $ref: '#/components/schemas/instanceLink'
-    reservationDetailsType:
+    reservationRotationPointsAdjustmentReasonType:
       type: object
-      description: Reservation Details
+      description: Contains adjustment reason code and description.
       properties:
-        hotelId:
-          description: Hotel Id
+        code:
+          description: Code.
           type: string
           minLength: 0
-          maxLength: 20
-        reservationIdList:
+          maxLength: 40
+        description:
+          description: Description of the code.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    getRoomRotationPoints:
+      type: object
+      properties:
+        roomRotationPointsInfoList:
+          description: List of Room Rotation Points Information.
           type: array
-          description: Unique identifier of the reservation like Reservation Name Id, Confirmation Number.
           maxItems: 4000
           items:
-            $ref: '#/components/schemas/uniqueID_Type'
-        arrival:
-          description: Reservation arrival date
+            $ref: '#/components/schemas/roomRotationPointsInfoType'
+        outOfOrderServiceActive:
+          description: Indicates whether Out of Order/ Out of Service Room Rotation Points is active
+          type: boolean
+        startRoomRotationPeriodDate:
+          description: Start date of the Room Rotation Period
           type: string
           format: date
-        departure:
-          description: Reservation departure date
+        endRoomRotationPeriodDate:
+          description: End date of the Room Rotation Period
           type: string
           format: date
-        nights:
-          description: The number of nights of the reservation.
+        balanceForwardActive:
+          description: Indicates whether the balance forward is active
+          type: boolean
+        balanceForwardEditable:
+          description: Indicates whether the user is allowed to edit balance forward points
+          type: boolean
+        offset:
+          description: Indicates the index of the next applicable set(page).
           type: integer
-        roomId:
-          description: Room Number
-          type: string
-          minLength: 0
-          maxLength: 20
-        profileId:
-          description: Unique identifier of the guest.
-          $ref: '#/components/schemas/profileId'
-        surname:
-          description: Family name, last name.
-          type: string
-          minLength: 0
-          maxLength: 40
-        givenName:
-          description: Given name, first name or names
-          type: string
-          minLength: 0
-          maxLength: 40
+        limit:
+          description: Indicates number of records the API can return as per the API request limit sent.
+          type: integer
+        count:
+          description: Indicates number of records the API has returned actually as per the API request criteria.
+          type: integer
+        hasMore:
+          description: Indicates whether there are more records available to be returned as per the API request criteria or not.
+          type: boolean
+        totalResults:
+          description: Indicates total number of records available that can be returned as per the API request criteria.
+          type: integer
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
   parameters:
-    x-hotelid:
-      name: x-hotelid
-      description: Mandatory parameter to identify the hotel code where the end user is logged in
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
       in: header
       required: true
       schema:
         type: string
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
+      schema:
+        type: string
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
     x-externalsystem:
       name: x-externalsystem
       description: External system code.
@@ -1937,77 +2001,13 @@ components:
       in: header
       schema:
         type: string
-    x-app-key:
-      name: x-app-key
-      description: Client or Partner's Application Key
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
       in: header
       required: true
       schema:
         type: string
-        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
-      in: header
-      schema:
-        type: string
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
-      in: header
-      required: true
-      schema:
-        type: string
-    x-request-id:
-      name: x-request-id
-      description: Request Id of an incoming request
-      in: header
-      schema:
-        type: string
-        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
-      in: header
-      schema:
-        type: string
-  responses:
-    '503':
-      description: Service Unavailable
-    '403':
-      description: Forbidden
-    '502':
-      description: Bad Gateway
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '415':
-      description: Unsupported Media Type
-    '406':
-      description: Not acceptable.
-    '413':
-      description: Request Entity Too Large
-    '401':
-      description: Unauthorized
-    '414':
-      description: Request URI Too Large
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '405':
-      description: Method not allowed
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

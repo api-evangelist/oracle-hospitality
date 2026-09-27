@@ -126,6 +126,27 @@ components:
       x-example: 4664ab3423434a45
       schema:
         type: string
+    Accept-Language:
+      name: Accept-Language
+      in: header
+      description: Language code
+      schema:
+        type: string
+    x-app-key:
+      name: x-app-key
+      in: header
+      description: Client or Partner's Application Key
+      required: false
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    authKey:
+      name: authorization
+      in: header
+      description: Bearer token that needs to be passed which is generated post user authentication
+      required: true
+      schema:
+        type: string
     x-channelCode:
       name: x-channelCode
       in: header
@@ -136,13 +157,6 @@ components:
         type: string
         maxLength: 50
         minLength: 1
-    authKey:
-      name: authorization
-      in: header
-      description: Bearer token that needs to be passed which is generated post user authentication
-      required: true
-      schema:
-        type: string
     hotelCodePath:
       name: hotelCode
       description: The unique identifier of the Property in Channel system.
@@ -152,21 +166,27 @@ components:
       schema:
         type: string
         minLength: 1
-    x-app-key:
-      name: x-app-key
-      in: header
-      description: Client or Partner's Application Key
-      required: false
-      schema:
-        type: string
-        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    Accept-Language:
-      name: Accept-Language
-      in: header
-      description: Language code
-      schema:
-        type: string
   schemas:
+    ConnectionInformation:
+      type: object
+      description: Controls in Channel Property Level
+      properties:
+        ariFutureDays:
+          type: integer
+          description: Number of future days for which ARI is maintained by this channel.
+          example: 400
+        channelDefaultTravelAgentId:
+          type: string
+          description: Default Travel Agent Id of the channel
+          example: TA1234567
+        alertRecipients:
+          type: array
+          description: List of user email ids to which any failover emails to be triggered.
+          items:
+            type: string
+          example:
+          - user1@email.com
+          - user2@email.com
     ExceptionDetail:
       type: object
       allOf:
@@ -196,26 +216,6 @@ components:
           example: CCHAIN1
         channelPropertyControls:
           $ref: '#/components/schemas/ConnectionInformation'
-    ConnectionInformation:
-      type: object
-      description: Controls in Channel Property Level
-      properties:
-        ariFutureDays:
-          type: integer
-          description: Number of future days for which ARI is maintained by this channel.
-          example: 400
-        channelDefaultTravelAgentId:
-          type: string
-          description: Default Travel Agent Id of the channel
-          example: TA1234567
-        alertRecipients:
-          type: array
-          description: List of user email ids to which any failover emails to be triggered.
-          items:
-            type: string
-          example:
-          - user1@email.com
-          - user2@email.com
     ExceptionObj:
       type: object
       properties:

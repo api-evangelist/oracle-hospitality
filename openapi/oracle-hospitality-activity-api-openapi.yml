@@ -2301,84 +2301,180 @@ paths:
       tags:
       - Activity
 components:
-  parameters:
-    x-hotelid:
-      name: x-hotelid
-      description: Mandatory parameter to identify the hotel code where the end user is logged in
-      in: header
-      required: true
-      schema:
-        type: string
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
-      in: header
-      schema:
-        type: string
-    x-app-key:
-      name: x-app-key
-      description: Client or Partner's Application Key
-      in: header
-      required: true
-      schema:
-        type: string
-        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    x-externalsystem:
-      name: x-externalsystem
-      description: External system code.
-      in: header
-      x-example: EXTERNALSYSTEMCODE
-      schema:
-        type: string
-        maxLength: 40
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
-      in: header
-      schema:
-        type: string
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
-      in: header
-      required: true
-      schema:
-        type: string
-    x-request-id:
-      name: x-request-id
-      description: Request Id of an incoming request
-      in: header
-      schema:
-        type: string
-        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
-      in: header
-      schema:
-        type: string
+  responses:
+    '405':
+      description: Method not allowed
+    '413':
+      description: Request Entity Too Large
+    '406':
+      description: Not acceptable.
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '401':
+      description: Unauthorized
+    '502':
+      description: Bad Gateway
+    '414':
+      description: Request URI Too Large
+    '503':
+      description: Service Unavailable
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '403':
+      description: Forbidden
+    '415':
+      description: Unsupported Media Type
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
   schemas:
-    dateTimeStampGroupType:
+    blockIdList:
+      type: array
+      description: Unique Id that references an object uniquely in the system.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/uniqueID_Type'
+    uRLInfoType:
       type: object
+      description: Web site address.
       properties:
-        createDateTime:
-          description: Time stamp of the creation.
-          type: string
-          format: date-time
-        creatorId:
-          description: ID of creator. The creator could be a software system identifier or an identifier of an employee responsible for the creation.
+        url:
+          description: Provides URL information.
+          $ref: '#/components/schemas/uRLType'
+    activityDetailsType:
+      type: object
+      description: Complete Activity Related Information.
+      properties:
+        activityId:
+          description: Unique identifier for the activity.
+          $ref: '#/components/schemas/activityId'
+        activityDetail:
+          description: Activity information in detail.
+          $ref: '#/components/schemas/activityInfoType'
+        linkedAccounts:
+          description: Provides information about the accounts linked to an activity. Please note that during a change operation this performs a full overlay if the attribute FullOverlay is set to true. In a full overlay, all the accounts that should be associated to the activity should be provided during a change operation. Any accounts not provided will be detached from this activity. By default the full overlay is considered false if this property is left blank. If values are provided for accounts, only the full overlay functionality is provided at this time.
+          type: object
+          properties:
+            activityAccount:
+              description: The list of accounts associated with an activity.
+              type: array
+              maxItems: 4000
+              items:
+                $ref: '#/components/schemas/activityLinkedProfilesType'
+            fullOverlay:
+              description: Indicates whether to perform a full overlay for the accounts.
+              type: boolean
+        linkedContacts:
+          description: Provides information about the contacts linked to an activity. Please note that during a change operation this performs a full overlay if the attribute FullOverlay is set to true. In a full overlay, all the contacts that should be associated to the activity should be provided during a change operation. Any contacts not provided will be detached from this activity. By default the full overlay is considered false if this property is left blank. If values are provided for contacts, only the full overlay functionality is provided at this time.
+          type: object
+          properties:
+            activityContact:
+              description: The list of contacts associated with an activity.
+              type: array
+              maxItems: 4000
+              items:
+                $ref: '#/components/schemas/activityLinkedProfilesType'
+            fullOverlay:
+              description: Indicates whether to perform a full overlay for the contacts.
+              type: boolean
+        linkedBlocks:
+          description: Provides information about the blocks linked to the activity.
+          $ref: '#/components/schemas/blockListType'
+        linkedAttachments:
+          description: Provides information about the attachments linked to the activity.
+          $ref: '#/components/schemas/attachmentsType'
+        linkedActivities:
+          description: The list of activities associated with an activity.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/linkedActivityDetailsType'
+        indicators:
+          description: Indicators of additional information attached to the activity
+          $ref: '#/components/schemas/indicatorsType'
+    activityStatReportType:
+      type: object
+      description: Base abstraction defining all details needed to create a statistical report.
+      properties:
+        chainCode:
+          description: The code that identifies a hotel chain or management group. The hotel chain code is decided between vendors. This attribute is optional if the hotel is an independent property that can be identified by the HotelCode attribute.
           type: string
           minLength: 0
-          maxLength: 200
-        lastModifyDateTime:
-          description: Time stamp of last modification.
-          type: string
-          format: date-time
-        lastModifierId:
-          description: Identifies the last software system or person to modify a record.
+          maxLength: 20
+        hotelId:
+          description: The code that uniquely identifies a single hotel property. The hotel code is decided between vendors.
           type: string
           minLength: 0
-          maxLength: 200
+          maxLength: 20
+        hotelCityCode:
+          description: The IATA city code; for example DCA, ORD.
+          type: string
+          minLength: 0
+          maxLength: 40
+        hotelName:
+          description: A text field used to communicate the proper name of the hotel.
+          type: string
+          minLength: 0
+          maxLength: 80
+        hotelCodeContext:
+          description: A text field used to communicate the context (or source of - ex Sabre, Galileo, Worldspan, Amadeus) the HotelReferenceGroup codes.
+          type: string
+          minLength: 0
+          maxLength: 40
+        chainName:
+          description: The name of the hotel chain (e.g., Hilton, Marriott, Hyatt).
+          type: string
+          minLength: 0
+          maxLength: 80
+        calendarDate:
+          description: Statistical date of the requested report.
+          type: string
+          format: date
+          maxLength: 8
+        description:
+          type: string
+          minLength: 0
+          maxLength: 2000
+        statCategory:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/activityStatCategoryType'
+        reportCode:
+          $ref: '#/components/schemas/activityStatReportCodeType'
+    uniqueNameIDType:
+      type: object
+      description: Defines descriptive name, unique identification, and basic information combination.
+      properties:
+        primary:
+          description: When true, indicates a primary information.
+          type: boolean
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
+    operaVersionNumberType:
+      type: string
+      description: Current Opera Version Number
+      minLength: 0
+      maxLength: 40
     activityLinkedProfilesType:
       type: object
       description: A collection of Unique IDs of Profiles.
@@ -2395,6 +2491,220 @@ components:
         activityLinkedProfileType:
           description: Determines the type of the activity profile.
           $ref: '#/components/schemas/linkedProfileTypeType'
+    activityLogListType:
+      type: object
+      properties:
+        activityLog:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/activityLogType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        count:
+          description: Total number of rows returned
+          type: integer
+    linkedActivityDetailsType:
+      type: object
+      description: Linked Activity Related Information.
+      properties:
+        activityId:
+          description: Unique identifier of the linked activity.
+          $ref: '#/components/schemas/activityId'
+        linkedActivityDetail:
+          description: Linked Activity Related Information.
+          $ref: '#/components/schemas/activityInfoType'
+    profileDeliveryModuleType:
+      type: string
+      description: 'Module where this delivery type will be used. Example : EFolio Export, EInvoice , Fiscal, etc..'
+      enum:
+      - EfolioExport
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
+    reservationStayHistoryFutureInfoType:
+      type: object
+      description: Information of History and Future Reservation details attached to Profiles.
+      properties:
+        historyList:
+          description: Refer to History list type document.
+          $ref: '#/components/schemas/stayHistoryListType'
+        futureList:
+          description: Refer to Future list type document.
+          $ref: '#/components/schemas/stayFutureListType'
+    pMS_ResStatusType:
+      type: string
+      description: This reservation is in checked in status and the business date is past departure date. This could occur when ORS and PMS are in same environment.
+      enum:
+      - Reserved
+      - Requested
+      - NoShow
+      - Cancelled
+      - InHouse
+      - CheckedOut
+      - Waitlisted
+      - DueIn
+      - DueOut
+      - Walkin
+      - PendingCheckout
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    activityStatReportCodeType:
+      type: string
+      description: Supported Activity report codes.
+      enum:
+      - Activities
+    resProfileTypeType:
+      type: string
+      enum:
+      - Guest
+      - Company
+      - Group
+      - TravelAgent
+      - Source
+      - ReservationContact
+      - BillingContact
+      - Addressee
+    activitiesBulkUpdate:
+      type: object
+      description: Request object that will Change a list of activities.
+      properties:
+        activitiesBulkUpdate:
+          description: Activities information, that is going to be updated in batch.
+          $ref: '#/components/schemas/activitiesBulkUpdateType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    emailInfoResponseType:
+      type: object
+      description: Defines elements related to fetched external emails stored.
+      properties:
+        hotelCodes:
+          description: This is the List of the Hotel Codes of the Sender External Email.
+          $ref: '#/components/schemas/codeListType'
+        emailID:
+          description: Unique identifier for the Sender External Email stored.
+          $ref: '#/components/schemas/emailID'
+        accountId:
+          description: Account ID linked to the Sender Email.
+          $ref: '#/components/schemas/accountId'
+        contactId:
+          description: Contact ID linked to the Sender Email.
+          $ref: '#/components/schemas/contactId'
+        blockId:
+          description: Block ID linked to the Sender Email.
+          $ref: '#/components/schemas/blockId'
+        emailSubject:
+          description: Subject of the email.
+          type: string
+          minLength: 0
+          maxLength: 100
+        senderLastName:
+          description: Family name or last name of the Sender.
+          type: string
+          minLength: 0
+          maxLength: 80
+        senderFirstName:
+          description: Given name or first name of the Sender.
+          type: string
+          minLength: 0
+          maxLength: 40
+        senderEmailAddress:
+          description: Email address of the Sender.
+          type: string
+          minLength: 0
+          maxLength: 200
+        emailAttachmentId:
+          description: Email Attachment Id for stored external emails.
+          type: integer
+        emailReceivedDateTime:
+          description: Email Recieved Date Time of the Sender.
+          type: string
+          format: date-time
+        emailRecipients:
+          description: List of Email TO Recipients separated by ";"
+          type: string
+          minLength: 0
+          maxLength: 4000
+        hasEmailAttachments:
+          description: Indicates if the Email body has attachments included.
+          type: boolean
     stayReservationInfoType:
       type: object
       description: The Reservation class contains the current reservation being created or altered.
@@ -2418,159 +2728,157 @@ components:
         computedReservationStatus:
           description: Indicates the status of the reservation.
           $ref: '#/components/schemas/pMS_ResStatusType'
-    uniqueNameIDType:
+    activityId:
       type: object
-      description: Defines descriptive name, unique identification, and basic information combination.
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
       properties:
-        primary:
-          description: When true, indicates a primary information.
-          type: boolean
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 20
         id:
           description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
           type: string
           minLength: 0
           maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 40
-    emailsDetails:
+    pointsType:
       type: object
-      description: Response object for FetchEmails Operation.
+      description: The Redeem Points contains the number of points required to book a room type.
       properties:
-        emailsFetched:
-          description: Collection of fetched External Emails.
-          $ref: '#/components/schemas/emailsFetchedType'
+        awardsType:
+          description: Awards type for the award type rate code.
+          type: string
+        points:
+          description: No of points required to book this Room Stay.
+          type: integer
+    telephoneInfoType:
+      type: object
+      description: Information on a telephone number for the customer.
+      properties:
+        telephone:
+          description: Phone details for the profile.
+          $ref: '#/components/schemas/telephoneType'
+    activityLog:
+      type: object
+      properties:
+        activityLogDetails:
+          description: Collection of the list of Activities(Log) requested.
+          $ref: '#/components/schemas/activityLogListType'
         links:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
+    activityStatCategoryType:
+      type: object
+      description: Defines the codes and corresponding categories for which the data in the other elements has been gathered.
+      properties:
+        statCode:
+          description: Defines where this statistical data is applied.
+          type: string
+          minLength: 0
+          maxLength: 20
+        statCodeClass:
+          description: Classification of the statistical data.
+          type: string
+          minLength: 0
+          maxLength: 40
+        description:
+          type: string
+          minLength: 0
+          maxLength: 2000
+        statSet:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/activityStatSetType'
+        statCategoryCode:
+          $ref: '#/components/schemas/activityStatCategoryCodeType'
+    activityStatCodeType:
+      type: string
+      description: Supported activity statistical codes.
+      enum:
+      - CompletedToDo
+      - IncompleteToDo
+      - CompletedAppointments
+      - IncompleteAppointments
     resAttachedProfileListType:
       type: array
       maxItems: 4000
       items:
         $ref: '#/components/schemas/resAttachedProfileType'
-    indicatorsType:
-      type: array
-      description: Collection of lamp indicators.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/indicatorType'
-    profileDeliveryMethod:
+    customerType:
       type: object
-      description: Delivery Information type to the profile.
+      description: Contains basic data on the customer's identity, location, relationships, finances, memberships, etc.
       properties:
-        deliveryId:
-          description: Delivery ID. It will be empty in case of new delivery method.
-          $ref: '#/components/schemas/uniqueID_Type'
-        deliveryType:
-          description: Delivery type can have a value EMAIL, ELECTRONIC etc and it depends on the parameter set in OPERA Control.
+        personName:
+          description: Detailed name information for the customer.
+          type: array
+          maxItems: 5
+          items:
+            $ref: '#/components/schemas/personNameType'
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
           type: string
-          minLength: 0
-          maxLength: 20
-        deliveryValue:
-          description: Delivery value holds the corresponding value of the delivery type..
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
           type: string
-          minLength: 0
-          maxLength: 2000
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
+    activityIdRecord:
+      type: object
+      description: Unique identifier for the Activity Record containing activity ID and activity property.
+      properties:
         hotelId:
-          description: Property that has delivery methods configured.
+          description: Hotel code to which activity belongs
           type: string
           minLength: 0
           maxLength: 20
-        deliveryModule:
-          description: 'Module where this delivery type will be used. Example : EFolio Export, EInvoice , Fiscal, etc..'
-          $ref: '#/components/schemas/profileDeliveryModuleType'
-        primary:
-          description: When true, indicates a primary information.
-          type: boolean
-        orderSequence:
-          description: Display Order sequence.
-          type: number
-    timeSpanType:
-      type: object
-      description: Allows for a choice in description of the amount of time spanned by this type. EndDate specifies a specific date, while Duration provides a measure of time to add to the StartDate to yield end date.
-      properties:
-        startDate:
-          type: string
-          format: date
-          maxLength: 8
-        endDate:
-          type: string
-          format: date
-          maxLength: 8
-    profileTypeType:
-      type: string
-      description: The types of Profile handled by the web service.
-      enum:
-      - Guest
-      - Agent
-      - Company
-      - Group
-      - Source
-      - Employee
-      - Hotel
-      - Vendor
-      - Contact
-      - Purge
-      - BusinessHeader
-      - BillingAccount
-      - Activity
-      - Potential
-      - Account
-    recentlyAccessedActivityType:
-      type: object
-      description: A recently used activity details.
-      properties:
-        activityIdList:
-          description: List of unique ids, consisting of the activity id.
-          $ref: '#/components/schemas/activityIdListType'
-        activityTypeDescription:
-          description: Description of the ActivityType.
-          type: string
-          minLength: 0
-          maxLength: 100
-        activityOwnerCode:
-          description: Owner Code of the Activity.
-          type: string
-          minLength: 0
-          maxLength: 20
-        timeSpan:
-          description: Activity start date and end date.
-          $ref: '#/components/schemas/timeSpanType'
-        accessDate:
-          description: The date the record was accessed.
-          type: string
-          format: date
-          maxLength: 8
-        hotelId:
-          description: Hotel Code of the Activity.
-          type: string
-          minLength: 0
-          maxLength: 20
-    profileStatusType:
-      type: string
-      enum:
-      - Active
-      - Inactive
-    resGuaranteeType:
-      type: object
-      description: Validations type record returned after Validations are done.
-      properties:
-        guaranteeCode:
-          description: Guarantee Code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        shortDescription:
-          description: Guarantee Code.
+        id:
+          description: Unique ID belonging to the activity.
           type: string
           minLength: 0
           maxLength: 80
-        onHold:
-          description: Guarantee Code.
+    stayFutureListType:
+      type: object
+      description: A collection of reservation history details attached to Profiles.
+      properties:
+        reservationInfo:
+          description: 'Additional reservation information attached to the profile . Eg : Future reservation details'
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/stayReservationInfoType'
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
           type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        count:
+          description: Total number of rows returned
+          type: integer
     stayInfoType:
       type: object
       description: Details on the Room Stay including Guest Counts, Time Span of this Room Stay, pointers to Res Guests, guest Memberships, Comments and Special Requests pertaining to this particular Room Stay and finally financial information related to the Room Stay, including Guarantee, Deposit and Payment and Cancellation Penalties.
@@ -2705,136 +3013,56 @@ components:
         upgradedByAI:
           description: Represents the room was assigned by AI Room Assignment.
           type: boolean
-    indicatorType:
-      type: object
-      description: Lamp indicator Type.
-      properties:
-        indicatorName:
-          description: Name of the indicator.
-          type: string
-          minLength: 0
-          maxLength: 80
-        count:
-          description: Indicates number of occurrences of the indicator.
-          type: integer
-    uniqueID_Type:
-      type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
-      properties:
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 40
-    attachmentsType:
-      type: array
-      description: Attachment List.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/attachmentType'
-    activityChanges:
-      type: object
-      description: Activities details to be updated.
-      properties:
-        activityClass:
-          description: Indicates the Activity Class.
-          $ref: '#/components/schemas/activityConfigClassType'
-        activityType:
-          description: Indicates the Activity Type used for the Activity.
-          type: string
-          minLength: 0
-          maxLength: 20
-        activityPurpose:
-          description: Indicates Purpose of the Activity.
-          type: string
-          minLength: 0
-          maxLength: 100
-        activityTraceCode:
-          description: Activity Trace code used for the Activity.
-          type: string
-          minLength: 0
-          maxLength: 20
-        activityOwner:
-          description: Owner of Activity.
-          type: string
-          minLength: 0
-          maxLength: 20
-        startDate:
-          description: Start Date of Activity.
-          type: string
-          format: date
-        startTime:
-          description: Start time of the Activity.
-          type: string
-        endDate:
-          description: End Date of Activity.
-          type: string
-          format: date
-        endTime:
-          description: End time of the Activity.
-          type: string
-        notes:
-          description: Notes associated with an Activity.
-          type: string
-          minLength: 0
-          maxLength: 4000
-        highPriority:
-          description: Indicates whether Activity has a high priority.
-          type: boolean
-        activityAccount:
-          description: The list of accounts associated with an activity.
-          $ref: '#/components/schemas/uniqueID_Type'
-        activityContact:
-          description: The list of accounts associated with an activity.
-          $ref: '#/components/schemas/uniqueID_Type'
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
+    relationshipProfileType:
       type: object
       properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
+        profileIdList:
+          description: Original profile details for which the relationships was created
+          $ref: '#/components/schemas/uniqueIDListType'
+        profileType:
+          description: Type of profile such as Guest, Agent, Company, Group, Source, Employee, Hotel, Vendor or Contact.
+          $ref: '#/components/schemas/profileTypeType'
+    activity:
+      type: object
+      properties:
+        activityDetails:
+          description: Type used to hold Activity in detail.
+          $ref: '#/components/schemas/activityDetailsType'
         links:
           $ref: '#/components/schemas/links'
-      required:
-      - type
-      - title
-    stayHistoryListType:
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    currencyAmountType:
       type: object
-      description: A collection of reservation history details attached to Profiles.
+      description: A monetary value expressed with a currency code.
       properties:
-        reservationInfo:
-          description: 'Additional reservation information attached to the profile . Eg : History reservation details'
+        amount:
+          description: A monetary amount.
+          type: number
+        currencyCode:
+          description: Provides a currency code to reflect the currency in which an amount may be expressed.
+          type: string
+          minLength: 3
+          maxLength: 3
+    emailsFetchedType:
+      type: object
+      description: Type contains the detailed information of a sender external email stored .
+      properties:
+        fetchedSenderEmailInfo:
+          description: Detailed information of a sender external email stored.
           type: array
           maxItems: 4000
           items:
-            $ref: '#/components/schemas/stayReservationInfoType'
+            $ref: '#/components/schemas/emailInfoResponseType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
         hasMore:
           description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
           type: boolean
@@ -2844,24 +3072,6 @@ components:
         count:
           description: Total number of rows returned
           type: integer
-    emailInfoType:
-      type: object
-      description: Information on an email for the customer.
-      properties:
-        email:
-          description: eMail deatils for the profile.
-          $ref: '#/components/schemas/emailType'
-    operaVersion:
-      type: object
-      description: Response for Ping operation.
-      properties:
-        operaVersion:
-          description: Opera version number.
-          $ref: '#/components/schemas/operaVersionNumberType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
     attachmentType:
       type: object
       description: Attached files.
@@ -2913,76 +3123,305 @@ components:
           type: string
           minLength: 0
           maxLength: 80
-    relationshipProfileType:
+    resGuaranteeType:
+      type: object
+      description: Validations type record returned after Validations are done.
+      properties:
+        guaranteeCode:
+          description: Guarantee Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        shortDescription:
+          description: Guarantee Code.
+          type: string
+          minLength: 0
+          maxLength: 80
+        onHold:
+          description: Guarantee Code.
+          type: boolean
+    activitiesInformation:
       type: object
       properties:
-        profileIdList:
-          description: Original profile details for which the relationships was created
-          $ref: '#/components/schemas/uniqueIDListType'
-        profileType:
-          description: Type of profile such as Guest, Agent, Company, Group, Source, Employee, Hotel, Vendor or Contact.
-          $ref: '#/components/schemas/profileTypeType'
-    linkedActivities:
-      type: object
-      properties:
-        linkedActivityDetails:
-          description: Linked activities to be created.
-          $ref: '#/components/schemas/linkedActivitiesType'
+        activitiesInformation:
+          description: Activities details to be created.
+          $ref: '#/components/schemas/activityListType'
         links:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    activityDetailsType:
+    profileStatusType:
+      type: string
+      enum:
+      - Active
+      - Inactive
+    accountId:
       type: object
-      description: Complete Activity Related Information.
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
       properties:
-        activityId:
-          description: Unique identifier for the activity.
-          $ref: '#/components/schemas/activityId'
-        activityDetail:
-          description: Activity information in detail.
-          $ref: '#/components/schemas/activityInfoType'
-        linkedAccounts:
-          description: Provides information about the accounts linked to an activity. Please note that during a change operation this performs a full overlay if the attribute FullOverlay is set to true. In a full overlay, all the accounts that should be associated to the activity should be provided during a change operation. Any accounts not provided will be detached from this activity. By default the full overlay is considered false if this property is left blank. If values are provided for accounts, only the full overlay functionality is provided at this time.
-          type: object
-          properties:
-            activityAccount:
-              description: The list of accounts associated with an activity.
-              type: array
-              maxItems: 4000
-              items:
-                $ref: '#/components/schemas/activityLinkedProfilesType'
-            fullOverlay:
-              description: Indicates whether to perform a full overlay for the accounts.
-              type: boolean
-        linkedContacts:
-          description: Provides information about the contacts linked to an activity. Please note that during a change operation this performs a full overlay if the attribute FullOverlay is set to true. In a full overlay, all the contacts that should be associated to the activity should be provided during a change operation. Any contacts not provided will be detached from this activity. By default the full overlay is considered false if this property is left blank. If values are provided for contacts, only the full overlay functionality is provided at this time.
-          type: object
-          properties:
-            activityContact:
-              description: The list of contacts associated with an activity.
-              type: array
-              maxItems: 4000
-              items:
-                $ref: '#/components/schemas/activityLinkedProfilesType'
-            fullOverlay:
-              description: Indicates whether to perform a full overlay for the contacts.
-              type: boolean
-        linkedBlocks:
-          description: Provides information about the blocks linked to the activity.
-          $ref: '#/components/schemas/blockListType'
-        linkedAttachments:
-          description: Provides information about the attachments linked to the activity.
-          $ref: '#/components/schemas/attachmentsType'
-        linkedActivities:
-          description: The list of activities associated with an activity.
+        url:
+          description: URL that identifies the location associated with the record identified by the UniqueID.
+          type: string
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 20
+        instance:
+          description: The identification of a record as it exists at a point in time. An instance is used in update messages where the sender must assure the server that the update sent refers to the most recent modification level of the object being updated.
+          type: string
+          minLength: 0
+          maxLength: 80
+        idContext:
+          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+          type: string
+          minLength: 0
+          maxLength: 80
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        idExtension:
+          description: Additional identifying value assigned by the creating system.
+          type: integer
+    emailInfoType:
+      type: object
+      description: Information on an email for the customer.
+      properties:
+        email:
+          description: eMail deatils for the profile.
+          $ref: '#/components/schemas/emailType'
+    stayHistoryListType:
+      type: object
+      description: A collection of reservation history details attached to Profiles.
+      properties:
+        reservationInfo:
+          description: 'Additional reservation information attached to the profile . Eg : History reservation details'
           type: array
           maxItems: 4000
           items:
-            $ref: '#/components/schemas/linkedActivityDetailsType'
-        indicators:
-          description: Indicators of additional information attached to the activity
-          $ref: '#/components/schemas/indicatorsType'
+            $ref: '#/components/schemas/stayReservationInfoType'
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        count:
+          description: Total number of rows returned
+          type: integer
+    activityConfigClassType:
+      type: string
+      description: A collection of supported list of activity classes.
+      enum:
+      - Appointment
+      - Todo
+    activityBlockInfoType:
+      type: object
+      description: ''
+      properties:
+        blockIdList:
+          description: List of Blocks that are linked to the Activity.
+          $ref: '#/components/schemas/uniqueNameIDListType'
+        blockCode:
+          description: Block code for the block.
+          type: string
+          minLength: 0
+          maxLength: 20
+        blockName:
+          description: Name of the block.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        timeSpan:
+          description: The Time Span(Start Date, End Date) which covers the Block Span.
+          $ref: '#/components/schemas/timeSpanType'
+        primary:
+          description: When true, indicates a primary information.
+          type: boolean
+        hotelId:
+          description: This is the HotelCode of the Block.
+          type: string
+          minLength: 0
+          maxLength: 20
+    recentlyAccessedActivityType:
+      type: object
+      description: A recently used activity details.
+      properties:
+        activityIdList:
+          description: List of unique ids, consisting of the activity id.
+          $ref: '#/components/schemas/activityIdListType'
+        activityTypeDescription:
+          description: Description of the ActivityType.
+          type: string
+          minLength: 0
+          maxLength: 100
+        activityOwnerCode:
+          description: Owner Code of the Activity.
+          type: string
+          minLength: 0
+          maxLength: 20
+        timeSpan:
+          description: Activity start date and end date.
+          $ref: '#/components/schemas/timeSpanType'
+        accessDate:
+          description: The date the record was accessed.
+          type: string
+          format: date
+          maxLength: 8
+        hotelId:
+          description: Hotel Code of the Activity.
+          type: string
+          minLength: 0
+          maxLength: 20
+    activityInfoType:
+      type: object
+      description: Activity related information.
+      properties:
+        hotelId:
+          description: This is the Hotel Code of the Activity.
+          type: string
+          minLength: 0
+          maxLength: 20
+        activityClass:
+          description: Indicates the Activity Class.
+          $ref: '#/components/schemas/activityConfigClassType'
+        activityType:
+          description: Indicates the Activity Type used for the Activity.
+          type: string
+          minLength: 0
+          maxLength: 20
+        activityTypeDescription:
+          description: Indicates the description used for the Activity Type.
+          type: string
+          minLength: 0
+          maxLength: 100
+        activityPurpose:
+          description: Indicates Purpose of the Activity.
+          type: string
+          minLength: 0
+          maxLength: 100
+        activityTraceCode:
+          description: Activity Trace code used for the Activity.
+          type: string
+          minLength: 0
+          maxLength: 20
+        activityOwner:
+          description: Owner of Activity.
+          type: string
+          minLength: 0
+          maxLength: 20
+        activityOwnerCode:
+          description: Owner Code of Activity.
+          type: string
+          minLength: 0
+          maxLength: 20
+        startDateTime:
+          description: Start Date time of Activity.
+          type: string
+          format: date-time
+        endDateTime:
+          description: End Date time of Activity.
+          type: string
+          format: date-time
+        status:
+          description: Completion status of Activity.
+          type: object
+          properties:
+            completedBy:
+              description: Name of person who completed the Activity.
+              type: string
+            completedOn:
+              description: Date on which the Activity was completed.
+              type: string
+              format: date-time
+            completed:
+              description: Indicates whether Activity is Completed or not.
+              type: boolean
+        activityResult:
+          description: Indicates the outcome of a completed Activity.
+          type: string
+          minLength: 0
+          maxLength: 20
+        notes:
+          description: Notes associated with an Activity.
+          type: string
+          minLength: 0
+          maxLength: 4000
+        followup:
+          description: Indicates whether Followup Activity is needed or not.
+          type: boolean
+        followupStartDateTime:
+          description: Start Date time of the Followup Activity.
+          type: string
+          format: date-time
+        highPriority:
+          description: Indicates whether Activity has a high priority.
+          type: boolean
+        overlapActivity:
+          description: Determines whether the Activity overlaps with another activity with same date and time for the same owner.
+          type: boolean
+        createDateTime:
+          description: Time stamp of the creation.
+          type: string
+          format: date-time
+        creatorId:
+          description: ID of creator. The creator could be a software system identifier or an identifier of an employee responsible for the creation.
+          type: string
+          minLength: 0
+          maxLength: 200
+        lastModifyDateTime:
+          description: Time stamp of last modification.
+          type: string
+          format: date-time
+        lastModifierId:
+          description: Identifies the last software system or person to modify a record.
+          type: string
+          minLength: 0
+          maxLength: 200
+    linkedProfileTypeType:
+      type: string
+      description: Simple type for profile types linked to activity.
+      enum:
+      - Company
+      - Agent
+      - Source
+      - CompanyContact
+      - AgentContact
+      - SourceContact
+    reservationIdList:
+      type: array
+      description: Unique Id that references an object uniquely in the system.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/uniqueID_Type'
+    guestHousekeepingServiceRequestType:
+      type: string
+      description: Possible values for the Guest Service Status.
+      enum:
+      - DoNotDisturb
+      - MakeUpRoom
+      - NoStatusSelected
+    profileTypeType:
+      type: string
+      description: The types of Profile handled by the web service.
+      enum:
+      - Guest
+      - Agent
+      - Company
+      - Group
+      - Source
+      - Employee
+      - Hotel
+      - Vendor
+      - Contact
+      - Purge
+      - BusinessHeader
+      - BillingAccount
+      - Activity
+      - Potential
+      - Account
     addressType:
       type: object
       description: Provides address information.
@@ -3034,164 +3473,21 @@ components:
         typeDescription:
           description: Describes the type code
           type: string
-    resAttachedProfileType:
+    activitiesToChange:
       type: object
       properties:
-        name:
-          description: Attached profile name
-          type: string
-        profileIdList:
-          description: Collection of unique profile identifiers
-          $ref: '#/components/schemas/profileIdList'
-        reservationProfileType:
-          $ref: '#/components/schemas/resProfileTypeType'
-    activityStatReportType:
-      type: object
-      description: Base abstraction defining all details needed to create a statistical report.
-      properties:
-        chainCode:
-          description: The code that identifies a hotel chain or management group. The hotel chain code is decided between vendors. This attribute is optional if the hotel is an independent property that can be identified by the HotelCode attribute.
-          type: string
-          minLength: 0
-          maxLength: 20
-        hotelId:
-          description: The code that uniquely identifies a single hotel property. The hotel code is decided between vendors.
-          type: string
-          minLength: 0
-          maxLength: 20
-        hotelCityCode:
-          description: The IATA city code; for example DCA, ORD.
-          type: string
-          minLength: 0
-          maxLength: 40
-        hotelName:
-          description: A text field used to communicate the proper name of the hotel.
-          type: string
-          minLength: 0
-          maxLength: 80
-        hotelCodeContext:
-          description: A text field used to communicate the context (or source of - ex Sabre, Galileo, Worldspan, Amadeus) the HotelReferenceGroup codes.
-          type: string
-          minLength: 0
-          maxLength: 40
-        chainName:
-          description: The name of the hotel chain (e.g., Hilton, Marriott, Hyatt).
-          type: string
-          minLength: 0
-          maxLength: 80
-        calendarDate:
-          description: Statistical date of the requested report.
-          type: string
-          format: date
-          maxLength: 8
-        description:
-          type: string
-          minLength: 0
-          maxLength: 2000
-        statCategory:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/activityStatCategoryType'
-        reportCode:
-          $ref: '#/components/schemas/activityStatReportCodeType'
-    recentlyAccessedActivities:
-      type: object
-      properties:
-        activities:
-          description: List of recently accessed profiles.
-          $ref: '#/components/schemas/recentlyAccessedActivitiesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    activityListType:
-      type: array
-      description: Activity information in detail.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/activityDetailsType'
-    profileIdList:
-      type: array
-      description: Unique Id that references an object uniquely in the system.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/uniqueID_Type'
-    telephoneType:
-      type: object
-      description: Information on a telephone number for the customer.
-      properties:
-        phoneNumber:
-          description: Telephone number assigned to a single location.
-          type: string
-          minLength: 0
-          maxLength: 40
-    relationshipInfoType:
-      type: object
-      description: Relationship Type contains information about the associations between and among individuals, companies, travel agents, groups, sources, and contact profiles.
-      properties:
-        relationshipProfile:
-          description: Refer to Relationship Profile type document.
-          $ref: '#/components/schemas/relationshipProfileType'
-    codeListType:
-      type: array
-      maxItems: 4000
-      items:
-        type: string
-        minLength: 0
-        maxLength: 20
-    uniqueNameIDListType:
-      type: array
-      description: Defines descriptive name and unique identification combination.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/uniqueNameIDType'
-    activityIdListType:
-      type: array
-      description: Unique identifier for the Activity.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/activityId'
-    profileDeliveryModuleType:
-      type: string
-      description: 'Module where this delivery type will be used. Example : EFolio Export, EInvoice , Fiscal, etc..'
-      enum:
-      - EfolioExport
-    uRLInfoType:
-      type: object
-      description: Web site address.
-      properties:
-        url:
-          description: Provides URL information.
-          $ref: '#/components/schemas/uRLType'
-    statUnitCategoryType:
-      type: string
-      description: Supported statistical units.
-      enum:
-      - Numeric
-      - Amount
-    blockIdList:
-      type: array
-      description: Unique Id that references an object uniquely in the system.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/uniqueID_Type'
-    activityAttachments:
-      type: object
-      properties:
-        activityAttachmentList:
-          description: Collection of information about activity attachments returned/fetched as per the criteria in the fetch request.
-          $ref: '#/components/schemas/attachmentsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    activityLog:
-      type: object
-      properties:
-        activityLogDetails:
-          description: Collection of the list of Activities(Log) requested.
-          $ref: '#/components/schemas/activityLogListType'
+        activitiesInformation:
+          description: Activities details to be updated.
+          $ref: '#/components/schemas/activityListType'
+        activityDetailsEditFlag:
+          description: Signifies whether only activity details are being modified.
+          type: boolean
+        updateLinkedActivities:
+          description: Signifies whether the linked activity details should be modified or not.
+          type: boolean
+        completeMode:
+          description: Signifies whether complete details of activity should alone be modified.
+          type: boolean
         links:
           $ref: '#/components/schemas/links'
         warnings:
@@ -3207,57 +3503,91 @@ components:
           type: string
           minLength: 0
           maxLength: 40
-    contactId:
+    statUnitCategoryType:
+      type: string
+      description: Supported statistical units.
+      enum:
+      - Numeric
+      - Amount
+    status:
       type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      description: Response Body.
       properties:
-        url:
-          description: URL that identifies the location associated with the record identified by the UniqueID.
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    uniqueNameIDListType:
+      type: array
+      description: Defines descriptive name and unique identification combination.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/uniqueNameIDType'
+    emailType:
+      type: object
+      description: Information on an email for the customer.
+      properties:
+        emailAddress:
+          description: Defines the e-mail address.
           type: string
+          minLength: 0
+          maxLength: 2000
         type:
-          description: A reference to the type of object defined by the UniqueID element.
+          description: Defines the purpose of the e-mail address (e.g. personal, business, listserve).
           type: string
           minLength: 0
           maxLength: 20
-        instance:
-          description: The identification of a record as it exists at a point in time. An instance is used in update messages where the sender must assure the server that the update sent refers to the most recent modification level of the object being updated.
+    resExpectedTimesType:
+      type: object
+      description: Holds the Arrival and Departure Time Information
+      properties:
+        reservationExpectedArrivalTime:
+          description: Arrival Time
+          type: string
+          format: date-time
+        reservationExpectedDepartureTime:
+          description: Departure Time
+          type: string
+          format: date-time
+    emailsDetails:
+      type: object
+      description: Response object for FetchEmails Operation.
+      properties:
+        emailsFetched:
+          description: Collection of fetched External Emails.
+          $ref: '#/components/schemas/emailsFetchedType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    activityStatCategoryCodeType:
+      type: string
+      description: Supported activity statistical category codes.
+      enum:
+      - HotelCode
+    promotionType:
+      type: object
+      description: Type to specify a rate promotion. Usually attached to a reservation to indicate a specific promotion is applied to the reservation.
+      properties:
+        promotionCode:
+          description: Promotion code associated with the rate plan.
           type: string
           minLength: 0
-          maxLength: 80
-        idContext:
-          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+          maxLength: 20
+        promotionName:
+          description: Promotion code Name associated with the rate plan.
           type: string
           minLength: 0
-          maxLength: 80
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          maxLength: 20
+        couponCode:
+          description: Promotion Coupon Code when promotion is setup to have a valid coupon code.
           type: string
           minLength: 0
-          maxLength: 80
-        idExtension:
-          description: Additional identifying value assigned by the creating system.
-          type: integer
-    linkedProfileTypeType:
-      type: string
-      description: Simple type for profile types linked to activity.
-      enum:
-      - Company
-      - Agent
-      - Source
-      - CompanyContact
-      - AgentContact
-      - SourceContact
-    activityStatReportCodeType:
-      type: string
-      description: Supported Activity report codes.
-      enum:
-      - Activities
-    activityConfigClassType:
-      type: string
-      description: A collection of supported list of activity classes.
-      enum:
-      - Appointment
-      - Todo
+          maxLength: 40
     activityLogType:
       type: object
       properties:
@@ -3300,285 +3630,38 @@ components:
           type: string
           minLength: 0
           maxLength: 2000
-    customerType:
+    relationshipAddressType:
       type: object
-      description: Contains basic data on the customer's identity, location, relationships, finances, memberships, etc.
+      description: Provides address information for a Relationship.
       properties:
-        personName:
-          description: Detailed name information for the customer.
+        addressLine:
+          description: When the address is unformatted (FormattedInd="false") these lines will contain free form address details. When the address is formatted and street number and street name must be sent independently, the street number will be sent using StreetNmbr, and the street name will be sent in the first AddressLine occurrence.
           type: array
-          maxItems: 5
+          maxItems: 4
           items:
-            $ref: '#/components/schemas/personNameType'
-    uRLType:
-      type: object
-      description: Web site address, in IETF(The Internet Engineering Task Force) specified format.
-      properties:
-        value:
-          type: string
-          description: Property Value
-        type:
-          description: Defines the purpose of the URL address, such as personal, business, public, etc.
-          type: string
-          minLength: 0
-          maxLength: 20
-    activityStatSetType:
-      type: object
-      description: Base statistic set holder which defines the span of the statistical data.
-      properties:
-        start:
-          type: string
-          format: date
-          maxLength: 8
-        end:
-          type: string
-          format: date
-          maxLength: 8
-        stat:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/activityStatType'
-        owner:
-          type: string
-          minLength: 0
-          maxLength: 20
-    addressInfoType:
-      type: object
-      description: Provides address information.
-      properties:
-        address:
-          description: Address details for the profile.
-          $ref: '#/components/schemas/addressType'
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
+            type: string
+            minLength: 0
+            maxLength: 80
+        city:
+          description: City (e.g., Dublin), town, or postal station (i.e., a postal service territory, often used in a military address).
           type: string
           minLength: 0
           maxLength: 40
-    emailID:
-      type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
-      properties:
-        url:
-          description: URL that identifies the location associated with the record identified by the UniqueID.
+        postalCode:
+          description: Post Office Code number.
           type: string
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
+          minLength: 0
+          maxLength: 15
+        state:
+          description: State or Province name (e.g., Texas).
           type: string
           minLength: 0
           maxLength: 20
-        instance:
-          description: The identification of a record as it exists at a point in time. An instance is used in update messages where the sender must assure the server that the update sent refers to the most recent modification level of the object being updated.
-          type: string
-          minLength: 0
-          maxLength: 80
-        idContext:
-          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
-          type: string
-          minLength: 0
-          maxLength: 80
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        idExtension:
-          description: Additional identifying value assigned by the creating system.
-          type: integer
-    activitiesBulkUpdateType:
-      type: object
-      description: Collection of Activity Ids their details to be updated.
-      properties:
-        activityIdList:
-          type: array
-          description: Selected activities Unique identifier.
-          maxItems: 200
-          items:
-            $ref: '#/components/schemas/activityIdRecord'
-        skipProcessing:
-          description: Boolean flag if True will skip processing activities
-          type: boolean
-        activityRec:
-          description: Selected activities to be updated with these activity details.
-          $ref: '#/components/schemas/activityChanges'
-    reservationStayHistoryFutureInfoType:
-      type: object
-      description: Information of History and Future Reservation details attached to Profiles.
-      properties:
-        historyList:
-          description: Refer to History list type document.
-          $ref: '#/components/schemas/stayHistoryListType'
-        futureList:
-          description: Refer to Future list type document.
-          $ref: '#/components/schemas/stayFutureListType'
-    recentlyAccessedActivitiesType:
-      type: array
-      description: A single recently accessed activity.
-      maxItems: 10
-      items:
-        $ref: '#/components/schemas/recentlyAccessedActivityType'
-    emailInfoResponseType:
-      type: object
-      description: Defines elements related to fetched external emails stored.
-      properties:
-        hotelCodes:
-          description: This is the List of the Hotel Codes of the Sender External Email.
-          $ref: '#/components/schemas/codeListType'
-        emailID:
-          description: Unique identifier for the Sender External Email stored.
-          $ref: '#/components/schemas/emailID'
-        accountId:
-          description: Account ID linked to the Sender Email.
-          $ref: '#/components/schemas/accountId'
-        contactId:
-          description: Contact ID linked to the Sender Email.
-          $ref: '#/components/schemas/contactId'
-        blockId:
-          description: Block ID linked to the Sender Email.
-          $ref: '#/components/schemas/blockId'
-        emailSubject:
-          description: Subject of the email.
-          type: string
-          minLength: 0
-          maxLength: 100
-        senderLastName:
-          description: Family name or last name of the Sender.
-          type: string
-          minLength: 0
-          maxLength: 80
-        senderFirstName:
-          description: Given name or first name of the Sender.
-          type: string
-          minLength: 0
-          maxLength: 40
-        senderEmailAddress:
-          description: Email address of the Sender.
+        country:
+          description: Country name (e.g., Ireland).
           type: string
           minLength: 0
           maxLength: 200
-        emailAttachmentId:
-          description: Email Attachment Id for stored external emails.
-          type: integer
-        emailReceivedDateTime:
-          description: Email Recieved Date Time of the Sender.
-          type: string
-          format: date-time
-        emailRecipients:
-          description: List of Email TO Recipients separated by ";"
-          type: string
-          minLength: 0
-          maxLength: 4000
-        hasEmailAttachments:
-          description: Indicates if the Email body has attachments included.
-          type: boolean
-    searchEmailsRequest:
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: Indicates maximum number of records a Web Service should return.
-        offset:
-          type: integer
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-          default: 0
-        code:
-          type: array
-          items:
-            type: string
-          maxItems: 4000
-          description: ''
-        id:
-          type: string
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-        idExtension:
-          type: integer
-          description: Additional identifying value assigned by the creating system.
-        idContext:
-          type: string
-          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
-        type:
-          type: string
-          description: A reference to the type of object defined by the UniqueID element.
-        accountIdId:
-          type: string
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-        accountIdIdExtension:
-          type: integer
-          description: Additional identifying value assigned by the creating system.
-        accountIdIdContext:
-          type: string
-          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
-        accountIdType:
-          type: string
-          description: A reference to the type of object defined by the UniqueID element.
-        contactIdId:
-          type: string
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-        contactIdIdExtension:
-          type: integer
-          description: Additional identifying value assigned by the creating system.
-        contactIdIdContext:
-          type: string
-          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
-        contactIdType:
-          type: string
-          description: A reference to the type of object defined by the UniqueID element.
-        blockIdId:
-          type: string
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-        blockIdIdExtension:
-          type: integer
-          description: Additional identifying value assigned by the creating system.
-        blockIdIdContext:
-          type: string
-          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
-        blockIdType:
-          type: string
-          description: A reference to the type of object defined by the UniqueID element.
-        emailSubject:
-          type: string
-          description: Subject of the email.
-        senderLastName:
-          type: string
-          description: Family name or last name of the Sender.
-        senderFirstName:
-          type: string
-          description: Given name or first name of the Sender.
-        senderEmailAddress:
-          type: string
-          description: Email address of the Sender.
-        startDate:
-          type: string
-          format: date
-        endDate:
-          type: string
-          format: date
-        duration:
-          type: string
-    activitiesToChange:
-      type: object
-      properties:
-        activitiesInformation:
-          description: Activities details to be updated.
-          $ref: '#/components/schemas/activityListType'
-        activityDetailsEditFlag:
-          description: Signifies whether only activity details are being modified.
-          type: boolean
-        updateLinkedActivities:
-          description: Signifies whether the linked activity details should be modified or not.
-          type: boolean
-        completeMode:
-          description: Signifies whether complete details of activity should alone be modified.
-          type: boolean
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
     profileType:
       type: object
       description: Type provides the detailed information about the profile and its children.
@@ -3688,6 +3771,584 @@ components:
         profileType:
           description: Type of profile such as Guest, Agent, Company, Group, Source, Employee, Hotel, Vendor or Contact.
           $ref: '#/components/schemas/profileTypeType'
+    activitiesProcessedInfoType:
+      type: object
+      description: Status/Info of the processed activities.
+      properties:
+        activityIdRecord:
+          description: The activity details which were not processed.
+          $ref: '#/components/schemas/activityIdRecord'
+        reason:
+          description: Reason for not processing the activity.
+          type: string
+        processingInfoType:
+          description: Flag to indicate the warning messages from the API
+          type: string
+        processingInfoCode:
+          description: Erorr/Warning code for not processing the activity.
+          type: string
+          minLength: 0
+          maxLength: 200
+    activityStatistics:
+      type: object
+      properties:
+        reports:
+          description: Statistical report - each report is determined by the requested report in the service request criteria.
+          type: array
+          items:
+            $ref: '#/components/schemas/activityStatReportType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    profileDeliveryMethod:
+      type: object
+      description: Delivery Information type to the profile.
+      properties:
+        deliveryId:
+          description: Delivery ID. It will be empty in case of new delivery method.
+          $ref: '#/components/schemas/uniqueID_Type'
+        deliveryType:
+          description: Delivery type can have a value EMAIL, ELECTRONIC etc and it depends on the parameter set in OPERA Control.
+          type: string
+          minLength: 0
+          maxLength: 20
+        deliveryValue:
+          description: Delivery value holds the corresponding value of the delivery type..
+          type: string
+          minLength: 0
+          maxLength: 2000
+        hotelId:
+          description: Property that has delivery methods configured.
+          type: string
+          minLength: 0
+          maxLength: 20
+        deliveryModule:
+          description: 'Module where this delivery type will be used. Example : EFolio Export, EInvoice , Fiscal, etc..'
+          $ref: '#/components/schemas/profileDeliveryModuleType'
+        primary:
+          description: When true, indicates a primary information.
+          type: boolean
+        orderSequence:
+          description: Display Order sequence.
+          type: number
+    contactId:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        url:
+          description: URL that identifies the location associated with the record identified by the UniqueID.
+          type: string
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 20
+        instance:
+          description: The identification of a record as it exists at a point in time. An instance is used in update messages where the sender must assure the server that the update sent refers to the most recent modification level of the object being updated.
+          type: string
+          minLength: 0
+          maxLength: 80
+        idContext:
+          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+          type: string
+          minLength: 0
+          maxLength: 80
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        idExtension:
+          description: Additional identifying value assigned by the creating system.
+          type: integer
+    profileIdList:
+      type: array
+      description: Unique Id that references an object uniquely in the system.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/uniqueID_Type'
+    activityChanges:
+      type: object
+      description: Activities details to be updated.
+      properties:
+        activityClass:
+          description: Indicates the Activity Class.
+          $ref: '#/components/schemas/activityConfigClassType'
+        activityType:
+          description: Indicates the Activity Type used for the Activity.
+          type: string
+          minLength: 0
+          maxLength: 20
+        activityPurpose:
+          description: Indicates Purpose of the Activity.
+          type: string
+          minLength: 0
+          maxLength: 100
+        activityTraceCode:
+          description: Activity Trace code used for the Activity.
+          type: string
+          minLength: 0
+          maxLength: 20
+        activityOwner:
+          description: Owner of Activity.
+          type: string
+          minLength: 0
+          maxLength: 20
+        startDate:
+          description: Start Date of Activity.
+          type: string
+          format: date
+        startTime:
+          description: Start time of the Activity.
+          type: string
+        endDate:
+          description: End Date of Activity.
+          type: string
+          format: date
+        endTime:
+          description: End time of the Activity.
+          type: string
+        notes:
+          description: Notes associated with an Activity.
+          type: string
+          minLength: 0
+          maxLength: 4000
+        highPriority:
+          description: Indicates whether Activity has a high priority.
+          type: boolean
+        activityAccount:
+          description: The list of accounts associated with an activity.
+          $ref: '#/components/schemas/uniqueID_Type'
+        activityContact:
+          description: The list of accounts associated with an activity.
+          $ref: '#/components/schemas/uniqueID_Type'
+    emailID:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        url:
+          description: URL that identifies the location associated with the record identified by the UniqueID.
+          type: string
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 20
+        instance:
+          description: The identification of a record as it exists at a point in time. An instance is used in update messages where the sender must assure the server that the update sent refers to the most recent modification level of the object being updated.
+          type: string
+          minLength: 0
+          maxLength: 80
+        idContext:
+          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+          type: string
+          minLength: 0
+          maxLength: 80
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        idExtension:
+          description: Additional identifying value assigned by the creating system.
+          type: integer
+    activityListType:
+      type: array
+      description: Activity information in detail.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/activityDetailsType'
+    activitiesBulkUpdateStatus:
+      type: object
+      properties:
+        activitiesBulkUpdateStatusType:
+          description: Status/Info of the processed activities.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/activitiesProcessedInfoType'
+    linkedActivities:
+      type: object
+      properties:
+        linkedActivityDetails:
+          description: Linked activities to be created.
+          $ref: '#/components/schemas/linkedActivitiesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    telephoneType:
+      type: object
+      description: Information on a telephone number for the customer.
+      properties:
+        phoneNumber:
+          description: Telephone number assigned to a single location.
+          type: string
+          minLength: 0
+          maxLength: 40
+    activityIdListType:
+      type: array
+      description: Unique identifier for the Activity.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/activityId'
+    searchEmailsRequest:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: Indicates maximum number of records a Web Service should return.
+        offset:
+          type: integer
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          default: 0
+        code:
+          type: array
+          items:
+            type: string
+          maxItems: 4000
+          description: ''
+        id:
+          type: string
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        idExtension:
+          type: integer
+          description: Additional identifying value assigned by the creating system.
+        idContext:
+          type: string
+          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+        type:
+          type: string
+          description: A reference to the type of object defined by the UniqueID element.
+        accountIdId:
+          type: string
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        accountIdIdExtension:
+          type: integer
+          description: Additional identifying value assigned by the creating system.
+        accountIdIdContext:
+          type: string
+          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+        accountIdType:
+          type: string
+          description: A reference to the type of object defined by the UniqueID element.
+        contactIdId:
+          type: string
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        contactIdIdExtension:
+          type: integer
+          description: Additional identifying value assigned by the creating system.
+        contactIdIdContext:
+          type: string
+          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+        contactIdType:
+          type: string
+          description: A reference to the type of object defined by the UniqueID element.
+        blockIdId:
+          type: string
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        blockIdIdExtension:
+          type: integer
+          description: Additional identifying value assigned by the creating system.
+        blockIdIdContext:
+          type: string
+          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+        blockIdType:
+          type: string
+          description: A reference to the type of object defined by the UniqueID element.
+        emailSubject:
+          type: string
+          description: Subject of the email.
+        senderLastName:
+          type: string
+          description: Family name or last name of the Sender.
+        senderFirstName:
+          type: string
+          description: Given name or first name of the Sender.
+        senderEmailAddress:
+          type: string
+          description: Email address of the Sender.
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        duration:
+          type: string
+    activityStatType:
+      type: object
+      description: Since the statistical value can be represented in different measure of units, this element will provide a flexible definition for the supported Opera9 statistical units.
+      properties:
+        unitType:
+          description: Unit of measurement or the actual code that defines the value. Eg. CurrencyCode for the Amount Category.
+          type: string
+          minLength: 3
+          maxLength: 3
+        unitValue:
+          description: Statistical value.
+          type: number
+        unitCategory:
+          description: Statistical unit category.
+          $ref: '#/components/schemas/statUnitCategoryType'
+        code:
+          $ref: '#/components/schemas/activityStatCodeType'
+    activitiesInfo:
+      type: object
+      properties:
+        activitiesInformation:
+          description: Collection of fetched Activities.
+          $ref: '#/components/schemas/activityListType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        count:
+          description: Total number of rows returned
+          type: integer
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    addressInfoType:
+      type: object
+      description: Provides address information.
+      properties:
+        address:
+          description: Address details for the profile.
+          $ref: '#/components/schemas/addressType'
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
+    resAttachedProfileType:
+      type: object
+      properties:
+        name:
+          description: Attached profile name
+          type: string
+        profileIdList:
+          description: Collection of unique profile identifiers
+          $ref: '#/components/schemas/profileIdList'
+        reservationProfileType:
+          $ref: '#/components/schemas/resProfileTypeType'
+    blockListType:
+      type: array
+      description: List of Blocks that are linked to the Activity.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/activityBlockInfoType'
+    timeSpanType:
+      type: object
+      description: Allows for a choice in description of the amount of time spanned by this type. EndDate specifies a specific date, while Duration provides a measure of time to add to the StartDate to yield end date.
+      properties:
+        startDate:
+          type: string
+          format: date
+          maxLength: 8
+        endDate:
+          type: string
+          format: date
+          maxLength: 8
+    companyType:
+      type: object
+      properties:
+        companyName:
+          description: Name of the company.
+          type: string
+          minLength: 0
+          maxLength: 40
+    dateTimeStampGroupType:
+      type: object
+      properties:
+        createDateTime:
+          description: Time stamp of the creation.
+          type: string
+          format: date-time
+        creatorId:
+          description: ID of creator. The creator could be a software system identifier or an identifier of an employee responsible for the creation.
+          type: string
+          minLength: 0
+          maxLength: 200
+        lastModifyDateTime:
+          description: Time stamp of last modification.
+          type: string
+          format: date-time
+        lastModifierId:
+          description: Identifies the last software system or person to modify a record.
+          type: string
+          minLength: 0
+          maxLength: 200
+    uRLType:
+      type: object
+      description: Web site address, in IETF(The Internet Engineering Task Force) specified format.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        type:
+          description: Defines the purpose of the URL address, such as personal, business, public, etc.
+          type: string
+          minLength: 0
+          maxLength: 20
+    personNameType:
+      type: object
+      description: This provides name information for a person.
+      properties:
+        givenName:
+          description: Given name, first name or names.
+          type: string
+          minLength: 0
+          maxLength: 40
+    attachmentsType:
+      type: array
+      description: Attachment List.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/attachmentType'
+    blockId:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        url:
+          description: URL that identifies the location associated with the record identified by the UniqueID.
+          type: string
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 20
+        instance:
+          description: The identification of a record as it exists at a point in time. An instance is used in update messages where the sender must assure the server that the update sent refers to the most recent modification level of the object being updated.
+          type: string
+          minLength: 0
+          maxLength: 80
+        idContext:
+          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+          type: string
+          minLength: 0
+          maxLength: 80
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        idExtension:
+          description: Additional identifying value assigned by the creating system.
+          type: integer
+    codeListType:
+      type: array
+      maxItems: 4000
+      items:
+        type: string
+        minLength: 0
+        maxLength: 20
+    uniqueIDListType:
+      type: array
+      description: Unique Id that references an object uniquely in the system.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/uniqueID_Type'
+    recentlyAccessedActivitiesType:
+      type: array
+      description: A single recently accessed activity.
+      maxItems: 10
+      items:
+        $ref: '#/components/schemas/recentlyAccessedActivityType'
+    relationshipInfoSummaryType:
+      type: object
+      description: RelationshipInfoSummaryType contains information about the associations between and among individuals, companies, travel agents, groups, sources, and contact profiles.
+      properties:
+        relationshipProfile:
+          description: Refer to Relationship Profile Summary type document.
+          $ref: '#/components/schemas/relationshipProfileSummaryType'
+        masterAccountDetails:
+          description: Refer to Master Profile type document.
+          $ref: '#/components/schemas/masterAccountInfoType'
+        relationshipID:
+          description: Relationship identifier.
+          type: string
+          minLength: 0
+          maxLength: 80
+        sourceRelation:
+          description: Indicates the type of relationship the current profile(Source Profile) has with the related profile(Target Profile).
+          type: string
+          minLength: 0
+          maxLength: 20
+        sourceRelationDescription:
+          description: Displays the description of relationship the current profile(Source Profile) has with the related profile(Target Profile).
+          type: string
+          minLength: 0
+          maxLength: 200
+        targetRelation:
+          description: Displays the type of relationship the Related profile(Target Profile) has with the current profile(Source Profile).
+          type: string
+          minLength: 0
+          maxLength: 20
+        targetRelationDescription:
+          description: Displays the description of the target relation(Target Profile).
+          type: string
+          minLength: 0
+          maxLength: 200
+    indicatorsType:
+      type: array
+      description: Collection of lamp indicators.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/indicatorType'
+    activitiesBulkUpdateType:
+      type: object
+      description: Collection of Activity Ids their details to be updated.
+      properties:
+        activityIdList:
+          type: array
+          description: Selected activities Unique identifier.
+          maxItems: 200
+          items:
+            $ref: '#/components/schemas/activityIdRecord'
+        skipProcessing:
+          description: Boolean flag if True will skip processing activities
+          type: boolean
+        activityRec:
+          description: Selected activities to be updated with these activity details.
+          $ref: '#/components/schemas/activityChanges'
+    relationshipInfoType:
+      type: object
+      description: Relationship Type contains information about the associations between and among individuals, companies, travel agents, groups, sources, and contact profiles.
+      properties:
+        relationshipProfile:
+          description: Refer to Relationship Profile type document.
+          $ref: '#/components/schemas/relationshipProfileType'
+    indicatorType:
+      type: object
+      description: Lamp indicator Type.
+      properties:
+        indicatorName:
+          description: Name of the indicator.
+          type: string
+          minLength: 0
+          maxLength: 80
+        count:
+          description: Indicates number of occurrences of the indicator.
+          type: integer
     relationshipProfileSummaryType:
       type: object
       properties:
@@ -3734,275 +4395,12 @@ components:
         profileType:
           description: Type of profile such as Guest, Agent, Company, Group, Source, Employee, Hotel, Vendor or Contact.
           $ref: '#/components/schemas/profileTypeType'
-    activityStatType:
-      type: object
-      description: Since the statistical value can be represented in different measure of units, this element will provide a flexible definition for the supported Opera9 statistical units.
-      properties:
-        unitType:
-          description: Unit of measurement or the actual code that defines the value. Eg. CurrencyCode for the Amount Category.
-          type: string
-          minLength: 3
-          maxLength: 3
-        unitValue:
-          description: Statistical value.
-          type: number
-        unitCategory:
-          description: Statistical unit category.
-          $ref: '#/components/schemas/statUnitCategoryType'
-        code:
-          $ref: '#/components/schemas/activityStatCodeType'
-    reservationBlockType:
-      type: object
-      description: Key information about the block for a reservation.
-      properties:
-        blockIdList:
-          description: Collection of unique block identifiers for the reservation.
-          $ref: '#/components/schemas/blockIdList'
-        blockName:
-          description: The Name of the block that is attached to the reservation.
-          type: string
-          minLength: 0
-          maxLength: 40
-        hotelId:
-          description: This is the HotelCode of the Block.
-          type: string
-          minLength: 0
-          maxLength: 20
-    activityBlockInfoType:
-      type: object
-      description: ''
-      properties:
-        blockIdList:
-          description: List of Blocks that are linked to the Activity.
-          $ref: '#/components/schemas/uniqueNameIDListType'
-        blockCode:
-          description: Block code for the block.
-          type: string
-          minLength: 0
-          maxLength: 20
-        blockName:
-          description: Name of the block.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        timeSpan:
-          description: The Time Span(Start Date, End Date) which covers the Block Span.
-          $ref: '#/components/schemas/timeSpanType'
-        primary:
-          description: When true, indicates a primary information.
-          type: boolean
-        hotelId:
-          description: This is the HotelCode of the Block.
-          type: string
-          minLength: 0
-          maxLength: 20
-    telephoneInfoType:
-      type: object
-      description: Information on a telephone number for the customer.
-      properties:
-        telephone:
-          description: Phone details for the profile.
-          $ref: '#/components/schemas/telephoneType'
-    activity:
-      type: object
-      properties:
-        activityDetails:
-          description: Type used to hold Activity in detail.
-          $ref: '#/components/schemas/activityDetailsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    activitiesBulkUpdateStatus:
-      type: object
-      properties:
-        activitiesBulkUpdateStatusType:
-          description: Status/Info of the processed activities.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/activitiesProcessedInfoType'
-    activitiesBulkUpdate:
-      type: object
-      description: Request object that will Change a list of activities.
-      properties:
-        activitiesBulkUpdate:
-          description: Activities information, that is going to be updated in batch.
-          $ref: '#/components/schemas/activitiesBulkUpdateType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    relationshipInfoSummaryType:
-      type: object
-      description: RelationshipInfoSummaryType contains information about the associations between and among individuals, companies, travel agents, groups, sources, and contact profiles.
-      properties:
-        relationshipProfile:
-          description: Refer to Relationship Profile Summary type document.
-          $ref: '#/components/schemas/relationshipProfileSummaryType'
-        masterAccountDetails:
-          description: Refer to Master Profile type document.
-          $ref: '#/components/schemas/masterAccountInfoType'
-        relationshipID:
-          description: Relationship identifier.
-          type: string
-          minLength: 0
-          maxLength: 80
-        sourceRelation:
-          description: Indicates the type of relationship the current profile(Source Profile) has with the related profile(Target Profile).
-          type: string
-          minLength: 0
-          maxLength: 20
-        sourceRelationDescription:
-          description: Displays the description of relationship the current profile(Source Profile) has with the related profile(Target Profile).
-          type: string
-          minLength: 0
-          maxLength: 200
-        targetRelation:
-          description: Displays the type of relationship the Related profile(Target Profile) has with the current profile(Source Profile).
-          type: string
-          minLength: 0
-          maxLength: 20
-        targetRelationDescription:
-          description: Displays the description of the target relation(Target Profile).
-          type: string
-          minLength: 0
-          maxLength: 200
-    currencyAmountType:
-      type: object
-      description: A monetary value expressed with a currency code.
-      properties:
-        amount:
-          description: A monetary amount.
-          type: number
-        currencyCode:
-          description: Provides a currency code to reflect the currency in which an amount may be expressed.
-          type: string
-          minLength: 3
-          maxLength: 3
-    reservationIdList:
+    warningsType:
       type: array
-      description: Unique Id that references an object uniquely in the system.
+      description: Used in conjunction with the Success element to define a business error.
       maxItems: 4000
       items:
-        $ref: '#/components/schemas/uniqueID_Type'
-    relationshipAddressType:
-      type: object
-      description: Provides address information for a Relationship.
-      properties:
-        addressLine:
-          description: When the address is unformatted (FormattedInd="false") these lines will contain free form address details. When the address is formatted and street number and street name must be sent independently, the street number will be sent using StreetNmbr, and the street name will be sent in the first AddressLine occurrence.
-          type: array
-          maxItems: 4
-          items:
-            type: string
-            minLength: 0
-            maxLength: 80
-        city:
-          description: City (e.g., Dublin), town, or postal station (i.e., a postal service territory, often used in a military address).
-          type: string
-          minLength: 0
-          maxLength: 40
-        postalCode:
-          description: Post Office Code number.
-          type: string
-          minLength: 0
-          maxLength: 15
-        state:
-          description: State or Province name (e.g., Texas).
-          type: string
-          minLength: 0
-          maxLength: 20
-        country:
-          description: Country name (e.g., Ireland).
-          type: string
-          minLength: 0
-          maxLength: 200
-    activitiesInfo:
-      type: object
-      properties:
-        activitiesInformation:
-          description: Collection of fetched Activities.
-          $ref: '#/components/schemas/activityListType'
-        totalPages:
-          description: Evaluated total page count based on the requested max fetch count.
-          type: integer
-        offset:
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-          type: integer
-        limit:
-          description: Indicates maximum number of records a Web Service should return.
-          type: integer
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        count:
-          description: Total number of rows returned
-          type: integer
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    activityIdRecord:
-      type: object
-      description: Unique identifier for the Activity Record containing activity ID and activity property.
-      properties:
-        hotelId:
-          description: Hotel code to which activity belongs
-          type: string
-          minLength: 0
-          maxLength: 20
-        id:
-          description: Unique ID belonging to the activity.
-          type: string
-          minLength: 0
-          maxLength: 80
-    activitiesProcessedInfoType:
-      type: object
-      description: Status/Info of the processed activities.
-      properties:
-        activityIdRecord:
-          description: The activity details which were not processed.
-          $ref: '#/components/schemas/activityIdRecord'
-        reason:
-          description: Reason for not processing the activity.
-          type: string
-        processingInfoType:
-          description: Flag to indicate the warning messages from the API
-          type: string
-        processingInfoCode:
-          description: Erorr/Warning code for not processing the activity.
-          type: string
-          minLength: 0
-          maxLength: 200
-    countryNameType:
-      type: object
-      description: Code for a country or a nationality.
-      properties:
-        value:
-          type: string
-          description: Used for Character Strings, length 0 to 200.
-          minLength: 0
-          maxLength: 200
-        code:
-          description: Code for a country or a nationality.
-          type: string
-          minLength: 0
-          maxLength: 20
-    activityStatCategoryCodeType:
-      type: string
-      description: Supported activity statistical category codes.
-      enum:
-      - HotelCode
-    uniqueIDListType:
-      type: array
-      description: Unique Id that references an object uniquely in the system.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/uniqueID_Type'
+        $ref: '#/components/schemas/warningType'
     linkedActivitiesType:
       type: object
       description: Provides the data to create linked activities to an activity .
@@ -4018,488 +4416,30 @@ components:
         ownerCodeList:
           description: List of Owner codes of the Linked Activity.
           $ref: '#/components/schemas/codeListType'
-    companyType:
+    activityAttachments:
       type: object
       properties:
-        companyName:
-          description: Name of the company.
-          type: string
-          minLength: 0
-          maxLength: 40
-    pointsType:
-      type: object
-      description: The Redeem Points contains the number of points required to book a room type.
-      properties:
-        awardsType:
-          description: Awards type for the award type rate code.
-          type: string
-        points:
-          description: No of points required to book this Room Stay.
-          type: integer
-    stayFutureListType:
-      type: object
-      description: A collection of reservation history details attached to Profiles.
-      properties:
-        reservationInfo:
-          description: 'Additional reservation information attached to the profile . Eg : Future reservation details'
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/stayReservationInfoType'
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        count:
-          description: Total number of rows returned
-          type: integer
-    activityInfoType:
-      type: object
-      description: Activity related information.
-      properties:
-        hotelId:
-          description: This is the Hotel Code of the Activity.
-          type: string
-          minLength: 0
-          maxLength: 20
-        activityClass:
-          description: Indicates the Activity Class.
-          $ref: '#/components/schemas/activityConfigClassType'
-        activityType:
-          description: Indicates the Activity Type used for the Activity.
-          type: string
-          minLength: 0
-          maxLength: 20
-        activityTypeDescription:
-          description: Indicates the description used for the Activity Type.
-          type: string
-          minLength: 0
-          maxLength: 100
-        activityPurpose:
-          description: Indicates Purpose of the Activity.
-          type: string
-          minLength: 0
-          maxLength: 100
-        activityTraceCode:
-          description: Activity Trace code used for the Activity.
-          type: string
-          minLength: 0
-          maxLength: 20
-        activityOwner:
-          description: Owner of Activity.
-          type: string
-          minLength: 0
-          maxLength: 20
-        activityOwnerCode:
-          description: Owner Code of Activity.
-          type: string
-          minLength: 0
-          maxLength: 20
-        startDateTime:
-          description: Start Date time of Activity.
-          type: string
-          format: date-time
-        endDateTime:
-          description: End Date time of Activity.
-          type: string
-          format: date-time
-        status:
-          description: Completion status of Activity.
-          type: object
-          properties:
-            completedBy:
-              description: Name of person who completed the Activity.
-              type: string
-            completedOn:
-              description: Date on which the Activity was completed.
-              type: string
-              format: date-time
-            completed:
-              description: Indicates whether Activity is Completed or not.
-              type: boolean
-        activityResult:
-          description: Indicates the outcome of a completed Activity.
-          type: string
-          minLength: 0
-          maxLength: 20
-        notes:
-          description: Notes associated with an Activity.
-          type: string
-          minLength: 0
-          maxLength: 4000
-        followup:
-          description: Indicates whether Followup Activity is needed or not.
-          type: boolean
-        followupStartDateTime:
-          description: Start Date time of the Followup Activity.
-          type: string
-          format: date-time
-        highPriority:
-          description: Indicates whether Activity has a high priority.
-          type: boolean
-        overlapActivity:
-          description: Determines whether the Activity overlaps with another activity with same date and time for the same owner.
-          type: boolean
-        createDateTime:
-          description: Time stamp of the creation.
-          type: string
-          format: date-time
-        creatorId:
-          description: ID of creator. The creator could be a software system identifier or an identifier of an employee responsible for the creation.
-          type: string
-          minLength: 0
-          maxLength: 200
-        lastModifyDateTime:
-          description: Time stamp of last modification.
-          type: string
-          format: date-time
-        lastModifierId:
-          description: Identifies the last software system or person to modify a record.
-          type: string
-          minLength: 0
-          maxLength: 200
-    accountId:
+        activityAttachmentList:
+          description: Collection of information about activity attachments returned/fetched as per the criteria in the fetch request.
+          $ref: '#/components/schemas/attachmentsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    uniqueID_Type:
       type: object
       description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
       properties:
-        url:
-          description: URL that identifies the location associated with the record identified by the UniqueID.
-          type: string
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 20
-        instance:
-          description: The identification of a record as it exists at a point in time. An instance is used in update messages where the sender must assure the server that the update sent refers to the most recent modification level of the object being updated.
-          type: string
-          minLength: 0
-          maxLength: 80
-        idContext:
-          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
-          type: string
-          minLength: 0
-          maxLength: 80
         id:
           description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
           type: string
           minLength: 0
           maxLength: 80
-        idExtension:
-          description: Additional identifying value assigned by the creating system.
-          type: integer
-    emailType:
-      type: object
-      description: Information on an email for the customer.
-      properties:
-        emailAddress:
-          description: Defines the e-mail address.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        type:
-          description: Defines the purpose of the e-mail address (e.g. personal, business, listserve).
-          type: string
-          minLength: 0
-          maxLength: 20
-    blockListType:
-      type: array
-      description: List of Blocks that are linked to the Activity.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/activityBlockInfoType'
-    linkedActivityDetailsType:
-      type: object
-      description: Linked Activity Related Information.
-      properties:
-        activityId:
-          description: Unique identifier of the linked activity.
-          $ref: '#/components/schemas/activityId'
-        linkedActivityDetail:
-          description: Linked Activity Related Information.
-          $ref: '#/components/schemas/activityInfoType'
-    guestHousekeepingServiceRequestType:
-      type: string
-      description: Possible values for the Guest Service Status.
-      enum:
-      - DoNotDisturb
-      - MakeUpRoom
-      - NoStatusSelected
-    personNameType:
-      type: object
-      description: This provides name information for a person.
-      properties:
-        givenName:
-          description: Given name, first name or names.
-          type: string
-          minLength: 0
-          maxLength: 40
-    blockId:
-      type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
-      properties:
-        url:
-          description: URL that identifies the location associated with the record identified by the UniqueID.
-          type: string
         type:
           description: A reference to the type of object defined by the UniqueID element.
           type: string
           minLength: 0
-          maxLength: 20
-        instance:
-          description: The identification of a record as it exists at a point in time. An instance is used in update messages where the sender must assure the server that the update sent refers to the most recent modification level of the object being updated.
-          type: string
-          minLength: 0
-          maxLength: 80
-        idContext:
-          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
-          type: string
-          minLength: 0
-          maxLength: 80
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        idExtension:
-          description: Additional identifying value assigned by the creating system.
-          type: integer
-    pMS_ResStatusType:
-      type: string
-      description: This reservation is in checked in status and the business date is past departure date. This could occur when ORS and PMS are in same environment.
-      enum:
-      - Reserved
-      - Requested
-      - NoShow
-      - Cancelled
-      - InHouse
-      - CheckedOut
-      - Waitlisted
-      - DueIn
-      - DueOut
-      - Walkin
-      - PendingCheckout
-    activityStatCategoryType:
-      type: object
-      description: Defines the codes and corresponding categories for which the data in the other elements has been gathered.
-      properties:
-        statCode:
-          description: Defines where this statistical data is applied.
-          type: string
-          minLength: 0
-          maxLength: 20
-        statCodeClass:
-          description: Classification of the statistical data.
-          type: string
-          minLength: 0
           maxLength: 40
-        description:
-          type: string
-          minLength: 0
-          maxLength: 2000
-        statSet:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/activityStatSetType'
-        statCategoryCode:
-          $ref: '#/components/schemas/activityStatCategoryCodeType'
-    activityLogListType:
-      type: object
-      properties:
-        activityLog:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/activityLogType'
-        totalPages:
-          description: Evaluated total page count based on the requested max fetch count.
-          type: integer
-        offset:
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-          type: integer
-        limit:
-          description: Indicates maximum number of records a Web Service should return.
-          type: integer
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        count:
-          description: Total number of rows returned
-          type: integer
-    promotionType:
-      type: object
-      description: Type to specify a rate promotion. Usually attached to a reservation to indicate a specific promotion is applied to the reservation.
-      properties:
-        promotionCode:
-          description: Promotion code associated with the rate plan.
-          type: string
-          minLength: 0
-          maxLength: 20
-        promotionName:
-          description: Promotion code Name associated with the rate plan.
-          type: string
-          minLength: 0
-          maxLength: 20
-        couponCode:
-          description: Promotion Coupon Code when promotion is setup to have a valid coupon code.
-          type: string
-          minLength: 0
-          maxLength: 40
-    instanceLink:
-      type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
-      properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
-          type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
-        title:
-          description: Exact copy of the "summary" field on the linked operation.
-          type: string
-    resProfileTypeType:
-      type: string
-      enum:
-      - Guest
-      - Company
-      - Group
-      - TravelAgent
-      - Source
-      - ReservationContact
-      - BillingContact
-      - Addressee
-    resExpectedTimesType:
-      type: object
-      description: Holds the Arrival and Departure Time Information
-      properties:
-        reservationExpectedArrivalTime:
-          description: Arrival Time
-          type: string
-          format: date-time
-        reservationExpectedDepartureTime:
-          description: Departure Time
-          type: string
-          format: date-time
-    activitiesInformation:
-      type: object
-      properties:
-        activitiesInformation:
-          description: Activities details to be created.
-          $ref: '#/components/schemas/activityListType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-      required:
-      - type
-      - title
-    emailsFetchedType:
-      type: object
-      description: Type contains the detailed information of a sender external email stored .
-      properties:
-        fetchedSenderEmailInfo:
-          description: Detailed information of a sender external email stored.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/emailInfoResponseType'
-        totalPages:
-          description: Evaluated total page count based on the requested max fetch count.
-          type: integer
-        offset:
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-          type: integer
-        limit:
-          description: Indicates maximum number of records a Web Service should return.
-          type: integer
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        count:
-          description: Total number of rows returned
-          type: integer
-    activityStatistics:
-      type: object
-      properties:
-        reports:
-          description: Statistical report - each report is determined by the requested report in the service request criteria.
-          type: array
-          items:
-            $ref: '#/components/schemas/activityStatReportType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    activityStatCodeType:
-      type: string
-      description: Supported activity statistical codes.
-      enum:
-      - CompletedToDo
-      - IncompleteToDo
-      - CompletedAppointments
-      - IncompleteAppointments
-    operaVersionNumberType:
-      type: string
-      description: Current Opera Version Number
-      minLength: 0
-      maxLength: 40
     warningType:
       type: object
       description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
@@ -4546,75 +4486,135 @@ components:
           type: string
           minLength: 1
           maxLength: 8
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    status:
+    activityStatSetType:
       type: object
-      description: Response Body.
+      description: Base statistic set holder which defines the span of the statistical data.
       properties:
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-        links:
-          $ref: '#/components/schemas/links'
-    activityId:
-      type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
-      properties:
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
+        start:
+          type: string
+          format: date
+          maxLength: 8
+        end:
+          type: string
+          format: date
+          maxLength: 8
+        stat:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/activityStatType'
+        owner:
           type: string
           minLength: 0
           maxLength: 20
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+    countryNameType:
+      type: object
+      description: Code for a country or a nationality.
+      properties:
+        value:
+          type: string
+          description: Used for Character Strings, length 0 to 200.
+          minLength: 0
+          maxLength: 200
+        code:
+          description: Code for a country or a nationality.
           type: string
           minLength: 0
-          maxLength: 80
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
-  responses:
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '415':
-      description: Unsupported Media Type
-    '406':
-      description: Not acceptable.
-    '414':
-      description: Request URI Too Large
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '502':
-      description: Bad Gateway
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '413':
-      description: Request Entity Too Large
-    '401':
-      description: Unauthorized
-    '403':
-      description: Forbidden
-    '405':
-      description: Method not allowed
-    '503':
-      description: Service Unavailable
+          maxLength: 20
+    operaVersion:
+      type: object
+      description: Response for Ping operation.
+      properties:
+        operaVersion:
+          description: Opera version number.
+          $ref: '#/components/schemas/operaVersionNumberType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    reservationBlockType:
+      type: object
+      description: Key information about the block for a reservation.
+      properties:
+        blockIdList:
+          description: Collection of unique block identifiers for the reservation.
+          $ref: '#/components/schemas/blockIdList'
+        blockName:
+          description: The Name of the block that is attached to the reservation.
+          type: string
+          minLength: 0
+          maxLength: 40
+        hotelId:
+          description: This is the HotelCode of the Block.
+          type: string
+          minLength: 0
+          maxLength: 20
+    recentlyAccessedActivities:
+      type: object
+      properties:
+        activities:
+          description: List of recently accessed profiles.
+          $ref: '#/components/schemas/recentlyAccessedActivitiesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+  parameters:
+    x-externalsystem:
+      name: x-externalsystem
+      description: External system code.
+      in: header
+      x-example: EXTERNALSYSTEMCODE
+      schema:
+        type: string
+        maxLength: 40
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
+      schema:
+        type: string
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
+      schema:
+        type: string
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
+      schema:
+        type: string
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

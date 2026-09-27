@@ -442,7 +442,98 @@ paths:
     servers:
     - url: /tokenExchange/v1
 components:
+  responses:
+    '403':
+      description: The Bearer Token is invalid/expired
+    '405':
+      description: Method not allowed for the target resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+          example:
+            correlationId: MzdhODNkZmMtNzk5YS00OTYxLTg3YTMtM2ZkYTE4YjJlMzc0
+            detail: Method not allowed for the resource
+            o:errorCode: OPICS-METHOD_NOT_ALLOWED
+            status: 405
+            title: Method Not Allowed
+            type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.6
+    '503':
+      description: The server is not ready to handle the request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+          example:
+            correlationId: MzdhODNkZmMtNzk5YS00OTYxLTg3YTMtM2ZkYTE4YjJlMzc0
+            detail: Server is temporarily unavailable or busy
+            o:errorCode: OPICS-SERVICE_UNAVAILABLE
+            status: 503
+            title: Service Unavailable
+            type: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
+    '406':
+      description: The Server cannot produce a response matching the the values in the request's content headers
+    '404':
+      description: The target resouce was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+          example:
+            title: Not Found
+            type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5
+            correlationId: MzdhODNkZmMtNzk5YS00OTYxLTg3YTMtM2ZkYTE4YjJlMzc0
+            detail: Resource not found
+            o:errorCode: OPICS-NOT_FOUND
+            status: 404
+    '500':
+      description: The server encountered an internal error or misconfiguration and was unable to complete the request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+          example:
+            correlationId: MzdhODNkZmMtNzk5YS00OTYxLTg3YTMtM2ZkYTE4YjJlMzc0
+            detail: The server encountered an internal error or misconfiguration and was unable to complete your request
+            o:errorCode: OPICS-INTERNAL_SERVER_ERROR
+            status: 500
+            title: Internal Server Error
+            type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.1
+    '401':
+      description: Authentication header was not present in request
+    '415':
+      description: The server refuses to accept the request because the payload format is in an unsupported format
   schemas:
+    EcommTokenizationResponse:
+      type: object
+      required:
+      - tokenPageUrl
+      - transactionId
+      - sessionId
+      - sessionToken
+      - expiresAt
+      properties:
+        tokenPageUrl:
+          type: string
+          format: uri
+          description: The URL of the ECommerce token form for completing the tokenization transaction.
+          example: https://opi-devcorp.oraclehospitality.us-phoenix-1.ocs.oc-test.com/tokenizationPage/widget.html?lang=en
+        transactionId:
+          type: string
+          description: ECommerce Transaction Identifier
+          example: 5ad81936-1cb9-4a41-a52f-2f8a08ef520c
+        sessionId:
+          type: string
+          description: ECommerce Session Identifier
+          example: c52a1cf9-acc8-4c81-9c03-448bf206fbd2
+        sessionToken:
+          type: string
+          description: ECommerce Session Token
+          example: eyJraWQiOiIzNmRhZTU4Yi05ZDg..3MiOiJodHRwcz
+        expiresAt:
+          type: string
+          description: Session expiration date in ISO8601 format
+          example: '2025-11-06T13:44:28-05:00'
     EcommTokenizationRequest:
       type: object
       required:
@@ -505,66 +596,6 @@ components:
           type: string
           description: Message containing the details of a transaction that failed to be processed. Present when status is ERROR.
           example: Payment Service Provider was unavailable
-    EcommTokenizationResponse:
-      type: object
-      required:
-      - tokenPageUrl
-      - transactionId
-      - sessionId
-      - sessionToken
-      - expiresAt
-      properties:
-        tokenPageUrl:
-          type: string
-          format: uri
-          description: The URL of the ECommerce token form for completing the tokenization transaction.
-          example: https://opi-devcorp.oraclehospitality.us-phoenix-1.ocs.oc-test.com/tokenizationPage/widget.html?lang=en
-        transactionId:
-          type: string
-          description: ECommerce Transaction Identifier
-          example: 5ad81936-1cb9-4a41-a52f-2f8a08ef520c
-        sessionId:
-          type: string
-          description: ECommerce Session Identifier
-          example: c52a1cf9-acc8-4c81-9c03-448bf206fbd2
-        sessionToken:
-          type: string
-          description: ECommerce Session Token
-          example: eyJraWQiOiIzNmRhZTU4Yi05ZDg..3MiOiJodHRwcz
-        expiresAt:
-          type: string
-          description: Session expiration date in ISO8601 format
-          example: '2025-11-06T13:44:28-05:00'
-    TokenInfo:
-      type: object
-      description: Token information. Present when status is APPROVED.
-      required:
-      - cardType
-      - expiryDate
-      - pan
-      - token
-      properties:
-        cardType:
-          type: string
-          description: OPERA Card Type
-          maxLength: 16
-          minLength: 2
-          example: VA
-        expiryDate:
-          type: string
-          description: Expiration Date, YYMM format
-          example: '3012'
-        pan:
-          type: string
-          description: Masked Primary Account Number (PAN)
-          maxLength: 19
-          minLength: 13
-          example: XXXXXXXXXXXX4444
-        token:
-          type: string
-          description: Card Token
-          maxLength: 42
-          example: '483204890324827'
     ProblemDetail:
       description: Problem Details for HTTP APIs
       properties:
@@ -599,6 +630,36 @@ components:
       - title
       - type
       type: object
+    TokenInfo:
+      type: object
+      description: Token information. Present when status is APPROVED.
+      required:
+      - cardType
+      - expiryDate
+      - pan
+      - token
+      properties:
+        cardType:
+          type: string
+          description: OPERA Card Type
+          maxLength: 16
+          minLength: 2
+          example: VA
+        expiryDate:
+          type: string
+          description: Expiration Date, YYMM format
+          example: '3012'
+        pan:
+          type: string
+          description: Masked Primary Account Number (PAN)
+          maxLength: 19
+          minLength: 13
+          example: XXXXXXXXXXXX4444
+        token:
+          type: string
+          description: Card Token
+          maxLength: 42
+          example: '483204890324827'
     ProblemDetail_2:
       description: Problem Details for HTTP APIs
       properties:
@@ -640,77 +701,7 @@ components:
       - title
       - type
       type: object
-  responses:
-    '401':
-      description: Authentication header was not present in request
-    '503':
-      description: The server is not ready to handle the request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProblemDetail'
-          example:
-            correlationId: MzdhODNkZmMtNzk5YS00OTYxLTg3YTMtM2ZkYTE4YjJlMzc0
-            detail: Server is temporarily unavailable or busy
-            o:errorCode: OPICS-SERVICE_UNAVAILABLE
-            status: 503
-            title: Service Unavailable
-            type: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-    '500':
-      description: The server encountered an internal error or misconfiguration and was unable to complete the request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProblemDetail'
-          example:
-            correlationId: MzdhODNkZmMtNzk5YS00OTYxLTg3YTMtM2ZkYTE4YjJlMzc0
-            detail: The server encountered an internal error or misconfiguration and was unable to complete your request
-            o:errorCode: OPICS-INTERNAL_SERVER_ERROR
-            status: 500
-            title: Internal Server Error
-            type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.1
-    '404':
-      description: The target resouce was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProblemDetail'
-          example:
-            title: Not Found
-            type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5
-            correlationId: MzdhODNkZmMtNzk5YS00OTYxLTg3YTMtM2ZkYTE4YjJlMzc0
-            detail: Resource not found
-            o:errorCode: OPICS-NOT_FOUND
-            status: 404
-    '415':
-      description: The server refuses to accept the request because the payload format is in an unsupported format
-    '405':
-      description: Method not allowed for the target resource
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProblemDetail'
-          example:
-            correlationId: MzdhODNkZmMtNzk5YS00OTYxLTg3YTMtM2ZkYTE4YjJlMzc0
-            detail: Method not allowed for the resource
-            o:errorCode: OPICS-METHOD_NOT_ALLOWED
-            status: 405
-            title: Method Not Allowed
-            type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.6
-    '403':
-      description: The Bearer Token is invalid/expired
-    '406':
-      description: The Server cannot produce a response matching the the values in the request's content headers
   parameters:
-    hotelCode:
-      name: hotelCode
-      description: OPERA Hotel Code
-      in: path
-      required: true
-      schema:
-        type: string
-        maxLength: 50
-        minLength: 1
     transactionId:
       name: transactionId
       description: ECommerce Transaction Identifier
@@ -720,13 +711,6 @@ components:
         type: string
         maxLength: 36
         minLength: 36
-    authKey:
-      name: Authorization
-      description: Bearer token
-      in: header
-      required: true
-      schema:
-        type: string
     x-app-key:
       name: x-app-key
       description: Client or Partner Application Key
@@ -735,6 +719,22 @@ components:
       schema:
         type: string
         pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    authKey:
+      name: Authorization
+      description: Bearer token
+      in: header
+      required: true
+      schema:
+        type: string
+    hotelCode:
+      name: hotelCode
+      description: OPERA Hotel Code
+      in: path
+      required: true
+      schema:
+        type: string
+        maxLength: 50
+        minLength: 1
     authKey_2:
       name: authorization
       description: Bearer token that needs to be passed which is generated post user authentication

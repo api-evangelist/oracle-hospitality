@@ -838,7 +838,76 @@ paths:
       tags:
       - LeisureManagement
 components:
+  responses:
+    '405':
+      description: Method not allowed
+    '413':
+      description: Request Entity Too Large
+    '403':
+      description: Forbidden
+    '503':
+      description: Service Unavailable
+    '406':
+      description: Not acceptable.
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '401':
+      description: Unauthorized
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '502':
+      description: Bad Gateway
+    '414':
+      description: Request URI Too Large
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
   schemas:
+    personNameTypeType:
+      type: string
+      description: Person's name in an external system.
+      enum:
+      - Primary
+      - Alternate
+      - Incognito
+      - External
+      - Phonetic
+    uniqueIDListType:
+      type: array
+      description: Unique Id that references an object uniquely in the system.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/uniqueID_Type'
+    operaVersionNumberType:
+      type: string
+      description: Current Opera Version Number
+      minLength: 0
+      maxLength: 40
+    currencyAmountType:
+      type: object
+      description: A monetary value expressed with a currency code.
+      properties:
+        amount:
+          description: A monetary amount.
+          type: number
+        currencyCode:
+          description: Provides a currency code to reflect the currency in which an amount may be expressed.
+          type: string
+          minLength: 3
+          maxLength: 3
     formattedTextTextType:
       type: object
       description: Provides text and indicates whether it is formatted or not.
@@ -850,6 +919,330 @@ components:
           description: Language identification.
           type: string
           pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
+    dateTimeSpanType:
+      type: object
+      description: Allows for a choice in description of the amount of time spanned by this type. EndDate specifies a specific date, while Duration provides a measure of time to add to the StartDate to yield end date.
+      properties:
+        startDateTime:
+          type: string
+          format: date-time
+        endDateTime:
+          type: string
+          format: date-time
+    locationNotificationToBeCreated:
+      type: object
+      properties:
+        reservationId:
+          description: Required unique identifier of the reservation
+          $ref: '#/components/schemas/uniqueID_Type'
+        activityTime:
+          description: The scheduled start and End time of Location Notification.
+          $ref: '#/components/schemas/dateTimeSpanType'
+        locationText:
+          description: Location Text of the Notification
+          $ref: '#/components/schemas/formattedTextTextType'
+        profileId:
+          description: Required unique identifier of the Profile ID
+          $ref: '#/components/schemas/uniqueID_Type'
+        description:
+          description: Description of the Location Notification
+          $ref: '#/components/schemas/formattedTextTextType'
+        locationNotificationStatus:
+          description: Location Notification Status
+          $ref: '#/components/schemas/locationNotificationStatus'
+        otherLocationNotificationStatus:
+          type: string
+          maxLength: 2000
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    activityBookingModified:
+      type: object
+      properties:
+        activityBooking:
+          description: Information related to modified activity booking.
+          $ref: '#/components/schemas/activityBookingRSType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    changeActivityBooking:
+      type: object
+      properties:
+        activityBooking:
+          description: Information related to activity booking to be modified.
+          $ref: '#/components/schemas/activityBookingRQType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    activityBookingRQType:
+      type: object
+      description: The choice between a reservation header or a profile ID. One or the other is required.
+      properties:
+        hotelId:
+          description: This is not required if a Reservation Id is provided
+          type: string
+          minLength: 0
+          maxLength: 20
+        reservationId:
+          description: Required unique identifier of the reservation
+          $ref: '#/components/schemas/uniqueID_Type'
+        profileId:
+          description: ProfileID associated with the Activity.
+          $ref: '#/components/schemas/uniqueID_Type'
+        activities:
+          description: A collection of activities
+          $ref: '#/components/schemas/activityList'
+    addressType:
+      type: object
+      description: Provides address information.
+      properties:
+        isValidated:
+          description: Indicator to define if the Address is validated by the Address Validation System.
+          type: boolean
+        addressLine:
+          description: When the address is unformatted (FormattedInd="false") these lines will contain free form address details. When the address is formatted and street number and street name must be sent independently, the street number will be sent using StreetNmbr, and the street name will be sent in the first AddressLine occurrence.
+          type: array
+          maxItems: 4
+          items:
+            type: string
+            minLength: 0
+            maxLength: 80
+        cityName:
+          description: City (e.g., Dublin), town, or postal station (i.e., a postal service territory, often used in a military address).
+          type: string
+          minLength: 0
+          maxLength: 40
+        postalCode:
+          description: Post Office Code number.
+          type: string
+          minLength: 0
+          maxLength: 15
+        cityExtension:
+          description: Post Office City Extension Code number. City Extension mainly used for UK addresses.
+          type: string
+          minLength: 0
+          maxLength: 20
+        county:
+          description: County or District Name (e.g., Fairfax). This is read only.
+          type: string
+          minLength: 0
+          maxLength: 20
+        state:
+          description: State or Province name (e.g., Texas).
+          type: string
+          minLength: 0
+          maxLength: 20
+        country:
+          description: Country name (e.g., Ireland).
+          $ref: '#/components/schemas/countryNameType'
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        type:
+          description: Defines the type of address (e.g. home, business, other).
+          type: string
+          minLength: 0
+          maxLength: 20
+        typeDescription:
+          description: Describes the type code
+          type: string
+        primaryInd:
+          description: When true, indicates a primary information.
+          type: boolean
+        updateReservations:
+          description: Indicates whether to update the reservations or not. If true and the address is primary, then all associated active reservations will be updated with the new primary address.
+          type: boolean
+        barCode:
+          description: The postal barcode for the address.
+          type: string
+          minLength: 0
+          maxLength: 100
+        createDateTime:
+          description: Time stamp of the creation.
+          type: string
+          format: date-time
+        creatorId:
+          description: ID of creator. The creator could be a software system identifier or an identifier of an employee responsible for the creation.
+          type: string
+          minLength: 0
+          maxLength: 200
+        lastModifyDateTime:
+          description: Time stamp of last modification.
+          type: string
+          format: date-time
+        lastModifierId:
+          description: Identifies the last software system or person to modify a record.
+          type: string
+          minLength: 0
+          maxLength: 200
+        purgeDate:
+          description: Date an item will be purged from a database (e.g., from a live database to an archive).
+          type: string
+          format: date
+          maxLength: 8
+    status:
+      type: object
+      description: Response Body.
+      properties:
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    createActivityBooking:
+      type: object
+      properties:
+        activityBooking:
+          description: Information related to activity booking to be created.
+          $ref: '#/components/schemas/activityBookingRQType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    uniqueID_Type:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
+        idContext:
+          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+          type: string
+          minLength: 0
+          maxLength: 80
+    warningType:
+      type: object
+      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
+          type: string
+          maxLength: 2000
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+          type: string
+          minLength: 0
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+          maxLength: 2000
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+          maxLength: 2000
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+          maxLength: 2000
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+          maxLength: 2000
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        rph:
+          description: Reference Place Holder used as an index for this warning.
+          type: string
+          minLength: 1
+          maxLength: 8
     fetchActivityBookingsType:
       type: object
       description: Used in the request message to describe the "filtering Criteria" when executing an activity lookup.
@@ -871,6 +1264,58 @@ components:
           type: string
           minLength: 0
           maxLength: 20
+    activityBookingsDetails:
+      type: object
+      properties:
+        activityLookUpList:
+          description: Criteria for fetching Activity Bookings.
+          type: array
+          items:
+            $ref: '#/components/schemas/fetchActivityBookingsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    locationNotificationStatus:
+      type: string
+      description: '(Enumeration) There are 3 possible values: SET, CLEAR and OTHER'
+      enum:
+      - Set
+      - Clear
+      - Other
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
     activityBookingRSType:
       type: object
       description: Generic self-contained response object that is used when inserting/ updating/ canceling activities.
@@ -878,73 +1323,6 @@ components:
         activities:
           description: A collection of activities
           $ref: '#/components/schemas/activityList'
-    personNameType:
-      type: object
-      description: This provides name information for a person.
-      properties:
-        namePrefix:
-          description: Salutation of honorific (e.g. Mr., Mrs., Ms., Miss, Dr.)
-          type: string
-          minLength: 0
-          maxLength: 40
-        givenName:
-          description: Given name, first name or names.
-          type: string
-          minLength: 0
-          maxLength: 40
-        middleName:
-          description: The middle name of the person name.
-          type: string
-          minLength: 0
-          maxLength: 40
-        surname:
-          description: Family name, last name. May also be used for full name if the sending system does not have the ability to separate a full name into its parts, e.g. the surname element may be used to pass the full name.
-          type: string
-          minLength: 0
-          maxLength: 40
-        nameSuffix:
-          description: Hold various name suffixes and letters (e.g. Jr., Sr., III, Ret., Esq.)
-          type: string
-          minLength: 0
-          maxLength: 40
-        nameTitle:
-          description: Degree or honors (e.g., Ph.D., M.D.)
-          type: string
-          minLength: 0
-          maxLength: 80
-        nameTitleSuffix:
-          description: Title Suffix. Must be populated if ADVANCED_TITLE is on.
-          type: integer
-        envelopeGreeting:
-          description: Envelope Greeting of the profile
-          type: string
-        salutation:
-          description: Salutation of the profile
-          type: string
-        nameType:
-          description: Type of name of the individual, such as former, nickname, alternate or alias name.
-          $ref: '#/components/schemas/personNameTypeType'
-        language:
-          description: Language identification.
-          type: string
-          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
-        externalSystem:
-          description: When name type is external, indicates the external system the name belongs to.
-          type: string
-          minLength: 0
-          maxLength: 40
-    currencyAmountType:
-      type: object
-      description: A monetary value expressed with a currency code.
-      properties:
-        amount:
-          description: A monetary amount.
-          type: number
-        currencyCode:
-          description: Provides a currency code to reflect the currency in which an amount may be expressed.
-          type: string
-          minLength: 3
-          maxLength: 3
     activityList:
       type: array
       description: A collection of Activity objects.
@@ -1047,80 +1425,6 @@ components:
             description: When true indicates that activity link only needs to be inserted or deleted for this record.
             type: boolean
         description: Represents a single instance of a scheduled activity.
-    personNameTypeType:
-      type: string
-      description: Person's name in an external system.
-      enum:
-      - Primary
-      - Alternate
-      - Incognito
-      - External
-      - Phonetic
-    activityBookingRQType:
-      type: object
-      description: The choice between a reservation header or a profile ID. One or the other is required.
-      properties:
-        hotelId:
-          description: This is not required if a Reservation Id is provided
-          type: string
-          minLength: 0
-          maxLength: 20
-        reservationId:
-          description: Required unique identifier of the reservation
-          $ref: '#/components/schemas/uniqueID_Type'
-        profileId:
-          description: ProfileID associated with the Activity.
-          $ref: '#/components/schemas/uniqueID_Type'
-        activities:
-          description: A collection of activities
-          $ref: '#/components/schemas/activityList'
-    uniqueID_Type:
-      type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
-      properties:
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 40
-        idContext:
-          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
-          type: string
-          minLength: 0
-          maxLength: 80
-    locationNotificationToBeCreated:
-      type: object
-      properties:
-        reservationId:
-          description: Required unique identifier of the reservation
-          $ref: '#/components/schemas/uniqueID_Type'
-        activityTime:
-          description: The scheduled start and End time of Location Notification.
-          $ref: '#/components/schemas/dateTimeSpanType'
-        locationText:
-          description: Location Text of the Notification
-          $ref: '#/components/schemas/formattedTextTextType'
-        profileId:
-          description: Required unique identifier of the Profile ID
-          $ref: '#/components/schemas/uniqueID_Type'
-        description:
-          description: Description of the Location Notification
-          $ref: '#/components/schemas/formattedTextTextType'
-        locationNotificationStatus:
-          description: Location Notification Status
-          $ref: '#/components/schemas/locationNotificationStatus'
-        otherLocationNotificationStatus:
-          type: string
-          maxLength: 2000
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
     countryNameType:
       type: object
       description: Code for a country or a nationality.
@@ -1135,134 +1439,6 @@ components:
           type: string
           minLength: 0
           maxLength: 20
-    instanceLink:
-      type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
-      properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
-          type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
-        title:
-          description: Exact copy of the "summary" field on the linked operation.
-          type: string
-    activityBookingModified:
-      type: object
-      properties:
-        activityBooking:
-          description: Information related to modified activity booking.
-          $ref: '#/components/schemas/activityBookingRSType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
-      required:
-      - type
-      - title
-    activityBookingsDetails:
-      type: object
-      properties:
-        activityLookUpList:
-          description: Criteria for fetching Activity Bookings.
-          type: array
-          items:
-            $ref: '#/components/schemas/fetchActivityBookingsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-      required:
-      - type
-      - title
-    locationNotificationStatus:
-      type: string
-      description: '(Enumeration) There are 3 possible values: SET, CLEAR and OTHER'
-      enum:
-      - Set
-      - Clear
-      - Other
     operaVersion:
       type: object
       description: Response for Ping operation.
@@ -1274,233 +1450,65 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    createActivityBooking:
+    personNameType:
       type: object
+      description: This provides name information for a person.
       properties:
-        activityBooking:
-          description: Information related to activity booking to be created.
-          $ref: '#/components/schemas/activityBookingRQType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    changeActivityBooking:
-      type: object
-      properties:
-        activityBooking:
-          description: Information related to activity booking to be modified.
-          $ref: '#/components/schemas/activityBookingRQType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    uniqueIDListType:
-      type: array
-      description: Unique Id that references an object uniquely in the system.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/uniqueID_Type'
-    addressType:
-      type: object
-      description: Provides address information.
-      properties:
-        isValidated:
-          description: Indicator to define if the Address is validated by the Address Validation System.
-          type: boolean
-        addressLine:
-          description: When the address is unformatted (FormattedInd="false") these lines will contain free form address details. When the address is formatted and street number and street name must be sent independently, the street number will be sent using StreetNmbr, and the street name will be sent in the first AddressLine occurrence.
-          type: array
-          maxItems: 4
-          items:
-            type: string
-            minLength: 0
-            maxLength: 80
-        cityName:
-          description: City (e.g., Dublin), town, or postal station (i.e., a postal service territory, often used in a military address).
+        namePrefix:
+          description: Salutation of honorific (e.g. Mr., Mrs., Ms., Miss, Dr.)
           type: string
           minLength: 0
           maxLength: 40
-        postalCode:
-          description: Post Office Code number.
+        givenName:
+          description: Given name, first name or names.
           type: string
           minLength: 0
-          maxLength: 15
-        cityExtension:
-          description: Post Office City Extension Code number. City Extension mainly used for UK addresses.
+          maxLength: 40
+        middleName:
+          description: The middle name of the person name.
           type: string
           minLength: 0
-          maxLength: 20
-        county:
-          description: County or District Name (e.g., Fairfax). This is read only.
+          maxLength: 40
+        surname:
+          description: Family name, last name. May also be used for full name if the sending system does not have the ability to separate a full name into its parts, e.g. the surname element may be used to pass the full name.
           type: string
           minLength: 0
-          maxLength: 20
-        state:
-          description: State or Province name (e.g., Texas).
+          maxLength: 40
+        nameSuffix:
+          description: Hold various name suffixes and letters (e.g. Jr., Sr., III, Ret., Esq.)
           type: string
           minLength: 0
-          maxLength: 20
-        country:
-          description: Country name (e.g., Ireland).
-          $ref: '#/components/schemas/countryNameType'
+          maxLength: 40
+        nameTitle:
+          description: Degree or honors (e.g., Ph.D., M.D.)
+          type: string
+          minLength: 0
+          maxLength: 80
+        nameTitleSuffix:
+          description: Title Suffix. Must be populated if ADVANCED_TITLE is on.
+          type: integer
+        envelopeGreeting:
+          description: Envelope Greeting of the profile
+          type: string
+        salutation:
+          description: Salutation of the profile
+          type: string
+        nameType:
+          description: Type of name of the individual, such as former, nickname, alternate or alias name.
+          $ref: '#/components/schemas/personNameTypeType'
         language:
           description: Language identification.
           type: string
           pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
-        type:
-          description: Defines the type of address (e.g. home, business, other).
+        externalSystem:
+          description: When name type is external, indicates the external system the name belongs to.
           type: string
           minLength: 0
-          maxLength: 20
-        typeDescription:
-          description: Describes the type code
-          type: string
-        primaryInd:
-          description: When true, indicates a primary information.
-          type: boolean
-        updateReservations:
-          description: Indicates whether to update the reservations or not. If true and the address is primary, then all associated active reservations will be updated with the new primary address.
-          type: boolean
-        barCode:
-          description: The postal barcode for the address.
-          type: string
-          minLength: 0
-          maxLength: 100
-        createDateTime:
-          description: Time stamp of the creation.
-          type: string
-          format: date-time
-        creatorId:
-          description: ID of creator. The creator could be a software system identifier or an identifier of an employee responsible for the creation.
-          type: string
-          minLength: 0
-          maxLength: 200
-        lastModifyDateTime:
-          description: Time stamp of last modification.
-          type: string
-          format: date-time
-        lastModifierId:
-          description: Identifies the last software system or person to modify a record.
-          type: string
-          minLength: 0
-          maxLength: 200
-        purgeDate:
-          description: Date an item will be purged from a database (e.g., from a live database to an archive).
-          type: string
-          format: date
-          maxLength: 8
-    operaVersionNumberType:
-      type: string
-      description: Current Opera Version Number
-      minLength: 0
-      maxLength: 40
-    warningType:
-      type: object
-      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
-      properties:
-        value:
-          type: string
-          description: Property Value
-        shortText:
-          description: An abbreviated version of the error in textual format.
-          type: string
-          maxLength: 2000
-        code:
-          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
-          type: string
-          minLength: 0
-          maxLength: 20
-        docURL:
-          description: If present, this URL refers to an online description of the error that occurred.
-          type: string
-          maxLength: 2000
-        status:
-          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
-          type: string
-          maxLength: 2000
-        tag:
-          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
-          type: string
-          maxLength: 2000
-        recordId:
-          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
-          type: string
-          maxLength: 2000
-        type:
-          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
-          type: string
-          minLength: 0
-          maxLength: 20
-        language:
-          description: Language identification.
-          type: string
-          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
-        rph:
-          description: Reference Place Holder used as an index for this warning.
-          type: string
-          minLength: 1
-          maxLength: 8
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    status:
-      type: object
-      description: Response Body.
-      properties:
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-        links:
-          $ref: '#/components/schemas/links'
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
-    dateTimeSpanType:
-      type: object
-      description: Allows for a choice in description of the amount of time spanned by this type. EndDate specifies a specific date, while Duration provides a measure of time to add to the StartDate to yield end date.
-      properties:
-        startDateTime:
-          type: string
-          format: date-time
-        endDateTime:
-          type: string
-          format: date-time
+          maxLength: 40
   parameters:
-    x-hotelid:
-      name: x-hotelid
-      description: Mandatory parameter to identify the hotel code where the end user is logged in
-      in: header
-      required: true
-      schema:
-        type: string
-    x-externalsystem:
-      name: x-externalsystem
-      description: External system code.
-      in: header
-      x-example: EXTERNALSYSTEMCODE
-      schema:
-        type: string
-        maxLength: 40
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
-      in: header
-      schema:
-        type: string
-    x-app-key:
-      name: x-app-key
-      description: Client or Partner's Application Key
-      in: header
-      required: true
-      schema:
-        type: string
-        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
       in: header
       schema:
         type: string
@@ -1511,6 +1519,12 @@ components:
       required: true
       schema:
         type: string
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
+      schema:
+        type: string
     x-request-id:
       name: x-request-id
       description: Request Id of an incoming request
@@ -1518,6 +1532,22 @@ components:
       schema:
         type: string
         pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    x-externalsystem:
+      name: x-externalsystem
+      description: External system code.
+      in: header
+      x-example: EXTERNALSYSTEMCODE
+      schema:
+        type: string
+        maxLength: 40
     x-externalsystemreq:
       name: x-externalsystem
       required: true
@@ -1527,49 +1557,19 @@ components:
       schema:
         type: string
         maxLength: 80
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
       in: header
       schema:
         type: string
-  responses:
-    '503':
-      description: Service Unavailable
-    '403':
-      description: Forbidden
-    '502':
-      description: Bad Gateway
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '415':
-      description: Unsupported Media Type
-    '406':
-      description: Not acceptable.
-    '413':
-      description: Request Entity Too Large
-    '401':
-      description: Unauthorized
-    '414':
-      description: Request URI Too Large
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '405':
-      description: Method not allowed
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
+      schema:
+        type: string
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

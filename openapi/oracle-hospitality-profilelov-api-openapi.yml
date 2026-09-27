@@ -186,14 +186,78 @@ paths:
       tags:
       - ProfileLOV
 components:
+  responses:
+    '405':
+      description: Method not allowed
+    '413':
+      description: Request Entity Too Large
+    '403':
+      description: Forbidden
+    '503':
+      description: Service Unavailable
+    '406':
+      description: Not acceptable.
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '401':
+      description: Unauthorized
+    '415':
+      description: Unsupported Media Type
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '502':
+      description: Bad Gateway
+    '414':
+      description: Request URI Too Large
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
   parameters:
-    x-hotelid:
-      name: x-hotelid
-      description: Mandatory parameter to identify the hotel code where the end user is logged in
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
       in: header
       required: true
       schema:
         type: string
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
+      schema:
+        type: string
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
     x-externalsystem:
       name: x-externalsystem
       description: External system code.
@@ -208,143 +272,50 @@ components:
       in: header
       schema:
         type: string
-    x-app-key:
-      name: x-app-key
-      description: Client or Partner's Application Key
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
       in: header
       required: true
       schema:
         type: string
-        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
-      in: header
-      schema:
-        type: string
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
-      in: header
-      required: true
-      schema:
-        type: string
-    x-request-id:
-      name: x-request-id
-      description: Request Id of an incoming request
-      in: header
-      schema:
-        type: string
-        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
-      in: header
-      schema:
-        type: string
-  responses:
-    '503':
-      description: Service Unavailable
-    '403':
-      description: Forbidden
-    '502':
-      description: Bad Gateway
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '415':
-      description: Unsupported Media Type
-    '406':
-      description: Not acceptable.
-    '413':
-      description: Request Entity Too Large
-    '401':
-      description: Unauthorized
-    '414':
-      description: Request URI Too Large
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '405':
-      description: Method not allowed
   schemas:
-    preferenceTypeType:
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
       type: object
-      description: Preference details for the profile.
       properties:
-        preference:
-          description: Collection of Preferences for the profile.
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
           type: array
-          maxItems: 4000
           items:
-            $ref: '#/components/schemas/preferenceType'
-        preferenceType:
-          description: Preference group code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        preferenceTypeDescription:
-          description: Preference group description.
-          type: string
-        sequence:
-          description: Preference Sequence.
-          type: string
-        maxQuantity:
-          description: Maximum quantity of preferences allowed per preference group.
-          type: integer
-        availableQuantity:
-          description: Available quantity of preferences (maximum quantity - Existing preferences)per preference group.
-          type: integer
-        maxResortUsedQuantity:
-          description: Maximum quantity of preferences used by any resort per preference group.
-          type: integer
-        reservationPreference:
-          description: Whether this preference is reservation preference or not.
-          type: boolean
-        createDateTime:
-          description: Time stamp of the creation.
-          type: string
-          format: date-time
-        creatorId:
-          description: ID of creator. The creator could be a software system identifier or an identifier of an employee resposible for the creation.
-          type: string
-          minLength: 0
-          maxLength: 200
-        lastModifyDateTime:
-          description: Time stamp of last modification.
-          type: string
-          format: date-time
-        lastModifierId:
-          description: Identifies the last software system or person to modify a record.
-          type: string
-          minLength: 0
-          maxLength: 200
-    countryNameType:
-      type: object
-      description: Code for a country or a nationality.
-      properties:
-        value:
-          type: string
-          description: Used for Character Strings, length 0 to 200.
-          minLength: 0
-          maxLength: 200
-        code:
-          description: Code for a country or a nationality.
-          type: string
-          minLength: 0
-          maxLength: 20
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
     availableARAddresses:
       type: object
       description: Response to the request to fetch the available Accounts Receivables(AR) Addresses for a Profile.
@@ -392,140 +363,12 @@ components:
         title:
           description: Exact copy of the "summary" field on the linked operation.
           type: string
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
-      required:
-      - type
-      - title
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-      required:
-      - type
-      - title
-    addressInfoType:
-      type: object
-      description: Provides address information.
-      properties:
-        address:
-          description: Address details for the profile.
-          $ref: '#/components/schemas/addressType'
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 40
-    preferenceType:
-      type: object
-      description: Guest Preference details for the profile.
-      properties:
-        preferenceValue:
-          description: Preference value for display purposes.
-          type: string
-          minLength: 0
-          maxLength: 200
-        description:
-          description: Preference Description for display purposes.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        global:
-          description: Whether this preference is property specific or not.
-          type: boolean
-        source:
-          description: Source of the preference.
-          type: string
-          minLength: 0
-          maxLength: 40
-        hotels:
-          description: If specified preference belongs to the Hotels listed, otherwise it is a global preference.
-          type: array
-          maxItems: 4000
-          items:
-            type: string
-            minLength: 0
-            maxLength: 20
-        preferenceCode:
-          type: string
-          minLength: 0
-          maxLength: 20
-        excludedPreferencesCount:
-          description: Specifies the count of preferences excluded for the attached reservation preference.
-          type: integer
-        copyToProfile:
-          description: Specifies whether to copy the reservation preference to the profile or not.
-          type: boolean
-    availablePreferences:
-      type: object
-      properties:
-        preferenceCollection:
-          type: array
-          description: A collection of preferences
-          items:
-            $ref: '#/components/schemas/preferenceTypeType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
     addressType:
       type: object
       description: Provides address information.
@@ -610,6 +453,63 @@ components:
           type: string
           minLength: 0
           maxLength: 200
+    preferenceType:
+      type: object
+      description: Guest Preference details for the profile.
+      properties:
+        preferenceValue:
+          description: Preference value for display purposes.
+          type: string
+          minLength: 0
+          maxLength: 200
+        description:
+          description: Preference Description for display purposes.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        global:
+          description: Whether this preference is property specific or not.
+          type: boolean
+        source:
+          description: Source of the preference.
+          type: string
+          minLength: 0
+          maxLength: 40
+        hotels:
+          description: If specified preference belongs to the Hotels listed, otherwise it is a global preference.
+          type: array
+          maxItems: 4000
+          items:
+            type: string
+            minLength: 0
+            maxLength: 20
+        preferenceCode:
+          type: string
+          minLength: 0
+          maxLength: 20
+        excludedPreferencesCount:
+          description: Specifies the count of preferences excluded for the attached reservation preference.
+          type: integer
+        copyToProfile:
+          description: Specifies whether to copy the reservation preference to the profile or not.
+          type: boolean
+    addressInfoType:
+      type: object
+      description: Provides address information.
+      properties:
+        address:
+          description: Address details for the profile.
+          $ref: '#/components/schemas/addressType'
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
     warningType:
       type: object
       description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
@@ -656,16 +556,116 @@ components:
           type: string
           minLength: 1
           maxLength: 8
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
     links:
       type: array
       items:
         $ref: '#/components/schemas/instanceLink'
+    availablePreferences:
+      type: object
+      properties:
+        preferenceCollection:
+          type: array
+          description: A collection of preferences
+          items:
+            $ref: '#/components/schemas/preferenceTypeType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    countryNameType:
+      type: object
+      description: Code for a country or a nationality.
+      properties:
+        value:
+          type: string
+          description: Used for Character Strings, length 0 to 200.
+          minLength: 0
+          maxLength: 200
+        code:
+          description: Code for a country or a nationality.
+          type: string
+          minLength: 0
+          maxLength: 20
+    preferenceTypeType:
+      type: object
+      description: Preference details for the profile.
+      properties:
+        preference:
+          description: Collection of Preferences for the profile.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/preferenceType'
+        preferenceType:
+          description: Preference group code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        preferenceTypeDescription:
+          description: Preference group description.
+          type: string
+        sequence:
+          description: Preference Sequence.
+          type: string
+        maxQuantity:
+          description: Maximum quantity of preferences allowed per preference group.
+          type: integer
+        availableQuantity:
+          description: Available quantity of preferences (maximum quantity - Existing preferences)per preference group.
+          type: integer
+        maxResortUsedQuantity:
+          description: Maximum quantity of preferences used by any resort per preference group.
+          type: integer
+        reservationPreference:
+          description: Whether this preference is reservation preference or not.
+          type: boolean
+        createDateTime:
+          description: Time stamp of the creation.
+          type: string
+          format: date-time
+        creatorId:
+          description: ID of creator. The creator could be a software system identifier or an identifier of an employee resposible for the creation.
+          type: string
+          minLength: 0
+          maxLength: 200
+        lastModifyDateTime:
+          description: Time stamp of last modification.
+          type: string
+          format: date-time
+        lastModifierId:
+          description: Identifies the last software system or person to modify a record.
+          type: string
+          minLength: 0
+          maxLength: 200
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html
