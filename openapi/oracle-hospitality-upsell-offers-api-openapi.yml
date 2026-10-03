@@ -87,24 +87,14 @@ paths:
           description: Service Unavailable
 components:
   schemas:
-    UpsellOffer:
+    Items:
       type: object
+      description: Success and Failure Summary Data
       properties:
-        offerType:
-          type: string
-          example: room_upgrade
-          description: "Describes type of an offer.\n\nPossible values: \n  - room_upgrade\n  - early_checkin\n  - late_checkout\n  - amenity\n  - spa_services\n  - extra_room\n  - extra_day\n  - food_beverage\n  - room_feature\n  - parking"
-        selectionType:
-          type: string
-          description: ''
-          example: zero_to_one
-          enum:
-          - zeroToOne
-          - zeroToMany
-        offers:
+        upsellOffers:
           type: array
           items:
-            $ref: '#/components/schemas/Offers'
+            $ref: '#/components/schemas/UpsellOffer'
     errorInstanceISE:
       type: object
       description: Complex type that contains internal server error instance details for a REST call
@@ -133,59 +123,6 @@ components:
           description: Holds List of errors
           items:
             $ref: '#/components/schemas/errorDetail'
-    UpsellOffers:
-      type: object
-      description: Success and Failure Summary Data
-      properties:
-        Items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Items'
-        totalResults:
-          type: number
-          example: 1
-        offset:
-          type: number
-          example: 0
-        count:
-          type: number
-          example: 1
-        hasMore:
-          type: boolean
-          example: false
-        limit:
-          type: number
-          example: 0
-    errorDetail:
-      type: object
-      description: Complex type that contains error detail
-      properties:
-        title:
-          type: string
-          description: Holds error details in short
-        detail:
-          type: string
-          description: Holds error details
-        errorCode:
-          type: string
-          description: Holds specific error code
-    Image:
-      type: object
-      properties:
-        big:
-          type: string
-          example: https://example.com/img_url1.jpg
-        small:
-          type: string
-          example: https://example.com/img_url2.jpg
-    Items:
-      type: object
-      description: Success and Failure Summary Data
-      properties:
-        upsellOffers:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpsellOffer'
     Offers:
       type: object
       properties:
@@ -227,6 +164,56 @@ components:
           items:
             type: string
             example: SGL
+    Image:
+      type: object
+      properties:
+        big:
+          type: string
+          example: https://example.com/img_url1.jpg
+        small:
+          type: string
+          example: https://example.com/img_url2.jpg
+    UpsellOffers:
+      type: object
+      description: Success and Failure Summary Data
+      properties:
+        Items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Items'
+        totalResults:
+          type: number
+          example: 1
+        offset:
+          type: number
+          example: 0
+        count:
+          type: number
+          example: 1
+        hasMore:
+          type: boolean
+          example: false
+        limit:
+          type: number
+          example: 0
+    UpsellOffer:
+      type: object
+      properties:
+        offerType:
+          type: string
+          example: room_upgrade
+          description: "Describes type of an offer.\n\nPossible values: \n  - room_upgrade\n  - early_checkin\n  - late_checkout\n  - amenity\n  - spa_services\n  - extra_room\n  - extra_day\n  - food_beverage\n  - room_feature\n  - parking"
+        selectionType:
+          type: string
+          description: ''
+          example: zero_to_one
+          enum:
+          - zeroToOne
+          - zeroToMany
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offers'
     errorInstanceNF:
       type: object
       description: Complex type that contains not found error instance details for a REST call
@@ -255,11 +242,31 @@ components:
           description: Holds List of errors
           items:
             $ref: '#/components/schemas/errorDetail'
+    errorDetail:
+      type: object
+      description: Complex type that contains error detail
+      properties:
+        title:
+          type: string
+          description: Holds error details in short
+        detail:
+          type: string
+          description: Holds error details
+        errorCode:
+          type: string
+          description: Holds specific error code
   parameters:
     Accept-Language:
       name: Accept-Language
       in: header
       description: Language code
+      schema:
+        type: string
+    providerId:
+      name: providerId
+      in: header
+      x-example: SAN
+      description: Partner's Unique Nor1 Provider ID
       schema:
         type: string
     x-app-key:
@@ -284,10 +291,3 @@ components:
         enum:
         - application/json; charset=UTF-8
         - application/json
-    providerId:
-      name: providerId
-      in: header
-      x-example: SAN
-      description: Partner's Unique Nor1 Provider ID
-      schema:
-        type: string

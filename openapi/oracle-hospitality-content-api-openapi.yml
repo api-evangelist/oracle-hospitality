@@ -551,121 +551,65 @@ paths:
                 $ref: '#/components/schemas/ExceptionDetail'
 components:
   schemas:
-    Address:
+    ContentRoomType:
       type: object
+      description: Room Type information
       properties:
-        addressLine:
-          description: The property's street address
-          type: array
-          items:
-            type: string
-          minItems: 1
-          maxItems: 2
-          example:
-          - Street 123
-          - Box 1
-        countryCode:
-          description: The property's two letter ISO country code
-          type: string
-          example: US
-        cityName:
-          description: The city where the property is located
-          type: string
-          example: Miami
-        stateProv:
-          description: The state where the property is located
-          type: string
-          example: Florida
-        postalCode:
-          description: The property's postal (ZIP) code
-          type: string
-          example: '90210'
-    ContentRateRoom:
-      type: object
-      properties:
-        ratePlanCode:
-          type: string
-          example: XDAILY
-          description: A code for a rate plan for a requested channel.
-        hotelRatePlanCode:
-          type: string
-          example: DAILY
-          description: A rate plan code for a hotel.
-        roomType:
-          type: string
-          example: XA1K
-          description: A code for a room type for a requested channel.
         hotelRoomType:
           type: string
           example: A1K
           description: A room type code for a hotel.
-        active:
-          type: boolean
-          example: true
-          description: It represent if the rate room is active or inactive. Default value is true.
-        occupancy:
-          type: object
-          description: It holds list of elements that defines room type occupancy information.
-          $ref: '#/components/schemas/Occupancy'
-    OfferMealPlan:
-      type: object
-      properties:
-        mealPlanCode:
-          description: The meal plan code
+        roomType:
           type: string
-          example: '1'
-        mealPlanDescription:
-          description: The meal plan description
-          type: string
-          example: All inclusive meal plan
-        mealsIncluded:
-          description: Type of meal plan
+          example: XA1K
+          description: A code for a room type for a requested channel.
+        description:
           type: array
           items:
-            $ref: '#/components/schemas/OfferRatePlanMealType'
-    CancellationPolicyScheduleDetail:
-      description: The cancellation policy schedule detail
-      type: object
-      properties:
-        start:
+            type: string
+            example: Deluxe King Room on my Channel
+        roomName:
           type: string
-          description: The start date the cancellation policy schedule is effective
-          format: date
-          example: '2025-11-01'
-        end:
+          example: 102
+        roomCategory:
           type: string
-          description: The end date the cancellation policy is no longer effective
-          format: date
-          example: '2025-11-07'
-    Direction:
-      type: object
-      properties:
-        propertyDirection:
+          example: SUITE
+        roomAmenities:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentRoomAmenity'
+        roomViewCode:
           type: string
-          maxLength: 4000
-          example: SE ABC hills
-    CancellationPolicyBasisType:
-      type: string
-      description: The method to be used to compute the penalty. Nights - The penalty amount is determined by the guest's room rate plus any packages, and generates associated with the rate for this number of nights. For example, assume the guest is planning to stay 3 nights. If the Penalty Amount is 1, and the nightly room rate is $150, the cancellation charge would be $150 ($150 x 1 nights). Percentage - The penalty amount is the percentage of the entire stay's room rate, plus any packages and generates associated with the rate, that will be taken for a cancellation charge. For example, if the Penalty Amount is 50, the guest will pay a charge of 50% of the total stay room rate. If the room rate is $300 a night for 3 nights, the guest pays$450 (0.50 x $900). NightPercentage - The penalty amount is based on the percentage of the first night's room rate. Schedule the time period when this rule is effective. FlatAmount - The penalty amount is the exact amount of the cancellation charge in the property currency. NonCancelable - The reservation can't be canceled. It will be resulted in penalty of the total cost of stay.
-      enum:
-      - Nights
-      - Percentage
-      - NightPercentage
-      - FlatAmount
-      - NonCancelable
-    ContentRoomAmenity:
-      type: object
-      properties:
-        roomAmenity:
+        roomViewType:
           type: string
-        description:
+        roomPrimaryBedType:
           type: string
-        quantity:
+        nonSmokingInd:
+          type: boolean
+          example: true
+        occupancy:
+          type: object
+          $ref: '#/components/schemas/Occupancy'
+        numberOfUnits:
           type: integer
-        includeInRate:
+          description: number of rooms requested
+          example: 1
+    HotelChildPolicy:
+      type: object
+      properties:
+        kidsStayFreeInd:
           type: boolean
-        confirmable:
-          type: boolean
+        usualStayFreeCutoffAge:
+          type: integer
+          example: 5
+        maxChildAge:
+          type: integer
+          example: 18
+    ModifiableChannelRouteType:
+      type: object
+      properties:
+        url:
+          $ref: '#/components/schemas/MessageUrl'
     ContentPropertyInfo:
       description: Property information
       type: object
@@ -767,88 +711,134 @@ components:
         location:
           type: object
           $ref: '#/components/schemas/Location'
-    CancellationPolicies:
-      description: The list of cancellation policies attached to a rate plan
-      type: array
-      items:
-        $ref: '#/components/schemas/CancellationPoliciesItem'
-    CancellationPolicyBasicAmountPercentType:
+    OfferDetailsPropertyInfoSummary:
+      description: Property information
       type: object
       properties:
-        nights:
-          description: Number of nights of the hotel stay used to calculate the fee amount when basisType=Nights.
-          type: integer
-          example: 2
-        percent:
-          description: Percentage used to calculate the amount when basisType=Percentage
-          type: number
-          format: double
-          example: 50
-        nightPercent:
-          description: Percentage used to calculate the amount when basisType=NightPercentage.
-          type: number
-          format: double
-          example: 66.6
-        amount:
-          description: Monetary amount when basisType=FlatAmount.
-          type: number
-          format: double
-          example: 540
-    Communications:
-      description: The contact information for the property
-      type: object
-      properties:
-        phones:
-          description: List of phone numbers for the property
-          type: array
-          items:
-            $ref: '#/components/schemas/Phone'
-          minItems: 1
-        emails:
-          description: List of emails addresses for the property
-          type: array
-          items:
-            $ref: '#/components/schemas/Email'
-        urls:
-          description: List of urls for the property
-          type: array
-          items:
-            $ref: '#/components/schemas/Url'
-    PropertyOffersHotelAmenity:
-      type: object
-      properties:
-        hotelAmenity:
+        hotelId:
           type: string
-          description: Feature available at a hotel
-          example: '12'
+          description: Unique ID that identifies a single hotel property
+          example: Hotel1
+        hotelCode:
+          type: string
+          description: The external Hotel/property Id for a channel
+          example: XUSXXYY99
+        hotelName:
+          type: string
+          description: The descriptive name of a property
+          example: The Palmyra Resort
+        chainCode:
+          type: string
+          description: Channel chain code for a property
+          example: CHAIN1
+        brandCode:
+          type: string
+          description: Channel's hotel/property brand code
+          example: BRAND1
+        startDate:
+          type: string
+          description: The date this property will be active for the channel
+          format: date
+          example: '2023-08-03'
+        endDate:
+          type: string
+          description: The date this property will be deactivate for the channel
+          format: date
+          example: '2024-09-04'
+        address:
+          description: Address Details such as city, state, country, postal code etc for a hotel property
+          $ref: '#/components/schemas/Address'
+        communications:
+          description: The contact information for the property
+          $ref: '#/components/schemas/Communications'
+        connectionInformation:
+          description: The connection information for the channel
+          $ref: '#/components/schemas/ConnectionInformation'
+    ContentRoomAmenity:
+      type: object
+      properties:
+        roomAmenity:
+          type: string
         description:
           type: string
-          description: Description of a hotel amenity
-          example: Swimming Pool
         quantity:
           type: integer
-          description: Quantity of a hotel amenity
-          example: 1
         includeInRate:
           type: boolean
-          description: Indicates if an amenity is included in a room rate
-          example: true
         confirmable:
           type: boolean
-          description: If a hotel amenity is confirmed to be available
-          example: false
-    CancellationPolicyDeadline:
-      description: The cancellation policy deadline
+    Occupancy:
       type: object
       properties:
-        offsetFromArrival:
-          description: The number of days before arrival that allows cancellation without penalties.
+        minOccupancy:
+          description: 'Assigned Type: ota2-0500:NonNegativeInteger'
           type: integer
-          example: 5
-        offsetDropTime:
-          description: Time on offset day the cancellation penalties applies. 24-hour format, hh:mm
+          format: int32
+          minimum: 0
+          example: 2
+        maxOccupancy:
+          description: 'Assigned Type: ota2-0500:NonNegativeInteger'
+          type: integer
+          format: int32
+          minimum: 0
+          example: 8
+        maxAdultOccupancy:
+          description: 'Assigned Type: ota2-0500:NonNegativeInteger'
+          type: integer
+          format: int32
+          minimum: 0
+          example: 4
+        maxChildOccupancy:
+          description: 'Assigned Type: ota2-0500:NonNegativeInteger'
+          type: integer
+          format: int32
+          minimum: 0
+          example: 3
+    CancellationPolicyBasisType:
+      type: string
+      description: The method to be used to compute the penalty. Nights - The penalty amount is determined by the guest's room rate plus any packages, and generates associated with the rate for this number of nights. For example, assume the guest is planning to stay 3 nights. If the Penalty Amount is 1, and the nightly room rate is $150, the cancellation charge would be $150 ($150 x 1 nights). Percentage - The penalty amount is the percentage of the entire stay's room rate, plus any packages and generates associated with the rate, that will be taken for a cancellation charge. For example, if the Penalty Amount is 50, the guest will pay a charge of 50% of the total stay room rate. If the room rate is $300 a night for 3 nights, the guest pays$450 (0.50 x $900). NightPercentage - The penalty amount is based on the percentage of the first night's room rate. Schedule the time period when this rule is effective. FlatAmount - The penalty amount is the exact amount of the cancellation charge in the property currency. NonCancelable - The reservation can't be canceled. It will be resulted in penalty of the total cost of stay.
+      enum:
+      - Nights
+      - Percentage
+      - NightPercentage
+      - FlatAmount
+      - NonCancelable
+    TimeZone:
+      type: object
+      properties:
+        timeZoneName:
           type: string
-          example: '22:00'
+          description: Zone Name of the region
+          minLength: 1
+          maxLength: 50
+          example: Asia/Calcutta
+        offset:
+          type: string
+          description: Provides the current offset from UTC for the specified time zone, considering DST
+          minLength: 1
+          maxLength: 50
+          example: UTC+05:30
+    MessageUrl:
+      description: Message URL
+      type: string
+      pattern: ^(http[s]?|ftp[s]?|sftp)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]
+      example: https://pms-certification.profit.net/opera-cloud
+    Email:
+      type: object
+      properties:
+        emailType:
+          description: The email type
+          type: string
+        email:
+          description: The email address for the specific emailType
+          type: string
+    ChannelRouteType:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ModifiableChannelRouteType'
+      - properties:
+          messageType:
+            $ref: '#/components/schemas/MessageType'
     CancellationPolicy:
       description: The cancellation policy details
       type: object
@@ -879,15 +869,6 @@ components:
           type: boolean
           description: Does this cancellation policy override another cancellation policy
           example: true
-    Email:
-      type: object
-      properties:
-        emailType:
-          description: The email type
-          type: string
-        email:
-          description: The email address for the specific emailType
-          type: string
     ConnectionInformation:
       description: Channel Connection Information for the hotel property
       type: object
@@ -917,89 +898,79 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ChannelRouteType'
-    Transportation:
+    Location:
       type: object
       properties:
-        transportationCode:
+        propertyLocation:
           type: string
-          description: 'Transportation type ex: Bus, Taxi. Enum values from globalCodes TRP - Transportation Code'
-          example: Metro
-        description:
+          maxLength: 4000
+          example: ABC hills
+    ContentRateRoom:
+      type: object
+      properties:
+        ratePlanCode:
           type: string
-          maxLength: 1024
-          example: Description for a Transportation
-        includeInRate:
+          example: XDAILY
+          description: A code for a rate plan for a requested channel.
+        hotelRatePlanCode:
+          type: string
+          example: DAILY
+          description: A rate plan code for a hotel.
+        roomType:
+          type: string
+          example: XA1K
+          description: A code for a room type for a requested channel.
+        hotelRoomType:
+          type: string
+          example: A1K
+          description: A room type code for a hotel.
+        active:
           type: boolean
-          description: Indicates whether charge rate is included or excluded
-          example: false
-        reservationRequired:
-          type: boolean
-          description: Indicates whether reservation is required for this Transportation
           example: true
-    TimeZone:
+          description: It represent if the rate room is active or inactive. Default value is true.
+        occupancy:
+          type: object
+          description: It holds list of elements that defines room type occupancy information.
+          $ref: '#/components/schemas/Occupancy'
+    PropertyInfoSummaryResponse:
       type: object
       properties:
-        timeZoneName:
-          type: string
-          description: Zone Name of the region
-          minLength: 1
-          maxLength: 50
-          example: Asia/Calcutta
-        offset:
-          type: string
-          description: Provides the current offset from UTC for the specified time zone, considering DST
-          minLength: 1
-          maxLength: 50
-          example: UTC+05:30
-    RateRoomsResponse:
-      description: Rate Rooms Response
-      type: object
-      properties:
-        rateRooms:
-          description: Collection of the returned RateRooms for given channel
-          type: array
-          items:
-            $ref: '#/components/schemas/ContentRateRoom'
-        count:
-          type: integer
-          example: 50
         hasMore:
           type: boolean
+          description: Boolean value that is set to true if more resources are available on the server than the subset returned in current page.
           example: true
+        totalResults:
+          type: integer
+          description: Total count of the resource instances, including both the instances in the current range and the instances on the server that satisfy the request.
+          example: 100
         limit:
           type: integer
+          description: Actual paging size used by the server.
+          example: 100
+        count:
+          type: integer
+          description: Number of resource instances returned in the current range.
           example: 100
         offset:
           type: integer
-          example: 25
-        totalResults:
-          type: integer
-          example: 500
-    PropertyInfoResponse:
+          description: Offset value used in the current page.
+          example: 1
+        hotels:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferDetailsPropertyInfoSummary'
+    CancellationPolicyDeadline:
+      description: The cancellation policy deadline
       type: object
       properties:
-        propertyInfo:
-          $ref: '#/components/schemas/ContentPropertyInfo'
-    ChannelRouteType:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ModifiableChannelRouteType'
-      - properties:
-          messageType:
-            $ref: '#/components/schemas/MessageType'
-    MessageType:
-      description: Message type that is enabled. <p>AvailNotif -  Indicates enable for hotel restrictions update </p> <p>RatePlanNotif - Indicates enable for hotel rate and room pricing update </p> <p>InvCountNotif - Indicates enable for hotel inventory counts update </p> <p>GetRooms - Indicates enable to fetch rooms from the distribution partner system </p> <p>GetRatePlans - Indicates enable to fetch rates from the distribution partner system </p>
-      type: string
-      enum:
-      - AvailNotif
-      - RatePlanNotif
-      - InvCountNotif
-      - GetRooms
-      - GetRatePlans
-      example: AvailNotif
-      externalDocs:
-        description: Find out more about Oracle Hospitality
-        url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html
+        offsetFromArrival:
+          description: The number of days before arrival that allows cancellation without penalties.
+          type: integer
+          example: 5
+        offsetDropTime:
+          description: Time on offset day the cancellation penalties applies. 24-hour format, hh:mm
+          type: string
+          example: '22:00'
     ContentRatePlan:
       type: object
       properties:
@@ -1054,11 +1025,35 @@ components:
           description: Cancellation policy schedule(s) and detail(s)
           type: object
           $ref: '#/components/schemas/CancellationPolicies'
-    ModifiableChannelRouteType:
+    RateRoomsResponse:
+      description: Rate Rooms Response
       type: object
       properties:
-        url:
-          $ref: '#/components/schemas/MessageUrl'
+        rateRooms:
+          description: Collection of the returned RateRooms for given channel
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentRateRoom'
+        count:
+          type: integer
+          example: 50
+        hasMore:
+          type: boolean
+          example: true
+        limit:
+          type: integer
+          example: 100
+        offset:
+          type: integer
+          example: 25
+        totalResults:
+          type: integer
+          example: 500
+    PropertyInfoResponse:
+      type: object
+      properties:
+        propertyInfo:
+          $ref: '#/components/schemas/ContentPropertyInfo'
     Phone:
       type: object
       properties:
@@ -1071,81 +1066,61 @@ components:
         phoneNumber:
           description: The phone number assigned to a specific location
           type: string
-    GeneralInformation:
+    Transportation:
       type: object
       properties:
-        checkInTime:
+        transportationCode:
           type: string
-          pattern: ^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$
-          example: 04:30
-        checkOutTime:
+          description: 'Transportation type ex: Bus, Taxi. Enum values from globalCodes TRP - Transportation Code'
+          example: Metro
+        description:
           type: string
-          pattern: ^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$
-          example: '14:30'
-    CancellationPoliciesItem:
-      description: The cancellation policy containing its schedules and policy details
-      type: object
-      properties:
-        policy:
-          type: object
-          $ref: '#/components/schemas/CancellationPolicy'
-        scheduleDetail:
-          type: object
-          $ref: '#/components/schemas/CancellationPolicyScheduleDetail'
-    RoomTypesResponse:
-      description: Room Types Response
-      type: object
-      properties:
-        roomTypes:
-          description: Collection of the returned Room Types for given channel
-          type: array
-          items:
-            $ref: '#/components/schemas/ContentRoomType'
-        count:
-          type: integer
-          example: 50
-        hasMore:
+          maxLength: 1024
+          example: Description for a Transportation
+        includeInRate:
           type: boolean
+          description: Indicates whether charge rate is included or excluded
+          example: false
+        reservationRequired:
+          type: boolean
+          description: Indicates whether reservation is required for this Transportation
           example: true
-        limit:
-          type: integer
-          example: 100
-        offset:
-          type: integer
-          example: 25
-        totalResults:
-          type: integer
-          example: 500
+    CancellationPolicyScheduleDetail:
+      description: The cancellation policy schedule detail
+      type: object
+      properties:
+        start:
+          type: string
+          description: The start date the cancellation policy schedule is effective
+          format: date
+          example: '2025-11-01'
+        end:
+          type: string
+          description: The end date the cancellation policy is no longer effective
+          format: date
+          example: '2025-11-07'
     Url:
       type: object
       properties:
         url:
           description: The url or internet web address
           type: string
-    RatePlansResponse:
-      description: Rate Plans Response
+    OfferMealPlan:
       type: object
       properties:
-        ratePlans:
-          description: Collection of the returned Rate Plans for a given channel
+        mealPlanCode:
+          description: The meal plan code
+          type: string
+          example: '1'
+        mealPlanDescription:
+          description: The meal plan description
+          type: string
+          example: All inclusive meal plan
+        mealsIncluded:
+          description: Type of meal plan
           type: array
           items:
-            $ref: '#/components/schemas/ContentRatePlan'
-        count:
-          type: integer
-          example: 50
-        hasMore:
-          type: boolean
-          example: true
-        limit:
-          type: integer
-          example: 100
-        offset:
-          type: integer
-          example: 25
-        totalResults:
-          type: integer
-          example: 500
+            $ref: '#/components/schemas/OfferRatePlanMealType'
     OfferPointOfInterest:
       type: object
       description: The point of interest for guests to get to the hotel.
@@ -1206,76 +1181,6 @@ components:
           type: number
           format: double
           example: 3.5
-    Occupancy:
-      type: object
-      properties:
-        minOccupancy:
-          description: 'Assigned Type: ota2-0500:NonNegativeInteger'
-          type: integer
-          format: int32
-          minimum: 0
-          example: 2
-        maxOccupancy:
-          description: 'Assigned Type: ota2-0500:NonNegativeInteger'
-          type: integer
-          format: int32
-          minimum: 0
-          example: 8
-        maxAdultOccupancy:
-          description: 'Assigned Type: ota2-0500:NonNegativeInteger'
-          type: integer
-          format: int32
-          minimum: 0
-          example: 4
-        maxChildOccupancy:
-          description: 'Assigned Type: ota2-0500:NonNegativeInteger'
-          type: integer
-          format: int32
-          minimum: 0
-          example: 3
-    PropertyInfoSummaryResponse:
-      type: object
-      properties:
-        hasMore:
-          type: boolean
-          description: Boolean value that is set to true if more resources are available on the server than the subset returned in current page.
-          example: true
-        totalResults:
-          type: integer
-          description: Total count of the resource instances, including both the instances in the current range and the instances on the server that satisfy the request.
-          example: 100
-        limit:
-          type: integer
-          description: Actual paging size used by the server.
-          example: 100
-        count:
-          type: integer
-          description: Number of resource instances returned in the current range.
-          example: 100
-        offset:
-          type: integer
-          description: Offset value used in the current page.
-          example: 1
-        hotels:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferDetailsPropertyInfoSummary'
-    HotelChildPolicy:
-      type: object
-      properties:
-        kidsStayFreeInd:
-          type: boolean
-        usualStayFreeCutoffAge:
-          type: integer
-          example: 5
-        maxChildAge:
-          type: integer
-          example: 18
-    MessageUrl:
-      description: Message URL
-      type: string
-      pattern: ^(http[s]?|ftp[s]?|sftp)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]
-      example: https://pms-certification.profit.net/opera-cloud
     ExceptionDetail:
       description: Common Error Response format
       type: object
@@ -1310,6 +1215,42 @@ components:
           type: integer
           description: An ID for support reasons to be able identify errors better.
           example: '334543532224'
+    CancellationPolicyAmountPercentType:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/CancellationPolicyBasicAmountPercentType'
+      properties:
+        basisType:
+          description: Cancellation policy basis type
+          $ref: '#/components/schemas/CancellationPolicyBasisType'
+          example: NightPercentage
+    CancellationPolicies:
+      description: The list of cancellation policies attached to a rate plan
+      type: array
+      items:
+        $ref: '#/components/schemas/CancellationPoliciesItem'
+    CancellationPolicyBasicAmountPercentType:
+      type: object
+      properties:
+        nights:
+          description: Number of nights of the hotel stay used to calculate the fee amount when basisType=Nights.
+          type: integer
+          example: 2
+        percent:
+          description: Percentage used to calculate the amount when basisType=Percentage
+          type: number
+          format: double
+          example: 50
+        nightPercent:
+          description: Percentage used to calculate the amount when basisType=NightPercentage.
+          type: number
+          format: double
+          example: 66.6
+        amount:
+          description: Monetary amount when basisType=FlatAmount.
+          type: number
+          format: double
+          example: 540
     Description:
       type: object
       properties:
@@ -1321,6 +1262,47 @@ components:
           type: string
         detailedDescription:
           type: string
+    CancellationPoliciesItem:
+      description: The cancellation policy containing its schedules and policy details
+      type: object
+      properties:
+        policy:
+          type: object
+          $ref: '#/components/schemas/CancellationPolicy'
+        scheduleDetail:
+          type: object
+          $ref: '#/components/schemas/CancellationPolicyScheduleDetail'
+    MessageType:
+      description: Message type that is enabled. <p>AvailNotif -  Indicates enable for hotel restrictions update </p> <p>RatePlanNotif - Indicates enable for hotel rate and room pricing update </p> <p>InvCountNotif - Indicates enable for hotel inventory counts update </p> <p>GetRooms - Indicates enable to fetch rooms from the distribution partner system </p> <p>GetRatePlans - Indicates enable to fetch rates from the distribution partner system </p>
+      type: string
+      enum:
+      - AvailNotif
+      - RatePlanNotif
+      - InvCountNotif
+      - GetRooms
+      - GetRatePlans
+      example: AvailNotif
+      externalDocs:
+        description: Find out more about Oracle Hospitality
+        url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html
+    GeneralInformation:
+      type: object
+      properties:
+        checkInTime:
+          type: string
+          pattern: ^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$
+          example: 04:30
+        checkOutTime:
+          type: string
+          pattern: ^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$
+          example: '14:30'
+    Direction:
+      type: object
+      properties:
+        propertyDirection:
+          type: string
+          maxLength: 4000
+          example: SE ABC hills
     OfferRatePlanMealType:
       type: string
       enum:
@@ -1328,109 +1310,138 @@ components:
       - Lunch
       - Dinner
       description: Type of meal the rate plan includes
-    Location:
+    PropertyOffersHotelAmenity:
       type: object
       properties:
-        propertyLocation:
+        hotelAmenity:
           type: string
-          maxLength: 4000
-          example: ABC hills
-    CancellationPolicyAmountPercentType:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/CancellationPolicyBasicAmountPercentType'
-      properties:
-        basisType:
-          description: Cancellation policy basis type
-          $ref: '#/components/schemas/CancellationPolicyBasisType'
-          example: NightPercentage
-    ContentRoomType:
-      type: object
-      description: Room Type information
-      properties:
-        hotelRoomType:
-          type: string
-          example: A1K
-          description: A room type code for a hotel.
-        roomType:
-          type: string
-          example: XA1K
-          description: A code for a room type for a requested channel.
+          description: Feature available at a hotel
+          example: '12'
         description:
+          type: string
+          description: Description of a hotel amenity
+          example: Swimming Pool
+        quantity:
+          type: integer
+          description: Quantity of a hotel amenity
+          example: 1
+        includeInRate:
+          type: boolean
+          description: Indicates if an amenity is included in a room rate
+          example: true
+        confirmable:
+          type: boolean
+          description: If a hotel amenity is confirmed to be available
+          example: false
+    Communications:
+      description: The contact information for the property
+      type: object
+      properties:
+        phones:
+          description: List of phone numbers for the property
+          type: array
+          items:
+            $ref: '#/components/schemas/Phone'
+          minItems: 1
+        emails:
+          description: List of emails addresses for the property
+          type: array
+          items:
+            $ref: '#/components/schemas/Email'
+        urls:
+          description: List of urls for the property
+          type: array
+          items:
+            $ref: '#/components/schemas/Url'
+    RatePlansResponse:
+      description: Rate Plans Response
+      type: object
+      properties:
+        ratePlans:
+          description: Collection of the returned Rate Plans for a given channel
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentRatePlan'
+        count:
+          type: integer
+          example: 50
+        hasMore:
+          type: boolean
+          example: true
+        limit:
+          type: integer
+          example: 100
+        offset:
+          type: integer
+          example: 25
+        totalResults:
+          type: integer
+          example: 500
+    RoomTypesResponse:
+      description: Room Types Response
+      type: object
+      properties:
+        roomTypes:
+          description: Collection of the returned Room Types for given channel
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentRoomType'
+        count:
+          type: integer
+          example: 50
+        hasMore:
+          type: boolean
+          example: true
+        limit:
+          type: integer
+          example: 100
+        offset:
+          type: integer
+          example: 25
+        totalResults:
+          type: integer
+          example: 500
+    Address:
+      type: object
+      properties:
+        addressLine:
+          description: The property's street address
           type: array
           items:
             type: string
-            example: Deluxe King Room on my Channel
-        roomName:
+          minItems: 1
+          maxItems: 2
+          example:
+          - Street 123
+          - Box 1
+        countryCode:
+          description: The property's two letter ISO country code
           type: string
-          example: 102
-        roomCategory:
+          example: US
+        cityName:
+          description: The city where the property is located
           type: string
-          example: SUITE
-        roomAmenities:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContentRoomAmenity'
-        roomViewCode:
+          example: Miami
+        stateProv:
+          description: The state where the property is located
           type: string
-        roomViewType:
+          example: Florida
+        postalCode:
+          description: The property's postal (ZIP) code
           type: string
-        roomPrimaryBedType:
-          type: string
-        nonSmokingInd:
-          type: boolean
-          example: true
-        occupancy:
-          type: object
-          $ref: '#/components/schemas/Occupancy'
-        numberOfUnits:
-          type: integer
-          description: number of rooms requested
-          example: 1
-    OfferDetailsPropertyInfoSummary:
-      description: Property information
-      type: object
-      properties:
-        hotelId:
-          type: string
-          description: Unique ID that identifies a single hotel property
-          example: Hotel1
-        hotelCode:
-          type: string
-          description: The external Hotel/property Id for a channel
-          example: XUSXXYY99
-        hotelName:
-          type: string
-          description: The descriptive name of a property
-          example: The Palmyra Resort
-        chainCode:
-          type: string
-          description: Channel chain code for a property
-          example: CHAIN1
-        brandCode:
-          type: string
-          description: Channel's hotel/property brand code
-          example: BRAND1
-        startDate:
-          type: string
-          description: The date this property will be active for the channel
-          format: date
-          example: '2023-08-03'
-        endDate:
-          type: string
-          description: The date this property will be deactivate for the channel
-          format: date
-          example: '2024-09-04'
-        address:
-          description: Address Details such as city, state, country, postal code etc for a hotel property
-          $ref: '#/components/schemas/Address'
-        communications:
-          description: The contact information for the property
-          $ref: '#/components/schemas/Communications'
-        connectionInformation:
-          description: The connection information for the channel
-          $ref: '#/components/schemas/ConnectionInformation'
+          example: '90210'
   parameters:
+    limit:
+      name: limit
+      description: Integer, the maximal number of item entities to be returned
+      in: query
+      required: false
+      x-example: 40
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+        minimum: 1
     HotelCode:
       name: hotelCode
       in: path
@@ -1441,6 +1452,128 @@ components:
         type: string
         maxLength: 50
         minLength: 1
+    x-channelCode:
+      name: x-channelCode
+      in: header
+      description: Channel code
+      required: true
+      x-example: CH1
+      schema:
+        type: string
+        maxLength: 50
+        minLength: 1
+    includeNegotiatedRates:
+      name: includeNegotiatedRates
+      in: query
+      description: Set this true to include Negotiated rate plans along with public rate plans. Default is False
+      required: false
+      x-example: false
+      schema:
+        type: boolean
+        default: false
+    fetchInstructionsRatePlans:
+      name: fetchInstructions
+      in: query
+      description: The optional additional information to be included in the response
+      required: false
+      schema:
+        type: string
+        enum:
+        - Policy
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: false
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    x-request-id:
+      name: x-request-id
+      description: Unique tracing key e.g. 4664ab3423434a45
+      in: header
+      x-example: 4664ab3423434a45
+      schema:
+        type: string
+    fetchInstructions:
+      name: fetchInstructions
+      in: query
+      description: The optional summary sections to be included in the response
+      required: false
+      schema:
+        type: string
+        enum:
+        - ConnectionInformation
+    includeInactive:
+      name: includeInactive
+      in: query
+      description: If true include inactive rateRooms. Default is False
+      required: false
+      x-example: false
+      schema:
+        type: boolean
+        default: false
+    includeRoomAmenities:
+      name: includeRoomAmenities
+      in: query
+      description: If true include room amenities along with each room type. Default is False
+      required: false
+      x-example: false
+      schema:
+        type: boolean
+        default: false
+    connectionStatusLastChangedTo:
+      name: connectionStatusLastChangedTo
+      in: query
+      description: Channel connection status last changed before this time
+      required: false
+      x-example: '2022-01-02T11:30:22.234Z'
+      schema:
+        type: string
+        format: date-time
+    authorization:
+      name: authorization
+      description: "Bearer token that needs to be passed which is generated post user\n  authentication"
+      in: header
+      required: true
+      schema:
+        type: string
+    roomType:
+      name: roomType
+      in: query
+      description: Room Type
+      required: false
+      x-example: XA1K
+      schema:
+        type: string
+        maxLength: 20
+        minLength: 1
+    offset:
+      name: offset
+      description: Non-negative integer values that specifies the index of the first item to be returned. The offset index begins at 0. By default, the offset is 0, which returns all items starting from the first item in the collection
+      in: query
+      required: false
+      x-example: 1
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    ratePlanCode:
+      name: ratePlanCode
+      in: query
+      description: Rate Plan code
+      required: false
+      x-example: XDAILY
+      schema:
+        type: string
+        maxLength: 20
+        minLength: 1
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
     connectionStatus:
       name: connectionStatus
       in: query
@@ -1461,139 +1594,6 @@ components:
       schema:
         type: string
         format: date-time
-    x-channelCode:
-      name: x-channelCode
-      in: header
-      description: Channel code
-      required: true
-      x-example: CH1
-      schema:
-        type: string
-        maxLength: 50
-        minLength: 1
-    ratePlanCode:
-      name: ratePlanCode
-      in: query
-      description: Rate Plan code
-      required: false
-      x-example: XDAILY
-      schema:
-        type: string
-        maxLength: 20
-        minLength: 1
-    authorization:
-      name: authorization
-      description: "Bearer token that needs to be passed which is generated post user\n  authentication"
-      in: header
-      required: true
-      schema:
-        type: string
-    limit:
-      name: limit
-      description: Integer, the maximal number of item entities to be returned
-      in: query
-      required: false
-      x-example: 40
-      schema:
-        type: integer
-        default: 20
-        maximum: 100
-        minimum: 1
-    x-request-id:
-      name: x-request-id
-      description: Unique tracing key e.g. 4664ab3423434a45
-      in: header
-      x-example: 4664ab3423434a45
-      schema:
-        type: string
-    x-app-key:
-      name: x-app-key
-      description: Client or Partner's Application Key
-      in: header
-      required: false
-      schema:
-        type: string
-        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    fetchInstructionsRatePlans:
-      name: fetchInstructions
-      in: query
-      description: The optional additional information to be included in the response
-      required: false
-      schema:
-        type: string
-        enum:
-        - Policy
-    connectionStatusLastChangedTo:
-      name: connectionStatusLastChangedTo
-      in: query
-      description: Channel connection status last changed before this time
-      required: false
-      x-example: '2022-01-02T11:30:22.234Z'
-      schema:
-        type: string
-        format: date-time
-    includeRoomAmenities:
-      name: includeRoomAmenities
-      in: query
-      description: If true include room amenities along with each room type. Default is False
-      required: false
-      x-example: false
-      schema:
-        type: boolean
-        default: false
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
-      in: header
-      schema:
-        type: string
-    roomType:
-      name: roomType
-      in: query
-      description: Room Type
-      required: false
-      x-example: XA1K
-      schema:
-        type: string
-        maxLength: 20
-        minLength: 1
-    fetchInstructions:
-      name: fetchInstructions
-      in: query
-      description: The optional summary sections to be included in the response
-      required: false
-      schema:
-        type: string
-        enum:
-        - ConnectionInformation
-    includeNegotiatedRates:
-      name: includeNegotiatedRates
-      in: query
-      description: Set this true to include Negotiated rate plans along with public rate plans. Default is False
-      required: false
-      x-example: false
-      schema:
-        type: boolean
-        default: false
-    offset:
-      name: offset
-      description: Non-negative integer values that specifies the index of the first item to be returned. The offset index begins at 0. By default, the offset is 0, which returns all items starting from the first item in the collection
-      in: query
-      required: false
-      x-example: 1
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-    includeInactive:
-      name: includeInactive
-      in: query
-      description: If true include inactive rateRooms. Default is False
-      required: false
-      x-example: false
-      schema:
-        type: boolean
-        default: false
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

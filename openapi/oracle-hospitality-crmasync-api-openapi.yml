@@ -498,43 +498,6 @@ paths:
       tags:
       - CRMAsync
 components:
-  responses:
-    '405':
-      description: Method not allowed
-    '413':
-      description: Request Entity Too Large
-    '403':
-      description: Forbidden
-    '406':
-      description: Not acceptable.
-    '503':
-      description: Service Unavailable
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '401':
-      description: Unauthorized
-    '415':
-      description: Unsupported Media Type
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '502':
-      description: Bad Gateway
-    '414':
-      description: Request URI Too Large
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
   schemas:
     stayDailyRatesType:
       type: object
@@ -570,6 +533,50 @@ components:
       required:
       - transactionDate
       - rateCode
+    stayRecord:
+      type: object
+      properties:
+        resort:
+          description: Specifies the property name
+          type: string
+        stayDailyRates:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/stayDailyRatesType'
+        stayMemberships:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/stayMembershipsType'
+        stayProfiles:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/stayProfilesType'
+        stayRecordsList:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/stayRecordsType'
+        stayRevenuesDetails:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/stayRevenuesDetailsType'
+    stayRevenuesDetailsType:
+      type: object
+      properties:
+        folioView:
+          description: ''
+          type: string
+        revenueAmount:
+          description: Specifies the amount of revenue.
+          type: number
+        stayRevenues:
+          type: array
+          items:
+            $ref: '#/components/schemas/stayRevenuesType'
     stayProfilesType:
       type: object
       properties:
@@ -587,9 +594,44 @@ components:
           type: string
       required:
       - profileRole
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
+    suspendedStayDeleteStatus:
+      type: object
+      description: Response for suspended stay records deleted.
+      properties:
+        warnings:
+          description: List of warnings that occurred.
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    stayRevenuesType:
+      type: object
+      properties:
+        revenueAmount:
+          description: Specifies the amount of revenue.
+          type: number
+        revenueBucketCode:
+          description: Specifies the bucket code to which the revenue belongs.
+          type: string
+        transactionDate:
+          description: Date on which the transaction was done.
+          type: string
+          format: date
+      required:
+      - revenueBucketCode
+      - transactionDate
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
       type: object
       properties:
         type:
@@ -613,29 +655,64 @@ components:
         o:errorPath:
           type: string
           description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
-    stayRevenuesDetailsType:
+    warningType:
+      type: object
+      description: Used when a stay record is successfully processed to repory any warnings or business error.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
+          type: string
+          maxLength: 2000
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+          type: string
+          minLength: 0
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+          maxLength: 2000
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+          maxLength: 2000
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+          maxLength: 2000
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+          maxLength: 2000
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        rph:
+          description: Reference Place Holder used as an index for this warning.
+          type: string
+          minLength: 1
+          maxLength: 8
+    stayMembershipsType:
       type: object
       properties:
-        folioView:
-          description: ''
+        membershipNumber:
+          description: A unique value given to a membership.
           type: string
-        revenueAmount:
-          description: Specifies the amount of revenue.
-          type: number
-        stayRevenues:
-          type: array
-          items:
-            $ref: '#/components/schemas/stayRevenuesType'
-    suspendedStayDeleteStatus:
+        membershipType:
+          description: Specifies the type of membership.
+          type: string
+    stayRecordStatus:
       type: object
-      description: Response for suspended stay records deleted.
+      description: Response for stay record uploaded status.
       properties:
         warnings:
           description: List of warnings that occurred.
@@ -842,37 +919,48 @@ components:
         travelAgentId:
           description: Specifies the travel agent id
           type: string
-    stayRecord:
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
       type: object
       properties:
-        resort:
-          description: Specifies the property name
+        type:
           type: string
-        stayDailyRates:
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
           type: array
-          maxItems: 4000
           items:
-            $ref: '#/components/schemas/stayDailyRatesType'
-        stayMemberships:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+    stayRecords:
+      type: object
+      description: Complex type that contains list of stay record types
+      properties:
+        stayRecords:
           type: array
-          maxItems: 4000
+          description: Array list of stay records
           items:
-            $ref: '#/components/schemas/stayMembershipsType'
-        stayProfiles:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/stayProfilesType'
-        stayRecordsList:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/stayRecordsType'
-        stayRevenuesDetails:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/stayRevenuesDetailsType'
+            $ref: '#/components/schemas/stayRecord'
     instanceLink:
       type: object
       description: Metadata describing link description objects that MAY appear in the JSON instance representation.
@@ -907,145 +995,44 @@ components:
         title:
           description: Exact copy of the "summary" field on the linked operation.
           type: string
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    stayRecords:
-      type: object
-      description: Complex type that contains list of stay record types
-      properties:
-        stayRecords:
-          type: array
-          description: Array list of stay records
-          items:
-            $ref: '#/components/schemas/stayRecord'
-    stayRecordStatus:
-      type: object
-      description: Response for stay record uploaded status.
-      properties:
-        warnings:
-          description: List of warnings that occurred.
-          $ref: '#/components/schemas/warningsType'
-        links:
-          $ref: '#/components/schemas/links'
-    stayRevenuesType:
-      type: object
-      properties:
-        revenueAmount:
-          description: Specifies the amount of revenue.
-          type: number
-        revenueBucketCode:
-          description: Specifies the bucket code to which the revenue belongs.
-          type: string
-        transactionDate:
-          description: Date on which the transaction was done.
-          type: string
-          format: date
-      required:
-      - revenueBucketCode
-      - transactionDate
-    stayMembershipsType:
-      type: object
-      properties:
-        membershipNumber:
-          description: A unique value given to a membership.
-          type: string
-        membershipType:
-          description: Specifies the type of membership.
-          type: string
-    warningType:
-      type: object
-      description: Used when a stay record is successfully processed to repory any warnings or business error.
-      properties:
-        value:
-          type: string
-          description: Property Value
-        shortText:
-          description: An abbreviated version of the error in textual format.
-          type: string
-          maxLength: 2000
-        code:
-          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
-          type: string
-          minLength: 0
-          maxLength: 20
-        docURL:
-          description: If present, this URL refers to an online description of the error that occurred.
-          type: string
-          maxLength: 2000
-        status:
-          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
-          type: string
-          maxLength: 2000
-        tag:
-          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
-          type: string
-          maxLength: 2000
-        recordId:
-          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
-          type: string
-          maxLength: 2000
-        type:
-          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
-          type: string
-          minLength: 0
-          maxLength: 20
-        language:
-          description: Language identification.
-          type: string
-          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
-        rph:
-          description: Reference Place Holder used as an index for this warning.
-          type: string
-          minLength: 1
-          maxLength: 8
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
+  responses:
+    '401':
+      description: Unauthorized
+    '414':
+      description: Request URI Too Large
+    '406':
+      description: Not acceptable.
+    '403':
+      description: Forbidden
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '502':
+      description: Bad Gateway
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '405':
+      description: Method not allowed
+    '503':
+      description: Service Unavailable
+    '413':
+      description: Request Entity Too Large
   parameters:
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
-      in: header
-      schema:
-        type: string
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
-      in: header
-      required: true
-      schema:
-        type: string
     externalData:
       name: externalData
       description: Pass this header as true, if payload needs DVM
@@ -1067,15 +1054,28 @@ components:
       schema:
         type: string
         pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
       in: header
       schema:
         type: string
     x-hotelid:
       name: x-hotelid
       description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
+      schema:
+        type: string
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
       in: header
       required: true
       schema:

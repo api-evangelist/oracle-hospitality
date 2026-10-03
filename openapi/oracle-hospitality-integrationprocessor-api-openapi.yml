@@ -185,26 +185,14 @@ paths:
       - IntegrationProcessor
 components:
   responses:
-    '405':
-      description: Method not allowed
-    '413':
-      description: Request Entity Too Large
-    '403':
-      description: Forbidden
-    '503':
-      description: Service Unavailable
-    '406':
-      description: Not acceptable.
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
     '401':
       description: Unauthorized
-    '415':
-      description: Unsupported Media Type
+    '414':
+      description: Request URI Too Large
+    '406':
+      description: Not acceptable.
+    '403':
+      description: Forbidden
     '404':
       description: Resource not found
       content:
@@ -213,104 +201,101 @@ components:
             $ref: '#/components/schemas/exceptionDetailType'
     '502':
       description: Bad Gateway
-    '414':
-      description: Request URI Too Large
     '400':
       description: Bad Request
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/exceptionDetailType'
-  parameters:
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
-      in: header
-      schema:
-        type: string
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
-      in: header
-      required: true
-      schema:
-        type: string
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
-      in: header
-      schema:
-        type: string
-    x-request-id:
-      name: x-request-id
-      description: Request Id of an incoming request
-      in: header
-      schema:
-        type: string
-        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
-    x-app-key:
-      name: x-app-key
-      description: Client or Partner's Application Key
-      in: header
-      required: true
-      schema:
-        type: string
-        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    x-externalsystem:
-      name: x-externalsystem
-      description: External system code.
-      in: header
-      x-example: EXTERNALSYSTEMCODE
-      schema:
-        type: string
-        maxLength: 40
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
-      in: header
-      schema:
-        type: string
-    x-hotelid:
-      name: x-hotelid
-      description: Mandatory parameter to identify the hotel code where the end user is logged in
-      in: header
-      required: true
-      schema:
-        type: string
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '503':
+      description: Service Unavailable
+    '405':
+      description: Method not allowed
+    '413':
+      description: Request Entity Too Large
   schemas:
-    businessEventHeaderType:
+    businessEventDataType:
       type: object
       properties:
-        moduleName:
-          description: Business event module name.
-          $ref: '#/components/schemas/businessEventModuleType'
-        actionType:
-          description: Business event action type, such as new reservation, update profile, etc.
-          type: string
-        actionId:
-          description: Unique action instance id of the business event, uniqueness is guaranteed intra-module only.
-          type: number
-        primaryKey:
-          description: Primary key value of the business event, such as resv name id, allotment header id, name id etc.
-          type: string
-        parentActionId:
-          description: Action instance id of the parent business event, if the action triggered this event was a side effect of another action.
-          type: number
-        publisherId:
-          description: Internal id of the application or system user that triggered this event.
-          type: number
-        createdDateTime:
-          description: Timestamp of the business event.
-          type: string
-          format: date-time
-        hotelId:
-          description: The property this business event is associated with.
+        businessEvent:
+          description: Business event type.
+          $ref: '#/components/schemas/businessEventType'
+        businessEventId:
+          description: Unique identifier of the Business Event ID
+          $ref: '#/components/schemas/businessEventIDType'
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    businessEventIDType:
+      type: object
+      properties:
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
           type: string
           minLength: 0
           maxLength: 20
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
+        idContext:
+          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+          type: string
+          minLength: 0
+          maxLength: 80
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+    businessEvents:
+      type: object
+      description: Provides business event message dequeued from BE queue as response
+      properties:
+        businessEventData:
+          description: List of BusinessEvents dequeued for given external system
+          type: array
+          items:
+            $ref: '#/components/schemas/businessEventDataType'
+        dataValueMapping:
+          description: List of available data value mappings for a given external system and property.
+          type: array
+          items:
+            $ref: '#/components/schemas/dataValueMappingType'
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/instanceLink'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    dataValueMappingType:
+      type: object
+      description: An element to provide OPERA to External value as operaValue and External to OPERA values as externalValue along with the data element when available for the given external system and property.
+      properties:
+        dataElement:
+          description: Name of the data element, such as rate code, room type, etc.
+          type: string
+        operaValue:
+          description: OPERA to External value that is configured for the given external system and property.
+          type: string
+        externalValue:
+          description: External to OPERA value that is configured for the given external system and property.
+          type: string
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
       type: object
       properties:
         type:
@@ -334,146 +319,9 @@ components:
         o:errorPath:
           type: string
           description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
       required:
       - type
       - title
-    businessEventDetailType:
-      type: object
-      properties:
-        dataElement:
-          description: Name of the data element, such as arrival date, departure date, etc.
-          type: string
-        oldValue:
-          description: Value of the element when this action took place. In case of date values, format used is YYYY-MM-DD.
-          type: string
-        newValue:
-          description: Value of the element after this action took place. In case of date values, format used is YYYY-MM-DD.
-          type: string
-        scopeFrom:
-          description: Begin date from when this value is applicable, such as daily element date, block grid date etc.
-          type: string
-          format: date
-          maxLength: 8
-        scopeTo:
-          description: End date till when this value is applicable, such as daily element date, block grid date etc.
-          type: string
-          format: date
-          maxLength: 8
-        elementSequence:
-          description: Sequence number used to correlate fields of each record, when a collection of records is represented.
-          type: integer
-        elementType:
-          description: Element type used to correlate fields of each record, when a collection of records is represented, such as phone type for phones.
-          type: string
-        elementRole:
-          description: Element role used to correlate fields of each record, when a collection of records is represented, such as phone role for phones.
-          type: string
-        hotelId:
-          description: Hotel code for the data element.
-          type: string
-    instanceLink:
-      type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
-      properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
-          type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
-        title:
-          description: Exact copy of the "summary" field on the linked operation.
-          type: string
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    businessEventModuleType:
-      type: string
-      enum:
-      - Activity
-      - Availability
-      - Block
-      - BlockOffsets
-      - Cashiering
-      - Catering
-      - CateringNotes
-      - Configuration
-      - ECertificate
-      - Enrollment
-      - Housekeeping
-      - MrEnrollment
-      - NightAudit
-      - OwnerContract
-      - Profile
-      - Rate
-      - Reservation
-      - StayRecords
-      - RoomRotation
-    businessEventType:
-      type: object
-      properties:
-        header:
-          description: Business event header type.
-          $ref: '#/components/schemas/businessEventHeaderType'
-        details:
-          description: Business event details collection.
-          $ref: '#/components/schemas/businessEventDetailsType'
-    businessEvents:
-      type: object
-      description: Provides business event message dequeued from BE queue as response
-      properties:
-        businessEventData:
-          description: List of BusinessEvents dequeued for given external system
-          type: array
-          items:
-            $ref: '#/components/schemas/businessEventDataType'
-        dataValueMapping:
-          description: List of available data value mappings for a given external system and property.
-          type: array
-          items:
-            $ref: '#/components/schemas/dataValueMappingType'
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/instanceLink'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    businessEventDetailsType:
-      type: array
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/businessEventDetailType'
     warningType:
       type: object
       description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
@@ -520,22 +368,109 @@ components:
           type: string
           minLength: 1
           maxLength: 8
-    dataValueMappingType:
+    businessEventModuleType:
+      type: string
+      enum:
+      - Activity
+      - Availability
+      - Block
+      - BlockOffsets
+      - Cashiering
+      - Catering
+      - CateringNotes
+      - Configuration
+      - ECertificate
+      - Enrollment
+      - Housekeeping
+      - MrEnrollment
+      - NightAudit
+      - OwnerContract
+      - Profile
+      - Rate
+      - Reservation
+      - StayRecords
+      - RoomRotation
+    businessEventDetailType:
       type: object
-      description: An element to provide OPERA to External value as operaValue and External to OPERA values as externalValue along with the data element when available for the given external system and property.
       properties:
         dataElement:
-          description: Name of the data element, such as rate code, room type, etc.
+          description: Name of the data element, such as arrival date, departure date, etc.
           type: string
-        operaValue:
-          description: OPERA to External value that is configured for the given external system and property.
+        oldValue:
+          description: Value of the element when this action took place. In case of date values, format used is YYYY-MM-DD.
           type: string
-        externalValue:
-          description: External to OPERA value that is configured for the given external system and property.
+        newValue:
+          description: Value of the element after this action took place. In case of date values, format used is YYYY-MM-DD.
           type: string
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
+        scopeFrom:
+          description: Begin date from when this value is applicable, such as daily element date, block grid date etc.
+          type: string
+          format: date
+          maxLength: 8
+        scopeTo:
+          description: End date till when this value is applicable, such as daily element date, block grid date etc.
+          type: string
+          format: date
+          maxLength: 8
+        elementSequence:
+          description: Sequence number used to correlate fields of each record, when a collection of records is represented.
+          type: integer
+        elementType:
+          description: Element type used to correlate fields of each record, when a collection of records is represented, such as phone type for phones.
+          type: string
+        elementRole:
+          description: Element role used to correlate fields of each record, when a collection of records is represented, such as phone role for phones.
+          type: string
+        hotelId:
+          description: Hotel code for the data element.
+          type: string
+    businessEventHeaderType:
+      type: object
+      properties:
+        moduleName:
+          description: Business event module name.
+          $ref: '#/components/schemas/businessEventModuleType'
+        actionType:
+          description: Business event action type, such as new reservation, update profile, etc.
+          type: string
+        actionId:
+          description: Unique action instance id of the business event, uniqueness is guaranteed intra-module only.
+          type: number
+        primaryKey:
+          description: Primary key value of the business event, such as resv name id, allotment header id, name id etc.
+          type: string
+        parentActionId:
+          description: Action instance id of the parent business event, if the action triggered this event was a side effect of another action.
+          type: number
+        publisherId:
+          description: Internal id of the application or system user that triggered this event.
+          type: number
+        createdDateTime:
+          description: Timestamp of the business event.
+          type: string
+          format: date-time
+        hotelId:
+          description: The property this business event is associated with.
+          type: string
+          minLength: 0
+          maxLength: 20
+    businessEventDetailsType:
+      type: array
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/businessEventDetailType'
+    businessEventType:
+      type: object
+      properties:
+        header:
+          description: Business event header type.
+          $ref: '#/components/schemas/businessEventHeaderType'
+        details:
+          description: Business event details collection.
+          $ref: '#/components/schemas/businessEventDetailsType'
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
       type: object
       properties:
         type:
@@ -559,41 +494,106 @@ components:
         o:errorPath:
           type: string
           description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
       required:
       - type
       - title
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
-    businessEventIDType:
+    instanceLink:
       type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
       properties:
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
           type: string
-          minLength: 0
-          maxLength: 20
-        idContext:
-          description: Used to identify the source of the identifier (e.g., IATA, ABTA).
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
           type: string
-          minLength: 0
-          maxLength: 80
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
           type: string
-          minLength: 0
-          maxLength: 80
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
-    businessEventDataType:
-      type: object
-      properties:
-        businessEvent:
-          description: Business event type.
-          $ref: '#/components/schemas/businessEventType'
-        businessEventId:
-          description: Unique identifier of the Business Event ID
-          $ref: '#/components/schemas/businessEventIDType'
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+  parameters:
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
+      schema:
+        type: string
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
+      schema:
+        type: string
+    x-externalsystem:
+      name: x-externalsystem
+      description: External system code.
+      in: header
+      x-example: EXTERNALSYSTEMCODE
+      schema:
+        type: string
+        maxLength: 40
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
+      schema:
+        type: string
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

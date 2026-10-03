@@ -1175,26 +1175,14 @@ paths:
     - url: /inv/v1
 components:
   responses:
-    '405':
-      description: Method not allowed
-    '413':
-      description: Request Entity Too Large
-    '403':
-      description: Forbidden
-    '503':
-      description: Service Unavailable
-    '406':
-      description: Not acceptable.
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
     '401':
       description: Unauthorized
-    '415':
-      description: Unsupported Media Type
+    '414':
+      description: Request URI Too Large
+    '406':
+      description: Not acceptable.
+    '403':
+      description: Forbidden
     '404':
       description: Resource not found
       content:
@@ -1203,14 +1191,26 @@ components:
             $ref: '#/components/schemas/exceptionDetailType'
     '502':
       description: Bad Gateway
-    '414':
-      description: Request URI Too Large
     '400':
       description: Bad Request
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/exceptionDetailType'
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '503':
+      description: Service Unavailable
+    '405':
+      description: Method not allowed
+    '413':
+      description: Request Entity Too Large
   schemas:
     channelSellLimitsByDate:
       type: object
@@ -1222,6 +1222,79 @@ components:
         adjustOverlappingSchedules:
           description: Flag to indicate whether any overlapping schedules should be automatically adjusted (split, truncated, etc.) as needed.
           type: boolean
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    channelSellLimitScheduleType:
+      type: object
+      description: Details about a sell limit schedule for a channel or channel room type.
+      properties:
+        sellLimitId:
+          description: Unique identifier for the channel sell limit.
+          $ref: '#/components/schemas/uniqueID_Type'
+        hotelId:
+          description: Hotel for which the sell limit schedule is applicable.
+          type: string
+          minLength: 0
+          maxLength: 20
+        bookingChannelCode:
+          description: Channel for which the sell limit schedule is applicable.
+          type: string
+          minLength: 0
+          maxLength: 20
+        channelRoomType:
+          description: Channel room type for which the sell limit schedule is applicable.
+          type: string
+          minLength: 0
+          maxLength: 20
+        dateRange:
+          description: Sell limit schedule begin and end dates as well as which days of the week the limit applies to.
+          $ref: '#/components/schemas/timeSpanDaysOfWeekType'
+        numberOfRooms:
+          description: Number of rooms which can be sold under the hotel, channel, and channel room type combination for the specified date range.
+          type: integer
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    channelSellLimitType:
+      type: object
+      properties:
+        numberOfRooms:
+          description: Number of rooms that can be sold for this particular sell limit date.
+          type: integer
+        bookingChannelCode:
+          description: Channel for which this sell limit is applicable.
+          type: string
+          minLength: 0
+          maxLength: 20
+        date:
+          description: Date on which this sell limit is applicable.
+          type: string
+          format: date
+          maxLength: 8
+    status:
+      type: object
+      description: Response Body.
+      properties:
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    channelSellLimits:
+      type: object
+      description: Response object containing sell limit schedules set for the channel or channel room type.
+      properties:
+        sellLimits:
+          description: List of sell limit schedules configured for the requested channel or channel room type.
+          $ref: '#/components/schemas/channelSellLimitSchedulesType'
+        links:
+          $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
     channelSellLimitsByDateRange:
@@ -1236,17 +1309,129 @@ components:
           type: boolean
         warnings:
           $ref: '#/components/schemas/warningsType'
-    channelSellLimits:
+    timeSpanType:
       type: object
-      description: Response object containing sell limit schedules set for the channel or channel room type.
+      description: Allows for a choice in description of the amount of time spanned by this type. EndDate specifies a specific date, while Duration provides a measure of time to add to the StartDate to yield end date.
       properties:
-        sellLimits:
-          description: List of sell limit schedules configured for the requested channel or channel room type.
-          $ref: '#/components/schemas/channelSellLimitSchedulesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
+        startDate:
+          type: string
+          format: date
+          maxLength: 8
+        endDate:
+          type: string
+          format: date
+          maxLength: 8
+        duration:
+          type: string
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
+    warningType:
+      type: object
+      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
+          type: string
+          maxLength: 2000
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+          type: string
+          minLength: 0
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+          maxLength: 2000
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+          maxLength: 2000
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+          maxLength: 2000
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+          maxLength: 2000
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        rph:
+          description: Reference Place Holder used as an index for this warning.
+          type: string
+          minLength: 1
+          maxLength: 8
+    uniqueID_Type:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
+    timeSpanDaysOfWeekType:
+      type: object
+      description: Container for Time span with days of week.
+      properties:
+        timeSpan:
+          $ref: '#/components/schemas/timeSpanType'
+        sunday:
+          type: boolean
+        monday:
+          type: boolean
+        tuesday:
+          type: boolean
+        wednesday:
+          type: boolean
+        thursday:
+          type: boolean
+        friday:
+          type: boolean
+        saturday:
+          type: boolean
     exceptionDetailType:
       title: Error Detail
       description: Complex type that contains error details for a REST call.
@@ -1357,247 +1542,58 @@ components:
         title:
           description: Exact copy of the "summary" field on the linked operation.
           type: string
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    channelSellLimitScheduleType:
-      type: object
-      description: Details about a sell limit schedule for a channel or channel room type.
-      properties:
-        sellLimitId:
-          description: Unique identifier for the channel sell limit.
-          $ref: '#/components/schemas/uniqueID_Type'
-        hotelId:
-          description: Hotel for which the sell limit schedule is applicable.
-          type: string
-          minLength: 0
-          maxLength: 20
-        bookingChannelCode:
-          description: Channel for which the sell limit schedule is applicable.
-          type: string
-          minLength: 0
-          maxLength: 20
-        channelRoomType:
-          description: Channel room type for which the sell limit schedule is applicable.
-          type: string
-          minLength: 0
-          maxLength: 20
-        dateRange:
-          description: Sell limit schedule begin and end dates as well as which days of the week the limit applies to.
-          $ref: '#/components/schemas/timeSpanDaysOfWeekType'
-        numberOfRooms:
-          description: Number of rooms which can be sold under the hotel, channel, and channel room type combination for the specified date range.
-          type: integer
-    channelSellLimitType:
-      type: object
-      properties:
-        numberOfRooms:
-          description: Number of rooms that can be sold for this particular sell limit date.
-          type: integer
-        bookingChannelCode:
-          description: Channel for which this sell limit is applicable.
-          type: string
-          minLength: 0
-          maxLength: 20
-        date:
-          description: Date on which this sell limit is applicable.
-          type: string
-          format: date
-          maxLength: 8
-    status:
-      type: object
-      description: Response Body.
-      properties:
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-        links:
-          $ref: '#/components/schemas/links'
     channelSellLimitSchedulesType:
       type: array
       description: Details about a sell limit schedule for a channel or channel room type.
       maxItems: 4000
       items:
         $ref: '#/components/schemas/channelSellLimitScheduleType'
-    uniqueID_Type:
+    holdItemInfoType:
       type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      description: Information about an item inventory that is requested for hold.
       properties:
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 40
-    warningType:
-      type: object
-      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
-      properties:
-        value:
-          type: string
-          description: Property Value
-        shortText:
-          description: An abbreviated version of the error in textual format.
-          type: string
-          maxLength: 2000
-        code:
-          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+        itemId:
+          description: Item ID to hold.
+          $ref: '#/components/schemas/uniqueID_Type'
+        itemCode:
+          description: Item Code to hold.
           type: string
           minLength: 0
           maxLength: 20
-        docURL:
-          description: If present, this URL refers to an online description of the error that occurred.
-          type: string
-          maxLength: 2000
-        status:
-          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
-          type: string
-          maxLength: 2000
-        tag:
-          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
-          type: string
-          maxLength: 2000
-        recordId:
-          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
-          type: string
-          maxLength: 2000
-        type:
-          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
-          type: string
-          minLength: 0
-          maxLength: 20
-        language:
-          description: Language identification.
-          type: string
-          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
-        rph:
-          description: Reference Place Holder used as an index for this warning.
-          type: string
-          minLength: 1
-          maxLength: 8
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-      required:
-      - type
-      - title
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
-    timeSpanType:
-      type: object
-      description: Allows for a choice in description of the amount of time spanned by this type. EndDate specifies a specific date, while Duration provides a measure of time to add to the StartDate to yield end date.
-      properties:
-        startDate:
-          type: string
-          format: date
-          maxLength: 8
-        endDate:
-          type: string
-          format: date
-          maxLength: 8
-        duration:
-          type: string
-    timeSpanDaysOfWeekType:
-      type: object
-      description: Container for Time span with days of week.
-      properties:
         timeSpan:
-          $ref: '#/components/schemas/timeSpanType'
-        sunday:
-          type: boolean
-        monday:
-          type: boolean
-        tuesday:
-          type: boolean
-        wednesday:
-          type: boolean
-        thursday:
-          type: boolean
-        friday:
-          type: boolean
-        saturday:
-          type: boolean
-    hotelInventory:
+          description: Date Range to hold the requested item.
+          $ref: '#/components/schemas/timeSpanType_2'
+        count:
+          description: Number of items to hold.
+          type: integer
+    dailyItemInventoryCountsType:
       type: object
-      description: A response for Hotel Inventories meeting the search criteria. Returns inventory classified on room type, class and house level for a given property.
-      properties:
-        hotelInventories:
-          description: Refer to Inventory common types document.
-          type: array
-          items:
-            $ref: '#/components/schemas/hotelInventoryType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    heldByType:
-      type: string
-      description: Type of the entity that is requesting for the item hold.
-      enum:
-      - Event
-      - Reservation
-      - Allotment
-    operaVersionNumberType:
-      type: string
-      description: Current Opera Version Number
-      minLength: 0
-      maxLength: 40
-    roomTypeSellLimitType:
-      type: object
+      description: Inventory counts for the given date.
       properties:
         date:
+          description: Date of the item inventory.
           type: string
           format: date
           maxLength: 8
-        amount:
-          type: number
-        flatOrPercentage:
-          type: string
-        roomType:
-          type: string
-          minLength: 0
-          maxLength: 20
-    inventoryCountsListType:
+        total:
+          description: Total Item count.
+          type: integer
+        available:
+          description: Available Item count.
+          type: integer
+    holdItemInfoListType:
       type: array
-      description: Collection of Inventory counts for the date ranges.
+      description: Info of an item inventory that is requested for Hold.
       maxItems: 4000
       items:
-        $ref: '#/components/schemas/inventoryCountsType'
-    sellLimitByDateResponse:
+        $ref: '#/components/schemas/holdItemInfoType'
+    holdItemsInventory:
       type: object
-      description: A Response object for setting sell limit by date range.
+      description: Response object to fetch the item hold details.
       properties:
+        itemsInventory:
+          description: Collection of Reservations returned/fetched as per the criteria in the fetch request.
+          $ref: '#/components/schemas/poolItemInventoryCountsListType'
         links:
           $ref: '#/components/schemas/links'
         warnings:
@@ -1626,6 +1622,65 @@ components:
         overrideInventory:
           description: Flag to indicate if inventory check will be overriden.
           type: boolean
+    releaseItemInventoryHold:
+      type: object
+      description: Request object for releasing a held item inventory/availability.
+      properties:
+        hotelId:
+          description: Hotel Code of the holding item to be released.
+          $ref: '#/components/schemas/codeType'
+        heldById:
+          description: ID of the one holding the item to be released.
+          $ref: '#/components/schemas/uniqueID_Type'
+        heldBy:
+          description: Type of the entity that is requesting for the item hold.
+          $ref: '#/components/schemas/heldByType'
+        itemHoldId:
+          description: ID reference for the one who hold the item. Used for releasing/reserving the item afterwards.
+          type: number
+        itemId:
+          description: ID of the item to be released. Passing null releases all held items by the passed holder.
+          $ref: '#/components/schemas/uniqueID_Type'
+        itemCode:
+          description: Item Code to be released.
+          $ref: '#/components/schemas/codeType'
+        reserveDates:
+          description: Dates when item was reserved.
+          $ref: '#/components/schemas/timeSpanType_2'
+        releaseItemsInventoryHoldInfo:
+          description: Information for releasing an Items Inventory hold.
+          $ref: '#/components/schemas/releaseItemsInventoryHoldType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    releaseItemInventoryHoldType:
+      type: object
+      description: Item information for releasing an Item Inventory hold.
+      properties:
+        hotelId:
+          description: Hotel Code of the holding item to be released.
+          type: string
+          minLength: 0
+          maxLength: 20
+        heldById:
+          description: ID of the one holding the item to be released.
+          $ref: '#/components/schemas/uniqueID_Type'
+        heldBy:
+          description: Type of the entity that is requesting for the item hold.
+          $ref: '#/components/schemas/heldByType'
+        itemHoldId:
+          description: ID reference for the one who hold the item. Used for releasing/reserving the item afterwards.
+          type: number
+        itemId:
+          description: ID of the item to be released. Passing null releases all held items by the passed holder.
+          $ref: '#/components/schemas/uniqueID_Type'
+        itemCode:
+          description: Item Code to be released.
+          type: string
+          minLength: 0
+          maxLength: 20
+        reserveDates:
+          description: Dates when item was reserved.
+          $ref: '#/components/schemas/timeSpanType_2'
     inventoryLevelCountsListType:
       type: object
       description: Collection of Inventory counts for the date ranges.
@@ -1644,42 +1699,40 @@ components:
         sequence:
           description: Integer Group/Level order sequence number.
           type: integer
-    timeWindowType:
+    sellLimit:
       type: object
-      description: Defines a Time period with startDate time and an endDate time.
+      description: A Request message that sets sell limit for a particular date for all the levels House, room type and room class. The request can contain the number type in which the sell limits is to be fetched for the different levels.
       properties:
-        startTime:
-          description: Start Time of the Time window.
-          type: string
-        endTime:
-          description: End Time of the Time window.
-          type: string
-    sellLimitByRange:
-      type: object
-      description: A Request message that sets sell limit for collection of date ranges for either of the levels House, room type or room class. You can specify the days of the week, number type group and the date range as part of the request.
-      properties:
-        sellLimitsByDateRange:
-          description: Contains the sell limits for a given date range to be set.
-          type: array
-          items:
-            $ref: '#/components/schemas/sellLimitByDateRangeType'
+        sellLimitsByDate:
+          description: Contains the sell limits that are being updated (Updates can be at House level, Room Class or Room Type levels).
+          $ref: '#/components/schemas/sellLimitByDateType'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    dailyItemInventoryCountsType:
+    codeType:
+      type: string
+      description: Used for codes in the OPERA Code tables. Possible values of this pattern are 1, 101, 101.EQP, or 101.EQP.X.
+      minLength: 0
+      maxLength: 20
+    sellLimitByDateRangeType:
       type: object
-      description: Inventory counts for the given date.
+      description: This type is used by sell limit request for date ranges.
       properties:
-        date:
-          description: Date of the item inventory.
+        sellLimitDateRanges:
+          description: Collection of date ranges and sell limit amount.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/sellLimitDateRangeType'
+        hotelId:
           type: string
-          format: date
-          maxLength: 8
-        total:
-          description: Total Item count.
-          type: integer
-        available:
-          description: Available Item count.
-          type: integer
+          minLength: 0
+          maxLength: 20
+        codeCategory:
+          $ref: '#/components/schemas/roomCodeCategoryType'
+        codeValue:
+          type: string
+          minLength: 0
+          maxLength: 20
     itemInventoryCountsType:
       type: object
       description: Basic information regarding an Item.
@@ -1738,64 +1791,63 @@ components:
         inventories:
           description: Collection of Inventory counts for the given dates.
           $ref: '#/components/schemas/dailyItemInventoryCountsListType'
-    holdItemsInventory:
-      type: object
-      description: Response object to fetch the item hold details.
-      properties:
-        itemsInventory:
-          description: Collection of Reservations returned/fetched as per the criteria in the fetch request.
-          $ref: '#/components/schemas/poolItemInventoryCountsListType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    releaseItemInventoryHold:
-      type: object
-      description: Request object for releasing a held item inventory/availability.
-      properties:
-        hotelId:
-          description: Hotel Code of the holding item to be released.
-          $ref: '#/components/schemas/codeType'
-        heldById:
-          description: ID of the one holding the item to be released.
-          $ref: '#/components/schemas/uniqueID_Type'
-        heldBy:
-          description: Type of the entity that is requesting for the item hold.
-          $ref: '#/components/schemas/heldByType'
-        itemHoldId:
-          description: ID reference for the one who hold the item. Used for releasing/reserving the item afterwards.
-          type: number
-        itemId:
-          description: ID of the item to be released. Passing null releases all held items by the passed holder.
-          $ref: '#/components/schemas/uniqueID_Type'
-        itemCode:
-          description: Item Code to be released.
-          $ref: '#/components/schemas/codeType'
-        reserveDates:
-          description: Dates when item was reserved.
-          $ref: '#/components/schemas/timeSpanType_2'
-        releaseItemsInventoryHoldInfo:
-          description: Information for releasing an Items Inventory hold.
-          $ref: '#/components/schemas/releaseItemsInventoryHoldType'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
     itemInventoryCountsListType:
       type: array
       description: Provides item's brief information and a collection of Inventory counts for the given dates for the item.
       maxItems: 4000
       items:
         $ref: '#/components/schemas/itemInventoryCountsType'
-    houseSellLimitType:
+    inventoryCountsListType:
+      type: array
+      description: Collection of Inventory counts for the date ranges.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/inventoryCountsType'
+    holdItemInventory:
       type: object
+      description: Object containing the item hold details.
       properties:
-        date:
+        holdItemInfo:
+          description: Item information.
+          $ref: '#/components/schemas/holdItemInventoryType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    hotelInventory:
+      type: object
+      description: A response for Hotel Inventories meeting the search criteria. Returns inventory classified on room type, class and house level for a given property.
+      properties:
+        hotelInventories:
+          description: Refer to Inventory common types document.
+          type: array
+          items:
+            $ref: '#/components/schemas/hotelInventoryType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    timeSpanType_2:
+      type: object
+      description: Allows for a choice in description of the amount of time spanned by this type. EndDate specifies a specific date, while Duration provides a measure of time to add to the StartDate to yield endDate date.
+      properties:
+        startDate:
           type: string
           format: date
           maxLength: 8
-        amount:
-          type: number
-        flatOrPercentage:
+        endDate:
           type: string
+          format: date
+          maxLength: 8
+        duration:
+          type: string
+    heldByType:
+      type: string
+      description: Type of the entity that is requesting for the item hold.
+      enum:
+      - Event
+      - Reservation
+      - Allotment
     pingDetail:
       type: object
       description: Response for Ping operation.
@@ -1807,51 +1859,63 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    holdItemInfoType:
+    sellLimitByDateType:
       type: object
-      description: Information about an item inventory that is requested for hold.
+      description: This type is used by sell limit request.
       properties:
-        itemId:
-          description: Item ID to hold.
-          $ref: '#/components/schemas/uniqueID_Type'
-        itemCode:
-          description: Item Code to hold.
+        houseSellLimits:
+          description: Collection of House level sell limit by the date.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/houseSellLimitType'
+        roomTypeSellLimits:
+          description: Collection of Room type level sell limit by the date.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/roomTypeSellLimitType'
+        roomClassSellLimits:
+          description: Collection of Room Class level sell limit by the date.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/roomClassSellLimitType'
+        hotelId:
+          description: Resort context.
           type: string
           minLength: 0
           maxLength: 20
-        timeSpan:
-          description: Date Range to hold the requested item.
-          $ref: '#/components/schemas/timeSpanType_2'
-        count:
-          description: Number of items to hold.
-          type: integer
-    dailyItemInventoryCountsListType:
-      type: array
-      description: Inventory counts for the given date.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/dailyItemInventoryCountsType'
-    releasedItemInventoryHeld:
-      type: object
-      description: Response object for releasing item inventory hold.
-      properties:
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    holdItemInfoListType:
-      type: array
-      description: Info of an item inventory that is requested for Hold.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/holdItemInfoType'
     roomCodeCategoryType:
       type: string
       description: Used for Room code type. eg. Code="RoomType" or "RoomClass"
       enum:
       - RoomType
       - RoomClass
-    roomClassSellLimitType:
+    inventoryCountsType:
+      type: object
+      description: Inventory counts for the given date range.
+      properties:
+        available:
+          description: Indicates whether enough inventory is available or not.
+          type: boolean
+        availableCount:
+          description: Available Inventory count.
+          type: integer
+        availableTentativeCount:
+          description: Available Tentative Inventory count.
+          type: integer
+        startDate:
+          description: The starting value of the date range.
+          type: string
+          format: date
+          maxLength: 8
+        endDate:
+          description: The ending value of the date range.
+          type: string
+          format: date
+          maxLength: 8
+    houseSellLimitType:
       type: object
       properties:
         date:
@@ -1862,24 +1926,25 @@ components:
           type: number
         flatOrPercentage:
           type: string
-        roomClass:
-          type: string
-          minLength: 0
-          maxLength: 20
-    releaseItemsInventoryHoldType:
-      type: array
-      description: Collection of items for releasing an Items Inventory hold.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/releaseItemInventoryHoldType'
-    sellLimitResponse:
+    hotelInventoryType:
       type: object
-      description: A Response object for setting sell limit by date.
+      description: A collection of Reservation objects and Unique IDs of Reservation.
       properties:
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
+        houseInventory:
+          description: Collection of House level Inventory counts for the date ranges.
+          $ref: '#/components/schemas/inventoryCountsListType'
+        roomTypeInventories:
+          description: Collection of Room type level Inventory counts for the date ranges.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/inventoryLevelCountsListType'
+        roomClassInventories:
+          description: Collection of Room Class level Inventory counts for the date ranges.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/inventoryLevelCountsListType'
     sellLimitDateRangeType:
       type: object
       properties:
@@ -1914,6 +1979,70 @@ components:
         actionType:
           description: It indicates the call is to update Available Rooms, Sell Limit or Sell Control Rooms.
           type: string
+    dailyItemInventoryCountsListType:
+      type: array
+      description: Inventory counts for the given date.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/dailyItemInventoryCountsType'
+    sellLimitByDateResponse:
+      type: object
+      description: A Response object for setting sell limit by date range.
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    timeWindowType:
+      type: object
+      description: Defines a Time period with startDate time and an endDate time.
+      properties:
+        startTime:
+          description: Start Time of the Time window.
+          type: string
+        endTime:
+          description: End Time of the Time window.
+          type: string
+    roomTypeSellLimitType:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          maxLength: 8
+        amount:
+          type: number
+        flatOrPercentage:
+          type: string
+        roomType:
+          type: string
+          minLength: 0
+          maxLength: 20
+    sellLimitResponse:
+      type: object
+      description: A Response object for setting sell limit by date.
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    sellLimitByRange:
+      type: object
+      description: A Request message that sets sell limit for collection of date ranges for either of the levels House, room type or room class. You can specify the days of the week, number type group and the date range as part of the request.
+      properties:
+        sellLimitsByDateRange:
+          description: Contains the sell limits for a given date range to be set.
+          type: array
+          items:
+            $ref: '#/components/schemas/sellLimitByDateRangeType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    releaseItemsInventoryHoldType:
+      type: array
+      description: Collection of items for releasing an Items Inventory hold.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/releaseItemInventoryHoldType'
     poolItemInventoryCountsType:
       type: object
       description: Basic information regarding an Item.
@@ -1975,142 +2104,11 @@ components:
         poolItems:
           description: Collection of items in the pool with brief information and its Inventory counts for the given dates. It element is populated when the parent item is a pull(when ItemPool is true.). ItemPool flag for this item, which is an item in the pool, cannot not be true.
           $ref: '#/components/schemas/itemInventoryCountsListType'
-    holdItemInventory:
-      type: object
-      description: Object containing the item hold details.
-      properties:
-        holdItemInfo:
-          description: Item information.
-          $ref: '#/components/schemas/holdItemInventoryType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    hotelInventoryType:
-      type: object
-      description: A collection of Reservation objects and Unique IDs of Reservation.
-      properties:
-        houseInventory:
-          description: Collection of House level Inventory counts for the date ranges.
-          $ref: '#/components/schemas/inventoryCountsListType'
-        roomTypeInventories:
-          description: Collection of Room type level Inventory counts for the date ranges.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/inventoryLevelCountsListType'
-        roomClassInventories:
-          description: Collection of Room Class level Inventory counts for the date ranges.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/inventoryLevelCountsListType'
-    releaseItemInventoryHoldType:
-      type: object
-      description: Item information for releasing an Item Inventory hold.
-      properties:
-        hotelId:
-          description: Hotel Code of the holding item to be released.
-          type: string
-          minLength: 0
-          maxLength: 20
-        heldById:
-          description: ID of the one holding the item to be released.
-          $ref: '#/components/schemas/uniqueID_Type'
-        heldBy:
-          description: Type of the entity that is requesting for the item hold.
-          $ref: '#/components/schemas/heldByType'
-        itemHoldId:
-          description: ID reference for the one who hold the item. Used for releasing/reserving the item afterwards.
-          type: number
-        itemId:
-          description: ID of the item to be released. Passing null releases all held items by the passed holder.
-          $ref: '#/components/schemas/uniqueID_Type'
-        itemCode:
-          description: Item Code to be released.
-          type: string
-          minLength: 0
-          maxLength: 20
-        reserveDates:
-          description: Dates when item was reserved.
-          $ref: '#/components/schemas/timeSpanType_2'
-    inventoryCountsType:
-      type: object
-      description: Inventory counts for the given date range.
-      properties:
-        available:
-          description: Indicates whether enough inventory is available or not.
-          type: boolean
-        availableCount:
-          description: Available Inventory count.
-          type: integer
-        availableTentativeCount:
-          description: Available Tentative Inventory count.
-          type: integer
-        startDate:
-          description: The starting value of the date range.
-          type: string
-          format: date
-          maxLength: 8
-        endDate:
-          description: The ending value of the date range.
-          type: string
-          format: date
-          maxLength: 8
-    timeSpanType_2:
-      type: object
-      description: Allows for a choice in description of the amount of time spanned by this type. EndDate specifies a specific date, while Duration provides a measure of time to add to the StartDate to yield endDate date.
-      properties:
-        startDate:
-          type: string
-          format: date
-          maxLength: 8
-        endDate:
-          type: string
-          format: date
-          maxLength: 8
-        duration:
-          type: string
-    sellLimit:
-      type: object
-      description: A Request message that sets sell limit for a particular date for all the levels House, room type and room class. The request can contain the number type in which the sell limits is to be fetched for the different levels.
-      properties:
-        sellLimitsByDate:
-          description: Contains the sell limits that are being updated (Updates can be at House level, Room Class or Room Type levels).
-          $ref: '#/components/schemas/sellLimitByDateType'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    codeType:
+    operaVersionNumberType:
       type: string
-      description: Used for codes in the OPERA Code tables. Possible values of this pattern are 1, 101, 101.EQP, or 101.EQP.X.
+      description: Current Opera Version Number
       minLength: 0
-      maxLength: 20
-    poolItemInventoryCountsListType:
-      type: array
-      description: Items/Item pool with brief information and its Inventory counts for the given dates.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/poolItemInventoryCountsType'
-    sellLimitByDateRangeType:
-      type: object
-      description: This type is used by sell limit request for date ranges.
-      properties:
-        sellLimitDateRanges:
-          description: Collection of date ranges and sell limit amount.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/sellLimitDateRangeType'
-        hotelId:
-          type: string
-          minLength: 0
-          maxLength: 20
-        codeCategory:
-          $ref: '#/components/schemas/roomCodeCategoryType'
-        codeValue:
-          type: string
-          minLength: 0
-          maxLength: 20
+      maxLength: 40
     itemInventory:
       type: object
       description: Return object to the request for information regarding items inventory/availability.
@@ -2122,60 +2120,42 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    sellLimitByDateType:
+    poolItemInventoryCountsListType:
+      type: array
+      description: Items/Item pool with brief information and its Inventory counts for the given dates.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/poolItemInventoryCountsType'
+    roomClassSellLimitType:
       type: object
-      description: This type is used by sell limit request.
       properties:
-        houseSellLimits:
-          description: Collection of House level sell limit by the date.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/houseSellLimitType'
-        roomTypeSellLimits:
-          description: Collection of Room type level sell limit by the date.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/roomTypeSellLimitType'
-        roomClassSellLimits:
-          description: Collection of Room Class level sell limit by the date.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/roomClassSellLimitType'
-        hotelId:
-          description: Resort context.
+        date:
+          type: string
+          format: date
+          maxLength: 8
+        amount:
+          type: number
+        flatOrPercentage:
+          type: string
+        roomClass:
           type: string
           minLength: 0
           maxLength: 20
+    releasedItemInventoryHeld:
+      type: object
+      description: Response object for releasing item inventory hold.
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
   parameters:
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
-      in: header
-      schema:
-        type: string
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
-      in: header
-      required: true
-      schema:
-        type: string
     externalData:
       name: externalData
       description: Pass this header as true, if payload needs DVM
       in: header
       schema:
         type: string
-    x-request-id:
-      name: x-request-id
-      description: Request Id of an incoming request
-      in: header
-      schema:
-        type: string
-        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
     x-app-key:
       name: x-app-key
       description: Client or Partner's Application Key
@@ -2184,6 +2164,26 @@ components:
       schema:
         type: string
         pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
+      schema:
+        type: string
     x-externalsystem:
       name: x-externalsystem
       description: External system code.
@@ -2198,9 +2198,9 @@ components:
       in: header
       schema:
         type: string
-    x-hotelid:
-      name: x-hotelid
-      description: Mandatory parameter to identify the hotel code where the end user is logged in
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
       in: header
       required: true
       schema:

@@ -48170,6 +48170,43 @@ paths:
       tags:
       - LOV
 components:
+  responses:
+    '401':
+      description: Unauthorized
+    '414':
+      description: Request URI Too Large
+    '406':
+      description: Not acceptable.
+    '403':
+      description: Forbidden
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '502':
+      description: Bad Gateway
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '503':
+      description: Service Unavailable
+    '405':
+      description: Method not allowed
+    '413':
+      description: Request Entity Too Large
   schemas:
     itemType:
       type: object
@@ -48195,186 +48232,17 @@ components:
           maxLength: 2000
         active:
           type: boolean
-    listOfValueNames:
+    operaVersion:
       type: object
+      description: Response for Ping operation.
       properties:
-        lOVNames:
-          description: Collection of List of Value names along with the input parameters it supports.
-          $ref: '#/components/schemas/lOVNamesType'
+        operaVersion:
+          description: Current Opera Version Number
+          type: string
         links:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    codeListType:
-      type: array
-      maxItems: 4000
-      items:
-        type: string
-        minLength: 0
-        maxLength: 20
-    listOfValuesCriteriaType:
-      type: object
-      properties:
-        parameters:
-          description: Please see documentation for a list of applicable ParameterName options.
-          $ref: '#/components/schemas/parametersType'
-        itemCodes:
-          type: array
-          maxItems: 4000
-          items:
-            type: string
-            minLength: 0
-            maxLength: 2000
-        excludeCodeList:
-          $ref: '#/components/schemas/codeListType'
-        lovName:
-          description: The name of the LOV to fetch.
-          type: string
-          minLength: 0
-          maxLength: 100
-        includeInactive:
-          description: Only useful for LOVs that support toggle of inactive records inclusion. When set to true, inactive records will be included.
-          type: boolean
-    validateListOfValues:
-      type: object
-      properties:
-        criteria:
-          description: Criteria to validate a list of value.
-          $ref: '#/components/schemas/listOfValuesCriteriaType'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    lOVNamesType:
-      type: array
-      description: List of List of Value names along with all parameters applicable for the LOV.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/lOVNameType'
-    parametersNameType:
-      type: object
-      properties:
-        parameterName:
-          description: Name of the parameter needed by the LOV.
-          type: string
-        mandatory:
-          description: This element depicts if the given parameter is mandatory for the LOV.
-          type: boolean
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
-      required:
-      - type
-      - title
-    instanceLink:
-      type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
-      properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
-          type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
-        title:
-          description: Exact copy of the "summary" field on the linked operation.
-          type: string
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    lOVNameType:
-      type: object
-      properties:
-        name:
-          description: Unique name for the LOV.
-          type: string
-          minLength: 0
-          maxLength: 200
-        parameters:
-          description: List of parameter names applicable for the particular LOV.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/parametersNameType'
-    status:
-      type: object
-      description: Response Body.
-      properties:
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-        links:
-          $ref: '#/components/schemas/links'
-    listOfValuesType:
-      type: object
-      properties:
-        items:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/itemType'
-        lovName:
-          description: List of Values name.
-          type: string
-          minLength: 0
-          maxLength: 100
-        itemCount:
-          type: integer
-        description:
-          type: string
-          minLength: 0
-          maxLength: 20
     listOfValuesMatchType:
       type: object
       description: This is a prototype element for the LOV validation.
@@ -48403,6 +48271,111 @@ components:
           type: string
           minLength: 0
           maxLength: 20
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    status:
+      type: object
+      description: Response Body.
+      properties:
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    codeListType:
+      type: array
+      maxItems: 4000
+      items:
+        type: string
+        minLength: 0
+        maxLength: 20
+    validateListOfValues:
+      type: object
+      properties:
+        criteria:
+          description: Criteria to validate a list of value.
+          $ref: '#/components/schemas/listOfValuesCriteriaType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    lOVNameType:
+      type: object
+      properties:
+        name:
+          description: Unique name for the LOV.
+          type: string
+          minLength: 0
+          maxLength: 200
+        parameters:
+          description: List of parameter names applicable for the particular LOV.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/parametersNameType'
+    validateListOfValuesDetails:
+      type: object
+      properties:
+        match:
+          description: Match for the List of Value items.
+          $ref: '#/components/schemas/listOfValuesMatchType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    listOfValuesType:
+      type: object
+      properties:
+        items:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/itemType'
+        lovName:
+          description: List of Values name.
+          type: string
+          minLength: 0
+          maxLength: 100
+        itemCount:
+          type: integer
+        description:
+          type: string
+          minLength: 0
+          maxLength: 20
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
     warningType:
       type: object
       description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
@@ -48449,9 +48422,75 @@ components:
           type: string
           minLength: 1
           maxLength: 8
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
+    listOfValues:
+      type: object
+      properties:
+        listOfValues:
+          description: Collection of List of Value items.
+          $ref: '#/components/schemas/listOfValuesType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    parametersType:
+      type: array
+      description: Collection of generic Name-Value-Pair parameters.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/parameterType'
+    listOfValueNames:
+      type: object
+      properties:
+        lOVNames:
+          description: Collection of List of Value names along with the input parameters it supports.
+          $ref: '#/components/schemas/lOVNamesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    parameterType:
+      type: object
+      description: Name value pair type that will hold generic parameter information. Only use this type when the parameters being passed are too dynamic to be defined.
+      properties:
+        parameterName:
+          description: Name of the parameter.
+          type: string
+        parameterValue:
+          description: Value of the parameter.
+          type: string
+    listOfValuesCriteriaType:
+      type: object
+      properties:
+        parameters:
+          description: Please see documentation for a list of applicable ParameterName options.
+          $ref: '#/components/schemas/parametersType'
+        itemCodes:
+          type: array
+          maxItems: 4000
+          items:
+            type: string
+            minLength: 0
+            maxLength: 2000
+        excludeCodeList:
+          $ref: '#/components/schemas/codeListType'
+        lovName:
+          description: The name of the LOV to fetch.
+          type: string
+          minLength: 0
+          maxLength: 100
+        includeInactive:
+          description: Only useful for LOVs that support toggle of inactive records inclusion. When set to true, inactive records will be included.
+          type: boolean
+    parametersNameType:
+      type: object
+      properties:
+        parameterName:
+          description: Name of the parameter needed by the LOV.
+          type: string
+        mandatory:
+          description: This element depicts if the given parameter is mandatory for the LOV.
+          type: boolean
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
       type: object
       properties:
         type:
@@ -48475,122 +48514,63 @@ components:
         o:errorPath:
           type: string
           description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
       required:
       - type
       - title
-    parametersType:
+    lOVNamesType:
       type: array
-      description: Collection of generic Name-Value-Pair parameters.
+      description: List of List of Value names along with all parameters applicable for the LOV.
       maxItems: 4000
       items:
-        $ref: '#/components/schemas/parameterType'
-    validateListOfValuesDetails:
+        $ref: '#/components/schemas/lOVNameType'
+    instanceLink:
       type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
       properties:
-        match:
-          description: Match for the List of Value items.
-          $ref: '#/components/schemas/listOfValuesMatchType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
-    parameterType:
-      type: object
-      description: Name value pair type that will hold generic parameter information. Only use this type when the parameters being passed are too dynamic to be defined.
-      properties:
-        parameterName:
-          description: Name of the parameter.
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
           type: string
-        parameterValue:
-          description: Value of the parameter.
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
           type: string
-    listOfValues:
-      type: object
-      properties:
-        listOfValues:
-          description: Collection of List of Value items.
-          $ref: '#/components/schemas/listOfValuesType'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    operaVersion:
-      type: object
-      description: Response for Ping operation.
-      properties:
-        operaVersion:
-          description: Current Opera Version Number
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
           type: string
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-  responses:
-    '405':
-      description: Method not allowed
-    '413':
-      description: Request Entity Too Large
-    '403':
-      description: Forbidden
-    '503':
-      description: Service Unavailable
-    '406':
-      description: Not acceptable.
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '401':
-      description: Unauthorized
-    '415':
-      description: Unsupported Media Type
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '502':
-      description: Bad Gateway
-    '414':
-      description: Request URI Too Large
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
   parameters:
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
-      in: header
-      schema:
-        type: string
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
-      in: header
-      required: true
-      schema:
-        type: string
     externalData:
       name: externalData
       description: Pass this header as true, if payload needs DVM
       in: header
       schema:
         type: string
-    x-request-id:
-      name: x-request-id
-      description: Request Id of an incoming request
-      in: header
-      schema:
-        type: string
-        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
     x-app-key:
       name: x-app-key
       description: Client or Partner's Application Key
@@ -48599,6 +48579,26 @@ components:
       schema:
         type: string
         pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
+      schema:
+        type: string
     x-externalsystem:
       name: x-externalsystem
       description: External system code.
@@ -48613,9 +48613,9 @@ components:
       in: header
       schema:
         type: string
-    x-hotelid:
-      name: x-hotelid
-      description: Mandatory parameter to identify the hotel code where the end user is logged in
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
       in: header
       required: true
       schema:

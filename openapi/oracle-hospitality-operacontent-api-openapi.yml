@@ -1138,37 +1138,6 @@ paths:
       - OperaContent
 components:
   schemas:
-    imageStyleType:
-      type: string
-      description: An enumeration of image styles.
-      enum:
-      - Full
-      - Thumbnail
-      - Icon
-      - Square
-      - Banner
-      - Button
-      - Lowres
-      - Highres
-    imageUploadInfoType:
-      type: array
-      description: List of Image details to upload including image to upload.
-      maxItems: 10
-      items:
-        $ref: '#/components/schemas/imageUploadType'
-    customizedLetterStatus:
-      type: object
-      description: Response Body.
-      properties:
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    stringLength200:
-      type: string
-      description: Used for Character Strings, length 0 to 200.
-      maxLength: 200
-      minLength: 0
     folioReportResultType:
       type: object
       description: Folio card details, including PDF report.
@@ -1185,168 +1154,12 @@ components:
           description: Folio PDF report.
           type: string
           format: byte
-    image:
-      type: object
-      description: Response to fetch image(s)
-      properties:
-        images:
-          description: Collection of images
-          $ref: '#/components/schemas/imageResultsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    imageResultType:
-      type: object
-      properties:
-        imageSet:
-          description: Image set describing path of image.
-          type: string
-          minLength: 0
-          maxLength: 800
-        mimeType:
-          description: Mime type of the Image.
-          type: string
-          minLength: 0
-          maxLength: 20
-        image:
-          description: Image file to upload.
-          type: string
-          format: byte
-        imageId:
-          description: ImageId file.
-          $ref: '#/components/schemas/uniqueID_Type'
-        linkId:
-          description: LinkID of the file.
-          $ref: '#/components/schemas/uniqueID_Type'
-        imageLinkId:
-          description: Image link id file.
-          $ref: '#/components/schemas/uniqueID_Type'
-        base64Image:
-          description: Base64Image image content of the file.
-          type: string
-    folioReport:
-      type: object
-      description: Response object for folio report.
-      properties:
-        folio:
-          description: Folio report.
-          $ref: '#/components/schemas/folioReportResultType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    stringLength1000:
-      type: string
-      description: Used for Character Strings, length 0 to 1000.
-      maxLength: 1000
-      minLength: 0
-    emailRecipientType:
-      type: object
-      properties:
-        emailAddress:
-          type: string
-          minLength: 0
-          maxLength: 200
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
-      required:
-      - type
-      - title
-    emailFileType:
-      type: object
-      description: ID that uniquely defines an email object
-      properties:
-        emailID:
-          description: Unique ID that represents an email.
-          $ref: '#/components/schemas/uniqueID_Type'
-        emailFile:
-          description: File attachment in base64 binary format
-          type: string
-          format: byte
-        emailFileName:
-          description: Name of the attachment
-          type: string
-          minLength: 0
-          maxLength: 100
-    fileToUpload:
-      type: object
-      description: Request to upload a file attachment.
-      properties:
-        linkId:
-          description: Link Id of the attachment.
-          $ref: '#/components/schemas/stringLength200'
-        linkType:
-          description: Link Type of the attachment.
-          $ref: '#/components/schemas/stringLength200'
-        fileName:
-          description: Name of the attachment.
-          $ref: '#/components/schemas/stringLength1000'
-        description:
-          description: Description of the attachment file.
-          $ref: '#/components/schemas/stringLength2000'
-        userName:
-          description: User (name) related to the attachment file.
-          $ref: '#/components/schemas/stringLength200'
-        hotelId:
-          description: Resort related to the attachment file.
-          $ref: '#/components/schemas/stringLength200'
-        globalYN:
-          description: Global Yes (Y) or No (N) flag related to the attachment file.
-          $ref: '#/components/schemas/stringLength10'
-        fileAttachment:
-          description: Attachment file in base64 binary format.
-          type: string
-          format: byte
-        overwriteExistingFileYN:
-          description: Overwrite Yes (Y) or No (N) flag related to the attachment file.
-          $ref: '#/components/schemas/stringLength10'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    registrationCard:
-      type: object
-      description: Response object for registration card.
-      properties:
-        registrationCard:
-          description: Registration card PDF.
-          $ref: '#/components/schemas/registrationCardType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
+    imageResultsType:
+      type: array
+      description: Collection of image results.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/imageResultType'
     folioReportCriteriaType:
       type: object
       description: Criteria required to generate or retrieve a folio for a reservation.
@@ -1380,46 +1193,73 @@ components:
           type: string
           minLength: 0
           maxLength: 20
-    imageUploadType:
-      type: object
-      description: Image upload details
-      properties:
-        imageCode:
-          description: Image code to upload
-          $ref: '#/components/schemas/imageCodeType'
-        fileExtension:
-          description: File extension of the Image, e.g. JPG, PNG, BMP, etc.
-          type: string
-          minLength: 0
-          maxLength: 10
-        imageParameters:
-          description: Zero or more image parameters - code / value pairs which define the image path. These are dependent on the image code type.
-          $ref: '#/components/schemas/imageParametersType'
-        languageCode:
-          description: Language code for the image.
-          $ref: '#/components/schemas/languageType'
-        imageStyle:
-          description: Style of the image.
-          $ref: '#/components/schemas/imageStyleType'
-        linkId:
-          description: Link ID to reference table.
-          $ref: '#/components/schemas/uniqueID_Type'
-        description:
-          description: Description of the image.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        image:
-          description: Image file to upload.
-          type: string
-          format: byte
-        imageId:
-          description: Image Id of the image to be replaced.
-          $ref: '#/components/schemas/uniqueID_Type'
-    languageType:
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    stringLength200:
       type: string
+      description: Used for Character Strings, length 0 to 200.
+      maxLength: 200
       minLength: 0
-      maxLength: 40
+    stringLength1000:
+      type: string
+      description: Used for Character Strings, length 0 to 1000.
+      maxLength: 1000
+      minLength: 0
+    status:
+      type: object
+      description: Response Body.
+      properties:
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    imageParametersType:
+      type: array
+      description: Collection of image parameters code / value pairs.
+      maxItems: 500
+      items:
+        $ref: '#/components/schemas/imageParameterType'
+    emailFile:
+      type: object
+      description: Response object for Fetch Email Blob File Operation.
+      properties:
+        file:
+          description: Email File Blob Details based on email Id Number
+          $ref: '#/components/schemas/emailFileType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    file:
+      type: object
+      description: Response to fetch file attachment
+      properties:
+        fileDetails:
+          description: File Attachment details
+          $ref: '#/components/schemas/fileAttachmentType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    image:
+      type: object
+      description: Response to fetch image(s)
+      properties:
+        images:
+          description: Collection of images
+          $ref: '#/components/schemas/imageResultsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
     instanceLink:
       type: object
       description: Metadata describing link description objects that MAY appear in the JSON instance representation.
@@ -1454,150 +1294,6 @@ components:
         title:
           description: Exact copy of the "summary" field on the linked operation.
           type: string
-    imageCodeType:
-      type: string
-      enum:
-      - LogoChain
-      - Logo
-      - Profile
-      - Nationality
-      - User
-      - ToolbarItemCode
-      - Chain
-      - MembershipType
-      - MembershipLevel
-      - Resort
-      - RoomTypeChain
-      - RoomType
-      - RoomNumber
-      - OooReasonChain
-      - OooReason
-      - RoomMaintChain
-      - RoomMaintenance
-      - RoomMaintIssue
-      - FloorPlan
-      - SiteLayout
-      - Attraction
-      - PropertyMap
-      - InvItemChain
-      - InvItem
-      - PackageChain
-      - Package
-      - Pool
-      - RoomConditionChain
-      - RoomCondition
-      - FunctionSpace
-      - FunctionSetupStyle
-      - TrackItTypeChain
-      - TrackItType
-      - Height
-      - Width
-      - RoomRepair
-      - Article
-      - AlertChain
-      - Alert
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    stringLength2000:
-      type: string
-      description: Used for Character Strings, length 0 to 2000.
-      maxLength: 2000
-      minLength: 0
-    file:
-      type: object
-      description: Response to fetch file attachment
-      properties:
-        fileDetails:
-          description: File Attachment details
-          $ref: '#/components/schemas/fileAttachmentType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    imageResultsType:
-      type: array
-      description: Collection of image results.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/imageResultType'
-    status:
-      type: object
-      description: Response Body.
-      properties:
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-        links:
-          $ref: '#/components/schemas/links'
-    customizedLetter:
-      type: object
-      description: Response object for retrieving customized letter.
-      properties:
-        customizedLetterDetails:
-          description: Customized letter in HTML or RTF format.
-          $ref: '#/components/schemas/customizedLetterType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    folioReportToEmail:
-      type: object
-      description: Request to generate and email a folio report.
-      properties:
-        folioInfo:
-          description: Identifies folio to be generated.
-          $ref: '#/components/schemas/folioReportCriteriaType'
-        emailRecipients:
-          description: List of email recipients for the report.
-          $ref: '#/components/schemas/emailRecipientsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    emailFile:
-      type: object
-      description: Response object for Fetch Email Blob File Operation.
-      properties:
-        file:
-          description: Email File Blob Details based on email Id Number
-          $ref: '#/components/schemas/emailFileType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    fileAttachmentType:
-      type: object
-      description: ID that uniquely determines file attachment
-      properties:
-        attachmentId:
-          description: Unique ID that represents file attachment
-          $ref: '#/components/schemas/uniqueID_Type'
-        fileAttachment:
-          description: File attachment in base64 binary format
-          type: string
-          format: byte
-        fileName:
-          description: Name of the attachment
-          type: string
-          minLength: 0
-          maxLength: 100
-    uniqueID_Type:
-      type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
-      properties:
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 40
     warningType:
       type: object
       description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
@@ -1644,6 +1340,18 @@ components:
           type: string
           minLength: 1
           maxLength: 8
+    imageStyleType:
+      type: string
+      description: An enumeration of image styles.
+      enum:
+      - Full
+      - Thumbnail
+      - Icon
+      - Square
+      - Banner
+      - Button
+      - Lowres
+      - Highres
     errorInstance:
       title: Error Instance Details
       description: Complex type that contains error instance details for a REST call.
@@ -1673,21 +1381,104 @@ components:
       required:
       - type
       - title
+    stringLength2000:
+      type: string
+      description: Used for Character Strings, length 0 to 2000.
+      maxLength: 2000
+      minLength: 0
     emailRecipientsType:
       type: array
       maxItems: 4000
       items:
         $ref: '#/components/schemas/emailRecipientType'
-    links:
+    customizedLetterStatus:
+      type: object
+      description: Response Body.
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    customizedLetter:
+      type: object
+      description: Response object for retrieving customized letter.
+      properties:
+        customizedLetterDetails:
+          description: Customized letter in HTML or RTF format.
+          $ref: '#/components/schemas/customizedLetterType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    uniqueID_Type:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
+    imageUploadInfoType:
       type: array
+      description: List of Image details to upload including image to upload.
+      maxItems: 10
       items:
-        $ref: '#/components/schemas/instanceLink'
-    imageParametersType:
-      type: array
-      description: Collection of image parameters code / value pairs.
-      maxItems: 500
-      items:
-        $ref: '#/components/schemas/imageParameterType'
+        $ref: '#/components/schemas/imageUploadType'
+    registrationCard:
+      type: object
+      description: Response object for registration card.
+      properties:
+        registrationCard:
+          description: Registration card PDF.
+          $ref: '#/components/schemas/registrationCardType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    imageResultType:
+      type: object
+      properties:
+        imageSet:
+          description: Image set describing path of image.
+          type: string
+          minLength: 0
+          maxLength: 800
+        mimeType:
+          description: Mime type of the Image.
+          type: string
+          minLength: 0
+          maxLength: 20
+        image:
+          description: Image file to upload.
+          type: string
+          format: byte
+        imageId:
+          description: ImageId file.
+          $ref: '#/components/schemas/uniqueID_Type'
+        linkId:
+          description: LinkID of the file.
+          $ref: '#/components/schemas/uniqueID_Type'
+        imageLinkId:
+          description: Image link id file.
+          $ref: '#/components/schemas/uniqueID_Type'
+        base64Image:
+          description: Base64Image image content of the file.
+          type: string
+    languageType:
+      type: string
+      minLength: 0
+      maxLength: 40
+    stringLength10:
+      type: string
+      description: Used for Character Strings, length 0 to 10.
+      maxLength: 10
+      minLength: 0
     registrationCardType:
       type: object
       description: Registration card details, including PDF report.
@@ -1715,23 +1506,136 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    imageParameterType:
+    fileAttachmentType:
       type: object
-      description: Image parameter code/value pair
+      description: ID that uniquely determines file attachment
       properties:
-        imageParameterCode:
-          description: Image parameter code.
-          $ref: '#/components/schemas/imageCodeType'
-        imageParameterValue:
-          description: Image parameter value.
+        attachmentId:
+          description: Unique ID that represents file attachment
+          $ref: '#/components/schemas/uniqueID_Type'
+        fileAttachment:
+          description: File attachment in base64 binary format
+          type: string
+          format: byte
+        fileName:
+          description: Name of the attachment
           type: string
           minLength: 0
-          maxLength: 40
-    stringLength10:
+          maxLength: 100
+    imageUploadType:
+      type: object
+      description: Image upload details
+      properties:
+        imageCode:
+          description: Image code to upload
+          $ref: '#/components/schemas/imageCodeType'
+        fileExtension:
+          description: File extension of the Image, e.g. JPG, PNG, BMP, etc.
+          type: string
+          minLength: 0
+          maxLength: 10
+        imageParameters:
+          description: Zero or more image parameters - code / value pairs which define the image path. These are dependent on the image code type.
+          $ref: '#/components/schemas/imageParametersType'
+        languageCode:
+          description: Language code for the image.
+          $ref: '#/components/schemas/languageType'
+        imageStyle:
+          description: Style of the image.
+          $ref: '#/components/schemas/imageStyleType'
+        linkId:
+          description: Link ID to reference table.
+          $ref: '#/components/schemas/uniqueID_Type'
+        description:
+          description: Description of the image.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        image:
+          description: Image file to upload.
+          type: string
+          format: byte
+        imageId:
+          description: Image Id of the image to be replaced.
+          $ref: '#/components/schemas/uniqueID_Type'
+    imageCodeType:
       type: string
-      description: Used for Character Strings, length 0 to 10.
-      maxLength: 10
-      minLength: 0
+      enum:
+      - LogoChain
+      - Logo
+      - Profile
+      - Nationality
+      - User
+      - ToolbarItemCode
+      - Chain
+      - MembershipType
+      - MembershipLevel
+      - Resort
+      - RoomTypeChain
+      - RoomType
+      - RoomNumber
+      - OooReasonChain
+      - OooReason
+      - RoomMaintChain
+      - RoomMaintenance
+      - RoomMaintIssue
+      - FloorPlan
+      - SiteLayout
+      - Attraction
+      - PropertyMap
+      - InvItemChain
+      - InvItem
+      - PackageChain
+      - Package
+      - Pool
+      - RoomConditionChain
+      - RoomCondition
+      - FunctionSpace
+      - FunctionSetupStyle
+      - TrackItTypeChain
+      - TrackItType
+      - Height
+      - Width
+      - RoomRepair
+      - Article
+      - AlertChain
+      - Alert
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
     customizedLetterType:
       type: object
       description: Details about customized letter.
@@ -1774,27 +1678,111 @@ components:
         idExtension:
           description: Additional identifying value assigned by the creating system.
           type: integer
+    fileToUpload:
+      type: object
+      description: Request to upload a file attachment.
+      properties:
+        linkId:
+          description: Link Id of the attachment.
+          $ref: '#/components/schemas/stringLength200'
+        linkType:
+          description: Link Type of the attachment.
+          $ref: '#/components/schemas/stringLength200'
+        fileName:
+          description: Name of the attachment.
+          $ref: '#/components/schemas/stringLength1000'
+        description:
+          description: Description of the attachment file.
+          $ref: '#/components/schemas/stringLength2000'
+        userName:
+          description: User (name) related to the attachment file.
+          $ref: '#/components/schemas/stringLength200'
+        hotelId:
+          description: Resort related to the attachment file.
+          $ref: '#/components/schemas/stringLength200'
+        globalYN:
+          description: Global Yes (Y) or No (N) flag related to the attachment file.
+          $ref: '#/components/schemas/stringLength10'
+        fileAttachment:
+          description: Attachment file in base64 binary format.
+          type: string
+          format: byte
+        overwriteExistingFileYN:
+          description: Overwrite Yes (Y) or No (N) flag related to the attachment file.
+          $ref: '#/components/schemas/stringLength10'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    emailFileType:
+      type: object
+      description: ID that uniquely defines an email object
+      properties:
+        emailID:
+          description: Unique ID that represents an email.
+          $ref: '#/components/schemas/uniqueID_Type'
+        emailFile:
+          description: File attachment in base64 binary format
+          type: string
+          format: byte
+        emailFileName:
+          description: Name of the attachment
+          type: string
+          minLength: 0
+          maxLength: 100
+    imageParameterType:
+      type: object
+      description: Image parameter code/value pair
+      properties:
+        imageParameterCode:
+          description: Image parameter code.
+          $ref: '#/components/schemas/imageCodeType'
+        imageParameterValue:
+          description: Image parameter value.
+          type: string
+          minLength: 0
+          maxLength: 40
+    folioReportToEmail:
+      type: object
+      description: Request to generate and email a folio report.
+      properties:
+        folioInfo:
+          description: Identifies folio to be generated.
+          $ref: '#/components/schemas/folioReportCriteriaType'
+        emailRecipients:
+          description: List of email recipients for the report.
+          $ref: '#/components/schemas/emailRecipientsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    emailRecipientType:
+      type: object
+      properties:
+        emailAddress:
+          type: string
+          minLength: 0
+          maxLength: 200
+    folioReport:
+      type: object
+      description: Response object for folio report.
+      properties:
+        folio:
+          description: Folio report.
+          $ref: '#/components/schemas/folioReportResultType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
   responses:
-    '405':
-      description: Method not allowed
-    '413':
-      description: Request Entity Too Large
-    '403':
-      description: Forbidden
-    '503':
-      description: Service Unavailable
-    '406':
-      description: Not acceptable.
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '415':
-      description: Unsupported Media Type
     '401':
       description: Unauthorized
+    '414':
+      description: Request URI Too Large
+    '406':
+      description: Not acceptable.
+    '403':
+      description: Forbidden
     '404':
       description: Resource not found
       content:
@@ -1803,41 +1791,33 @@ components:
             $ref: '#/components/schemas/exceptionDetailType'
     '502':
       description: Bad Gateway
-    '414':
-      description: Request URI Too Large
     '400':
       description: Bad Request
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/exceptionDetailType'
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '503':
+      description: Service Unavailable
+    '405':
+      description: Method not allowed
+    '413':
+      description: Request Entity Too Large
   parameters:
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
-      in: header
-      schema:
-        type: string
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
-      in: header
-      required: true
-      schema:
-        type: string
     externalData:
       name: externalData
       description: Pass this header as true, if payload needs DVM
       in: header
       schema:
         type: string
-    x-request-id:
-      name: x-request-id
-      description: Request Id of an incoming request
-      in: header
-      schema:
-        type: string
-        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
     x-app-key:
       name: x-app-key
       description: Client or Partner's Application Key
@@ -1846,17 +1826,16 @@ components:
       schema:
         type: string
         pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    x-externalsystem:
-      name: x-externalsystem
-      description: External system code.
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
       in: header
-      x-example: EXTERNALSYSTEMCODE
       schema:
         type: string
-        maxLength: 40
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
       in: header
       schema:
         type: string
@@ -1868,6 +1847,27 @@ components:
       schema:
         type: string
         maxLength: 2000
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
+    x-externalsystem:
+      name: x-externalsystem
+      description: External system code.
+      in: header
+      x-example: EXTERNALSYSTEMCODE
+      schema:
+        type: string
+        maxLength: 40
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
+      schema:
+        type: string
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

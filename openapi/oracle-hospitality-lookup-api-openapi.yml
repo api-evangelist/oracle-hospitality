@@ -235,91 +235,6 @@ paths:
                 $ref: '#/components/schemas/ExceptionDetail'
 components:
   schemas:
-    RatePlan:
-      type: object
-      properties:
-        ratePlanCode:
-          type: string
-          example: XDAILY
-          description: The code for a rate plan.
-        ratePlanName:
-          type: string
-          example: Corporate
-          description: The name of the rate plan.
-        ratePlanDescription:
-          type: string
-          example: Daily discount for a corporation.
-          description: Description of the rate plan code.
-      required:
-      - ratePlanCode
-    Occupancy:
-      type: object
-      properties:
-        maxOccupancy:
-          type: integer
-          example: 3
-          description: The maximum number of individuals allowed in the room type.
-        maxAdultOccupancy:
-          type: integer
-          example: 3
-          description: The maximum number of adults allowed in the room type.
-        maxChildOccupancy:
-          type: integer
-          example: 2
-          description: The maximum number of children allowed in the room type.
-    RatePlanItem:
-      type: object
-      properties:
-        ratePlan:
-          type: object
-          $ref: '#/components/schemas/RatePlan'
-      required:
-      - ratePlan
-    RoomTypeItem:
-      type: object
-      properties:
-        room:
-          type: object
-          $ref: '#/components/schemas/Room'
-        occupancy:
-          type: object
-          $ref: '#/components/schemas/Occupancy'
-      required:
-      - room
-    ExceptionDetail:
-      description: Common Error Response format.
-      type: object
-      properties:
-        title:
-          type: string
-          description: Short, human-readable summary of the problem. The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-          example: Error in Application
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-          example: 400
-        o:errorCode:
-          type: string
-          description: Business specific Error code, which is different from HTTP error code.
-          example: RSV-34534534
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type. When dereferenced, it SHOULD provide a human-readable summary of the problem.
-          example: 'http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4'
-        timestamp:
-          type: string
-          format: date-time
-          description: The UTC Date and Time of the Error happened.
-          example: '2022-01-02T11: 30: 22.234Z'
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/ExceptionDetail'
-        logId:
-          type: integer
-          description: An ID for support reasons to be able identify errors better.
-          example: '334543532224'
     ExternalRoomTypesResponse:
       type: object
       properties:
@@ -364,6 +279,40 @@ components:
       required:
       - hotelCode
       - channelCode
+    ExceptionDetail:
+      description: Common Error Response format.
+      type: object
+      properties:
+        title:
+          type: string
+          description: Short, human-readable summary of the problem. The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+          example: Error in Application
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+          example: 400
+        o:errorCode:
+          type: string
+          description: Business specific Error code, which is different from HTTP error code.
+          example: RSV-34534534
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type. When dereferenced, it SHOULD provide a human-readable summary of the problem.
+          example: 'http: //www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4'
+        timestamp:
+          type: string
+          format: date-time
+          description: The UTC Date and Time of the Error happened.
+          example: '2022-01-02T11: 30: 22.234Z'
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/ExceptionDetail'
+        logId:
+          type: integer
+          description: An ID for support reasons to be able identify errors better.
+          example: '334543532224'
     ExternalRatePlansResponse:
       type: object
       properties:
@@ -394,6 +343,38 @@ components:
           type: integer
           example: 0
           description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+    RatePlan:
+      type: object
+      properties:
+        ratePlanCode:
+          type: string
+          example: XDAILY
+          description: The code for a rate plan.
+        ratePlanName:
+          type: string
+          example: Corporate
+          description: The name of the rate plan.
+        ratePlanDescription:
+          type: string
+          example: Daily discount for a corporation.
+          description: Description of the rate plan code.
+      required:
+      - ratePlanCode
+    Occupancy:
+      type: object
+      properties:
+        maxOccupancy:
+          type: integer
+          example: 3
+          description: The maximum number of individuals allowed in the room type.
+        maxAdultOccupancy:
+          type: integer
+          example: 3
+          description: The maximum number of adults allowed in the room type.
+        maxChildOccupancy:
+          type: integer
+          example: 2
+          description: The maximum number of children allowed in the room type.
     Room:
       type: object
       properties:
@@ -411,7 +392,36 @@ components:
           description: Description of the room type.
       required:
       - roomType
+    RoomTypeItem:
+      type: object
+      properties:
+        room:
+          type: object
+          $ref: '#/components/schemas/Room'
+        occupancy:
+          type: object
+          $ref: '#/components/schemas/Occupancy'
+      required:
+      - room
+    RatePlanItem:
+      type: object
+      properties:
+        ratePlan:
+          type: object
+          $ref: '#/components/schemas/RatePlan'
+      required:
+      - ratePlan
   parameters:
+    channelCode:
+      name: channelCode
+      description: A unique identifier value for the channel associated with a property/hotel.
+      in: query
+      required: false
+      x-example: CH1
+      schema:
+        type: string
+        maxLength: 50
+        minLength: 1
     roomType:
       name: roomType
       description: The OPERA Cloud Hotel/proeprty Room type code.
@@ -420,6 +430,16 @@ components:
       x-example: XA1K
       schema:
         type: string
+        minLength: 1
+    hotelCode:
+      name: hotelCode
+      description: A unique identifier value for the property/hotel associated with a channel.
+      in: path
+      required: true
+      x-example: XUSXXYY99
+      schema:
+        type: string
+        maxLength: 50
         minLength: 1
     limit:
       name: limit
@@ -439,26 +459,6 @@ components:
       x-example: 1
       schema:
         type: integer
-    channelCode:
-      name: channelCode
-      description: A unique identifier value for the channel associated with a property/hotel.
-      in: query
-      required: false
-      x-example: CH1
-      schema:
-        type: string
-        maxLength: 50
-        minLength: 1
-    hotelCode:
-      name: hotelCode
-      description: A unique identifier value for the property/hotel associated with a channel.
-      in: path
-      required: true
-      x-example: XUSXXYY99
-      schema:
-        type: string
-        maxLength: 50
-        minLength: 1
     authorization:
       name: authorization
       description: A Basic authentication header using the base64 hash of your Client user and Client password in the format base64 encoded to the Basic Access Authorization standard.

@@ -214,6 +214,84 @@ paths:
                 $ref: '#/components/schemas/ExceptionDetail'
 components:
   schemas:
+    UpdateConnectionInformationData:
+      type: object
+      description: Channel Connection Information
+      properties:
+        connectionStatus:
+          $ref: '#/components/schemas/UpdateConnectionStatus'
+        connectionNotes:
+          type: string
+          description: Connection Notes for the latest connection Status change.
+          maxLength: 300
+          example: Property onboarded successfully
+      required:
+      - connectionStatus
+      - connectionNotes
+    ExceptionDetail:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ExceptionObj'
+      - type: object
+        properties:
+          o.errorDetails:
+            type: array
+            items:
+              $ref: '#/components/schemas/ExceptionObj'
+    UpdateChannelPropertyStatus:
+      type: object
+      properties:
+        hotelCode:
+          type: string
+          description: The unique identifier of the Property in Channel system.
+          example: XUSXXYY99
+        channelCode:
+          type: string
+          description: Unique ID that identifies a single Channel.
+          example: CH1
+          maxLength: 20
+          minLength: 1
+        connectionInformation:
+          $ref: '#/components/schemas/UpdateConnectionInformation'
+    ConnectionStatus:
+      type: string
+      description: The connection status to the property.
+      enum:
+      - NEW
+      - TEST
+      - MAINTENANCE
+      - ACTIVE
+      - INACTIVE
+      example: ACTIVE
+    ExceptionObj:
+      type: object
+      properties:
+        logId:
+          type: integer
+          example: 884366976
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+          example: 400
+        o.errorCode:
+          type: string
+          description: HDP error code, which is different from HTTP error code.
+          example: DCR00001
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem.
+          example: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x
+        timestamp:
+          type: string
+          example: '2021-09-17T08:17:18.321Z'
+          format: date-time
+      required:
+      - logId
+      - title
+      - status
     UpdateConnectionInformation:
       type: object
       description: Channel Connection Information
@@ -244,35 +322,13 @@ components:
           minLength: 1
         connectionInformation:
           $ref: '#/components/schemas/ConnectionInformation'
-    UpdateChannelPropertyStatus:
-      type: object
-      properties:
-        hotelCode:
-          type: string
-          description: The unique identifier of the Property in Channel system.
-          example: XUSXXYY99
-        channelCode:
-          type: string
-          description: Unique ID that identifies a single Channel.
-          example: CH1
-          maxLength: 20
-          minLength: 1
-        connectionInformation:
-          $ref: '#/components/schemas/UpdateConnectionInformation'
-    UpdateConnectionInformationData:
-      type: object
-      description: Channel Connection Information
-      properties:
-        connectionStatus:
-          $ref: '#/components/schemas/UpdateConnectionStatus'
-        connectionNotes:
-          type: string
-          description: Connection Notes for the latest connection Status change.
-          maxLength: 300
-          example: Property onboarded successfully
-      required:
-      - connectionStatus
-      - connectionNotes
+    UpdateConnectionStatus:
+      type: string
+      description: The connection status to be updated for the given channel and property.  The connection status can be changed to TEST / MAINTENANCE if the existing connection Status is NEW.  If the existing connection status is TEST, it can be changed to MAINTENANCE.
+      enum:
+      - TEST
+      - MAINTENANCE
+      example: TEST
     ConnectionInformation:
       type: object
       description: Channel Connection Information
@@ -289,69 +345,23 @@ components:
           format: date-time
           description: Date on which Channel connection status was updated last time.
           example: '2021-09-17T08:17:18.321Z'
-    ExceptionDetail:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ExceptionObj'
-      - type: object
-        properties:
-          o.errorDetails:
-            type: array
-            items:
-              $ref: '#/components/schemas/ExceptionObj'
-    ExceptionObj:
-      type: object
-      properties:
-        logId:
-          type: integer
-          example: 884366976
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-          example: 400
-        o.errorCode:
-          type: string
-          description: HDP error code, which is different from HTTP error code.
-          example: DCR00001
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem.
-          example: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.x
-        timestamp:
-          type: string
-          example: '2021-09-17T08:17:18.321Z'
-          format: date-time
-      required:
-      - logId
-      - title
-      - status
-    ConnectionStatus:
-      type: string
-      description: The connection status to the property.
-      enum:
-      - NEW
-      - TEST
-      - MAINTENANCE
-      - ACTIVE
-      - INACTIVE
-      example: ACTIVE
-    UpdateConnectionStatus:
-      type: string
-      description: The connection status to be updated for the given channel and property.  The connection status can be changed to TEST / MAINTENANCE if the existing connection Status is NEW.  If the existing connection status is TEST, it can be changed to MAINTENANCE.
-      enum:
-      - TEST
-      - MAINTENANCE
-      example: TEST
   parameters:
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
+    Accept-Language:
+      name: Accept-Language
       in: header
+      description: Language code
       schema:
         type: string
+    x-channelCode:
+      name: x-channelCode
+      in: header
+      description: Code for the channel.
+      required: true
+      x-example: CH1
+      schema:
+        type: string
+        maxLength: 50
+        minLength: 1
     x-request-id:
       name: x-request-id
       description: Unique tracing key e.g. 4664ab3423434a45
@@ -359,10 +369,10 @@ components:
       x-example: 4664ab3423434a45
       schema:
         type: string
-    Accept-Language:
-      name: Accept-Language
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
       in: header
-      description: Language code
       schema:
         type: string
     x-app-key:
@@ -380,16 +390,6 @@ components:
       required: true
       schema:
         type: string
-    x-channelCode:
-      name: x-channelCode
-      in: header
-      description: Code for the channel.
-      required: true
-      x-example: CH1
-      schema:
-        type: string
-        maxLength: 50
-        minLength: 1
     hotelCodePath:
       name: hotelCode
       description: The unique identifier of the Property in Channel system.

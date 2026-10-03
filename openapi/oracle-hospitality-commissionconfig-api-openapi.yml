@@ -1073,26 +1073,14 @@ paths:
         required: true
 components:
   responses:
-    '405':
-      description: Method not allowed
-    '413':
-      description: Request Entity Too Large
-    '403':
-      description: Forbidden
-    '503':
-      description: Service Unavailable
-    '406':
-      description: Not acceptable.
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
     '401':
       description: Unauthorized
-    '415':
-      description: Unsupported Media Type
+    '414':
+      description: Request URI Too Large
+    '406':
+      description: Not acceptable.
+    '403':
+      description: Forbidden
     '404':
       description: Resource not found
       content:
@@ -1101,65 +1089,38 @@ components:
             $ref: '#/components/schemas/exceptionDetailType'
     '502':
       description: Bad Gateway
-    '414':
-      description: Request URI Too Large
     '400':
       description: Bad Request
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/exceptionDetailType'
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '503':
+      description: Service Unavailable
+    '405':
+      description: Method not allowed
+    '413':
+      description: Request Entity Too Large
   schemas:
-    commissionPaidDetailsType:
+    operaVersion:
       type: object
-      description: Commission paid details.
+      description: Response for Ping operation.
       properties:
-        perNight:
-          type: boolean
-        perStay:
-          type: boolean
-        commissionAmount:
-          description: Commission amount that needs to be paid.
-          $ref: '#/components/schemas/currencyAmountType'
-        weekEndCommissionAmount:
-          description: Commission amount that needs to be paid over weekend.
-          $ref: '#/components/schemas/currencyAmountType'
-        commissionType:
-          description: Indicates the type of commission paid to agent.
-          type: string
-          minLength: 1
-          maxLength: 1
-    commissionCodeTransactionType:
-      type: object
-      description: Revenue based commission details.
-      properties:
-        transactionCode:
-          type: string
-          minLength: 0
-          maxLength: 20
-        transactionCodeDesc:
-          type: string
-        basedOnNetAmount:
-          type: boolean
-        commissionPaidDetails:
-          $ref: '#/components/schemas/commissionPaidDetailsType'
-    operaVersionNumberType:
-      type: string
-      description: Current Opera Version Number
-      minLength: 0
-      maxLength: 40
-    currencyAmountType:
-      type: object
-      description: A monetary value expressed with a currency code.
-      properties:
-        amount:
-          description: A monetary amount.
-          type: number
-        currencyCode:
-          description: Provides a currency code to reflect the currency in which an amount may be expressed.
-          type: string
-          minLength: 3
-          maxLength: 3
+        operaVersion:
+          description: Opera version number.
+          $ref: '#/components/schemas/operaVersionNumberType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
     commissionCodeHoldStatusType:
       type: object
       description: Commission Code Hold Status type
@@ -1173,89 +1134,45 @@ components:
         holdAccountReceivables:
           description: Hold accoutn receivables status for commission code.
           type: boolean
-    bankAccounts:
+    commissionCodeSummaryInfoType:
       type: object
-      description: Request object to edit Bank Accounts
+      description: Commission codes summary details.
       properties:
-        bankAccounts:
-          description: Details of the Bank Accounts to edit
-          $ref: '#/components/schemas/configBankAccountsType'
-        updateDefault:
-          description: Update default confirmation response
-          type: boolean
-        updateDefaultForCurrency:
-          description: Update default for currency confirmation response
-          type: boolean
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    managedByOptions:
-      description: Describes of the Configuration is Managed by Enterprise or Property.
-      type: string
-      enum:
-      - EnterpriseManaged
-      - PropertyManaged
-      - EnterpriseEnforced
-      - PropertyOverridden
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
-      type: object
-      properties:
-        type:
+        hotelId:
+          description: Property of the commission codes.
           type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
+          minLength: 0
+          maxLength: 20
+        commissionCode:
+          description: Commission code details.
           type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
+          minLength: 0
+          maxLength: 20
+        description:
+          description: Commission code description for which details are fetched.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        sequence:
+          description: Commission code sequence number.
           type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
-      required:
-      - type
-      - title
-    stopProcessingReasons:
-      type: object
-      description: Response object for fetching Stop Processing Reason.
-      properties:
-        stopProcessingReasons:
-          description: Collection of Stop Processing Reasons.
-          $ref: '#/components/schemas/stopProcessingReasonsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    bankAccountsInfo:
-      type: object
-      description: Response for fetching Bank Accounts
-      properties:
-        bankAccounts:
-          description: Collection of Bank Accounts
-          $ref: '#/components/schemas/configBankAccountsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
+        basedOn:
+          description: Commission based on information.
+          $ref: '#/components/schemas/commissionBasedOnType'
+        commissionAmount:
+          description: Commission amount that needs to be paid.
+          $ref: '#/components/schemas/currencyAmountType'
+        taxPercentage:
+          description: Commission paid Tax details.
+          type: number
+        default:
+          type: boolean
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
     stopProcessingReasonType:
       type: object
       description: Details for Stop Processing Reason.
@@ -1275,58 +1192,14 @@ components:
           type: number
         managedBy:
           $ref: '#/components/schemas/managedByOptions'
-    reservationBasedCommissionType:
-      type: object
-      description: Reservation based commission details.
-      properties:
-        commissionPaidDetails:
-          $ref: '#/components/schemas/commissionPaidDetailsType'
-    stopProcessingReasonsType:
-      type: array
-      description: List of the Stop Processing Reasons to be configured or fetched
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/stopProcessingReasonType'
-    instanceLink:
-      type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
-      properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
-          type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
-        title:
-          description: Exact copy of the "summary" field on the linked operation.
-          type: string
-    commissionCodesSummaryType:
-      type: array
-      description: Commission code details.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/commissionCodeSummaryInfoType'
+    managedByOptions:
+      description: Describes of the Configuration is Managed by Enterprise or Property.
+      type: string
+      enum:
+      - EnterpriseManaged
+      - PropertyManaged
+      - EnterpriseEnforced
+      - PropertyOverridden
     commissionCodes:
       type: object
       description: Request object to update commission codes.
@@ -1338,30 +1211,6 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    commissionCodeDetail:
-      type: object
-      description: Response object for fetching commission code details.
-      properties:
-        commissionCodeDetail:
-          description: Collection of commission code details.
-          $ref: '#/components/schemas/commissionCodeDetailType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    commissionCodeDetailType:
-      type: object
-      description: Commission code detail.
-      properties:
-        commissionCodeInfo:
-          description: Commission code details.
-          $ref: '#/components/schemas/commissionCodeInfoType'
     commissionCodeInfoType:
       type: object
       description: Commission code info.
@@ -1398,6 +1247,12 @@ components:
           type: number
         managedBy:
           $ref: '#/components/schemas/managedByOptions'
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
     status:
       type: object
       description: Response Body.
@@ -1406,18 +1261,58 @@ components:
           $ref: '#/components/schemas/warningsType'
         links:
           $ref: '#/components/schemas/links'
-    commissionCodesType:
-      type: array
-      description: Commission code details object.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/commissionCodeInfoType'
-    revenueBasedCommissionType:
-      type: array
-      description: Revenue based commission details.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/commissionCodeTransactionType'
+    commissionBasedOnType:
+      type: string
+      description: Commission based on Revenue.
+      enum:
+      - Reservation
+      - Revenue
+    bankAccounts:
+      type: object
+      description: Request object to edit Bank Accounts
+      properties:
+        bankAccounts:
+          description: Details of the Bank Accounts to edit
+          $ref: '#/components/schemas/configBankAccountsType'
+        updateDefault:
+          description: Update default confirmation response
+          type: boolean
+        updateDefaultForCurrency:
+          description: Update default for currency confirmation response
+          type: boolean
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
     warningType:
       type: object
       description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
@@ -1464,96 +1359,13 @@ components:
           type: string
           minLength: 1
           maxLength: 8
-    commissionCalculationType:
+    stopProcessingReasons:
       type: object
-      description: Commission calculation type based on details.
+      description: Response object for fetching Stop Processing Reason.
       properties:
-        revenueBasedCommission:
-          $ref: '#/components/schemas/revenueBasedCommissionType'
-        reservationBasedCommission:
-          $ref: '#/components/schemas/reservationBasedCommissionType'
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-      required:
-      - type
-      - title
-    commissionCodeSummaryInfoType:
-      type: object
-      description: Commission codes summary details.
-      properties:
-        hotelId:
-          description: Property of the commission codes.
-          type: string
-          minLength: 0
-          maxLength: 20
-        commissionCode:
-          description: Commission code details.
-          type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          description: Commission code description for which details are fetched.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        sequence:
-          description: Commission code sequence number.
-          type: integer
-        basedOn:
-          description: Commission based on information.
-          $ref: '#/components/schemas/commissionBasedOnType'
-        commissionAmount:
-          description: Commission amount that needs to be paid.
-          $ref: '#/components/schemas/currencyAmountType'
-        taxPercentage:
-          description: Commission paid Tax details.
-          type: number
-        default:
-          type: boolean
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
-    commissionConfigPaymentMethodType:
-      type: string
-      description: This value of the enum is used for Payment methods
-      enum:
-      - Check
-      - CentrallyPaid
-      - Eft
-    operaVersion:
-      type: object
-      description: Response for Ping operation.
-      properties:
-        operaVersion:
-          description: Opera version number.
-          $ref: '#/components/schemas/operaVersionNumberType'
+        stopProcessingReasons:
+          description: Collection of Stop Processing Reasons.
+          $ref: '#/components/schemas/stopProcessingReasonsType'
         links:
           $ref: '#/components/schemas/links'
         warnings:
@@ -1564,6 +1376,86 @@ components:
       maxItems: 4000
       items:
         $ref: '#/components/schemas/configBankAccountType'
+    commissionCodesSummaryType:
+      type: array
+      description: Commission code details.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/commissionCodeSummaryInfoType'
+    commissionCodesSummary:
+      type: object
+      description: Response object for fetching commission codes.
+      properties:
+        commissionCodesSummary:
+          description: Collection of commission code details.
+          $ref: '#/components/schemas/commissionCodesSummaryType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    reservationBasedCommissionType:
+      type: object
+      description: Reservation based commission details.
+      properties:
+        commissionPaidDetails:
+          $ref: '#/components/schemas/commissionPaidDetailsType'
+    stopProcessingReasonsType:
+      type: array
+      description: List of the Stop Processing Reasons to be configured or fetched
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/stopProcessingReasonType'
+    commissionCodeDetailType:
+      type: object
+      description: Commission code detail.
+      properties:
+        commissionCodeInfo:
+          description: Commission code details.
+          $ref: '#/components/schemas/commissionCodeInfoType'
+    commissionCalculationType:
+      type: object
+      description: Commission calculation type based on details.
+      properties:
+        revenueBasedCommission:
+          $ref: '#/components/schemas/revenueBasedCommissionType'
+        reservationBasedCommission:
+          $ref: '#/components/schemas/reservationBasedCommissionType'
+    bankAccountsInfo:
+      type: object
+      description: Response for fetching Bank Accounts
+      properties:
+        bankAccounts:
+          description: Collection of Bank Accounts
+          $ref: '#/components/schemas/configBankAccountsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    commissionPaidDetailsType:
+      type: object
+      description: Commission paid details.
+      properties:
+        perNight:
+          type: boolean
+        perStay:
+          type: boolean
+        commissionAmount:
+          description: Commission amount that needs to be paid.
+          $ref: '#/components/schemas/currencyAmountType'
+        weekEndCommissionAmount:
+          description: Commission amount that needs to be paid over weekend.
+          $ref: '#/components/schemas/currencyAmountType'
+        commissionType:
+          description: Indicates the type of commission paid to agent.
+          type: string
+          minLength: 1
+          maxLength: 1
+    commissionCodesType:
+      type: array
+      description: Commission code details object.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/commissionCodeInfoType'
     configBankAccountType:
       type: object
       description: Indentifier for a Bank Account.
@@ -1665,50 +1557,138 @@ components:
           type: boolean
         managedBy:
           $ref: '#/components/schemas/managedByOptions'
-    commissionBasedOnType:
-      type: string
-      description: Commission based on Revenue.
-      enum:
-      - Reservation
-      - Revenue
-    commissionCodesSummary:
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
       type: object
-      description: Response object for fetching commission codes.
       properties:
-        commissionCodesSummary:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
+    operaVersionNumberType:
+      type: string
+      description: Current Opera Version Number
+      minLength: 0
+      maxLength: 40
+    currencyAmountType:
+      type: object
+      description: A monetary value expressed with a currency code.
+      properties:
+        amount:
+          description: A monetary amount.
+          type: number
+        currencyCode:
+          description: Provides a currency code to reflect the currency in which an amount may be expressed.
+          type: string
+          minLength: 3
+          maxLength: 3
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    revenueBasedCommissionType:
+      type: array
+      description: Revenue based commission details.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/commissionCodeTransactionType'
+    commissionConfigPaymentMethodType:
+      type: string
+      description: This value of the enum is used for Payment methods
+      enum:
+      - Check
+      - CentrallyPaid
+      - Eft
+    commissionCodeDetail:
+      type: object
+      description: Response object for fetching commission code details.
+      properties:
+        commissionCodeDetail:
           description: Collection of commission code details.
-          $ref: '#/components/schemas/commissionCodesSummaryType'
+          $ref: '#/components/schemas/commissionCodeDetailType'
         links:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
+    commissionCodeTransactionType:
+      type: object
+      description: Revenue based commission details.
+      properties:
+        transactionCode:
+          type: string
+          minLength: 0
+          maxLength: 20
+        transactionCodeDesc:
+          type: string
+        basedOnNetAmount:
+          type: boolean
+        commissionPaidDetails:
+          $ref: '#/components/schemas/commissionPaidDetailsType'
   parameters:
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
-      in: header
-      schema:
-        type: string
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
-      in: header
-      required: true
-      schema:
-        type: string
     externalData:
       name: externalData
       description: Pass this header as true, if payload needs DVM
       in: header
       schema:
         type: string
-    x-request-id:
-      name: x-request-id
-      description: Request Id of an incoming request
-      in: header
-      schema:
-        type: string
-        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
     x-app-key:
       name: x-app-key
       description: Client or Partner's Application Key
@@ -1717,17 +1697,16 @@ components:
       schema:
         type: string
         pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    x-externalsystem:
-      name: x-externalsystem
-      description: External system code.
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
       in: header
-      x-example: EXTERNALSYSTEMCODE
       schema:
         type: string
-        maxLength: 40
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
       in: header
       schema:
         type: string
@@ -1738,6 +1717,27 @@ components:
       required: true
       schema:
         type: string
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
+      schema:
+        type: string
+    x-externalsystem:
+      name: x-externalsystem
+      description: External system code.
+      in: header
+      x-example: EXTERNALSYSTEMCODE
+      schema:
+        type: string
+        maxLength: 40
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

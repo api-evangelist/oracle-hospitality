@@ -125,6 +125,16 @@ paths:
         required: true
 components:
   schemas:
+    ExceptionDetail:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ExceptionObj'
+      - type: object
+        properties:
+          o.errorDetails:
+            type: array
+            items:
+              $ref: '#/components/schemas/ExceptionObj'
     ChannelContent:
       description: The object provides the channel content detail.
       type: object
@@ -169,16 +179,10 @@ components:
         value:
           type: string
           example: ROOMTYPECODE
-    ExceptionDetail:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ExceptionObj'
-      - type: object
-        properties:
-          o.errorDetails:
-            type: array
-            items:
-              $ref: '#/components/schemas/ExceptionObj'
+    UniqueId:
+      type: string
+      description: The unique identifier element allows the trading partners to uniquely identify each request of the same message, (i.e.  the entire message) for transaction traceability
+      example: 234512-3432-234234234
     ExceptionObj:
       type: object
       properties:
@@ -208,10 +212,6 @@ components:
       - logId
       - title
       - status
-    UniqueId:
-      type: string
-      description: The unique identifier element allows the trading partners to uniquely identify each request of the same message, (i.e.  the entire message) for transaction traceability
-      example: 234512-3432-234234234
     Timestamp:
       type: string
       format: DATE_TIME

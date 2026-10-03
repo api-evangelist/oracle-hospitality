@@ -419,50 +419,55 @@ paths:
       - RSVStats
 components:
   schemas:
-    blockStatType:
+    blockReservationStatistics:
       type: object
-      description: Statistics of one block.
+      description: Response for BlockReservationStatisticsByDateAndRoomPool operation.
       properties:
-        blockIdList:
-          description: Unique IDs of the business block being represented.
-          $ref: '#/components/schemas/blockIdList'
-        roomPoolStats:
-          description: Collection of room pool statistics.
-          $ref: '#/components/schemas/roomPoolStatsType'
-    blockIdList:
+        blockReservationStatisticsByDateAndRoomPool:
+          description: Block reservation statistics.
+          $ref: '#/components/schemas/blockReservationStatisticsByDateAndRoomPoolType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    operaVersion:
+      type: object
+      description: Response for Ping operation.
+      properties:
+        operaVersion:
+          description: Current Opera Version Number
+          type: string
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    reservationPace:
+      type: object
+      description: FetchReservationPace response.
+      properties:
+        reservationPace:
+          description: Contains data returned from ReservationPace Web Service call.
+          $ref: '#/components/schemas/reservationPaceRSType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    links:
       type: array
-      description: Unique Id that references an object uniquely in the system.
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    dailyPaceStatsType:
+      type: array
+      description: a collection of reservation pace statistics.
       maxItems: 4000
       items:
-        $ref: '#/components/schemas/uniqueID_Type'
-    dailyStatType:
-      type: object
-      description: Statistics of one day.
-      properties:
-        statisticDate:
-          description: Date of statistics.
-          type: string
-          format: date
-        blockStats:
-          description: Collection of block statistics.
-          $ref: '#/components/schemas/blockStatsType'
-    revenueCategorySummaryType:
-      type: object
-      description: This element has revenue amount data for its revenue category such as Room Revenue, Food and Beverage Revenue.
-      properties:
-        revenueCategoryCode:
-          description: The representation of a revenue category.
-          type: string
-          minLength: 0
-          maxLength: 40
-        amount:
-          description: A monetary amount.
-          type: number
-        currencyCode:
-          description: Provides a currency code to reflect the currency in which an amount may be expressed.
-          type: string
-          minLength: 3
-          maxLength: 3
+        $ref: '#/components/schemas/dailyPaceStatType'
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
     statisticSetType:
       type: object
       description: An instance of a statistic, which is a set containing revenue category and number category summaries.
@@ -486,88 +491,29 @@ components:
         weekendDate:
           description: Determines whether statistic date is a weekend date.
           type: boolean
-    currencyAmountType:
+    blockIdList:
+      type: array
+      description: Unique Id that references an object uniquely in the system.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/uniqueID_Type'
+    blockStatType:
       type: object
-      description: A monetary value expressed with a currency code.
+      description: Statistics of one block.
       properties:
-        amount:
-          description: A monetary amount.
-          type: number
-        currencyCode:
-          description: Provides a currency code to reflect the currency in which an amount may be expressed.
-          type: string
-          minLength: 3
-          maxLength: 3
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
+        blockIdList:
+          description: Unique IDs of the business block being represented.
+          $ref: '#/components/schemas/blockIdList'
+        roomPoolStats:
+          description: Collection of room pool statistics.
+          $ref: '#/components/schemas/roomPoolStatsType'
+    blockReservationStatisticsByDateAndRoomPoolType:
       type: object
+      description: Statistics of block reservations summarized by date and room pools.
       properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
-      required:
-      - type
-      - title
-    instanceLink:
-      type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
-      properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
-          type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
-        title:
-          description: Exact copy of the "summary" field on the linked operation.
-          type: string
+        dailyStats:
+          description: Collection of daily statistics.
+          $ref: '#/components/schemas/dailyStatsType'
     statisticType:
       type: object
       description: Defines all details needed to create a statistical report.
@@ -622,131 +568,35 @@ components:
           type: string
           minLength: 0
           maxLength: 2000
-    statisticCodeType:
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
       type: object
-      description: Defines the codes and corresponding categories for which the data in the other elements has been gathered.
       properties:
-        statisticSetsType:
-          description: Collection of statistic summary data.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/statisticSetType'
-        statCode:
-          description: Actual code used by the system to collect the statistics (e.g. CORP, RACK if category is Market Segment).
-          type: string
-          minLength: 0
-          maxLength: 20
-        statCategoryCode:
-          description: Category Code category of StatCode attribute (e.g. Market Segment).
-          type: string
-          minLength: 0
-          maxLength: 40
-        statCodeClass:
-          description: Class grouping of StatCode attribute.
-          type: string
-          minLength: 0
-          maxLength: 40
-        description:
-          description: Statistic code description.
-          type: string
-          minLength: 0
-          maxLength: 2000
-    reservationPace:
-      type: object
-      description: FetchReservationPace response.
-      properties:
-        reservationPace:
-          description: Contains data returned from ReservationPace Web Service call.
-          $ref: '#/components/schemas/reservationPaceRSType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    blockReservationStatistics:
-      type: object
-      description: Response for BlockReservationStatisticsByDateAndRoomPool operation.
-      properties:
-        blockReservationStatisticsByDateAndRoomPool:
-          description: Block reservation statistics.
-          $ref: '#/components/schemas/blockReservationStatisticsByDateAndRoomPoolType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    roomPoolStatType:
-      type: object
-      description: Statistics of one room pool.
-      properties:
-        roomPool:
-          description: Room pool (room pool represents a group of room types).
-          type: string
-          minLength: 0
-          maxLength: 20
-        paidRooms:
-          description: Number of non-complementary rooms.
-          type: integer
-        compRooms:
-          description: Number of complementary rooms.
-          type: integer
-        roomRevenue:
-          description: Room revenue amount.
-          $ref: '#/components/schemas/currencyAmountType'
-    numericCategorySummaryType:
-      type: object
-      description: This element has count data for each count category such as number of guests, rooms occupied, etc.
-      properties:
-        numericSummary:
-          description: The total count for the category in NumericCategoryCode.
-          type: number
-        numericCategoryCode:
-          description: 'The representation of a numeric category such as Guests : Number of guests, RoomsOcc : Rooms occupied.'
-          type: string
-          minLength: 0
-          maxLength: 40
-    blockReservationStatisticsByDateAndRoomPoolType:
-      type: object
-      description: Statistics of block reservations summarized by date and room pools.
-      properties:
-        dailyStats:
-          description: Collection of daily statistics.
-          $ref: '#/components/schemas/dailyStatsType'
-    dailyPaceStatType:
-      type: object
-      description: An instance or a day of a reservation pace statistic.
-      properties:
-        channel:
-          type: string
-        consideredDate:
-          description: The day to which the information belongs.
-          type: string
-          format: date
-        rooms:
-          description: Number of rooms reserved.
-          type: integer
-    uniqueID_Type:
-      type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
-      properties:
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
         type:
-          description: A reference to the type of object defined by the UniqueID element.
           type: string
-          minLength: 0
-          maxLength: 40
-        idExtension:
-          description: 'Additional identifying value assigned by the creating system. Eg: ConfirmationLegNumber, ExternalLegNumber'
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
           type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
     warningType:
       type: object
       description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
@@ -793,21 +643,74 @@ components:
           type: string
           minLength: 1
           maxLength: 8
-    dailyPaceStatsType:
-      type: array
-      description: a collection of reservation pace statistics.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/dailyPaceStatType'
-    dailyStatsType:
-      type: array
+    dailyStatType:
+      type: object
       description: Statistics of one day.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/dailyStatType'
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
+      properties:
+        statisticDate:
+          description: Date of statistics.
+          type: string
+          format: date
+        blockStats:
+          description: Collection of block statistics.
+          $ref: '#/components/schemas/blockStatsType'
+    uniqueID_Type:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
+        idExtension:
+          description: 'Additional identifying value assigned by the creating system. Eg: ConfirmationLegNumber, ExternalLegNumber'
+          type: integer
+    numericCategorySummaryType:
+      type: object
+      description: This element has count data for each count category such as number of guests, rooms occupied, etc.
+      properties:
+        numericSummary:
+          description: The total count for the category in NumericCategoryCode.
+          type: number
+        numericCategoryCode:
+          description: 'The representation of a numeric category such as Guests : Number of guests, RoomsOcc : Rooms occupied.'
+          type: string
+          minLength: 0
+          maxLength: 40
+    reservationPaceRSType:
+      type: object
+      description: Contains reservation pace report data.
+      properties:
+        hotelId:
+          type: string
+        businessDate:
+          type: string
+          format: date
+        dailyPaceStats:
+          description: Contains the statistical data.
+          $ref: '#/components/schemas/dailyPaceStatsType'
+    reservationStatistics:
+      type: object
+      description: FetchReservationStatistics response
+      properties:
+        statisticsType:
+          description: Collection of statistic data of a reservation.
+          type: array
+          items:
+            $ref: '#/components/schemas/statisticType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
       type: object
       properties:
         type:
@@ -831,82 +734,167 @@ components:
         o:errorPath:
           type: string
           description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
       required:
       - type
       - title
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
-    reservationStatistics:
-      type: object
-      description: FetchReservationStatistics response
-      properties:
-        statisticsType:
-          description: Collection of statistic data of a reservation.
-          type: array
-          items:
-            $ref: '#/components/schemas/statisticType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
     roomPoolStatsType:
       type: array
       description: Statistics of one room pool.
       maxItems: 4000
       items:
         $ref: '#/components/schemas/roomPoolStatType'
-    reservationPaceRSType:
+    dailyStatsType:
+      type: array
+      description: Statistics of one day.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/dailyStatType'
+    statisticCodeType:
       type: object
-      description: Contains reservation pace report data.
+      description: Defines the codes and corresponding categories for which the data in the other elements has been gathered.
       properties:
-        hotelId:
+        statisticSetsType:
+          description: Collection of statistic summary data.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/statisticSetType'
+        statCode:
+          description: Actual code used by the system to collect the statistics (e.g. CORP, RACK if category is Market Segment).
           type: string
-        businessDate:
+          minLength: 0
+          maxLength: 20
+        statCategoryCode:
+          description: Category Code category of StatCode attribute (e.g. Market Segment).
           type: string
-          format: date
-        dailyPaceStats:
-          description: Contains the statistical data.
-          $ref: '#/components/schemas/dailyPaceStatsType'
+          minLength: 0
+          maxLength: 40
+        statCodeClass:
+          description: Class grouping of StatCode attribute.
+          type: string
+          minLength: 0
+          maxLength: 40
+        description:
+          description: Statistic code description.
+          type: string
+          minLength: 0
+          maxLength: 2000
     blockStatsType:
       type: array
       description: Statistics of one block.
       maxItems: 4000
       items:
         $ref: '#/components/schemas/blockStatType'
-    operaVersion:
+    currencyAmountType:
       type: object
-      description: Response for Ping operation.
+      description: A monetary value expressed with a currency code.
       properties:
-        operaVersion:
-          description: Current Opera Version Number
+        amount:
+          description: A monetary amount.
+          type: number
+        currencyCode:
+          description: Provides a currency code to reflect the currency in which an amount may be expressed.
           type: string
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
+          minLength: 3
+          maxLength: 3
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    roomPoolStatType:
+      type: object
+      description: Statistics of one room pool.
+      properties:
+        roomPool:
+          description: Room pool (room pool represents a group of room types).
+          type: string
+          minLength: 0
+          maxLength: 20
+        paidRooms:
+          description: Number of non-complementary rooms.
+          type: integer
+        compRooms:
+          description: Number of complementary rooms.
+          type: integer
+        roomRevenue:
+          description: Room revenue amount.
+          $ref: '#/components/schemas/currencyAmountType'
+    dailyPaceStatType:
+      type: object
+      description: An instance or a day of a reservation pace statistic.
+      properties:
+        channel:
+          type: string
+        consideredDate:
+          description: The day to which the information belongs.
+          type: string
+          format: date
+        rooms:
+          description: Number of rooms reserved.
+          type: integer
+    revenueCategorySummaryType:
+      type: object
+      description: This element has revenue amount data for its revenue category such as Room Revenue, Food and Beverage Revenue.
+      properties:
+        revenueCategoryCode:
+          description: The representation of a revenue category.
+          type: string
+          minLength: 0
+          maxLength: 40
+        amount:
+          description: A monetary amount.
+          type: number
+        currencyCode:
+          description: Provides a currency code to reflect the currency in which an amount may be expressed.
+          type: string
+          minLength: 3
+          maxLength: 3
   responses:
-    '405':
-      description: Method not allowed
-    '413':
-      description: Request Entity Too Large
-    '403':
-      description: Forbidden
-    '503':
-      description: Service Unavailable
-    '406':
-      description: Not acceptable.
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
     '401':
       description: Unauthorized
-    '415':
-      description: Unsupported Media Type
+    '414':
+      description: Request URI Too Large
+    '406':
+      description: Not acceptable.
+    '403':
+      description: Forbidden
     '404':
       description: Resource not found
       content:
@@ -915,41 +903,33 @@ components:
             $ref: '#/components/schemas/exceptionDetailType'
     '502':
       description: Bad Gateway
-    '414':
-      description: Request URI Too Large
     '400':
       description: Bad Request
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/exceptionDetailType'
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '503':
+      description: Service Unavailable
+    '405':
+      description: Method not allowed
+    '413':
+      description: Request Entity Too Large
   parameters:
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
-      in: header
-      schema:
-        type: string
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
-      in: header
-      required: true
-      schema:
-        type: string
     externalData:
       name: externalData
       description: Pass this header as true, if payload needs DVM
       in: header
       schema:
         type: string
-    x-request-id:
-      name: x-request-id
-      description: Request Id of an incoming request
-      in: header
-      schema:
-        type: string
-        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
     x-app-key:
       name: x-app-key
       description: Client or Partner's Application Key
@@ -958,6 +938,26 @@ components:
       schema:
         type: string
         pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
+      schema:
+        type: string
     x-externalsystem:
       name: x-externalsystem
       description: External system code.
@@ -972,9 +972,9 @@ components:
       in: header
       schema:
         type: string
-    x-hotelid:
-      name: x-hotelid
-      description: Mandatory parameter to identify the hotel code where the end user is logged in
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
       in: header
       required: true
       schema:

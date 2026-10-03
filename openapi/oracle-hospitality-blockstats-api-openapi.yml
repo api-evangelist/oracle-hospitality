@@ -474,26 +474,14 @@ paths:
       - BlockStats
 components:
   responses:
-    '405':
-      description: Method not allowed
-    '413':
-      description: Request Entity Too Large
-    '403':
-      description: Forbidden
-    '503':
-      description: Service Unavailable
-    '406':
-      description: Not acceptable.
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
     '401':
       description: Unauthorized
-    '415':
-      description: Unsupported Media Type
+    '414':
+      description: Request URI Too Large
+    '406':
+      description: Not acceptable.
+    '403':
+      description: Forbidden
     '404':
       description: Resource not found
       content:
@@ -502,76 +490,157 @@ components:
             $ref: '#/components/schemas/exceptionDetailType'
     '502':
       description: Bad Gateway
-    '414':
-      description: Request URI Too Large
     '400':
       description: Bad Request
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/exceptionDetailType'
-  parameters:
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
-      in: header
-      schema:
-        type: string
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
-      in: header
-      required: true
-      schema:
-        type: string
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
-      in: header
-      schema:
-        type: string
-    x-request-id:
-      name: x-request-id
-      description: Request Id of an incoming request
-      in: header
-      schema:
-        type: string
-        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
-    x-app-key:
-      name: x-app-key
-      description: Client or Partner's Application Key
-      in: header
-      required: true
-      schema:
-        type: string
-        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    x-externalsystem:
-      name: x-externalsystem
-      description: External system code.
-      in: header
-      x-example: EXTERNALSYSTEMCODE
-      schema:
-        type: string
-        maxLength: 40
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
-      in: header
-      schema:
-        type: string
-    x-hotelid:
-      name: x-hotelid
-      description: Mandatory parameter to identify the hotel code where the end user is logged in
-      in: header
-      required: true
-      schema:
-        type: string
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '503':
+      description: Service Unavailable
+    '405':
+      description: Method not allowed
+    '413':
+      description: Request Entity Too Large
   schemas:
-    operaVersionNumberType:
+    operaVersion:
+      type: object
+      description: Response for Ping operation.
+      properties:
+        operaVersion:
+          description: Opera version number.
+          $ref: '#/components/schemas/operaVersionNumberType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    hSKStatReportCodeType:
       type: string
-      description: Current Opera Version Number
-      minLength: 0
-      maxLength: 40
+      description: Supported Housekeeping report codes.
+      enum:
+      - HouseSummary
+      - HouseSummaryMonthToDate
+      - HouseSummaryYearToDate
+      - ReservationActivity
+      - ReservationActivityDaily
+      - ReservationActivityMonthToDate
+      - ReservationActivityYearToDate
+      - ComplimentaryOrHouseUse
+      - DailyProjection
+      - RoomStatus
+      - LastHourStatus
+      - Turndown
+      - InHouse
+      - CheckIns
+      - CheckOuts
+      - AvailableRooms
+      - RoomMaintenance
+      - ReservationStatistics
+      - VIPGuests
+      - AdvanceCheckIn
+      - BlockArrivals
+      - ReservationsCancellationsToday
+      - AIRoomAssignment
+      - CompRouting
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    statUnitCategoryType:
+      type: string
+      description: Supported statistical units.
+      enum:
+      - Numeric
+      - Amount
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
+    warningType:
+      type: object
+      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
+          type: string
+          maxLength: 2000
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+          type: string
+          minLength: 0
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+          maxLength: 2000
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+          maxLength: 2000
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+          maxLength: 2000
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+          maxLength: 2000
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        rph:
+          description: Reference Place Holder used as an index for this warning.
+          type: string
+          minLength: 1
+          maxLength: 8
     hSKStatCodeType:
       type: string
       description: Supported housekeeping statistical codes.
@@ -729,6 +798,30 @@ components:
       - ArrivalAIAssgnVIPResvs
       - ArrivalAIAssgnMemberResvs
       - ArrivalAIAssgnOverridden
+    hSKStatSetType:
+      type: object
+      description: Base statistic set holder which defines the span of the statistical data.
+      properties:
+        start:
+          type: string
+          format: date
+          maxLength: 8
+        end:
+          type: string
+          format: date
+          maxLength: 8
+        stat:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/hSKStatType'
+        code:
+          type: string
+    hSKStatCategoryCodeType:
+      type: string
+      description: Supported housekeeping statistical category codes.
+      enum:
+      - HotelCode
     hSKStatCategoryType:
       type: object
       description: Defines the codes and corresponding categories for which the data in the other elements has been gathered.
@@ -790,6 +883,11 @@ components:
       required:
       - type
       - title
+    operaVersionNumberType:
+      type: string
+      description: Current Opera Version Number
+      minLength: 0
+      maxLength: 40
     blockStatReportType:
       type: object
       description: Base abstraction defining all details needed to create a statistical report.
@@ -840,6 +938,19 @@ components:
             $ref: '#/components/schemas/hSKStatCategoryType'
         reportCode:
           $ref: '#/components/schemas/hSKStatReportCodeType'
+    blockStats:
+      type: object
+      description: Response element for block statistics.
+      properties:
+        reports:
+          description: Statistical report - each report is determined by the requested report in the service request criteria.
+          type: array
+          items:
+            $ref: '#/components/schemas/blockStatReportType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
     hSKStatType:
       type: object
       description: Since the statistical value can be represented in different measure of units, this element will provide a flexible definition for the supported Opera9 statistical units.
@@ -891,173 +1002,62 @@ components:
         title:
           description: Exact copy of the "summary" field on the linked operation.
           type: string
-    hSKStatCategoryCodeType:
-      type: string
-      description: Supported housekeeping statistical category codes.
-      enum:
-      - HotelCode
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    hSKStatReportCodeType:
-      type: string
-      description: Supported Housekeeping report codes.
-      enum:
-      - HouseSummary
-      - HouseSummaryMonthToDate
-      - HouseSummaryYearToDate
-      - ReservationActivity
-      - ReservationActivityDaily
-      - ReservationActivityMonthToDate
-      - ReservationActivityYearToDate
-      - ComplimentaryOrHouseUse
-      - DailyProjection
-      - RoomStatus
-      - LastHourStatus
-      - Turndown
-      - InHouse
-      - CheckIns
-      - CheckOuts
-      - AvailableRooms
-      - RoomMaintenance
-      - ReservationStatistics
-      - VIPGuests
-      - AdvanceCheckIn
-      - BlockArrivals
-      - ReservationsCancellationsToday
-      - AIRoomAssignment
-      - CompRouting
-    hSKStatSetType:
-      type: object
-      description: Base statistic set holder which defines the span of the statistical data.
-      properties:
-        start:
-          type: string
-          format: date
-          maxLength: 8
-        end:
-          type: string
-          format: date
-          maxLength: 8
-        stat:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/hSKStatType'
-        code:
-          type: string
-    statUnitCategoryType:
-      type: string
-      description: Supported statistical units.
-      enum:
-      - Numeric
-      - Amount
-    warningType:
-      type: object
-      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
-      properties:
-        value:
-          type: string
-          description: Property Value
-        shortText:
-          description: An abbreviated version of the error in textual format.
-          type: string
-          maxLength: 2000
-        code:
-          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
-          type: string
-          minLength: 0
-          maxLength: 20
-        docURL:
-          description: If present, this URL refers to an online description of the error that occurred.
-          type: string
-          maxLength: 2000
-        status:
-          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
-          type: string
-          maxLength: 2000
-        tag:
-          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
-          type: string
-          maxLength: 2000
-        recordId:
-          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
-          type: string
-          maxLength: 2000
-        type:
-          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
-          type: string
-          minLength: 0
-          maxLength: 20
-        language:
-          description: Language identification.
-          type: string
-          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
-        rph:
-          description: Reference Place Holder used as an index for this warning.
-          type: string
-          minLength: 1
-          maxLength: 8
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-      required:
-      - type
-      - title
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
-    blockStats:
-      type: object
-      description: Response element for block statistics.
-      properties:
-        reports:
-          description: Statistical report - each report is determined by the requested report in the service request criteria.
-          type: array
-          items:
-            $ref: '#/components/schemas/blockStatReportType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    operaVersion:
-      type: object
-      description: Response for Ping operation.
-      properties:
-        operaVersion:
-          description: Opera version number.
-          $ref: '#/components/schemas/operaVersionNumberType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
+  parameters:
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
+      in: header
+      schema:
+        type: string
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
+      schema:
+        type: string
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
+      schema:
+        type: string
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
+    x-externalsystem:
+      name: x-externalsystem
+      description: External system code.
+      in: header
+      x-example: EXTERNALSYSTEMCODE
+      schema:
+        type: string
+        maxLength: 40
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html
