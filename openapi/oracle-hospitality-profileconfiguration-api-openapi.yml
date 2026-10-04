@@ -3628,239 +3628,55 @@ paths:
         required: true
 components:
   schemas:
-    exclusivePreferencesCopy:
+    creditRatingsType:
+      type: array
+      description: List of Credit Ratings.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/creditRatingType'
+    preferencesCopy:
       type: object
-      description: Request object for copying template Exclusive preferences to hotel(s).
+      description: Request object for copying template preferences to hotel(s).
       properties:
         copyInstructions:
-          description: List of the template Exclusive preferences to be copied to hotel(s).
-          $ref: '#/components/schemas/configCopyExclusivePreferencesType'
+          description: List of the template preferences to be copied to hotel(s).
+          $ref: '#/components/schemas/configCopyPreferencesType'
         links:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    operaVersion:
-      type: object
-      description: Response for Ping operation.
-      properties:
-        operaVersion:
-          description: Opera version number.
-          $ref: '#/components/schemas/operaVersionNumberType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    creditRatings:
-      type: object
-      description: Response object for fetching credit ratings.
-      properties:
-        creditRatings:
-          description: Collection of Credit Ratings.
-          $ref: '#/components/schemas/creditRatingsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    preferenceGroupsType:
+    profileNameValidationsType:
       type: array
-      description: Collection of preference groups.
+      description: List of the Profile name to be configured or fetched.
       maxItems: 4000
       items:
-        $ref: '#/components/schemas/preferenceGroupType'
-    translationTextType2000:
+        $ref: '#/components/schemas/profileNameValidationType'
+    creditRatingType:
       type: object
-      description: Contains Multiple translated texts and language codes.
+      description: Contains Common Master configuration detail.
       properties:
-        defaultText:
-          description: Default text with Character length from 0 to 2000.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        translatedTexts:
-          description: List of translated text and language codes.
-          $ref: '#/components/schemas/translationsTextType'
-    addressFormatType:
-      type: object
-      description: A representation of the information contained by an address format.
-      properties:
-        formatCode:
-          description: Address format code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        formatDefinition:
-          description: Address format definition with the elements of the address.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        description:
-          description: Description of the address format.
-          type: string
-          minLength: 0
-          maxLength: 200
-        displayOrder:
-          description: sequence number of the address format.
-          type: number
-        formattedExample:
-          description: An example address formatted with the current format definition.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        salesFormat:
-          description: Determines if the format is a sales format or not.
-          type: boolean
-        canDelete:
-          description: Determines whether this address format can be deleted.
-          type: boolean
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-      required:
-      - type
-      - title
-    profileNameValidations:
-      type: object
-      description: Response for fetching Profile names.
-      properties:
-        profileNames:
-          description: Collection of Profile names.
-          $ref: '#/components/schemas/profileNameValidationsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    profileNameValidationsToChange:
-      type: object
-      description: Request object to edit Profile names.
-      properties:
-        profileNames:
-          description: Details of the Profile names to edit.
-          $ref: '#/components/schemas/profileNameValidationEditType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    configTemplateExclusivePreferencesType:
-      type: array
-      description: Base details common between both template and property level exclusive preferences.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/configExclusivePreferenceBaseType'
-    templatePreferences:
-      type: object
-      description: Response object for fetching preferences at the template level.
-      properties:
-        templatePreferences:
-          description: Collection of preferences specified at the template level.
-          $ref: '#/components/schemas/configTemplatePreferencesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    configHotelPreferenceType:
-      type: object
-      description: Base details common between both template and property level preferences.
-      properties:
-        description:
-          description: The description about the preference.
-          type: string
-          minLength: 0
-          maxLength: 2000
         code:
-          description: Specifies the preference code.
+          description: Common Master unique code.
           type: string
           minLength: 0
-          maxLength: 20
-        preferenceGroup:
-          description: Specifies the preference group the preference belongs to.
-          type: string
-          minLength: 0
-          maxLength: 20
-        preferenceSubGroup:
-          description: This is a placeholder element for future use. Functionality may not be available for the current implementation.
-          type: string
-          minLength: 0
-          maxLength: 20
-        housekeeping:
-          description: Flag to indicate if this preference should be available on the Task Sheet Workflow configuration. It is only applicable for preference types FLOOR and SPECIALS.
-          type: boolean
-        orderSequence:
-          description: Display Order sequence.
+          maxLength: 40
+        description:
+          description: Description of the Master code.
+          $ref: '#/components/schemas/translationTextType2000'
+        displayOrder:
+          description: Common Master record sequence number.
           type: number
-        hotelId:
-          description: Specifies the hotel code for which the preference is specified.
-          type: string
-          minLength: 0
-          maxLength: 20
+        inactive:
+          description: Determines whether this credit rating is inactive or not.
+          type: boolean
         managedBy:
           $ref: '#/components/schemas/managedByOptions'
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
-      required:
-      - type
-      - title
-    preferenceCodesType:
+    configHotelExclusivePreferencesType:
       type: array
-      description: Specifies the preference code and its description mapped to the exclusive preference.
+      description: This gives detailed information about a Exclusive preference at the property level.
       maxItems: 4000
       items:
-        $ref: '#/components/schemas/codeDescriptionType'
+        $ref: '#/components/schemas/configHotelExclusivePreferenceType'
     profileLinkType:
       type: object
       description: ProfileLinksType for create, change and delete
@@ -3912,48 +3728,37 @@ components:
           type: boolean
         managedBy:
           $ref: '#/components/schemas/managedByOptions'
-    configHotelExclusivePreferencesType:
+    preferenceGroupsType:
       type: array
-      description: This gives detailed information about a Exclusive preference at the property level.
+      description: Collection of preference groups.
       maxItems: 4000
       items:
-        $ref: '#/components/schemas/configHotelExclusivePreferenceType'
-    claimAdjustmentLimitsRangeType:
-      type: object
-      description: List of Claim Adjustment Limits.
-      properties:
-        awardPoints:
-          description: Threshold limit for the award.
-          $ref: '#/components/schemas/pointsThreshold'
-        stayPoints:
-          description: Threshold limit for the Tier Stay Points.
-          $ref: '#/components/schemas/pointsThreshold'
-        nightPoints:
-          description: Threshold limit for the Tier Nights Points.
-          $ref: '#/components/schemas/pointsThreshold'
-        revenuePoints:
-          description: Threshold limit for the Tier Revenue Points.
-          $ref: '#/components/schemas/pointsThreshold'
-    claimAdjustmentLimitsType:
+        $ref: '#/components/schemas/preferenceGroupType'
+    translationsTextType:
       type: array
-      description: Collection of Claim Adjustment Limits
+      description: Language code for the translation.
       maxItems: 4000
       items:
-        $ref: '#/components/schemas/claimAdjustmentLimitType'
-    profileNameValidationType:
-      type: object
-      description: Provides information about the Profile Names.
-      properties:
-        type:
-          description: Type of the Profile.
-          $ref: '#/components/schemas/profileNameValidationTypeType'
-        name:
-          description: Name of the Profile.
-          type: string
-          minLength: 0
-          maxLength: 80
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
+        type: object
+        properties:
+          value:
+            type: string
+            description: Used for Character Strings, length 0 to 2000.
+            minLength: 0
+            maxLength: 2000
+          language:
+            description: Language identification.
+            type: string
+            minLength: 0
+            maxLength: 20
+        description: Language code for the translation.
+    codeListType:
+      type: array
+      maxItems: 4000
+      items:
+        type: string
+        minLength: 0
+        maxLength: 20
     exclusivePreferences:
       type: object
       description: Response object for fetching Exclusive preferences at the property level.
@@ -3965,26 +3770,64 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    configTemplatePreferenceIDType:
+    exclusivePreferencesCopy:
       type: object
-      description: Base details common between both template and property level preference ids.
+      description: Request object for copying template Exclusive preferences to hotel(s).
+      properties:
+        copyInstructions:
+          description: List of the template Exclusive preferences to be copied to hotel(s).
+          $ref: '#/components/schemas/configCopyExclusivePreferencesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    configExclusivePrefCodeAndGroupType:
+      type: object
+      description: Base details common between both template and property level Exclusive preference ids.
       properties:
         code:
-          description: Specifies the preference code.
+          description: Specifies the Exclusive preference code.
           type: string
           minLength: 0
           maxLength: 20
         preferenceGroup:
-          description: Specifies the preference group the preference belongs to.
+          description: Specifies the preference group the Exclusive preference belongs to.
           type: string
           minLength: 0
           maxLength: 20
+    configTemplatePreferencesType:
+      type: array
+      description: This type holds a collection of preferences at the template level.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/configTemplatePreferenceType'
+    profileLinks:
+      type: object
+      description: Response object for fetch profile links
+      properties:
+        profileLinks:
+          $ref: '#/components/schemas/profileLinksType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    profileNameValidationsToChange:
+      type: object
+      description: Request object to edit Profile names.
+      properties:
+        profileNames:
+          description: Details of the Profile names to edit.
+          $ref: '#/components/schemas/profileNameValidationEditType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    profileLinkInheritRates:
+      type: string
+      description: Simple type for inherit rates
+      enum:
+      - From
+      - To
     pointsThreshold:
       type: object
       description: Points Threshold Information.
@@ -3995,6 +3838,83 @@ components:
         higherLimit:
           description: Higher limit.
           type: integer
+    preferenceGroupType:
+      type: object
+      description: Preference group identification details.
+      properties:
+        code:
+          description: Code identifying the preference group.
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: Description of the preference group.
+          type: string
+          minLength: 0
+          maxLength: 40
+        mandatoryReservation:
+          description: When this mandatory reservation is true then user cannot set or change reservation preference flag and also this is a non editable field. SPECIALS AND ROOM FEATURES preference groups will have true for this field
+          type: boolean
+        reservationPreference:
+          description: Indicates if the preference group can be used in reservations.
+          type: boolean
+        maxQuantity:
+          description: Maximum number of preferences which can be created in this preference group.
+          type: integer
+        sequence:
+          description: Display sequence for the preference group.
+          type: integer
+        allowSubTypes:
+          description: This is a placeholder element for future use. Functionality may not be available for the current implementation.
+          type: boolean
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    configTemplatePreferenceType:
+      type: object
+      description: Base details common between both template and property level preferences.
+      properties:
+        description:
+          description: The description about the preference.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        code:
+          description: Specifies the preference code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        preferenceGroup:
+          description: Specifies the preference group the preference belongs to.
+          type: string
+          minLength: 0
+          maxLength: 20
+        preferenceSubGroup:
+          description: This is a placeholder element for future use. Functionality may not be available for the current implementation.
+          type: string
+          minLength: 0
+          maxLength: 20
+        housekeeping:
+          description: Flag to indicate if this preference should be available on the Task Sheet Workflow configuration. It is only applicable for preference types FLOOR and SPECIALS.
+          type: boolean
+        orderSequence:
+          description: Display Order sequence.
+          type: number
+        global:
+          description: Specifies whether the preference is to be available for selection at all properties .
+          type: boolean
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    creditRatings:
+      type: object
+      description: Response object for fetching credit ratings.
+      properties:
+        creditRatings:
+          description: Collection of Credit Ratings.
+          $ref: '#/components/schemas/creditRatingsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
     claimAdjustmentLimits:
       type: object
       description: Request object for modifying Claim Adjustment Limits.
@@ -4006,6 +3926,62 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
+    managedByOptions:
+      description: Describes of the Configuration is Managed by Enterprise or Property.
+      type: string
+      enum:
+      - EnterpriseManaged
+      - PropertyManaged
+      - EnterpriseEnforced
+      - PropertyOverridden
+    addressFormatsType:
+      type: array
+      description: An Address formats.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/addressFormatType'
+    configCopyPreferencesType:
+      type: object
+      description: Copy instructions for copying template preferences to hotel(s)
+      properties:
+        hotelCodes:
+          description: Hotel codes to copy the template preferences to.
+          $ref: '#/components/schemas/codeListType'
+        templatePreferences:
+          description: Template preference to be copied to the hotel(s).
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/configTemplatePreferenceIDType'
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
     warningType:
       type: object
       description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
@@ -4052,43 +4028,31 @@ components:
           type: string
           minLength: 1
           maxLength: 8
-    profileLinkInheritRates:
-      type: string
-      description: Simple type for inherit rates
-      enum:
-      - From
-      - To
-    preferenceGroupType:
+    configHotelExclusivePreferenceType:
       type: object
-      description: Preference group identification details.
+      description: Base details common between both template and property level Exclusive preference ids.
       properties:
         code:
-          description: Code identifying the preference group.
+          description: Specifies the Exclusive preference code.
           type: string
           minLength: 0
           maxLength: 20
-        description:
-          description: Description of the preference group.
+        preferenceGroup:
+          description: Specifies the preference group the Exclusive preference belongs to.
           type: string
           minLength: 0
-          maxLength: 40
-        mandatoryReservation:
-          description: When this mandatory reservation is true then user cannot set or change reservation preference flag and also this is a non editable field. SPECIALS AND ROOM FEATURES preference groups will have true for this field
-          type: boolean
-        reservationPreference:
-          description: Indicates if the preference group can be used in reservations.
-          type: boolean
-        maxQuantity:
-          description: Maximum number of preferences which can be created in this preference group.
-          type: integer
-        sequence:
-          description: Display sequence for the preference group.
-          type: integer
-        allowSubTypes:
-          description: This is a placeholder element for future use. Functionality may not be available for the current implementation.
-          type: boolean
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
+          maxLength: 20
+        preferenceCodes:
+          description: Specifies the preference codes mapped to the exclusive preference.
+          $ref: '#/components/schemas/preferenceCodesType'
+        orderSequence:
+          description: Display Order sequence.
+          type: number
+        hotelId:
+          description: Specifies the hotel code for which the Exclusive preference is specified.
+          type: string
+          minLength: 0
+          maxLength: 20
     configCopyExclusivePreferencesType:
       type: object
       description: Copy instructions for copying template Exclusive preferences to hotel(s)
@@ -4102,12 +4066,243 @@ components:
         hotelCodes:
           description: Hotel codes list to which the exclusive pref is to be copied.
           $ref: '#/components/schemas/codeListType'
-    creditRatingsType:
+    addressFormats:
+      type: object
+      description: Response object for fetching Address Formats.
+      properties:
+        formats:
+          description: Collection of Address formats fetched.
+          $ref: '#/components/schemas/addressFormatsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
+    templatePreferences:
+      type: object
+      description: Response object for fetching preferences at the template level.
+      properties:
+        templatePreferences:
+          description: Collection of preferences specified at the template level.
+          $ref: '#/components/schemas/configTemplatePreferencesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    preferenceCodesType:
       type: array
-      description: List of Credit Ratings.
+      description: Specifies the preference code and its description mapped to the exclusive preference.
       maxItems: 4000
       items:
-        $ref: '#/components/schemas/creditRatingType'
+        $ref: '#/components/schemas/codeDescriptionType'
+    claimAdjustmentLimitsRangeType:
+      type: object
+      description: List of Claim Adjustment Limits.
+      properties:
+        awardPoints:
+          description: Threshold limit for the award.
+          $ref: '#/components/schemas/pointsThreshold'
+        stayPoints:
+          description: Threshold limit for the Tier Stay Points.
+          $ref: '#/components/schemas/pointsThreshold'
+        nightPoints:
+          description: Threshold limit for the Tier Nights Points.
+          $ref: '#/components/schemas/pointsThreshold'
+        revenuePoints:
+          description: Threshold limit for the Tier Revenue Points.
+          $ref: '#/components/schemas/pointsThreshold'
+    profileNameValidationEditType:
+      type: object
+      description: Provides information about the Profile Names.
+      properties:
+        type:
+          description: Type of the Profile.
+          $ref: '#/components/schemas/profileNameValidationTypeType'
+        name:
+          description: Name of the Profile.
+          type: string
+          minLength: 0
+          maxLength: 80
+        newProfileName:
+          description: List of new values for Profile Name and Type .
+          $ref: '#/components/schemas/profileNameValidationType'
+    configExclusivePreferenceBaseType:
+      type: object
+      description: Base details common between both template and property level Exclusive preference ids.
+      properties:
+        code:
+          description: Specifies the Exclusive preference code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        preferenceGroup:
+          description: Specifies the preference group the Exclusive preference belongs to.
+          type: string
+          minLength: 0
+          maxLength: 20
+        preferenceCodes:
+          description: Specifies the preference codes mapped to the exclusive preference.
+          $ref: '#/components/schemas/preferenceCodesType'
+        orderSequence:
+          description: Display Order sequence.
+          type: number
+    addressFormatType:
+      type: object
+      description: A representation of the information contained by an address format.
+      properties:
+        formatCode:
+          description: Address format code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        formatDefinition:
+          description: Address format definition with the elements of the address.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        description:
+          description: Description of the address format.
+          type: string
+          minLength: 0
+          maxLength: 200
+        displayOrder:
+          description: sequence number of the address format.
+          type: number
+        formattedExample:
+          description: An example address formatted with the current format definition.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        salesFormat:
+          description: Determines if the format is a sales format or not.
+          type: boolean
+        canDelete:
+          description: Determines whether this address format can be deleted.
+          type: boolean
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    claimAdjustmentLimitType:
+      type: object
+      description: Details of Claim Adjustment Limit.
+      properties:
+        limitCode:
+          description: A Type that holds key value, that uniquely identifies a Claim Adjustment Limit.
+          type: string
+          minLength: 0
+          maxLength: 20
+        billingGroup:
+          description: The billing group that represents a billing rule schedule for the Claim Adjustment Limit.
+          type: string
+          minLength: 0
+          maxLength: 20
+        limits:
+          description: Threshold limits.
+          $ref: '#/components/schemas/claimAdjustmentLimitsRangeType'
+        hotels:
+          description: Collection of property codes which associated for a Claim Adjustment Limit code.
+          $ref: '#/components/schemas/codeListType'
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    profileNameValidations:
+      type: object
+      description: Response for fetching Profile names.
+      properties:
+        profileNames:
+          description: Collection of Profile names.
+          $ref: '#/components/schemas/profileNameValidationsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    preferenceGroups:
+      type: object
+      description: Response object for fetching preference groups.
+      properties:
+        preferenceGroups:
+          description: Collection of preference groups matching the search criteria.
+          $ref: '#/components/schemas/preferenceGroupsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    templateExclusivePreferences:
+      type: object
+      description: Response object for fetching exclusive preferences at the template level.
+      properties:
+        templateExclusivePreferences:
+          description: Collection of exclusive preferences specified at the template level.
+          $ref: '#/components/schemas/configTemplateExclusivePreferencesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    operaVersion:
+      type: object
+      description: Response for Ping operation.
+      properties:
+        operaVersion:
+          description: Opera version number.
+          $ref: '#/components/schemas/operaVersionNumberType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    claimAdjustmentLimitsInfo:
+      type: object
+      description: Response object for fetching Claim Adjustment Limits.
+      properties:
+        claimAdjustmentLimits:
+          description: Collection of Claim Adjustment Limits.
+          $ref: '#/components/schemas/claimAdjustmentLimitsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    configTemplateExclusivePreferencesType:
+      type: array
+      description: Base details common between both template and property level exclusive preferences.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/configExclusivePreferenceBaseType'
     instanceLink:
       type: object
       description: Metadata describing link description objects that MAY appear in the JSON instance representation.
@@ -4142,205 +4337,33 @@ components:
         title:
           description: Exact copy of the "summary" field on the linked operation.
           type: string
-    claimAdjustmentLimitsInfo:
+    configTemplatePreferenceIDType:
       type: object
-      description: Response object for fetching Claim Adjustment Limits.
-      properties:
-        claimAdjustmentLimits:
-          description: Collection of Claim Adjustment Limits.
-          $ref: '#/components/schemas/claimAdjustmentLimitsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    templateExclusivePreferences:
-      type: object
-      description: Response object for fetching exclusive preferences at the template level.
-      properties:
-        templateExclusivePreferences:
-          description: Collection of exclusive preferences specified at the template level.
-          $ref: '#/components/schemas/configTemplateExclusivePreferencesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    translationsTextType:
-      type: array
-      description: Language code for the translation.
-      maxItems: 4000
-      items:
-        type: object
-        properties:
-          value:
-            type: string
-            description: Used for Character Strings, length 0 to 2000.
-            minLength: 0
-            maxLength: 2000
-          language:
-            description: Language identification.
-            type: string
-            minLength: 0
-            maxLength: 20
-        description: Language code for the translation.
-    hotelPreferences:
-      type: object
-      description: Response object for fetching preferences at the property level.
-      properties:
-        hotelPreferences:
-          description: Collection of preferences specified at the property level.
-          $ref: '#/components/schemas/configHotelPreferencesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    addressFormats:
-      type: object
-      description: Response object for fetching Address Formats.
-      properties:
-        formats:
-          description: Collection of Address formats fetched.
-          $ref: '#/components/schemas/addressFormatsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    configCopyPreferencesType:
-      type: object
-      description: Copy instructions for copying template preferences to hotel(s)
-      properties:
-        hotelCodes:
-          description: Hotel codes to copy the template preferences to.
-          $ref: '#/components/schemas/codeListType'
-        templatePreferences:
-          description: Template preference to be copied to the hotel(s).
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/configTemplatePreferenceIDType'
-    status:
-      type: object
-      description: Response Body.
-      properties:
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-        links:
-          $ref: '#/components/schemas/links'
-    preferenceGroups:
-      type: object
-      description: Response object for fetching preference groups.
-      properties:
-        preferenceGroups:
-          description: Collection of preference groups matching the search criteria.
-          $ref: '#/components/schemas/preferenceGroupsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    configExclusivePreferenceBaseType:
-      type: object
-      description: Base details common between both template and property level Exclusive preference ids.
+      description: Base details common between both template and property level preference ids.
       properties:
         code:
-          description: Specifies the Exclusive preference code.
+          description: Specifies the preference code.
           type: string
           minLength: 0
           maxLength: 20
         preferenceGroup:
-          description: Specifies the preference group the Exclusive preference belongs to.
+          description: Specifies the preference group the preference belongs to.
           type: string
           minLength: 0
           maxLength: 20
-        preferenceCodes:
-          description: Specifies the preference codes mapped to the exclusive preference.
-          $ref: '#/components/schemas/preferenceCodesType'
-        orderSequence:
-          description: Display Order sequence.
-          type: number
-    profileNameValidationsType:
+    profileNameValidationTypeType:
+      type: string
+      description: Simple Type for Profile Name Validations Type. e.g. Company,Travel Agent,Source.
+      enum:
+      - Company
+      - TravelAgent
+      - Source
+    configHotelPreferencesType:
       type: array
-      description: List of the Profile name to be configured or fetched.
+      description: This type holds a collection of preferences at the property level.
       maxItems: 4000
       items:
-        $ref: '#/components/schemas/profileNameValidationType'
-    profileLinksType:
-      type: array
-      description: Holds the collection of profile link objects
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/profileLinkType'
-    profileNameValidationEditType:
-      type: object
-      description: Provides information about the Profile Names.
-      properties:
-        type:
-          description: Type of the Profile.
-          $ref: '#/components/schemas/profileNameValidationTypeType'
-        name:
-          description: Name of the Profile.
-          type: string
-          minLength: 0
-          maxLength: 80
-        newProfileName:
-          description: List of new values for Profile Name and Type .
-          $ref: '#/components/schemas/profileNameValidationType'
-    claimAdjustmentLimitType:
-      type: object
-      description: Details of Claim Adjustment Limit.
-      properties:
-        limitCode:
-          description: A Type that holds key value, that uniquely identifies a Claim Adjustment Limit.
-          type: string
-          minLength: 0
-          maxLength: 20
-        billingGroup:
-          description: The billing group that represents a billing rule schedule for the Claim Adjustment Limit.
-          type: string
-          minLength: 0
-          maxLength: 20
-        limits:
-          description: Threshold limits.
-          $ref: '#/components/schemas/claimAdjustmentLimitsRangeType'
-        hotels:
-          description: Collection of property codes which associated for a Claim Adjustment Limit code.
-          $ref: '#/components/schemas/codeListType'
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-    configHotelExclusivePreferenceType:
-      type: object
-      description: Base details common between both template and property level Exclusive preference ids.
-      properties:
-        code:
-          description: Specifies the Exclusive preference code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        preferenceGroup:
-          description: Specifies the preference group the Exclusive preference belongs to.
-          type: string
-          minLength: 0
-          maxLength: 20
-        preferenceCodes:
-          description: Specifies the preference codes mapped to the exclusive preference.
-          $ref: '#/components/schemas/preferenceCodesType'
-        orderSequence:
-          description: Display Order sequence.
-          type: number
-        hotelId:
-          description: Specifies the hotel code for which the Exclusive preference is specified.
-          type: string
-          minLength: 0
-          maxLength: 20
-    preferencesCopy:
-      type: object
-      description: Request object for copying template preferences to hotel(s).
-      properties:
-        copyInstructions:
-          description: List of the template preferences to be copied to hotel(s).
-          $ref: '#/components/schemas/configCopyPreferencesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
+        $ref: '#/components/schemas/configHotelPreferenceType'
     codeDescriptionType:
       type: object
       description: This contains a generic code and description information.
@@ -4355,36 +4378,56 @@ components:
           type: string
           minLength: 0
           maxLength: 2000
-    links:
+    warningsType:
       type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
-    managedByOptions:
-      description: Describes of the Configuration is Managed by Enterprise or Property.
-      type: string
-      enum:
-      - EnterpriseManaged
-      - PropertyManaged
-      - EnterpriseEnforced
-      - PropertyOverridden
-    codeListType:
-      type: array
+      description: Used in conjunction with the Success element to define a business error.
       maxItems: 4000
       items:
-        type: string
-        minLength: 0
-        maxLength: 20
-    profileLinks:
+        $ref: '#/components/schemas/warningType'
+    profileLinksType:
+      type: array
+      description: Holds the collection of profile link objects
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/profileLinkType'
+    claimAdjustmentLimitsType:
+      type: array
+      description: Collection of Claim Adjustment Limits
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/claimAdjustmentLimitType'
+    hotelPreferences:
       type: object
-      description: Response object for fetch profile links
+      description: Response object for fetching preferences at the property level.
       properties:
-        profileLinks:
-          $ref: '#/components/schemas/profileLinksType'
+        hotelPreferences:
+          description: Collection of preferences specified at the property level.
+          $ref: '#/components/schemas/configHotelPreferencesType'
         links:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    configTemplatePreferenceType:
+    translationTextType2000:
+      type: object
+      description: Contains Multiple translated texts and language codes.
+      properties:
+        defaultText:
+          description: Default text with Character length from 0 to 2000.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        translatedTexts:
+          description: List of translated text and language codes.
+          $ref: '#/components/schemas/translationsTextType'
+    status:
+      type: object
+      description: Response Body.
+      properties:
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    configHotelPreferenceType:
       type: object
       description: Base details common between both template and property level preferences.
       properties:
@@ -4414,132 +4457,44 @@ components:
         orderSequence:
           description: Display Order sequence.
           type: number
-        global:
-          description: Specifies whether the preference is to be available for selection at all properties .
-          type: boolean
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-    creditRatingType:
-      type: object
-      description: Contains Common Master configuration detail.
-      properties:
-        code:
-          description: Common Master unique code.
-          type: string
-          minLength: 0
-          maxLength: 40
-        description:
-          description: Description of the Master code.
-          $ref: '#/components/schemas/translationTextType2000'
-        displayOrder:
-          description: Common Master record sequence number.
-          type: number
-        inactive:
-          description: Determines whether this credit rating is inactive or not.
-          type: boolean
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-    profileNameValidationTypeType:
-      type: string
-      description: Simple Type for Profile Name Validations Type. e.g. Company,Travel Agent,Source.
-      enum:
-      - Company
-      - TravelAgent
-      - Source
-    configExclusivePrefCodeAndGroupType:
-      type: object
-      description: Base details common between both template and property level Exclusive preference ids.
-      properties:
-        code:
-          description: Specifies the Exclusive preference code.
+        hotelId:
+          description: Specifies the hotel code for which the preference is specified.
           type: string
           minLength: 0
           maxLength: 20
-        preferenceGroup:
-          description: Specifies the preference group the Exclusive preference belongs to.
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    profileNameValidationType:
+      type: object
+      description: Provides information about the Profile Names.
+      properties:
+        type:
+          description: Type of the Profile.
+          $ref: '#/components/schemas/profileNameValidationTypeType'
+        name:
+          description: Name of the Profile.
           type: string
           minLength: 0
-          maxLength: 20
-    addressFormatsType:
-      type: array
-      description: An Address formats.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/addressFormatType'
-    configTemplatePreferencesType:
-      type: array
-      description: This type holds a collection of preferences at the template level.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/configTemplatePreferenceType'
+          maxLength: 80
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
     operaVersionNumberType:
       type: string
       description: Current Opera Version Number
       minLength: 0
       maxLength: 40
-    configHotelPreferencesType:
-      type: array
-      description: This type holds a collection of preferences at the property level.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/configHotelPreferenceType'
-  responses:
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '401':
-      description: Unauthorized
-    '414':
-      description: Request URI Too Large
-    '406':
-      description: Not acceptable.
-    '403':
-      description: Forbidden
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '502':
-      description: Bad Gateway
-    '503':
-      description: Service Unavailable
-    '415':
-      description: Unsupported Media Type
-    '405':
-      description: Method not allowed
-    '413':
-      description: Request Entity Too Large
   parameters:
-    x-app-key:
-      name: x-app-key
-      description: Client or Partner's Application Key
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
       in: header
       required: true
       schema:
         type: string
-        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
       in: header
-      schema:
-        type: string
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
-      in: header
-      required: true
       schema:
         type: string
     x-externalsystem:
@@ -4550,12 +4505,33 @@ components:
       schema:
         type: string
         maxLength: 40
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
     x-originating-application:
       name: x-originating-application
       description: Customer's Integration Application Id
       in: header
       schema:
         type: string
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
+      schema:
+        type: string
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
     x-request-id:
       name: x-request-id
       description: Request Id of an incoming request
@@ -4563,19 +4539,43 @@ components:
       schema:
         type: string
         pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
-      in: header
-      schema:
-        type: string
-    x-hotelid:
-      name: x-hotelid
-      description: Mandatory parameter to identify the hotel code where the end user is logged in
-      in: header
-      required: true
-      schema:
-        type: string
+  responses:
+    '413':
+      description: Request Entity Too Large
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '405':
+      description: Method not allowed
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '503':
+      description: Service Unavailable
+    '403':
+      description: Forbidden
+    '502':
+      description: Bad Gateway
+    '414':
+      description: Request URI Too Large
+    '406':
+      description: Not acceptable.
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '401':
+      description: Unauthorized
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

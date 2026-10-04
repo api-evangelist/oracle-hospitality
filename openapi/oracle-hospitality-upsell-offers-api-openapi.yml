@@ -87,42 +87,60 @@ paths:
           description: Service Unavailable
 components:
   schemas:
-    Items:
+    UpsellOffers:
       type: object
       description: Success and Failure Summary Data
       properties:
-        upsellOffers:
+        Items:
           type: array
           items:
-            $ref: '#/components/schemas/UpsellOffer'
-    errorInstanceISE:
+            $ref: '#/components/schemas/Items'
+        totalResults:
+          type: number
+          example: 1
+        offset:
+          type: number
+          example: 0
+        count:
+          type: number
+          example: 1
+        hasMore:
+          type: boolean
+          example: false
+        limit:
+          type: number
+          example: 0
+    UpsellOffer:
       type: object
-      description: Complex type that contains internal server error instance details for a REST call
       properties:
-        type:
+        offerType:
           type: string
-          description: Holds error type
-          example: https://www.example.org/protocols/..
+          example: room_upgrade
+          description: "Describes type of an offer.\n\nPossible values: \n  - room_upgrade\n  - early_checkin\n  - late_checkout\n  - amenity\n  - spa_services\n  - extra_room\n  - extra_day\n  - food_beverage\n  - room_feature\n  - parking"
+        selectionType:
+          type: string
+          description: ''
+          example: zero_to_one
+          enum:
+          - zeroToOne
+          - zeroToMany
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offers'
+    errorDetail:
+      type: object
+      description: Complex type that contains error detail
+      properties:
         title:
           type: string
           description: Holds error details in short
-          example: Internal Server Error
-        status:
-          type: number
-          example: 500
         detail:
           type: string
           description: Holds error details
-          example: Internal Server Error
         errorCode:
           type: string
           description: Holds specific error code
-          example: null
-        errorDetails:
-          type: array
-          description: Holds List of errors
-          items:
-            $ref: '#/components/schemas/errorDetail'
     Offers:
       type: object
       properties:
@@ -173,47 +191,34 @@ components:
         small:
           type: string
           example: https://example.com/img_url2.jpg
-    UpsellOffers:
+    errorInstanceISE:
       type: object
-      description: Success and Failure Summary Data
+      description: Complex type that contains internal server error instance details for a REST call
       properties:
-        Items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Items'
-        totalResults:
-          type: number
-          example: 1
-        offset:
-          type: number
-          example: 0
-        count:
-          type: number
-          example: 1
-        hasMore:
-          type: boolean
-          example: false
-        limit:
-          type: number
-          example: 0
-    UpsellOffer:
-      type: object
-      properties:
-        offerType:
+        type:
           type: string
-          example: room_upgrade
-          description: "Describes type of an offer.\n\nPossible values: \n  - room_upgrade\n  - early_checkin\n  - late_checkout\n  - amenity\n  - spa_services\n  - extra_room\n  - extra_day\n  - food_beverage\n  - room_feature\n  - parking"
-        selectionType:
+          description: Holds error type
+          example: https://www.example.org/protocols/..
+        title:
           type: string
-          description: ''
-          example: zero_to_one
-          enum:
-          - zeroToOne
-          - zeroToMany
-        offers:
+          description: Holds error details in short
+          example: Internal Server Error
+        status:
+          type: number
+          example: 500
+        detail:
+          type: string
+          description: Holds error details
+          example: Internal Server Error
+        errorCode:
+          type: string
+          description: Holds specific error code
+          example: null
+        errorDetails:
           type: array
+          description: Holds List of errors
           items:
-            $ref: '#/components/schemas/Offers'
+            $ref: '#/components/schemas/errorDetail'
     errorInstanceNF:
       type: object
       description: Complex type that contains not found error instance details for a REST call
@@ -242,43 +247,20 @@ components:
           description: Holds List of errors
           items:
             $ref: '#/components/schemas/errorDetail'
-    errorDetail:
+    Items:
       type: object
-      description: Complex type that contains error detail
+      description: Success and Failure Summary Data
       properties:
-        title:
-          type: string
-          description: Holds error details in short
-        detail:
-          type: string
-          description: Holds error details
-        errorCode:
-          type: string
-          description: Holds specific error code
+        upsellOffers:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpsellOffer'
   parameters:
-    Accept-Language:
-      name: Accept-Language
-      in: header
-      description: Language code
-      schema:
-        type: string
     providerId:
       name: providerId
       in: header
       x-example: SAN
       description: Partner's Unique Nor1 Provider ID
-      schema:
-        type: string
-    x-app-key:
-      name: x-app-key
-      in: header
-      x-example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-      schema:
-        type: string
-    authorization:
-      name: Authorization
-      in: header
-      x-example: Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       schema:
         type: string
     accept:
@@ -291,3 +273,21 @@ components:
         enum:
         - application/json; charset=UTF-8
         - application/json
+    authorization:
+      name: Authorization
+      in: header
+      x-example: Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      schema:
+        type: string
+    x-app-key:
+      name: x-app-key
+      in: header
+      x-example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+      schema:
+        type: string
+    Accept-Language:
+      name: Accept-Language
+      in: header
+      description: Language code
+      schema:
+        type: string

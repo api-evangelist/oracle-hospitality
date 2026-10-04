@@ -214,55 +214,22 @@ paths:
                 $ref: '#/components/schemas/ExceptionDetail'
 components:
   schemas:
-    UpdateConnectionInformationData:
+    ConnectionInformation:
       type: object
       description: Channel Connection Information
       properties:
         connectionStatus:
-          $ref: '#/components/schemas/UpdateConnectionStatus'
+          $ref: '#/components/schemas/ConnectionStatus'
         connectionNotes:
           type: string
           description: Connection Notes for the latest connection Status change.
           maxLength: 300
           example: Property onboarded successfully
-      required:
-      - connectionStatus
-      - connectionNotes
-    ExceptionDetail:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ExceptionObj'
-      - type: object
-        properties:
-          o.errorDetails:
-            type: array
-            items:
-              $ref: '#/components/schemas/ExceptionObj'
-    UpdateChannelPropertyStatus:
-      type: object
-      properties:
-        hotelCode:
+        connectionStatusLastChangedOn:
           type: string
-          description: The unique identifier of the Property in Channel system.
-          example: XUSXXYY99
-        channelCode:
-          type: string
-          description: Unique ID that identifies a single Channel.
-          example: CH1
-          maxLength: 20
-          minLength: 1
-        connectionInformation:
-          $ref: '#/components/schemas/UpdateConnectionInformation'
-    ConnectionStatus:
-      type: string
-      description: The connection status to the property.
-      enum:
-      - NEW
-      - TEST
-      - MAINTENANCE
-      - ACTIVE
-      - INACTIVE
-      example: ACTIVE
+          format: date-time
+          description: Date on which Channel connection status was updated last time.
+          example: '2021-09-17T08:17:18.321Z'
     ExceptionObj:
       type: object
       properties:
@@ -292,6 +259,23 @@ components:
       - logId
       - title
       - status
+    ExceptionDetail:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ExceptionObj'
+      - type: object
+        properties:
+          o.errorDetails:
+            type: array
+            items:
+              $ref: '#/components/schemas/ExceptionObj'
+    UpdateConnectionStatus:
+      type: string
+      description: The connection status to be updated for the given channel and property.  The connection status can be changed to TEST / MAINTENANCE if the existing connection Status is NEW.  If the existing connection status is TEST, it can be changed to MAINTENANCE.
+      enum:
+      - TEST
+      - MAINTENANCE
+      example: TEST
     UpdateConnectionInformation:
       type: object
       description: Channel Connection Information
@@ -307,6 +291,45 @@ components:
           type: string
           format: date-time
           description: Date on which Channel connection status was updated last time.
+    UpdateChannelPropertyStatus:
+      type: object
+      properties:
+        hotelCode:
+          type: string
+          description: The unique identifier of the Property in Channel system.
+          example: XUSXXYY99
+        channelCode:
+          type: string
+          description: Unique ID that identifies a single Channel.
+          example: CH1
+          maxLength: 20
+          minLength: 1
+        connectionInformation:
+          $ref: '#/components/schemas/UpdateConnectionInformation'
+    ConnectionStatus:
+      type: string
+      description: The connection status to the property.
+      enum:
+      - NEW
+      - TEST
+      - MAINTENANCE
+      - ACTIVE
+      - INACTIVE
+      example: ACTIVE
+    UpdateConnectionInformationData:
+      type: object
+      description: Channel Connection Information
+      properties:
+        connectionStatus:
+          $ref: '#/components/schemas/UpdateConnectionStatus'
+        connectionNotes:
+          type: string
+          description: Connection Notes for the latest connection Status change.
+          maxLength: 300
+          example: Property onboarded successfully
+      required:
+      - connectionStatus
+      - connectionNotes
     ChannelPropertyStatus:
       type: object
       properties:
@@ -322,34 +345,20 @@ components:
           minLength: 1
         connectionInformation:
           $ref: '#/components/schemas/ConnectionInformation'
-    UpdateConnectionStatus:
-      type: string
-      description: The connection status to be updated for the given channel and property.  The connection status can be changed to TEST / MAINTENANCE if the existing connection Status is NEW.  If the existing connection status is TEST, it can be changed to MAINTENANCE.
-      enum:
-      - TEST
-      - MAINTENANCE
-      example: TEST
-    ConnectionInformation:
-      type: object
-      description: Channel Connection Information
-      properties:
-        connectionStatus:
-          $ref: '#/components/schemas/ConnectionStatus'
-        connectionNotes:
-          type: string
-          description: Connection Notes for the latest connection Status change.
-          maxLength: 300
-          example: Property onboarded successfully
-        connectionStatusLastChangedOn:
-          type: string
-          format: date-time
-          description: Date on which Channel connection status was updated last time.
-          example: '2021-09-17T08:17:18.321Z'
   parameters:
-    Accept-Language:
-      name: Accept-Language
+    hotelCodePath:
+      name: hotelCode
+      description: The unique identifier of the Property in Channel system.
+      in: path
+      required: true
+      x-example: XUSXXYY99
+      schema:
+        type: string
+        minLength: 1
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
       in: header
-      description: Language code
       schema:
         type: string
     x-channelCode:
@@ -362,17 +371,11 @@ components:
         type: string
         maxLength: 50
         minLength: 1
-    x-request-id:
-      name: x-request-id
-      description: Unique tracing key e.g. 4664ab3423434a45
+    authKey:
+      name: authorization
       in: header
-      x-example: 4664ab3423434a45
-      schema:
-        type: string
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
-      in: header
+      description: Bearer token that needs to be passed which is generated post user authentication
+      required: true
       schema:
         type: string
     x-app-key:
@@ -383,22 +386,19 @@ components:
       schema:
         type: string
         pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    authKey:
-      name: authorization
+    x-request-id:
+      name: x-request-id
+      description: Unique tracing key e.g. 4664ab3423434a45
       in: header
-      description: Bearer token that needs to be passed which is generated post user authentication
-      required: true
+      x-example: 4664ab3423434a45
       schema:
         type: string
-    hotelCodePath:
-      name: hotelCode
-      description: The unique identifier of the Property in Channel system.
-      in: path
-      required: true
-      x-example: XUSXXYY99
+    Accept-Language:
+      name: Accept-Language
+      in: header
+      description: Language code
       schema:
         type: string
-        minLength: 1
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

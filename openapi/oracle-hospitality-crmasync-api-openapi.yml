@@ -499,40 +499,115 @@ paths:
       - CRMAsync
 components:
   schemas:
-    stayDailyRatesType:
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    suspendedStayDeleteStatus:
+      type: object
+      description: Response for suspended stay records deleted.
+      properties:
+        warnings:
+          description: List of warnings that occurred.
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
       type: object
       properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+    stayRevenuesType:
+      type: object
+      properties:
+        revenueAmount:
+          description: Specifies the amount of revenue.
+          type: number
+        revenueBucketCode:
+          description: Specifies the bucket code to which the revenue belongs.
+          type: string
         transactionDate:
           description: Date on which the transaction was done.
           type: string
           format: date
-        bookedRoomType:
-          description: Specifies the type of room booked.
-          type: string
-        currencyCode:
-          description: Specifies the code assigned to the currency.
-          type: string
-        pseudoRoom:
-          description: Specifies if the room is a pseudo room.
+      required:
+      - revenueBucketCode
+      - transactionDate
+    stayProfilesType:
+      type: object
+      properties:
+        primary:
+          description: Checks if the profile is primary.
           type: boolean
-        marketCode:
-          description: Specifies the market code.
-          type: string
-        rateCode:
-          description: Specifies the rate code.
-          type: string
-        rateAmount:
-          description: Specifies the amount added to a particular rate code.
+        nameId:
+          description: Specifies the unique id that is assigned to a profile.
           type: number
-        roomNumber:
-          description: Describes the number assigned to a room.
+        pmsNameId:
+          description: Specifies the pms id that is assigned to a profile.
           type: string
-        roomType:
-          description: Describes the type of the room.
+        profileRole:
+          description: Describes the role associated with the profile.
           type: string
       required:
-      - transactionDate
-      - rateCode
+      - profileRole
     stayRecord:
       type: object
       properties:
@@ -577,58 +652,68 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/stayRevenuesType'
-    stayProfilesType:
+    stayMembershipsType:
       type: object
       properties:
-        primary:
-          description: Checks if the profile is primary.
-          type: boolean
-        nameId:
-          description: Specifies the unique id that is assigned to a profile.
-          type: number
-        pmsNameId:
-          description: Specifies the pms id that is assigned to a profile.
+        membershipNumber:
+          description: A unique value given to a membership.
           type: string
-        profileRole:
-          description: Describes the role associated with the profile.
+        membershipType:
+          description: Specifies the type of membership.
           type: string
-      required:
-      - profileRole
-    suspendedStayDeleteStatus:
-      type: object
-      description: Response for suspended stay records deleted.
-      properties:
-        warnings:
-          description: List of warnings that occurred.
-          $ref: '#/components/schemas/warningsType'
-        links:
-          $ref: '#/components/schemas/links'
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
     warningsType:
       type: array
       description: Used in conjunction with the Success element to define a business error.
       maxItems: 4000
       items:
         $ref: '#/components/schemas/warningType'
-    stayRevenuesType:
+    stayDailyRatesType:
       type: object
       properties:
-        revenueAmount:
-          description: Specifies the amount of revenue.
-          type: number
-        revenueBucketCode:
-          description: Specifies the bucket code to which the revenue belongs.
-          type: string
         transactionDate:
           description: Date on which the transaction was done.
           type: string
           format: date
+        bookedRoomType:
+          description: Specifies the type of room booked.
+          type: string
+        currencyCode:
+          description: Specifies the code assigned to the currency.
+          type: string
+        pseudoRoom:
+          description: Specifies if the room is a pseudo room.
+          type: boolean
+        marketCode:
+          description: Specifies the market code.
+          type: string
+        rateCode:
+          description: Specifies the rate code.
+          type: string
+        rateAmount:
+          description: Specifies the amount added to a particular rate code.
+          type: number
+        roomNumber:
+          description: Describes the number assigned to a room.
+          type: string
+        roomType:
+          description: Describes the type of the room.
+          type: string
       required:
-      - revenueBucketCode
       - transactionDate
+      - rateCode
+    stayRecords:
+      type: object
+      description: Complex type that contains list of stay record types
+      properties:
+        stayRecords:
+          type: array
+          description: Array list of stay records
+          items:
+            $ref: '#/components/schemas/stayRecord'
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
     errorInstance:
       title: Error Instance Details
       description: Complex type that contains error instance details for a REST call.
@@ -701,15 +786,6 @@ components:
           type: string
           minLength: 1
           maxLength: 8
-    stayMembershipsType:
-      type: object
-      properties:
-        membershipNumber:
-          description: A unique value given to a membership.
-          type: string
-        membershipType:
-          description: Specifies the type of membership.
-          type: string
     stayRecordStatus:
       type: object
       description: Response for stay record uploaded status.
@@ -919,124 +995,20 @@ components:
         travelAgentId:
           description: Specifies the travel agent id
           type: string
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
-    stayRecords:
-      type: object
-      description: Complex type that contains list of stay record types
-      properties:
-        stayRecords:
-          type: array
-          description: Array list of stay records
-          items:
-            $ref: '#/components/schemas/stayRecord'
-    instanceLink:
-      type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
-      properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
-          type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
-        title:
-          description: Exact copy of the "summary" field on the linked operation.
-          type: string
-  responses:
-    '401':
-      description: Unauthorized
-    '414':
-      description: Request URI Too Large
-    '406':
-      description: Not acceptable.
-    '403':
-      description: Forbidden
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '502':
-      description: Bad Gateway
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '415':
-      description: Unsupported Media Type
-    '405':
-      description: Method not allowed
-    '503':
-      description: Service Unavailable
-    '413':
-      description: Request Entity Too Large
   parameters:
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
+    x-app-key:
+      name: x-app-key
+      description: Client or PartnerAC/AAs Application Key
       in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
       schema:
         type: string
     x-request-id:
@@ -1046,30 +1018,9 @@ components:
       schema:
         type: string
         pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
-    x-app-key:
-      name: x-app-key
-      description: Client or PartnerAC/AAs Application Key
-      in: header
-      required: true
-      schema:
-        type: string
-        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
-      in: header
-      schema:
-        type: string
-    x-hotelid:
-      name: x-hotelid
-      description: Mandatory parameter to identify the hotel code where the end user is logged in
-      in: header
-      required: true
-      schema:
-        type: string
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
       in: header
       schema:
         type: string
@@ -1080,6 +1031,55 @@ components:
       required: true
       schema:
         type: string
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
+  responses:
+    '503':
+      description: Service Unavailable
+    '401':
+      description: Unauthorized
+    '413':
+      description: Request Entity Too Large
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '403':
+      description: Forbidden
+    '405':
+      description: Method not allowed
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '406':
+      description: Not acceptable.
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '502':
+      description: Bad Gateway
+    '414':
+      description: Request URI Too Large
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

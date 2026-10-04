@@ -97,115 +97,12 @@ paths:
         required: true
 components:
   schemas:
-    Items:
-      type: object
-      description: Success and Failure Summary Data
-      properties:
-        upsellOffers:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpsellOffer'
-    errorInstanceUMT:
-      type: object
-      description: Complex type that contains refuse request error instance details for a REST call
-      properties:
-        type:
-          type: string
-          description: Holds error type
-          example: https://www.example.org/protocols/..
-        title:
-          type: string
-          description: Holds error details in short
-          example: Unsupported Media Type
-        status:
-          type: number
-          example: 415
-        detail:
-          type: string
-          description: Holds error details
-          example: Unsupported Media Type
-        errorCode:
-          type: string
-          description: Holds specific error code
-          example: null
-    errorInstanceISE:
-      type: object
-      description: Complex type that contains internal server error instance details for a REST call
-      properties:
-        type:
-          type: string
-          description: Holds error type
-          example: https://www.example.org/protocols/..
-        title:
-          type: string
-          description: Holds error details in short
-          example: Internal Server Error
-        status:
-          type: number
-          example: 500
-        detail:
-          type: string
-          description: Holds error details
-          example: Internal Server Error
-        errorCode:
-          type: string
-          description: Holds specific error code
-          example: null
-        errorDetails:
-          type: array
-          description: Holds List of errors
-          items:
-            $ref: '#/components/schemas/errorDetail'
-    Offers:
+    Item:
       type: object
       properties:
         offerId:
           type: string
           format: uuid
-          description: A unique upsell ID per upsell offer
-        name:
-          type: string
-          example: Deluxe King Suite
-          description: offer name
-        description:
-          type: string
-          example: Rest easy in the 600-square-foot suite with sitting area and cityscape views. Enjoy pillow top mattress, pull out sofa bed, premium mini bar, 24 hour room service, and a large marble bathroom.
-        images:
-          $ref: '#/components/schemas/Image'
-        price:
-          type: object
-          properties:
-            amount:
-              type: number
-              example: 33.94
-            currency:
-              type: string
-              description: This is an ISO 4217(https://en.wikipedia.org/wiki/ISO_4217) currency code.
-              example: USD
-        savings:
-          type: string
-          example: '16.06'
-        chargeFrequency:
-          type: string
-          description: "chargeFrequency defines how often the upgrade charge is applied. \n\nPossible values: \n  - per_unit_per_night\n  - per_unit_per_stay\n  - per_person_per_stay\n  - per_person_per_night"
-          example: per_unit_per_night
-        fixedCharge:
-          type: number
-          example: 33.94
-        roomTypeCode:
-          type: array
-          items:
-            type: string
-            example: SGL
-    Image:
-      type: object
-      properties:
-        big:
-          type: string
-          example: https://example.com/img_url1.jpg
-        small:
-          type: string
-          example: https://example.com/img_url2.jpg
     UpsellOffers:
       type: object
       description: Success and Failure Summary Data
@@ -247,12 +144,120 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Offers'
-    Item:
+    errorDetail:
+      type: object
+      description: Complex type that contains error detail
+      properties:
+        title:
+          type: string
+          description: Holds error details in short
+        detail:
+          type: string
+          description: Holds error details
+        errorCode:
+          type: string
+          description: Holds specific error code
+    Offers:
       type: object
       properties:
         offerId:
           type: string
           format: uuid
+          description: A unique upsell ID per upsell offer
+        name:
+          type: string
+          example: Deluxe King Suite
+          description: offer name
+        description:
+          type: string
+          example: Rest easy in the 600-square-foot suite with sitting area and cityscape views. Enjoy pillow top mattress, pull out sofa bed, premium mini bar, 24 hour room service, and a large marble bathroom.
+        images:
+          $ref: '#/components/schemas/Image'
+        price:
+          type: object
+          properties:
+            amount:
+              type: number
+              example: 33.94
+            currency:
+              type: string
+              description: This is an ISO 4217(https://en.wikipedia.org/wiki/ISO_4217) currency code.
+              example: USD
+        savings:
+          type: string
+          example: '16.06'
+        chargeFrequency:
+          type: string
+          description: "chargeFrequency defines how often the upgrade charge is applied. \n\nPossible values: \n  - per_unit_per_night\n  - per_unit_per_stay\n  - per_person_per_stay\n  - per_person_per_night"
+          example: per_unit_per_night
+        fixedCharge:
+          type: number
+          example: 33.94
+        roomTypeCode:
+          type: array
+          items:
+            type: string
+            example: SGL
+    errorInstanceUMT:
+      type: object
+      description: Complex type that contains refuse request error instance details for a REST call
+      properties:
+        type:
+          type: string
+          description: Holds error type
+          example: https://www.example.org/protocols/..
+        title:
+          type: string
+          description: Holds error details in short
+          example: Unsupported Media Type
+        status:
+          type: number
+          example: 415
+        detail:
+          type: string
+          description: Holds error details
+          example: Unsupported Media Type
+        errorCode:
+          type: string
+          description: Holds specific error code
+          example: null
+    Image:
+      type: object
+      properties:
+        big:
+          type: string
+          example: https://example.com/img_url1.jpg
+        small:
+          type: string
+          example: https://example.com/img_url2.jpg
+    errorInstanceISE:
+      type: object
+      description: Complex type that contains internal server error instance details for a REST call
+      properties:
+        type:
+          type: string
+          description: Holds error type
+          example: https://www.example.org/protocols/..
+        title:
+          type: string
+          description: Holds error details in short
+          example: Internal Server Error
+        status:
+          type: number
+          example: 500
+        detail:
+          type: string
+          description: Holds error details
+          example: Internal Server Error
+        errorCode:
+          type: string
+          description: Holds specific error code
+          example: null
+        errorDetails:
+          type: array
+          description: Holds List of errors
+          items:
+            $ref: '#/components/schemas/errorDetail'
     errorInstanceNF:
       type: object
       description: Complex type that contains not found error instance details for a REST call
@@ -281,26 +286,15 @@ components:
           description: Holds List of errors
           items:
             $ref: '#/components/schemas/errorDetail'
-    errorDetail:
+    Items:
       type: object
-      description: Complex type that contains error detail
+      description: Success and Failure Summary Data
       properties:
-        title:
-          type: string
-          description: Holds error details in short
-        detail:
-          type: string
-          description: Holds error details
-        errorCode:
-          type: string
-          description: Holds specific error code
+        upsellOffers:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpsellOffer'
   parameters:
-    Accept-Language:
-      name: Accept-Language
-      in: header
-      description: Language code
-      schema:
-        type: string
     providerId:
       name: providerId
       in: header
@@ -308,10 +302,22 @@ components:
       description: Partner's Unique Nor1 Provider ID
       schema:
         type: string
+    authorization:
+      name: Authorization
+      in: header
+      x-example: Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      schema:
+        type: string
     x-app-key:
       name: x-app-key
       in: header
       x-example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+      schema:
+        type: string
+    Accept-Language:
+      name: Accept-Language
+      in: header
+      description: Language code
       schema:
         type: string
     acceptForPost:
@@ -323,9 +329,3 @@ components:
         enum:
         - application/json; charset=UTF-8
         - application/json
-    authorization:
-      name: Authorization
-      in: header
-      x-example: Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-      schema:
-        type: string

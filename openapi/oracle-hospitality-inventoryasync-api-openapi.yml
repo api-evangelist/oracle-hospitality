@@ -714,108 +714,41 @@ paths:
       tags:
       - InventoryAsync
 components:
-  responses:
-    '401':
-      description: Unauthorized
-    '414':
-      description: Request URI Too Large
-    '406':
-      description: Not acceptable.
-    '403':
-      description: Forbidden
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '502':
-      description: Bad Gateway
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '415':
-      description: Unsupported Media Type
-    '503':
-      description: Service Unavailable
-    '405':
-      description: Method not allowed
-    '413':
-      description: Request Entity Too Large
   schemas:
-    sellLimitsByDate:
-      type: array
-      description: Request for setting sell limits for house, room type, room class.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/sellLimitByDateType'
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    statisticSetType:
+    instanceLink:
       type: object
-      description: An instance of a statistic, which is a set containing revenue category and number category summaries.
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
       properties:
-        revenue:
-          description: Collection of RevenueCategorySummary elements. Used if revenue values reported.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/revenueCategorySummaryType'
-        inventory:
-          description: Collection of CountCategorySummary elements. Used if count values reported.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/numericCategorySummaryType'
-        statisticDate:
-          description: Date of the statistic.
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
           type: string
-          format: date
-          maxLength: 8
-        weekendDate:
-          description: Determines whether statistic date is a weekend date.
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
           type: boolean
-    filterListType:
-      type: object
-      description: Filter name with its value.
-      properties:
-        filterName:
-          description: Filter Name.
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
           type: string
           enum:
-          - RoomClassList
-          - RoomTypeWildCardList
-        filterValue:
-          description: 'Filter Value. Mulitple values can be passed as comma separated values. example : if filterName is say ''RoomClassList'' then its corresponding filterValue would mean room class which can be comma separated like ''DAILY,RACK'''
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
           type: string
-          minLength: 0
-          maxLength: 4000
-      required:
-      - filterName
-      - filterValue
-    inventoryStatisticsDetails:
-      type: array
-      description: List of inventory statistics that is grouped by statistic date.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/statisticType'
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
     statisticType:
       type: object
       description: Defines all details needed to create a statistical report.
@@ -841,9 +774,101 @@ components:
           type: string
           minLength: 0
           maxLength: 2000
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
+    revenueInventoryStatisticsType:
+      type: object
+      description: Revenue and statistics for an occupancy date and hotel code.
+      properties:
+        property:
+          description: The property for which revenue inventory statistics are fetched
+          type: string
+          minLength: 0
+          maxLength: 20
+        occupancyDate:
+          description: The occupancy date for which the revenue inventory statistics are fetched.
+          type: string
+          format: date
+        resType:
+          type: string
+          minLength: 0
+          maxLength: 20
+        marketCode:
+          description: The market code for which the revenue inventory statistics are fetched.
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomType:
+          description: The room type for which the revenue inventory statistics are fetched.
+          type: string
+          minLength: 0
+          maxLength: 20
+        physicalRooms:
+          description: The statistical figure for physical rooms.
+          type: string
+        ooRooms:
+          description: The statistical figure for out of order rooms.
+          type: string
+        osRooms:
+          description: The statistical figure for out of service rooms.
+          type: string
+        roomsSold:
+          description: The statistical figure for rooms sold.
+          type: string
+        roomRevenue:
+          description: The statistical figure for room revenue.
+          type: string
+        roomArrivals:
+          description: The statistical figure for arrival rooms.
+          type: string
+        roomDepartures:
+          description: The statistical figure of departure rooms.
+          type: string
+        foodRevenue:
+          description: The statistical figure for food revenue.
+          type: string
+        totalRevenue:
+          description: The statistical figure for total revenue.
+          type: string
+        cancelledRooms:
+          description: The statistical figure for canceled rooms.
+          type: string
+        noShowRooms:
+          description: The statistical figure of no show rooms.
+          type: string
+    roomClassSellLimitType:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        amount:
+          type: number
+        flatOrPercentage:
+          type: string
+          description: Indicates if sell limit is flat or percentage.
+          enum:
+          - Flat
+          - Percentage
+        roomClass:
+          type: string
+          minLength: 0
+          maxLength: 20
+    houseSellLimitType:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        amount:
+          type: number
+        flatOrPercentage:
+          type: string
+          description: Indicates if sell limit is flat or percentage.
+          enum:
+          - Flat
+          - Percentage
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
       type: object
       properties:
         type:
@@ -867,129 +892,67 @@ components:
         o:errorPath:
           type: string
           description: Path to the problem at the resource or property level.
-    warningType:
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+    statisticCodeType:
       type: object
-      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
+      description: Defines the codes and corresponding categories for which the data in the other elements has been gathered.
       properties:
-        value:
-          type: string
-          description: Property Value
-        shortText:
-          description: An abbreviated version of the error in textual format.
-          type: string
-          maxLength: 2000
-        code:
-          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+        statisticDate:
+          description: Collection of statistic summary data.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/statisticSetType'
+        statCode:
+          description: Actual code used by the system to collect the statistics (e.g. CORP, RACK if category is Market Segment).
           type: string
           minLength: 0
           maxLength: 20
-        docURL:
-          description: If present, this URL refers to an online description of the error that occurred.
-          type: string
-          maxLength: 2000
-        status:
-          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
-          type: string
-          maxLength: 2000
-        tag:
-          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
-          type: string
-          maxLength: 2000
-        recordId:
-          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
-          type: string
-          maxLength: 2000
-        type:
-          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
-          type: string
-          minLength: 0
-          maxLength: 20
-        language:
-          description: Language identification.
-          type: string
-        rph:
-          description: Reference Place Holder used as an index for this warning.
-          type: string
-          minLength: 1
-          maxLength: 8
-    inventoryCriteriaType:
-      type: object
-      description: Fetch criteria type for fetching revenue inventory statistics.
-      properties:
-        dateRangeStart:
-          description: The starting value of the date range.
-          type: string
-          format: date
-        dateRangeEnd:
-          description: The ending value of the date range.
-          type: string
-          format: date
-        reportCode:
-          enum:
-          - RoomsAvailabilitySummary
-          description: Identifies the type of statistics collected. Each ReportCode corresponds to a set of category summaries based upon a predetermined agreement.
-          type: string
-        paramList:
-          description: List of supported parameter names and its parameter values.
-          type: array
-          maxItems: 100
-          items:
-            $ref: '#/components/schemas/paramListType'
-        filterList:
-          description: List of supported filter names and its filter values.
-          type: array
-          maxItems: 2
-          items:
-            $ref: '#/components/schemas/filterListType'
-        groupBy:
-          description: Group by instructions for inventory statistics that can be used in request operation.
-          type: string
-          enum:
-          - RoomType
-          - RoomClass
-        channel:
-          description: Channel Code.
-          type: string
-          minLength: 1
-          maxLength: 20
-      required:
-      - dateRangeStart
-      - dateRangeEnd
-      - reportCode
-    sellLimitByDateType:
-      type: object
-      description: This type is used by sell limit request.
-      properties:
-        houseSellLimits:
-          description: Collection of House level sell limit by the date.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/houseSellLimitType'
-        roomTypeSellLimits:
-          description: Collection of Room type level sell limit by the date.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/roomTypeSellLimitType'
-        roomClassSellLimits:
-          description: Collection of Room Class level sell limit by the date.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/roomClassSellLimitType'
-    numericCategorySummaryType:
-      type: object
-      description: This element has count data for each count category such as number of guests, rooms occupied, etc.
-      properties:
-        value:
-          description: The total count for the category in NumericCategoryCode.
-          type: number
-        code:
-          description: 'The representation of a numeric category such as Guests : Number of guests, RoomsOcc : Rooms occupied.'
+        statCategoryCode:
+          description: Category Code category of StatCode attribute (e.g. Market Segment).
           type: string
           minLength: 0
           maxLength: 40
+        statCodeClass:
+          description: Class grouping of StatCode attribute.
+          type: string
+          minLength: 0
+          maxLength: 40
+        description:
+          description: Statistic code description.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    statisticSetType:
+      type: object
+      description: An instance of a statistic, which is a set containing revenue category and number category summaries.
+      properties:
+        revenue:
+          description: Collection of RevenueCategorySummary elements. Used if revenue values reported.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/revenueCategorySummaryType'
+        inventory:
+          description: Collection of CountCategorySummary elements. Used if count values reported.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/numericCategorySummaryType'
+        statisticDate:
+          description: Date of the statistic.
+          type: string
+          format: date
+          maxLength: 8
+        weekendDate:
+          description: Determines whether statistic date is a weekend date.
+          type: boolean
     paramListType:
       type: object
       description: Parameter name and its Parameter value as a pair.
@@ -1077,20 +1040,41 @@ components:
       required:
       - paramName
       - paramValue
-    houseSellLimitType:
+    filterListType:
       type: object
+      description: Filter name with its value.
       properties:
-        date:
+        filterName:
+          description: Filter Name.
           type: string
-          format: date
-        amount:
-          type: number
-        flatOrPercentage:
-          type: string
-          description: Indicates if sell limit is flat or percentage.
           enum:
-          - Flat
-          - Percentage
+          - RoomClassList
+          - RoomTypeWildCardList
+        filterValue:
+          description: 'Filter Value. Mulitple values can be passed as comma separated values. example : if filterName is say ''RoomClassList'' then its corresponding filterValue would mean room class which can be comma separated like ''DAILY,RACK'''
+          type: string
+          minLength: 0
+          maxLength: 4000
+      required:
+      - filterName
+      - filterValue
+    revenueCategorySummaryType:
+      type: object
+      description: This element has revenue amount data for its revenue category such as Room Revenue, Food and Beverage Revenue.
+      properties:
+        code:
+          description: The representation of a revenue category.
+          type: string
+          minLength: 0
+          maxLength: 40
+        amount:
+          description: A monetary amount.
+          type: number
+        currencyCode:
+          description: Provides a currency code to reflect the currency in which an amount may be expressed.
+          type: string
+          minLength: 3
+          maxLength: 3
     sellLimitByDateStatus:
       type: object
       description: 'Response for sell limits status '
@@ -1100,6 +1084,18 @@ components:
           $ref: '#/components/schemas/warningsType'
         links:
           $ref: '#/components/schemas/links'
+    numericCategorySummaryType:
+      type: object
+      description: This element has count data for each count category such as number of guests, rooms occupied, etc.
+      properties:
+        value:
+          description: The total count for the category in NumericCategoryCode.
+          type: number
+        code:
+          description: 'The representation of a numeric category such as Guests : Number of guests, RoomsOcc : Rooms occupied.'
+          type: string
+          minLength: 0
+          maxLength: 40
     roomTypeSellLimitType:
       type: object
       properties:
@@ -1118,39 +1114,103 @@ components:
           type: string
           minLength: 0
           maxLength: 20
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
+    inventoryCriteriaType:
       type: object
+      description: Fetch criteria type for fetching revenue inventory statistics.
       properties:
-        type:
+        dateRangeStart:
+          description: The starting value of the date range.
           type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
+          format: date
+        dateRangeEnd:
+          description: The ending value of the date range.
           type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
+          format: date
+        reportCode:
+          enum:
+          - RoomsAvailabilitySummary
+          description: Identifies the type of statistics collected. Each ReportCode corresponds to a set of category summaries based upon a predetermined agreement.
           type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
+        paramList:
+          description: List of supported parameter names and its parameter values.
           type: array
+          maxItems: 100
           items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
+            $ref: '#/components/schemas/paramListType'
+        filterList:
+          description: List of supported filter names and its filter values.
+          type: array
+          maxItems: 2
+          items:
+            $ref: '#/components/schemas/filterListType'
+        groupBy:
+          description: Group by instructions for inventory statistics that can be used in request operation.
+          type: string
+          enum:
+          - RoomType
+          - RoomClass
+        channel:
+          description: Channel Code.
+          type: string
+          minLength: 1
+          maxLength: 20
+      required:
+      - dateRangeStart
+      - dateRangeEnd
+      - reportCode
+    sellLimitsByDate:
+      type: array
+      description: Request for setting sell limits for house, room type, room class.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/sellLimitByDateType'
+    inventoryStatisticsDetails:
+      type: array
+      description: List of inventory statistics that is grouped by statistic date.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/statisticType'
+    sellLimitByDateType:
+      type: object
+      description: This type is used by sell limit request.
+      properties:
+        houseSellLimits:
+          description: Collection of House level sell limit by the date.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/houseSellLimitType'
+        roomTypeSellLimits:
+          description: Collection of Room type level sell limit by the date.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/roomTypeSellLimitType'
+        roomClassSellLimits:
+          description: Collection of Room Class level sell limit by the date.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/roomClassSellLimitType'
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    revenueInventoryStatisticsDetails:
+      type: object
+      description: Revenue Inventory Statistics for the current occupancy date which might include data grouped by room type, market and reservation guarantee code.
+      properties:
+        revInvStats:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/revenueInventoryStatisticsType'
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
     revenueInventoryStatisticsSearchType:
       type: object
       description: Fetch criteria type for fetching revenue inventory statistics.
@@ -1197,188 +1257,78 @@ components:
             - MarketCode
             - RoomType
             - GuaranteeType
-    revenueInventoryStatisticsDetails:
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
       type: object
-      description: Revenue Inventory Statistics for the current occupancy date which might include data grouped by room type, market and reservation guarantee code.
       properties:
-        revInvStats:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/revenueInventoryStatisticsType'
-    statisticCodeType:
-      type: object
-      description: Defines the codes and corresponding categories for which the data in the other elements has been gathered.
-      properties:
-        statisticDate:
-          description: Collection of statistic summary data.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/statisticSetType'
-        statCode:
-          description: Actual code used by the system to collect the statistics (e.g. CORP, RACK if category is Market Segment).
+        type:
           type: string
-          minLength: 0
-          maxLength: 20
-        statCategoryCode:
-          description: Category Code category of StatCode attribute (e.g. Market Segment).
-          type: string
-          minLength: 0
-          maxLength: 40
-        statCodeClass:
-          description: Class grouping of StatCode attribute.
-          type: string
-          minLength: 0
-          maxLength: 40
-        description:
-          description: Statistic code description.
-          type: string
-          minLength: 0
-          maxLength: 2000
-    instanceLink:
-      type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
-      properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
-          type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
         title:
-          description: Exact copy of the "summary" field on the linked operation.
           type: string
-    revenueInventoryStatisticsType:
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+    warningType:
       type: object
-      description: Revenue and statistics for an occupancy date and hotel code.
+      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
       properties:
-        property:
-          description: The property for which revenue inventory statistics are fetched
+        value:
           type: string
-          minLength: 0
-          maxLength: 20
-        occupancyDate:
-          description: The occupancy date for which the revenue inventory statistics are fetched.
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
           type: string
-          format: date
-        resType:
-          type: string
-          minLength: 0
-          maxLength: 20
-        marketCode:
-          description: The market code for which the revenue inventory statistics are fetched.
-          type: string
-          minLength: 0
-          maxLength: 20
-        roomType:
-          description: The room type for which the revenue inventory statistics are fetched.
-          type: string
-          minLength: 0
-          maxLength: 20
-        physicalRooms:
-          description: The statistical figure for physical rooms.
-          type: string
-        ooRooms:
-          description: The statistical figure for out of order rooms.
-          type: string
-        osRooms:
-          description: The statistical figure for out of service rooms.
-          type: string
-        roomsSold:
-          description: The statistical figure for rooms sold.
-          type: string
-        roomRevenue:
-          description: The statistical figure for room revenue.
-          type: string
-        roomArrivals:
-          description: The statistical figure for arrival rooms.
-          type: string
-        roomDepartures:
-          description: The statistical figure of departure rooms.
-          type: string
-        foodRevenue:
-          description: The statistical figure for food revenue.
-          type: string
-        totalRevenue:
-          description: The statistical figure for total revenue.
-          type: string
-        cancelledRooms:
-          description: The statistical figure for canceled rooms.
-          type: string
-        noShowRooms:
-          description: The statistical figure of no show rooms.
-          type: string
-    roomClassSellLimitType:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date
-        amount:
-          type: number
-        flatOrPercentage:
-          type: string
-          description: Indicates if sell limit is flat or percentage.
-          enum:
-          - Flat
-          - Percentage
-        roomClass:
-          type: string
-          minLength: 0
-          maxLength: 20
-    revenueCategorySummaryType:
-      type: object
-      description: This element has revenue amount data for its revenue category such as Room Revenue, Food and Beverage Revenue.
-      properties:
+          maxLength: 2000
         code:
-          description: The representation of a revenue category.
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
           type: string
           minLength: 0
-          maxLength: 40
-        amount:
-          description: A monetary amount.
-          type: number
-        currencyCode:
-          description: Provides a currency code to reflect the currency in which an amount may be expressed.
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
           type: string
-          minLength: 3
-          maxLength: 3
+          maxLength: 2000
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+          maxLength: 2000
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+          maxLength: 2000
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+          maxLength: 2000
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+        rph:
+          description: Reference Place Holder used as an index for this warning.
+          type: string
+          minLength: 1
+          maxLength: 8
   parameters:
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
-      in: header
-      schema:
-        type: string
-    x-request-id:
-      name: x-request-id
-      description: Request Id of an incoming request
-      in: header
-      schema:
-        type: string
-        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
     x-app-key:
       name: x-app-key
       description: Client or Partner's Application Key
@@ -1387,12 +1337,13 @@ components:
       schema:
         type: string
         pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
       in: header
       schema:
         type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
     x-hotelid:
       name: x-hotelid
       description: Mandatory parameter to identify the hotel code where the end user is logged in
@@ -1400,9 +1351,9 @@ components:
       required: true
       schema:
         type: string
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
       in: header
       schema:
         type: string
@@ -1413,6 +1364,55 @@ components:
       required: true
       schema:
         type: string
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
+  responses:
+    '503':
+      description: Service Unavailable
+    '401':
+      description: Unauthorized
+    '413':
+      description: Request Entity Too Large
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '403':
+      description: Forbidden
+    '405':
+      description: Method not allowed
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '406':
+      description: Not acceptable.
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '502':
+      description: Bad Gateway
+    '414':
+      description: Request URI Too Large
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

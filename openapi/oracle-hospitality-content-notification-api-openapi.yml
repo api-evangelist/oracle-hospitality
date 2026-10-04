@@ -125,16 +125,6 @@ paths:
         required: true
 components:
   schemas:
-    ExceptionDetail:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ExceptionObj'
-      - type: object
-        properties:
-          o.errorDetails:
-            type: array
-            items:
-              $ref: '#/components/schemas/ExceptionObj'
     ChannelContent:
       description: The object provides the channel content detail.
       type: object
@@ -170,19 +160,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TransactionKeyDetail'
-    TransactionKeyDetail:
-      type: object
-      properties:
-        name:
-          type: string
-          example: roomType
-        value:
-          type: string
-          example: ROOMTYPECODE
-    UniqueId:
-      type: string
-      description: The unique identifier element allows the trading partners to uniquely identify each request of the same message, (i.e.  the entire message) for transaction traceability
-      example: 234512-3432-234234234
     ExceptionObj:
       type: object
       properties:
@@ -212,11 +189,34 @@ components:
       - logId
       - title
       - status
+    ExceptionDetail:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ExceptionObj'
+      - type: object
+        properties:
+          o.errorDetails:
+            type: array
+            items:
+              $ref: '#/components/schemas/ExceptionObj'
+    UniqueId:
+      type: string
+      description: The unique identifier element allows the trading partners to uniquely identify each request of the same message, (i.e.  the entire message) for transaction traceability
+      example: 234512-3432-234234234
     Timestamp:
       type: string
       format: DATE_TIME
       description: Indicates the creation date and time of the message in UTC using the following format specified by ISO 8601; YYYY-MM-DDThh:mm:ss.zzzZ with time values using the 24 hour clock (e.g. 20 November 2003, 1:59:38 pm UTC becomes 2003-11-20T13:59:38.000Z).
       example: '2021-11-20T13:59:38.000Z'
+    TransactionKeyDetail:
+      type: object
+      properties:
+        name:
+          type: string
+          example: roomType
+        value:
+          type: string
+          example: ROOMTYPECODE
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

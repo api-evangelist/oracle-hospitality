@@ -741,135 +741,119 @@ paths:
         description: Request object for changing account types.
         required: true
 components:
-  responses:
-    '401':
-      description: Unauthorized
-    '414':
-      description: Request URI Too Large
-    '406':
-      description: Not acceptable.
-    '403':
-      description: Forbidden
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '502':
-      description: Bad Gateway
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '415':
-      description: Unsupported Media Type
-    '503':
-      description: Service Unavailable
-    '405':
-      description: Method not allowed
-    '413':
-      description: Request Entity Too Large
   schemas:
-    aRReminderCycleType:
+    instanceLink:
       type: object
-      description: When reminder letters needs to be generated. user can choose from End of month or Day cycle
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
       properties:
-        endOfMonthCycle:
-          description: Reminder letters are generated at the end of month if user specifies this element
-          $ref: '#/components/schemas/aREndOfMonthCycleType'
-        daysCycle:
-          description: Reminder letters are generate at user-defined cycles if user specifies this element
-          $ref: '#/components/schemas/aRDaysCycleType'
-    operaVersion:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    aREndOfMonthCycleType:
       type: object
-      description: Response for Ping operation.
+      description: Reminder letters will be generated at the end of each month if user specifies this element
       properties:
-        operaVersion:
-          description: Opera version number.
-          $ref: '#/components/schemas/operaVersionNumberType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
-    arFlaggedReasons:
+        reportName:
+          description: Reminder letter file name for the reminder letter to be generated at the end of month
+          type: string
+          minLength: 0
+          maxLength: 80
+        reportNameDesc:
+          description: Description associated with reminder letter.
+          type: string
+          minLength: 0
+          maxLength: 1000
+    aRDaysReminderCycleType:
       type: object
-      description: Response for fetching Flagged Reasons.
+      description: Custom reminder cycles determine which to generated statements for the account with outstanding balances
       properties:
-        aRFlaggedReasons:
-          description: Collection of Flagged Reasons.
-          $ref: '#/components/schemas/aRFlaggedReasonsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    managedByOptions:
-      description: Describes of the Configuration is Managed by Enterprise or Property.
+        accountTypeReminderCycleId:
+          description: Internal number associated with daily reminder type
+          $ref: '#/components/schemas/uniqueID_Type'
+        noOfDays:
+          description: Number of days in the reminder cycle
+          type: integer
+        reportName:
+          description: File name for the reminder letter to be granted for this cycle
+          type: string
+          minLength: 0
+          maxLength: 80
+    aRPrintPreferenceType:
       type: string
+      description: Preference type when separate folios has to be included in the statement
       enum:
-      - EnterpriseManaged
-      - PropertyManaged
-      - EnterpriseEnforced
-      - PropertyOverridden
-    status:
+      - InvoicesWithoutDetails
+      - InvoicesWithDetails
+      - SeparateFolios
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
       type: object
-      description: Response Body.
       properties:
-        warnings:
-          $ref: '#/components/schemas/warningsType'
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
         links:
           $ref: '#/components/schemas/links'
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
+      required:
+      - type
+      - title
     aRFlaggedReasonsType:
       type: array
       description: List of the Flagged Reason to be configured or fetched
       maxItems: 4000
       items:
         $ref: '#/components/schemas/aRFlaggedReasonType'
-    aRFinanceChargeType:
-      type: object
-      description: Finance charges will allow user to post a flat amount or percentage finance charge based on user-defined cycle.
-      properties:
-        postOnDay:
-          description: Day of the month when the end of day procedure should run
-          type: integer
-        financeCharge:
-          description: Determines how the finance charge will be applied to outstanding balance valid values are F, P
-          type: string
-          minLength: 1
-          maxLength: 1
-        financeChargeValue:
-          description: Amount or percentage value
-          type: number
-        daysOlderThan:
-          description: Number of days after which an outstanding balance triggers
-          type: integer
-        includeUnallocatedPayments:
-          description: If true unallocated payments are subtracted from the outstanding balances before finance charge is calculated
-          type: boolean
-    aRAccountTypesType:
-      type: array
-      description: Holds collection of account types
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/aRAccountTypeType'
     aRFlaggedReasonType:
       type: object
       description: Details for AR Flagged Reason.
@@ -894,6 +878,105 @@ components:
           type: number
         managedBy:
           $ref: '#/components/schemas/managedByOptions'
+    arFlaggedReasons:
+      type: object
+      description: Response for fetching Flagged Reasons.
+      properties:
+        aRFlaggedReasons:
+          description: Collection of Flagged Reasons.
+          $ref: '#/components/schemas/aRFlaggedReasonsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    arAccountTypes:
+      type: object
+      description: Request object for changing account types.
+      properties:
+        accountTypes:
+          description: Collection of account types that needs to be created
+          $ref: '#/components/schemas/aRAccountTypesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    aRReminderCycleType:
+      type: object
+      description: When reminder letters needs to be generated. user can choose from End of month or Day cycle
+      properties:
+        endOfMonthCycle:
+          description: Reminder letters are generated at the end of month if user specifies this element
+          $ref: '#/components/schemas/aREndOfMonthCycleType'
+        daysCycle:
+          description: Reminder letters are generate at user-defined cycles if user specifies this element
+          $ref: '#/components/schemas/aRDaysCycleType'
+    managedByOptions:
+      description: Describes of the Configuration is Managed by Enterprise or Property.
+      type: string
+      enum:
+      - EnterpriseManaged
+      - PropertyManaged
+      - EnterpriseEnforced
+      - PropertyOverridden
+    uniqueID_Type:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    aRFinanceChargeType:
+      type: object
+      description: Finance charges will allow user to post a flat amount or percentage finance charge based on user-defined cycle.
+      properties:
+        postOnDay:
+          description: Day of the month when the end of day procedure should run
+          type: integer
+        financeCharge:
+          description: Determines how the finance charge will be applied to outstanding balance valid values are F, P
+          type: string
+          minLength: 1
+          maxLength: 1
+        financeChargeValue:
+          description: Amount or percentage value
+          type: number
+        daysOlderThan:
+          description: Number of days after which an outstanding balance triggers
+          type: integer
+        includeUnallocatedPayments:
+          description: If true unallocated payments are subtracted from the outstanding balances before finance charge is calculated
+          type: boolean
+    status:
+      type: object
+      description: Response Body.
+      properties:
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    statementType:
+      type: string
+      description: The Types of Statements that can be used on an Account Type.
+      enum:
+      - BalanceForward
+      - IndividualOpenItems
     errorInstance:
       title: Error Instance Details
       description: Complex type that contains error instance details for a REST call.
@@ -923,66 +1006,6 @@ components:
       required:
       - type
       - title
-    warningType:
-      type: object
-      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
-      properties:
-        value:
-          type: string
-          description: Property Value
-        shortText:
-          description: An abbreviated version of the error in textual format.
-          type: string
-          maxLength: 2000
-        code:
-          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
-          type: string
-          minLength: 0
-          maxLength: 20
-        docURL:
-          description: If present, this URL refers to an online description of the error that occurred.
-          type: string
-          maxLength: 2000
-        status:
-          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
-          type: string
-          maxLength: 2000
-        tag:
-          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
-          type: string
-          maxLength: 2000
-        recordId:
-          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
-          type: string
-          maxLength: 2000
-        type:
-          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
-          type: string
-          minLength: 0
-          maxLength: 20
-        language:
-          description: Language identification.
-          type: string
-          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
-        rph:
-          description: Reference Place Holder used as an index for this warning.
-          type: string
-          minLength: 1
-          maxLength: 8
-    uniqueID_Type:
-      type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
-      properties:
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 40
     aRAccountTypeType:
       type: object
       description: Information which uniquely identifies account type
@@ -1032,147 +1055,118 @@ components:
           type: integer
         managedBy:
           $ref: '#/components/schemas/managedByOptions'
-    aRDaysReminderCycleType:
+    warningType:
       type: object
-      description: Custom reminder cycles determine which to generated statements for the account with outstanding balances
+      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
       properties:
-        accountTypeReminderCycleId:
-          description: Internal number associated with daily reminder type
-          $ref: '#/components/schemas/uniqueID_Type'
-        noOfDays:
-          description: Number of days in the reminder cycle
-          type: integer
-        reportName:
-          description: File name for the reminder letter to be granted for this cycle
+        value:
+          type: string
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
+          type: string
+          maxLength: 2000
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
           type: string
           minLength: 0
-          maxLength: 80
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+          maxLength: 2000
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+          maxLength: 2000
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+          maxLength: 2000
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+          maxLength: 2000
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        rph:
+          description: Reference Place Holder used as an index for this warning.
+          type: string
+          minLength: 1
+          maxLength: 8
+    operaVersion:
+      type: object
+      description: Response for Ping operation.
+      properties:
+        operaVersion:
+          description: Opera version number.
+          $ref: '#/components/schemas/operaVersionNumberType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    aRAccountTypesType:
+      type: array
+      description: Holds collection of account types
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/aRAccountTypeType'
     aRDaysCycleType:
       type: array
       description: Reminder letters will be generated based on the number of days for which the account has had an outstanding balance
       maxItems: 4000
       items:
         $ref: '#/components/schemas/aRDaysReminderCycleType'
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
-      required:
-      - type
-      - title
-    aREndOfMonthCycleType:
-      type: object
-      description: Reminder letters will be generated at the end of each month if user specifies this element
-      properties:
-        reportName:
-          description: Reminder letter file name for the reminder letter to be generated at the end of month
-          type: string
-          minLength: 0
-          maxLength: 80
-        reportNameDesc:
-          description: Description associated with reminder letter.
-          type: string
-          minLength: 0
-          maxLength: 1000
-    statementType:
-      type: string
-      description: The Types of Statements that can be used on an Account Type.
-      enum:
-      - BalanceForward
-      - IndividualOpenItems
     operaVersionNumberType:
       type: string
       description: Current Opera Version Number
       minLength: 0
       maxLength: 40
-    arAccountTypes:
-      type: object
-      description: Request object for changing account types.
-      properties:
-        accountTypes:
-          description: Collection of account types that needs to be created
-          $ref: '#/components/schemas/aRAccountTypesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    instanceLink:
-      type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
-      properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
-          type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
-        title:
-          description: Exact copy of the "summary" field on the linked operation.
-          type: string
-    aRPrintPreferenceType:
-      type: string
-      description: Preference type when separate folios has to be included in the statement
-      enum:
-      - InvoicesWithoutDetails
-      - InvoicesWithDetails
-      - SeparateFolios
+  responses:
+    '503':
+      description: Service Unavailable
+    '401':
+      description: Unauthorized
+    '413':
+      description: Request Entity Too Large
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '403':
+      description: Forbidden
+    '405':
+      description: Method not allowed
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '406':
+      description: Not acceptable.
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '502':
+      description: Bad Gateway
+    '414':
+      description: Request URI Too Large
   parameters:
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
-      in: header
-      schema:
-        type: string
     x-app-key:
       name: x-app-key
       description: Client or Partner's Application Key
@@ -1181,19 +1175,6 @@ components:
       schema:
         type: string
         pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    x-request-id:
-      name: x-request-id
-      description: Request Id of an incoming request
-      in: header
-      schema:
-        type: string
-        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
-      in: header
-      schema:
-        type: string
     x-hotelid:
       name: x-hotelid
       description: Mandatory parameter to identify the hotel code where the end user is logged in
@@ -1201,9 +1182,16 @@ components:
       required: true
       schema:
         type: string
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
       in: header
       schema:
         type: string
@@ -1220,6 +1208,18 @@ components:
       description: Bearer token that needs to be passed which is generated post user authentication
       in: header
       required: true
+      schema:
+        type: string
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
       schema:
         type: string
 externalDocs:

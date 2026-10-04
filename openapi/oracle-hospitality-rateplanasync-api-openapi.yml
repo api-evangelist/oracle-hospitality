@@ -1824,6 +1824,473 @@ paths:
       - RatePlanAsync
 components:
   schemas:
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    bestAvailableRatePlansStatus:
+      type: object
+      description: Response for configured best available rate plans status.
+      properties:
+        warnings:
+          description: List of warnings that occurred.
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    hurdleRateType:
+      type: object
+      description: Unique identifier for hurdle rate.
+      properties:
+        hurdleDate:
+          description: Hurdle date for which the hurdle rate is scheduled.
+          type: string
+          format: date
+        roomType:
+          description: Room type for which the hurdle rate applies to.
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomCategory:
+          description: Internal room category of the room type for which the hurdle rate applies to.
+          type: string
+          minLength: 0
+          maxLength: 20
+        yieldCategory:
+          description: Yield category for which the hurdle rate applies to.
+          type: string
+          minLength: 0
+          maxLength: 20
+        lengthOfStay:
+          description: Length of stay for which the hurdle rate applies to.
+          type: number
+        yieldMarketCode:
+          description: Yield market code for which the hurdle rate applies to.
+          type: string
+          minLength: 0
+          maxLength: 20
+        hurdle:
+          description: Defines the amount to be reached before rate code or room type is made available.
+          type: number
+        delta:
+          description: Defines the amount to be added to hurdle rate for each additional rooms sold up to the ceiling.
+          type: number
+        ceiling:
+          description: Maximum number of rooms to sell for which the delta is applicable to be aded to hurdle rate.
+          type: number
+        maximumSolds:
+          description: Maximum number of rooms to sell.
+          type: number
+        roomsSold:
+          description: Defines the actual number of rooms sold.
+          type: number
+        override:
+          description: Specifies whether to override hurdle rate or not.
+          type: boolean
+    bestAvailableRatePlanType:
+      type: object
+      description: Defines best available rate plans.
+      properties:
+        ratePlanCodes:
+          description: Collection of best available rate plan codes.
+          $ref: '#/components/schemas/bestAvailableRateCodesType'
+        rateDate:
+          description: Validity of best available rate plan.
+          type: string
+          format: date
+        los1:
+          description: Indicates Length of Stay 1 configuration.
+          type: boolean
+        los2:
+          description: Indicates Length of Stay 2 configuration.
+          type: boolean
+        los3:
+          description: Indicates Length of Stay 3 configuration.
+          type: boolean
+        los4:
+          description: Indicates Length of Stay 4 configuration.
+          type: boolean
+        los5:
+          description: Indicates Length of Stay 5 configuration.
+          type: boolean
+        los6:
+          description: Indicates Length of Stay 6 configuration.
+          type: boolean
+        los7:
+          description: Indicates Length of Stay 7 configuration.
+          type: boolean
+        los8:
+          description: Indicates Length of Stay 8 configuration.
+          type: boolean
+    outcomeMessageType:
+      type: object
+      description: Object for update messages.
+      properties:
+        messageCode:
+          type: string
+          description: Update Message Code.
+          minLength: 0
+          maxLength: 2000
+        messageText:
+          description: Update Message Text
+          type: string
+          minLength: 0
+          maxLength: 4000
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+    ratePlanSchedulesSyncType:
+      type: object
+      description: 'Provide syncMode and corresponding required identifiers. Validation: SINGLE_SCHEDULE_TO_ALL_BASE_RATES requires ratePlanCode + rateSetId + parentRateSetAction. ALL_SCHEDULES_TO_ONE_BASE_RATE requires baseRateCode.'
+      properties:
+        syncMode:
+          type: string
+          enum:
+          - SINGLE_SCHEDULE_TO_ALL_BASE_RATES
+          - ALL_SCHEDULES_TO_ONE_BASE_RATE
+          description: 'SINGLE_SCHEDULE_TO_ALL_BASE_RATES: Sync one selected schedule from the given rate plan to all linked base rates. ALL_SCHEDULES_TO_ONE_BASE_RATE: Sync all schedules from the given rate plan to one specified linked base rate.'
+        ratePlanCode:
+          description: The standard rate plan code whose schedules are to be synced (required when syncMode=SINGLE_SCHEDULE_TO_ALL_BASE_RATES).
+          type: string
+          minLength: 1
+          maxLength: 20
+        rateSetId:
+          description: Identifier for the rate schedule to sync (required when syncMode=SINGLE_SCHEDULE_TO_ALL_BASE_RATES).
+          type: integer
+        parentRateSetAction:
+          description: Action applied on the parent (standard) rate set before syncing to base rates (required when syncMode=SINGLE_SCHEDULE_TO_ALL_BASE_RATES).
+          type: string
+          enum:
+          - NEW
+          - UPDATE
+        baseRateCode:
+          type: string
+          description: Linked base rate code where pricing schedules will be synced to (required when syncMode=ALL_SCHEDULES_TO_ONE_BASE_RATE).
+      required:
+      - syncMode
+    rateByAgeBucketsType:
+      type: array
+      description: Rate amount by age bucket.
+      maxItems: 3
+      items:
+        $ref: '#/components/schemas/rateByAgeBucketType'
+    ratePlanSchedulesSyncBaseRateStatusType:
+      type: object
+      description: Outcome for a single base rate during sync process.
+      properties:
+        baseRateCode:
+          description: Base rate code to which schedule was synced.
+          type: string
+        syncStatus:
+          description: Status for this base rate.
+          type: string
+          enum:
+          - Success
+          - Fail
+        outcomeMessages:
+          description: Detail messages for this base rate update.
+          type: array
+          items:
+            $ref: '#/components/schemas/outcomeMessageType'
+    deleteRatePlanSchedulesOutcomeType:
+      type: object
+      description: Response object for outcome of delete Rate Plan Schedule.
+      properties:
+        hotelId:
+          description: hotelId
+          type: string
+          minLength: 1
+          maxLength: 20
+        ratePlanCode:
+          description: Rate Plan Code
+          type: string
+          minLength: 0
+          maxLength: 20
+        ratePlanScheduleId:
+          description: Rate Plan Schedule Id
+          type: string
+          minLength: 0
+          maxLength: 2000
+        status:
+          type: string
+          description: Delete Rate Plan Schedule Status.
+          enum:
+          - Success
+          - Fail
+        outcomeMessages:
+          description: Status of the update
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/outcomeMessageType'
+    deleteRatePlansOutcomeType:
+      type: object
+      description: Response object for outcome of delete Rate Plans.
+      properties:
+        hotelId:
+          description: Hotel code.
+          type: string
+          minLength: 1
+          maxLength: 20
+        ratePlanCode:
+          description: Rate Plan Code
+          type: string
+          minLength: 0
+          maxLength: 20
+        status:
+          type: string
+          description: Delete Rate Plans Status.
+          enum:
+          - Success
+          - Fail
+        outcomeMessages:
+          description: Status of the update
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/outcomeMessageType'
+    deleteRatePlansSummaryType:
+      type: object
+      description: Response object for delete Rate Plans process summary.
+      properties:
+        deleteRatePlansOutcomesType:
+          $ref: '#/components/schemas/deleteRatePlansOutcomesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    ratePlans:
+      type: object
+      description: Request object to create rate plan.
+      properties:
+        ratePlans:
+          type: array
+          description: Rate plan code details to be created.
+          items:
+            $ref: '#/components/schemas/ratePlanType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    deleteRatePlansSchedulesType:
+      type: object
+      description: ' Delete list of rate plans schedules.'
+      properties:
+        ratePlansSchedules:
+          description: Hotel rate plan schedules to be deleted.
+          type: array
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/deleteRatePlanSchedules'
+    bestAvailableRateCodesType:
+      type: array
+      description: Collection of best available rate codes.
+      maxItems: 25
+      items:
+        type: string
+        minLength: 0
+        maxLength: 20
+    modifyRatePlanRoomTypesOutcomesType:
+      type: array
+      description: Collection of outcome of add/remove Room Types.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/modifyRatePlanRoomTypesOutcomeType'
+    deleteRatePlanSchedulesOutcomesType:
+      type: array
+      description: Collection of outcome of delete Rate Plan Schedules.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/deleteRatePlanSchedulesOutcomeType'
+    copyRatePlansCriteriaType:
+      type: object
+      description: Copy Rate plans criteria type to copy multiple rate plans from one Hotel to another Hotel.
+      properties:
+        copyRatePlans:
+          description: The details of Rate plans to be copied.
+          type: object
+          properties:
+            copyRatePlan:
+              description: The details of Rate plans to be copied.
+              type: array
+              maxItems: 4000
+              items:
+                $ref: '#/components/schemas/copyRatePlanType'
+            hotelId:
+              description: Hotel Code from which rate plans are being copied.
+              type: string
+              minLength: 0
+              maxLength: 20
+        includeRateDetails:
+          description: include rate plan schedules?
+          type: boolean
+        includePackages:
+          description: include packages?
+          type: boolean
+        includeNegotiatedRates:
+          description: include negotiated rates?
+          type: boolean
+        includeRateFloor:
+          description: include rate floors?
+          type: boolean
+    copyRatePlansOutcomeType:
+      type: object
+      description: Response object for outcome of copy rate plans.
+      properties:
+        copyStatus:
+          description: Rate plan copy status
+          type: string
+          minLength: 0
+          maxLength: 100
+        copyStatusMessage:
+          description: Rate plan copy status messages.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    deleteRatePlanSchedulesSummaryType:
+      type: object
+      description: Response object for delete Rate Plan Schedules process summary.
+      properties:
+        deleteRatePlanSchedulesOutcomesType:
+          $ref: '#/components/schemas/deleteRatePlanSchedulesOutcomesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    codeDescriptionType:
+      type: object
+      description: This contains a generic code and description information.
+      properties:
+        code:
+          description: Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: description.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    ratePlansCopy:
+      type: object
+      description: Request object for Copying rate plans to multiple hotels.
+      properties:
+        criteria:
+          description: Criteria for copying rate plans.
+          $ref: '#/components/schemas/copyRatePlansCriteriaType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    dailyRatePlanSchedulesStatus:
+      type: object
+      description: Response for configured best available rate plans status.
+      properties:
+        warnings:
+          description: List of warnings that occurred.
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    bestAvailableRatePlans:
+      type: object
+      description: Request for configuring best available rate plans.
+      properties:
+        bestAvailableRatePlans:
+          description: Best available rate plans to be configured.
+          $ref: '#/components/schemas/bestAvailableRatePlansType'
+    bestAvailableRatePlansType:
+      description: Collection of best available rate plans.
+      type: array
+      minItems: 1
+      maxItems: 1000
+      items:
+        $ref: '#/components/schemas/bestAvailableRatePlanType'
+    deleteRatePlanSchedules:
+      type: object
+      description: Delete list of ratePlan schedules
+      properties:
+        ratePlanCode:
+          description: Rate Plan Code
+          type: string
+          minLength: 0
+          maxLength: 20
+        ratePlanScheduleIdList:
+          type: array
+          description: Rate Plan Schedule Ids list.
+          maxItems: 4000
+          items:
+            type: string
+            minLength: 0
+            maxLength: 80
+    ratePlanModifyActionType:
+      description: Action to add or remove the room type.
+      type: string
+      enum:
+      - ADD
+      - REMOVE
     modifyRatePlanRoomTypesSummaryType:
       type: object
       description: Response object for add or remove Room Types process summary.
@@ -1834,6 +2301,130 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
+    ratePlanDistributionType:
+      type: object
+      properties:
+        restrictionUpdate:
+          description: Restriction updates for the rate plan to be sent to channels?
+          type: boolean
+        rateUpdate:
+          description: Rate updates for the rate plan to be sent to channels?
+          type: boolean
+        myFidelioUploadAllowed:
+          description: Rate plan to be uploaded to MyFidleio and published.
+          type: boolean
+        channelAllowed:
+          description: Rate plan Code is available for channels.
+          type: boolean
+    deleteRatePlansOutcomesType:
+      type: array
+      description: Collection of outcome of delete Rate Plans.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/deleteRatePlansOutcomeType'
+    modifyRatePlanRoomTypesType:
+      type: object
+      description: Add or remove the Room Type criteria.
+      properties:
+        action:
+          description: Action to add or remove the room type.
+          $ref: '#/components/schemas/ratePlanModifyActionType'
+        roomTypes:
+          type: array
+          description: Room Types to be added or removed.
+          maxItems: 500
+          items:
+            type: string
+            minLength: 0
+            maxLength: 20
+        rateCodes:
+          type: array
+          description: Rate Codes.
+          maxItems: 4000
+          items:
+            type: string
+            minLength: 0
+            maxLength: 20
+        rateCategory:
+          description: Rate Category for the rate plan.
+          type: string
+          minLength: 0
+          maxLength: 20
+        updateSchedules:
+          description: Indicates to update the room type to the pricing schedule.
+          type: boolean
+          default: false
+        referenceRoomType:
+          description: If updateSchedules is true, then rom type should be added to the pricing schedules based on the referenceRoomType.
+          type: string
+          minLength: 0
+          maxLength: 20
+      required:
+      - hotelId
+      - action
+      - roomTypes
+    dailyRatePlanScheduleType:
+      type: object
+      description: Daily rate plan schedule details.
+      properties:
+        rateAmounts:
+          description: Daily rate amounts to be applied.
+          $ref: '#/components/schemas/scheduleRateAmountsType'
+        rateDate:
+          description: The rate date for which the daily rate amounts will be applied.
+          type: string
+          format: date
+        rateDateRangeStart:
+          description: The start date for the range for which the daily rate amounts will be applied.
+          type: string
+          format: date
+        rateDateRangeEnd:
+          description: The end date for the range for which the daily rate amounts will be applied.
+          type: string
+          format: date
+        ratePlanCode:
+          description: The rate code for which the daily rate amounts will be applied.
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomType:
+          description: The room type label for which the daily rate amounts will be applied.
+          type: string
+          minLength: 0
+          maxLength: 20
+    dailyRatePlanSchedules:
+      description: Daily rate plan schedules.
+      type: object
+      properties:
+        dailyRatePlanSchedule:
+          description: Collection of daily rate plan schedules.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/dailyRatePlanScheduleType'
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    hurdleRates:
+      type: array
+      description: Hurdle rates to be configured.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/hurdleRateType'
+    rateByAgeBucketType:
+      type: object
+      description: Rate amount by age bucket.
+      properties:
+        rateAmount:
+          description: Rate amount by age bucket.
+          type: number
+        minimumAge:
+          description: Minimum age for age bucket.
+          type: integer
+        maximumAge:
+          description: Maximum age for age bucket.
+          type: integer
     ratePlanType:
       type: object
       description: The Rate plan code Details.
@@ -1900,507 +2491,6 @@ components:
         distribution:
           description: Distribution setup for the rate code.
           $ref: '#/components/schemas/ratePlanDistributionType'
-    copyRatePlansCriteriaType:
-      type: object
-      description: Copy Rate plans criteria type to copy multiple rate plans from one Hotel to another Hotel.
-      properties:
-        copyRatePlans:
-          description: The details of Rate plans to be copied.
-          type: object
-          properties:
-            copyRatePlan:
-              description: The details of Rate plans to be copied.
-              type: array
-              maxItems: 4000
-              items:
-                $ref: '#/components/schemas/copyRatePlanType'
-            hotelId:
-              description: Hotel Code from which rate plans are being copied.
-              type: string
-              minLength: 0
-              maxLength: 20
-        includeRateDetails:
-          description: include rate plan schedules?
-          type: boolean
-        includePackages:
-          description: include packages?
-          type: boolean
-        includeNegotiatedRates:
-          description: include negotiated rates?
-          type: boolean
-        includeRateFloor:
-          description: include rate floors?
-          type: boolean
-    ratePlansCopy:
-      type: object
-      description: Request object for Copying rate plans to multiple hotels.
-      properties:
-        criteria:
-          description: Criteria for copying rate plans.
-          $ref: '#/components/schemas/copyRatePlansCriteriaType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    rateByAgeBucketType:
-      type: object
-      description: Rate amount by age bucket.
-      properties:
-        rateAmount:
-          description: Rate amount by age bucket.
-          type: number
-        minimumAge:
-          description: Minimum age for age bucket.
-          type: integer
-        maximumAge:
-          description: Maximum age for age bucket.
-          type: integer
-    hurdleRatesStatus:
-      type: object
-      description: Response for configured hurdle rates.
-      properties:
-        warnings:
-          description: List of warnings that occurred.
-          $ref: '#/components/schemas/warningsType'
-        links:
-          $ref: '#/components/schemas/links'
-    ratePlanModifyActionType:
-      description: Action to add or remove the room type.
-      type: string
-      enum:
-      - ADD
-      - REMOVE
-    ratePlanApprovalStatusType:
-      type: string
-      description: Indicates that the Rate Plan is approved for selling.
-      enum:
-      - NewUnapproved
-      - ChangedUnapproved
-      - Rejected
-      - Approved
-    hurdleRateType:
-      type: object
-      description: Unique identifier for hurdle rate.
-      properties:
-        hurdleDate:
-          description: Hurdle date for which the hurdle rate is scheduled.
-          type: string
-          format: date
-        roomType:
-          description: Room type for which the hurdle rate applies to.
-          type: string
-          minLength: 0
-          maxLength: 20
-        roomCategory:
-          description: Internal room category of the room type for which the hurdle rate applies to.
-          type: string
-          minLength: 0
-          maxLength: 20
-        yieldCategory:
-          description: Yield category for which the hurdle rate applies to.
-          type: string
-          minLength: 0
-          maxLength: 20
-        lengthOfStay:
-          description: Length of stay for which the hurdle rate applies to.
-          type: number
-        yieldMarketCode:
-          description: Yield market code for which the hurdle rate applies to.
-          type: string
-          minLength: 0
-          maxLength: 20
-        hurdle:
-          description: Defines the amount to be reached before rate code or room type is made available.
-          type: number
-        delta:
-          description: Defines the amount to be added to hurdle rate for each additional rooms sold up to the ceiling.
-          type: number
-        ceiling:
-          description: Maximum number of rooms to sell for which the delta is applicable to be aded to hurdle rate.
-          type: number
-        maximumSolds:
-          description: Maximum number of rooms to sell.
-          type: number
-        roomsSold:
-          description: Defines the actual number of rooms sold.
-          type: number
-        override:
-          description: Specifies whether to override hurdle rate or not.
-          type: boolean
-    codeDescriptionType:
-      type: object
-      description: This contains a generic code and description information.
-      properties:
-        code:
-          description: Code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          description: description.
-          type: string
-          minLength: 0
-          maxLength: 2000
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    copyRatePlanType:
-      type: object
-      description: The type describes Rate plan Details being copied.
-      properties:
-        targets:
-          description: The details of Rate plan targets, where it is being copied and with what name.
-          type: array
-          maxItems: 4000
-          items:
-            type: object
-            properties:
-              ratePlanCodes:
-                description: The code and description to be used for the rate plan being copied.
-                type: array
-                maxItems: 10
-                items:
-                  $ref: '#/components/schemas/codeDescriptionType'
-              hotelId:
-                description: Hotel code to which rate code will be copied.
-                type: string
-                minLength: 0
-                maxLength: 20
-              approvalStatus:
-                description: Approval Status of the Rate Plan.
-                $ref: '#/components/schemas/ratePlanApprovalStatusType'
-        ratePlanCode:
-          description: Rate plan code being copied.
-          type: string
-          minLength: 0
-          maxLength: 20
-    copyRatePlansOutcomeType:
-      type: object
-      description: Response object for outcome of copy rate plans.
-      properties:
-        copyStatus:
-          description: Rate plan copy status
-          type: string
-          minLength: 0
-          maxLength: 100
-        copyStatusMessage:
-          description: Rate plan copy status messages.
-          type: string
-          minLength: 0
-          maxLength: 2000
-    deleteRatePlansSchedulesType:
-      type: object
-      description: ' Delete list of rate plans schedules.'
-      properties:
-        ratePlansSchedules:
-          description: Hotel rate plan schedules to be deleted.
-          type: array
-          maxItems: 100
-          items:
-            $ref: '#/components/schemas/deleteRatePlanSchedules'
-    copyRatePlansSummaryType:
-      type: object
-      description: Response object for copy rate plans process summary.
-      properties:
-        copyRatePlansOutcomes:
-          $ref: '#/components/schemas/copyRatePlansOutcomesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    ratePlans:
-      type: object
-      description: Request object to create rate plan.
-      properties:
-        ratePlans:
-          type: array
-          description: Rate plan code details to be created.
-          items:
-            $ref: '#/components/schemas/ratePlanType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    instanceLink:
-      type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
-      properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
-          type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
-        title:
-          description: Exact copy of the "summary" field on the linked operation.
-          type: string
-    warningType:
-      type: object
-      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
-      properties:
-        value:
-          type: string
-          description: Property Value
-        shortText:
-          description: An abbreviated version of the error in textual format.
-          type: string
-          maxLength: 2000
-        code:
-          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
-          type: string
-          minLength: 0
-          maxLength: 20
-        docURL:
-          description: If present, this URL refers to an online description of the error that occurred.
-          type: string
-          maxLength: 2000
-        status:
-          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
-          type: string
-          maxLength: 2000
-        tag:
-          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
-          type: string
-          maxLength: 2000
-        recordId:
-          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
-          type: string
-          maxLength: 2000
-        type:
-          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
-          type: string
-          minLength: 0
-          maxLength: 20
-        language:
-          description: Language identification.
-          type: string
-          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
-        rph:
-          description: Reference Place Holder used as an index for this warning.
-          type: string
-          minLength: 1
-          maxLength: 8
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-    dailyRatePlanSchedules:
-      description: Daily rate plan schedules.
-      type: object
-      properties:
-        dailyRatePlanSchedule:
-          description: Collection of daily rate plan schedules.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/dailyRatePlanScheduleType'
-    ratePlanSchedulesSyncSummaryType:
-      type: object
-      description: Summary response for the rate plan schedules sync process.
-      properties:
-        baseRateSyncStatuses:
-          description: Array of base rates and their status for this sync.
-          type: array
-          items:
-            $ref: '#/components/schemas/ratePlanSchedulesSyncBaseRateStatusType'
-        warnings:
-          description: Business or technical warnings.
-          $ref: '#/components/schemas/warningsType'
-        links:
-          $ref: '#/components/schemas/links'
-    dailyRatePlanSchedulesStatus:
-      type: object
-      description: Response for configured best available rate plans status.
-      properties:
-        warnings:
-          description: List of warnings that occurred.
-          $ref: '#/components/schemas/warningsType'
-        links:
-          $ref: '#/components/schemas/links'
-    dailyRatePlanScheduleType:
-      type: object
-      description: Daily rate plan schedule details.
-      properties:
-        rateAmounts:
-          description: Daily rate amounts to be applied.
-          $ref: '#/components/schemas/scheduleRateAmountsType'
-        rateDate:
-          description: The rate date for which the daily rate amounts will be applied.
-          type: string
-          format: date
-        rateDateRangeStart:
-          description: The start date for the range for which the daily rate amounts will be applied.
-          type: string
-          format: date
-        rateDateRangeEnd:
-          description: The end date for the range for which the daily rate amounts will be applied.
-          type: string
-          format: date
-        ratePlanCode:
-          description: The rate code for which the daily rate amounts will be applied.
-          type: string
-          minLength: 0
-          maxLength: 20
-        roomType:
-          description: The room type label for which the daily rate amounts will be applied.
-          type: string
-          minLength: 0
-          maxLength: 20
-    bestAvailableRatePlansStatus:
-      type: object
-      description: Response for configured best available rate plans status.
-      properties:
-        warnings:
-          description: List of warnings that occurred.
-          $ref: '#/components/schemas/warningsType'
-        links:
-          $ref: '#/components/schemas/links'
-    deleteRatePlansOutcomeType:
-      type: object
-      description: Response object for outcome of delete Rate Plans.
-      properties:
-        hotelId:
-          description: Hotel code.
-          type: string
-          minLength: 1
-          maxLength: 20
-        ratePlanCode:
-          description: Rate Plan Code
-          type: string
-          minLength: 0
-          maxLength: 20
-        status:
-          type: string
-          description: Delete Rate Plans Status.
-          enum:
-          - Success
-          - Fail
-        outcomeMessages:
-          description: Status of the update
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/outcomeMessageType'
-    modifyRatePlanRoomTypesType:
-      type: object
-      description: Add or remove the Room Type criteria.
-      properties:
-        action:
-          description: Action to add or remove the room type.
-          $ref: '#/components/schemas/ratePlanModifyActionType'
-        roomTypes:
-          type: array
-          description: Room Types to be added or removed.
-          maxItems: 500
-          items:
-            type: string
-            minLength: 0
-            maxLength: 20
-        rateCodes:
-          type: array
-          description: Rate Codes.
-          maxItems: 4000
-          items:
-            type: string
-            minLength: 0
-            maxLength: 20
-        rateCategory:
-          description: Rate Category for the rate plan.
-          type: string
-          minLength: 0
-          maxLength: 20
-        updateSchedules:
-          description: Indicates to update the room type to the pricing schedule.
-          type: boolean
-          default: false
-        referenceRoomType:
-          description: If updateSchedules is true, then rom type should be added to the pricing schedules based on the referenceRoomType.
-          type: string
-          minLength: 0
-          maxLength: 20
-      required:
-      - hotelId
-      - action
-      - roomTypes
-    deleteRatePlanSchedulesOutcomeType:
-      type: object
-      description: Response object for outcome of delete Rate Plan Schedule.
-      properties:
-        hotelId:
-          description: hotelId
-          type: string
-          minLength: 1
-          maxLength: 20
-        ratePlanCode:
-          description: Rate Plan Code
-          type: string
-          minLength: 0
-          maxLength: 20
-        ratePlanScheduleId:
-          description: Rate Plan Schedule Id
-          type: string
-          minLength: 0
-          maxLength: 2000
-        status:
-          type: string
-          description: Delete Rate Plan Schedule Status.
-          enum:
-          - Success
-          - Fail
-        outcomeMessages:
-          description: Status of the update
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/outcomeMessageType'
     scheduleRateAmountsType:
       type: object
       properties:
@@ -2449,30 +2539,42 @@ components:
         overrideFloorAmount:
           description: true if floor amount needs to be override
           type: boolean
-    ratePlanSchedulesSyncBaseRateStatusType:
+    copyRatePlansSummaryType:
       type: object
-      description: Outcome for a single base rate during sync process.
+      description: Response object for copy rate plans process summary.
       properties:
-        baseRateCode:
-          description: Base rate code to which schedule was synced.
+        copyRatePlansOutcomes:
+          $ref: '#/components/schemas/copyRatePlansOutcomesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
           type: string
-        syncStatus:
-          description: Status for this base rate.
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
           type: string
-          enum:
-          - Success
-          - Fail
-        outcomeMessages:
-          description: Detail messages for this base rate update.
-          type: array
-          items:
-            $ref: '#/components/schemas/outcomeMessageType'
-    modifyRatePlanRoomTypesOutcomesType:
-      type: array
-      description: Collection of outcome of add/remove Room Types.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/modifyRatePlanRoomTypesOutcomeType'
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
     modifyRatePlanRoomTypesOutcomeType:
       type: object
       description: Response object for outcome of add/remove Room Types.
@@ -2498,133 +2600,119 @@ components:
           maxItems: 4000
           items:
             $ref: '#/components/schemas/outcomeMessageType'
-    outcomeMessageType:
+    copyRatePlanType:
       type: object
-      description: Object for update messages.
+      description: The type describes Rate plan Details being copied.
       properties:
-        messageCode:
-          type: string
-          description: Update Message Code.
-          minLength: 0
-          maxLength: 2000
-        messageText:
-          description: Update Message Text
-          type: string
-          minLength: 0
-          maxLength: 4000
-    deleteRatePlanSchedulesSummaryType:
-      type: object
-      description: Response object for delete Rate Plan Schedules process summary.
-      properties:
-        deleteRatePlanSchedulesOutcomesType:
-          $ref: '#/components/schemas/deleteRatePlanSchedulesOutcomesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    bestAvailableRatePlanType:
-      type: object
-      description: Defines best available rate plans.
-      properties:
-        ratePlanCodes:
-          description: Collection of best available rate plan codes.
-          $ref: '#/components/schemas/bestAvailableRateCodesType'
-        rateDate:
-          description: Validity of best available rate plan.
-          type: string
-          format: date
-        los1:
-          description: Indicates Length of Stay 1 configuration.
-          type: boolean
-        los2:
-          description: Indicates Length of Stay 2 configuration.
-          type: boolean
-        los3:
-          description: Indicates Length of Stay 3 configuration.
-          type: boolean
-        los4:
-          description: Indicates Length of Stay 4 configuration.
-          type: boolean
-        los5:
-          description: Indicates Length of Stay 5 configuration.
-          type: boolean
-        los6:
-          description: Indicates Length of Stay 6 configuration.
-          type: boolean
-        los7:
-          description: Indicates Length of Stay 7 configuration.
-          type: boolean
-        los8:
-          description: Indicates Length of Stay 8 configuration.
-          type: boolean
-    deleteRatePlansSummaryType:
-      type: object
-      description: Response object for delete Rate Plans process summary.
-      properties:
-        deleteRatePlansOutcomesType:
-          $ref: '#/components/schemas/deleteRatePlansOutcomesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    deleteRatePlanSchedules:
-      type: object
-      description: Delete list of ratePlan schedules
-      properties:
+        targets:
+          description: The details of Rate plan targets, where it is being copied and with what name.
+          type: array
+          maxItems: 4000
+          items:
+            type: object
+            properties:
+              ratePlanCodes:
+                description: The code and description to be used for the rate plan being copied.
+                type: array
+                maxItems: 10
+                items:
+                  $ref: '#/components/schemas/codeDescriptionType'
+              hotelId:
+                description: Hotel code to which rate code will be copied.
+                type: string
+                minLength: 0
+                maxLength: 20
+              approvalStatus:
+                description: Approval Status of the Rate Plan.
+                $ref: '#/components/schemas/ratePlanApprovalStatusType'
         ratePlanCode:
-          description: Rate Plan Code
+          description: Rate plan code being copied.
           type: string
           minLength: 0
           maxLength: 20
-        ratePlanScheduleIdList:
-          type: array
-          description: Rate Plan Schedule Ids list.
-          maxItems: 4000
-          items:
-            type: string
-            minLength: 0
-            maxLength: 80
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
+    copyRatePlansOutcomesType:
+      type: array
+      description: Collection of outcome of copy rate plans.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/copyRatePlansOutcomeType'
+    warningType:
       type: object
+      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
       properties:
-        type:
+        value:
           type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
           type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+          maxLength: 2000
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+          type: string
+          minLength: 0
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+          maxLength: 2000
         status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
           type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
+          maxLength: 2000
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
           type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
+          maxLength: 2000
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
           type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
+          maxLength: 2000
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
           type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        rph:
+          description: Reference Place Holder used as an index for this warning.
+          type: string
+          minLength: 1
+          maxLength: 8
+    ratePlanApprovalStatusType:
+      type: string
+      description: Indicates that the Rate Plan is approved for selling.
+      enum:
+      - NewUnapproved
+      - ChangedUnapproved
+      - Rejected
+      - Approved
+    ratePlanSchedulesSyncSummaryType:
+      type: object
+      description: Summary response for the rate plan schedules sync process.
+      properties:
+        baseRateSyncStatuses:
+          description: Array of base rates and their status for this sync.
           type: array
           items:
-            $ref: '#/components/schemas/errorInstance'
+            $ref: '#/components/schemas/ratePlanSchedulesSyncBaseRateStatusType'
+        warnings:
+          description: Business or technical warnings.
+          $ref: '#/components/schemas/warningsType'
         links:
           $ref: '#/components/schemas/links'
-    bestAvailableRateCodesType:
-      type: array
-      description: Collection of best available rate codes.
-      maxItems: 25
-      items:
-        type: string
-        minLength: 0
-        maxLength: 20
+    hurdleRatesStatus:
+      type: object
+      description: Response for configured hurdle rates.
+      properties:
+        warnings:
+          description: List of warnings that occurred.
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
     deleteRatePlanCodesType:
       type: object
       description: List of rate plans to delete.
@@ -2639,136 +2727,20 @@ components:
             maxLength: 20
       required:
       - ratePlanCodes
-    deleteRatePlanSchedulesOutcomesType:
-      type: array
-      description: Collection of outcome of delete Rate Plan Schedules.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/deleteRatePlanSchedulesOutcomeType'
-    ratePlanDistributionType:
-      type: object
-      properties:
-        restrictionUpdate:
-          description: Restriction updates for the rate plan to be sent to channels?
-          type: boolean
-        rateUpdate:
-          description: Rate updates for the rate plan to be sent to channels?
-          type: boolean
-        myFidelioUploadAllowed:
-          description: Rate plan to be uploaded to MyFidleio and published.
-          type: boolean
-        channelAllowed:
-          description: Rate plan Code is available for channels.
-          type: boolean
-    bestAvailableRatePlans:
-      type: object
-      description: Request for configuring best available rate plans.
-      properties:
-        bestAvailableRatePlans:
-          description: Best available rate plans to be configured.
-          $ref: '#/components/schemas/bestAvailableRatePlansType'
-    deleteRatePlansOutcomesType:
-      type: array
-      description: Collection of outcome of delete Rate Plans.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/deleteRatePlansOutcomeType'
-    ratePlanSchedulesSyncType:
-      type: object
-      description: 'Provide syncMode and corresponding required identifiers. Validation: SINGLE_SCHEDULE_TO_ALL_BASE_RATES requires ratePlanCode + rateSetId + parentRateSetAction. ALL_SCHEDULES_TO_ONE_BASE_RATE requires baseRateCode.'
-      properties:
-        syncMode:
-          type: string
-          enum:
-          - SINGLE_SCHEDULE_TO_ALL_BASE_RATES
-          - ALL_SCHEDULES_TO_ONE_BASE_RATE
-          description: 'SINGLE_SCHEDULE_TO_ALL_BASE_RATES: Sync one selected schedule from the given rate plan to all linked base rates. ALL_SCHEDULES_TO_ONE_BASE_RATE: Sync all schedules from the given rate plan to one specified linked base rate.'
-        ratePlanCode:
-          description: The standard rate plan code whose schedules are to be synced (required when syncMode=SINGLE_SCHEDULE_TO_ALL_BASE_RATES).
-          type: string
-          minLength: 1
-          maxLength: 20
-        rateSetId:
-          description: Identifier for the rate schedule to sync (required when syncMode=SINGLE_SCHEDULE_TO_ALL_BASE_RATES).
-          type: integer
-        parentRateSetAction:
-          description: Action applied on the parent (standard) rate set before syncing to base rates (required when syncMode=SINGLE_SCHEDULE_TO_ALL_BASE_RATES).
-          type: string
-          enum:
-          - NEW
-          - UPDATE
-        baseRateCode:
-          type: string
-          description: Linked base rate code where pricing schedules will be synced to (required when syncMode=ALL_SCHEDULES_TO_ONE_BASE_RATE).
-      required:
-      - syncMode
-    hurdleRates:
-      type: array
-      description: Hurdle rates to be configured.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/hurdleRateType'
-    bestAvailableRatePlansType:
-      description: Collection of best available rate plans.
-      type: array
-      minItems: 1
-      maxItems: 1000
-      items:
-        $ref: '#/components/schemas/bestAvailableRatePlanType'
-    copyRatePlansOutcomesType:
-      type: array
-      description: Collection of outcome of copy rate plans.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/copyRatePlansOutcomeType'
-    rateByAgeBucketsType:
-      type: array
-      description: Rate amount by age bucket.
-      maxItems: 3
-      items:
-        $ref: '#/components/schemas/rateByAgeBucketType'
-  responses:
-    '401':
-      description: Unauthorized
-    '414':
-      description: Request URI Too Large
-    '406':
-      description: Not acceptable.
-    '403':
-      description: Forbidden
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '502':
-      description: Bad Gateway
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '503':
-      description: Service Unavailable
-    '405':
-      description: Method not allowed
-    '415':
-      description: Unsupported Media Type
-    '413':
-      description: Request Entity Too Large
   parameters:
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
       in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
+      in: header
+      required: true
       schema:
         type: string
     x-request-id:
@@ -2778,30 +2750,9 @@ components:
       schema:
         type: string
         pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
-    x-app-key:
-      name: x-app-key
-      description: Client or Partner's Application Key
-      in: header
-      required: true
-      schema:
-        type: string
-        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
-      in: header
-      schema:
-        type: string
-    x-hotelid:
-      name: x-hotelid
-      description: Mandatory parameter to identify the hotel code where the end user is logged in
-      in: header
-      required: true
-      schema:
-        type: string
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
       in: header
       schema:
         type: string
@@ -2812,6 +2763,55 @@ components:
       required: true
       schema:
         type: string
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
+  responses:
+    '503':
+      description: Service Unavailable
+    '401':
+      description: Unauthorized
+    '413':
+      description: Request Entity Too Large
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '403':
+      description: Forbidden
+    '405':
+      description: Method not allowed
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '406':
+      description: Not acceptable.
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '502':
+      description: Bad Gateway
+    '414':
+      description: Request URI Too Large
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

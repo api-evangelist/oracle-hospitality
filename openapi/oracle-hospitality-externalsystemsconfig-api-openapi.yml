@@ -3955,7 +3955,17 @@ paths:
         required: true
 components:
   schemas:
-    changedInterfaceRoomStatus:
+    interfaceExportDataInfoType:
+      type: object
+      description: This type holds the export data of a hotel interface.
+      properties:
+        interfaceExportDataDetails:
+          description: Collection which shows the manually selected columns for the export data of a hotel interface.
+          $ref: '#/components/schemas/interfaceExportDataDetailsType'
+        interfaceExportDataMandatoryDetails:
+          description: Collection which shows the mandatory columns for the export data of a hotel interface.
+          $ref: '#/components/schemas/interfaceExportDataDetailsType'
+    changedExternalDeviceConfigurations:
       type: object
       description: Response Body.
       properties:
@@ -3963,148 +3973,294 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    operaVersion:
+    hotelInterfaceFailedMessagesType:
+      type: array
+      description: Collection of Hotel Interface Failed Messages.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/hotelInterfaceFailedMessageType'
+    interfaceControlArticleType:
       type: object
-      description: Response for Ping operation.
       properties:
-        operaVersion:
-          description: Opera version number.
-          $ref: '#/components/schemas/operaVersionNumberType'
+        hotelId:
+          description: Hotel Code of the hotel interface.
+          type: string
+          minLength: 0
+          maxLength: 20
+        logo:
+          description: Logo of the hotel interface.
+          type: string
+          minLength: 0
+          maxLength: 20
+        internalCode:
+          description: Internal code of a translation article setup.
+          type: integer
+        selector:
+          description: Selector of a translation article setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+        articleNo:
+          description: Article Number of a translation article setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+        description:
+          description: Description of a translation article setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+    hotelInterfaceControllerRegsType:
+      type: array
+      description: Collection of Hotel Interface Controller Registry.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/hotelInterfaceControllerRegType'
+    payByLinkDeliveryMethodType:
+      type: object
+      description: Pay By Link delivery method configuration, settings for Email containing payment url
+      properties:
+        email:
+          $ref: '#/components/schemas/emailDeliveryConfigurationType'
+    queueReservationDeliveryMethodType:
+      type: object
+      description: Queue reservation delivery method configuration, settings for Text Message Delivery of Queue Reservation status
+      properties:
+        textMessage:
+          $ref: '#/components/schemas/textMessageDeliveryConfigurationType'
+    emailDeliveryFormatType:
+      type: string
+      description: Email delivery format
+      enum:
+      - Htmlcss
+      - Pdf
+      - Rtf
+      - Tif
+    translationsTextType:
+      type: array
+      description: Language code for the translation.
+      maxItems: 4000
+      items:
+        type: object
+        properties:
+          value:
+            type: string
+            description: Used for Character Strings, length 0 to 2000.
+            minLength: 0
+            maxLength: 2000
+          language:
+            description: Language identification.
+            type: string
+            minLength: 0
+            maxLength: 20
+        description: Language code for the translation.
+    codeListType:
+      type: array
+      maxItems: 4000
+      items:
+        type: string
+        minLength: 0
+        maxLength: 20
+    createPublishers:
+      type: object
+      description: Request to create publishers.
+      properties:
+        subscriber:
+          description: Subscriber external system information.
+          $ref: '#/components/schemas/externalSystemType'
+        publishers:
+          description: Collection of publisher external systems information.
+          $ref: '#/components/schemas/publishersType'
         links:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    interfaceAdditionalInfoType:
+    externalSystemType:
       type: object
+      description: External System Information
       properties:
-        menuType:
-          description: Internal representation for Interface Type
-          $ref: '#/components/schemas/ifcMenuTypeType'
-        menuName:
-          description: Name of the Interface sub-menu
+        hotelId:
           type: string
           minLength: 0
           maxLength: 20
-        controllerPort:
-          description: Opera IFC controller (server) port for the connecting clients.
-          type: integer
-        vncPort:
-          description: VNC server port for connecting to a VNC server.
-          type: integer
-        cashierId:
-          description: Cashier Number.
-          type: integer
-        pathId1:
-          description: Used if interface has to support more than one front office system.
-          type: integer
-        timeout:
-          description: Used by the Interface module. ( IFC7.exe )
+        externalSystemCode:
+          $ref: '#/components/schemas/externalSystemCodeType'
+    changedInterfaceMachine:
+      type: object
+      description: Response Body.
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    uniqueID_Type:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
           type: string
           minLength: 0
-          maxLength: 3
-        displayFlag:
-          description: True if the interface will be displayed.
-          type: boolean
-        autoStartFlag:
-          description: Decides if the interface will be started automatically when the controller is restarted.
-          type: boolean
-        activeFlag:
-          description: Indicator if the Hotel Interface is active or not. This is different from the Interface Status, which is either STOPPED or RUNNING.
-          type: boolean
-        interfaceStatus:
-          description: Status if the Hotel Interface is STOPPED or RUNNING. This is different from the Active Flag, which is either 1 or 0.
-          $ref: '#/components/schemas/hotelInterfaceStatusType'
-        version:
-          description: Version no. of each external interface that is installed
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
+    postingAccountType:
+      type: object
+      properties:
+        id:
+          description: Internal ID to reference the records.
+          type: number
+        paymentMethod:
+          description: Payment method of posting accounts in transaction codes setup.
           type: string
           minLength: 0
           maxLength: 10
-        msgExpiresAfter:
-          description: (Internal Use) Message Expires After
+        account:
+          description: Account of posting accounts in transaction codes setup.
           type: string
           minLength: 0
-          maxLength: 8
-        useDataThroughFlag:
+          maxLength: 50
+        accountDescription:
+          description: Account description of posting accounts in transaction codes setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+        salesOutlet:
+          description: Sales outlet of posting accounts in transaction codes setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+        transactionCode:
+          description: Transaction code of posting accounts in transaction codes setup.
+          type: string
+          minLength: 0
+          maxLength: 40
+        description:
+          description: Description of posting accounts in transaction codes setup.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        autoBalance:
+          description: Auto balance flag of postings setup.
           type: boolean
-        nAStart:
-          description: Indicator if the Hotel Interface handles night audit commands.
-          type: boolean
-        multipleRoomKey:
-          description: Indicator if the Hotel Interface allows multiple room selection for keys.
-          type: boolean
-        onlineKeySystem:
-          description: Indicator if the Hotel Interface is an online key system.
-          type: boolean
-        deleteIfcKeysOnKeyDelete:
-          description: Indicator if the Interface Keys will be deleted on KeyDelete.
-          type: boolean
-        sendTrack1Data:
-          description: Indicator for Hotel Interface Send Track 1 Data.
-          type: boolean
-        sendTrack2Data:
-          description: Indicator for Hotel Interface Send Track 2 Data.
-          type: boolean
-        sendRoomStatus:
-          description: Indicator if the Room Status will be sent.
-          type: boolean
-        telephoneCharge:
-          description: Indicates on what the post unit charge is based on.
-          $ref: '#/components/schemas/telephoneChargeType'
-        additionalRoomsLimit:
-          description: Maximum number of additional rooms allowed.
+    confirmationDeliveryMethodType:
+      type: object
+      description: Confirmation letter delivery method configuration, settings for Text Message, Email and Fax Delivery of Confirmation Letters
+      properties:
+        email:
+          $ref: '#/components/schemas/emailDeliveryConfigurationType'
+        fax:
+          $ref: '#/components/schemas/faxDeliveryConfigurationType'
+        textMessage:
+          $ref: '#/components/schemas/textMessageDeliveryConfigurationType'
+    interfaceUnitChargesType:
+      type: object
+      description: Collection of Hotel Interface Unit Charges.
+      properties:
+        hotelId:
+          description: Hotel Code
+          type: string
+          minLength: 0
+          maxLength: 20
+        logo:
+          description: Hotel Interface Logo. On the database, this is also referred as DBF Logo. This is a three letter code followed by an underscore(_). This tells us which DBF files and log files with the prefix that IFC7 is going to create.
+          type: string
+          minLength: 0
+          maxLength: 20
+        unitCharges:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/interfaceUnitChargeType'
+    textMessageDeliveryConfigurationType:
+      type: object
+      description: Text message delivery configuration
+      properties:
+        userId:
+          description: Partner or User ID, Text field for Partner ID or User ID for the delivery provider, Name of the Text Messaging Provider.
+          type: string
+          minLength: 0
+          maxLength: 80
+        serverName:
+          description: Text field for Service type or email server address for the SMTP.
+          type: string
+          minLength: 0
+          maxLength: 80
+        account:
+          description: Text field for Service ID or email account for the SMTP as advised by Text Messaging Provider.
+          type: string
+          minLength: 0
+          maxLength: 80
+        password:
+          type: string
+          minLength: 0
+          maxLength: 80
+        timeOut:
+          description: Number field for Delivery time out in seconds for the message. Any message exceeding this limit will be timed out. Add word Seconds using small grey font next to the number box.
           type: integer
-          minimum: 1
-          maximum: 999
-        sendValidStartDateTime:
-          description: Indicator if the DLS Interface allows to send valid start date and time.
-          type: boolean
-        sequence:
-          description: Display Order sequence for Interfaces
-          type: number
-    workstationSetupType:
-      type: array
-      description: List of workstations of a hotel interface.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/interfaceWorkstationType'
-    arDeliveryMethodType:
+        url:
+          description: Text field for URL address or the Text Messaging Provider.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        uRLParameter:
+          description: Url parameter(format) is supported by Text Messaging Provider, it can be either an XML or TEXT format.
+          $ref: '#/components/schemas/urlFormatType'
+        format:
+          description: Text field for entering any special formatting for the delivery, or multi select LOV type, for example the one used for Address Format for selection of SID fields, to allow users choosing from a list of tags that may be used to customize this field.
+          type: string
+          minLength: 0
+          maxLength: 4000
+        message:
+          description: Text field for entering the Text Message for delivery.
+          type: string
+          minLength: 0
+          maxLength: 4000
+        type:
+          description: 'Type of Delivery Method HTTP/SMTP: HTTP for URL, SMTP for Email'
+          $ref: '#/components/schemas/textDeliveryMethodType'
+        hotelId:
+          description: Hotel code
+          type: string
+          minLength: 0
+          maxLength: 20
+    interfaceCustomDataDetailType:
       type: object
-      description: Delivery Method configuration for Email and Fax Delivery for Accounts Receivables.
+      description: This gives information of custom detail of a hotel interface.
+      properties:
+        customDataField:
+          description: Specifies the type of data stored.
+          type: string
+          minLength: 0
+          maxLength: 200
+        customDataValue:
+          description: Specifies the actual data corresponding to each value in the field.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    changedPrinter:
+      type: object
+      description: Response Body.
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    otherFolioDeliveryMethodType:
+      type: object
+      description: Delivery Method configuration for Email and Fax Delivery for Other Folios
       properties:
         email:
           $ref: '#/components/schemas/emailDeliveryConfigurationType'
         fax:
           $ref: '#/components/schemas/faxDeliveryConfigurationType'
-    opiInfoType:
+    changedUDFMapping:
       type: object
+      description: Response Body.
       properties:
-        tokenEndpoint:
-          description: Token endpoint
-          $ref: '#/components/schemas/pspEndpointValue'
-        ccEndpoint:
-          description: CreditCard endpoint
-          $ref: '#/components/schemas/pspEndpointValue'
-        pblEndpoint:
-          description: PayByLink endpoint
-          $ref: '#/components/schemas/pspEndpointValue'
-    billingFolioDeliveryMethodType:
-      type: object
-      description: Billing folio delivery method configuration, settings for Email and Fax Delivery of Guest Folios
-      properties:
-        email:
-          $ref: '#/components/schemas/emailDeliveryConfigurationType'
-        fax:
-          $ref: '#/components/schemas/faxDeliveryConfigurationType'
-    importInterfaceRooms:
-      type: object
-      description: Request object for importing the Interface Rooms for a Hotel Interface record.
-      properties:
-        details:
-          $ref: '#/components/schemas/importInterfaceRoomsType'
-        dMLCommand:
-          $ref: '#/components/schemas/dMLCommandType'
-        targetedImport:
-          $ref: '#/components/schemas/interfaceRoomType'
         links:
           $ref: '#/components/schemas/links'
         warnings:
@@ -4120,695 +4276,17 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    changedDeliveryMethods:
-      type: object
-      description: Response Body.
-      properties:
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    sVTransactionType:
+    maskDialNumberType:
       type: string
-      description: Status of the Hotel Interface either STOPPED or RUNNING.
+      description: Mask the dialled digits as per the room configuration.
       enum:
-      - OperaTransaction
-      - VendorTransaction
-      - OperaAndVendorTransaction
-    interfaceUnitChargeType:
-      type: object
-      properties:
-        trunkId:
-          description: Trunk ID of the CAS or PBX.
-          type: string
-          minLength: 0
-          maxLength: 10
-        lineType:
-          description: Line Types setup in IFC_ROOM table.
-          type: string
-          minLength: 0
-          maxLength: 10
-        vipCode:
-          description: Guest VIP Code.
-          type: string
-          minLength: 0
-          maxLength: 40
-        startUnit:
-          description: Starting number of units for the unit range.
-          type: integer
-        endUnit:
-          description: Ending number of units for the unit range.
-          type: integer
-        pricePerUnit:
-          description: Amount charged per unit.
-          type: integer
-    translationTextType2000:
-      type: object
-      description: Contains Multiple translated texts and language codes.
-      properties:
-        defaultText:
-          description: Default text with Character length from 0 to 2000.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        translatedTexts:
-          description: List of translated text and language codes.
-          $ref: '#/components/schemas/translationsTextType'
-    createInterfaceAccount:
-      type: object
-      description: Request object for creating an Interface Account of a Hotel Interface record.
-      properties:
-        account:
-          $ref: '#/components/schemas/interfaceAccountType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    changedInterfaceUnitCharges:
-      type: object
-      description: Response Body.
-      properties:
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    payByLinkDeliveryMethodType:
-      type: object
-      description: Pay By Link delivery method configuration, settings for Email containing payment url
-      properties:
-        email:
-          $ref: '#/components/schemas/emailDeliveryConfigurationType'
-    hotelInterfaceControllerRegType:
-      type: object
-      properties:
-        id:
-          description: Internal ID to reference the records.
-          type: number
-        machine:
-          description: Machine Name
-          type: string
-          minLength: 0
-          maxLength: 80
-        cntrlRegSetting:
-          description: Controller Registry Setting
-          type: string
-          minLength: 0
-          maxLength: 20
-        data:
-          description: Data
-          type: string
-          minLength: 0
-          maxLength: 400
-        description:
-          description: Description
-          type: string
-          minLength: 0
-          maxLength: 4000
-    roomMaskSetupType:
-      type: object
-      properties:
-        wakeUpCall:
-          description: Value to set/check if the wake up call functionality is enabled/disabled for the particular line number.
-          type: boolean
-        doNotDisturb:
-          description: Value to set/check if the Do Not Disturb functionality is enabled/disabled/NA for the particular line number.
-          $ref: '#/components/schemas/doNotDisturbType'
-        classOfService:
-          description: Value to set/check if the Class of Service functionality is enabled/disabled/NA for the particular line number.
-          $ref: '#/components/schemas/classOfServiceConfigType'
-        directInwardDial:
-          description: Value to set/check if the Direct Inward Dial functionality is enabled/disabled/NA for the particular line number.
-          $ref: '#/components/schemas/directInwardDialType'
-        messageWaiting:
-          description: Value to set/check if the Message Waiting functionality is enabled/disabled/NA for the particular line number.
-          $ref: '#/components/schemas/messageWaitingType'
-        maskDialNumber:
-          description: Value to set/check the type number masking used for the particular line number.
-          $ref: '#/components/schemas/maskDialNumberType'
-    createPublishers:
-      type: object
-      description: Request to create publishers.
-      properties:
-        subscriber:
-          description: Subscriber external system information.
-          $ref: '#/components/schemas/externalSystemType'
-        publishers:
-          description: Collection of publisher external systems information.
-          $ref: '#/components/schemas/publishersType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-      required:
-      - type
-      - title
-    importRoomsType:
-      type: object
-      properties:
-        requiresLineNumberSetup:
-          description: Indicator for Requires line number setup, from Import Rooms related information of a Hotel Interface.
-          type: boolean
-        virtualNumberSetup:
-          description: Indicator for Virtual number setup, from Import Rooms related information of a Hotel Interface.
-          type: boolean
-        ioLines:
-          description: Indicator for support of Input/Output Lines for Hotel Room Categories.
-          type: boolean
-        inXlatId:
-          description: Translation table for incoming messages.
-          type: string
-          minLength: 0
-          maxLength: 100
-        ouXlatId:
-          description: Translation table for outgoing messages.
-          type: string
-          minLength: 0
-          maxLength: 100
-        selectedRoomTypes:
-          description: Concatenated label of Hotel Room Categories for which SendToInterface flag should be set as true.
-          type: string
-          minLength: 0
-          maxLength: 4000
-    emailDeliveryConfigurationType:
-      type: object
-      description: Email content configuration template
-      properties:
-        fromAddress:
-          type: string
-          minLength: 0
-          maxLength: 200
-        userId:
-          type: string
-          minLength: 0
-          maxLength: 80
-        userPassword:
-          type: string
-          minLength: 0
-          maxLength: 80
-        serverName:
-          type: string
-          minLength: 0
-          maxLength: 80
-        subject:
-          type: string
-          minLength: 0
-          maxLength: 2000
-        body:
-          type: string
-          minLength: 0
-          maxLength: 2000
-        format:
-          description: 'EMAIL Format: HTML, RTF, PDF. Fax Format: TIF'
-          $ref: '#/components/schemas/emailDeliveryFormatType'
-        type:
-          description: 'Deliver Type, possible values: AR, BILLING, CONFIRMATION, LEADS, OWS, OVOS.'
-          $ref: '#/components/schemas/emailDeliveryMethodType'
-        hotelId:
-          description: Hotel code
-          type: string
-          minLength: 0
-          maxLength: 20
-        activateDelivery:
-          description: This option must be selected in order to activate emailing from an SMTP compliant email server
-          type: boolean
-        hTMLFormatDelivery:
-          description: Available for Confirmation Letters only and when Activate Email Delivery is selected
-          type: boolean
-        attachICalender:
-          type: boolean
-        outboundCode:
-          description: Outbound Code
-          type: string
-          minLength: 0
-          maxLength: 20
-    changePrinter:
-      type: object
-      description: Request object for updating a new Printer and Print Task
-      properties:
-        printerSetup:
-          $ref: '#/components/schemas/printerSetupType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    classOfServiceConfigType:
-      type: string
-      description: Class Of Service is set to available and freely switchable.
-      enum:
-      - NotAvailable
-      - AlwaysOn
-      - AlwaysOff
-      - FreelySwitchable
-    externalDeviceConfigurationType:
-      type: object
-      description: Type for the configurations available to the device.
-      properties:
-        hotelId:
-          description: Property for which the device is configured.
-          type: string
-          minLength: 0
-          maxLength: 20
-        device:
-          description: External device.
-          $ref: '#/components/schemas/supportedExternalDeviceType'
-        deviceConfigurations:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/deviceConfigurationType'
-        codeMappings:
-          description: Type that contains the mappings of the codes used in the external device to the code used in OPERA.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/deviceMappingType'
-    interfaceRoomType:
-      type: object
-      properties:
-        hotelId:
-          description: Hotel Code of the Interface Room.
-          type: string
-          minLength: 0
-          maxLength: 20
-        logo:
-          description: Hotel Interface Logo. On the database, this is also referred as DBF Logo. This is a three letter code followed by an underscore(_). This tells us which DBF files and log files with the prefix that IFC7 is going to create.
-          type: string
-          minLength: 0
-          maxLength: 20
-        roomType:
-          description: Front Office Room Type.
-          type: string
-          minLength: 0
-          maxLength: 20
-        roomId:
-          description: Front Office Room Number.
-          type: string
-          minLength: 0
-          maxLength: 20
-        lineNumber:
-          description: External System's extension number.
-          type: string
-          minLength: 0
-          maxLength: 20
-        oldLineNumber:
-          description: External System's extension number. It is used for editing a record. It is logically part of the record ID, and can actually be updated.
-          type: string
-          minLength: 0
-          maxLength: 20
-        fromRoom:
-          description: From Room Number
-          type: string
-          minLength: 1
-          maxLength: 20
-        toRoom:
-          description: To Room Number
-          type: string
-          minLength: 1
-          maxLength: 20
-        fromLine:
-          description: From Line Number
-          type: string
-          minLength: 1
-          maxLength: 20
-        toLine:
-          description: To Line Number
-          type: string
-          minLength: 1
-          maxLength: 20
-        type:
-          description: Line Type of an Interface Room.
-          type: string
-          minLength: 0
-          maxLength: 20
-        dataLine:
-          description: I/O Lines type, which is either IN or OUT.
-          $ref: '#/components/schemas/dataLineType'
-        dataLineId:
-          description: Translation Table Id as defined in the IFC_CTRL table. It is also referred as Xlat Id.
-          type: string
-          minLength: 0
-          maxLength: 100
-        wakeUpCall:
-          description: Value to set/check if the wake up call functionality is enabled/disabled for the particular line number.
-          type: boolean
-        doNotDisturb:
-          description: Value to set/check if the Do Not Disturb functionality is enabled/disabled/NA for the particular line number.
-          $ref: '#/components/schemas/doNotDisturbType'
-        classOfService:
-          description: Value to set/check if the Class of Service functionality is enabled/disabled/NA for the particular line number.
-          $ref: '#/components/schemas/classOfServiceConfigType'
-        directInwardDial:
-          description: Value to set/check if the Direct Inward Dial functionality is enabled/disabled/NA for the particular line number.
-          $ref: '#/components/schemas/directInwardDialType'
-        messageWaiting:
-          description: Value to set/check if the Message Waiting functionality is enabled/disabled/NA for the particular line number.
-          $ref: '#/components/schemas/messageWaitingType'
-        maskDialNumber:
-          description: Value to set/check the type number masking used for the particular line number.
-          $ref: '#/components/schemas/maskDialNumberType'
-    textDeliveryMethodType:
-      type: string
-      description: Text delivery method type
-      enum:
-      - Url
-      - Email
-    hotelInterfaceType:
-      type: object
-      properties:
-        interfaceId:
-          description: Unique DB internal number of a Hotel Interface record.
-          $ref: '#/components/schemas/uniqueID_Type'
-        hotelId:
-          description: Hotel Code
-          type: string
-          minLength: 0
-          maxLength: 20
-        interfaceName:
-          description: Name of the Hotel Interface
-          type: string
-          minLength: 0
-          maxLength: 40
-        interfaceType:
-          description: Three letter code for each interface that identifies the interface.
-          $ref: '#/components/schemas/hotelInterfaceTypeType'
-        logo:
-          description: Hotel Interface Logo. On the database, this is also referred as DBF Logo. This is a three letter code followed by an underscore(_). This tells us which DBF files and log files with the prefix that IFC7 is going to create.
-          type: string
-          minLength: 0
-          maxLength: 20
-        machineName:
-          description: Unique machine name of the running IFC.
-          type: string
-          minLength: 0
-          maxLength: 80
-        status:
-          description: The current status of the IFC.
-          $ref: '#/components/schemas/hotelInterfaceStatusType'
-        activeFlag:
-          description: Indicator if the Hotel Interface is active or not. This is different from the Interface Status, which is either STOPPED or RUNNING.
-          type: boolean
-        outboundCode:
-          description: Stores the Outbound Code to identify the target system.
-          type: string
-          minLength: 0
-          maxLength: 20
-        externalSystem:
-          description: Stores the external system to identify the target system.
-          type: string
-          minLength: 0
-          maxLength: 40
-    fetchedDeliveryMethods:
-      type: object
-      description: Response to request to fetch the delivery method for a property/HUB/Chain and its configurations.
-      properties:
-        deliveryMethods:
-          description: Collection of all delivery method types.
-          $ref: '#/components/schemas/configuredExternalDeliveryMethodsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    interfaceExportDataInfoType:
-      type: object
-      description: This type holds the export data of a hotel interface.
-      properties:
-        interfaceExportDataDetails:
-          description: Collection which shows the manually selected columns for the export data of a hotel interface.
-          $ref: '#/components/schemas/interfaceExportDataDetailsType'
-        interfaceExportDataMandatoryDetails:
-          description: Collection which shows the mandatory columns for the export data of a hotel interface.
-          $ref: '#/components/schemas/interfaceExportDataDetailsType'
-    changeInterfaceUnitCharges:
-      type: object
-      description: Request object for updating Hotel Interface Unit Charges.
-      properties:
-        details:
-          $ref: '#/components/schemas/interfaceUnitChargesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    changedInterfaceRoom:
-      type: object
-      description: Response Body.
-      properties:
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    interfaceCustomDataDetailType:
-      type: object
-      description: This gives information of custom detail of a hotel interface.
-      properties:
-        customDataField:
-          description: Specifies the type of data stored.
-          type: string
-          minLength: 0
-          maxLength: 200
-        customDataValue:
-          description: Specifies the actual data corresponding to each value in the field.
-          type: string
-          minLength: 0
-          maxLength: 2000
-    supportedExternalDeviceType:
-      type: object
-      properties:
-        deviceType:
-          description: Internal device type used to identify in which group the external device belongs to.
-          $ref: '#/components/schemas/deviceType'
-        deviceCode:
-          description: Internal device code used to identify the external device.
-          $ref: '#/components/schemas/deviceCode'
-        deviceArea:
-          description: The area where the device is installed
-          type: string
-          minLength: 0
-          maxLength: 40
-        displayName:
-          description: External device display name.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        mobileYN:
-          description: Indicator if device type is mobile or desktop.
-          type: boolean
-        desktopYN:
-          description: Indicator if device type is mobile or desktop.
-          type: boolean
-        registerAddress:
-          description: The address which the Cash Register ID ( Device ID ) is associated with.
-          type: string
-          minLength: 0
-          maxLength: 200
-        deviceValue:
-          description: External device Value.
-          type: string
-          minLength: 0
-          maxLength: 40
-        fiscalPartnerCode:
-          description: Fiscal Partner associated with the terminal.
-          $ref: '#/components/schemas/fiscalPartnerCodeType'
-        primary:
-          description: Flag to designate the primary Fiscal Terminal.
-          type: boolean
-        active:
-          description: Flag that indicates whether the device is active.
-          type: boolean
-        id:
-          type: string
-          minLength: 0
-          maxLength: 100
-        label:
-          type: string
-          minLength: 0
-          maxLength: 100
-        translatableLabel:
-          description: Translatable Label for the external devices.
-          $ref: '#/components/schemas/translationTextType2000'
-        iDEditable:
-          type: boolean
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-      description: External device details.
-    hotelInterface:
-      type: object
-      description: Request object for creating a new Hotel Interface.
-      properties:
-        details:
-          $ref: '#/components/schemas/hotelInterfaceDetailType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
-      required:
-      - type
-      - title
-    changeInterfaceRoom:
-      type: object
-      description: Request object for updating an Interface Room of a Hotel Interface record.
-      properties:
-        room:
-          $ref: '#/components/schemas/interfaceRoomType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    doNotDisturbType:
-      type: string
-      description: Do Not Disturb is set to available and freely switchable.
-      enum:
-      - NotAvailable
-      - AlwaysOn
-      - AlwaysOff
-      - FreelySwitchable
-    interfaceCommunicationInfoType:
-      type: object
-      properties:
-        tCPConfig:
-          $ref: '#/components/schemas/tCPConfigType'
-    importInterfaceRoomsType:
-      type: object
-      properties:
-        hotelId:
-          description: Hotel Code to which the Interface Room belongs to.
-          type: string
-          minLength: 0
-          maxLength: 20
-        logo:
-          description: Hotel Interface Logo. On the database, this is also referred as DBF Logo. This is a three letter code followed by an underscore(_). This tells us which DBF files and log files with the prefix that IFC7 is going to create.
-          type: string
-          minLength: 0
-          maxLength: 20
-        dataLine:
-          description: I/O Lines type, which is either IN or OUT.
-          $ref: '#/components/schemas/dataLineType'
-        numberOfLines:
-          description: Number of lines to use for the import of a Hotel Interface Room.
-          type: integer
-        removeLeadingZeros:
-          description: Number of lines to use for the import of a Hotel Interface Room.
-          type: boolean
-        line1Prefix:
-          description: Prefix for the Hotel Interface Room number for Line 1.
-          type: integer
-        line1AddTo:
-          description: Numeric value to be summed with the Hotel Interface Room number for Line 1.
-          type: integer
-        line2Prefix:
-          description: Prefix for the Hotel Interface Room number for Line 2.
-          type: integer
-        line2AddTo:
-          description: Numeric value to be summed with the Hotel Interface Room number for Line 2.
-          type: integer
-        line3Prefix:
-          description: Prefix for the Hotel Interface Room number for Line 3.
-          type: integer
-        line3AddTo:
-          description: Numeric value to be summed with the Hotel Interface Room number for Line 3.
-          type: integer
-        line4Prefix:
-          description: Prefix for the Hotel Interface Room number for Line 4.
-          type: integer
-        line4AddTo:
-          description: Numeric value to be summed with the Hotel Interface Room number for Line 4.
-          type: integer
-        selectedRoomTypes:
-          description: Concatenated label of Hotel Room Categories, which will be imported to the Hotel Interface.
-          type: string
-          minLength: 0
-          maxLength: 4000
-        maskLines:
-          description: Mask configurations for different line types.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/roomMaskSetupType'
-    printerOutputType:
-      type: string
-      enum:
-      - Print
-      - Email
-    configuredExternalDeliveryMethodsType:
-      type: object
-      description: External system configuration delivery methods for a property(chain or hub).
-      properties:
-        general:
-          $ref: '#/components/schemas/generalDeliveryMethodType'
-        queueReservation:
-          $ref: '#/components/schemas/queueReservationDeliveryMethodType'
-        confirmation:
-          $ref: '#/components/schemas/confirmationDeliveryMethodType'
-        guestMessage:
-          $ref: '#/components/schemas/guestMessageDeliveryMethodType'
-        billingFolio:
-          $ref: '#/components/schemas/billingFolioDeliveryMethodType'
-        queueRush:
-          $ref: '#/components/schemas/queueRushDeliveryMethodType'
-        ar:
-          $ref: '#/components/schemas/arDeliveryMethodType'
-        otherFolios:
-          $ref: '#/components/schemas/otherFolioDeliveryMethodType'
-        payByLink:
-          $ref: '#/components/schemas/payByLinkDeliveryMethodType'
+      - NoMasking
+      - MaskLast2Digits
+      - MaskLast4Digits
+      - Mask4DigitsLeaveLast2Intact
+      - MaskAllExceptFirst2
+      - MaskAll
+      - MaskingPerRoom
     translationType:
       type: object
       properties:
@@ -4854,85 +4332,26 @@ components:
           maxItems: 4000
           items:
             $ref: '#/components/schemas/interfaceControlLangType'
-    hotelInterfaceFailedMessagesType:
-      type: array
-      description: Collection of Hotel Interface Failed Messages.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/hotelInterfaceFailedMessageType'
-    changedUDFMapping:
+    generalDeliveryMethodType:
       type: object
-      description: Response Body.
-      properties:
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    changedInterfaceMachine:
-      type: object
-      description: Response Body.
-      properties:
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    hotelInterfaceTypeType:
-      type: string
-      enum:
-      - Bms
-      - Cas
-      - Ccw
-      - Dls
-      - Eft
-      - Exp
-      - Mak
-      - Mbs
-      - Msc
-      - Pbx
-      - Pos
-      - Svs
-      - Tik
-      - Vid
-      - Vms
-      - Www
-      - Xml
-      description: XML Posting Interface
-    hotelExternalDevicesType:
-      type: object
-      description: Type for the external device supported by the hotel.
-      properties:
-        hotelId:
-          description: Property for which the device is configured.
-          type: string
-          minLength: 0
-          maxLength: 20
-        supportedDevices:
-          $ref: '#/components/schemas/supportedExternalDevicesType'
-    createDeliveryMethods:
-      type: object
-      description: Request to create the delivery method for a property/HUB/Chain and its configurations.
-      properties:
-        deliveryMethods:
-          description: Collection of delivery method types to create.
-          $ref: '#/components/schemas/configuredExternalDeliveryMethodsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    hotelInterfaceSchemasType:
-      type: array
-      description: Collection of Hotel Interface Schemas.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/hotelInterfaceSchemaType'
-    otherFolioDeliveryMethodType:
-      type: object
-      description: Delivery Method configuration for Email and Fax Delivery for Other Folios
+      description: General delivery method SFTPConfigurationType configuration, settings for Email and Fax Delivery of General Letters
       properties:
         email:
           $ref: '#/components/schemas/emailDeliveryConfigurationType'
         fax:
           $ref: '#/components/schemas/faxDeliveryConfigurationType'
+        sftpConfigurations:
+          $ref: '#/components/schemas/sftpConfigurationsListType'
+    changeInterfaceUnitCharges:
+      type: object
+      description: Request object for updating Hotel Interface Unit Charges.
+      properties:
+        details:
+          $ref: '#/components/schemas/interfaceUnitChargesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
     changeDeliveryMethods:
       type: object
       description: Request to change the delivery method for a property/HUB/Chain and its configurations.
@@ -4944,27 +4363,202 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    directInwardDialType:
+    uDFMappingType:
+      type: object
+      description: Generic self-contained request object that is used when updating and fetching UDFs.
+      properties:
+        uDFName:
+          description: Name of the user-defined function (UDF) field.
+          type: string
+          minLength: 0
+          maxLength: 40
+        uDFLabel:
+          description: Label the user-defined function (UDF) field shared with external system which will be send in the request message for mapping of actual UDF Name.
+          type: string
+          minLength: 0
+          maxLength: 200
+        active:
+          description: A flag to indicate whether the UDF mapping is active in the Interface system or not.
+          type: boolean
+        updateAllowed:
+          description: A flag to indicate whether the update is allowed in the Interface system or not.
+          type: boolean
+        type:
+          description: A reference to the type of object defined by the Type for Reservation and Profile Type.
+          type: string
+          minLength: 0
+          maxLength: 20
+    transactionCodeInfoType:
+      type: object
+      properties:
+        allChargesCode:
+          description: All charges code of transaction code setup
+          type: string
+          minLength: 0
+          maxLength: 10
+        miniBarCode:
+          description: Minibar charges code of transaction code setup
+          type: string
+          minLength: 0
+          maxLength: 10
+        cashCreditCardPosting:
+          description: Cash or credit card posting of transaction code setup
+          type: string
+          minLength: 0
+          maxLength: 1
+        subtotalPosting:
+          description: Subtotal posting of transaction code setup
+          type: string
+          minLength: 0
+          maxLength: 1
+        differencePosting:
+          description: Difference posting of transaction code setup
+          type: string
+          minLength: 0
+          maxLength: 1
+        calcTrxCodePosting:
+          description: Calculated transaction code posting of transaction code setup
+          type: string
+          minLength: 0
+          maxLength: 1
+        numberOfDialedDigits:
+          description: Number of dialed digits transaction code setup
+          type: string
+          minLength: 0
+          maxLength: 1
+        postingAccounts:
+          description: Postings information of transaction codes setup.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/postingAccountType'
+        itemizers:
+          description: Split information of transaction code setup.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/itemizerType'
+        transactionCodes:
+          description: Split information of transaction code setup.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/transactionCodeDetailType'
+    interfaceAccountType:
+      type: object
+      properties:
+        hotelId:
+          description: Hotel Code of the Interface Account.
+          type: string
+          minLength: 0
+          maxLength: 20
+        logo:
+          description: Hotel Interface Logo. On the database, this is also referred as DBF Logo. This is a three letter code followed by an underscore(_). This tells us which DBF files and log files with the prefix that IFC7 is going to create.
+          type: string
+          minLength: 0
+          maxLength: 20
+        postingAccount:
+          description: Posting information of transaction codes setup.
+          $ref: '#/components/schemas/postingAccountType'
+    ifcMenuTypeType:
       type: string
-      description: Direct Inward Dial is set to available and freely switchable.
       enum:
-      - NotAvailable
-      - AlwaysOn
-      - AlwaysOff
-      - FreelySwitchable
-    telephoneChargeType:
-      type: string
-      enum:
-      - '0'
-      - '1'
-      - '2'
-      description: Auto Choose
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
+      - Cas
+      - Kss
+      - Mbs
+      - Pbx
+      - Pos
+      - Vss
+      - Dcs
+      description: Data Card System
+    pspEndpointParamValue:
+      type: object
+      description: Parameter key-value for PSP endpoint.
+      properties:
+        paramId:
+          type: string
+        value:
+          type: string
+    itemizerShortInfoType:
+      type: object
+      properties:
+        code:
+          description: Code of the itemizer on a transaction code setup.
+          type: string
+          minLength: 0
+          maxLength: 50
+        itemizerName:
+          description: Itemizer name on a transaction code setup.
+          type: string
+          minLength: 0
+          maxLength: 50
+        itemNumber:
+          description: Itemizer number which is the split post on a transaction code setup.
+          type: integer
+    faxDeliveryConfigurationType:
+      type: object
+      description: Email content configuration template
+      properties:
+        fromAddress:
+          type: string
+          minLength: 0
+          maxLength: 200
+        userId:
+          type: string
+          minLength: 0
+          maxLength: 80
+        userPassword:
+          type: string
+          minLength: 0
+          maxLength: 80
+        serverName:
+          type: string
+          minLength: 0
+          maxLength: 80
+        subject:
+          type: string
+          minLength: 0
+          maxLength: 2000
+        body:
+          type: string
+          minLength: 0
+          maxLength: 2000
+        format:
+          description: 'EMAIL Format: HTML, RTF, PDF. Fax Format: TIF'
+          $ref: '#/components/schemas/emailDeliveryFormatType'
+        type:
+          description: 'Deliver Type, possible values: AR, BILLING, CONFIRMATION, LEADS, OWS, OVOS.'
+          $ref: '#/components/schemas/emailDeliveryMethodType'
+        hotelId:
+          description: Hotel code
+          type: string
+          minLength: 0
+          maxLength: 20
+        faxPrefix:
+          type: string
+          minLength: 0
+          maxLength: 20
+        faxSuffix:
+          type: string
+          minLength: 0
+          maxLength: 20
+        faxDomain:
+          type: string
+          minLength: 0
+          maxLength: 40
+        activateEmailToFax:
+          description: This option must be selected in order to activate faxing from an SMTP compliant fax server
+          type: boolean
+    fetchedConfiguredExternalDevices:
+      type: object
+      properties:
+        configuredExternalDevices:
+          description: Collection of all active external devices.
+          $ref: '#/components/schemas/configuredExternalDevices'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
     itemizerType:
       type: object
       properties:
@@ -4984,7 +4578,27 @@ components:
         splitFactor:
           description: Split factor of the itemizer setup.
           type: integer
-    changedInterfaceAccount:
+    hotelInterface:
+      type: object
+      description: Request object for creating a new Hotel Interface.
+      properties:
+        details:
+          $ref: '#/components/schemas/hotelInterfaceDetailType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    createInterfaceAccount:
+      type: object
+      description: Request object for creating an Interface Account of a Hotel Interface record.
+      properties:
+        account:
+          $ref: '#/components/schemas/interfaceAccountType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    changedInterfaceRoom:
       type: object
       description: Response Body.
       properties:
@@ -4992,107 +4606,69 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    hotelInterfacesType:
-      type: array
-      description: Collection of Hotel Interfaces.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/hotelInterfaceType'
+    externalSystemCodeType:
+      type: object
+      description: External System Code
+      properties:
+        code:
+          type: string
+          minLength: 0
+          maxLength: 40
     fiscalPartnerCodeType:
       type: string
       description: Used for fiscal partner codes. Possible values of this pattern are 1, 101, 101.EQP, or 101.EQP.X.
       maxLength: 100
       minLength: 0
-    fetchedHotelInterfaceSchemas:
+    interfaceMachineType:
       type: object
-      description: Response object for retrieving Hotel Interface Schemas.
       properties:
-        schemas:
-          description: Collection of Hotel Interface Schemas.
-          $ref: '#/components/schemas/hotelInterfaceSchemasType'
-        totalPages:
-          description: Evaluated total page count based on the requested max fetch count.
-          type: integer
-        offset:
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-          type: integer
-        limit:
-          description: Indicates maximum number of records a Web Service should return.
-          type: integer
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    warningType:
-      type: object
-      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
-      properties:
-        value:
+        id:
+          description: Unique Id for every interface machine.
+          $ref: '#/components/schemas/uniqueID_Type'
+        machine:
+          description: Unique Machine name of the running Interface.
           type: string
-          description: Property Value
-        shortText:
-          description: An abbreviated version of the error in textual format.
+          minLength: 0
+          maxLength: 80
+        program:
+          description: Path and name of the Interface program running on every Machine.
           type: string
+          minLength: 0
           maxLength: 2000
-        code:
-          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+        controllerPort:
+          description: Opera Interface controller (server) port for the connecting clients.
+          type: integer
+        vncPort:
+          description: VNC server port for connecting to the VNC server.
+          type: integer
+    definedNameFormatType:
+      type: object
+      properties:
+        hotelId:
+          description: Hotel Code where the defined name format is associated.
           type: string
           minLength: 0
           maxLength: 20
-        docURL:
-          description: If present, this URL refers to an online description of the error that occurred.
-          type: string
-          maxLength: 2000
-        status:
-          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
-          type: string
-          maxLength: 2000
-        tag:
-          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
-          type: string
-          maxLength: 2000
-        recordId:
-          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
-          type: string
-          maxLength: 2000
-        type:
-          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+        definedFormatId:
+          description: ID of the defined name format.
           type: string
           minLength: 0
           maxLength: 20
-        language:
-          description: Language identification.
+        expressionTable:
+          description: Table from which the info will be retrieved.
           type: string
-          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
-        rph:
-          description: Reference Place Holder used as an index for this warning.
+          minLength: 0
+          maxLength: 200
+        expression:
+          description: Expression of the defined name format It basically contains all formats that are being set.
           type: string
-          minLength: 1
-          maxLength: 8
-    pspEndpointParamValue:
-      type: object
-      description: Parameter key-value for PSP endpoint.
-      properties:
-        paramId:
+          minLength: 0
+          maxLength: 4000
+        logo:
+          description: Logo of the hotel interface.
           type: string
-        value:
-          type: string
-    changeInterfaceRoomStatus:
-      type: object
-      description: Request object for updating a Hotel Interface Room Status. If it does not exist, then creates the Hotel Interface Room Status.
-      properties:
-        details:
-          $ref: '#/components/schemas/interfaceRoomStatusType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
+          minLength: 0
+          maxLength: 20
     printerSetupType:
       type: object
       description: Entity schema to persist Printers.
@@ -5152,518 +4728,14 @@ components:
           type: integer
         managedBy:
           $ref: '#/components/schemas/managedByOptions'
-    hotelInterfaceErrorsType:
-      type: array
-      description: Collection of Hotel Interface Errors.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/hotelInterfaceErrorType'
-    externalSystemType:
-      type: object
-      description: External System Information
-      properties:
-        hotelId:
-          type: string
-          minLength: 0
-          maxLength: 20
-        externalSystemCode:
-          $ref: '#/components/schemas/externalSystemCodeType'
-    createInterfaceRoom:
-      type: object
-      description: Request object for creating an Interface Room of a Hotel Interface record.
-      properties:
-        room:
-          $ref: '#/components/schemas/interfaceRoomType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    changedExternalDeviceConfigurations:
-      type: object
-      description: Response Body.
-      properties:
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    fetchedExternalDatabaseAvailableProperties:
-      type: object
-      description: Response object for retrieving the Available properties for External Databases.
-      properties:
-        availailableProperties:
-          $ref: '#/components/schemas/externalDatabaseAssociatedHotelsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    externalDatabaseAssociatedHotelsType:
-      type: array
-      description: Collection of Hotel for external database.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/externalDatabaseAssociatedHotelType'
-    hotelInterfaceControllerRegsType:
-      type: array
-      description: Collection of Hotel Interface Controller Registry.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/hotelInterfaceControllerRegType'
-    externalSystemCodeType:
-      type: object
-      description: External System Code
-      properties:
-        code:
-          type: string
-          minLength: 0
-          maxLength: 40
-    dMLCommandType:
+    classOfServiceConfigType:
       type: string
-      enum:
-      - Insert
-      - Update
-      - Delete
-      description: A data manipulation language command for deleting an existing record.
-    pspEndpointValue:
-      type: object
-      description: Generic endpoint configuration.
-      properties:
-        endpointId:
-          type: string
-          description: obfuscated id.
-        pspId:
-          type: string
-          description: PSP Id.
-        opera9TerminalWsNo:
-          type: string
-          description: OPERA 9 TERMINAL value.
-        pspEndpointParams:
-          type: array
-          description: Parameters for PSP endpoint configuration.
-          items:
-            $ref: '#/components/schemas/pspEndpointParamValue'
-    changeInterfaceRight:
-      type: object
-      description: Request object for updating a Hotel Interface Right. It will create the Hotel Interface Right if it does not exist on the database.
-      properties:
-        details:
-          $ref: '#/components/schemas/interfaceRightType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    instanceLink:
-      type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
-      properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
-          type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
-        title:
-          description: Exact copy of the "summary" field on the linked operation.
-          type: string
-    fetchedHotelInterfaceErrors:
-      type: object
-      description: Response object for retrieving Hotel Interface Errors.
-      properties:
-        hotelInterfaceErrors:
-          description: Collection of Hotel Interface Errors.
-          $ref: '#/components/schemas/hotelInterfaceErrorsType'
-        totalPages:
-          description: Evaluated total page count based on the requested max fetch count.
-          type: integer
-        offset:
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-          type: integer
-        limit:
-          description: Indicates maximum number of records a Web Service should return.
-          type: integer
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    translationsTextType:
-      type: array
-      description: Language code for the translation.
-      maxItems: 4000
-      items:
-        type: object
-        properties:
-          value:
-            type: string
-            description: Used for Character Strings, length 0 to 2000.
-            minLength: 0
-            maxLength: 2000
-          language:
-            description: Language identification.
-            type: string
-            minLength: 0
-            maxLength: 20
-        description: Language code for the translation.
-    changeInterfaceAccount:
-      type: object
-      description: Request object for updating an Interface Account of a Hotel Interface record.
-      properties:
-        account:
-          $ref: '#/components/schemas/interfaceAccountType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    uDFMappingType:
-      type: object
-      description: Generic self-contained request object that is used when updating and fetching UDFs.
-      properties:
-        uDFName:
-          description: Name of the user-defined function (UDF) field.
-          type: string
-          minLength: 0
-          maxLength: 40
-        uDFLabel:
-          description: Label the user-defined function (UDF) field shared with external system which will be send in the request message for mapping of actual UDF Name.
-          type: string
-          minLength: 0
-          maxLength: 200
-        active:
-          description: A flag to indicate whether the UDF mapping is active in the Interface system or not.
-          type: boolean
-        updateAllowed:
-          description: A flag to indicate whether the update is allowed in the Interface system or not.
-          type: boolean
-        type:
-          description: A reference to the type of object defined by the Type for Reservation and Profile Type.
-          type: string
-          minLength: 0
-          maxLength: 20
-    fetchedConfiguredExternalDevices:
-      type: object
-      properties:
-        configuredExternalDevices:
-          description: Collection of all active external devices.
-          $ref: '#/components/schemas/configuredExternalDevices'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    interfacePrimaryInfoType:
-      type: object
-      properties:
-        interfaceId:
-          description: Unique DB internal number of a Hotel Interface record.
-          $ref: '#/components/schemas/uniqueID_Type'
-        hotelId:
-          description: Hotel Code
-          type: string
-          minLength: 0
-          maxLength: 20
-        logo:
-          description: Hotel Interface Logo. On the database, this is also referred as DBF Logo. This is a three letter code followed by an underscore(_). This tells us which DBF files and log files with the prefix that IFC7 is going to create.
-          type: string
-          minLength: 0
-          maxLength: 20
-        interfaceName:
-          description: Name of the Hotel Interface
-          type: string
-          minLength: 0
-          maxLength: 40
-        interfaceType:
-          description: Three letter code for each interface that identifies the interface.
-          $ref: '#/components/schemas/hotelInterfaceTypeType'
-        productCode:
-          description: Three letter code that uniquely identifies the external interface.
-          type: string
-          minLength: 0
-          maxLength: 4
-        licenseCode:
-          description: Interface License code
-          type: string
-          minLength: 0
-          maxLength: 20
-        machineId:
-          description: The ID stored in IFC_MACHINES table.
-          type: integer
-        machineName:
-          description: Unique machine name of the running IFC.
-          type: string
-          minLength: 0
-          maxLength: 80
-        interfaceProductCode:
-          description: FKT Logo required for the external interface.
-          type: string
-          minLength: 0
-          maxLength: 40
-        outboundCode:
-          description: Stores the Outbound Code to identify the target system.
-          type: string
-          minLength: 0
-          maxLength: 20
-        externalSystem:
-          description: Stores the External System Code to identify the target system.
-          type: string
-          minLength: 0
-          maxLength: 40
-    confirmationDeliveryMethodType:
-      type: object
-      description: Confirmation letter delivery method configuration, settings for Text Message, Email and Fax Delivery of Confirmation Letters
-      properties:
-        email:
-          $ref: '#/components/schemas/emailDeliveryConfigurationType'
-        fax:
-          $ref: '#/components/schemas/faxDeliveryConfigurationType'
-        textMessage:
-          $ref: '#/components/schemas/textMessageDeliveryConfigurationType'
-    interfaceMachineType:
-      type: object
-      properties:
-        id:
-          description: Unique Id for every interface machine.
-          $ref: '#/components/schemas/uniqueID_Type'
-        machine:
-          description: Unique Machine name of the running Interface.
-          type: string
-          minLength: 0
-          maxLength: 80
-        program:
-          description: Path and name of the Interface program running on every Machine.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        controllerPort:
-          description: Opera Interface controller (server) port for the connecting clients.
-          type: integer
-        vncPort:
-          description: VNC server port for connecting to the VNC server.
-          type: integer
-    sftpConfigurationsListType:
-      type: array
-      description: Type that holds sftp configurations
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/sftpConfigurationType'
-    status:
-      type: object
-      description: Response Body.
-      properties:
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-        links:
-          $ref: '#/components/schemas/links'
-    messageWaitingType:
-      type: string
-      description: Message Waiting is set to available and freely switchable.
+      description: Class Of Service is set to available and freely switchable.
       enum:
       - NotAvailable
       - AlwaysOn
       - AlwaysOff
       - FreelySwitchable
-    fetchedHotelInterfaces:
-      type: object
-      description: Response object for retrieving Hotel Interfaces.
-      properties:
-        hotelInterfaces:
-          description: Collection of Hotel Interfaces.
-          $ref: '#/components/schemas/hotelInterfacesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    transactionCodeInfoType:
-      type: object
-      properties:
-        allChargesCode:
-          description: All charges code of transaction code setup
-          type: string
-          minLength: 0
-          maxLength: 10
-        miniBarCode:
-          description: Minibar charges code of transaction code setup
-          type: string
-          minLength: 0
-          maxLength: 10
-        cashCreditCardPosting:
-          description: Cash or credit card posting of transaction code setup
-          type: string
-          minLength: 0
-          maxLength: 1
-        subtotalPosting:
-          description: Subtotal posting of transaction code setup
-          type: string
-          minLength: 0
-          maxLength: 1
-        differencePosting:
-          description: Difference posting of transaction code setup
-          type: string
-          minLength: 0
-          maxLength: 1
-        calcTrxCodePosting:
-          description: Calculated transaction code posting of transaction code setup
-          type: string
-          minLength: 0
-          maxLength: 1
-        numberOfDialedDigits:
-          description: Number of dialed digits transaction code setup
-          type: string
-          minLength: 0
-          maxLength: 1
-        postingAccounts:
-          description: Postings information of transaction codes setup.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/postingAccountType'
-        itemizers:
-          description: Split information of transaction code setup.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/itemizerType'
-        transactionCodes:
-          description: Split information of transaction code setup.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/transactionCodeDetailType'
-    textMessageDeliveryConfigurationType:
-      type: object
-      description: Text message delivery configuration
-      properties:
-        userId:
-          description: Partner or User ID, Text field for Partner ID or User ID for the delivery provider, Name of the Text Messaging Provider.
-          type: string
-          minLength: 0
-          maxLength: 80
-        serverName:
-          description: Text field for Service type or email server address for the SMTP.
-          type: string
-          minLength: 0
-          maxLength: 80
-        account:
-          description: Text field for Service ID or email account for the SMTP as advised by Text Messaging Provider.
-          type: string
-          minLength: 0
-          maxLength: 80
-        password:
-          type: string
-          minLength: 0
-          maxLength: 80
-        timeOut:
-          description: Number field for Delivery time out in seconds for the message. Any message exceeding this limit will be timed out. Add word Seconds using small grey font next to the number box.
-          type: integer
-        url:
-          description: Text field for URL address or the Text Messaging Provider.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        uRLParameter:
-          description: Url parameter(format) is supported by Text Messaging Provider, it can be either an XML or TEXT format.
-          $ref: '#/components/schemas/urlFormatType'
-        format:
-          description: Text field for entering any special formatting for the delivery, or multi select LOV type, for example the one used for Address Format for selection of SID fields, to allow users choosing from a list of tags that may be used to customize this field.
-          type: string
-          minLength: 0
-          maxLength: 4000
-        message:
-          description: Text field for entering the Text Message for delivery.
-          type: string
-          minLength: 0
-          maxLength: 4000
-        type:
-          description: 'Type of Delivery Method HTTP/SMTP: HTTP for URL, SMTP for Email'
-          $ref: '#/components/schemas/textDeliveryMethodType'
-        hotelId:
-          description: Hotel code
-          type: string
-          minLength: 0
-          maxLength: 20
-    interfaceControlArticleType:
-      type: object
-      properties:
-        hotelId:
-          description: Hotel Code of the hotel interface.
-          type: string
-          minLength: 0
-          maxLength: 20
-        logo:
-          description: Logo of the hotel interface.
-          type: string
-          minLength: 0
-          maxLength: 20
-        internalCode:
-          description: Internal code of a translation article setup.
-          type: integer
-        selector:
-          description: Selector of a translation article setup.
-          type: string
-          minLength: 0
-          maxLength: 100
-        articleNo:
-          description: Article Number of a translation article setup.
-          type: string
-          minLength: 0
-          maxLength: 100
-        description:
-          description: Description of a translation article setup.
-          type: string
-          minLength: 0
-          maxLength: 100
-    interfaceCustomDataDetailsType:
-      type: array
-      description: Collection of custom data details of a hotel interface.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/interfaceCustomDataDetailType'
-    fetchedInterfaceRights:
-      type: array
-      description: Collection of Hotel Interface Rights.
-      items:
-        $ref: '#/components/schemas/interfaceRightType'
-    changedInterfaceRight:
-      type: object
-      description: Response Body.
-      properties:
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    generalDeliveryMethodType:
-      type: object
-      description: General delivery method SFTPConfigurationType configuration, settings for Email and Fax Delivery of General Letters
-      properties:
-        email:
-          $ref: '#/components/schemas/emailDeliveryConfigurationType'
-        fax:
-          $ref: '#/components/schemas/faxDeliveryConfigurationType'
-        sftpConfigurations:
-          $ref: '#/components/schemas/sftpConfigurationsListType'
     fetchedPublishers:
       type: object
       description: Response to request to fetch the external systems
@@ -5675,12 +4747,373 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    queueReservationDeliveryMethodType:
+    doNotDisturbType:
+      type: string
+      description: Do Not Disturb is set to available and freely switchable.
+      enum:
+      - NotAvailable
+      - AlwaysOn
+      - AlwaysOff
+      - FreelySwitchable
+    externalDeviceConfigurationType:
       type: object
-      description: Queue reservation delivery method configuration, settings for Text Message Delivery of Queue Reservation status
+      description: Type for the configurations available to the device.
       properties:
-        textMessage:
-          $ref: '#/components/schemas/textMessageDeliveryConfigurationType'
+        hotelId:
+          description: Property for which the device is configured.
+          type: string
+          minLength: 0
+          maxLength: 20
+        device:
+          description: External device.
+          $ref: '#/components/schemas/supportedExternalDeviceType'
+        deviceConfigurations:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/deviceConfigurationType'
+        codeMappings:
+          description: Type that contains the mappings of the codes used in the external device to the code used in OPERA.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/deviceMappingType'
+    fetchedExternalDatabaseAvailableProperties:
+      type: object
+      description: Response object for retrieving the Available properties for External Databases.
+      properties:
+        availailableProperties:
+          $ref: '#/components/schemas/externalDatabaseAssociatedHotelsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    telephoneChargeType:
+      type: string
+      enum:
+      - '0'
+      - '1'
+      - '2'
+      description: Auto Choose
+    emailDeliveryConfigurationType:
+      type: object
+      description: Email content configuration template
+      properties:
+        fromAddress:
+          type: string
+          minLength: 0
+          maxLength: 200
+        userId:
+          type: string
+          minLength: 0
+          maxLength: 80
+        userPassword:
+          type: string
+          minLength: 0
+          maxLength: 80
+        serverName:
+          type: string
+          minLength: 0
+          maxLength: 80
+        subject:
+          type: string
+          minLength: 0
+          maxLength: 2000
+        body:
+          type: string
+          minLength: 0
+          maxLength: 2000
+        format:
+          description: 'EMAIL Format: HTML, RTF, PDF. Fax Format: TIF'
+          $ref: '#/components/schemas/emailDeliveryFormatType'
+        type:
+          description: 'Deliver Type, possible values: AR, BILLING, CONFIRMATION, LEADS, OWS, OVOS.'
+          $ref: '#/components/schemas/emailDeliveryMethodType'
+        hotelId:
+          description: Hotel code
+          type: string
+          minLength: 0
+          maxLength: 20
+        activateDelivery:
+          description: This option must be selected in order to activate emailing from an SMTP compliant email server
+          type: boolean
+        hTMLFormatDelivery:
+          description: Available for Confirmation Letters only and when Activate Email Delivery is selected
+          type: boolean
+        attachICalender:
+          type: boolean
+        outboundCode:
+          description: Outbound Code
+          type: string
+          minLength: 0
+          maxLength: 20
+    createDeliveryMethods:
+      type: object
+      description: Request to create the delivery method for a property/HUB/Chain and its configurations.
+      properties:
+        deliveryMethods:
+          description: Collection of delivery method types to create.
+          $ref: '#/components/schemas/configuredExternalDeliveryMethodsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    sftpConfigurationsListType:
+      type: array
+      description: Type that holds sftp configurations
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/sftpConfigurationType'
+    hotelInterfaceSchemasType:
+      type: array
+      description: Collection of Hotel Interface Schemas.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/hotelInterfaceSchemaType'
+    changedDeliveryMethods:
+      type: object
+      description: Response Body.
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    dataLineType:
+      type: string
+      enum:
+      - In
+      - Out
+      description: Line Out
+    interfaceExportDataDetailType:
+      type: object
+      description: This gives information of export detail of a hotel interface.
+      properties:
+        sourceTableName:
+          description: Specifies the table where the event data is stored.
+          type: string
+          minLength: 0
+          maxLength: 50
+        columnName:
+          description: Specifies the column name found in the table.
+          type: string
+          minLength: 0
+          maxLength: 50
+        dataType:
+          description: Specifies the type of data in the column.
+          type: string
+          minLength: 0
+          maxLength: 20
+        dataLength:
+          description: Specifies the length of data in the column.
+          type: integer
+        xMLTagName:
+          description: Specifies the tag name found in the export.
+          type: string
+          minLength: 0
+          maxLength: 50
+        columnSelected:
+          description: Specifies whether the column is chosen to be included in the export.
+          type: boolean
+    managedByOptions:
+      description: Describes of the Configuration is Managed by Enterprise or Property.
+      type: string
+      enum:
+      - EnterpriseManaged
+      - PropertyManaged
+      - EnterpriseEnforced
+      - PropertyOverridden
+    emailDeliveryMethodType:
+      type: string
+      description: Email delivery method type
+      enum:
+      - Billing
+      - Confirmation
+      - General
+      - Other
+      - AR
+      - PayByLink
+    changePrinter:
+      type: object
+      description: Request object for updating a new Printer and Print Task
+      properties:
+        printerSetup:
+          $ref: '#/components/schemas/printerSetupType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    deviceType:
+      type: string
+      enum:
+      - Scanner
+      - CreditCard
+      - Fiscal
+      - Device
+    hotelInterfaceControllerRegType:
+      type: object
+      properties:
+        id:
+          description: Internal ID to reference the records.
+          type: number
+        machine:
+          description: Machine Name
+          type: string
+          minLength: 0
+          maxLength: 80
+        cntrlRegSetting:
+          description: Controller Registry Setting
+          type: string
+          minLength: 0
+          maxLength: 20
+        data:
+          description: Data
+          type: string
+          minLength: 0
+          maxLength: 400
+        description:
+          description: Description
+          type: string
+          minLength: 0
+          maxLength: 4000
+    fetchedDeliveryMethods:
+      type: object
+      description: Response to request to fetch the delivery method for a property/HUB/Chain and its configurations.
+      properties:
+        deliveryMethods:
+          description: Collection of all delivery method types.
+          $ref: '#/components/schemas/configuredExternalDeliveryMethodsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    interfaceRoomStatusType:
+      type: object
+      properties:
+        hotelId:
+          description: Hotel Code
+          type: string
+          minLength: 0
+          maxLength: 20
+        logo:
+          description: Hotel Interface Logo. On the database, this is also referred as DBF Logo. This is a three letter code followed by an underscore(_). This tells us which DBF files and log files with the prefix that IFC7 is going to create.
+          type: string
+          minLength: 0
+          maxLength: 20
+        entryCode:
+          description: Entry code of a Hotel Interface Room Status.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        status:
+          description: Room Status which is either Vacant (V) or Occupied (O).
+          type: string
+          minLength: 0
+          maxLength: 20
+        housekeepingStatus:
+          description: Housekeeping status of a room.
+          type: string
+          minLength: 0
+          maxLength: 20
+        customRoomTranslation:
+          description: Custom Room Translation of a Hotel Interface. It is a concatenation of a Status (V-Vacant or O-Occupied) and Housekeeping Status (IS-Inspected, CL-Clean, etc.) The delimiter is a period. Sample values are V.IS, V.CL, O.IS, O.CL.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        description:
+          description: Description of the Hotel Interface Room Status.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        interfaceRoomStatusId:
+          description: Row number to identify all the records belonging to a single group of Hotel Interface Room Status.
+          type: integer
+    sVTransactionType:
+      type: string
+      description: Status of the Hotel Interface either STOPPED or RUNNING.
+      enum:
+      - OperaTransaction
+      - VendorTransaction
+      - OperaAndVendorTransaction
+    changedInterfaceUnitCharges:
+      type: object
+      description: Response Body.
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    hotelInterfaceErrorsType:
+      type: array
+      description: Collection of Hotel Interface Errors.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/hotelInterfaceErrorType'
+    changeInterfaceMachine:
+      type: object
+      description: Request object for updating a Hotel Interface Machine. If it does not exist, then creates the Hotel Interface Machine.
+      properties:
+        details:
+          $ref: '#/components/schemas/interfaceMachineType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    fetchedInterfaceRoomStatuses:
+      type: array
+      description: Collection of Hotel Interface Room Statuses.
+      items:
+        $ref: '#/components/schemas/interfaceRoomStatusType'
+    configuredExternalDeliveryMethodsType:
+      type: object
+      description: External system configuration delivery methods for a property(chain or hub).
+      properties:
+        general:
+          $ref: '#/components/schemas/generalDeliveryMethodType'
+        queueReservation:
+          $ref: '#/components/schemas/queueReservationDeliveryMethodType'
+        confirmation:
+          $ref: '#/components/schemas/confirmationDeliveryMethodType'
+        guestMessage:
+          $ref: '#/components/schemas/guestMessageDeliveryMethodType'
+        billingFolio:
+          $ref: '#/components/schemas/billingFolioDeliveryMethodType'
+        queueRush:
+          $ref: '#/components/schemas/queueRushDeliveryMethodType'
+        ar:
+          $ref: '#/components/schemas/arDeliveryMethodType'
+        otherFolios:
+          $ref: '#/components/schemas/otherFolioDeliveryMethodType'
+        payByLink:
+          $ref: '#/components/schemas/payByLinkDeliveryMethodType'
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
     fetchedInterfaceUnitCharges:
       type: object
       description: Response object for retrieving the Interface Unit Charges.
@@ -5691,6 +5124,70 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
+    hotelInterfacesType:
+      type: array
+      description: Collection of Hotel Interfaces.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/hotelInterfaceType'
+    warningType:
+      type: object
+      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
+          type: string
+          maxLength: 2000
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+          type: string
+          minLength: 0
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+          maxLength: 2000
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+          maxLength: 2000
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+          maxLength: 2000
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+          maxLength: 2000
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        rph:
+          description: Reference Place Holder used as an index for this warning.
+          type: string
+          minLength: 1
+          maxLength: 8
+    interfaceExportDataDetailsType:
+      type: array
+      description: Collection of export data details of a hotel interface.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/interfaceExportDataDetailType'
+    externalDatabaseAssociatedHotelsType:
+      type: array
+      description: Collection of Hotel for external database.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/externalDatabaseAssociatedHotelType'
     generalInfoType:
       type: object
       properties:
@@ -5845,6 +5342,1325 @@ components:
         allPrintDetailOn:
           description: Indicator for Default All Print Details On.
           type: boolean
+    interfaceCommunicationInfoType:
+      type: object
+      properties:
+        tCPConfig:
+          $ref: '#/components/schemas/tCPConfigType'
+    fetchedHotelInterfaceErrors:
+      type: object
+      description: Response object for retrieving Hotel Interface Errors.
+      properties:
+        hotelInterfaceErrors:
+          description: Collection of Hotel Interface Errors.
+          $ref: '#/components/schemas/hotelInterfaceErrorsType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    classOfServiceType:
+      type: object
+      properties:
+        cosMsgLmpRg:
+          description: ''
+          type: string
+          minLength: 0
+          maxLength: 1
+        cosChkRg:
+          description: ''
+          type: string
+          minLength: 0
+          maxLength: 1
+        cosMsgCmdRg:
+          description: ''
+          type: string
+          minLength: 0
+          maxLength: 1
+        roomEquipCi:
+          description: ''
+          type: boolean
+        roomEquipCo:
+          description: ''
+          type: boolean
+        guestDataChangeCo:
+          description: ''
+          type: boolean
+        standardNameFormat:
+          description: Standard name format in the class of service.
+          type: string
+          minLength: 0
+          maxLength: 5
+        definedNameFormat:
+          description: Defined name format in the class of service.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/definedNameFormatType'
+        resvInQueue:
+          description: Indicates whethe a message will be triggered when a room/reservation is placed on QUEUE
+          type: boolean
+    directInwardDialType:
+      type: string
+      description: Direct Inward Dial is set to available and freely switchable.
+      enum:
+      - NotAvailable
+      - AlwaysOn
+      - AlwaysOff
+      - FreelySwitchable
+    messageWaitingType:
+      type: string
+      description: Message Waiting is set to available and freely switchable.
+      enum:
+      - NotAvailable
+      - AlwaysOn
+      - AlwaysOff
+      - FreelySwitchable
+    hotelInterfaceStatusType:
+      type: string
+      description: Status of the Hotel Interface either STOPPED or RUNNING.
+      enum:
+      - Stopped
+      - Running
+      - Waiting
+      - StopInitiated
+      - StartInitiated
+      - RebootInitiated
+      - Other
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
+    hotelInterfaceSchemaType:
+      type: object
+      properties:
+        hotelId:
+          description: Hotel Code
+          type: string
+          minLength: 0
+          maxLength: 20
+        logo:
+          description: Hotel Interface Logo. On the database, this is also referred as DBF Logo. This is a three letter code followed by an underscore(_). This tells us which DBF files and log files with the prefix that IFC7 is going to create.
+          type: string
+          minLength: 0
+          maxLength: 20
+        actionName:
+          description: Action Name
+          type: string
+          minLength: 0
+          maxLength: 40
+        schemaName:
+          description: Schema Name
+          type: string
+          minLength: 0
+          maxLength: 40
+        schema:
+          description: Schema
+          type: string
+          minLength: 0
+          maxLength: 4000
+        insertDate:
+          description: Date time stamp of a Hotel Interface Schema. Uses database time zone.
+          type: string
+          format: date-time
+        ifcType:
+          description: ifcType
+          type: string
+          minLength: 0
+          maxLength: 4000
+    interfaceAdditionalInfoType:
+      type: object
+      properties:
+        menuType:
+          description: Internal representation for Interface Type
+          $ref: '#/components/schemas/ifcMenuTypeType'
+        menuName:
+          description: Name of the Interface sub-menu
+          type: string
+          minLength: 0
+          maxLength: 20
+        controllerPort:
+          description: Opera IFC controller (server) port for the connecting clients.
+          type: integer
+        vncPort:
+          description: VNC server port for connecting to a VNC server.
+          type: integer
+        cashierId:
+          description: Cashier Number.
+          type: integer
+        pathId1:
+          description: Used if interface has to support more than one front office system.
+          type: integer
+        timeout:
+          description: Used by the Interface module. ( IFC7.exe )
+          type: string
+          minLength: 0
+          maxLength: 3
+        displayFlag:
+          description: True if the interface will be displayed.
+          type: boolean
+        autoStartFlag:
+          description: Decides if the interface will be started automatically when the controller is restarted.
+          type: boolean
+        activeFlag:
+          description: Indicator if the Hotel Interface is active or not. This is different from the Interface Status, which is either STOPPED or RUNNING.
+          type: boolean
+        interfaceStatus:
+          description: Status if the Hotel Interface is STOPPED or RUNNING. This is different from the Active Flag, which is either 1 or 0.
+          $ref: '#/components/schemas/hotelInterfaceStatusType'
+        version:
+          description: Version no. of each external interface that is installed
+          type: string
+          minLength: 0
+          maxLength: 10
+        msgExpiresAfter:
+          description: (Internal Use) Message Expires After
+          type: string
+          minLength: 0
+          maxLength: 8
+        useDataThroughFlag:
+          type: boolean
+        nAStart:
+          description: Indicator if the Hotel Interface handles night audit commands.
+          type: boolean
+        multipleRoomKey:
+          description: Indicator if the Hotel Interface allows multiple room selection for keys.
+          type: boolean
+        onlineKeySystem:
+          description: Indicator if the Hotel Interface is an online key system.
+          type: boolean
+        deleteIfcKeysOnKeyDelete:
+          description: Indicator if the Interface Keys will be deleted on KeyDelete.
+          type: boolean
+        sendTrack1Data:
+          description: Indicator for Hotel Interface Send Track 1 Data.
+          type: boolean
+        sendTrack2Data:
+          description: Indicator for Hotel Interface Send Track 2 Data.
+          type: boolean
+        sendRoomStatus:
+          description: Indicator if the Room Status will be sent.
+          type: boolean
+        telephoneCharge:
+          description: Indicates on what the post unit charge is based on.
+          $ref: '#/components/schemas/telephoneChargeType'
+        additionalRoomsLimit:
+          description: Maximum number of additional rooms allowed.
+          type: integer
+          minimum: 1
+          maximum: 999
+        sendValidStartDateTime:
+          description: Indicator if the DLS Interface allows to send valid start date and time.
+          type: boolean
+        sequence:
+          description: Display Order sequence for Interfaces
+          type: number
+    changeInterfaceAccount:
+      type: object
+      description: Request object for updating an Interface Account of a Hotel Interface record.
+      properties:
+        account:
+          $ref: '#/components/schemas/interfaceAccountType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    postingInfoType:
+      type: object
+      properties:
+        referenceField:
+          description: Reference field of postings setup.
+          type: string
+          minLength: 0
+          maxLength: 1
+        chargeScaling:
+          description: Charge scaling of postings setup.
+          type: string
+          minLength: 0
+          maxLength: 1
+        zeroChargePostings:
+          description: Zero charge posting of postings setup.
+          type: string
+          minLength: 0
+          maxLength: 1
+        postings:
+          description: Postings of postings setup.
+          type: string
+          minLength: 0
+          maxLength: 1
+        postType:
+          description: Post type of postings setup.
+          type: string
+          minLength: 0
+          maxLength: 1
+        conversion:
+          description: Conversion of postings setup.
+          type: integer
+        reference:
+          description: Reference of postings setup.
+          type: string
+          minLength: 0
+          maxLength: 50
+        supplement:
+          description: Supplement of postings setup.
+          type: string
+          minLength: 0
+          maxLength: 50
+        overrideCreditLimit:
+          description: Override credit limit of postings setup.
+          type: boolean
+        noPostFlag:
+          description: No post flag of postings setup.
+          type: boolean
+        generatesTax:
+          description: IFC generate tax of postings setup.
+          type: boolean
+        dialedNumberMasking:
+          description: Type of number masking used for the dialed numbers in the particular interface.
+          $ref: '#/components/schemas/maskDialNumberType'
+        articleNoPrefix:
+          description: Article Prefix of postings setup.
+          type: boolean
+    fetchedExternalDeviceConfigurations:
+      type: object
+      properties:
+        externalDeviceConfigurations:
+          description: Collection of configurations for the external device.
+          $ref: '#/components/schemas/externalDeviceConfigurationType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    opiInfoType:
+      type: object
+      properties:
+        tokenEndpoint:
+          description: Token endpoint
+          $ref: '#/components/schemas/pspEndpointValue'
+        ccEndpoint:
+          description: CreditCard endpoint
+          $ref: '#/components/schemas/pspEndpointValue'
+        pblEndpoint:
+          description: PayByLink endpoint
+          $ref: '#/components/schemas/pspEndpointValue'
+    interfaceControlSpecType:
+      type: object
+      properties:
+        hotelId:
+          description: Hotel Code of the hotel interface.
+          type: string
+          minLength: 0
+          maxLength: 20
+        logo:
+          description: Logo of the hotel interface.
+          type: string
+          minLength: 0
+          maxLength: 20
+        internalCode:
+          description: Internal code of a translation specification setup.
+          type: integer
+        selector:
+          description: Selector of a translation specification setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+        specification:
+          description: Specification of a translation specification setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+        priority:
+          description: Priority of a translation specification setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+        position:
+          description: Position of a translation specification setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+    interfaceRoomType:
+      type: object
+      properties:
+        hotelId:
+          description: Hotel Code of the Interface Room.
+          type: string
+          minLength: 0
+          maxLength: 20
+        logo:
+          description: Hotel Interface Logo. On the database, this is also referred as DBF Logo. This is a three letter code followed by an underscore(_). This tells us which DBF files and log files with the prefix that IFC7 is going to create.
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomType:
+          description: Front Office Room Type.
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomId:
+          description: Front Office Room Number.
+          type: string
+          minLength: 0
+          maxLength: 20
+        lineNumber:
+          description: External System's extension number.
+          type: string
+          minLength: 0
+          maxLength: 20
+        oldLineNumber:
+          description: External System's extension number. It is used for editing a record. It is logically part of the record ID, and can actually be updated.
+          type: string
+          minLength: 0
+          maxLength: 20
+        fromRoom:
+          description: From Room Number
+          type: string
+          minLength: 1
+          maxLength: 20
+        toRoom:
+          description: To Room Number
+          type: string
+          minLength: 1
+          maxLength: 20
+        fromLine:
+          description: From Line Number
+          type: string
+          minLength: 1
+          maxLength: 20
+        toLine:
+          description: To Line Number
+          type: string
+          minLength: 1
+          maxLength: 20
+        type:
+          description: Line Type of an Interface Room.
+          type: string
+          minLength: 0
+          maxLength: 20
+        dataLine:
+          description: I/O Lines type, which is either IN or OUT.
+          $ref: '#/components/schemas/dataLineType'
+        dataLineId:
+          description: Translation Table Id as defined in the IFC_CTRL table. It is also referred as Xlat Id.
+          type: string
+          minLength: 0
+          maxLength: 100
+        wakeUpCall:
+          description: Value to set/check if the wake up call functionality is enabled/disabled for the particular line number.
+          type: boolean
+        doNotDisturb:
+          description: Value to set/check if the Do Not Disturb functionality is enabled/disabled/NA for the particular line number.
+          $ref: '#/components/schemas/doNotDisturbType'
+        classOfService:
+          description: Value to set/check if the Class of Service functionality is enabled/disabled/NA for the particular line number.
+          $ref: '#/components/schemas/classOfServiceConfigType'
+        directInwardDial:
+          description: Value to set/check if the Direct Inward Dial functionality is enabled/disabled/NA for the particular line number.
+          $ref: '#/components/schemas/directInwardDialType'
+        messageWaiting:
+          description: Value to set/check if the Message Waiting functionality is enabled/disabled/NA for the particular line number.
+          $ref: '#/components/schemas/messageWaitingType'
+        maskDialNumber:
+          description: Value to set/check the type number masking used for the particular line number.
+          $ref: '#/components/schemas/maskDialNumberType'
+    supportedExternalDevicesType:
+      type: array
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/supportedExternalDeviceType'
+    fetchedUDFMappings:
+      type: object
+      description: Message received on an UDFs Lookup.
+      properties:
+        uDFMappings:
+          description: Criteria for fetching UDFs.
+          type: array
+          items:
+            $ref: '#/components/schemas/uDFMappingType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    hotelInterfaceType:
+      type: object
+      properties:
+        interfaceId:
+          description: Unique DB internal number of a Hotel Interface record.
+          $ref: '#/components/schemas/uniqueID_Type'
+        hotelId:
+          description: Hotel Code
+          type: string
+          minLength: 0
+          maxLength: 20
+        interfaceName:
+          description: Name of the Hotel Interface
+          type: string
+          minLength: 0
+          maxLength: 40
+        interfaceType:
+          description: Three letter code for each interface that identifies the interface.
+          $ref: '#/components/schemas/hotelInterfaceTypeType'
+        logo:
+          description: Hotel Interface Logo. On the database, this is also referred as DBF Logo. This is a three letter code followed by an underscore(_). This tells us which DBF files and log files with the prefix that IFC7 is going to create.
+          type: string
+          minLength: 0
+          maxLength: 20
+        machineName:
+          description: Unique machine name of the running IFC.
+          type: string
+          minLength: 0
+          maxLength: 80
+        status:
+          description: The current status of the IFC.
+          $ref: '#/components/schemas/hotelInterfaceStatusType'
+        activeFlag:
+          description: Indicator if the Hotel Interface is active or not. This is different from the Interface Status, which is either STOPPED or RUNNING.
+          type: boolean
+        outboundCode:
+          description: Stores the Outbound Code to identify the target system.
+          type: string
+          minLength: 0
+          maxLength: 20
+        externalSystem:
+          description: Stores the external system to identify the target system.
+          type: string
+          minLength: 0
+          maxLength: 40
+    fetchedHotelInterfaceControllerRegistry:
+      type: object
+      description: Response object for retrieving Hotel Interface Controller Registry.
+      properties:
+        reg:
+          description: Collection of Hotel Interface Controller Registry.
+          $ref: '#/components/schemas/hotelInterfaceControllerRegsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    externalDatabaseAssociatedHotelType:
+      type: object
+      properties:
+        hotelId:
+          description: Pertain associated hotel code for external database.
+          type: string
+          minLength: 0
+          maxLength: 20
+        hotelName:
+          description: Pertain associated hotel code for external database.
+          type: string
+          minLength: 0
+          maxLength: 80
+    textDeliveryMethodType:
+      type: string
+      description: Text delivery method type
+      enum:
+      - Url
+      - Email
+    roomMaskSetupType:
+      type: object
+      properties:
+        wakeUpCall:
+          description: Value to set/check if the wake up call functionality is enabled/disabled for the particular line number.
+          type: boolean
+        doNotDisturb:
+          description: Value to set/check if the Do Not Disturb functionality is enabled/disabled/NA for the particular line number.
+          $ref: '#/components/schemas/doNotDisturbType'
+        classOfService:
+          description: Value to set/check if the Class of Service functionality is enabled/disabled/NA for the particular line number.
+          $ref: '#/components/schemas/classOfServiceConfigType'
+        directInwardDial:
+          description: Value to set/check if the Direct Inward Dial functionality is enabled/disabled/NA for the particular line number.
+          $ref: '#/components/schemas/directInwardDialType'
+        messageWaiting:
+          description: Value to set/check if the Message Waiting functionality is enabled/disabled/NA for the particular line number.
+          $ref: '#/components/schemas/messageWaitingType'
+        maskDialNumber:
+          description: Value to set/check the type number masking used for the particular line number.
+          $ref: '#/components/schemas/maskDialNumberType'
+    deviceCode:
+      type: string
+      enum:
+      - TtiScannerMobile
+      - TtiScannerDesktop
+      - SamsotechScanner
+      - GenScannerDesktop
+      - GenScannerMobile
+      - ChipAndPin
+      - FiscalTerminal
+      - Device
+    changeUDFMapping:
+      type: object
+      description: Self-contained Request object that is used when Updating UDFMapping.
+      properties:
+        uDFMapping:
+          $ref: '#/components/schemas/uDFMappingType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    configuredExternalDevices:
+      type: object
+      description: Collection of hotels and the external devices that were configured for the hotel.
+      properties:
+        deviceType:
+          $ref: '#/components/schemas/deviceType'
+        supportedExternalDevices:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/hotelExternalDevicesType'
+    fetchedInterfaceMachines:
+      type: array
+      description: Collection of Hotel Interface Machines.
+      items:
+        $ref: '#/components/schemas/interfaceMachineType'
+    interfaceWorkstationType:
+      type: object
+      properties:
+        hotelId:
+          description: Hotel Code of a workstation.
+          type: string
+          minLength: 0
+          maxLength: 20
+        logo:
+          description: Logo of a workstation.
+          type: string
+          minLength: 0
+          maxLength: 20
+        internalCode:
+          description: Internal code of a workstation.
+          type: integer
+        workstation:
+          description: Workstation of a hotel interface.
+          type: string
+          minLength: 0
+          maxLength: 200
+        deviceIp:
+          description: IP of a workstation.
+          type: string
+          minLength: 0
+          maxLength: 200
+        orderSequence:
+          description: Display Order sequence.
+          type: number
+        location:
+          description: Location of a workstation.
+          type: string
+          minLength: 0
+          maxLength: 200
+        type:
+          description: Type of a workstation.
+          type: string
+          minLength: 0
+          maxLength: 2
+        deviceLocation:
+          description: Device Group / Area.
+          type: string
+          minLength: 0
+          maxLength: 40
+    createInterfaceRoom:
+      type: object
+      description: Request object for creating an Interface Room of a Hotel Interface record.
+      properties:
+        room:
+          $ref: '#/components/schemas/interfaceRoomType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    fetchedHotelInterfaces:
+      type: object
+      description: Response object for retrieving Hotel Interfaces.
+      properties:
+        hotelInterfaces:
+          description: Collection of Hotel Interfaces.
+          $ref: '#/components/schemas/hotelInterfacesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    publishersType:
+      type: array
+      description: Information of all the publishers for a given subscriber.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/externalSystemType'
+    importRoomsType:
+      type: object
+      properties:
+        requiresLineNumberSetup:
+          description: Indicator for Requires line number setup, from Import Rooms related information of a Hotel Interface.
+          type: boolean
+        virtualNumberSetup:
+          description: Indicator for Virtual number setup, from Import Rooms related information of a Hotel Interface.
+          type: boolean
+        ioLines:
+          description: Indicator for support of Input/Output Lines for Hotel Room Categories.
+          type: boolean
+        inXlatId:
+          description: Translation table for incoming messages.
+          type: string
+          minLength: 0
+          maxLength: 100
+        ouXlatId:
+          description: Translation table for outgoing messages.
+          type: string
+          minLength: 0
+          maxLength: 100
+        selectedRoomTypes:
+          description: Concatenated label of Hotel Room Categories for which SendToInterface flag should be set as true.
+          type: string
+          minLength: 0
+          maxLength: 4000
+    interfaceControlLangType:
+      type: object
+      properties:
+        hotelId:
+          description: Hotel Code of the hotel interface.
+          type: string
+          minLength: 0
+          maxLength: 20
+        logo:
+          description: Logo of the hotel interface.
+          type: string
+          minLength: 0
+          maxLength: 20
+        internalCode:
+          description: Internal code of a translation language setup.
+          type: integer
+        selector:
+          description: Selector of a translation language setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+        languageCode:
+          description: Language code of a translation language setup.
+          type: string
+          minLength: 0
+          maxLength: 100
+    interfaceRightType:
+      type: object
+      properties:
+        hotelId:
+          description: Hotel Code to which the Interface Right belongs to.
+          type: string
+          minLength: 0
+          maxLength: 20
+        interfaceId:
+          description: Unique DB internal number of a Hotel Interface record.
+          $ref: '#/components/schemas/uniqueID_Type'
+        right:
+          description: Internal code for each allowed right of a Hotel Interface record.
+          type: integer
+        code:
+          description: User defined code for an Interface Right.
+          type: string
+          minLength: 0
+          maxLength: 5
+        description:
+          description: User defined description for an Interface Right.
+          type: string
+          minLength: 0
+          maxLength: 80
+        interfaceRightDescription:
+          description: System Description of an allowed Interface Right.
+          type: string
+          minLength: 0
+          maxLength: 80
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    hotelExternalDevicesType:
+      type: object
+      description: Type for the external device supported by the hotel.
+      properties:
+        hotelId:
+          description: Property for which the device is configured.
+          type: string
+          minLength: 0
+          maxLength: 20
+        supportedDevices:
+          $ref: '#/components/schemas/supportedExternalDevicesType'
+    deviceMappingType:
+      type: object
+      description: Type that contains the codes used in/provided by the external device and their counterpart in OPERA.
+      properties:
+        codeType:
+          description: Internal code type of the mapping entry.
+          type: string
+          minLength: 0
+          maxLength: 800
+        externalCode:
+          description: Code used/provided by the external device or application.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        displayName:
+          description: Display name of the code mapping.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        operaCode:
+          description: Corresponding code value in OPERA.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    changeInterfaceRoom:
+      type: object
+      description: Request object for updating an Interface Room of a Hotel Interface record.
+      properties:
+        room:
+          $ref: '#/components/schemas/interfaceRoomType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    operaVersion:
+      type: object
+      description: Response for Ping operation.
+      properties:
+        operaVersion:
+          description: Opera version number.
+          $ref: '#/components/schemas/operaVersionNumberType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    guestMessageDeliveryMethodType:
+      type: object
+      description: Guest text message configuration, settings for Text Message Delivery of Guest Messages
+      properties:
+        textMessage:
+          $ref: '#/components/schemas/textMessageDeliveryConfigurationType'
+    workstationSetupType:
+      type: array
+      description: List of workstations of a hotel interface.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/interfaceWorkstationType'
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    interfaceUnitChargeType:
+      type: object
+      properties:
+        trunkId:
+          description: Trunk ID of the CAS or PBX.
+          type: string
+          minLength: 0
+          maxLength: 10
+        lineType:
+          description: Line Types setup in IFC_ROOM table.
+          type: string
+          minLength: 0
+          maxLength: 10
+        vipCode:
+          description: Guest VIP Code.
+          type: string
+          minLength: 0
+          maxLength: 40
+        startUnit:
+          description: Starting number of units for the unit range.
+          type: integer
+        endUnit:
+          description: Ending number of units for the unit range.
+          type: integer
+        pricePerUnit:
+          description: Amount charged per unit.
+          type: integer
+    fetchedInterfaceRooms:
+      type: array
+      description: Collection of Hotel Interface Rooms.
+      items:
+        $ref: '#/components/schemas/interfaceRoomType'
+    fetchedInterfaceRights:
+      type: array
+      description: Collection of Hotel Interface Rights.
+      items:
+        $ref: '#/components/schemas/interfaceRightType'
+    hotelInterfaceDetailType:
+      type: object
+      properties:
+        primaryInfo:
+          description: Primary information of a Hotel Interface.
+          $ref: '#/components/schemas/interfacePrimaryInfoType'
+        additionalInfo:
+          description: Additional information of a Hotel Interface.
+          $ref: '#/components/schemas/interfaceAdditionalInfoType'
+        generalInfo:
+          description: General information of a Hotel Interface.
+          $ref: '#/components/schemas/generalInfoType'
+        communicationInfo:
+          description: Communication related information of a Hotel Interface.
+          $ref: '#/components/schemas/interfaceCommunicationInfoType'
+        translationInfo:
+          description: Communication related information of a Hotel Interface.
+          $ref: '#/components/schemas/translationType'
+        classOfServiceInfo:
+          description: Information related to Class of Service of a Hotel Interface.
+          $ref: '#/components/schemas/classOfServiceType'
+        importRoomsInfo:
+          description: Information related to Import Rooms of a Hotel Interface.
+          $ref: '#/components/schemas/importRoomsType'
+        workstationSetupInfo:
+          description: Workstation setup of a hotel interface.
+          $ref: '#/components/schemas/workstationSetupType'
+        postingsInfo:
+          description: Postings of a hotel interface.
+          $ref: '#/components/schemas/postingInfoType'
+        customDataInfo:
+          description: Information related to Custom Data of a Hotel Interface.
+          $ref: '#/components/schemas/interfaceCustomDataInfoType'
+        exportDataInfo:
+          description: Information related to Export Data of a Hotel Interface.
+          $ref: '#/components/schemas/interfaceExportDataInfoType'
+        transactionsInfo:
+          description: Postings of a hotel interface.
+          $ref: '#/components/schemas/transactionCodeInfoType'
+        opiOnboardingInfo:
+          description: Information required to onboard OPI
+          $ref: '#/components/schemas/opiInfoType'
+    importInterfaceRooms:
+      type: object
+      description: Request object for importing the Interface Rooms for a Hotel Interface record.
+      properties:
+        details:
+          $ref: '#/components/schemas/importInterfaceRoomsType'
+        dMLCommand:
+          $ref: '#/components/schemas/dMLCommandType'
+        targetedImport:
+          $ref: '#/components/schemas/interfaceRoomType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    changedInterfaceRight:
+      type: object
+      description: Response Body.
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    fetchedHotelInterfaceFailedMessages:
+      type: object
+      description: Response object for retrieving Hotel Interface Failed Messages.
+      properties:
+        messages:
+          description: Collection of Hotel Interface Failed Messages.
+          $ref: '#/components/schemas/hotelInterfaceFailedMessagesType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    fetchedHotelInterfaceDetails:
+      type: object
+      description: Response object for retrieving the details of a Hotel Interface.
+      properties:
+        details:
+          $ref: '#/components/schemas/hotelInterfaceDetailType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    importInterfaceRoomsType:
+      type: object
+      properties:
+        hotelId:
+          description: Hotel Code to which the Interface Room belongs to.
+          type: string
+          minLength: 0
+          maxLength: 20
+        logo:
+          description: Hotel Interface Logo. On the database, this is also referred as DBF Logo. This is a three letter code followed by an underscore(_). This tells us which DBF files and log files with the prefix that IFC7 is going to create.
+          type: string
+          minLength: 0
+          maxLength: 20
+        dataLine:
+          description: I/O Lines type, which is either IN or OUT.
+          $ref: '#/components/schemas/dataLineType'
+        numberOfLines:
+          description: Number of lines to use for the import of a Hotel Interface Room.
+          type: integer
+        removeLeadingZeros:
+          description: Number of lines to use for the import of a Hotel Interface Room.
+          type: boolean
+        line1Prefix:
+          description: Prefix for the Hotel Interface Room number for Line 1.
+          type: integer
+        line1AddTo:
+          description: Numeric value to be summed with the Hotel Interface Room number for Line 1.
+          type: integer
+        line2Prefix:
+          description: Prefix for the Hotel Interface Room number for Line 2.
+          type: integer
+        line2AddTo:
+          description: Numeric value to be summed with the Hotel Interface Room number for Line 2.
+          type: integer
+        line3Prefix:
+          description: Prefix for the Hotel Interface Room number for Line 3.
+          type: integer
+        line3AddTo:
+          description: Numeric value to be summed with the Hotel Interface Room number for Line 3.
+          type: integer
+        line4Prefix:
+          description: Prefix for the Hotel Interface Room number for Line 4.
+          type: integer
+        line4AddTo:
+          description: Numeric value to be summed with the Hotel Interface Room number for Line 4.
+          type: integer
+        selectedRoomTypes:
+          description: Concatenated label of Hotel Room Categories, which will be imported to the Hotel Interface.
+          type: string
+          minLength: 0
+          maxLength: 4000
+        maskLines:
+          description: Mask configurations for different line types.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/roomMaskSetupType'
+    hotelInterfaceErrorType:
+      type: object
+      properties:
+        hotelId:
+          description: Hotel Code
+          type: string
+          minLength: 0
+          maxLength: 20
+        logo:
+          description: Hotel Interface Logo. On the database, this is also referred as DBF Logo. This is a three letter code followed by an underscore(_). This tells us which DBF files and log files with the prefix that IFC7 is going to create.
+          type: string
+          minLength: 0
+          maxLength: 20
+        actionName:
+          description: Action Name
+          type: string
+          minLength: 0
+          maxLength: 40
+        message:
+          description: Message
+          type: string
+          minLength: 0
+          maxLength: 4000
+        error:
+          description: Error
+          type: string
+          minLength: 0
+          maxLength: 2000
+        resvNameId:
+          description: Schema
+          type: string
+          minLength: 0
+          maxLength: 40
+        insertDate:
+          description: Date time stamp of a Hotel Interface Schema. Uses database time zone.
+          type: string
+          format: date-time
+        ifcType:
+          description: ifcType
+          type: string
+          minLength: 0
+          maxLength: 4000
+    deviceConfigurationType:
+      type: object
+      description: Type that contains the parameters and configurations used by the device.
+      properties:
+        name:
+          description: Internal name of the configuration.
+          type: string
+          minLength: 0
+          maxLength: 80
+        displayName:
+          description: Configuration display name.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        value:
+          description: Value of the configuration.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        required:
+          description: Flag that indicates whether the configuration is required or not.
+          type: boolean
+        encrypted:
+          description: Flag that indicates whether the configuration value should be encrypted or not.
+          type: boolean
+    supportedExternalDeviceType:
+      type: object
+      properties:
+        deviceType:
+          description: Internal device type used to identify in which group the external device belongs to.
+          $ref: '#/components/schemas/deviceType'
+        deviceCode:
+          description: Internal device code used to identify the external device.
+          $ref: '#/components/schemas/deviceCode'
+        deviceArea:
+          description: The area where the device is installed
+          type: string
+          minLength: 0
+          maxLength: 40
+        displayName:
+          description: External device display name.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        mobileYN:
+          description: Indicator if device type is mobile or desktop.
+          type: boolean
+        desktopYN:
+          description: Indicator if device type is mobile or desktop.
+          type: boolean
+        registerAddress:
+          description: The address which the Cash Register ID ( Device ID ) is associated with.
+          type: string
+          minLength: 0
+          maxLength: 200
+        deviceValue:
+          description: External device Value.
+          type: string
+          minLength: 0
+          maxLength: 40
+        fiscalPartnerCode:
+          description: Fiscal Partner associated with the terminal.
+          $ref: '#/components/schemas/fiscalPartnerCodeType'
+        primary:
+          description: Flag to designate the primary Fiscal Terminal.
+          type: boolean
+        active:
+          description: Flag that indicates whether the device is active.
+          type: boolean
+        id:
+          type: string
+          minLength: 0
+          maxLength: 100
+        label:
+          type: string
+          minLength: 0
+          maxLength: 100
+        translatableLabel:
+          description: Translatable Label for the external devices.
+          $ref: '#/components/schemas/translationTextType2000'
+        iDEditable:
+          type: boolean
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+      description: External device details.
+    billingFolioDeliveryMethodType:
+      type: object
+      description: Billing folio delivery method configuration, settings for Email and Fax Delivery of Guest Folios
+      properties:
+        email:
+          $ref: '#/components/schemas/emailDeliveryConfigurationType'
+        fax:
+          $ref: '#/components/schemas/faxDeliveryConfigurationType'
+    pspEndpointValue:
+      type: object
+      description: Generic endpoint configuration.
+      properties:
+        endpointId:
+          type: string
+          description: obfuscated id.
+        pspId:
+          type: string
+          description: PSP Id.
+        opera9TerminalWsNo:
+          type: string
+          description: OPERA 9 TERMINAL value.
+        pspEndpointParams:
+          type: array
+          description: Parameters for PSP endpoint configuration.
+          items:
+            $ref: '#/components/schemas/pspEndpointParamValue'
+    hotelInterfaceTypeType:
+      type: string
+      enum:
+      - Bms
+      - Cas
+      - Ccw
+      - Dls
+      - Eft
+      - Exp
+      - Mak
+      - Mbs
+      - Msc
+      - Pbx
+      - Pos
+      - Svs
+      - Tik
+      - Vid
+      - Vms
+      - Www
+      - Xml
+      description: XML Posting Interface
+    fetchedHotelInterfaceSchemas:
+      type: object
+      description: Response object for retrieving Hotel Interface Schemas.
+      properties:
+        schemas:
+          description: Collection of Hotel Interface Schemas.
+          $ref: '#/components/schemas/hotelInterfaceSchemasType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    changedInterfaceAccount:
+      type: object
+      description: Response Body.
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    urlFormatType:
+      type: string
+      description: Url content format
+      enum:
+      - Xml
+      - Text
+    dMLCommandType:
+      type: string
+      enum:
+      - Insert
+      - Update
+      - Delete
+      description: A data manipulation language command for deleting an existing record.
+    changedInterfaceRoomStatus:
+      type: object
+      description: Response Body.
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    tCPConfigType:
+      type: object
+      properties:
+        iPAddress:
+          description: IP address of the interface server
+          type: string
+          minLength: 0
+          maxLength: 20
+        portNumber:
+          description: Logical Port assignment
+          type: string
+          minLength: 0
+          maxLength: 80
     transactionCodeDetailType:
       type: object
       properties:
@@ -5912,34 +6728,7 @@ components:
           maxItems: 4000
           items:
             $ref: '#/components/schemas/itemizerShortInfoType'
-    fetchedInterfaceMachines:
-      type: array
-      description: Collection of Hotel Interface Machines.
-      items:
-        $ref: '#/components/schemas/interfaceMachineType'
-    dataLineType:
-      type: string
-      enum:
-      - In
-      - Out
-      description: Line Out
-    fetchedHotelInterfaceControllerRegistry:
-      type: object
-      description: Response object for retrieving Hotel Interface Controller Registry.
-      properties:
-        reg:
-          description: Collection of Hotel Interface Controller Registry.
-          $ref: '#/components/schemas/hotelInterfaceControllerRegsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    fetchedInterfaceRoomStatuses:
-      type: array
-      description: Collection of Hotel Interface Room Statuses.
-      items:
-        $ref: '#/components/schemas/interfaceRoomStatusType'
-    interfaceControlSpecType:
+    interfaceControlCfgType:
       type: object
       properties:
         hotelId:
@@ -5953,28 +6742,165 @@ components:
           minLength: 0
           maxLength: 20
         internalCode:
-          description: Internal code of a translation specification setup.
+          description: Internal code of a translation configuration setup.
           type: integer
-        selector:
-          description: Selector of a translation specification setup.
+        originCode:
+          description: Origin code of a translation configuration setup.
           type: string
           minLength: 0
           maxLength: 100
-        specification:
-          description: Specification of a translation specification setup.
+        merchantId:
+          description: Merchant Id of a translation configuration setup.
           type: string
           minLength: 0
           maxLength: 100
-        priority:
-          description: Priority of a translation specification setup.
+    translationTextType2000:
+      type: object
+      description: Contains Multiple translated texts and language codes.
+      properties:
+        defaultText:
+          description: Default text with Character length from 0 to 2000.
           type: string
           minLength: 0
-          maxLength: 100
-        position:
-          description: Position of a translation specification setup.
+          maxLength: 2000
+        translatedTexts:
+          description: List of translated text and language codes.
+          $ref: '#/components/schemas/translationsTextType'
+    changeInterfaceRight:
+      type: object
+      description: Request object for updating a Hotel Interface Right. It will create the Hotel Interface Right if it does not exist on the database.
+      properties:
+        details:
+          $ref: '#/components/schemas/interfaceRightType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    sftpConfigurationType:
+      type: object
+      description: Information which uniquely identifies SFTP Configuration
+      properties:
+        configurationId:
+          description: Unique id associated with this configuration
+          type: integer
+        destination:
+          description: SFTP destination
           type: string
           minLength: 0
-          maxLength: 100
+          maxLength: 20
+        description:
+          description: Description of the destination, such as Shift Reports.
+          type: string
+          minLength: 0
+          maxLength: 200
+        inactive:
+          description: Indicates whether the configuration is inactive or not.
+          type: boolean
+        hotelId:
+          description: Hotel code
+          type: string
+          minLength: 0
+          maxLength: 20
+    status:
+      type: object
+      description: Response Body.
+      properties:
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    printerOutputType:
+      type: string
+      enum:
+      - Print
+      - Email
+    arDeliveryMethodType:
+      type: object
+      description: Delivery Method configuration for Email and Fax Delivery for Accounts Receivables.
+      properties:
+        email:
+          $ref: '#/components/schemas/emailDeliveryConfigurationType'
+        fax:
+          $ref: '#/components/schemas/faxDeliveryConfigurationType'
+    changeInterfaceRoomStatus:
+      type: object
+      description: Request object for updating a Hotel Interface Room Status. If it does not exist, then creates the Hotel Interface Room Status.
+      properties:
+        details:
+          $ref: '#/components/schemas/interfaceRoomStatusType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    interfacePrimaryInfoType:
+      type: object
+      properties:
+        interfaceId:
+          description: Unique DB internal number of a Hotel Interface record.
+          $ref: '#/components/schemas/uniqueID_Type'
+        hotelId:
+          description: Hotel Code
+          type: string
+          minLength: 0
+          maxLength: 20
+        logo:
+          description: Hotel Interface Logo. On the database, this is also referred as DBF Logo. This is a three letter code followed by an underscore(_). This tells us which DBF files and log files with the prefix that IFC7 is going to create.
+          type: string
+          minLength: 0
+          maxLength: 20
+        interfaceName:
+          description: Name of the Hotel Interface
+          type: string
+          minLength: 0
+          maxLength: 40
+        interfaceType:
+          description: Three letter code for each interface that identifies the interface.
+          $ref: '#/components/schemas/hotelInterfaceTypeType'
+        productCode:
+          description: Three letter code that uniquely identifies the external interface.
+          type: string
+          minLength: 0
+          maxLength: 4
+        licenseCode:
+          description: Interface License code
+          type: string
+          minLength: 0
+          maxLength: 20
+        machineId:
+          description: The ID stored in IFC_MACHINES table.
+          type: integer
+        machineName:
+          description: Unique machine name of the running IFC.
+          type: string
+          minLength: 0
+          maxLength: 80
+        interfaceProductCode:
+          description: FKT Logo required for the external interface.
+          type: string
+          minLength: 0
+          maxLength: 40
+        outboundCode:
+          description: Stores the Outbound Code to identify the target system.
+          type: string
+          minLength: 0
+          maxLength: 20
+        externalSystem:
+          description: Stores the External System Code to identify the target system.
+          type: string
+          minLength: 0
+          maxLength: 40
+    queueRushDeliveryMethodType:
+      type: object
+      description: Queue rush delivery method configuration, settings for Text Message Delivery of Queue Reservation status
+      properties:
+        textMessage:
+          $ref: '#/components/schemas/textMessageDeliveryConfigurationType'
+    interfaceCustomDataDetailsType:
+      type: array
+      description: Collection of custom data details of a hotel interface.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/interfaceCustomDataDetailType'
     interfaceCustomDataInfoType:
       type: object
       description: This type holds the custom data of a hotel interface.
@@ -5988,388 +6914,6 @@ components:
         interfaceCustomDataDetails:
           description: Collection of custom data details of a hotel interface.
           $ref: '#/components/schemas/interfaceCustomDataDetailsType'
-    interfaceUnitChargesType:
-      type: object
-      description: Collection of Hotel Interface Unit Charges.
-      properties:
-        hotelId:
-          description: Hotel Code
-          type: string
-          minLength: 0
-          maxLength: 20
-        logo:
-          description: Hotel Interface Logo. On the database, this is also referred as DBF Logo. This is a three letter code followed by an underscore(_). This tells us which DBF files and log files with the prefix that IFC7 is going to create.
-          type: string
-          minLength: 0
-          maxLength: 20
-        unitCharges:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/interfaceUnitChargeType'
-    changeUDFMapping:
-      type: object
-      description: Self-contained Request object that is used when Updating UDFMapping.
-      properties:
-        uDFMapping:
-          $ref: '#/components/schemas/uDFMappingType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    interfaceExportDataDetailsType:
-      type: array
-      description: Collection of export data details of a hotel interface.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/interfaceExportDataDetailType'
-    itemizerShortInfoType:
-      type: object
-      properties:
-        code:
-          description: Code of the itemizer on a transaction code setup.
-          type: string
-          minLength: 0
-          maxLength: 50
-        itemizerName:
-          description: Itemizer name on a transaction code setup.
-          type: string
-          minLength: 0
-          maxLength: 50
-        itemNumber:
-          description: Itemizer number which is the split post on a transaction code setup.
-          type: integer
-    externalDatabaseAssociatedHotelType:
-      type: object
-      properties:
-        hotelId:
-          description: Pertain associated hotel code for external database.
-          type: string
-          minLength: 0
-          maxLength: 20
-        hotelName:
-          description: Pertain associated hotel code for external database.
-          type: string
-          minLength: 0
-          maxLength: 80
-    emailDeliveryMethodType:
-      type: string
-      description: Email delivery method type
-      enum:
-      - Billing
-      - Confirmation
-      - General
-      - Other
-      - AR
-      - PayByLink
-    postingAccountType:
-      type: object
-      properties:
-        id:
-          description: Internal ID to reference the records.
-          type: number
-        paymentMethod:
-          description: Payment method of posting accounts in transaction codes setup.
-          type: string
-          minLength: 0
-          maxLength: 10
-        account:
-          description: Account of posting accounts in transaction codes setup.
-          type: string
-          minLength: 0
-          maxLength: 50
-        accountDescription:
-          description: Account description of posting accounts in transaction codes setup.
-          type: string
-          minLength: 0
-          maxLength: 100
-        salesOutlet:
-          description: Sales outlet of posting accounts in transaction codes setup.
-          type: string
-          minLength: 0
-          maxLength: 100
-        transactionCode:
-          description: Transaction code of posting accounts in transaction codes setup.
-          type: string
-          minLength: 0
-          maxLength: 40
-        description:
-          description: Description of posting accounts in transaction codes setup.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        autoBalance:
-          description: Auto balance flag of postings setup.
-          type: boolean
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
-    faxDeliveryConfigurationType:
-      type: object
-      description: Email content configuration template
-      properties:
-        fromAddress:
-          type: string
-          minLength: 0
-          maxLength: 200
-        userId:
-          type: string
-          minLength: 0
-          maxLength: 80
-        userPassword:
-          type: string
-          minLength: 0
-          maxLength: 80
-        serverName:
-          type: string
-          minLength: 0
-          maxLength: 80
-        subject:
-          type: string
-          minLength: 0
-          maxLength: 2000
-        body:
-          type: string
-          minLength: 0
-          maxLength: 2000
-        format:
-          description: 'EMAIL Format: HTML, RTF, PDF. Fax Format: TIF'
-          $ref: '#/components/schemas/emailDeliveryFormatType'
-        type:
-          description: 'Deliver Type, possible values: AR, BILLING, CONFIRMATION, LEADS, OWS, OVOS.'
-          $ref: '#/components/schemas/emailDeliveryMethodType'
-        hotelId:
-          description: Hotel code
-          type: string
-          minLength: 0
-          maxLength: 20
-        faxPrefix:
-          type: string
-          minLength: 0
-          maxLength: 20
-        faxSuffix:
-          type: string
-          minLength: 0
-          maxLength: 20
-        faxDomain:
-          type: string
-          minLength: 0
-          maxLength: 40
-        activateEmailToFax:
-          description: This option must be selected in order to activate faxing from an SMTP compliant fax server
-          type: boolean
-    changeInterfaceMachine:
-      type: object
-      description: Request object for updating a Hotel Interface Machine. If it does not exist, then creates the Hotel Interface Machine.
-      properties:
-        details:
-          $ref: '#/components/schemas/interfaceMachineType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    hotelInterfaceDetailType:
-      type: object
-      properties:
-        primaryInfo:
-          description: Primary information of a Hotel Interface.
-          $ref: '#/components/schemas/interfacePrimaryInfoType'
-        additionalInfo:
-          description: Additional information of a Hotel Interface.
-          $ref: '#/components/schemas/interfaceAdditionalInfoType'
-        generalInfo:
-          description: General information of a Hotel Interface.
-          $ref: '#/components/schemas/generalInfoType'
-        communicationInfo:
-          description: Communication related information of a Hotel Interface.
-          $ref: '#/components/schemas/interfaceCommunicationInfoType'
-        translationInfo:
-          description: Communication related information of a Hotel Interface.
-          $ref: '#/components/schemas/translationType'
-        classOfServiceInfo:
-          description: Information related to Class of Service of a Hotel Interface.
-          $ref: '#/components/schemas/classOfServiceType'
-        importRoomsInfo:
-          description: Information related to Import Rooms of a Hotel Interface.
-          $ref: '#/components/schemas/importRoomsType'
-        workstationSetupInfo:
-          description: Workstation setup of a hotel interface.
-          $ref: '#/components/schemas/workstationSetupType'
-        postingsInfo:
-          description: Postings of a hotel interface.
-          $ref: '#/components/schemas/postingInfoType'
-        customDataInfo:
-          description: Information related to Custom Data of a Hotel Interface.
-          $ref: '#/components/schemas/interfaceCustomDataInfoType'
-        exportDataInfo:
-          description: Information related to Export Data of a Hotel Interface.
-          $ref: '#/components/schemas/interfaceExportDataInfoType'
-        transactionsInfo:
-          description: Postings of a hotel interface.
-          $ref: '#/components/schemas/transactionCodeInfoType'
-        opiOnboardingInfo:
-          description: Information required to onboard OPI
-          $ref: '#/components/schemas/opiInfoType'
-    interfaceExportDataDetailType:
-      type: object
-      description: This gives information of export detail of a hotel interface.
-      properties:
-        sourceTableName:
-          description: Specifies the table where the event data is stored.
-          type: string
-          minLength: 0
-          maxLength: 50
-        columnName:
-          description: Specifies the column name found in the table.
-          type: string
-          minLength: 0
-          maxLength: 50
-        dataType:
-          description: Specifies the type of data in the column.
-          type: string
-          minLength: 0
-          maxLength: 20
-        dataLength:
-          description: Specifies the length of data in the column.
-          type: integer
-        xMLTagName:
-          description: Specifies the tag name found in the export.
-          type: string
-          minLength: 0
-          maxLength: 50
-        columnSelected:
-          description: Specifies whether the column is chosen to be included in the export.
-          type: boolean
-    maskDialNumberType:
-      type: string
-      description: Mask the dialled digits as per the room configuration.
-      enum:
-      - NoMasking
-      - MaskLast2Digits
-      - MaskLast4Digits
-      - Mask4DigitsLeaveLast2Intact
-      - MaskAllExceptFirst2
-      - MaskAll
-      - MaskingPerRoom
-    managedByOptions:
-      description: Describes of the Configuration is Managed by Enterprise or Property.
-      type: string
-      enum:
-      - EnterpriseManaged
-      - PropertyManaged
-      - EnterpriseEnforced
-      - PropertyOverridden
-    deviceCode:
-      type: string
-      enum:
-      - TtiScannerMobile
-      - TtiScannerDesktop
-      - SamsotechScanner
-      - GenScannerDesktop
-      - GenScannerMobile
-      - ChipAndPin
-      - FiscalTerminal
-      - Device
-    emailDeliveryFormatType:
-      type: string
-      description: Email delivery format
-      enum:
-      - Htmlcss
-      - Pdf
-      - Rtf
-      - Tif
-    codeListType:
-      type: array
-      maxItems: 4000
-      items:
-        type: string
-        minLength: 0
-        maxLength: 20
-    hotelInterfaceSchemaType:
-      type: object
-      properties:
-        hotelId:
-          description: Hotel Code
-          type: string
-          minLength: 0
-          maxLength: 20
-        logo:
-          description: Hotel Interface Logo. On the database, this is also referred as DBF Logo. This is a three letter code followed by an underscore(_). This tells us which DBF files and log files with the prefix that IFC7 is going to create.
-          type: string
-          minLength: 0
-          maxLength: 20
-        actionName:
-          description: Action Name
-          type: string
-          minLength: 0
-          maxLength: 40
-        schemaName:
-          description: Schema Name
-          type: string
-          minLength: 0
-          maxLength: 40
-        schema:
-          description: Schema
-          type: string
-          minLength: 0
-          maxLength: 4000
-        insertDate:
-          description: Date time stamp of a Hotel Interface Schema. Uses database time zone.
-          type: string
-          format: date-time
-        ifcType:
-          description: ifcType
-          type: string
-          minLength: 0
-          maxLength: 4000
-    classOfServiceType:
-      type: object
-      properties:
-        cosMsgLmpRg:
-          description: ''
-          type: string
-          minLength: 0
-          maxLength: 1
-        cosChkRg:
-          description: ''
-          type: string
-          minLength: 0
-          maxLength: 1
-        cosMsgCmdRg:
-          description: ''
-          type: string
-          minLength: 0
-          maxLength: 1
-        roomEquipCi:
-          description: ''
-          type: boolean
-        roomEquipCo:
-          description: ''
-          type: boolean
-        guestDataChangeCo:
-          description: ''
-          type: boolean
-        standardNameFormat:
-          description: Standard name format in the class of service.
-          type: string
-          minLength: 0
-          maxLength: 5
-        definedNameFormat:
-          description: Defined name format in the class of service.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/definedNameFormatType'
-        resvInQueue:
-          description: Indicates whethe a message will be triggered when a room/reservation is placed on QUEUE
-          type: boolean
-    queueRushDeliveryMethodType:
-      type: object
-      description: Queue rush delivery method configuration, settings for Text Message Delivery of Queue Reservation status
-      properties:
-        textMessage:
-          $ref: '#/components/schemas/textMessageDeliveryConfigurationType'
     hotelInterfaceFailedMessageType:
       type: object
       properties:
@@ -6402,612 +6946,23 @@ components:
           type: string
           minLength: 0
           maxLength: 4000
-    guestMessageDeliveryMethodType:
-      type: object
-      description: Guest text message configuration, settings for Text Message Delivery of Guest Messages
-      properties:
-        textMessage:
-          $ref: '#/components/schemas/textMessageDeliveryConfigurationType'
-    postingInfoType:
-      type: object
-      properties:
-        referenceField:
-          description: Reference field of postings setup.
-          type: string
-          minLength: 0
-          maxLength: 1
-        chargeScaling:
-          description: Charge scaling of postings setup.
-          type: string
-          minLength: 0
-          maxLength: 1
-        zeroChargePostings:
-          description: Zero charge posting of postings setup.
-          type: string
-          minLength: 0
-          maxLength: 1
-        postings:
-          description: Postings of postings setup.
-          type: string
-          minLength: 0
-          maxLength: 1
-        postType:
-          description: Post type of postings setup.
-          type: string
-          minLength: 0
-          maxLength: 1
-        conversion:
-          description: Conversion of postings setup.
-          type: integer
-        reference:
-          description: Reference of postings setup.
-          type: string
-          minLength: 0
-          maxLength: 50
-        supplement:
-          description: Supplement of postings setup.
-          type: string
-          minLength: 0
-          maxLength: 50
-        overrideCreditLimit:
-          description: Override credit limit of postings setup.
-          type: boolean
-        noPostFlag:
-          description: No post flag of postings setup.
-          type: boolean
-        generatesTax:
-          description: IFC generate tax of postings setup.
-          type: boolean
-        dialedNumberMasking:
-          description: Type of number masking used for the dialed numbers in the particular interface.
-          $ref: '#/components/schemas/maskDialNumberType'
-        articleNoPrefix:
-          description: Article Prefix of postings setup.
-          type: boolean
-    hotelInterfaceStatusType:
-      type: string
-      description: Status of the Hotel Interface either STOPPED or RUNNING.
-      enum:
-      - Stopped
-      - Running
-      - Waiting
-      - StopInitiated
-      - StartInitiated
-      - RebootInitiated
-      - Other
-    uniqueID_Type:
-      type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
-      properties:
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 40
-    urlFormatType:
-      type: string
-      description: Url content format
-      enum:
-      - Xml
-      - Text
-    deviceType:
-      type: string
-      enum:
-      - Scanner
-      - CreditCard
-      - Fiscal
-      - Device
-    interfaceRightType:
-      type: object
-      properties:
-        hotelId:
-          description: Hotel Code to which the Interface Right belongs to.
-          type: string
-          minLength: 0
-          maxLength: 20
-        interfaceId:
-          description: Unique DB internal number of a Hotel Interface record.
-          $ref: '#/components/schemas/uniqueID_Type'
-        right:
-          description: Internal code for each allowed right of a Hotel Interface record.
-          type: integer
-        code:
-          description: User defined code for an Interface Right.
-          type: string
-          minLength: 0
-          maxLength: 5
-        description:
-          description: User defined description for an Interface Right.
-          type: string
-          minLength: 0
-          maxLength: 80
-        interfaceRightDescription:
-          description: System Description of an allowed Interface Right.
-          type: string
-          minLength: 0
-          maxLength: 80
-    deviceConfigurationType:
-      type: object
-      description: Type that contains the parameters and configurations used by the device.
-      properties:
-        name:
-          description: Internal name of the configuration.
-          type: string
-          minLength: 0
-          maxLength: 80
-        displayName:
-          description: Configuration display name.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        value:
-          description: Value of the configuration.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        required:
-          description: Flag that indicates whether the configuration is required or not.
-          type: boolean
-        encrypted:
-          description: Flag that indicates whether the configuration value should be encrypted or not.
-          type: boolean
-    hotelInterfaceErrorType:
-      type: object
-      properties:
-        hotelId:
-          description: Hotel Code
-          type: string
-          minLength: 0
-          maxLength: 20
-        logo:
-          description: Hotel Interface Logo. On the database, this is also referred as DBF Logo. This is a three letter code followed by an underscore(_). This tells us which DBF files and log files with the prefix that IFC7 is going to create.
-          type: string
-          minLength: 0
-          maxLength: 20
-        actionName:
-          description: Action Name
-          type: string
-          minLength: 0
-          maxLength: 40
-        message:
-          description: Message
-          type: string
-          minLength: 0
-          maxLength: 4000
-        error:
-          description: Error
-          type: string
-          minLength: 0
-          maxLength: 2000
-        resvNameId:
-          description: Schema
-          type: string
-          minLength: 0
-          maxLength: 40
-        insertDate:
-          description: Date time stamp of a Hotel Interface Schema. Uses database time zone.
-          type: string
-          format: date-time
-        ifcType:
-          description: ifcType
-          type: string
-          minLength: 0
-          maxLength: 4000
-    sftpConfigurationType:
-      type: object
-      description: Information which uniquely identifies SFTP Configuration
-      properties:
-        configurationId:
-          description: Unique id associated with this configuration
-          type: integer
-        destination:
-          description: SFTP destination
-          type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          description: Description of the destination, such as Shift Reports.
-          type: string
-          minLength: 0
-          maxLength: 200
-        inactive:
-          description: Indicates whether the configuration is inactive or not.
-          type: boolean
-        hotelId:
-          description: Hotel code
-          type: string
-          minLength: 0
-          maxLength: 20
-    supportedExternalDevicesType:
-      type: array
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/supportedExternalDeviceType'
-    fetchedExternalDeviceConfigurations:
-      type: object
-      properties:
-        externalDeviceConfigurations:
-          description: Collection of configurations for the external device.
-          $ref: '#/components/schemas/externalDeviceConfigurationType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    configuredExternalDevices:
-      type: object
-      description: Collection of hotels and the external devices that were configured for the hotel.
-      properties:
-        deviceType:
-          $ref: '#/components/schemas/deviceType'
-        supportedExternalDevices:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/hotelExternalDevicesType'
-    interfaceWorkstationType:
-      type: object
-      properties:
-        hotelId:
-          description: Hotel Code of a workstation.
-          type: string
-          minLength: 0
-          maxLength: 20
-        logo:
-          description: Logo of a workstation.
-          type: string
-          minLength: 0
-          maxLength: 20
-        internalCode:
-          description: Internal code of a workstation.
-          type: integer
-        workstation:
-          description: Workstation of a hotel interface.
-          type: string
-          minLength: 0
-          maxLength: 200
-        deviceIp:
-          description: IP of a workstation.
-          type: string
-          minLength: 0
-          maxLength: 200
-        orderSequence:
-          description: Display Order sequence.
-          type: number
-        location:
-          description: Location of a workstation.
-          type: string
-          minLength: 0
-          maxLength: 200
-        type:
-          description: Type of a workstation.
-          type: string
-          minLength: 0
-          maxLength: 2
-        deviceLocation:
-          description: Device Group / Area.
-          type: string
-          minLength: 0
-          maxLength: 40
-    changedPrinter:
-      type: object
-      description: Response Body.
-      properties:
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    fetchedHotelInterfaceDetails:
-      type: object
-      description: Response object for retrieving the details of a Hotel Interface.
-      properties:
-        details:
-          $ref: '#/components/schemas/hotelInterfaceDetailType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    interfaceAccountType:
-      type: object
-      properties:
-        hotelId:
-          description: Hotel Code of the Interface Account.
-          type: string
-          minLength: 0
-          maxLength: 20
-        logo:
-          description: Hotel Interface Logo. On the database, this is also referred as DBF Logo. This is a three letter code followed by an underscore(_). This tells us which DBF files and log files with the prefix that IFC7 is going to create.
-          type: string
-          minLength: 0
-          maxLength: 20
-        postingAccount:
-          description: Posting information of transaction codes setup.
-          $ref: '#/components/schemas/postingAccountType'
-    fetchedInterfaceRooms:
-      type: array
-      description: Collection of Hotel Interface Rooms.
-      items:
-        $ref: '#/components/schemas/interfaceRoomType'
-    deviceMappingType:
-      type: object
-      description: Type that contains the codes used in/provided by the external device and their counterpart in OPERA.
-      properties:
-        codeType:
-          description: Internal code type of the mapping entry.
-          type: string
-          minLength: 0
-          maxLength: 800
-        externalCode:
-          description: Code used/provided by the external device or application.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        displayName:
-          description: Display name of the code mapping.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        operaCode:
-          description: Corresponding code value in OPERA.
-          type: string
-          minLength: 0
-          maxLength: 2000
-    interfaceRoomStatusType:
-      type: object
-      properties:
-        hotelId:
-          description: Hotel Code
-          type: string
-          minLength: 0
-          maxLength: 20
-        logo:
-          description: Hotel Interface Logo. On the database, this is also referred as DBF Logo. This is a three letter code followed by an underscore(_). This tells us which DBF files and log files with the prefix that IFC7 is going to create.
-          type: string
-          minLength: 0
-          maxLength: 20
-        entryCode:
-          description: Entry code of a Hotel Interface Room Status.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        status:
-          description: Room Status which is either Vacant (V) or Occupied (O).
-          type: string
-          minLength: 0
-          maxLength: 20
-        housekeepingStatus:
-          description: Housekeeping status of a room.
-          type: string
-          minLength: 0
-          maxLength: 20
-        customRoomTranslation:
-          description: Custom Room Translation of a Hotel Interface. It is a concatenation of a Status (V-Vacant or O-Occupied) and Housekeeping Status (IS-Inspected, CL-Clean, etc.) The delimiter is a period. Sample values are V.IS, V.CL, O.IS, O.CL.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        description:
-          description: Description of the Hotel Interface Room Status.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        interfaceRoomStatusId:
-          description: Row number to identify all the records belonging to a single group of Hotel Interface Room Status.
-          type: integer
-    tCPConfigType:
-      type: object
-      properties:
-        iPAddress:
-          description: IP address of the interface server
-          type: string
-          minLength: 0
-          maxLength: 20
-        portNumber:
-          description: Logical Port assignment
-          type: string
-          minLength: 0
-          maxLength: 80
     operaVersionNumberType:
       type: string
       description: Current Opera Version Number
       minLength: 0
       maxLength: 40
-    interfaceControlCfgType:
-      type: object
-      properties:
-        hotelId:
-          description: Hotel Code of the hotel interface.
-          type: string
-          minLength: 0
-          maxLength: 20
-        logo:
-          description: Logo of the hotel interface.
-          type: string
-          minLength: 0
-          maxLength: 20
-        internalCode:
-          description: Internal code of a translation configuration setup.
-          type: integer
-        originCode:
-          description: Origin code of a translation configuration setup.
-          type: string
-          minLength: 0
-          maxLength: 100
-        merchantId:
-          description: Merchant Id of a translation configuration setup.
-          type: string
-          minLength: 0
-          maxLength: 100
-    definedNameFormatType:
-      type: object
-      properties:
-        hotelId:
-          description: Hotel Code where the defined name format is associated.
-          type: string
-          minLength: 0
-          maxLength: 20
-        definedFormatId:
-          description: ID of the defined name format.
-          type: string
-          minLength: 0
-          maxLength: 20
-        expressionTable:
-          description: Table from which the info will be retrieved.
-          type: string
-          minLength: 0
-          maxLength: 200
-        expression:
-          description: Expression of the defined name format It basically contains all formats that are being set.
-          type: string
-          minLength: 0
-          maxLength: 4000
-        logo:
-          description: Logo of the hotel interface.
-          type: string
-          minLength: 0
-          maxLength: 20
-    publishersType:
-      type: array
-      description: Information of all the publishers for a given subscriber.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/externalSystemType'
-    ifcMenuTypeType:
-      type: string
-      enum:
-      - Cas
-      - Kss
-      - Mbs
-      - Pbx
-      - Pos
-      - Vss
-      - Dcs
-      description: Data Card System
-    interfaceControlLangType:
-      type: object
-      properties:
-        hotelId:
-          description: Hotel Code of the hotel interface.
-          type: string
-          minLength: 0
-          maxLength: 20
-        logo:
-          description: Logo of the hotel interface.
-          type: string
-          minLength: 0
-          maxLength: 20
-        internalCode:
-          description: Internal code of a translation language setup.
-          type: integer
-        selector:
-          description: Selector of a translation language setup.
-          type: string
-          minLength: 0
-          maxLength: 100
-        languageCode:
-          description: Language code of a translation language setup.
-          type: string
-          minLength: 0
-          maxLength: 100
-    fetchedUDFMappings:
-      type: object
-      description: Message received on an UDFs Lookup.
-      properties:
-        uDFMappings:
-          description: Criteria for fetching UDFs.
-          type: array
-          items:
-            $ref: '#/components/schemas/uDFMappingType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    fetchedHotelInterfaceFailedMessages:
-      type: object
-      description: Response object for retrieving Hotel Interface Failed Messages.
-      properties:
-        messages:
-          description: Collection of Hotel Interface Failed Messages.
-          $ref: '#/components/schemas/hotelInterfaceFailedMessagesType'
-        totalPages:
-          description: Evaluated total page count based on the requested max fetch count.
-          type: integer
-        offset:
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-          type: integer
-        limit:
-          description: Indicates maximum number of records a Web Service should return.
-          type: integer
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-  responses:
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '401':
-      description: Unauthorized
-    '414':
-      description: Request URI Too Large
-    '406':
-      description: Not acceptable.
-    '403':
-      description: Forbidden
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '502':
-      description: Bad Gateway
-    '503':
-      description: Service Unavailable
-    '415':
-      description: Unsupported Media Type
-    '405':
-      description: Method not allowed
-    '413':
-      description: Request Entity Too Large
   parameters:
-    x-app-key:
-      name: x-app-key
-      description: Client or Partner's Application Key
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
       in: header
       required: true
       schema:
         type: string
-        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
       in: header
-      schema:
-        type: string
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
-      in: header
-      required: true
       schema:
         type: string
     x-externalsystem:
@@ -7018,12 +6973,33 @@ components:
       schema:
         type: string
         maxLength: 40
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
     x-originating-application:
       name: x-originating-application
       description: Customer's Integration Application Id
       in: header
       schema:
         type: string
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
+      schema:
+        type: string
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
     x-request-id:
       name: x-request-id
       description: Request Id of an incoming request
@@ -7031,19 +7007,43 @@ components:
       schema:
         type: string
         pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
-      in: header
-      schema:
-        type: string
-    x-hotelid:
-      name: x-hotelid
-      description: Mandatory parameter to identify the hotel code where the end user is logged in
-      in: header
-      required: true
-      schema:
-        type: string
+  responses:
+    '413':
+      description: Request Entity Too Large
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '405':
+      description: Method not allowed
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '503':
+      description: Service Unavailable
+    '403':
+      description: Forbidden
+    '502':
+      description: Bad Gateway
+    '414':
+      description: Request URI Too Large
+    '406':
+      description: Not acceptable.
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '401':
+      description: Unauthorized
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

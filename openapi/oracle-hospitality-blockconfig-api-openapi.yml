@@ -2695,344 +2695,7 @@ paths:
       tags:
       - BlockConfig
 components:
-  responses:
-    '401':
-      description: Unauthorized
-    '414':
-      description: Request URI Too Large
-    '406':
-      description: Not acceptable.
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '502':
-      description: Bad Gateway
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '415':
-      description: Unsupported Media Type
-    '503':
-      description: Service Unavailable
-    '405':
-      description: Method not allowed
-    '413':
-      description: Request Entity Too Large
-    '403':
-      description: Forbidden
   schemas:
-    operaVersion:
-      type: object
-      description: Response for Ping operation.
-      properties:
-        operaVersion:
-          description: Opera version number.
-          $ref: '#/components/schemas/operaVersionNumberType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    salesManagerType:
-      type: object
-      description: Sales Manager's information.
-      properties:
-        hotelId:
-          description: Hotel Code of the Sales Manager
-          type: string
-          minLength: 0
-          maxLength: 20
-        nameId:
-          description: Unique Name ID for the Sales Manager
-          $ref: '#/components/schemas/uniqueID_Type'
-        salesManagerCode:
-          description: Sales Manager's code
-          type: string
-          minLength: 0
-          maxLength: 20
-        name:
-          description: Sales Manager's name
-          type: string
-        groupRoomWithCatering:
-          description: Indicates if the Sales manager has Group Room with Catering Goal
-          type: boolean
-        transientRoom:
-          description: Indicates if the Sales manager has Transient Room Goal
-          type: boolean
-        activity:
-          description: Indicates if the Sales manager has Activity Goal
-          type: boolean
-    nextBlockStatusCodeListType:
-      type: array
-      description: Block status code with its next configured and/or available status codes.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/nextBlockStatusCodeType'
-    nextBlockStatusCodeDetails:
-      type: object
-      description: Response object for fetching next block status codes.
-      properties:
-        nextBlockStatusCodeList:
-          description: List of block status code flow which compose of a particular status code and its selected next statuses. Moreover, available next status can be not included if ConfigureOnly is set to true.
-          $ref: '#/components/schemas/nextBlockStatusCodeListType'
-        blockStatusCodeMasterList:
-          description: Block status code information e.g. Color, Description, etc.
-          $ref: '#/components/schemas/blockStatusCodeListType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    codeDescriptionType:
-      type: object
-      description: This contains a generic code and description information.
-      properties:
-        code:
-          description: Code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          description: description.
-          type: string
-          minLength: 0
-          maxLength: 2000
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
-    cutoffCodeDetail:
-      type: object
-      description: A representation of the single entry information for cutoff schedule detail.
-      properties:
-        id:
-          description: Cutoff Schedule detail Id.
-          type: integer
-        stayDate:
-          description: Contains stay date.
-          type: string
-          format: date
-          maxLength: 8
-        cutoffDays:
-          description: Contains the number of cutoff Days to be set for specific date and room type.
-          type: integer
-        roomType:
-          description: Contains the room types.
-          type: string
-    managedByOptions:
-      description: Describes of the Configuration is Managed by Enterprise or Property.
-      type: string
-      enum:
-      - EnterpriseManaged
-      - PropertyManaged
-      - EnterpriseEnforced
-      - PropertyOverridden
-    status:
-      type: object
-      description: Response Body.
-      properties:
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-        links:
-          $ref: '#/components/schemas/links'
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    salesManagersInfo:
-      type: object
-      description: You can use this API to retrieve multiple Sales Managers, you can narrow the results using different search criteria
-      properties:
-        salesManagers:
-          description: Collection of Sales Managers information.
-          $ref: '#/components/schemas/salesManagersType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    nextBlockStatusCodeType:
-      type: object
-      description: Next block status codes information. Contains list of all configured and/or available next status codes for a particular status code.
-      properties:
-        nextConfiguredStatusList:
-          description: List of all configured next status codes for the main status code.
-          $ref: '#/components/schemas/nextBlockStatusCodeInfoListType'
-        nextAvailableStatusList:
-          description: List of all available next status codes for the main status code.
-          $ref: '#/components/schemas/nextBlockStatusCodeInfoListType'
-        status:
-          description: Main block status code.
-          type: string
-          minLength: 0
-          maxLength: 20
-    washCodeDetailsType:
-      type: array
-      description: Wash Code Detail for a single entry.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/washCodeDetailType'
-    salesManagersType:
-      type: object
-      description: Collection of Sales Managers information.
-      properties:
-        salesManager:
-          description: Sales Manager's information.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/salesManagerType'
-        totalPages:
-          description: Evaluated total page count based on the requested max fetch count.
-          type: integer
-        offset:
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-          type: integer
-        limit:
-          description: Indicates maximum number of records a Web Service should return.
-          type: integer
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        count:
-          description: Total number of rows returned
-          type: integer
-    blockSalesAllowanceActivityLogType:
-      type: object
-      properties:
-        hotelId:
-          type: string
-          minLength: 0
-          maxLength: 20
-        logDate:
-          type: string
-          format: date-time
-          description: Date on which change happened.
-        salesAllowanceDate:
-          type: string
-          format: date-time
-          description: sales Allowance Date
-        oldQuantity:
-          type: number
-          description: Value of sales allowance before the change.
-        newQuantity:
-          type: number
-          description: Value of sales allowance after the change.
-        refActionId:
-          type: number
-        logUserId:
-          type: number
-          description: ID of user who made the change.
-        logUserName:
-          type: string
-          description: Name of user who made the change.
-        actionType:
-          type: string
-          minLength: 0
-          maxLength: 100
-          description: Action type.
-        ipAddress:
-          description: The IP Address of the machine that performed the activity
-          type: string
-          minLength: 0
-          maxLength: 20
-    blockSalesAllowanceListType:
-      type: array
-      description: Block's sales allowance information.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/blockSalesAllowanceType'
-    statusColorType:
-      type: string
-      description: Status code color configuration type.
-      enum:
-      - White
-      - Red
-      - Blue
-      - Cyan
-      - Magenta
-      - Green
-      - Brown
-      - Black
-      - Yellow
-      - Gray
-    createSalesManagerGoals:
-      type: object
-      description: Request object for Creating Sales Manager Goal(s).
-      properties:
-        salesManagerGoals:
-          description: Collection of Sales Manager Goals information which should be created.
-          $ref: '#/components/schemas/salesManagerGoalsType'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    blockCutoffScheduleRangeType:
-      type: object
-      description: Object to create block cutoff schedule details by providing date range, room type, days of week and cutoff days.
-      properties:
-        hotelId:
-          description: Contains Hotel Code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        cutoffCodeId:
-          description: Contains Cutoff Schedule Code Id.
-          type: integer
-        roomTypes:
-          description: Contains Room Types.
-          type: array
-          maxItems: 20
-          items:
-            type: string
-            minLength: 0
-            maxLength: 20
-        cutoffDays:
-          description: Number of cutoff Days.
-          type: integer
-        overwriteExistingcutoffschedule:
-          description: Flag to indicate if the cutoff schedule already exists for criteria then overwrite the records.
-          type: boolean
-        stayDateFrom:
-          description: The starting value of the date range.
-          type: string
-          format: date
-        stayDateTo:
-          description: The ending value of the date range.
-          type: string
-          format: date
-        sunday:
-          type: boolean
-        monday:
-          type: boolean
-        tuesday:
-          type: boolean
-        wednesday:
-          type: boolean
-        thursday:
-          type: boolean
-        friday:
-          type: boolean
-        saturday:
-          type: boolean
-    blockStatusCodeListType:
-      type: array
-      description: Block status code information.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/blockStatusCodeType'
     instanceLink:
       type: object
       description: Metadata describing link description objects that MAY appear in the JSON instance representation.
@@ -3067,481 +2730,32 @@ components:
         title:
           description: Exact copy of the "summary" field on the linked operation.
           type: string
-    warningType:
+    washByRoomType:
       type: object
-      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
+      description: A representation of the single entry information for 'Wash by number of rooms' type.
       properties:
-        value:
-          type: string
-          description: Property Value
-        shortText:
-          description: An abbreviated version of the error in textual format.
-          type: string
-          maxLength: 2000
-        code:
-          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
-          type: string
-          minLength: 0
-          maxLength: 20
-        docURL:
-          description: If present, this URL refers to an online description of the error that occurred.
-          type: string
-          maxLength: 2000
-        status:
-          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
-          type: string
-          maxLength: 2000
-        tag:
-          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
-          type: string
-          maxLength: 2000
-        recordId:
-          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
-          type: string
-          maxLength: 2000
-        type:
-          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
-          type: string
-          minLength: 0
-          maxLength: 20
-        language:
-          description: Language identification.
-          type: string
-          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
-        rph:
-          description: Reference Place Holder used as an index for this warning.
-          type: string
-          minLength: 1
-          maxLength: 8
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
+        occupancy1:
+          description: Contains the number of 'Occupancy1'. Based on the parameter it should be replaced by the number of 'Rooms'.
           type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-      required:
-      - type
-      - title
-    nextBlockStatusCodeInfoType:
-      type: object
-      description: Information of next block status code.
-      properties:
-        status:
-          description: Next block status code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        order:
-          description: Order of next block status code
+        occupancy2:
+          description: Contains the number of 'Occupancy2'.
           type: integer
-    cutoffCodeDetailType:
-      type: object
-      description: Cutoff Code Detail for a single entry
-      properties:
-        cutoffCodeDetail:
-          $ref: '#/components/schemas/cutoffCodeDetail'
-    salesManagerGoalsInfo:
-      type: object
-      description: You can use this API to retrieve individual Sales Manager Goals for a hotel, you can narrow the results using different search criteria
-      properties:
-        salesManagerGoals:
-          description: Collection of Sales Manager Goals information.
-          $ref: '#/components/schemas/salesManagerGoalsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    cutoffCodeCriteria:
-      type: object
-      description: 'Object which will contain all the information of ''CutoffCodes''. '
-      properties:
-        cutoffCodes:
-          type: array
-          description: Cutoff Code, which will allow the user to define standard cutoff schedules. Cutoff schedule codes can be applied to blocks, to default number of cutoff days per stay date and room type. A default number number of cutoff days can be set on cutoff scheduler header level, and will be applied when no specific number of days has been defined for a date / room type combination within the cutoff schedule dates.
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/cutoffCodeType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    blockSalesAllowanceType:
-      type: object
-      description: Contains single entry information for Block's Sales Allowance.
-      properties:
-        hotelId:
-          description: Contains Hotel Code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        salesAllowanceDate:
-          description: Contains sales allowance date.
-          type: string
-          format: date
-          maxLength: 8
-        roomType:
-          description: Contains room type.
-          type: string
-          minLength: 0
-          maxLength: 20
-        roomPool:
-          description: Contains room pool code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        allowance:
-          description: Contains allocated number of rooms for allowance.
+        occupancy3:
+          description: Contains the number of 'Occupancy3'.
           type: integer
-        booked:
-          description: Contains number of rooms are booked/consumed from sales allowance.
+        occupancy4:
+          description: Contains the number of 'Occupancy4'.
           type: integer
-        overBooked:
-          description: Contains number of rooms are overbooked from sales allowance.
+        sell:
+          description: Contains the available Sell Limit rooms for a Sell Limit block.
           type: integer
-        cutoffDate:
-          description: Contains cutoff date for sales allowance.
-          type: string
-          format: date
-          maxLength: 8
-    uniqueID_Type:
+    salesManagersInfo:
       type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      description: You can use this API to retrieve multiple Sales Managers, you can narrow the results using different search criteria
       properties:
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 40
-    blockStatusCodeStatusType:
-      type: string
-      description: Simple type for block status code's room status type and catering status type. Valid status values are Waitlist,Cancel,Lost,Refused,Actual,Inquiry,NonDeductInv,DeductInv and Referral.
-      enum:
-      - Waitlist
-      - Cancel
-      - Lost
-      - Refused
-      - Actual
-      - Inquiry
-      - NonDeductInv
-      - DeductInv
-      - Referral
-    blockSalesAllowanceActivityLog:
-      type: object
-      description: Response object for fetching block sales allowance activity log.
-      properties:
-        blockSalesAllowance:
-          description: Response object for Block Sales Allowance activity Log.
-          $ref: '#/components/schemas/blockSalesAllowanceActivityLogListType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    nextBlockStatusCode:
-      type: object
-      description: Request object for change block status code flow. Batch insert/update/delete of next status code list of a particular status code.
-      properties:
-        nextBlockStatusCodeList:
-          description: Contains list of all available next status codes for a particular status code.
-          $ref: '#/components/schemas/nextBlockStatusCodeListType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    washCodeDetailType:
-      type: object
-      description: Allows for a choice to populate the detail information based on the choice between 'Wash by number of rooms' and 'Wash by %'.
-      properties:
-        washByRoom:
-          $ref: '#/components/schemas/washByRoomType'
-        washByPercent:
-          type: integer
-        daysPriorToArrival:
-          description: Number of days prior to arrival of a block or block's cutoff day.
-          type: integer
-    blockSalesAllowanceRangeType:
-      type: object
-      description: Indicates the block sales allowance for a date range.
-      properties:
-        hotelId:
-          description: Contains Hotel Code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        quantity:
-          description: Contains quantity for sales allowance.
-          type: integer
-        cutoffDays:
-          description: Number of days before sales allowance date, after which unused quantity should set to 0.
-          type: integer
-        incrementFlag:
-          description: Flag to indicate if the sales allowance update is absolute or relative to the current value.
-          type: boolean
-        overwriteExistingSalesAllowance:
-          description: Flag to indicate if the sales allowance already exists for criteria then overwrite the records.
-          type: boolean
-        start:
-          description: The starting value of the date range.
-          type: string
-          format: date
-          maxLength: 8
-        end:
-          description: The ending value of the date range.
-          type: string
-          format: date
-          maxLength: 8
-        sunday:
-          type: boolean
-        monday:
-          type: boolean
-        tuesday:
-          type: boolean
-        wednesday:
-          type: boolean
-        thursday:
-          type: boolean
-        friday:
-          type: boolean
-        saturday:
-          type: boolean
-        validateExistingSalesAllowance:
-          description: Flag to validate existing sales allowance records within criteria.
-          type: boolean
-    cutoffCodeType:
-      type: object
-      description: A representation of the information contained by a Cutoff Code.
-      properties:
-        cutoffCodeDetails:
-          type: array
-          description: Detail information of the Cutoff Code.
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/cutoffCodeDetailType'
-        hotelCode:
-          description: Hotel Code to which the cutoff Code belongs to.
-          type: string
-          minLength: 0
-          maxLength: 20
-        code:
-          description: Unique Cutoff Schedule Code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        id:
-          description: Unique Cutoff Schedule Code Id
-          type: integer
-        description:
-          description: Description of the Cutoff Schedule Code.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        cutoffCodeStartDate:
-          type: string
-          description: Cutoff Schedule Code Start Date.
-          format: date
-        cutoffCodeEndDate:
-          type: string
-          description: Cutoff Schedule Code End Date.
-          format: date
-        defaultDays:
-          description: Cutoff Schedule Code Default Days. This value will be used if no pre defined schedule exist for a date or room type.
-          type: integer
-    blockStatusCodeType:
-      type: object
-      description: Block status code information.
-      properties:
-        status:
-          description: Code and Description used to define a status e.g. (INT, TENT, DEF, CXL) (initial, tentative, definite, cancelled).
-          $ref: '#/components/schemas/codeDescriptionType'
-        roomStatusType:
-          description: Room status type selected for status code.
-          $ref: '#/components/schemas/blockStatusCodeStatusType'
-        cateringStatusType:
-          description: Catering status type selected for status code. When the OPS Sales & Catering license code is active, the Sales & Catering status type for the status code is displayed.
-          $ref: '#/components/schemas/blockStatusCodeStatusType'
-        defaultReservationType:
-          description: Default reservation type to be used for the status code. The reservation type and status code must have the same deduct/no deduct status.
-          $ref: '#/components/schemas/codeDescriptionType'
-        reasonType:
-          description: Reason type for every block reservation cancellation. Block Cancellation Reason, Block Refused Reasons, and Block Lost Reasons.
-          type: string
-        color:
-          description: Color code for the status code.
-          $ref: '#/components/schemas/statusColorType'
-        allowPickup:
-          description: Indicates if the rooms with this status code will be allowed for pickup or not.
-          type: boolean
-        returnToInventory:
-          description: Indicates if the rooms with this status code can be returned to availability or not.
-          type: boolean
-        starting:
-          description: Indicates if the status code is the starting status of the status cycle or not.
-          type: boolean
-        leadStatus:
-          description: Indicates the default status for all new leads. Only one lead status can be selected as the default.
-          type: boolean
-        logCatering:
-          description: Indicates if the status code logs the catering changes or not.
-          type: boolean
-        showDiary:
-          description: Indicates if the function diary will be shown within the Sales and Catering.
-          type: boolean
-        orderBy:
-          description: Indicates the order the status code is displayed in the status cycle.
-          type: integer
-        inUse:
-          description: Returns true if the status code is already used in Block / Event / Status Flow.
-          type: boolean
-        cateringInUse:
-          description: Returns true if the status code is already used in Events.
-          type: boolean
-        opportunity:
-          description: Indicates that the business block created with this Status is an Opportunity.
-          type: boolean
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-    nextBlockStatusCodeInfoListType:
-      type: array
-      description: List of all configured next status codes for the main status code.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/nextBlockStatusCodeInfoType'
-    statusCodeDetails:
-      type: object
-      description: Response object for fetching block status codes.
-      properties:
-        blockStatusCodes:
-          description: Collection of configured Block Status Codes.
-          $ref: '#/components/schemas/blockStatusCodeListType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    washCodesType:
-      type: array
-      description: Wash Code, which will allow the user to define standard schedules that can be attached to blocks prior to the block's cutoff date to automate this process.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/washCodeType'
-    searchSalesManagersRequest:
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: Indicates maximum number of records a Web Service should return.
-        offset:
-          type: integer
-          default: 0
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-        ownerCodes:
-          type: array
-          maxItems: 4000
-          items:
-            type: string
-          description: ''
-        firstName:
-          type: string
-          description: First name required to fetch Sales Manager information.
-        lastName:
-          type: string
-          description: Last name required to fetch Sales Manager information.
-    salesManagerGoalsType:
-      type: array
-      description: Detail Information about Sales Manager's goal.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/salesManagerGoalType'
-    washCodeType:
-      type: object
-      description: A representation of the information contained by a Wash Code.
-      properties:
-        description:
-          description: Description of the Wash Code.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        washCodeDetails:
-          description: Detail information of the Wash Code. It will contain number of rooms to be washed which is linked to a block by a Percentage or Specific number of rooms.
-          $ref: '#/components/schemas/washCodeDetailsType'
-        hotelId:
-          description: Hotel Code to which the Wash Code belongs to.
-          type: string
-          minLength: 0
-          maxLength: 20
-        code:
-          description: Wash Code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
-      required:
-      - type
-      - title
-    blockCutoffScheduleRange:
-      type: object
-      description: Operation to a create block cutoff schedule details by providing date range, room type, days of week and cutoff days.
-      properties:
-        criteria:
-          description: Criteria to create block cutoff schedule.
-          $ref: '#/components/schemas/blockCutoffScheduleRangeType'
+        salesManagers:
+          description: Collection of Sales Managers information.
+          $ref: '#/components/schemas/salesManagersType'
         links:
           $ref: '#/components/schemas/links'
         warnings:
@@ -3635,22 +2849,401 @@ components:
         future:
           description: Use this indicator to fetch goal's having Production From or Arrival From dates later than the current business date or quarter
           type: boolean
-    operaVersionNumberType:
-      type: string
-      description: Current Opera Version Number
-      minLength: 0
-      maxLength: 40
-    blockStatusCodeDetails:
+    statusCodeDetails:
       type: object
-      description: Request object for updating block status code.
+      description: Response object for fetching block status codes.
       properties:
-        blockStatusCode:
-          description: Block status code information to be applied.
-          $ref: '#/components/schemas/blockStatusCodeType'
+        blockStatusCodes:
+          description: Collection of configured Block Status Codes.
+          $ref: '#/components/schemas/blockStatusCodeListType'
         links:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
+    nextBlockStatusCode:
+      type: object
+      description: Request object for change block status code flow. Batch insert/update/delete of next status code list of a particular status code.
+      properties:
+        nextBlockStatusCodeList:
+          description: Contains list of all available next status codes for a particular status code.
+          $ref: '#/components/schemas/nextBlockStatusCodeListType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    statusColorType:
+      type: string
+      description: Status code color configuration type.
+      enum:
+      - White
+      - Red
+      - Blue
+      - Cyan
+      - Magenta
+      - Green
+      - Brown
+      - Black
+      - Yellow
+      - Gray
+    nextBlockStatusCodeInfoListType:
+      type: array
+      description: List of all configured next status codes for the main status code.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/nextBlockStatusCodeInfoType'
+    washCodeDetailType:
+      type: object
+      description: Allows for a choice to populate the detail information based on the choice between 'Wash by number of rooms' and 'Wash by %'.
+      properties:
+        washByRoom:
+          $ref: '#/components/schemas/washByRoomType'
+        washByPercent:
+          type: integer
+        daysPriorToArrival:
+          description: Number of days prior to arrival of a block or block's cutoff day.
+          type: integer
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
+    createSalesManagerGoals:
+      type: object
+      description: Request object for Creating Sales Manager Goal(s).
+      properties:
+        salesManagerGoals:
+          description: Collection of Sales Manager Goals information which should be created.
+          $ref: '#/components/schemas/salesManagerGoalsType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    cutoffCodeCriteria:
+      type: object
+      description: 'Object which will contain all the information of ''CutoffCodes''. '
+      properties:
+        cutoffCodes:
+          type: array
+          description: Cutoff Code, which will allow the user to define standard cutoff schedules. Cutoff schedule codes can be applied to blocks, to default number of cutoff days per stay date and room type. A default number number of cutoff days can be set on cutoff scheduler header level, and will be applied when no specific number of days has been defined for a date / room type combination within the cutoff schedule dates.
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/cutoffCodeType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    blockStatusCodeType:
+      type: object
+      description: Block status code information.
+      properties:
+        status:
+          description: Code and Description used to define a status e.g. (INT, TENT, DEF, CXL) (initial, tentative, definite, cancelled).
+          $ref: '#/components/schemas/codeDescriptionType'
+        roomStatusType:
+          description: Room status type selected for status code.
+          $ref: '#/components/schemas/blockStatusCodeStatusType'
+        cateringStatusType:
+          description: Catering status type selected for status code. When the OPS Sales & Catering license code is active, the Sales & Catering status type for the status code is displayed.
+          $ref: '#/components/schemas/blockStatusCodeStatusType'
+        defaultReservationType:
+          description: Default reservation type to be used for the status code. The reservation type and status code must have the same deduct/no deduct status.
+          $ref: '#/components/schemas/codeDescriptionType'
+        reasonType:
+          description: Reason type for every block reservation cancellation. Block Cancellation Reason, Block Refused Reasons, and Block Lost Reasons.
+          type: string
+        color:
+          description: Color code for the status code.
+          $ref: '#/components/schemas/statusColorType'
+        allowPickup:
+          description: Indicates if the rooms with this status code will be allowed for pickup or not.
+          type: boolean
+        returnToInventory:
+          description: Indicates if the rooms with this status code can be returned to availability or not.
+          type: boolean
+        starting:
+          description: Indicates if the status code is the starting status of the status cycle or not.
+          type: boolean
+        leadStatus:
+          description: Indicates the default status for all new leads. Only one lead status can be selected as the default.
+          type: boolean
+        logCatering:
+          description: Indicates if the status code logs the catering changes or not.
+          type: boolean
+        showDiary:
+          description: Indicates if the function diary will be shown within the Sales and Catering.
+          type: boolean
+        orderBy:
+          description: Indicates the order the status code is displayed in the status cycle.
+          type: integer
+        inUse:
+          description: Returns true if the status code is already used in Block / Event / Status Flow.
+          type: boolean
+        cateringInUse:
+          description: Returns true if the status code is already used in Events.
+          type: boolean
+        opportunity:
+          description: Indicates that the business block created with this Status is an Opportunity.
+          type: boolean
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    blockSalesAllowanceActivityLogType:
+      type: object
+      properties:
+        hotelId:
+          type: string
+          minLength: 0
+          maxLength: 20
+        logDate:
+          type: string
+          format: date-time
+          description: Date on which change happened.
+        salesAllowanceDate:
+          type: string
+          format: date-time
+          description: sales Allowance Date
+        oldQuantity:
+          type: number
+          description: Value of sales allowance before the change.
+        newQuantity:
+          type: number
+          description: Value of sales allowance after the change.
+        refActionId:
+          type: number
+        logUserId:
+          type: number
+          description: ID of user who made the change.
+        logUserName:
+          type: string
+          description: Name of user who made the change.
+        actionType:
+          type: string
+          minLength: 0
+          maxLength: 100
+          description: Action type.
+        ipAddress:
+          description: The IP Address of the machine that performed the activity
+          type: string
+          minLength: 0
+          maxLength: 20
+    salesManagersType:
+      type: object
+      description: Collection of Sales Managers information.
+      properties:
+        salesManager:
+          description: Sales Manager's information.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/salesManagerType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        count:
+          description: Total number of rows returned
+          type: integer
+    cutoffCodeDetail:
+      type: object
+      description: A representation of the single entry information for cutoff schedule detail.
+      properties:
+        id:
+          description: Cutoff Schedule detail Id.
+          type: integer
+        stayDate:
+          description: Contains stay date.
+          type: string
+          format: date
+          maxLength: 8
+        cutoffDays:
+          description: Contains the number of cutoff Days to be set for specific date and room type.
+          type: integer
+        roomType:
+          description: Contains the room types.
+          type: string
+    cutoffCodeType:
+      type: object
+      description: A representation of the information contained by a Cutoff Code.
+      properties:
+        cutoffCodeDetails:
+          type: array
+          description: Detail information of the Cutoff Code.
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/cutoffCodeDetailType'
+        hotelCode:
+          description: Hotel Code to which the cutoff Code belongs to.
+          type: string
+          minLength: 0
+          maxLength: 20
+        code:
+          description: Unique Cutoff Schedule Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        id:
+          description: Unique Cutoff Schedule Code Id
+          type: integer
+        description:
+          description: Description of the Cutoff Schedule Code.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        cutoffCodeStartDate:
+          type: string
+          description: Cutoff Schedule Code Start Date.
+          format: date
+        cutoffCodeEndDate:
+          type: string
+          description: Cutoff Schedule Code End Date.
+          format: date
+        defaultDays:
+          description: Cutoff Schedule Code Default Days. This value will be used if no pre defined schedule exist for a date or room type.
+          type: integer
+    washScheduleDetails:
+      type: object
+      description: Response object for FetchWashSchedule operation which will contain all the information of 'WashCodes' like Days prior to arrival, Occupancy detail, Sell limit and Wash by percent value if exists.
+      properties:
+        washCodes:
+          description: Collection of Block Wash Schedule fetched.
+          $ref: '#/components/schemas/washCodesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    managedByOptions:
+      description: Describes of the Configuration is Managed by Enterprise or Property.
+      type: string
+      enum:
+      - EnterpriseManaged
+      - PropertyManaged
+      - EnterpriseEnforced
+      - PropertyOverridden
+    salesManagerGoalsInfo:
+      type: object
+      description: You can use this API to retrieve individual Sales Manager Goals for a hotel, you can narrow the results using different search criteria
+      properties:
+        salesManagerGoals:
+          description: Collection of Sales Manager Goals information.
+          $ref: '#/components/schemas/salesManagerGoalsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    blockStatusCodeStatusType:
+      type: string
+      description: Simple type for block status code's room status type and catering status type. Valid status values are Waitlist,Cancel,Lost,Refused,Actual,Inquiry,NonDeductInv,DeductInv and Referral.
+      enum:
+      - Waitlist
+      - Cancel
+      - Lost
+      - Refused
+      - Actual
+      - Inquiry
+      - NonDeductInv
+      - DeductInv
+      - Referral
+    uniqueID_Type:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
+    blockCutoffScheduleRangeType:
+      type: object
+      description: Object to create block cutoff schedule details by providing date range, room type, days of week and cutoff days.
+      properties:
+        hotelId:
+          description: Contains Hotel Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        cutoffCodeId:
+          description: Contains Cutoff Schedule Code Id.
+          type: integer
+        roomTypes:
+          description: Contains Room Types.
+          type: array
+          maxItems: 20
+          items:
+            type: string
+            minLength: 0
+            maxLength: 20
+        cutoffDays:
+          description: Number of cutoff Days.
+          type: integer
+        overwriteExistingcutoffschedule:
+          description: Flag to indicate if the cutoff schedule already exists for criteria then overwrite the records.
+          type: boolean
+        stayDateFrom:
+          description: The starting value of the date range.
+          type: string
+          format: date
+        stayDateTo:
+          description: The ending value of the date range.
+          type: string
+          format: date
+        sunday:
+          type: boolean
+        monday:
+          type: boolean
+        tuesday:
+          type: boolean
+        wednesday:
+          type: boolean
+        thursday:
+          type: boolean
+        friday:
+          type: boolean
+        saturday:
+          type: boolean
     searchSalesManagersMultipleHotelIdsRequest:
       type: object
       properties:
@@ -3681,18 +3274,28 @@ components:
           description: Last name required to fetch Sales Manager information.
       required:
       - hotelIds
-    currencyAmountType:
+    blockSalesAllowanceRange:
       type: object
-      description: A monetary value expressed with a currency code.
+      description: Operation to a create block sales allowance with date range.
       properties:
-        amount:
-          description: A monetary amount.
-          type: number
-        currencyCode:
-          description: Provides a currency code to reflect the currency in which an amount may be expressed.
-          type: string
-          minLength: 3
-          maxLength: 3
+        criteria:
+          description: Criteria to fetch block sales allowance.
+          $ref: '#/components/schemas/blockSalesAllowanceRangeType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    washScheduleCriteria:
+      type: object
+      description: Operation to create new Wash Schedule Configuration under the selected property.
+      properties:
+        washCodes:
+          description: Wash Schedule Configuration to be created.
+          $ref: '#/components/schemas/washCodesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
     blockSalesAllowanceActivityLogListType:
       type: object
       properties:
@@ -3719,6 +3322,292 @@ components:
         count:
           description: Total number of rows returned
           type: integer
+    codeDescriptionType:
+      type: object
+      description: This contains a generic code and description information.
+      properties:
+        code:
+          description: Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: description.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    nextBlockStatusCodeDetails:
+      type: object
+      description: Response object for fetching next block status codes.
+      properties:
+        nextBlockStatusCodeList:
+          description: List of block status code flow which compose of a particular status code and its selected next statuses. Moreover, available next status can be not included if ConfigureOnly is set to true.
+          $ref: '#/components/schemas/nextBlockStatusCodeListType'
+        blockStatusCodeMasterList:
+          description: Block status code information e.g. Color, Description, etc.
+          $ref: '#/components/schemas/blockStatusCodeListType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    blockSalesAllowanceType:
+      type: object
+      description: Contains single entry information for Block's Sales Allowance.
+      properties:
+        hotelId:
+          description: Contains Hotel Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        salesAllowanceDate:
+          description: Contains sales allowance date.
+          type: string
+          format: date
+          maxLength: 8
+        roomType:
+          description: Contains room type.
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomPool:
+          description: Contains room pool code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        allowance:
+          description: Contains allocated number of rooms for allowance.
+          type: integer
+        booked:
+          description: Contains number of rooms are booked/consumed from sales allowance.
+          type: integer
+        overBooked:
+          description: Contains number of rooms are overbooked from sales allowance.
+          type: integer
+        cutoffDate:
+          description: Contains cutoff date for sales allowance.
+          type: string
+          format: date
+          maxLength: 8
+    blockSalesAllowanceActivityLog:
+      type: object
+      description: Response object for fetching block sales allowance activity log.
+      properties:
+        blockSalesAllowance:
+          description: Response object for Block Sales Allowance activity Log.
+          $ref: '#/components/schemas/blockSalesAllowanceActivityLogListType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    washCodesType:
+      type: array
+      description: Wash Code, which will allow the user to define standard schedules that can be attached to blocks prior to the block's cutoff date to automate this process.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/washCodeType'
+    blockCutoffScheduleRange:
+      type: object
+      description: Operation to a create block cutoff schedule details by providing date range, room type, days of week and cutoff days.
+      properties:
+        criteria:
+          description: Criteria to create block cutoff schedule.
+          $ref: '#/components/schemas/blockCutoffScheduleRangeType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    blockSalesAllowanceRangeType:
+      type: object
+      description: Indicates the block sales allowance for a date range.
+      properties:
+        hotelId:
+          description: Contains Hotel Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        quantity:
+          description: Contains quantity for sales allowance.
+          type: integer
+        cutoffDays:
+          description: Number of days before sales allowance date, after which unused quantity should set to 0.
+          type: integer
+        incrementFlag:
+          description: Flag to indicate if the sales allowance update is absolute or relative to the current value.
+          type: boolean
+        overwriteExistingSalesAllowance:
+          description: Flag to indicate if the sales allowance already exists for criteria then overwrite the records.
+          type: boolean
+        start:
+          description: The starting value of the date range.
+          type: string
+          format: date
+          maxLength: 8
+        end:
+          description: The ending value of the date range.
+          type: string
+          format: date
+          maxLength: 8
+        sunday:
+          type: boolean
+        monday:
+          type: boolean
+        tuesday:
+          type: boolean
+        wednesday:
+          type: boolean
+        thursday:
+          type: boolean
+        friday:
+          type: boolean
+        saturday:
+          type: boolean
+        validateExistingSalesAllowance:
+          description: Flag to validate existing sales allowance records within criteria.
+          type: boolean
+    salesManagerGoalsType:
+      type: array
+      description: Detail Information about Sales Manager's goal.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/salesManagerGoalType'
+    nextBlockStatusCodeListType:
+      type: array
+      description: Block status code with its next configured and/or available status codes.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/nextBlockStatusCodeType'
+    searchSalesManagersRequest:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: Indicates maximum number of records a Web Service should return.
+        offset:
+          type: integer
+          default: 0
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+        ownerCodes:
+          type: array
+          maxItems: 4000
+          items:
+            type: string
+          description: ''
+        firstName:
+          type: string
+          description: First name required to fetch Sales Manager information.
+        lastName:
+          type: string
+          description: Last name required to fetch Sales Manager information.
+    nextBlockStatusCodeType:
+      type: object
+      description: Next block status codes information. Contains list of all configured and/or available next status codes for a particular status code.
+      properties:
+        nextConfiguredStatusList:
+          description: List of all configured next status codes for the main status code.
+          $ref: '#/components/schemas/nextBlockStatusCodeInfoListType'
+        nextAvailableStatusList:
+          description: List of all available next status codes for the main status code.
+          $ref: '#/components/schemas/nextBlockStatusCodeInfoListType'
+        status:
+          description: Main block status code.
+          type: string
+          minLength: 0
+          maxLength: 20
+    washCodeType:
+      type: object
+      description: A representation of the information contained by a Wash Code.
+      properties:
+        description:
+          description: Description of the Wash Code.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        washCodeDetails:
+          description: Detail information of the Wash Code. It will contain number of rooms to be washed which is linked to a block by a Percentage or Specific number of rooms.
+          $ref: '#/components/schemas/washCodeDetailsType'
+        hotelId:
+          description: Hotel Code to which the Wash Code belongs to.
+          type: string
+          minLength: 0
+          maxLength: 20
+        code:
+          description: Wash Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    status:
+      type: object
+      description: Response Body.
+      properties:
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
+    blockSalesAllowanceListType:
+      type: array
+      description: Block's sales allowance information.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/blockSalesAllowanceType'
+    blockStatusCodeListType:
+      type: array
+      description: Block status code information.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/blockStatusCodeType'
+    currencyAmountType:
+      type: object
+      description: A monetary value expressed with a currency code.
+      properties:
+        amount:
+          description: A monetary amount.
+          type: number
+        currencyCode:
+          description: Provides a currency code to reflect the currency in which an amount may be expressed.
+          type: string
+          minLength: 3
+          maxLength: 3
     cutoffScheduleDetails:
       type: object
       description: 'Object which will contain all the information of ''CutoffCodes''. '
@@ -3751,28 +3640,63 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    blockSalesAllowanceRange:
+    blockStatusCodeDetails:
       type: object
-      description: Operation to a create block sales allowance with date range.
+      description: Request object for updating block status code.
       properties:
-        criteria:
-          description: Criteria to fetch block sales allowance.
-          $ref: '#/components/schemas/blockSalesAllowanceRangeType'
+        blockStatusCode:
+          description: Block status code information to be applied.
+          $ref: '#/components/schemas/blockStatusCodeType'
         links:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    washScheduleDetails:
+    warningType:
       type: object
-      description: Response object for FetchWashSchedule operation which will contain all the information of 'WashCodes' like Days prior to arrival, Occupancy detail, Sell limit and Wash by percent value if exists.
+      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
       properties:
-        washCodes:
-          description: Collection of Block Wash Schedule fetched.
-          $ref: '#/components/schemas/washCodesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
+        value:
+          type: string
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
+          type: string
+          maxLength: 2000
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+          type: string
+          minLength: 0
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+          maxLength: 2000
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+          maxLength: 2000
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+          maxLength: 2000
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+          maxLength: 2000
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        rph:
+          description: Reference Place Holder used as an index for this warning.
+          type: string
+          minLength: 1
+          maxLength: 8
     blockSalesAllowance:
       type: object
       description: Response object for FetchBlockSalesAllowance operation which will contain all the information of sales allowance.
@@ -3784,43 +3708,113 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    washScheduleCriteria:
+    salesManagerType:
       type: object
-      description: Operation to create new Wash Schedule Configuration under the selected property.
+      description: Sales Manager's information.
       properties:
-        washCodes:
-          description: Wash Schedule Configuration to be created.
-          $ref: '#/components/schemas/washCodesType'
+        hotelId:
+          description: Hotel Code of the Sales Manager
+          type: string
+          minLength: 0
+          maxLength: 20
+        nameId:
+          description: Unique Name ID for the Sales Manager
+          $ref: '#/components/schemas/uniqueID_Type'
+        salesManagerCode:
+          description: Sales Manager's code
+          type: string
+          minLength: 0
+          maxLength: 20
+        name:
+          description: Sales Manager's name
+          type: string
+        groupRoomWithCatering:
+          description: Indicates if the Sales manager has Group Room with Catering Goal
+          type: boolean
+        transientRoom:
+          description: Indicates if the Sales manager has Transient Room Goal
+          type: boolean
+        activity:
+          description: Indicates if the Sales manager has Activity Goal
+          type: boolean
+    nextBlockStatusCodeInfoType:
+      type: object
+      description: Information of next block status code.
+      properties:
+        status:
+          description: Next block status code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        order:
+          description: Order of next block status code
+          type: integer
+    washCodeDetailsType:
+      type: array
+      description: Wash Code Detail for a single entry.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/washCodeDetailType'
+    operaVersion:
+      type: object
+      description: Response for Ping operation.
+      properties:
+        operaVersion:
+          description: Opera version number.
+          $ref: '#/components/schemas/operaVersionNumberType'
         links:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    washByRoomType:
+    cutoffCodeDetailType:
       type: object
-      description: A representation of the single entry information for 'Wash by number of rooms' type.
+      description: Cutoff Code Detail for a single entry
       properties:
-        occupancy1:
-          description: Contains the number of 'Occupancy1'. Based on the parameter it should be replaced by the number of 'Rooms'.
-          type: integer
-        occupancy2:
-          description: Contains the number of 'Occupancy2'.
-          type: integer
-        occupancy3:
-          description: Contains the number of 'Occupancy3'.
-          type: integer
-        occupancy4:
-          description: Contains the number of 'Occupancy4'.
-          type: integer
-        sell:
-          description: Contains the available Sell Limit rooms for a Sell Limit block.
-          type: integer
+        cutoffCodeDetail:
+          $ref: '#/components/schemas/cutoffCodeDetail'
+    operaVersionNumberType:
+      type: string
+      description: Current Opera Version Number
+      minLength: 0
+      maxLength: 40
+  responses:
+    '503':
+      description: Service Unavailable
+    '401':
+      description: Unauthorized
+    '413':
+      description: Request Entity Too Large
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '403':
+      description: Forbidden
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '405':
+      description: Method not allowed
+    '406':
+      description: Not acceptable.
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '502':
+      description: Bad Gateway
+    '414':
+      description: Request URI Too Large
   parameters:
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
-      in: header
-      schema:
-        type: string
     x-app-key:
       name: x-app-key
       description: Client or Partner's Application Key
@@ -3829,19 +3823,6 @@ components:
       schema:
         type: string
         pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    x-request-id:
-      name: x-request-id
-      description: Request Id of an incoming request
-      in: header
-      schema:
-        type: string
-        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
-      in: header
-      schema:
-        type: string
     x-hotelid:
       name: x-hotelid
       description: Mandatory parameter to identify the hotel code where the end user is logged in
@@ -3849,9 +3830,16 @@ components:
       required: true
       schema:
         type: string
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
+      in: header
+      schema:
+        type: string
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
       in: header
       schema:
         type: string
@@ -3868,6 +3856,18 @@ components:
       description: Bearer token that needs to be passed which is generated post user authentication
       in: header
       required: true
+      schema:
+        type: string
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
       schema:
         type: string
 externalDocs:

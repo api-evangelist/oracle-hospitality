@@ -6437,7 +6437,92 @@ paths:
         required: true
 components:
   schemas:
-    locatorCodeType:
+    attachPreferenceType:
+      type: object
+      description: Auto attach preference element.
+      properties:
+        type:
+          description: Preference group.
+          type: string
+          minLength: 0
+          maxLength: 20
+        code:
+          description: Preference code..
+          type: string
+          minLength: 0
+          maxLength: 20
+    traceTextChanges:
+      type: object
+      description: Request object for changing trace texts.
+      properties:
+        traceTexts:
+          description: Trace texts to be changed.
+          $ref: '#/components/schemas/traceTextChangesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    mergeCodesType:
+      type: array
+      description: A Merge Code.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/mergeCodeType'
+    expressionFieldType:
+      type: object
+      properties:
+        fieldName:
+          type: string
+          minLength: 0
+          maxLength: 40
+        fieldDescription:
+          type: string
+          minLength: 0
+          maxLength: 2000
+        tableName:
+          type: string
+          minLength: 0
+          maxLength: 40
+        virtual:
+          type: boolean
+        dataType:
+          type: string
+          minLength: 0
+          maxLength: 40
+        lovSelected:
+          type: string
+          minLength: 0
+          maxLength: 20
+    scriptType:
+      type: object
+      description: A Script associated to either Chain, CRO or Property and to a Language and/or Membership Type.
+      properties:
+        scriptId:
+          description: Unique identifier of a Script.
+          $ref: '#/components/schemas/uniqueID_Type'
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        membershipType:
+          description: Membership Type the script belonged to.
+          type: string
+          minLength: 0
+          maxLength: 20
+        script:
+          description: Script.
+          type: string
+          format: byte
+        mergeCodes:
+          description: Merge Codes in the script.
+          $ref: '#/components/schemas/mergeCodesType'
+        type:
+          description: Type of script.
+          $ref: '#/components/schemas/scriptTypeType'
+        locations:
+          description: Collection of locations where Script is to be used.
+          $ref: '#/components/schemas/scriptLocationsType'
+    locatorCodeTemplateType:
       type: object
       description: Common code type for code, description
       properties:
@@ -6457,30 +6542,14 @@ components:
         inactive:
           description: Indicates whether the locator code is active or not
           type: boolean
-        hotelId:
-          description: Property for which the locator code belongs to.
-          type: string
-          minLength: 0
-          maxLength: 20
         managedBy:
           $ref: '#/components/schemas/managedByOptions'
-    ratePlanRatingsInfo:
+    retrievedGuestMessages:
       type: object
-      description: Request object for modifying rate plan codes and their rating details.
+      description: Response object for information regarding guest message.
       properties:
-        ratePlanRatingsInfo:
-          $ref: '#/components/schemas/ratePlanRatingsInfoType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    ratePlanRatings:
-      type: object
-      description: Response object for fetching the rate codes and their rating details.
-      properties:
-        ratePlanRatingsInfo:
-          description: List of rate plan codes and their rating details.
-          $ref: '#/components/schemas/ratePlanRatingsInfoType'
+        guestMessages:
+          $ref: '#/components/schemas/guestMessageCodesType'
         totalPages:
           description: Evaluated total page count based on the requested max fetch count.
           type: integer
@@ -6500,6 +6569,367 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
+    configOccupancyLevelType:
+      type: object
+      description: This type holds the upsell amount by occupancy levels. This is used when upsell rule is being set bu occupancy levels
+      properties:
+        level:
+          description: Used to specify the occupancy level id.
+          type: integer
+        levelDescription:
+          description: Used to specify the occupancy level description.
+          type: string
+          minLength: 0
+          maxLength: 20
+        levelUpsellAmount:
+          description: Used to specify the occupancy level upsell amount.
+          type: number
+    globalAlertsInfo:
+      type: object
+      description: Response object for fetching Global Alerts.
+      properties:
+        globalAlerts:
+          description: Collection of Global Alerts information details
+          $ref: '#/components/schemas/globalAlertsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    attachTraceType:
+      type: object
+      description: Auto attach trace element.
+      properties:
+        traceText:
+          description: The trace text that will be sent to the selected department(s) when Trace is selected as the Rule Type.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        departments:
+          description: List of departments codes.
+          $ref: '#/components/schemas/codeListType'
+    translationsTextType:
+      type: array
+      description: Language code for the translation.
+      maxItems: 4000
+      items:
+        type: object
+        properties:
+          value:
+            type: string
+            description: Used for Character Strings, length 0 to 2000.
+            minLength: 0
+            maxLength: 2000
+          language:
+            description: Language identification.
+            type: string
+            minLength: 0
+            maxLength: 20
+        description: Language code for the translation.
+    hotelTurnAwayCodesType:
+      type: array
+      description: Turnaway code details for hotels.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/hotelTurnAwayCodeType'
+    codeListType:
+      type: array
+      maxItems: 4000
+      items:
+        type: string
+        minLength: 0
+        maxLength: 20
+    roomSpecialRatingsInfoType:
+      type: array
+      description: Collection of rooms specials and their ratings.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/roomSpecialRatingInfoType'
+    traceTextsCopy:
+      type: object
+      description: Request object for copying trace texts.
+      properties:
+        criteria:
+          description: Criteria for copying trace texts.
+          $ref: '#/components/schemas/copyTraceTextsCriteriaType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    codeInfoType:
+      type: object
+      description: ''
+      properties:
+        description:
+          type: string
+          minLength: 0
+          maxLength: 80
+        addtionalCodeInfo:
+          $ref: '#/components/schemas/addtionalCodeInfoType'
+        hotelId:
+          type: string
+          minLength: 0
+          maxLength: 20
+        code:
+          type: string
+          minLength: 0
+          maxLength: 20
+    guestMessages:
+      type: object
+      description: Request object for creating a new guest message.
+      properties:
+        guestMessages:
+          $ref: '#/components/schemas/guestMessageCodesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    basedOnMembershipType:
+      type: object
+      description: Auto attach based on membership.
+      properties:
+        membershipType:
+          description: The membership type that will be required for the element type (one that is based on Membership condition) to auto attach to the reservation.
+          type: string
+          minLength: 0
+          maxLength: 20
+        level:
+          description: The membership level of the selected membership type.
+          type: string
+          minLength: 0
+          maxLength: 20
+    logicalOperatorType:
+      type: string
+      enum:
+      - And
+      - Or
+    attachElementsType:
+      type: object
+      description: Elements to be attached to the rule.
+      properties:
+        preference:
+          description: Auto attach preference.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/attachPreferenceType'
+        trace:
+          description: Auto attach trace.
+          $ref: '#/components/schemas/attachTraceType'
+        code:
+          description: List of attached elements codes.
+          type: array
+          maxItems: 4000
+          items:
+            type: string
+            minLength: 0
+            maxLength: 20
+        type:
+          description: Auto attach rule type.
+          $ref: '#/components/schemas/resvAutoAttchTypeCode'
+        description:
+          description: Auto attach rule type description.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    uniqueID_Type:
+      type: object
+      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
+      properties:
+        id:
+          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
+          type: string
+          minLength: 0
+          maxLength: 80
+        type:
+          description: A reference to the type of object defined by the UniqueID element.
+          type: string
+          minLength: 0
+          maxLength: 40
+    eCouponCopyType:
+      type: object
+      description: Copy eCoupons from one Property to one or multiple properties.
+      properties:
+        hotelId:
+          description: Source property from which copy operation will happen.
+          type: string
+          minLength: 0
+          maxLength: 20
+        eCouponCodes:
+          description: List of eCoupon codes to copy from souce to list of target properties.
+          $ref: '#/components/schemas/codeListType'
+        targetHotelCodes:
+          description: List of target properties to which the selected eCoupons will be copied.
+          $ref: '#/components/schemas/codeListType'
+    alertCodeTemplates:
+      type: object
+      description: Response object for information regarding alert templates.
+      properties:
+        alertCodeTemplates:
+          description: Collection of alert code templates and their information.
+          $ref: '#/components/schemas/alertTemplatesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    guestMessageCodeType:
+      type: object
+      description: A template for guest message.
+      properties:
+        code:
+          description: Code for the guest message type
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: Description for guest message type.
+          $ref: '#/components/schemas/translationTextType2000'
+        displaySequence:
+          description: Sequence for guest message template.
+          type: number
+        hotelId:
+          description: Sequence for guest message.
+          type: string
+          minLength: 0
+          maxLength: 20
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    locatorCodesType:
+      type: array
+      description: Collection of locator codes.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/locatorCodeType'
+    copyGlobalAlertType:
+      type: object
+      description: Copy Global Alerts criteria from one property to another property
+      properties:
+        resvAlertIds:
+          description: Each Reservation Alert details copy to target properties
+          $ref: '#/components/schemas/uniqueIDListType'
+        targetHotelCodes:
+          description: Copy and store reservation alert details on the destination properties
+          $ref: '#/components/schemas/codeListType'
+    traceTextChangeType:
+      type: object
+      description: Type provides trace text that will be modified.
+      properties:
+        originalTraceText:
+          description: Original settings of the trace text that will be changed.
+          $ref: '#/components/schemas/traceTextType'
+        newTraceText:
+          description: New settings of the trace text.
+          $ref: '#/components/schemas/traceTextType'
+    globalAlertType:
+      type: object
+      description: A property level global alert attached with global alert types.
+      properties:
+        alertId:
+          type: number
+        hotelId:
+          type: string
+          minLength: 0
+          maxLength: 20
+        alertCode:
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          type: string
+          minLength: 0
+          maxLength: 2000
+        area:
+          type: string
+          minLength: 0
+          maxLength: 20
+        queryId:
+          type: number
+        notifications:
+          $ref: '#/components/schemas/notificationType'
+        conditions:
+          $ref: '#/components/schemas/conditionGroupType'
+        welcomeOffer:
+          description: Determines the Global Alert is a Welcome Offer Alert or not.
+          type: boolean
+        stopCheckInCheckOut:
+          description: Indicates the Reservation Stop Check In/Check Out Global Alert.
+          type: boolean
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    alertCodes:
+      type: object
+      description: Response object for information regarding alert templates.
+      properties:
+        alerts:
+          description: Collection of alert code templates and their information.
+          $ref: '#/components/schemas/alertCodesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    ratePlanRatingsInfo:
+      type: object
+      description: Request object for modifying rate plan codes and their rating details.
+      properties:
+        ratePlanRatingsInfo:
+          $ref: '#/components/schemas/ratePlanRatingsInfoType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    roomFeatureRatings:
+      type: object
+      description: Request object for modifying room features rating details.
+      properties:
+        roomFeatureRatingsInfo:
+          $ref: '#/components/schemas/roomFeatureRatingsInfoType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    roomRatingInfoType:
+      type: object
+      description: Rating details for a room.
+      properties:
+        hotelId:
+          description: Property code of the rooms.
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomId:
+          description: Room number whose ratings are fetched.
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomClass:
+          description: Room Class of the room.
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomType:
+          description: Room Type and its description of the room.
+          $ref: '#/components/schemas/codeDescriptionType'
+        rating:
+          description: Ratings associated with the room.
+          $ref: '#/components/schemas/roomRatingType'
+    phoneNumberType:
+      type: string
+      description: Phone number
+      minLength: 0
+      maxLength: 40
+    expressionParameterType:
+      type: object
+      properties:
+        parameter:
+          type: array
+          maxItems: 3
+          items:
+            type: string
+            minLength: 0
+            maxLength: 40
+        functionIdOne:
+          type: number
+        functionIdTwo:
+          type: number
     masterType:
       type: string
       enum:
@@ -6530,1088 +6960,6 @@ components:
       - RateCode
       - OutOfOrderReason
       - Block
-    operaVersion:
-      type: object
-      description: Response for Ping operation.
-      properties:
-        operaVersion:
-          description: Opera version number.
-          $ref: '#/components/schemas/operaVersionNumberType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    resvAutoAttchBasedOnCode:
-      type: string
-      enum:
-      - Membership
-      - Preference
-      - RateCode
-      - RoomType
-      - MinAdults
-      - MinChildren
-      - KeywordType
-      - Special
-      - Vip
-      - Condition
-      description: Available only when Keyword Functionality is active.
-    locatorCodesTemplateType:
-      type: array
-      description: Collection of locator codes.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/locatorCodeTemplateType'
-    configOccupancyLevelsType:
-      type: array
-      description: This type holds a collection of upsell amounts by occupancy levels.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/configOccupancyLevelType'
-    templateTurnAwayCodes:
-      type: object
-      description: Response object for fetching template turnaway codes.
-      properties:
-        turnAwayCodes:
-          description: Collection of template turnaway codes and their information.
-          $ref: '#/components/schemas/templateTurnAwayCodesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    translationTextType2000:
-      type: object
-      description: Contains Multiple translated texts and language codes.
-      properties:
-        defaultText:
-          description: Default text with Character length from 0 to 2000.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        translatedTexts:
-          description: List of translated text and language codes.
-          $ref: '#/components/schemas/translationsTextType'
-    membershipLevelRatingsInfoType:
-      type: array
-      description: Collection of membership levels and their ratings.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/membershipLevelRatingInfoType'
-    hotelTurnAwayCodesType:
-      type: array
-      description: Turnaway code details for hotels.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/hotelTurnAwayCodeType'
-    roomRatingsInfo:
-      type: object
-      description: Request object for modifying room rating details.
-      properties:
-        roomRatingsInfo:
-          $ref: '#/components/schemas/roomRatingsInfoType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    roomFeatureRatingInfoType:
-      type: object
-      description: Rating details for room features.
-      properties:
-        hotelId:
-          description: Property code of the room feature.
-          type: string
-          minLength: 0
-          maxLength: 20
-        roomFeature:
-          description: Room feature along with its description whose rating is fetched.
-          $ref: '#/components/schemas/codeDescriptionType'
-        rating:
-          description: Ratings associated with the room feature.
-          $ref: '#/components/schemas/roomFeatureRatingType'
-    traceTextChangeType:
-      type: object
-      description: Type provides trace text that will be modified.
-      properties:
-        originalTraceText:
-          description: Original settings of the trace text that will be changed.
-          $ref: '#/components/schemas/traceTextType'
-        newTraceText:
-          description: New settings of the trace text.
-          $ref: '#/components/schemas/traceTextType'
-    copyConfigurationCodeType:
-      type: object
-      description: Information needed to copy configuration code from one property to the other.
-      properties:
-        targetHotelCode:
-          description: Property to which configuration code type to be copied to.
-          type: array
-          maxItems: 4000
-          items:
-            type: string
-            minLength: 0
-            maxLength: 20
-        sourceHotelCode:
-          description: Code that is to be copied.
-          type: string
-          minLength: 0
-          maxLength: 20
-        code:
-          description: Source hotel code from which code is to be copied from.
-          type: string
-          minLength: 0
-          maxLength: 20
-    roomFeatureRatingsInfoType:
-      type: array
-      description: Collection of rooms features and their ratings.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/roomFeatureRatingInfoType'
-    hotelTurnAwayCodeType:
-      type: object
-      description: Base details common between hotel and template TurnAway codes.
-      properties:
-        code:
-          description: TurnAway code
-          type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          description: Description of the TurnAway code.
-          $ref: '#/components/schemas/translationTextType50'
-        displaySequence:
-          description: Sequence of TurnAway code.
-          type: number
-        turnAwayType:
-          description: TurnAway type. e.g. Denial,Regret.
-          $ref: '#/components/schemas/turnAwayTypeType'
-        inactive:
-          description: Inactive flag for a TurnAway code.
-          type: boolean
-        canDelete:
-          description: Determines whether this TurnAway code can be deleted.
-          type: boolean
-        hotelId:
-          description: Hotel code that the turnaway code belongs to.
-          type: string
-          minLength: 0
-          maxLength: 20
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-    autoAttachElements:
-      type: object
-      description: Add configuration rule(s) that specify the elements to be automatically attached to the reservation.
-      properties:
-        autoAttachRules:
-          description: List of configuration rule(s) to be added to the configuration of resort.
-          $ref: '#/components/schemas/autoAttachElementsConfigType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    attachElementsType:
-      type: object
-      description: Elements to be attached to the rule.
-      properties:
-        preference:
-          description: Auto attach preference.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/attachPreferenceType'
-        trace:
-          description: Auto attach trace.
-          $ref: '#/components/schemas/attachTraceType'
-        code:
-          description: List of attached elements codes.
-          type: array
-          maxItems: 4000
-          items:
-            type: string
-            minLength: 0
-            maxLength: 20
-        type:
-          description: Auto attach rule type.
-          $ref: '#/components/schemas/resvAutoAttchTypeCode'
-        description:
-          description: Auto attach rule type description.
-          type: string
-          minLength: 0
-          maxLength: 2000
-    guestMessages:
-      type: object
-      description: Request object for creating a new guest message.
-      properties:
-        guestMessages:
-          $ref: '#/components/schemas/guestMessageCodesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-      required:
-      - type
-      - title
-    guestMessageTemplates:
-      type: object
-      description: Response object for information regarding guest message templates.
-      properties:
-        guestMessageTemplates:
-          $ref: '#/components/schemas/guestMessageTemplatesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    alertCodesType:
-      type: array
-      description: Collection of hotel level alert codes with attached alert types.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/alertCodeType'
-    membershipLevelRatingsInfo:
-      type: object
-      description: Response object for fetching the membership levels and their rating details.
-      properties:
-        membershipLevelRatingsInfo:
-          description: List of membership levels and their rating details.
-          $ref: '#/components/schemas/membershipLevelRatingsInfoType'
-        totalPages:
-          description: Evaluated total page count based on the requested max fetch count.
-          type: integer
-        offset:
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-          type: integer
-        limit:
-          description: Indicates maximum number of records a Web Service should return.
-          type: integer
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    expressionFieldType:
-      type: object
-      properties:
-        fieldName:
-          type: string
-          minLength: 0
-          maxLength: 40
-        fieldDescription:
-          type: string
-          minLength: 0
-          maxLength: 2000
-        tableName:
-          type: string
-          minLength: 0
-          maxLength: 40
-        virtual:
-          type: boolean
-        dataType:
-          type: string
-          minLength: 0
-          maxLength: 40
-        lovSelected:
-          type: string
-          minLength: 0
-          maxLength: 20
-    attachTraceType:
-      type: object
-      description: Auto attach trace element.
-      properties:
-        traceText:
-          description: The trace text that will be sent to the selected department(s) when Trace is selected as the Rule Type.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        departments:
-          description: List of departments codes.
-          $ref: '#/components/schemas/codeListType'
-    colorType:
-      type: string
-      description: Color configuration type. This color configuration provides a visual category of entities.
-      enum:
-      - Red
-      - DarkRed
-      - Green
-      - DarkGreen
-      - LightGreen
-      - Orange
-      - White
-      - Yellow
-      - DarkYellow
-      - Purple
-      - Brown
-      - Gray
-      - Aqua
-      - Chocolate
-      - Blue
-      - LightBlue
-      - DarkBlue
-      - Cyan
-      - DarkCyan
-      - Magenta
-      - DarkMagenta
-      - Black
-      - Deepteal
-      - Sunsetorange
-      - Aquasky
-      - Mochabrown
-      - Mossgreen
-      - Rosewood
-      - Claybrown
-      - Softlavender
-      - Olivegold
-      - Plumpurple
-      - Mistblue
-      - Forestgreen
-      - Dustyviolet
-      - Oceanblue
-      - Copper
-    roomSpecialRatingType:
-      type: string
-      description: Possible Room special rating values.
-      enum:
-      - MostImportant
-      - Important
-      - SomewhatImportant
-      - LessImportant
-      - LeastImportant
-      - NoValueSet
-    globalAlertsInfo:
-      type: object
-      description: Response object for fetching Global Alerts.
-      properties:
-        globalAlerts:
-          description: Collection of Global Alerts information details
-          $ref: '#/components/schemas/globalAlertsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    configUpsellRulesType:
-      type: array
-      description: This type holds a collection of upsell rules.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/configUpsellRuleType'
-    reservationProtectionCondition:
-      type: object
-      description: Reservation protection condition in which a reservation would be automatically marked as protected for the property.
-      properties:
-        reservationProtectionCondition:
-          description: Reservation protection condition in which a reservation would be automatically marked as protected for the property.
-          maxItems: 4000
-          $ref: '#/components/schemas/reservationProtectionConditionType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    globalAlertsCopy:
-      type: object
-      description: Request object for copying Global Alerts.
-      properties:
-        copyInstructions:
-          description: Copy Global Alert type to copy from one Hotel to another Hotel.
-          $ref: '#/components/schemas/copyGlobalAlertType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    retrievedGuestMessages:
-      type: object
-      description: Response object for information regarding guest message.
-      properties:
-        guestMessages:
-          $ref: '#/components/schemas/guestMessageCodesType'
-        totalPages:
-          description: Evaluated total page count based on the requested max fetch count.
-          type: integer
-        offset:
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-          type: integer
-        limit:
-          description: Indicates maximum number of records a Web Service should return.
-          type: integer
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    roomRatingType:
-      type: string
-      description: Possible room rating values.
-      enum:
-      - MostDesirable
-      - Desirable
-      - SomewhatDesirable
-      - LessDesirable
-      - LeastDesirable
-      - NoValueDefined
-    resvAutoAttchTypeCode:
-      type: string
-      enum:
-      - Item
-      - Product
-      - ResvPreference
-      - Trace
-      - RoomFeatures
-      - Preference
-      - Promotions
-      - AdvancedDiscount
-      description: Available only when Reservation Discounts and Advanced Discounts are active
-    mergeCodesType:
-      type: array
-      description: A Merge Code.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/mergeCodeType'
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
-      type: object
-      properties:
-        type:
-          type: string
-          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
-        title:
-          type: string
-          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
-        status:
-          type: integer
-          description: HTTP status code for this occurrence of the problem, set by the origin server.
-        detail:
-          type: string
-          description: Human-readable description specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
-        o:errorCode:
-          type: string
-          description: Application error code, which is different from HTTP error code.
-        o:errorPath:
-          type: string
-          description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
-      required:
-      - type
-      - title
-    notificationType:
-      type: object
-      description: Global Alert Notification type for Screen, Print, email and text
-      properties:
-        screen:
-          type: boolean
-        print:
-          type: boolean
-        printerName:
-          type: string
-          minLength: 0
-          maxLength: 20
-        reportName:
-          type: string
-          minLength: 0
-          maxLength: 80
-        email:
-          type: boolean
-        emailAddress:
-          type: string
-          minLength: 0
-          maxLength: 100
-        department:
-          type: string
-          minLength: 0
-          maxLength: 20
-        textMessage:
-          type: boolean
-        phoneNumber:
-          $ref: '#/components/schemas/phoneNumberType'
-    copyTraceTextsCriteriaType:
-      type: object
-      description: Copy Trace texts criteria type to copy multiple trace texts from one Hotel to another Hotel.
-      properties:
-        targetHotels:
-          description: List of hotel codes for which the trace texts needs to be copied.
-          $ref: '#/components/schemas/hotelCodeListType'
-        traceTexts:
-          description: List of Trace Texts that will be copied.
-          $ref: '#/components/schemas/traceTextsType'
-    globalAlerts:
-      type: object
-      description: Request object for creating a new Global Alert.
-      properties:
-        globalAlerts:
-          description: Global Alert details to be created.
-          $ref: '#/components/schemas/globalAlertsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    roomFeatureRatingsInfo:
-      type: object
-      description: Response object for fetching the room features and their rating details.
-      properties:
-        roomFeatureRatingsInfo:
-          description: List of rooms and their rating details.
-          $ref: '#/components/schemas/roomFeatureRatingsInfoType'
-        totalPages:
-          description: Evaluated total page count based on the requested max fetch count.
-          type: integer
-        offset:
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-          type: integer
-        limit:
-          description: Indicates maximum number of records a Web Service should return.
-          type: integer
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    traceTextsToBeCreated:
-      type: object
-      description: Request object for creating new trace texts.
-      properties:
-        traceTexts:
-          description: Trace texts to be created.
-          $ref: '#/components/schemas/traceTextsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    basedOnMembershipType:
-      type: object
-      description: Auto attach based on membership.
-      properties:
-        membershipType:
-          description: The membership type that will be required for the element type (one that is based on Membership condition) to auto attach to the reservation.
-          type: string
-          minLength: 0
-          maxLength: 20
-        level:
-          description: The membership level of the selected membership type.
-          type: string
-          minLength: 0
-          maxLength: 20
-    currencyAmountType:
-      type: object
-      description: A monetary value expressed with a currency code.
-      properties:
-        amount:
-          description: A monetary amount.
-          type: number
-        currencyCode:
-          description: Provides a currency code to reflect the currency in which an amount may be expressed.
-          type: string
-          minLength: 3
-          maxLength: 3
-    codeInfoType:
-      type: object
-      description: ''
-      properties:
-        description:
-          type: string
-          minLength: 0
-          maxLength: 80
-        addtionalCodeInfo:
-          $ref: '#/components/schemas/addtionalCodeInfoType'
-        hotelId:
-          type: string
-          minLength: 0
-          maxLength: 20
-        code:
-          type: string
-          minLength: 0
-          maxLength: 20
-    mergeCodeType:
-      type: object
-      description: A Merge Code.
-      properties:
-        tag:
-          description: Merge Code.
-          type: string
-          minLength: 0
-          maxLength: 100
-        value:
-          description: Default value of Merge Code.
-          type: string
-          minLength: 0
-          maxLength: 80
-    configTestUpsellRulesType:
-      type: array
-      description: This type holds a collection of upsell rules which are returned on testing a reservation.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/configTestUpsellRuleType'
-    locatorCodes:
-      type: object
-      description: Request object for modifying an existing locator code.
-      properties:
-        locatorCodes:
-          $ref: '#/components/schemas/locatorCodesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    roundingRuleType:
-      type: string
-      description: Simple type for storing rounding rule type.
-      enum:
-      - Up
-      - Down
-      - None
-      - UpKeepDecimal
-      - DownKeepDecimal
-    eCouponCopyType:
-      type: object
-      description: Copy eCoupons from one Property to one or multiple properties.
-      properties:
-        hotelId:
-          description: Source property from which copy operation will happen.
-          type: string
-          minLength: 0
-          maxLength: 20
-        eCouponCodes:
-          description: List of eCoupon codes to copy from souce to list of target properties.
-          $ref: '#/components/schemas/codeListType'
-        targetHotelCodes:
-          description: List of target properties to which the selected eCoupons will be copied.
-          $ref: '#/components/schemas/codeListType'
-    formulaType:
-      type: string
-      description: Simple type for storing formula type.
-      enum:
-      - FlatAmountAddedToOriginalRate
-      - PercentOfDifferenceAddedToOriginalRate
-      - PercentOfOriginalRateAddedToOriginalRate
-    upsellRulesToTestDetails:
-      type: object
-      description: Response object for testing upsell rules.
-      properties:
-        upsellRules:
-          description: Collection of upsell rules which satisfy the test search criteria.
-          $ref: '#/components/schemas/configTestUpsellRulesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    roomRatingInfoType:
-      type: object
-      description: Rating details for a room.
-      properties:
-        hotelId:
-          description: Property code of the rooms.
-          type: string
-          minLength: 0
-          maxLength: 20
-        roomId:
-          description: Room number whose ratings are fetched.
-          type: string
-          minLength: 0
-          maxLength: 20
-        roomClass:
-          description: Room Class of the room.
-          type: string
-          minLength: 0
-          maxLength: 20
-        roomType:
-          description: Room Type and its description of the room.
-          $ref: '#/components/schemas/codeDescriptionType'
-        rating:
-          description: Ratings associated with the room.
-          $ref: '#/components/schemas/roomRatingType'
-    logicalOperatorType:
-      type: string
-      enum:
-      - And
-      - Or
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    traceTextsToBeFetched:
-      type: object
-      description: Response object for fetching trace texts.
-      properties:
-        traceTexts:
-          description: Type contains trace texts.
-          $ref: '#/components/schemas/traceTextsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    traceTextType:
-      type: object
-      description: Type provides trace text information.
-      properties:
-        hotelId:
-          description: Property Code where the trace text belongs to.
-          type: string
-          minLength: 0
-          maxLength: 20
-        departmentCode:
-          description: Department Code where the trace text belongs to.
-          type: string
-          minLength: 0
-          maxLength: 10
-        traceText:
-          description: Trace text value.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        canDelete:
-          description: Determines whether this trace text can be deleted.
-          type: boolean
-        displaySequence:
-          description: Display Sequence for the trace text.
-          type: number
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-    upsellRules:
-      type: object
-      description: Response object for fetching upsell rules.
-      properties:
-        upsellRules:
-          description: Collection of upsell rules fetched.
-          $ref: '#/components/schemas/configUpsellRulesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    warningType:
-      type: object
-      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
-      properties:
-        value:
-          type: string
-          description: Property Value
-        shortText:
-          description: An abbreviated version of the error in textual format.
-          type: string
-          maxLength: 2000
-        code:
-          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
-          type: string
-          minLength: 0
-          maxLength: 20
-        docURL:
-          description: If present, this URL refers to an online description of the error that occurred.
-          type: string
-          maxLength: 2000
-        status:
-          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
-          type: string
-          maxLength: 2000
-        tag:
-          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
-          type: string
-          maxLength: 2000
-        recordId:
-          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
-          type: string
-          maxLength: 2000
-        type:
-          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
-          type: string
-          minLength: 0
-          maxLength: 20
-        language:
-          description: Language identification.
-          type: string
-          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
-        rph:
-          description: Reference Place Holder used as an index for this warning.
-          type: string
-          minLength: 1
-          maxLength: 8
-    scriptLocationType:
-      type: object
-      description: Unique identifier of a Script.
-      properties:
-        hotelId:
-          description: Hotel code the script belonged to.
-          type: string
-          minLength: 0
-          maxLength: 20
-        croCode:
-          description: CRO the script belonged to.
-          type: string
-          minLength: 0
-          maxLength: 20
-        chainCode:
-          description: Chain the script belonged to.
-          type: string
-          minLength: 0
-          maxLength: 20
-    roomSpecialRatingInfoType:
-      type: object
-      description: Rating details for room Specials.
-      properties:
-        hotelId:
-          description: Property code of the room Special.
-          type: string
-          minLength: 0
-          maxLength: 20
-        roomSpecial:
-          description: Room Special along with its description whose rating is fetched.
-          $ref: '#/components/schemas/codeDescriptionType'
-        rating:
-          description: Ratings associated with the room special.
-          $ref: '#/components/schemas/roomSpecialRatingType'
-    membershipLevelRatingType:
-      type: integer
-      description: The desired rating for membership level, up to 4 numeric values.
-    roomRatingsInfoType:
-      type: array
-      description: Collection of rooms and their ratings.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/roomRatingInfoType'
-    traceTextsType:
-      type: array
-      description: Collection of trace texts.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/traceTextType'
-    expressionOperatorType:
-      type: object
-      properties:
-        operatorName:
-          type: string
-          minLength: 0
-          maxLength: 40
-        operatorDescription:
-          type: string
-          minLength: 0
-          maxLength: 400
-        parameterSize:
-          type: number
-    autoAttachElementsConfigType:
-      type: array
-      description: Auto attachment rule details.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/autoAttachRuleType'
-    attachPreferenceType:
-      type: object
-      description: Auto attach preference element.
-      properties:
-        type:
-          description: Preference group.
-          type: string
-          minLength: 0
-          maxLength: 20
-        code:
-          description: Preference code..
-          type: string
-          minLength: 0
-          maxLength: 20
-    roomSpecialRatings:
-      type: object
-      description: Request object for modifying room specials rating details.
-      properties:
-        roomSpecialRatingsInfo:
-          $ref: '#/components/schemas/roomSpecialRatingsInfoType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    autoAttachElementsCopy:
-      type: object
-      properties:
-        autoAttachRule:
-          type: array
-          description: List of the auto attach configuration rule(s) to be copied.
-          items:
-            $ref: '#/components/schemas/copyConfigurationCodeType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    masterInfoType:
-      type: object
-      properties:
-        codeInfo:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/codeInfoType'
-        codeType:
-          $ref: '#/components/schemas/masterType'
-    locatorCodesTemplateInfo:
-      type: object
-      description: Response object for fetching locator codes at template level.
-      properties:
-        locatorCodes:
-          $ref: '#/components/schemas/locatorCodesTemplateType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    guestMessageTemplateType:
-      type: object
-      description: A template for guest message.
-      properties:
-        code:
-          description: Code for the guest message type
-          type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          description: Description for guest message type.
-          $ref: '#/components/schemas/translationTextType2000'
-        displaySequence:
-          description: Sequence for guest message template.
-          type: number
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-    hotelCodeListType:
-      type: array
-      description: Hotel code.
-      maxItems: 4000
-      items:
-        type: string
-        minLength: 0
-        maxLength: 20
-    alertCodeType:
-      type: object
-      description: Common code type for code, description
-      properties:
-        code:
-          description: Code for the code type.
-          type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          description: Description for the code type.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        displaySequence:
-          description: Sequence for alert.
-          type: number
-        hotelId:
-          description: Hotel Code for alert.
-          type: string
-          minLength: 0
-          maxLength: 20
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-        isAdvancedAlert:
-          description: Indicates whether the Alert is an Advanced Alert with script.
-          type: boolean
-        script:
-          description: Script associated with Alert.
-          $ref: '#/components/schemas/scriptType'
-    guestMessageTemplatesType:
-      type: array
-      description: Collection of guest messages templates.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/guestMessageTemplateType'
-    instanceLink:
-      type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
-      properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
-          type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
-        title:
-          description: Exact copy of the "summary" field on the linked operation.
-          type: string
-    eCouponCodesType:
-      type: array
-      description: List of eCoupon Codes.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/eCouponCodeType'
-    translationsTextType:
-      type: array
-      description: Language code for the translation.
-      maxItems: 4000
-      items:
-        type: object
-        properties:
-          value:
-            type: string
-            description: Used for Character Strings, length 0 to 2000.
-            minLength: 0
-            maxLength: 2000
-          language:
-            description: Language identification.
-            type: string
-            minLength: 0
-            maxLength: 20
-        description: Language code for the translation.
     autoAttachRuleType:
       type: object
       description: Auto attachment rule details.
@@ -7637,102 +6985,12 @@ components:
           type: boolean
         managedBy:
           $ref: '#/components/schemas/managedByOptions'
-    articleInfoType:
-      type: object
-      description: Information regarding an article.
-      properties:
-        description:
-          description: Description of the article.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        transactionCode:
-          description: Transaction code to which the article belongs.
-          type: string
-          minLength: 0
-          maxLength: 20
-        price:
-          description: Default price of the article.
-          $ref: '#/components/schemas/currencyAmountType'
-        postIt:
-          description: Post it information of the article.
-          $ref: '#/components/schemas/articlePostItType'
-        universalProductCode:
-          description: Unique Universal product code of the article.
-          type: string
-          minLength: 0
-          maxLength: 20
-        hotelId:
-          description: Hotel code to which the article belongs.
-          type: string
-          minLength: 0
-          maxLength: 20
-        articleCode:
-          description: Unique code of the article.
-          type: string
-          minLength: 0
-          maxLength: 20
-        inactive:
-          description: Indicates whether the article is inactive or not.
-          type: boolean
-        orderSequence:
-          description: Display Order sequence.
-          type: number
-    basedOnCondition:
-      type: object
-      description: Auto attach based advanced query filter.
-      properties:
-        queryId:
-          description: The query ID that is used to filter condition.
-          type: number
-        conditions:
-          description: Conditions for attached rule.
-          $ref: '#/components/schemas/conditionGroupType'
-    articlePostItType:
-      type: object
-      description: Post it information of an article.
-      properties:
-        availableForPostIt:
-          description: Indicates whether the article is available for post it.
-          type: boolean
-        color:
-          description: Color indicator which is only configurable if article is available for post it.
-          $ref: '#/components/schemas/colorType'
-    reservationProtectionConditionType:
-      type: object
-      description: Details of reservation protection condition
-      properties:
-        hotelId:
-          type: string
-          description: Unique OPERA Hotel code identifier
-          minLength: 0
-          maxLength: 20
-        conditions:
-          description: Reservation protection condition which may consist of multiple layers of conditions and groups of conditions
-          $ref: '#/components/schemas/conditionGroupType'
-    alertTemplatesType:
+    membershipLevelRatingsInfoType:
       type: array
-      description: Collection of alert code templates.
+      description: Collection of membership levels and their ratings.
       maxItems: 4000
       items:
-        $ref: '#/components/schemas/alertTemplateType'
-    reservationColorsToChange:
-      type: object
-      description: Request object to change reservation colors.
-      properties:
-        reservationColors:
-          description: Criteria to change reservation colors.
-          $ref: '#/components/schemas/reservationColorsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    reservationColorsType:
-      type: array
-      description: Collection of reservation colors.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/reservationColorType'
+        $ref: '#/components/schemas/membershipLevelRatingInfoType'
     trxInfoType:
       type: object
       description: Transaction codes info.
@@ -7784,135 +7042,197 @@ components:
         printTrxReceipt:
           description: Print receipt flag that tells whether the transaction receipt is to be printed or not. This is based on the transaction code.
           type: boolean
-    autoAttachElementsConfig:
+    colorType:
+      type: string
+      description: Color configuration type. This color configuration provides a visual category of entities.
+      enum:
+      - Red
+      - DarkRed
+      - Green
+      - DarkGreen
+      - LightGreen
+      - Orange
+      - White
+      - Yellow
+      - DarkYellow
+      - Purple
+      - Brown
+      - Gray
+      - Aqua
+      - Chocolate
+      - Blue
+      - LightBlue
+      - DarkBlue
+      - Cyan
+      - DarkCyan
+      - Magenta
+      - DarkMagenta
+      - Black
+      - Deepteal
+      - Sunsetorange
+      - Aquasky
+      - Mochabrown
+      - Mossgreen
+      - Rosewood
+      - Claybrown
+      - Softlavender
+      - Olivegold
+      - Plumpurple
+      - Mistblue
+      - Forestgreen
+      - Dustyviolet
+      - Oceanblue
+      - Copper
+    roomFeatureRatingInfoType:
       type: object
-      description: Response object for the configuration rules that specify the elements to be automatically attached to the reservation.
-      properties:
-        autoAttachRules:
-          description: List of auto attachment configuration rules.
-          $ref: '#/components/schemas/autoAttachElementsConfigType'
-        masterInfoList:
-          description: Refer to Generic common types document.
-          type: array
-          items:
-            $ref: '#/components/schemas/masterInfoType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    status:
-      type: object
-      description: Response Body.
-      properties:
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-        links:
-          $ref: '#/components/schemas/links'
-    ratePlanRatingInfoType:
-      type: object
-      description: Rating details for a rate plan.
+      description: Rating details for room features.
       properties:
         hotelId:
-          description: Property code of the rate plan codes.
+          description: Property code of the room feature.
           type: string
           minLength: 0
           maxLength: 20
-        ratePlan:
-          description: Rate Plan Code and its description
-          $ref: '#/components/schemas/codeDescriptionType'
-        rateCategory:
-          description: Rate category of the rate code.
+        roomFeature:
+          description: Room feature along with its description whose rating is fetched.
           $ref: '#/components/schemas/codeDescriptionType'
         rating:
-          description: Ratings associated with the rate code.
-          $ref: '#/components/schemas/ratePlanRatingType'
-    guestMessageCodeType:
+          description: Ratings associated with the room feature.
+          $ref: '#/components/schemas/roomFeatureRatingType'
+    locatorCodesInfo:
       type: object
-      description: A template for guest message.
+      description: Response object for fetching locator codes.
+      properties:
+        locatorCodes:
+          $ref: '#/components/schemas/locatorCodesType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    roomSpecialRatingType:
+      type: string
+      description: Possible Room special rating values.
+      enum:
+      - MostImportant
+      - Important
+      - SomewhatImportant
+      - LessImportant
+      - LeastImportant
+      - NoValueSet
+    alertCodesType:
+      type: array
+      description: Collection of hotel level alert codes with attached alert types.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/alertCodeType'
+    hotelTurnAwayCodeType:
+      type: object
+      description: Base details common between hotel and template TurnAway codes.
       properties:
         code:
-          description: Code for the guest message type
+          description: TurnAway code
           type: string
           minLength: 0
           maxLength: 20
         description:
-          description: Description for guest message type.
-          $ref: '#/components/schemas/translationTextType2000'
+          description: Description of the TurnAway code.
+          $ref: '#/components/schemas/translationTextType50'
         displaySequence:
-          description: Sequence for guest message template.
+          description: Sequence of TurnAway code.
           type: number
+        turnAwayType:
+          description: TurnAway type. e.g. Denial,Regret.
+          $ref: '#/components/schemas/turnAwayTypeType'
+        inactive:
+          description: Inactive flag for a TurnAway code.
+          type: boolean
+        canDelete:
+          description: Determines whether this TurnAway code can be deleted.
+          type: boolean
         hotelId:
-          description: Sequence for guest message.
+          description: Hotel code that the turnaway code belongs to.
           type: string
           minLength: 0
           maxLength: 20
         managedBy:
           $ref: '#/components/schemas/managedByOptions'
-    masterInfoCodeDetailType:
-      type: string
-      enum:
-      - LongDescription
-      - ShortDescription
-    configOccupancyLevelType:
+    alertCodeType:
       type: object
-      description: This type holds the upsell amount by occupancy levels. This is used when upsell rule is being set bu occupancy levels
+      description: Common code type for code, description
       properties:
-        level:
-          description: Used to specify the occupancy level id.
-          type: integer
-        levelDescription:
-          description: Used to specify the occupancy level description.
+        code:
+          description: Code for the code type.
           type: string
           minLength: 0
           maxLength: 20
-        levelUpsellAmount:
-          description: Used to specify the occupancy level upsell amount.
+        description:
+          description: Description for the code type.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        displaySequence:
+          description: Sequence for alert.
           type: number
-    scriptTypeType:
-      type: string
-      description: Type for Web Reg Card.
-      enum:
-      - ClosingScript
-      - WebRegCard
-    scriptType:
-      type: object
-      description: A Script associated to either Chain, CRO or Property and to a Language and/or Membership Type.
-      properties:
-        scriptId:
-          description: Unique identifier of a Script.
-          $ref: '#/components/schemas/uniqueID_Type'
-        language:
-          description: Language identification.
-          type: string
-          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
-        membershipType:
-          description: Membership Type the script belonged to.
+        hotelId:
+          description: Hotel Code for alert.
           type: string
           minLength: 0
           maxLength: 20
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+        isAdvancedAlert:
+          description: Indicates whether the Alert is an Advanced Alert with script.
+          type: boolean
         script:
-          description: Script.
-          type: string
-          format: byte
-        mergeCodes:
-          description: Merge Codes in the script.
-          $ref: '#/components/schemas/mergeCodesType'
-        type:
-          description: Type of script.
-          $ref: '#/components/schemas/scriptTypeType'
-        locations:
-          description: Collection of locations where Script is to be used.
-          $ref: '#/components/schemas/scriptLocationsType'
-    eCouponCodes:
+          description: Script associated with Alert.
+          $ref: '#/components/schemas/scriptType'
+    formulaType:
+      type: string
+      description: Simple type for storing formula type.
+      enum:
+      - FlatAmountAddedToOriginalRate
+      - PercentOfDifferenceAddedToOriginalRate
+      - PercentOfOriginalRateAddedToOriginalRate
+    membershipLevelRatingInfoType:
       type: object
-      description: Response object to fetch eCoupon codes.
+      description: Rating details for membership levels.
       properties:
-        eCouponCodes:
-          $ref: '#/components/schemas/eCouponCodesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
+        hotelId:
+          description: Property code of the membership level.
+          type: string
+          minLength: 0
+          maxLength: 20
+        membershipType:
+          description: Membership type of the membership level.
+          type: string
+          minLength: 0
+          maxLength: 20
+        membershipLevel:
+          description: Membership Level along with its description whose rating is fetched.
+          $ref: '#/components/schemas/codeDescriptionType'
+        rating:
+          description: Ratings associated with the membership level.
+          $ref: '#/components/schemas/membershipLevelRatingType'
+    reservationColorsType:
+      type: array
+      description: Collection of reservation colors.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/reservationColorType'
     resvAutoAttchBasedOn:
       type: object
       description: The Based On information for the rule.
@@ -7960,32 +7280,131 @@ components:
           type: string
           minLength: 0
           maxLength: 2000
-    expressionParameterType:
+    managedByOptions:
+      description: Describes of the Configuration is Managed by Enterprise or Property.
+      type: string
+      enum:
+      - EnterpriseManaged
+      - PropertyManaged
+      - EnterpriseEnforced
+      - PropertyOverridden
+    guestMessageTemplateType:
       type: object
+      description: A template for guest message.
       properties:
-        parameter:
-          type: array
-          maxItems: 3
-          items:
-            type: string
-            minLength: 0
-            maxLength: 40
-        functionIdOne:
+        code:
+          description: Code for the guest message type
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: Description for guest message type.
+          $ref: '#/components/schemas/translationTextType2000'
+        displaySequence:
+          description: Sequence for guest message template.
           type: number
-        functionIdTwo:
-          type: number
-    upsellRulesCopy:
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    membershipLevelRatingsInfo:
       type: object
+      description: Response object for fetching the membership levels and their rating details.
       properties:
-        UpsellRules:
-          type: array
-          description: List of the upsell rules to be copied to hotel code(s).
-          items:
-            $ref: '#/components/schemas/copyConfigurationCodeType'
+        membershipLevelRatingsInfo:
+          description: List of membership levels and their rating details.
+          $ref: '#/components/schemas/membershipLevelRatingsInfoType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
         links:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
+    guestMessageTemplates:
+      type: object
+      description: Response object for information regarding guest message templates.
+      properties:
+        guestMessageTemplates:
+          $ref: '#/components/schemas/guestMessageTemplatesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    locatorCodes:
+      type: object
+      description: Request object for modifying an existing locator code.
+      properties:
+        locatorCodes:
+          $ref: '#/components/schemas/locatorCodesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    alertTemplateType:
+      type: object
+      description: Common code type for code, description
+      properties:
+        code:
+          description: Code for the code type.
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: Description for the code type.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        displaySequence:
+          description: Sequence for alert template.
+          type: number
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+        isAdvancedAlert:
+          description: Indicates whether the Alert is an Advanced Alert with script.
+          type: boolean
+        script:
+          description: Script associated with Alert.
+          $ref: '#/components/schemas/scriptType'
+    upsellRules:
+      type: object
+      description: Response object for fetching upsell rules.
+      properties:
+        upsellRules:
+          description: Collection of upsell rules fetched.
+          $ref: '#/components/schemas/configUpsellRulesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    guestMessageCodesType:
+      type: array
+      description: Collection of guest messages with attached guest message types.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/guestMessageCodeType'
+    reservationProtectionConditionType:
+      type: object
+      description: Details of reservation protection condition
+      properties:
+        hotelId:
+          type: string
+          description: Unique OPERA Hotel code identifier
+          minLength: 0
+          maxLength: 20
+        conditions:
+          description: Reservation protection condition which may consist of multiple layers of conditions and groups of conditions
+          $ref: '#/components/schemas/conditionGroupType'
     eCouponCodeType:
       type: object
       description: eCoupon code detailed information.
@@ -8027,476 +7446,6 @@ components:
           type: boolean
         managedBy:
           $ref: '#/components/schemas/managedByOptions'
-    configTestUpsellRuleType:
-      type: object
-      description: This gives detailed information about an upsell rule which is returned upon testing an upsell rule against a reservation.
-      properties:
-        toRoomType:
-          description: The room type for the upsell offer.
-          type: string
-          minLength: 0
-          maxLength: 20
-        totalStayAmount:
-          description: The regular rate amount for the upsell offer. This amount is taken from the Rate Code configuration.
-          type: number
-        totalUpsellMoneyAmount:
-          description: The adjusted rate amount for the room type, based on the upsell offer.
-          type: number
-        upsellRuleCode:
-          description: Specifies the upsell rule code used for the calculation.
-          type: string
-          minLength: 0
-          maxLength: 20
-    locatorCodeTemplateType:
-      type: object
-      description: Common code type for code, description
-      properties:
-        code:
-          description: Code for the code type.
-          type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          description: Description for the code type.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        displaySequence:
-          description: Sequence for locator code
-          type: number
-        inactive:
-          description: Indicates whether the locator code is active or not
-          type: boolean
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-    uniqueIDListType:
-      type: array
-      description: Unique Id that references an object uniquely in the system.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/uniqueID_Type'
-    phoneNumberType:
-      type: string
-      description: Phone number
-      minLength: 0
-      maxLength: 40
-    eCouponCodesCopy:
-      type: object
-      description: Request object to copy the existing eCoupon codes from source property to the selected target properties.
-      properties:
-        eCouponCopy:
-          description: Request object to copy the eCoupon codes from source property to the selected target properties.
-          $ref: '#/components/schemas/eCouponCopyType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    alertCodes:
-      type: object
-      description: Response object for information regarding alert templates.
-      properties:
-        alerts:
-          description: Collection of alert code templates and their information.
-          $ref: '#/components/schemas/alertCodesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    scriptLocationsType:
-      type: object
-      description: Collection of locations where a Script is to be used.
-      properties:
-        hotels:
-          description: Location where a Script is to be used.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/scriptLocationType'
-        cROs:
-          description: Location where a Script is to be used.
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/scriptLocationType'
-        chains:
-          description: Location where a Script is to be used..
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/scriptLocationType'
-    roomSpecialRatingsInfoType:
-      type: array
-      description: Collection of rooms specials and their ratings.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/roomSpecialRatingInfoType'
-    traceTextChanges:
-      type: object
-      description: Request object for changing trace texts.
-      properties:
-        traceTexts:
-          description: Trace texts to be changed.
-          $ref: '#/components/schemas/traceTextChangesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    reservationColorsResponse:
-      type: object
-      description: Response object for fetch reservation colors.
-      properties:
-        reservationColors:
-          description: Reservation colors.
-          $ref: '#/components/schemas/reservationColorsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    copyGlobalAlertType:
-      type: object
-      description: Copy Global Alerts criteria from one property to another property
-      properties:
-        resvAlertIds:
-          description: Each Reservation Alert details copy to target properties
-          $ref: '#/components/schemas/uniqueIDListType'
-        targetHotelCodes:
-          description: Copy and store reservation alert details on the destination properties
-          $ref: '#/components/schemas/codeListType'
-    templateTurnAwayCodeType:
-      type: object
-      description: Base details common between hotel and template TurnAway codes.
-      properties:
-        code:
-          description: TurnAway code
-          type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          description: Description of the TurnAway code.
-          $ref: '#/components/schemas/translationTextType50'
-        displaySequence:
-          description: Sequence of TurnAway code.
-          type: number
-        turnAwayType:
-          description: TurnAway type. e.g. Denial,Regret.
-          $ref: '#/components/schemas/turnAwayTypeType'
-        inactive:
-          description: Inactive flag for a TurnAway code.
-          type: boolean
-        canDelete:
-          description: Determines whether this TurnAway code can be deleted.
-          type: boolean
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-    roomSpecialRatingsInfo:
-      type: object
-      description: Response object for fetching the room specials and their rating details.
-      properties:
-        roomSpecialRatingsInfo:
-          description: List of room specials and their rating details.
-          $ref: '#/components/schemas/roomSpecialRatingsInfoType'
-        totalPages:
-          description: Evaluated total page count based on the requested max fetch count.
-          type: integer
-        offset:
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-          type: integer
-        limit:
-          description: Indicates maximum number of records a Web Service should return.
-          type: integer
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    ratePlanRatingType:
-      type: string
-      description: Possible Rate plan rating values.
-      enum:
-      - MostImportant
-      - Important
-      - SomewhatImportant
-      - LessImportant
-      - LeastImportant
-      - NoValueSet
-    turnAwayTypeType:
-      type: string
-      description: Simple Type for TurnAwayType Types.
-      enum:
-      - Denial
-      - Regret
-    membershipLevelRatingInfoType:
-      type: object
-      description: Rating details for membership levels.
-      properties:
-        hotelId:
-          description: Property code of the membership level.
-          type: string
-          minLength: 0
-          maxLength: 20
-        membershipType:
-          description: Membership type of the membership level.
-          type: string
-          minLength: 0
-          maxLength: 20
-        membershipLevel:
-          description: Membership Level along with its description whose rating is fetched.
-          $ref: '#/components/schemas/codeDescriptionType'
-        rating:
-          description: Ratings associated with the membership level.
-          $ref: '#/components/schemas/membershipLevelRatingType'
-    traceTextChangesType:
-      type: array
-      description: Collection of trace texts that will be modified.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/traceTextChangeType'
-    conditionGroupType:
-      type: object
-      properties:
-        condition:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/conditionType'
-        conditionGroup:
-          type: array
-          maxItems: 4000
-          items:
-            $ref: '#/components/schemas/conditionGroupType'
-        logicalOperator:
-          $ref: '#/components/schemas/logicalOperatorType'
-    traceTextsCopy:
-      type: object
-      description: Request object for copying trace texts.
-      properties:
-        criteria:
-          description: Criteria for copying trace texts.
-          $ref: '#/components/schemas/copyTraceTextsCriteriaType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    roomFeatureRatings:
-      type: object
-      description: Request object for modifying room features rating details.
-      properties:
-        roomFeatureRatingsInfo:
-          $ref: '#/components/schemas/roomFeatureRatingsInfoType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    roomFeatureRatingType:
-      type: string
-      description: Possible Room Feature rating values.
-      enum:
-      - MostImportant
-      - Important
-      - SomewhatImportant
-      - LessImportant
-      - LeastImportant
-      - NoValueSet
-    globalAlertType:
-      type: object
-      description: A property level global alert attached with global alert types.
-      properties:
-        alertId:
-          type: number
-        hotelId:
-          type: string
-          minLength: 0
-          maxLength: 20
-        alertCode:
-          type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          type: string
-          minLength: 0
-          maxLength: 2000
-        area:
-          type: string
-          minLength: 0
-          maxLength: 20
-        queryId:
-          type: number
-        notifications:
-          $ref: '#/components/schemas/notificationType'
-        conditions:
-          $ref: '#/components/schemas/conditionGroupType'
-        welcomeOffer:
-          description: Determines the Global Alert is a Welcome Offer Alert or not.
-          type: boolean
-        stopCheckInCheckOut:
-          description: Indicates the Reservation Stop Check In/Check Out Global Alert.
-          type: boolean
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-    codeDescriptionType:
-      type: object
-      description: This contains a generic code and description information.
-      properties:
-        code:
-          description: Code.
-          type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          description: description.
-          type: string
-          minLength: 0
-          maxLength: 2000
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
-    alertTemplateType:
-      type: object
-      description: Common code type for code, description
-      properties:
-        code:
-          description: Code for the code type.
-          type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          description: Description for the code type.
-          type: string
-          minLength: 0
-          maxLength: 2000
-        displaySequence:
-          description: Sequence for alert template.
-          type: number
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-        isAdvancedAlert:
-          description: Indicates whether the Alert is an Advanced Alert with script.
-          type: boolean
-        script:
-          description: Script associated with Alert.
-          $ref: '#/components/schemas/scriptType'
-    managedByOptions:
-      description: Describes of the Configuration is Managed by Enterprise or Property.
-      type: string
-      enum:
-      - EnterpriseManaged
-      - PropertyManaged
-      - EnterpriseEnforced
-      - PropertyOverridden
-    templateTurnAwayCodesType:
-      type: array
-      description: Collection of template turnaway codes
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/templateTurnAwayCodeType'
-    guestMessageCodesType:
-      type: array
-      description: Collection of guest messages with attached guest message types.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/guestMessageCodeType'
-    codeListType:
-      type: array
-      maxItems: 4000
-      items:
-        type: string
-        minLength: 0
-        maxLength: 20
-    addtionalCodeInfoType:
-      type: array
-      description: Holds name of additional code information
-      maxItems: 4000
-      items:
-        type: object
-        properties:
-          name:
-            description: Holds name of additional code information
-            $ref: '#/components/schemas/masterInfoCodeDetailType'
-          value:
-            description: Holds value of additional code information
-            type: string
-            minLength: 0
-            maxLength: 2000
-    uniqueID_Type:
-      type: object
-      description: An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote).
-      properties:
-        id:
-          description: A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.
-          type: string
-          minLength: 0
-          maxLength: 80
-        type:
-          description: A reference to the type of object defined by the UniqueID element.
-          type: string
-          minLength: 0
-          maxLength: 40
-    locatorCodesInfo:
-      type: object
-      description: Response object for fetching locator codes.
-      properties:
-        locatorCodes:
-          $ref: '#/components/schemas/locatorCodesType'
-        totalPages:
-          description: Evaluated total page count based on the requested max fetch count.
-          type: integer
-        offset:
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-          type: integer
-        limit:
-          description: Indicates maximum number of records a Web Service should return.
-          type: integer
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    ratePlanRatingsInfoType:
-      type: array
-      description: Collection of rate plan Codes and their ratings.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/ratePlanRatingInfoType'
-    globalAlertsType:
-      type: array
-      description: Collection of property level global alert details with attached global alert types.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/globalAlertType'
-    translationTextType50:
-      type: object
-      description: Contains Multiple translated texts and language codes.
-      properties:
-        defaultText:
-          description: Default text with Character length from 0 to 50.
-          type: string
-          minLength: 0
-          maxLength: 50
-        translatedTexts:
-          description: List of translated text and language codes.
-          $ref: '#/components/schemas/translationsTextType'
-    upsellRulesToTest:
-      type: object
-      description: Request object for testing upsell rules.
-      properties:
-        criteria:
-          description: Search criteria for testing upsell rules.
-          $ref: '#/components/schemas/configTestUpsellRuleSearchType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
     configTestUpsellRuleSearchType:
       type: object
       description: Search criteria for testing upsell rules.
@@ -8561,126 +7510,69 @@ components:
         occupancyLevelId:
           description: Signifies the occupancy level id for which the upsell rule test has to be run. This field is only available when the test upgrade rule is set for 'Upgrade By Occupancy Levels'.
           type: integer
-    reservationColorType:
+    locatorCodesTemplateType:
+      type: array
+      description: Collection of locator codes.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/locatorCodeTemplateType'
+    eCouponCodesType:
+      type: array
+      description: List of eCoupon Codes.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/eCouponCodeType'
+    scriptLocationsType:
       type: object
-      description: Property level reservation color information.
+      description: Collection of locations where a Script is to be used.
       properties:
-        hotelId:
-          description: Property which the reservation color belongs to.
+        hotels:
+          description: Location where a Script is to be used.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/scriptLocationType'
+        cROs:
+          description: Location where a Script is to be used.
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/scriptLocationType'
+        chains:
+          description: Location where a Script is to be used..
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/scriptLocationType'
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
+      type: object
+      properties:
+        type:
           type: string
-          minLength: 0
-          maxLength: 20
-        colorCode:
-          description: Code to identify reservation color.
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
           type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          description: Description of reservation color.
-          $ref: '#/components/schemas/translationTextType2000'
-        displaySequence:
-          description: Display sequence for reservation color.
-          type: number
-        inactive:
-          description: Indicates if reservation color is inactive.
-          type: boolean
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-    roomRatings:
-      type: object
-      description: Response object for fetching the rooms and their rating details.
-      properties:
-        roomRatingsInfo:
-          description: List of rooms and their rating details.
-          $ref: '#/components/schemas/roomRatingsInfoType'
-        totalPages:
-          description: Evaluated total page count based on the requested max fetch count.
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
           type: integer
-        offset:
-          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
-          type: integer
-        limit:
-          description: Indicates maximum number of records a Web Service should return.
-          type: integer
-        hasMore:
-          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
-          type: boolean
-        totalResults:
-          description: Total number of rows queried
-          type: integer
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    alertTemplates:
-      type: object
-      description: Request object for modifying the existing alert code templates.
-      properties:
-        alertTemplates:
-          description: Alert code template group details to be changed.
-          $ref: '#/components/schemas/alertTemplatesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    alertCodeTemplates:
-      type: object
-      description: Response object for information regarding alert templates.
-      properties:
-        alertCodeTemplates:
-          description: Collection of alert code templates and their information.
-          $ref: '#/components/schemas/alertTemplatesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    membershipLevelRatings:
-      type: object
-      description: Request object for modifying membership levels rating details.
-      properties:
-        membershipLevelRatingsInfo:
-          $ref: '#/components/schemas/membershipLevelRatingsInfoType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    hotelTurnAwayCodes:
-      type: object
-      description: Response object for fetching hotel turnaway codes
-      properties:
-        turnAwayCodes:
-          description: Collection of turnaway codes.
-          $ref: '#/components/schemas/hotelTurnAwayCodesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    operaVersionNumberType:
-      type: string
-      description: Current Opera Version Number
-      minLength: 0
-      maxLength: 40
-    locatorCodesTemplate:
-      type: object
-      description: Request object for modifying an existing locator code template.
-      properties:
-        locatorCodes:
-          $ref: '#/components/schemas/locatorCodesTemplateType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    conditionType:
-      type: object
-      properties:
-        leftExpression:
-          $ref: '#/components/schemas/expressionFieldType'
-        operator:
-          $ref: '#/components/schemas/expressionOperatorType'
-        rightExpression:
-          $ref: '#/components/schemas/expressionParameterType'
-        logicalOperator:
-          $ref: '#/components/schemas/logicalOperatorType'
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+      required:
+      - type
+      - title
     configUpsellRuleType:
       type: object
       description: This gives detailed information about an upsell rule.
@@ -8772,69 +7664,1132 @@ components:
           maxLength: 20
         managedBy:
           $ref: '#/components/schemas/managedByOptions'
-    locatorCodesType:
+    basedOnCondition:
+      type: object
+      description: Auto attach based advanced query filter.
+      properties:
+        queryId:
+          description: The query ID that is used to filter condition.
+          type: number
+        conditions:
+          description: Conditions for attached rule.
+          $ref: '#/components/schemas/conditionGroupType'
+    configUpsellRulesType:
       type: array
-      description: Collection of locator codes.
+      description: This type holds a collection of upsell rules.
       maxItems: 4000
       items:
-        $ref: '#/components/schemas/locatorCodeType'
-  responses:
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '401':
-      description: Unauthorized
-    '414':
-      description: Request URI Too Large
-    '406':
-      description: Not acceptable.
-    '403':
-      description: Forbidden
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '500':
-      description: System Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '502':
-      description: Bad Gateway
-    '503':
-      description: Service Unavailable
-    '415':
-      description: Unsupported Media Type
-    '405':
-      description: Method not allowed
-    '413':
-      description: Request Entity Too Large
+        $ref: '#/components/schemas/configUpsellRuleType'
+    traceTextChangesType:
+      type: array
+      description: Collection of trace texts that will be modified.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/traceTextChangeType'
+    warningType:
+      type: object
+      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
+          type: string
+          maxLength: 2000
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+          type: string
+          minLength: 0
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+          maxLength: 2000
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+          maxLength: 2000
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+          maxLength: 2000
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+          maxLength: 2000
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        rph:
+          description: Reference Place Holder used as an index for this warning.
+          type: string
+          minLength: 1
+          maxLength: 8
+    ratePlanRatingsInfoType:
+      type: array
+      description: Collection of rate plan Codes and their ratings.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/ratePlanRatingInfoType'
+    turnAwayTypeType:
+      type: string
+      description: Simple Type for TurnAwayType Types.
+      enum:
+      - Denial
+      - Regret
+    copyConfigurationCodeType:
+      type: object
+      description: Information needed to copy configuration code from one property to the other.
+      properties:
+        targetHotelCode:
+          description: Property to which configuration code type to be copied to.
+          type: array
+          maxItems: 4000
+          items:
+            type: string
+            minLength: 0
+            maxLength: 20
+        sourceHotelCode:
+          description: Code that is to be copied.
+          type: string
+          minLength: 0
+          maxLength: 20
+        code:
+          description: Source hotel code from which code is to be copied from.
+          type: string
+          minLength: 0
+          maxLength: 20
+    templateTurnAwayCodeType:
+      type: object
+      description: Base details common between hotel and template TurnAway codes.
+      properties:
+        code:
+          description: TurnAway code
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: Description of the TurnAway code.
+          $ref: '#/components/schemas/translationTextType50'
+        displaySequence:
+          description: Sequence of TurnAway code.
+          type: number
+        turnAwayType:
+          description: TurnAway type. e.g. Denial,Regret.
+          $ref: '#/components/schemas/turnAwayTypeType'
+        inactive:
+          description: Inactive flag for a TurnAway code.
+          type: boolean
+        canDelete:
+          description: Determines whether this TurnAway code can be deleted.
+          type: boolean
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    mergeCodeType:
+      type: object
+      description: A Merge Code.
+      properties:
+        tag:
+          description: Merge Code.
+          type: string
+          minLength: 0
+          maxLength: 100
+        value:
+          description: Default value of Merge Code.
+          type: string
+          minLength: 0
+          maxLength: 80
+    addtionalCodeInfoType:
+      type: array
+      description: Holds name of additional code information
+      maxItems: 4000
+      items:
+        type: object
+        properties:
+          name:
+            description: Holds name of additional code information
+            $ref: '#/components/schemas/masterInfoCodeDetailType'
+          value:
+            description: Holds value of additional code information
+            type: string
+            minLength: 0
+            maxLength: 2000
+    autoAttachElements:
+      type: object
+      description: Add configuration rule(s) that specify the elements to be automatically attached to the reservation.
+      properties:
+        autoAttachRules:
+          description: List of configuration rule(s) to be added to the configuration of resort.
+          $ref: '#/components/schemas/autoAttachElementsConfigType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    configTestUpsellRulesType:
+      type: array
+      description: This type holds a collection of upsell rules which are returned on testing a reservation.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/configTestUpsellRuleType'
+    globalAlerts:
+      type: object
+      description: Request object for creating a new Global Alert.
+      properties:
+        globalAlerts:
+          description: Global Alert details to be created.
+          $ref: '#/components/schemas/globalAlertsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
+      type: object
+      properties:
+        type:
+          type: string
+          description: Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).
+        title:
+          type: string
+          description: Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: HTTP status code for this occurrence of the problem, set by the origin server.
+        detail:
+          type: string
+          description: Human-readable description specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.
+        o:errorCode:
+          type: string
+          description: Application error code, which is different from HTTP error code.
+        o:errorPath:
+          type: string
+          description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+      - type
+      - title
+    alertTemplates:
+      type: object
+      description: Request object for modifying the existing alert code templates.
+      properties:
+        alertTemplates:
+          description: Alert code template group details to be changed.
+          $ref: '#/components/schemas/alertTemplatesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    templateTurnAwayCodesType:
+      type: array
+      description: Collection of template turnaway codes
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/templateTurnAwayCodeType'
+    translationTextType50:
+      type: object
+      description: Contains Multiple translated texts and language codes.
+      properties:
+        defaultText:
+          description: Default text with Character length from 0 to 50.
+          type: string
+          minLength: 0
+          maxLength: 50
+        translatedTexts:
+          description: List of translated text and language codes.
+          $ref: '#/components/schemas/translationsTextType'
+    reservationProtectionCondition:
+      type: object
+      description: Reservation protection condition in which a reservation would be automatically marked as protected for the property.
+      properties:
+        reservationProtectionCondition:
+          description: Reservation protection condition in which a reservation would be automatically marked as protected for the property.
+          maxItems: 4000
+          $ref: '#/components/schemas/reservationProtectionConditionType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    roomFeatureRatingsInfo:
+      type: object
+      description: Response object for fetching the room features and their rating details.
+      properties:
+        roomFeatureRatingsInfo:
+          description: List of rooms and their rating details.
+          $ref: '#/components/schemas/roomFeatureRatingsInfoType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    hotelTurnAwayCodes:
+      type: object
+      description: Response object for fetching hotel turnaway codes
+      properties:
+        turnAwayCodes:
+          description: Collection of turnaway codes.
+          $ref: '#/components/schemas/hotelTurnAwayCodesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    membershipLevelRatings:
+      type: object
+      description: Request object for modifying membership levels rating details.
+      properties:
+        membershipLevelRatingsInfo:
+          $ref: '#/components/schemas/membershipLevelRatingsInfoType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    autoAttachElementsConfig:
+      type: object
+      description: Response object for the configuration rules that specify the elements to be automatically attached to the reservation.
+      properties:
+        autoAttachRules:
+          description: List of auto attachment configuration rules.
+          $ref: '#/components/schemas/autoAttachElementsConfigType'
+        masterInfoList:
+          description: Refer to Generic common types document.
+          type: array
+          items:
+            $ref: '#/components/schemas/masterInfoType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    locatorCodesTemplate:
+      type: object
+      description: Request object for modifying an existing locator code template.
+      properties:
+        locatorCodes:
+          $ref: '#/components/schemas/locatorCodesTemplateType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    autoAttachElementsConfigType:
+      type: array
+      description: Auto attachment rule details.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/autoAttachRuleType'
+    configTestUpsellRuleType:
+      type: object
+      description: This gives detailed information about an upsell rule which is returned upon testing an upsell rule against a reservation.
+      properties:
+        toRoomType:
+          description: The room type for the upsell offer.
+          type: string
+          minLength: 0
+          maxLength: 20
+        totalStayAmount:
+          description: The regular rate amount for the upsell offer. This amount is taken from the Rate Code configuration.
+          type: number
+        totalUpsellMoneyAmount:
+          description: The adjusted rate amount for the room type, based on the upsell offer.
+          type: number
+        upsellRuleCode:
+          description: Specifies the upsell rule code used for the calculation.
+          type: string
+          minLength: 0
+          maxLength: 20
+    roomRatingType:
+      type: string
+      description: Possible room rating values.
+      enum:
+      - MostDesirable
+      - Desirable
+      - SomewhatDesirable
+      - LessDesirable
+      - LeastDesirable
+      - NoValueDefined
+    membershipLevelRatingType:
+      type: integer
+      description: The desired rating for membership level, up to 4 numeric values.
+    configOccupancyLevelsType:
+      type: array
+      description: This type holds a collection of upsell amounts by occupancy levels.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/configOccupancyLevelType'
+    eCouponCodesCopy:
+      type: object
+      description: Request object to copy the existing eCoupon codes from source property to the selected target properties.
+      properties:
+        eCouponCopy:
+          description: Request object to copy the eCoupon codes from source property to the selected target properties.
+          $ref: '#/components/schemas/eCouponCopyType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    traceTextsToBeFetched:
+      type: object
+      description: Response object for fetching trace texts.
+      properties:
+        traceTexts:
+          description: Type contains trace texts.
+          $ref: '#/components/schemas/traceTextsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    roomRatingsInfo:
+      type: object
+      description: Request object for modifying room rating details.
+      properties:
+        roomRatingsInfo:
+          $ref: '#/components/schemas/roomRatingsInfoType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    globalAlertsType:
+      type: array
+      description: Collection of property level global alert details with attached global alert types.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/globalAlertType'
+    reservationColorsToChange:
+      type: object
+      description: Request object to change reservation colors.
+      properties:
+        reservationColors:
+          description: Criteria to change reservation colors.
+          $ref: '#/components/schemas/reservationColorsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    hotelCodeListType:
+      type: array
+      description: Hotel code.
+      maxItems: 4000
+      items:
+        type: string
+        minLength: 0
+        maxLength: 20
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    notificationType:
+      type: object
+      description: Global Alert Notification type for Screen, Print, email and text
+      properties:
+        screen:
+          type: boolean
+        print:
+          type: boolean
+        printerName:
+          type: string
+          minLength: 0
+          maxLength: 20
+        reportName:
+          type: string
+          minLength: 0
+          maxLength: 80
+        email:
+          type: boolean
+        emailAddress:
+          type: string
+          minLength: 0
+          maxLength: 100
+        department:
+          type: string
+          minLength: 0
+          maxLength: 20
+        textMessage:
+          type: boolean
+        phoneNumber:
+          $ref: '#/components/schemas/phoneNumberType'
+    locatorCodeType:
+      type: object
+      description: Common code type for code, description
+      properties:
+        code:
+          description: Code for the code type.
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: Description for the code type.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        displaySequence:
+          description: Sequence for locator code
+          type: number
+        inactive:
+          description: Indicates whether the locator code is active or not
+          type: boolean
+        hotelId:
+          description: Property for which the locator code belongs to.
+          type: string
+          minLength: 0
+          maxLength: 20
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    masterInfoCodeDetailType:
+      type: string
+      enum:
+      - LongDescription
+      - ShortDescription
+    roomSpecialRatings:
+      type: object
+      description: Request object for modifying room specials rating details.
+      properties:
+        roomSpecialRatingsInfo:
+          $ref: '#/components/schemas/roomSpecialRatingsInfoType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    scriptTypeType:
+      type: string
+      description: Type for Web Reg Card.
+      enum:
+      - ClosingScript
+      - WebRegCard
+    roomSpecialRatingInfoType:
+      type: object
+      description: Rating details for room Specials.
+      properties:
+        hotelId:
+          description: Property code of the room Special.
+          type: string
+          minLength: 0
+          maxLength: 20
+        roomSpecial:
+          description: Room Special along with its description whose rating is fetched.
+          $ref: '#/components/schemas/codeDescriptionType'
+        rating:
+          description: Ratings associated with the room special.
+          $ref: '#/components/schemas/roomSpecialRatingType'
+    uniqueIDListType:
+      type: array
+      description: Unique Id that references an object uniquely in the system.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/uniqueID_Type'
+    operaVersion:
+      type: object
+      description: Response for Ping operation.
+      properties:
+        operaVersion:
+          description: Opera version number.
+          $ref: '#/components/schemas/operaVersionNumberType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    upsellRulesToTestDetails:
+      type: object
+      description: Response object for testing upsell rules.
+      properties:
+        upsellRules:
+          description: Collection of upsell rules which satisfy the test search criteria.
+          $ref: '#/components/schemas/configTestUpsellRulesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    articlePostItType:
+      type: object
+      description: Post it information of an article.
+      properties:
+        availableForPostIt:
+          description: Indicates whether the article is available for post it.
+          type: boolean
+        color:
+          description: Color indicator which is only configurable if article is available for post it.
+          $ref: '#/components/schemas/colorType'
+    copyTraceTextsCriteriaType:
+      type: object
+      description: Copy Trace texts criteria type to copy multiple trace texts from one Hotel to another Hotel.
+      properties:
+        targetHotels:
+          description: List of hotel codes for which the trace texts needs to be copied.
+          $ref: '#/components/schemas/hotelCodeListType'
+        traceTexts:
+          description: List of Trace Texts that will be copied.
+          $ref: '#/components/schemas/traceTextsType'
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    ratePlanRatingInfoType:
+      type: object
+      description: Rating details for a rate plan.
+      properties:
+        hotelId:
+          description: Property code of the rate plan codes.
+          type: string
+          minLength: 0
+          maxLength: 20
+        ratePlan:
+          description: Rate Plan Code and its description
+          $ref: '#/components/schemas/codeDescriptionType'
+        rateCategory:
+          description: Rate category of the rate code.
+          $ref: '#/components/schemas/codeDescriptionType'
+        rating:
+          description: Ratings associated with the rate code.
+          $ref: '#/components/schemas/ratePlanRatingType'
+    roomFeatureRatingType:
+      type: string
+      description: Possible Room Feature rating values.
+      enum:
+      - MostImportant
+      - Important
+      - SomewhatImportant
+      - LessImportant
+      - LeastImportant
+      - NoValueSet
+    masterInfoType:
+      type: object
+      properties:
+        codeInfo:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/codeInfoType'
+        codeType:
+          $ref: '#/components/schemas/masterType'
+    roomRatingsInfoType:
+      type: array
+      description: Collection of rooms and their ratings.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/roomRatingInfoType'
+    traceTextType:
+      type: object
+      description: Type provides trace text information.
+      properties:
+        hotelId:
+          description: Property Code where the trace text belongs to.
+          type: string
+          minLength: 0
+          maxLength: 20
+        departmentCode:
+          description: Department Code where the trace text belongs to.
+          type: string
+          minLength: 0
+          maxLength: 10
+        traceText:
+          description: Trace text value.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        canDelete:
+          description: Determines whether this trace text can be deleted.
+          type: boolean
+        displaySequence:
+          description: Display Sequence for the trace text.
+          type: number
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    conditionGroupType:
+      type: object
+      properties:
+        condition:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/conditionType'
+        conditionGroup:
+          type: array
+          maxItems: 4000
+          items:
+            $ref: '#/components/schemas/conditionGroupType'
+        logicalOperator:
+          $ref: '#/components/schemas/logicalOperatorType'
+    roomSpecialRatingsInfo:
+      type: object
+      description: Response object for fetching the room specials and their rating details.
+      properties:
+        roomSpecialRatingsInfo:
+          description: List of room specials and their rating details.
+          $ref: '#/components/schemas/roomSpecialRatingsInfoType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    roomFeatureRatingsInfoType:
+      type: array
+      description: Collection of rooms features and their ratings.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/roomFeatureRatingInfoType'
+    ratePlanRatingType:
+      type: string
+      description: Possible Rate plan rating values.
+      enum:
+      - MostImportant
+      - Important
+      - SomewhatImportant
+      - LessImportant
+      - LeastImportant
+      - NoValueSet
+    upsellRulesCopy:
+      type: object
+      properties:
+        UpsellRules:
+          type: array
+          description: List of the upsell rules to be copied to hotel code(s).
+          items:
+            $ref: '#/components/schemas/copyConfigurationCodeType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    scriptLocationType:
+      type: object
+      description: Unique identifier of a Script.
+      properties:
+        hotelId:
+          description: Hotel code the script belonged to.
+          type: string
+          minLength: 0
+          maxLength: 20
+        croCode:
+          description: CRO the script belonged to.
+          type: string
+          minLength: 0
+          maxLength: 20
+        chainCode:
+          description: Chain the script belonged to.
+          type: string
+          minLength: 0
+          maxLength: 20
+    articleInfoType:
+      type: object
+      description: Information regarding an article.
+      properties:
+        description:
+          description: Description of the article.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        transactionCode:
+          description: Transaction code to which the article belongs.
+          type: string
+          minLength: 0
+          maxLength: 20
+        price:
+          description: Default price of the article.
+          $ref: '#/components/schemas/currencyAmountType'
+        postIt:
+          description: Post it information of the article.
+          $ref: '#/components/schemas/articlePostItType'
+        universalProductCode:
+          description: Unique Universal product code of the article.
+          type: string
+          minLength: 0
+          maxLength: 20
+        hotelId:
+          description: Hotel code to which the article belongs.
+          type: string
+          minLength: 0
+          maxLength: 20
+        articleCode:
+          description: Unique code of the article.
+          type: string
+          minLength: 0
+          maxLength: 20
+        inactive:
+          description: Indicates whether the article is inactive or not.
+          type: boolean
+        orderSequence:
+          description: Display Order sequence.
+          type: number
+    reservationColorsResponse:
+      type: object
+      description: Response object for fetch reservation colors.
+      properties:
+        reservationColors:
+          description: Reservation colors.
+          $ref: '#/components/schemas/reservationColorsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    globalAlertsCopy:
+      type: object
+      description: Request object for copying Global Alerts.
+      properties:
+        copyInstructions:
+          description: Copy Global Alert type to copy from one Hotel to another Hotel.
+          $ref: '#/components/schemas/copyGlobalAlertType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    reservationColorType:
+      type: object
+      description: Property level reservation color information.
+      properties:
+        hotelId:
+          description: Property which the reservation color belongs to.
+          type: string
+          minLength: 0
+          maxLength: 20
+        colorCode:
+          description: Code to identify reservation color.
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: Description of reservation color.
+          $ref: '#/components/schemas/translationTextType2000'
+        displaySequence:
+          description: Display sequence for reservation color.
+          type: number
+        inactive:
+          description: Indicates if reservation color is inactive.
+          type: boolean
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    conditionType:
+      type: object
+      properties:
+        leftExpression:
+          $ref: '#/components/schemas/expressionFieldType'
+        operator:
+          $ref: '#/components/schemas/expressionOperatorType'
+        rightExpression:
+          $ref: '#/components/schemas/expressionParameterType'
+        logicalOperator:
+          $ref: '#/components/schemas/logicalOperatorType'
+    traceTextsToBeCreated:
+      type: object
+      description: Request object for creating new trace texts.
+      properties:
+        traceTexts:
+          description: Trace texts to be created.
+          $ref: '#/components/schemas/traceTextsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    templateTurnAwayCodes:
+      type: object
+      description: Response object for fetching template turnaway codes.
+      properties:
+        turnAwayCodes:
+          description: Collection of template turnaway codes and their information.
+          $ref: '#/components/schemas/templateTurnAwayCodesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    expressionOperatorType:
+      type: object
+      properties:
+        operatorName:
+          type: string
+          minLength: 0
+          maxLength: 40
+        operatorDescription:
+          type: string
+          minLength: 0
+          maxLength: 400
+        parameterSize:
+          type: number
+    codeDescriptionType:
+      type: object
+      description: This contains a generic code and description information.
+      properties:
+        code:
+          description: Code.
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: description.
+          type: string
+          minLength: 0
+          maxLength: 2000
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    roomRatings:
+      type: object
+      description: Response object for fetching the rooms and their rating details.
+      properties:
+        roomRatingsInfo:
+          description: List of rooms and their rating details.
+          $ref: '#/components/schemas/roomRatingsInfoType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    ratePlanRatings:
+      type: object
+      description: Response object for fetching the rate codes and their rating details.
+      properties:
+        ratePlanRatingsInfo:
+          description: List of rate plan codes and their rating details.
+          $ref: '#/components/schemas/ratePlanRatingsInfoType'
+        totalPages:
+          description: Evaluated total page count based on the requested max fetch count.
+          type: integer
+        offset:
+          description: Index or initial index of the set(page) being requested. If the index goes out of the bounds of the total set count then no data will be returned.
+          type: integer
+        limit:
+          description: Indicates maximum number of records a Web Service should return.
+          type: integer
+        hasMore:
+          description: Indicates whether all the records are included in the response or not. Absence of the attribute values should be consider as all rows fetched in the response.
+          type: boolean
+        totalResults:
+          description: Total number of rows queried
+          type: integer
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    resvAutoAttchTypeCode:
+      type: string
+      enum:
+      - Item
+      - Product
+      - ResvPreference
+      - Trace
+      - RoomFeatures
+      - Preference
+      - Promotions
+      - AdvancedDiscount
+      description: Available only when Reservation Discounts and Advanced Discounts are active
+    translationTextType2000:
+      type: object
+      description: Contains Multiple translated texts and language codes.
+      properties:
+        defaultText:
+          description: Default text with Character length from 0 to 2000.
+          type: string
+          minLength: 0
+          maxLength: 2000
+        translatedTexts:
+          description: List of translated text and language codes.
+          $ref: '#/components/schemas/translationsTextType'
+    resvAutoAttchBasedOnCode:
+      type: string
+      enum:
+      - Membership
+      - Preference
+      - RateCode
+      - RoomType
+      - MinAdults
+      - MinChildren
+      - KeywordType
+      - Special
+      - Vip
+      - Condition
+      description: Available only when Keyword Functionality is active.
+    upsellRulesToTest:
+      type: object
+      description: Request object for testing upsell rules.
+      properties:
+        criteria:
+          description: Search criteria for testing upsell rules.
+          $ref: '#/components/schemas/configTestUpsellRuleSearchType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    roundingRuleType:
+      type: string
+      description: Simple type for storing rounding rule type.
+      enum:
+      - Up
+      - Down
+      - None
+      - UpKeepDecimal
+      - DownKeepDecimal
+    status:
+      type: object
+      description: Response Body.
+      properties:
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    autoAttachElementsCopy:
+      type: object
+      properties:
+        autoAttachRule:
+          type: array
+          description: List of the auto attach configuration rule(s) to be copied.
+          items:
+            $ref: '#/components/schemas/copyConfigurationCodeType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    currencyAmountType:
+      type: object
+      description: A monetary value expressed with a currency code.
+      properties:
+        amount:
+          description: A monetary amount.
+          type: number
+        currencyCode:
+          description: Provides a currency code to reflect the currency in which an amount may be expressed.
+          type: string
+          minLength: 3
+          maxLength: 3
+    alertTemplatesType:
+      type: array
+      description: Collection of alert code templates.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/alertTemplateType'
+    traceTextsType:
+      type: array
+      description: Collection of trace texts.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/traceTextType'
+    locatorCodesTemplateInfo:
+      type: object
+      description: Response object for fetching locator codes at template level.
+      properties:
+        locatorCodes:
+          $ref: '#/components/schemas/locatorCodesTemplateType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    guestMessageTemplatesType:
+      type: array
+      description: Collection of guest messages templates.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/guestMessageTemplateType'
+    eCouponCodes:
+      type: object
+      description: Response object to fetch eCoupon codes.
+      properties:
+        eCouponCodes:
+          $ref: '#/components/schemas/eCouponCodesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    operaVersionNumberType:
+      type: string
+      description: Current Opera Version Number
+      minLength: 0
+      maxLength: 40
   parameters:
-    x-app-key:
-      name: x-app-key
-      description: Client or Partner's Application Key
+    x-hotelid:
+      name: x-hotelid
+      description: Mandatory parameter to identify the hotel code where the end user is logged in
       in: header
       required: true
       schema:
         type: string
-        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
       in: header
-      schema:
-        type: string
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
-      in: header
-      required: true
       schema:
         type: string
     x-externalsystem:
@@ -8845,12 +8800,33 @@ components:
       schema:
         type: string
         maxLength: 40
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
     x-originating-application:
       name: x-originating-application
       description: Customer's Integration Application Id
       in: header
       schema:
         type: string
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
+      schema:
+        type: string
+    x-app-key:
+      name: x-app-key
+      description: Client or Partner's Application Key
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
     x-request-id:
       name: x-request-id
       description: Request Id of an incoming request
@@ -8858,19 +8834,43 @@ components:
       schema:
         type: string
         pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
-      in: header
-      schema:
-        type: string
-    x-hotelid:
-      name: x-hotelid
-      description: Mandatory parameter to identify the hotel code where the end user is logged in
-      in: header
-      required: true
-      schema:
-        type: string
+  responses:
+    '413':
+      description: Request Entity Too Large
+    '500':
+      description: System Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '405':
+      description: Method not allowed
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '503':
+      description: Service Unavailable
+    '403':
+      description: Forbidden
+    '502':
+      description: Bad Gateway
+    '414':
+      description: Request URI Too Large
+    '406':
+      description: Not acceptable.
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '401':
+      description: Unauthorized
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html

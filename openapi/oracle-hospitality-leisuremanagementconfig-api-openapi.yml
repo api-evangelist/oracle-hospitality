@@ -1298,7 +1298,63 @@ paths:
         required: true
 components:
   schemas:
-    copyActivityTypesRS:
+    instanceLink:
+      type: object
+      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
+      properties:
+        href:
+          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
+          type: string
+        rel:
+          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
+          type: string
+        templated:
+          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
+          type: boolean
+          default: false
+        method:
+          description: HTTP method for requesting the target of the link.
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+          - HEAD
+        targetSchema:
+          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
+          type: string
+        operationId:
+          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
+          type: string
+        title:
+          description: Exact copy of the "summary" field on the linked operation.
+          type: string
+    copyConfigurationCodeType:
+      type: object
+      description: Information needed to copy configuration code from one property to the other.
+      properties:
+        targetHotelCode:
+          description: Property to which configuration code type to be copied to.
+          type: array
+          maxItems: 4000
+          items:
+            type: string
+            minLength: 0
+            maxLength: 20
+        sourceHotelCode:
+          description: Code that is to be copied.
+          type: string
+          minLength: 0
+          maxLength: 20
+        code:
+          description: Source hotel code from which code is to be copied from.
+          type: string
+          minLength: 0
+          maxLength: 20
+    copyActivityLocationsRS:
       type: object
       description: Response Body.
       properties:
@@ -1344,310 +1400,9 @@ components:
       type: object
       description: Returning an empty element of this type indicates the successful processing of an message. This is used in conjunction with the Warning Type to report any warnings or business errors.
       properties: {}
-    fetchActivityTypes:
-      type: object
-      description: Response object after fetching the Activity Types.
-      properties:
-        activityTypes:
-          description: Collection of fetched Activity Types.
-          $ref: '#/components/schemas/activityTypesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    createActivityStatusCodes:
-      type: object
-      description: Request object for creating Activity Status Codes.
-      properties:
-        activityStatusCodes:
-          description: Collection of Activity Status Codes to be created.
-          $ref: '#/components/schemas/activityStatusCodesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    errorsType:
-      type: array
-      description: An error that occurred during the processing of a message.
-      maxItems: 99
-      items:
-        $ref: '#/components/schemas/errorType'
-    changeActivityLocations:
-      type: object
-      description: Request object for changing Activity Locations.
-      properties:
-        activityLocations:
-          description: Collection of Activity Locations to be changed.
-          $ref: '#/components/schemas/activityLocationsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    errorType:
-      type: object
-      description: Standard way to indicate that an error occurred during the processing of an message. If the message successfully processes, but there are business errors, those errors should be passed in the warning element.
-      properties:
-        value:
-          type: string
-          description: Property Value
-        shortText:
-          description: An abbreviated version of the error in textual format.
-          type: string
-        code:
-          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
-          type: string
-          minLength: 0
-          maxLength: 20
-        docURL:
-          description: If present, this URL refers to an online description of the error that occurred.
-          type: string
-        status:
-          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
-          type: string
-        tag:
-          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
-          type: string
-        recordId:
-          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
-          type: string
-        type:
-          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
-          type: string
-          minLength: 0
-          maxLength: 20
-        language:
-          description: Language identification.
-          type: string
-          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
-        nodeList:
-          description: An XPath expression that selects all the nodes whose data caused this error. Further, this expression should have an additional constraint which contains the data of the node. This will provide the offending data back to systems that cannot maintain the original message.
-          type: string
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/instanceLink'
-    managedByOptions:
-      description: Describes of the Configuration is Managed by Enterprise or Property.
-      type: string
-      enum:
-      - EnterpriseManaged
-      - PropertyManaged
-      - EnterpriseEnforced
-      - PropertyOverridden
-    activityLocationType:
-      type: object
-      description: Activity Location detail information.
-      properties:
-        hotelId:
-          description: Property to which the activity Location belongs to.
-          type: string
-          minLength: 0
-          maxLength: 20
-        code:
-          description: Code for the activity Location.
-          type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          description: Description for the Activity Location.
-          type: string
-          minLength: 0
-          maxLength: 80
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
-    changeActivityStatusCodesRS:
-      type: object
-      description: Response Body.
-      properties:
-        success:
-          description: Refer to Generic common types document.
-          $ref: '#/components/schemas/successType'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-        errors:
-          description: Refer to Generic common types document.
-          $ref: '#/components/schemas/errorsType'
-        echoToken:
-          description: A reference for additional message identification, assigned by the requesting host system. When a request message includes an echo token the corresponding response message MUST include an echo token with an identical value.
-          type: string
-          minLength: 0
-          maxLength: 128
-        timeStamp:
-          description: Indicates the creation date and time of the message in UTC using the following format specified by ISO 8601; YYYY-MM-DDThh:mm:ssZ with time values using the 24 hour clock (e.g. 20 November 2003, 1:59:38 pm UTC becomes 2003-11-20T13:59:38Z).
-          type: string
-          format: date-time
-        version:
-          description: For all Opera versioned messages, the version of the message is indicated by a Opera Version value.
-          type: string
-          minLength: 0
-          maxLength: 40
-        correlationId:
-          description: Allow end-to-end correlation of log messages with the corresponding Web service message throughout the processing of the Web service message.
-          type: string
-          minLength: 0
-          maxLength: 80
-        retryAllowed:
-          description: Indicates if the operation supports the ability to retry the request.
-          type: boolean
-        enforceAllowed:
-          description: Indicates if the operation supports the ability to force the retry request through OPERA services in the case where the external system continues to fail.
-          type: boolean
-        useLocalAllowed:
-          description: This attribute carries the user selected confirmation value on confirmation popup.
-          type: boolean
-        links:
-          $ref: '#/components/schemas/links'
-    warningsType:
-      type: array
-      description: Used in conjunction with the Success element to define a business error.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/warningType'
-    status:
-      type: object
-      description: Response Body.
-      properties:
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-        links:
-          $ref: '#/components/schemas/links'
-    copyConfigurationCodeType:
-      type: object
-      description: Information needed to copy configuration code from one property to the other.
-      properties:
-        targetHotelCode:
-          description: Property to which configuration code type to be copied to.
-          type: array
-          maxItems: 4000
-          items:
-            type: string
-            minLength: 0
-            maxLength: 20
-        sourceHotelCode:
-          description: Code that is to be copied.
-          type: string
-          minLength: 0
-          maxLength: 20
-        code:
-          description: Source hotel code from which code is to be copied from.
-          type: string
-          minLength: 0
-          maxLength: 20
-    changeActivityTypesRS:
-      type: object
-      description: Response Body.
-      properties:
-        success:
-          description: Refer to Generic common types document.
-          $ref: '#/components/schemas/successType'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-        errors:
-          description: Refer to Generic common types document.
-          $ref: '#/components/schemas/errorsType'
-        echoToken:
-          description: A reference for additional message identification, assigned by the requesting host system. When a request message includes an echo token the corresponding response message MUST include an echo token with an identical value.
-          type: string
-          minLength: 0
-          maxLength: 128
-        timeStamp:
-          description: Indicates the creation date and time of the message in UTC using the following format specified by ISO 8601; YYYY-MM-DDThh:mm:ssZ with time values using the 24 hour clock (e.g. 20 November 2003, 1:59:38 pm UTC becomes 2003-11-20T13:59:38Z).
-          type: string
-          format: date-time
-        version:
-          description: For all Opera versioned messages, the version of the message is indicated by a Opera Version value.
-          type: string
-          minLength: 0
-          maxLength: 40
-        correlationId:
-          description: Allow end-to-end correlation of log messages with the corresponding Web service message throughout the processing of the Web service message.
-          type: string
-          minLength: 0
-          maxLength: 80
-        retryAllowed:
-          description: Indicates if the operation supports the ability to retry the request.
-          type: boolean
-        enforceAllowed:
-          description: Indicates if the operation supports the ability to force the retry request through OPERA services in the case where the external system continues to fail.
-          type: boolean
-        useLocalAllowed:
-          description: This attribute carries the user selected confirmation value on confirmation popup.
-          type: boolean
-        links:
-          $ref: '#/components/schemas/links'
-    copyActivityLocations:
-      type: object
-      description: Request object for copying Activity Locations to hotel(s).
-      properties:
-        copyInstructions:
-          description: List of the Activity Location details to be copied to hotel(s).
-          $ref: '#/components/schemas/copyConfigurationCodesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    changeActivityLocationsRS:
-      type: object
-      description: Response Body.
-      properties:
-        success:
-          description: Refer to Generic common types document.
-          $ref: '#/components/schemas/successType'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-        errors:
-          description: Refer to Generic common types document.
-          $ref: '#/components/schemas/errorsType'
-        echoToken:
-          description: A reference for additional message identification, assigned by the requesting host system. When a request message includes an echo token the corresponding response message MUST include an echo token with an identical value.
-          type: string
-          minLength: 0
-          maxLength: 128
-        timeStamp:
-          description: Indicates the creation date and time of the message in UTC using the following format specified by ISO 8601; YYYY-MM-DDThh:mm:ssZ with time values using the 24 hour clock (e.g. 20 November 2003, 1:59:38 pm UTC becomes 2003-11-20T13:59:38Z).
-          type: string
-          format: date-time
-        version:
-          description: For all Opera versioned messages, the version of the message is indicated by a Opera Version value.
-          type: string
-          minLength: 0
-          maxLength: 40
-        correlationId:
-          description: Allow end-to-end correlation of log messages with the corresponding Web service message throughout the processing of the Web service message.
-          type: string
-          minLength: 0
-          maxLength: 80
-        retryAllowed:
-          description: Indicates if the operation supports the ability to retry the request.
-          type: boolean
-        enforceAllowed:
-          description: Indicates if the operation supports the ability to force the retry request through OPERA services in the case where the external system continues to fail.
-          type: boolean
-        useLocalAllowed:
-          description: This attribute carries the user selected confirmation value on confirmation popup.
-          type: boolean
-        links:
-          $ref: '#/components/schemas/links'
-    activityLocationsType:
-      type: array
-      description: Collection of Activity Locations.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/activityLocationType'
-    createActivityTypes:
-      type: object
-      description: Request object for creating Activity Types.
-      properties:
-        activityTypes:
-          description: Collection of Activity Types to be created.
-          $ref: '#/components/schemas/activityTypesType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    errorInstance:
-      title: Error Instance Details
-      description: Complex type that contains error instance details for a REST call.
+    exceptionDetailType:
+      title: Error Detail
+      description: Complex type that contains error details for a REST call.
       type: object
       properties:
         type:
@@ -1671,76 +1426,61 @@ components:
         o:errorPath:
           type: string
           description: Path to the problem at the resource or property level.
+        o:errorDetails:
+          description: Details of the error message, consisting of a hierarchical tree structure.
+          type: array
+          items:
+            $ref: '#/components/schemas/errorInstance'
+        links:
+          $ref: '#/components/schemas/links'
       required:
       - type
       - title
-    warningType:
+    copyConfigurationCodesType:
+      type: array
+      description: Information needed to copy configuration code from one property to the other.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/copyConfigurationCodeType'
+    copyActivityLocations:
       type: object
-      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
+      description: Request object for copying Activity Locations to hotel(s).
       properties:
-        value:
-          type: string
-          description: Property Value
-        shortText:
-          description: An abbreviated version of the error in textual format.
-          type: string
-          maxLength: 2000
-        code:
-          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
-          type: string
-          minLength: 0
-          maxLength: 20
-        docURL:
-          description: If present, this URL refers to an online description of the error that occurred.
-          type: string
-          maxLength: 2000
-        status:
-          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
-          type: string
-          maxLength: 2000
-        tag:
-          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
-          type: string
-          maxLength: 2000
-        recordId:
-          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
-          type: string
-          maxLength: 2000
-        type:
-          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
-          type: string
-          minLength: 0
-          maxLength: 20
-        language:
-          description: Language identification.
-          type: string
-          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
-        rph:
-          description: Reference Place Holder used as an index for this warning.
-          type: string
-          minLength: 1
-          maxLength: 8
-    activityTypeDetailType:
+        copyInstructions:
+          description: List of the Activity Location details to be copied to hotel(s).
+          $ref: '#/components/schemas/copyConfigurationCodesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    createActivityLocations:
       type: object
-      description: Activity Type detail information.
+      description: Request object for creating Activity Locations.
       properties:
-        hotelId:
-          description: Property to which the activity Type belongs to.
-          type: string
-          minLength: 0
-          maxLength: 20
-        typeCode:
-          description: Type for the activity Type.
-          type: string
-          minLength: 0
-          maxLength: 20
-        description:
-          description: Description for the Activity Type.
-          type: string
-          minLength: 0
-          maxLength: 100
-        managedBy:
-          $ref: '#/components/schemas/managedByOptions'
+        activityLocations:
+          description: Collection of Activity Locations to be created.
+          $ref: '#/components/schemas/activityLocationsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    activityLocationsType:
+      type: array
+      description: Collection of Activity Locations.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/activityLocationType'
+    changeActivityLocations:
+      type: object
+      description: Request object for changing Activity Locations.
+      properties:
+        activityLocations:
+          description: Collection of Activity Locations to be changed.
+          $ref: '#/components/schemas/activityLocationsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
     changeActivityTypes:
       type: object
       description: Request object for changing Activity Types.
@@ -1752,12 +1492,6 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    activityTypesType:
-      type: array
-      description: Collection of Activity Types.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/activityTypeDetailType'
     activityStatusCodeType:
       type: object
       description: Activity Status Code detail information.
@@ -1791,7 +1525,60 @@ components:
           maxLength: 20
         managedBy:
           $ref: '#/components/schemas/managedByOptions'
-    copyActivityLocationsRS:
+    managedByOptions:
+      description: Describes of the Configuration is Managed by Enterprise or Property.
+      type: string
+      enum:
+      - EnterpriseManaged
+      - PropertyManaged
+      - EnterpriseEnforced
+      - PropertyOverridden
+    createActivityTypes:
+      type: object
+      description: Request object for creating Activity Types.
+      properties:
+        activityTypes:
+          description: Collection of Activity Types to be created.
+          $ref: '#/components/schemas/activityTypesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    changeActivityStatusCodes:
+      type: object
+      description: Request object for changing Activity Status Codes.
+      properties:
+        activityStatusCodes:
+          description: Collection of Activity Status Codes to be changed.
+          $ref: '#/components/schemas/activityStatusCodesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    activityStatusCodesType:
+      type: array
+      description: Activity Status Codes object.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/activityStatusCodeType'
+    fetchActivityLocations:
+      type: object
+      description: Response object after fetching the Activity Locations.
+      properties:
+        activityLocations:
+          description: Collection of fetched Activity Locations.
+          $ref: '#/components/schemas/activityLocationsType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    warningsType:
+      type: array
+      description: Used in conjunction with the Success element to define a business error.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/warningType'
+    changeActivityLocationsRS:
       type: object
       description: Response Body.
       properties:
@@ -1844,32 +1631,63 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    copyConfigurationCodesType:
-      type: array
-      description: Information needed to copy configuration code from one property to the other.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/copyConfigurationCodeType'
-    activityStatusCodesType:
-      type: array
-      description: Activity Status Codes object.
-      maxItems: 4000
-      items:
-        $ref: '#/components/schemas/activityStatusCodeType'
-    createActivityLocations:
+    changeActivityStatusCodesRS:
       type: object
-      description: Request object for creating Activity Locations.
+      description: Response Body.
       properties:
-        activityLocations:
-          description: Collection of Activity Locations to be created.
-          $ref: '#/components/schemas/activityLocationsType'
-        links:
-          $ref: '#/components/schemas/links'
+        success:
+          description: Refer to Generic common types document.
+          $ref: '#/components/schemas/successType'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    exceptionDetailType:
-      title: Error Detail
-      description: Complex type that contains error details for a REST call.
+        errors:
+          description: Refer to Generic common types document.
+          $ref: '#/components/schemas/errorsType'
+        echoToken:
+          description: A reference for additional message identification, assigned by the requesting host system. When a request message includes an echo token the corresponding response message MUST include an echo token with an identical value.
+          type: string
+          minLength: 0
+          maxLength: 128
+        timeStamp:
+          description: Indicates the creation date and time of the message in UTC using the following format specified by ISO 8601; YYYY-MM-DDThh:mm:ssZ with time values using the 24 hour clock (e.g. 20 November 2003, 1:59:38 pm UTC becomes 2003-11-20T13:59:38Z).
+          type: string
+          format: date-time
+        version:
+          description: For all Opera versioned messages, the version of the message is indicated by a Opera Version value.
+          type: string
+          minLength: 0
+          maxLength: 40
+        correlationId:
+          description: Allow end-to-end correlation of log messages with the corresponding Web service message throughout the processing of the Web service message.
+          type: string
+          minLength: 0
+          maxLength: 80
+        retryAllowed:
+          description: Indicates if the operation supports the ability to retry the request.
+          type: boolean
+        enforceAllowed:
+          description: Indicates if the operation supports the ability to force the retry request through OPERA services in the case where the external system continues to fail.
+          type: boolean
+        useLocalAllowed:
+          description: This attribute carries the user selected confirmation value on confirmation popup.
+          type: boolean
+        links:
+          $ref: '#/components/schemas/links'
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/instanceLink'
+    status:
+      type: object
+      description: Response Body.
+      properties:
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        links:
+          $ref: '#/components/schemas/links'
+    errorInstance:
+      title: Error Instance Details
+      description: Complex type that contains error instance details for a REST call.
       type: object
       properties:
         type:
@@ -1893,16 +1711,157 @@ components:
         o:errorPath:
           type: string
           description: Path to the problem at the resource or property level.
-        o:errorDetails:
-          description: Details of the error message, consisting of a hierarchical tree structure.
-          type: array
-          items:
-            $ref: '#/components/schemas/errorInstance'
-        links:
-          $ref: '#/components/schemas/links'
       required:
       - type
       - title
+    activityTypeDetailType:
+      type: object
+      description: Activity Type detail information.
+      properties:
+        hotelId:
+          description: Property to which the activity Type belongs to.
+          type: string
+          minLength: 0
+          maxLength: 20
+        typeCode:
+          description: Type for the activity Type.
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: Description for the Activity Type.
+          type: string
+          minLength: 0
+          maxLength: 100
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    errorType:
+      type: object
+      description: Standard way to indicate that an error occurred during the processing of an message. If the message successfully processes, but there are business errors, those errors should be passed in the warning element.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
+          type: string
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+          type: string
+          minLength: 0
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        nodeList:
+          description: An XPath expression that selects all the nodes whose data caused this error. Further, this expression should have an additional constraint which contains the data of the node. This will provide the offending data back to systems that cannot maintain the original message.
+          type: string
+    changeActivityTypesRS:
+      type: object
+      description: Response Body.
+      properties:
+        success:
+          description: Refer to Generic common types document.
+          $ref: '#/components/schemas/successType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        errors:
+          description: Refer to Generic common types document.
+          $ref: '#/components/schemas/errorsType'
+        echoToken:
+          description: A reference for additional message identification, assigned by the requesting host system. When a request message includes an echo token the corresponding response message MUST include an echo token with an identical value.
+          type: string
+          minLength: 0
+          maxLength: 128
+        timeStamp:
+          description: Indicates the creation date and time of the message in UTC using the following format specified by ISO 8601; YYYY-MM-DDThh:mm:ssZ with time values using the 24 hour clock (e.g. 20 November 2003, 1:59:38 pm UTC becomes 2003-11-20T13:59:38Z).
+          type: string
+          format: date-time
+        version:
+          description: For all Opera versioned messages, the version of the message is indicated by a Opera Version value.
+          type: string
+          minLength: 0
+          maxLength: 40
+        correlationId:
+          description: Allow end-to-end correlation of log messages with the corresponding Web service message throughout the processing of the Web service message.
+          type: string
+          minLength: 0
+          maxLength: 80
+        retryAllowed:
+          description: Indicates if the operation supports the ability to retry the request.
+          type: boolean
+        enforceAllowed:
+          description: Indicates if the operation supports the ability to force the retry request through OPERA services in the case where the external system continues to fail.
+          type: boolean
+        useLocalAllowed:
+          description: This attribute carries the user selected confirmation value on confirmation popup.
+          type: boolean
+        links:
+          $ref: '#/components/schemas/links'
+    warningType:
+      type: object
+      description: Used when a message has been successfully processed to report any warnings or business errors that occurred.
+      properties:
+        value:
+          type: string
+          description: Property Value
+        shortText:
+          description: An abbreviated version of the error in textual format.
+          type: string
+          maxLength: 2000
+        code:
+          description: If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.
+          type: string
+          minLength: 0
+          maxLength: 20
+        docURL:
+          description: If present, this URL refers to an online description of the error that occurred.
+          type: string
+          maxLength: 2000
+        status:
+          description: If present, recommended values are those enumerated in the ErrorRS, (NotProcessed Incomplete Complete Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.
+          type: string
+          maxLength: 2000
+        tag:
+          description: If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].
+          type: string
+          maxLength: 2000
+        recordId:
+          description: If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.
+          type: string
+          maxLength: 2000
+        type:
+          description: The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".
+          type: string
+          minLength: 0
+          maxLength: 20
+        language:
+          description: Language identification.
+          type: string
+          pattern: '[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'
+        rph:
+          description: Reference Place Holder used as an index for this warning.
+          type: string
+          minLength: 1
+          maxLength: 8
     copyActivityTypes:
       type: object
       description: Request object for copying Activity Types to hotel(s).
@@ -1914,106 +1873,141 @@ components:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    changeActivityStatusCodes:
+    fetchActivityTypes:
       type: object
-      description: Request object for changing Activity Status Codes.
+      description: Response object after fetching the Activity Types.
+      properties:
+        activityTypes:
+          description: Collection of fetched Activity Types.
+          $ref: '#/components/schemas/activityTypesType'
+        links:
+          $ref: '#/components/schemas/links'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+    activityLocationType:
+      type: object
+      description: Activity Location detail information.
+      properties:
+        hotelId:
+          description: Property to which the activity Location belongs to.
+          type: string
+          minLength: 0
+          maxLength: 20
+        code:
+          description: Code for the activity Location.
+          type: string
+          minLength: 0
+          maxLength: 20
+        description:
+          description: Description for the Activity Location.
+          type: string
+          minLength: 0
+          maxLength: 80
+        managedBy:
+          $ref: '#/components/schemas/managedByOptions'
+    activityTypesType:
+      type: array
+      description: Collection of Activity Types.
+      maxItems: 4000
+      items:
+        $ref: '#/components/schemas/activityTypeDetailType'
+    copyActivityTypesRS:
+      type: object
+      description: Response Body.
+      properties:
+        success:
+          description: Refer to Generic common types document.
+          $ref: '#/components/schemas/successType'
+        warnings:
+          $ref: '#/components/schemas/warningsType'
+        errors:
+          description: Refer to Generic common types document.
+          $ref: '#/components/schemas/errorsType'
+        echoToken:
+          description: A reference for additional message identification, assigned by the requesting host system. When a request message includes an echo token the corresponding response message MUST include an echo token with an identical value.
+          type: string
+          minLength: 0
+          maxLength: 128
+        timeStamp:
+          description: Indicates the creation date and time of the message in UTC using the following format specified by ISO 8601; YYYY-MM-DDThh:mm:ssZ with time values using the 24 hour clock (e.g. 20 November 2003, 1:59:38 pm UTC becomes 2003-11-20T13:59:38Z).
+          type: string
+          format: date-time
+        version:
+          description: For all Opera versioned messages, the version of the message is indicated by a Opera Version value.
+          type: string
+          minLength: 0
+          maxLength: 40
+        correlationId:
+          description: Allow end-to-end correlation of log messages with the corresponding Web service message throughout the processing of the Web service message.
+          type: string
+          minLength: 0
+          maxLength: 80
+        retryAllowed:
+          description: Indicates if the operation supports the ability to retry the request.
+          type: boolean
+        enforceAllowed:
+          description: Indicates if the operation supports the ability to force the retry request through OPERA services in the case where the external system continues to fail.
+          type: boolean
+        useLocalAllowed:
+          description: This attribute carries the user selected confirmation value on confirmation popup.
+          type: boolean
+        links:
+          $ref: '#/components/schemas/links'
+    errorsType:
+      type: array
+      description: An error that occurred during the processing of a message.
+      maxItems: 99
+      items:
+        $ref: '#/components/schemas/errorType'
+    createActivityStatusCodes:
+      type: object
+      description: Request object for creating Activity Status Codes.
       properties:
         activityStatusCodes:
-          description: Collection of Activity Status Codes to be changed.
+          description: Collection of Activity Status Codes to be created.
           $ref: '#/components/schemas/activityStatusCodesType'
         links:
           $ref: '#/components/schemas/links'
         warnings:
           $ref: '#/components/schemas/warningsType'
-    fetchActivityLocations:
-      type: object
-      description: Response object after fetching the Activity Locations.
-      properties:
-        activityLocations:
-          description: Collection of fetched Activity Locations.
-          $ref: '#/components/schemas/activityLocationsType'
-        links:
-          $ref: '#/components/schemas/links'
-        warnings:
-          $ref: '#/components/schemas/warningsType'
-    instanceLink:
-      type: object
-      description: Metadata describing link description objects that MAY appear in the JSON instance representation.
-      properties:
-        href:
-          description: URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the "templated" property must be set to true.
-          type: string
-        rel:
-          description: Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.
-          type: string
-        templated:
-          description: Boolean flag that specifies that "href" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.
-          type: boolean
-          default: false
-        method:
-          description: HTTP method for requesting the target of the link.
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - PATCH
-          - OPTIONS
-          - HEAD
-        targetSchema:
-          description: Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..
-          type: string
-        operationId:
-          description: The operationId of the path you can call to follow this link.  This allows you to look up not only the path and method, but the description of that path and any parameters you need to supply.
-          type: string
-        title:
-          description: Exact copy of the "summary" field on the linked operation.
-          type: string
   responses:
+    '503':
+      description: Service Unavailable
     '401':
       description: Unauthorized
-    '414':
-      description: Request URI Too Large
-    '406':
-      description: Not acceptable.
-    '403':
-      description: Forbidden
-    '404':
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
-    '502':
-      description: Bad Gateway
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exceptionDetailType'
+    '413':
+      description: Request Entity Too Large
     '500':
       description: System Error
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/exceptionDetailType'
-    '415':
-      description: Unsupported Media Type
-    '503':
-      description: Service Unavailable
+    '403':
+      description: Forbidden
     '405':
       description: Method not allowed
-    '413':
-      description: Request Entity Too Large
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '406':
+      description: Not acceptable.
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exceptionDetailType'
+    '415':
+      description: Unsupported Media Type
+    '502':
+      description: Bad Gateway
+    '414':
+      description: Request URI Too Large
   parameters:
-    externalData:
-      name: externalData
-      description: Pass this header as true, if payload needs DVM
-      in: header
-      schema:
-        type: string
     x-app-key:
       name: x-app-key
       description: Client or Partner's Application Key
@@ -2022,19 +2016,6 @@ components:
       schema:
         type: string
         pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$
-    x-request-id:
-      name: x-request-id
-      description: Request Id of an incoming request
-      in: header
-      schema:
-        type: string
-        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
-    Accept-Language:
-      name: Accept-Language
-      description: Language code
-      in: header
-      schema:
-        type: string
     x-hotelid:
       name: x-hotelid
       description: Mandatory parameter to identify the hotel code where the end user is logged in
@@ -2042,17 +2023,17 @@ components:
       required: true
       schema:
         type: string
-    x-originating-application:
-      name: x-originating-application
-      description: Customer's Integration Application Id
+    x-request-id:
+      name: x-request-id
+      description: Request Id of an incoming request
       in: header
       schema:
         type: string
-    authKey:
-      name: authorization
-      description: Bearer token that needs to be passed which is generated post user authentication
+        pattern: ~*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+    externalData:
+      name: externalData
+      description: Pass this header as true, if payload needs DVM
       in: header
-      required: true
       schema:
         type: string
     x-externalsystem:
@@ -2063,6 +2044,25 @@ components:
       schema:
         type: string
         maxLength: 40
+    authKey:
+      name: authorization
+      description: Bearer token that needs to be passed which is generated post user authentication
+      in: header
+      required: true
+      schema:
+        type: string
+    Accept-Language:
+      name: Accept-Language
+      description: Language code
+      in: header
+      schema:
+        type: string
+    x-originating-application:
+      name: x-originating-application
+      description: Customer's Integration Application Id
+      in: header
+      schema:
+        type: string
 externalDocs:
   description: Find out more about Oracle Hospitality
   url: https://docs.oracle.com/en/industries/hospitality/integration_platforms.html
